@@ -41,6 +41,8 @@
               "path": "/tunnel-management/subscribe-tunnel-policys/subscribe-tunnel-policy/policy-name",
               "type": "string",
               "label": "policy-name",
+              "minLength": 1,
+              "maxLength": 39,
               "readonly": true,
               "isKey": true
             }
@@ -89,6 +91,8 @@
               "path": "/tunnel-management/tunnel-infos/tunnel-info/id",
               "type": "string",
               "label": "id",
+              "minLength": 1,
+              "maxLength": 36,
               "readonly": true,
               "isKey": true
             },
@@ -96,6 +100,8 @@
               "path": "/tunnel-management/tunnel-infos/tunnel-info/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 256,
               "readonly": true
             },
             {
@@ -283,7 +289,9 @@
             {
               "path": "/tunnel-management/tunnel-policys/tunnel-policy/description",
               "type": "string",
-              "label": "description"
+              "label": "description",
+              "minLength": 1,
+              "maxLength": 80
             },
             {
               "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set",
@@ -331,6 +339,8 @@
                                           "path": "/tunnel-management/tunnel-policys/tunnel-policy/ipv4-set/nexthops/nexthop/auto-names/auto-name/name",
                                           "type": "string",
                                           "label": "name",
+                                          "minLength": 1,
+                                          "maxLength": 37,
                                           "isKey": true
                                         }
                                       ]
@@ -588,6 +598,8 @@
               "path": "/tunnel-management/tunnel-policys/tunnel-policy/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 39,
               "isKey": true
             }
           ]

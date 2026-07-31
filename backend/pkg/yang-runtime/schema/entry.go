@@ -233,6 +233,7 @@ func entryToLeaf(e *yang.Entry, parent Node, path string, isKey bool, inheritedR
 			leaf.pattern = e.Type.Pattern[0]
 		}
 		leaf.rangeMin, leaf.hasMin, leaf.rangeMax, leaf.hasMax = leafRangeBounds(e.Type)
+		leaf.lengthMin, leaf.hasLenMin, leaf.lengthMax, leaf.hasLenMax = leafLengthBounds(e.Type)
 	}
 	if leaf.units == "" {
 		// units may sit on the leaf statement itself rather than the (derived) type.
@@ -317,6 +318,22 @@ func leafRangeBounds(yt *yang.YangType) (min int, hasMin bool, max int, hasMax b
 		min, hasMin = int(v), true
 	}
 	if v, err := yt.Range[len(yt.Range)-1].Max.Int(); err == nil {
+		max, hasMax = int(v), true
+	}
+	return
+}
+
+// leafLengthBounds extracts string `length` bounds. goyang only populates
+// Type.Length when a length statement exists (directly or via derived type)；
+// 非整数/溢出的界按 R08 省略该侧，不 panic。
+func leafLengthBounds(yt *yang.YangType) (min int, hasMin bool, max int, hasMax bool) {
+	if yt == nil || len(yt.Length) == 0 {
+		return
+	}
+	if v, err := yt.Length[0].Min.Int(); err == nil {
+		min, hasMin = int(v), true
+	}
+	if v, err := yt.Length[len(yt.Length)-1].Max.Int(); err == nil {
 		max, hasMax = int(v), true
 	}
 	return

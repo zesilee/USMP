@@ -56,7 +56,7 @@
 
 ## 6. 收尾（PR-6）
 
-- [ ] 6.1 D9 string length 元数据：B1 红灯（field_gen 透出 length）→实现→契约生成同步（`make gen-contract`）→FE-22 占位自动生效核验
-- [ ] 6.2 `/opsx:sync`：两份 delta（config-changeset/frontend）合入主 spec
-- [ ] 6.3 对照目标截图走查（变更内容/试运行/工具栏），差异清单确认或立后续项
-- [ ] 6.4 记忆归档（docs/memory：二期交付与后续期待办——导出/配置项/跨设备变更集）+ `/opsx:archive`
+- [x] 6.1 D9 string length 元数据：B1 红灯（field_gen 透出 length）→实现→契约生成同步（`make gen-contract`）→FE-22 占位自动生效核验
+- [x] 6.2 `/opsx:sync`：两份 delta（config-changeset/frontend）合入主 spec
+- [x] 6.3 对照目标截图走查（变更内容/试运行/工具栏），差异清单确认或立后续项
+- [x] 6.4 记忆归档（docs/memory：二期交付与后续期待办——导出/配置项/跨设备变更集）+ `/opsx:archive`

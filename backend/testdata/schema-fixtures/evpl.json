@@ -290,6 +290,8 @@
                       "type": "string",
                       "label": "remote-esi",
                       "pattern": "( *(00([0-9a-fA-F]){2}\\.(([0-9a-fA-F]){4}\\.){3}(([0-9a-fA-F]){4}))? *)",
+                      "minLength": 1,
+                      "maxLength": 24,
                       "readonly": true
                     },
                     {

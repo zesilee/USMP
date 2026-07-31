@@ -31,6 +31,7 @@
               "path": "/ecc/key-pairs/key-pair/host-key-code",
               "type": "string",
               "label": "host-key-code",
+              "maxLength": 2048,
               "readonly": true,
               "supportFilter": true
             },
@@ -39,6 +40,8 @@
               "type": "string",
               "label": "key-pair-label",
               "pattern": "[a-zA-Z0-9_]*",
+              "minLength": 1,
+              "maxLength": 35,
               "isKey": true
             },
             {
@@ -74,18 +77,21 @@
           "path": "/ecc/local-key/host-key-code",
           "type": "string",
           "label": "host-key-code",
+          "maxLength": 1024,
           "readonly": true
         },
         {
           "path": "/ecc/local-key/host-key-name",
           "type": "string",
           "label": "host-key-name",
+          "maxLength": 264,
           "readonly": true
         },
         {
           "path": "/ecc/local-key/host-key-pem",
           "type": "string",
           "label": "host-key-pem",
+          "maxLength": 1024,
           "readonly": true
         },
         {
@@ -124,12 +130,16 @@
               "type": "string",
               "label": "key-code",
               "required": true,
+              "minLength": 1,
+              "maxLength": 1024,
               "supportFilter": true
             },
             {
               "path": "/ecc/peer-keys/peer-key/key-name",
               "type": "string",
               "label": "key-name",
+              "minLength": 1,
+              "maxLength": 40,
               "isKey": true
             }
           ]

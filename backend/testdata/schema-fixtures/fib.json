@@ -32,6 +32,7 @@
                   "path": "/fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/slot",
                   "type": "string",
                   "label": "slot",
+                  "maxLength": 16,
                   "readonly": true,
                   "isKey": true
                 },
@@ -39,6 +40,7 @@
                   "path": "/fib/route-statistics/ip-route-entry-counts/ip-route-entry-count/vpn-name",
                   "type": "string",
                   "label": "vpn-name",
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 }
@@ -62,6 +64,7 @@
                   "path": "/fib/route-statistics/ip-route-resources/ip-route-resource/slot",
                   "type": "string",
                   "label": "slot",
+                  "maxLength": 16,
                   "readonly": true,
                   "isKey": true
                 },
@@ -106,6 +109,7 @@
                   "path": "/fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/slot",
                   "type": "string",
                   "label": "slot",
+                  "maxLength": 24,
                   "readonly": true,
                   "isKey": true
                 },
@@ -113,6 +117,7 @@
                   "path": "/fib/route-statistics/ipv6-route-entry-counts/ipv6-route-entry-count/vpn-name",
                   "type": "string",
                   "label": "vpn-name",
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 }
@@ -136,6 +141,7 @@
                   "path": "/fib/route-statistics/ipv6-route-resources/ipv6-route-resource/slot",
                   "type": "string",
                   "label": "slot",
+                  "maxLength": 16,
                   "readonly": true,
                   "isKey": true
                 },
@@ -192,6 +198,7 @@
               "path": "/fib/unicast-afs/unicast-af/position",
               "type": "string",
               "label": "position",
+              "maxLength": 16,
               "readonly": true,
               "isKey": true
             },
@@ -211,6 +218,8 @@
                       "path": "/fib/unicast-afs/unicast-af/routes/route/bak-if-name",
                       "type": "string",
                       "label": "bak-if-name",
+                      "minLength": 1,
+                      "maxLength": 63,
                       "readonly": true
                     },
                     {
@@ -218,6 +227,8 @@
                       "type": "string",
                       "label": "bak-inner-lable",
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "readonly": true
                     },
                     {
@@ -225,6 +236,8 @@
                       "type": "string",
                       "label": "bak-lsp-token",
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "readonly": true
                     },
                     {
@@ -250,6 +263,8 @@
                       "path": "/fib/unicast-afs/unicast-af/routes/route/if-name",
                       "type": "string",
                       "label": "if-name",
+                      "minLength": 1,
+                      "maxLength": 63,
                       "readonly": true,
                       "isKey": true
                     },
@@ -258,6 +273,8 @@
                       "type": "string",
                       "label": "inner-label",
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "readonly": true
                     },
                     {
@@ -265,6 +282,8 @@
                       "type": "string",
                       "label": "lsp-token",
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "readonly": true
                     },
                     {
@@ -286,6 +305,7 @@
                       "path": "/fib/unicast-afs/unicast-af/routes/route/tunnel-id",
                       "type": "string",
                       "label": "tunnel-id",
+                      "maxLength": 49,
                       "readonly": true,
                       "isKey": true
                     },

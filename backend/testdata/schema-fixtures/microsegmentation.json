@@ -54,7 +54,9 @@
             {
               "path": "/microsegmentation/endpoint-groups/endpoint-group/description",
               "type": "string",
-              "label": "description"
+              "label": "description",
+              "minLength": 1,
+              "maxLength": 256
             },
             {
               "path": "/microsegmentation/endpoint-groups/endpoint-group/intra-epg-behavior",
@@ -165,6 +167,8 @@
               "path": "/microsegmentation/endpoint-groups/endpoint-group/segment-name",
               "type": "string",
               "label": "segment-name",
+              "minLength": 1,
+              "maxLength": 31,
               "supportFilter": true
             },
             {
@@ -280,6 +284,8 @@
               "path": "/microsegmentation/segment-behaviors/segment-behavior/behavior-name",
               "type": "string",
               "label": "behavior-name",
+              "minLength": 1,
+              "maxLength": 31,
               "isKey": true
             },
             {
@@ -306,6 +312,8 @@
               "path": "/microsegmentation/segment-classifiers/segment-classifier/classifier-name",
               "type": "string",
               "label": "classifier-name",
+              "minLength": 1,
+              "maxLength": 31,
               "isKey": true
             },
             {
@@ -470,6 +478,8 @@
               "path": "/microsegmentation/segment-policys/segment-policy/policy-name",
               "type": "string",
               "label": "policy-name",
+              "minLength": 1,
+              "maxLength": 31,
               "isKey": true
             }
           ]

@@ -17,6 +17,7 @@
               "path": "/devm/cards/card/hard-type",
               "type": "string",
               "label": "hard-type",
+              "maxLength": 30,
               "readonly": true
             },
             {
@@ -90,6 +91,8 @@
               "path": "/devm/cards/card/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {
@@ -116,6 +119,7 @@
               "path": "/devm/cards/card/type",
               "type": "string",
               "label": "type",
+              "maxLength": 30,
               "readonly": true
             }
           ],
@@ -146,6 +150,7 @@
               "path": "/devm/cf-cards/cf-card/card-type",
               "type": "string",
               "label": "card-type",
+              "maxLength": 30,
               "readonly": true
             },
             {
@@ -176,6 +181,8 @@
               "path": "/devm/cf-cards/cf-card/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -183,6 +190,8 @@
               "path": "/devm/cf-cards/cf-card/serial-number",
               "type": "string",
               "label": "serial-number",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             }
@@ -355,6 +364,8 @@
               "path": "/devm/chassiss/chassis/last-clean-date",
               "type": "string",
               "label": "last-clean-date",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
@@ -430,6 +441,8 @@
               "path": "/devm/chassiss/chassis/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {
@@ -481,6 +494,8 @@
                   "path": "/devm/chassiss/chassis/power-supply-attribute/power-supply-assigned-utility",
                   "type": "string",
                   "label": "power-supply-assigned-utility",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -529,6 +544,8 @@
                   "path": "/devm/chassiss/chassis/power-supply-attribute/power-supply-real-utility",
                   "type": "string",
                   "label": "power-supply-real-utility",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -557,6 +574,7 @@
               "path": "/devm/chassiss/chassis/service-type",
               "type": "string",
               "label": "service-type",
+              "maxLength": 30,
               "readonly": true
             },
             {
@@ -575,6 +593,7 @@
               "path": "/devm/chassiss/chassis/type",
               "type": "string",
               "label": "type",
+              "maxLength": 30,
               "readonly": true
             },
             {
@@ -617,6 +636,7 @@
               "path": "/devm/containers/container/equiped-entity-type",
               "type": "string",
               "label": "equiped-entity-type",
+              "maxLength": 30,
               "readonly": true
             },
             {
@@ -629,6 +649,8 @@
               "path": "/devm/containers/container/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -648,6 +670,7 @@
                       "path": "/devm/containers/container/supported-entity-types/supported-entity-type/entity-type",
                       "type": "string",
                       "label": "entity-type",
+                      "maxLength": 30,
                       "readonly": true,
                       "isKey": true
                     }
@@ -659,6 +682,7 @@
               "path": "/devm/containers/container/type",
               "type": "string",
               "label": "type",
+              "maxLength": 30,
               "readonly": true
             }
           ]
@@ -686,6 +710,8 @@
                   "path": "/devm/driver/ccus/ccu/software-version",
                   "type": "string",
                   "label": "software-version",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 }
               ],
@@ -9535,7 +9561,9 @@
                         {
                           "path": "/devm/driver/cmus/cmu/cmu-analogs/cmu-analog/analog-name",
                           "type": "string",
-                          "label": "analog-name"
+                          "label": "analog-name",
+                          "minLength": 1,
+                          "maxLength": 24
                         },
                         {
                           "path": "/devm/driver/cmus/cmu/cmu-analogs/cmu-analog/analog-object",
@@ -9636,7 +9664,9 @@
                         {
                           "path": "/devm/driver/cmus/cmu/cmu-relays/cmu-relay/relay-name",
                           "type": "string",
-                          "label": "relay-name"
+                          "label": "relay-name",
+                          "minLength": 1,
+                          "maxLength": 24
                         }
                       ]
                     }
@@ -9696,7 +9726,9 @@
                         {
                           "path": "/devm/driver/cmus/cmu/cmu-switchs/cmu-switch/switch-name",
                           "type": "string",
-                          "label": "switch-name"
+                          "label": "switch-name",
+                          "minLength": 1,
+                          "maxLength": 24
                         }
                       ]
                     }
@@ -9718,6 +9750,8 @@
                   "path": "/devm/driver/cmus/cmu/position",
                   "type": "string",
                   "label": "position",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "isKey": true
                 },
                 {
@@ -14008,6 +14042,8 @@
                   "path": "/devm/driver/dacss/dacs/dacs-area",
                   "type": "string",
                   "label": "dacs-area",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 },
                 {
@@ -14020,42 +14056,56 @@
                   "path": "/devm/driver/dacss/dacs/insource-plane",
                   "type": "string",
                   "label": "insource-plane",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/dacss/dacs/insource-plane-a",
                   "type": "string",
                   "label": "insource-plane-a",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/dacss/dacs/insource-plane-b",
                   "type": "string",
                   "label": "insource-plane-b",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/dacss/dacs/output-electrical-value",
                   "type": "string",
                   "label": "output-electrical-value",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/dacss/dacs/output-status",
                   "type": "string",
                   "label": "output-status",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/dacss/dacs/output-voltage-value",
                   "type": "string",
                   "label": "output-voltage-value",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/dacss/dacs/position",
                   "type": "string",
                   "label": "position",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -18340,6 +18390,8 @@
                   "path": "/devm/driver/dmus/dmu/position",
                   "type": "string",
                   "label": "position",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -18347,18 +18399,24 @@
                   "path": "/devm/driver/dmus/dmu/present",
                   "type": "string",
                   "label": "present",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/dmus/dmu/register",
                   "type": "string",
                   "label": "register",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/dmus/dmu/work",
                   "type": "string",
                   "label": "work",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 }
               ]
@@ -22632,6 +22690,8 @@
                   "path": "/devm/driver/ecus/ecu/position",
                   "type": "string",
                   "label": "position",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -26923,6 +26983,8 @@
                   "path": "/devm/driver/fans/fan/global-speed",
                   "type": "string",
                   "label": "global-speed",
+                  "minLength": 1,
+                  "maxLength": 128,
                   "readonly": true
                 },
                 {
@@ -26945,6 +27007,8 @@
                   "path": "/devm/driver/fans/fan/position",
                   "type": "string",
                   "label": "position",
+                  "minLength": 1,
+                  "maxLength": 50,
                   "readonly": true,
                   "isKey": true
                 },
@@ -31284,6 +31348,8 @@
                   "path": "/devm/driver/icus/icu/position",
                   "type": "string",
                   "label": "position",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -35557,6 +35623,8 @@
                   "path": "/devm/driver/lcds/lcd/position",
                   "type": "string",
                   "label": "position",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 }
@@ -35580,6 +35648,8 @@
                   "path": "/devm/driver/pdus/pdu/abnormal-number",
                   "type": "string",
                   "label": "abnormal-number",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -39824,12 +39894,16 @@
                   "path": "/devm/driver/pdus/pdu/normal-number",
                   "type": "string",
                   "label": "normal-number",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/pdus/pdu/position",
                   "type": "string",
                   "label": "position",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -39837,6 +39911,8 @@
                   "path": "/devm/driver/pdus/pdu/power-state",
                   "type": "string",
                   "label": "power-state",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -44119,18 +44195,24 @@
                   "path": "/devm/driver/pms/pm/input-electrical-value",
                   "type": "string",
                   "label": "input-electrical-value",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/pms/pm/input-power-value",
                   "type": "string",
                   "label": "input-power-value",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/pms/pm/input-voltage-value",
                   "type": "string",
                   "label": "input-voltage-value",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -44153,24 +44235,32 @@
                   "path": "/devm/driver/pms/pm/output-electrical-value",
                   "type": "string",
                   "label": "output-electrical-value",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/pms/pm/output-power-value",
                   "type": "string",
                   "label": "output-power-value",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/pms/pm/output-voltage-value",
                   "type": "string",
                   "label": "output-voltage-value",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/pms/pm/pm-area",
                   "type": "string",
                   "label": "pm-area",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 },
                 {
@@ -44193,6 +44283,8 @@
                   "path": "/devm/driver/pms/pm/position",
                   "type": "string",
                   "label": "position",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "isKey": true
                 },
                 {
@@ -48481,12 +48573,16 @@
                   "path": "/devm/driver/pmus/pmu/ha-status",
                   "type": "string",
                   "label": "ha-status",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/pmus/pmu/position",
                   "type": "string",
                   "label": "position",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -48494,18 +48590,24 @@
                   "path": "/devm/driver/pmus/pmu/present",
                   "type": "string",
                   "label": "present",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/pmus/pmu/register",
                   "type": "string",
                   "label": "register",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 },
                 {
                   "path": "/devm/driver/pmus/pmu/work",
                   "type": "string",
                   "label": "work",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 }
               ]
@@ -52794,6 +52896,8 @@
                   "path": "/devm/driver/power-supplys/power-supply/position",
                   "type": "string",
                   "label": "position",
+                  "minLength": 1,
+                  "maxLength": 50,
                   "readonly": true,
                   "isKey": true
                 },
@@ -52813,24 +52917,32 @@
                           "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/electrical-value",
                           "type": "string",
                           "label": "electrical-value",
+                          "minLength": 1,
+                          "maxLength": 255,
                           "readonly": true
                         },
                         {
                           "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/out-electrical-value",
                           "type": "string",
                           "label": "out-electrical-value",
+                          "minLength": 1,
+                          "maxLength": 255,
                           "readonly": true
                         },
                         {
                           "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/out-power-value",
                           "type": "string",
                           "label": "out-power-value",
+                          "minLength": 1,
+                          "maxLength": 255,
                           "readonly": true
                         },
                         {
                           "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/out-voltage-value",
                           "type": "string",
                           "label": "out-voltage-value",
+                          "minLength": 1,
+                          "maxLength": 255,
                           "readonly": true
                         },
                         {
@@ -52844,18 +52956,24 @@
                           "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/power-value",
                           "type": "string",
                           "label": "power-value",
+                          "minLength": 1,
+                          "maxLength": 255,
                           "readonly": true
                         },
                         {
                           "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/temperature-value",
                           "type": "string",
                           "label": "temperature-value",
+                          "minLength": 1,
+                          "maxLength": 255,
                           "readonly": true
                         },
                         {
                           "path": "/devm/driver/power-supplys/power-supply/power-environments/power-environment/voltage-value",
                           "type": "string",
                           "label": "voltage-value",
+                          "minLength": 1,
+                          "maxLength": 255,
                           "readonly": true
                         }
                       ]
@@ -52866,6 +52984,8 @@
                   "path": "/devm/driver/power-supplys/power-supply/power-state",
                   "type": "string",
                   "label": "power-state",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -52912,6 +53032,8 @@
                   "path": "/devm/driver/vsus/vsu/position",
                   "type": "string",
                   "label": "position",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -53275,6 +53397,8 @@
               "path": "/devm/inconsistent-entitys/inconsistent-entity/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -53282,6 +53406,7 @@
               "path": "/devm/inconsistent-entitys/inconsistent-entity/serial-number",
               "type": "string",
               "label": "serial-number",
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             }
@@ -53399,6 +53524,7 @@
               "path": "/devm/logic-containers/logic-container/position",
               "type": "string",
               "label": "position",
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -53553,6 +53679,7 @@
               "path": "/devm/logic-entitys/logic-entity/entity-description",
               "type": "string",
               "label": "entity-description",
+              "maxLength": 256,
               "readonly": true
             },
             {
@@ -53564,12 +53691,14 @@
             {
               "path": "/devm/logic-entitys/logic-entity/memo",
               "type": "string",
-              "label": "memo"
+              "label": "memo",
+              "maxLength": 256
             },
             {
               "path": "/devm/logic-entitys/logic-entity/name",
               "type": "string",
               "label": "name",
+              "maxLength": 128,
               "readonly": true
             },
             {
@@ -53648,12 +53777,15 @@
               "path": "/devm/logic-entitys/logic-entity/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {
               "path": "/devm/logic-entitys/logic-entity/serial-number",
               "type": "string",
               "label": "serial-number",
+              "maxLength": 32,
               "isKey": true
             },
             {
@@ -53856,12 +53988,15 @@
               "path": "/devm/logic-ports/logic-port/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {
               "path": "/devm/logic-ports/logic-port/serial-number",
               "type": "string",
               "label": "serial-number",
+              "maxLength": 32,
               "isKey": true
             }
           ]
@@ -53882,12 +54017,14 @@
               "path": "/devm/lpu-boards/lpu-board/board-type",
               "type": "string",
               "label": "board-type",
+              "maxLength": 30,
               "readonly": true
             },
             {
               "path": "/devm/lpu-boards/lpu-board/clock-8k-port",
               "type": "string",
-              "label": "clock-8k-port"
+              "label": "clock-8k-port",
+              "maxLength": 32
             },
             {
               "path": "/devm/lpu-boards/lpu-board/current-l3-clk",
@@ -53917,6 +54054,8 @@
                           "path": "/devm/lpu-boards/lpu-board/driver/l3-clocks/l3-clock/clock-id",
                           "type": "string",
                           "label": "clock-id",
+                          "minLength": 1,
+                          "maxLength": 255,
                           "readonly": true,
                           "isKey": true
                         },
@@ -54151,6 +54290,8 @@
                       "type": "string",
                       "label": "custom-seed",
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "must": [
                         {
                           "expr": "../custom-seed='0x0' or ../random-flag='false'"
@@ -54200,6 +54341,8 @@
                           "type": "string",
                           "label": "box1",
                           "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 4,
                           "when": "../type='box'"
                         },
                         {
@@ -54207,6 +54350,8 @@
                           "type": "string",
                           "label": "box2",
                           "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 10,
                           "when": "../type='box'"
                         },
                         {
@@ -54214,6 +54359,8 @@
                           "type": "string",
                           "label": "custom-seed",
                           "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 10,
                           "when": "../type='seed' and ../random-flag='false'"
                         },
                         {
@@ -54367,7 +54514,8 @@
                           "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/dst-macaddr",
                           "type": "string",
                           "label": "dst-macaddr",
-                          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                          "maxLength": 255
                         },
                         {
                           "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/dst-port",
@@ -54378,7 +54526,9 @@
                           "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/eth-type",
                           "type": "string",
                           "label": "eth-type",
-                          "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                          "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 6
                         },
                         {
                           "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/filter-id",
@@ -54420,7 +54570,9 @@
                                   "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/ppp-protocol",
                                   "type": "string",
                                   "label": "ppp-protocol",
-                                  "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                                  "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                                  "minLength": 1,
+                                  "maxLength": 6
                                 }
                               ]
                             }
@@ -54452,7 +54604,8 @@
                           "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/src-macaddr",
                           "type": "string",
                           "label": "src-macaddr",
-                          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                          "maxLength": 255
                         },
                         {
                           "path": "/devm/lpu-boards/lpu-board/mirror/observe-filters/observe-filter/src-port",
@@ -54558,6 +54711,8 @@
               "path": "/devm/lpu-boards/lpu-board/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {
@@ -54750,12 +54905,14 @@
                           "type": "string",
                           "label": "dest-slot-id1",
                           "required": true,
+                          "maxLength": 50,
                           "supportFilter": true
                         },
                         {
                           "path": "/devm/lpu-boards/lpu-board/unicast-forward/vxlan-rdr-trunks/vxlan-rdr-trunk/dest-slot-id2",
                           "type": "string",
                           "label": "dest-slot-id2",
+                          "maxLength": 50,
                           "supportFilter": true
                         },
                         {
@@ -54816,6 +54973,7 @@
               "path": "/devm/mpu-boards/mpu-board/board-type",
               "type": "string",
               "label": "board-type",
+              "maxLength": 30,
               "readonly": true
             },
             {
@@ -54852,6 +55010,7 @@
               "path": "/devm/mpu-boards/mpu-board/last-reset-reason",
               "type": "string",
               "label": "last-reset-reason",
+              "maxLength": 256,
               "readonly": true
             },
             {
@@ -55052,6 +55211,8 @@
                       "type": "string",
                       "label": "custom-seed",
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "must": [
                         {
                           "expr": "../custom-seed='0x0' or ../random-flag='false'"
@@ -55149,7 +55310,8 @@
                           "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/dst-macaddr",
                           "type": "string",
                           "label": "dst-macaddr",
-                          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                          "maxLength": 255
                         },
                         {
                           "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/dst-port",
@@ -55160,7 +55322,9 @@
                           "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/eth-type",
                           "type": "string",
                           "label": "eth-type",
-                          "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                          "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 6
                         },
                         {
                           "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/filter-id",
@@ -55202,7 +55366,9 @@
                                   "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/ppp-protocol",
                                   "type": "string",
                                   "label": "ppp-protocol",
-                                  "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                                  "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                                  "minLength": 1,
+                                  "maxLength": 6
                                 }
                               ]
                             }
@@ -55234,7 +55400,8 @@
                           "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/src-macaddr",
                           "type": "string",
                           "label": "src-macaddr",
-                          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                          "maxLength": 255
                         },
                         {
                           "path": "/devm/mpu-boards/mpu-board/mirror/observe-filters/observe-filter/src-port",
@@ -55280,6 +55447,8 @@
               "path": "/devm/mpu-boards/mpu-board/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {
@@ -55439,6 +55608,8 @@
               "path": "/devm/offlines/offline/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             }
@@ -55482,6 +55653,7 @@
               "path": "/devm/physical-entitys/physical-entity/alias",
               "type": "string",
               "label": "alias",
+              "maxLength": 128,
               "readonly": true
             },
             {
@@ -55611,18 +55783,21 @@
               "path": "/devm/physical-entitys/physical-entity/entity-description",
               "type": "string",
               "label": "entity-description",
+              "maxLength": 256,
               "readonly": true
             },
             {
               "path": "/devm/physical-entitys/physical-entity/firmware-version",
               "type": "string",
               "label": "firmware-version",
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/devm/physical-entitys/physical-entity/hardware-version",
               "type": "string",
               "label": "hardware-version",
+              "maxLength": 128,
               "readonly": true
             },
             {
@@ -55641,18 +55816,22 @@
               "path": "/devm/physical-entitys/physical-entity/ls-name",
               "type": "string",
               "label": "ls-name",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true
             },
             {
               "path": "/devm/physical-entitys/physical-entity/module-name",
               "type": "string",
               "label": "module-name",
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/devm/physical-entitys/physical-entity/name",
               "type": "string",
               "label": "name",
+              "maxLength": 128,
               "readonly": true
             },
             {
@@ -55665,6 +55844,8 @@
               "path": "/devm/physical-entitys/physical-entity/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -55732,6 +55913,7 @@
               "path": "/devm/physical-entitys/physical-entity/serial-number",
               "type": "string",
               "label": "serial-number",
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },
@@ -55739,6 +55921,7 @@
               "path": "/devm/physical-entitys/physical-entity/software-version",
               "type": "string",
               "label": "software-version",
+              "maxLength": 128,
               "readonly": true
             },
             {
@@ -55773,12 +55956,15 @@
               "path": "/devm/physical-entitys/physical-entity/system-oid",
               "type": "string",
               "label": "system-oid",
+              "minLength": 1,
+              "maxLength": 128,
               "readonly": true
             },
             {
               "path": "/devm/physical-entitys/physical-entity/vendor-type",
               "type": "string",
               "label": "vendor-type",
+              "maxLength": 30,
               "readonly": true
             }
           ]
@@ -55953,6 +56139,8 @@
               "path": "/devm/ports/port/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {
@@ -56064,6 +56252,8 @@
           "path": "/devm/schedule-reboot/delay-time",
           "type": "string",
           "label": "delay-time",
+          "minLength": 1,
+          "maxLength": 49,
           "readonly": true
         }
       ]
@@ -56084,6 +56274,7 @@
               "path": "/devm/sfu-boards/sfu-board/board-type",
               "type": "string",
               "label": "board-type",
+              "maxLength": 30,
               "readonly": true
             },
             {
@@ -56108,6 +56299,8 @@
               "path": "/devm/sfu-boards/sfu-board/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 32,
               "readonly": true,
               "isKey": true
             },

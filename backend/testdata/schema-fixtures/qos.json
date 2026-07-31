@@ -152,6 +152,8 @@
                   "path": "/qos/car-template/templates/template/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 }
               ]
@@ -330,6 +332,8 @@
                           "path": "/qos/classifier-template/diffserv-domains/diffserv-domain/diffserv-domain-applications/diffserv-domain-application/interface-name",
                           "type": "string",
                           "label": "interface-name",
+                          "minLength": 1,
+                          "maxLength": 127,
                           "readonly": true,
                           "isKey": true
                         }
@@ -341,6 +345,8 @@
                   "path": "/qos/classifier-template/diffserv-domains/diffserv-domain/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 48,
                   "isKey": true
                 },
                 {
@@ -527,6 +533,8 @@
                   "path": "/qos/classifier-template/qos-groups/qos-group/group-name",
                   "type": "string",
                   "label": "group-name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 },
                 {
@@ -1145,7 +1153,9 @@
                 {
                   "path": "/qos/classifier-template/traffic-behaviors/traffic-behavior/description",
                   "type": "string",
-                  "label": "description"
+                  "label": "description",
+                  "minLength": 1,
+                  "maxLength": 127
                 },
                 {
                   "path": "/qos/classifier-template/traffic-behaviors/traffic-behavior/except-deny-action",
@@ -1437,7 +1447,9 @@
                           "type": "string",
                           "label": "observe-index",
                           "required": true,
-                          "pattern": "((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|[1-9]){1}((,(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|[1-9])){0,7}))"
+                          "pattern": "((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|[1-9]){1}((,(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|[1-9])){0,7}))",
+                          "minLength": 1,
+                          "maxLength": 50
                         }
                       ],
                       "presence": true
@@ -1501,6 +1513,8 @@
                   "path": "/qos/classifier-template/traffic-behaviors/traffic-behavior/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "isKey": true
                 },
                 {
@@ -2335,7 +2349,9 @@
                 {
                   "path": "/qos/classifier-template/traffic-classifiers/traffic-classifier/description",
                   "type": "string",
-                  "label": "description"
+                  "label": "description",
+                  "minLength": 1,
+                  "maxLength": 127
                 },
                 {
                   "path": "/qos/classifier-template/traffic-classifiers/traffic-classifier/local-id-ipv6s",
@@ -2385,6 +2401,8 @@
                   "path": "/qos/classifier-template/traffic-classifiers/traffic-classifier/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "isKey": true
                 },
                 {
@@ -2671,6 +2689,8 @@
                           "type": "string",
                           "label": "value",
                           "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 10,
                           "isKey": true
                         }
                       ]
@@ -2779,7 +2799,9 @@
                           "path": "/qos/classifier-template/traffic-classifiers/traffic-classifier/rule-ip-identifications/rule-ip-identification/identification-mask",
                           "type": "string",
                           "label": "identification-mask",
-                          "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                          "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 10
                         }
                       ]
                     }
@@ -2800,6 +2822,7 @@
                           "type": "string",
                           "label": "address",
                           "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                          "maxLength": 255,
                           "isKey": true
                         },
                         {
@@ -2837,6 +2860,7 @@
                           "type": "string",
                           "label": "mac-address",
                           "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                          "maxLength": 255,
                           "isKey": true
                         },
                         {
@@ -2844,6 +2868,7 @@
                           "type": "string",
                           "label": "mac-address-mask",
                           "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                          "maxLength": 255,
                           "isKey": true
                         },
                         {
@@ -3006,50 +3031,66 @@
                           "type": "string",
                           "label": "match-mask1",
                           "required": true,
-                          "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                          "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 10
                         },
                         {
                           "path": "/qos/classifier-template/traffic-classifiers/traffic-classifier/rule-offsets/rule-offset/match-mask2",
                           "type": "string",
                           "label": "match-mask2",
-                          "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                          "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 10
                         },
                         {
                           "path": "/qos/classifier-template/traffic-classifiers/traffic-classifier/rule-offsets/rule-offset/match-mask3",
                           "type": "string",
                           "label": "match-mask3",
-                          "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                          "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 10
                         },
                         {
                           "path": "/qos/classifier-template/traffic-classifiers/traffic-classifier/rule-offsets/rule-offset/match-mask4",
                           "type": "string",
                           "label": "match-mask4",
-                          "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                          "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 10
                         },
                         {
                           "path": "/qos/classifier-template/traffic-classifiers/traffic-classifier/rule-offsets/rule-offset/match-value1",
                           "type": "string",
                           "label": "match-value1",
                           "required": true,
-                          "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                          "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 10
                         },
                         {
                           "path": "/qos/classifier-template/traffic-classifiers/traffic-classifier/rule-offsets/rule-offset/match-value2",
                           "type": "string",
                           "label": "match-value2",
-                          "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                          "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 10
                         },
                         {
                           "path": "/qos/classifier-template/traffic-classifiers/traffic-classifier/rule-offsets/rule-offset/match-value3",
                           "type": "string",
                           "label": "match-value3",
-                          "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                          "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 10
                         },
                         {
                           "path": "/qos/classifier-template/traffic-classifiers/traffic-classifier/rule-offsets/rule-offset/match-value4",
                           "type": "string",
                           "label": "match-value4",
-                          "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                          "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 10
                         },
                         {
                           "path": "/qos/classifier-template/traffic-classifiers/traffic-classifier/rule-offsets/rule-offset/offset-value1",
@@ -3335,6 +3376,8 @@
                               "type": "string",
                               "label": "rule-mask",
                               "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                              "minLength": 3,
+                              "maxLength": 10,
                               "isKey": true
                             },
                             {
@@ -3342,6 +3385,8 @@
                               "type": "string",
                               "label": "rule-string",
                               "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                              "minLength": 3,
+                              "maxLength": 10,
                               "isKey": true
                             }
                           ]
@@ -3641,6 +3686,8 @@
                           "type": "string",
                           "label": "field-value",
                           "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                          "minLength": 1,
+                          "maxLength": 10,
                           "isKey": true
                         },
                         {
@@ -3830,7 +3877,9 @@
                 {
                   "path": "/qos/classifier-template/traffic-policys/traffic-policy/description",
                   "type": "string",
-                  "label": "description"
+                  "label": "description",
+                  "minLength": 1,
+                  "maxLength": 127
                 },
                 {
                   "path": "/qos/classifier-template/traffic-policys/traffic-policy/group-mode-policy-nodes",
@@ -3875,6 +3924,8 @@
                           "path": "/qos/classifier-template/traffic-policys/traffic-policy/group-mode-policy-nodes/group-mode-policy-node/group-name",
                           "type": "string",
                           "label": "group-name",
+                          "minLength": 1,
+                          "maxLength": 33,
                           "isKey": true
                         },
                         {
@@ -3942,6 +3993,8 @@
                   "path": "/qos/classifier-template/traffic-policys/traffic-policy/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "isKey": true
                 },
                 {
@@ -4115,6 +4168,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "isKey": true
                 }
               ]
@@ -4469,6 +4524,8 @@
                                   "path": "/qos/global-config/global-policys/global-policy/global-policy-statisticss/global-policy-statistics/classifier-statisticss/classifier-statistics/classifier-name",
                                   "type": "string",
                                   "label": "classifier-name",
+                                  "minLength": 1,
+                                  "maxLength": 127,
                                   "readonly": true,
                                   "isKey": true
                                 },
@@ -4500,12 +4557,16 @@
                                   "path": "/qos/global-config/global-policys/global-policy/global-policy-statisticss/global-policy-statistics/classifier-statisticss/classifier-statistics/group-name",
                                   "type": "string",
                                   "label": "group-name",
+                                  "minLength": 1,
+                                  "maxLength": 31,
                                   "readonly": true
                                 },
                                 {
                                   "path": "/qos/global-config/global-policys/global-policy/global-policy-statisticss/global-policy-statistics/classifier-statisticss/classifier-statistics/group-type",
                                   "type": "string",
                                   "label": "group-type",
+                                  "minLength": 1,
+                                  "maxLength": 31,
                                   "readonly": true
                                 },
                                 {
@@ -4584,6 +4645,8 @@
                                   "path": "/qos/global-config/global-policys/global-policy/global-policy-statisticss/global-policy-statistics/classifier-statisticss/classifier-statistics/stream-direction",
                                   "type": "string",
                                   "label": "stream-direction",
+                                  "minLength": 1,
+                                  "maxLength": 31,
                                   "readonly": true
                                 },
                                 {
@@ -4770,6 +4833,8 @@
                                   "path": "/qos/global-config/global-policys/global-policy/global-policy-statisticss/global-policy-statistics/rule-based-statisticss/rule-based-statistics/acl-name",
                                   "type": "string",
                                   "label": "acl-name",
+                                  "minLength": 1,
+                                  "maxLength": 63,
                                   "readonly": true
                                 },
                                 {
@@ -4860,6 +4925,8 @@
                           "type": "string",
                           "label": "slot-id",
                           "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+",
+                          "minLength": 1,
+                          "maxLength": 32,
                           "readonly": true,
                           "isKey": true
                         },
@@ -4901,7 +4968,9 @@
                   "path": "/qos/global-config/global-policys/global-policy/slot-id",
                   "type": "string",
                   "label": "slot-id",
-                  "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+"
+                  "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32
                 },
                 {
                   "path": "/qos/global-config/global-policys/global-policy/ucl-type",
@@ -5075,6 +5144,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "isKey": true
                 }
               ]
@@ -5112,6 +5183,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "isKey": true
                 }
               ]
@@ -5237,6 +5310,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "isKey": true
                 },
                 {
@@ -5436,6 +5511,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "isKey": true
                 },
                 {
@@ -5505,6 +5582,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "isKey": true
                 }
               ],
@@ -5529,6 +5608,8 @@
                   "path": "/qos/global-config/tm-schedule-traffic-statistics-enables/tm-schedule-traffic-statistics-enable/card-id",
                   "type": "string",
                   "label": "card-id",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "isKey": true
                 },
                 {
@@ -5536,6 +5617,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "isKey": true
                 }
               ]
@@ -5659,7 +5742,9 @@
                   "path": "/qos/global-config/traffic-policys/traffic-policy/slot-id",
                   "type": "string",
                   "label": "slot-id",
-                  "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+"
+                  "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32
                 }
               ]
             }
@@ -5689,6 +5774,8 @@
                   "path": "/qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/bankid-list",
                   "type": "string",
                   "label": "bankid-list",
+                  "minLength": 1,
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -5702,6 +5789,8 @@
                   "path": "/qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/direction",
                   "type": "string",
                   "label": "direction",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -5728,6 +5817,8 @@
                   "path": "/qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/service-name",
                   "type": "string",
                   "label": "service-name",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -5771,6 +5862,8 @@
                   "path": "/qos/global-query/acl-bank-resource-usages/acl-bank-resource-usage/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 }
@@ -5813,6 +5906,8 @@
                   "path": "/qos/global-query/acl-resource-usages/acl-resource-usage/resource-name",
                   "type": "string",
                   "label": "resource-name",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -5820,6 +5915,8 @@
                   "path": "/qos/global-query/acl-resource-usages/acl-resource-usage/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 }
@@ -5943,6 +6040,8 @@
                   "path": "/qos/global-query/car-resources/car-resource/car-type",
                   "type": "string",
                   "label": "car-type",
+                  "minLength": 1,
+                  "maxLength": 96,
                   "readonly": true,
                   "isKey": true
                 },
@@ -5962,6 +6061,8 @@
                   "path": "/qos/global-query/car-resources/car-resource/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 }
@@ -6034,6 +6135,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 }
@@ -6200,6 +6303,8 @@
                   "path": "/qos/global-query/core-queue-buffer-statisticss/core-queue-buffer-statistics/current-percent",
                   "type": "string",
                   "label": "current-percent",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "readonly": true
                 },
                 {
@@ -6611,6 +6716,8 @@
                   "type": "string",
                   "label": "source-slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -6665,6 +6772,8 @@
                   "type": "string",
                   "label": "destination-slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -6703,6 +6812,8 @@
                   "type": "string",
                   "label": "source-slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -6822,6 +6933,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 }
@@ -6869,6 +6982,8 @@
                   "path": "/qos/global-query/global-classifier-statisticss/global-classifier-statistics/classifier-name",
                   "type": "string",
                   "label": "classifier-name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "readonly": true,
                   "isKey": true
                 },
@@ -7000,6 +7115,8 @@
                   "path": "/qos/global-query/global-classifier-statisticss/global-classifier-statistics/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 }
@@ -7047,6 +7164,8 @@
                   "path": "/qos/global-query/group-classifier-statisticss/group-classifier-statistics/classifier-name",
                   "type": "string",
                   "label": "classifier-name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "readonly": true,
                   "isKey": true
                 },
@@ -7099,6 +7218,8 @@
                   "path": "/qos/global-query/group-classifier-statisticss/group-classifier-statistics/group-name",
                   "type": "string",
                   "label": "group-name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "readonly": true,
                   "isKey": true
                 },
@@ -7185,6 +7306,8 @@
                   "path": "/qos/global-query/group-classifier-statisticss/group-classifier-statistics/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 }
@@ -7593,6 +7716,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -7656,6 +7781,8 @@
                   "path": "/qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/classifier-name",
                   "type": "string",
                   "label": "classifier-name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "readonly": true
                 },
                 {
@@ -7789,6 +7916,8 @@
                   "path": "/qos/global-query/interface-classifier-statisticss/interface-classifier-statistics/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 }
@@ -7812,6 +7941,8 @@
                   "path": "/qos/global-query/interface-configurations/interface-configuration/car-name",
                   "type": "string",
                   "label": "car-name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "readonly": true
                 },
                 {
@@ -7846,12 +7977,16 @@
                   "path": "/qos/global-query/interface-configurations/interface-configuration/diffserv-domain-name",
                   "type": "string",
                   "label": "diffserv-domain-name",
+                  "minLength": 1,
+                  "maxLength": 48,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-configurations/interface-configuration/interface-name",
                   "type": "string",
                   "label": "interface-name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "readonly": true,
                   "isKey": true
                 },
@@ -7989,6 +8124,8 @@
                           "path": "/qos/global-query/interface-configurations/interface-configuration/queue-configurations/queue-configuration/wred",
                           "type": "string",
                           "label": "wred",
+                          "minLength": 1,
+                          "maxLength": 31,
                           "readonly": true
                         }
                       ]
@@ -8023,6 +8160,8 @@
                   "path": "/qos/global-query/interface-configurations/interface-configuration/wred-name",
                   "type": "string",
                   "label": "wred-name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "readonly": true
                 }
               ]
@@ -8057,6 +8196,8 @@
                   "path": "/qos/global-query/interface-ecn-thresholds/interface-ecn-threshold/interface-name",
                   "type": "string",
                   "label": "interface-name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "readonly": true,
                   "isKey": true
                 },
@@ -8125,84 +8266,112 @@
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/receive-packet-between-1024to1518bytes",
                   "type": "string",
                   "label": "receive-packet-between-1024to1518bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/receive-packet-between-128to255bytes",
                   "type": "string",
                   "label": "receive-packet-between-128to255bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/receive-packet-between-256to511bytes",
                   "type": "string",
                   "label": "receive-packet-between-256to511bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/receive-packet-between-512to1023bytes",
                   "type": "string",
                   "label": "receive-packet-between-512to1023bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/receive-packet-between-65to127bytes",
                   "type": "string",
                   "label": "receive-packet-between-65to127bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/receive-packet-equal-64bytes",
                   "type": "string",
                   "label": "receive-packet-equal-64bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/receive-packet-larger-1518bytes",
                   "type": "string",
                   "label": "receive-packet-larger-1518bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/send-packet-between-1024to1518bytes",
                   "type": "string",
                   "label": "send-packet-between-1024to1518bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/send-packet-between-128to255bytes",
                   "type": "string",
                   "label": "send-packet-between-128to255bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/send-packet-between-256to511bytes",
                   "type": "string",
                   "label": "send-packet-between-256to511bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/send-packet-between-512to1023bytes",
                   "type": "string",
                   "label": "send-packet-between-512to1023bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/send-packet-between-65to127bytes",
                   "type": "string",
                   "label": "send-packet-between-65to127bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/send-packet-equal-64bytes",
                   "type": "string",
                   "label": "send-packet-equal-64bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/interface-extend-statisticss/interface-extend-statistics/send-packet-larger-1518bytes",
                   "type": "string",
                   "label": "send-packet-larger-1518bytes",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
@@ -8314,6 +8483,8 @@
                   "path": "/qos/global-query/interface-monitoring-results/interface-monitoring-result/interface-name",
                   "type": "string",
                   "label": "interface-name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "readonly": true,
                   "isKey": true
                 },
@@ -9505,6 +9676,8 @@
                           "path": "/qos/global-query/interface-traffic-policy-statisticss/interface-traffic-policy-statistics/classifier-statisticss/classifier-statistics/classifier-name",
                           "type": "string",
                           "label": "classifier-name",
+                          "minLength": 1,
+                          "maxLength": 127,
                           "readonly": true,
                           "isKey": true
                         },
@@ -9909,6 +10082,8 @@
                           "path": "/qos/global-query/interface-traffic-policy-statisticss/interface-traffic-policy-statistics/rule-based-staticss/rule-based-statics/acl-name",
                           "type": "string",
                           "label": "acl-name",
+                          "minLength": 1,
+                          "maxLength": 63,
                           "readonly": true
                         },
                         {
@@ -10049,6 +10224,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -10079,6 +10256,8 @@
                   "path": "/qos/global-query/interface-traffic-policy-statisticss/interface-traffic-policy-statistics/traffic-policy-name",
                   "type": "string",
                   "label": "traffic-policy-name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "readonly": true
                 },
                 {
@@ -10549,6 +10728,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -11280,6 +11461,8 @@
                   "path": "/qos/global-query/qos-resource-rules/qos-resource-rule/resource-pool",
                   "type": "string",
                   "label": "resource-pool",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -11321,6 +11504,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true,
                   "isKey": true
                 },
@@ -11396,6 +11581,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 }
@@ -11773,6 +11960,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -11891,6 +12080,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 }
@@ -12052,6 +12243,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true,
                   "isKey": true
                 }
@@ -12087,6 +12280,8 @@
                           "path": "/qos/global-query/sub-port-queue-abnormal-allocations/sub-port-queue-abnormal-allocation/abnormal-configurations/abnormal-configuration/configuration",
                           "type": "string",
                           "label": "configuration",
+                          "minLength": 1,
+                          "maxLength": 128,
                           "readonly": true
                         },
                         {
@@ -12117,6 +12312,8 @@
                   "path": "/qos/global-query/sub-port-queue-abnormal-allocations/sub-port-queue-abnormal-allocation/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -12166,6 +12363,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true,
                   "isKey": true
                 },
@@ -12173,6 +12372,8 @@
                   "path": "/qos/global-query/sub-port-queue-resources/sub-port-queue-resource/tm-type",
                   "type": "string",
                   "label": "tm-type",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -12202,6 +12403,8 @@
                   "path": "/qos/global-query/traffic-buffer-usages/traffic-buffer-usage/chip-name",
                   "type": "string",
                   "label": "chip-name",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -12209,6 +12412,8 @@
                   "path": "/qos/global-query/traffic-buffer-usages/traffic-buffer-usage/chip-type",
                   "type": "string",
                   "label": "chip-type",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true
                 },
                 {
@@ -12236,6 +12441,8 @@
                   "path": "/qos/global-query/traffic-buffer-usages/traffic-buffer-usage/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true,
                   "isKey": true
                 },
@@ -12277,6 +12484,8 @@
                   "path": "/qos/global-query/traffic-policy-application-resources/traffic-policy-application-resource/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true,
                   "isKey": true
                 },
@@ -12367,6 +12576,8 @@
                       "path": "/qos/global-query/traffic-policy-states/bd-applys/bd-apply/slot-id",
                       "type": "string",
                       "label": "slot-id",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true,
                       "isKey": true
                     }
@@ -12438,6 +12649,8 @@
                       "path": "/qos/global-query/traffic-policy-states/global-applys/global-apply/slot-id",
                       "type": "string",
                       "label": "slot-id",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true,
                       "isKey": true
                     }
@@ -12478,6 +12691,8 @@
                       "path": "/qos/global-query/traffic-policy-states/group-applys/group-apply/group-name",
                       "type": "string",
                       "label": "group-name",
+                      "minLength": 1,
+                      "maxLength": 31,
                       "readonly": true,
                       "isKey": true
                     },
@@ -12516,6 +12731,8 @@
                       "path": "/qos/global-query/traffic-policy-states/group-applys/group-apply/slot-id",
                       "type": "string",
                       "label": "slot-id",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true,
                       "isKey": true
                     }
@@ -12594,6 +12811,8 @@
                       "path": "/qos/global-query/traffic-policy-states/interface-applys/interface-apply/slot-id",
                       "type": "string",
                       "label": "slot-id",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true,
                       "isKey": true
                     }
@@ -12671,6 +12890,8 @@
                       "path": "/qos/global-query/traffic-policy-states/vpn-applys/vpn-apply/slot-id",
                       "type": "string",
                       "label": "slot-id",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "readonly": true,
                       "isKey": true
                     },
@@ -12777,6 +12998,8 @@
                           "path": "/qos/global-query/user-group-queue-abnormal-allocations/user-group-queue-abnormal-allocation/abnormal-configurations/abnormal-configuration/configuration",
                           "type": "string",
                           "label": "configuration",
+                          "minLength": 1,
+                          "maxLength": 128,
                           "readonly": true
                         },
                         {
@@ -12812,6 +13035,8 @@
                   "type": "string",
                   "label": "slot-id",
                   "pattern": "(c[cl]c\\d+/)?\\d+",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -12864,6 +13089,8 @@
                   "path": "/qos/global-query/user-group-queue-resources/user-group-queue-resource/pool",
                   "type": "string",
                   "label": "pool",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -12871,6 +13098,8 @@
                   "path": "/qos/global-query/user-group-queue-resources/user-group-queue-resource/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true,
                   "isKey": true
                 },
@@ -12878,6 +13107,8 @@
                   "path": "/qos/global-query/user-group-queue-resources/user-group-queue-resource/tm-type",
                   "type": "string",
                   "label": "tm-type",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -13503,12 +13734,16 @@
                           "path": "/qos/global-query/user-queue-abnormal-allocations/user-queue-abnormal-allocation/abnormal-configurations/abnormal-configuration/configuration",
                           "type": "string",
                           "label": "configuration",
+                          "minLength": 1,
+                          "maxLength": 128,
                           "readonly": true
                         },
                         {
                           "path": "/qos/global-query/user-queue-abnormal-allocations/user-queue-abnormal-allocation/abnormal-configurations/abnormal-configuration/interface-name",
                           "type": "string",
                           "label": "interface-name",
+                          "minLength": 1,
+                          "maxLength": 64,
                           "readonly": true,
                           "isKey": true
                         }
@@ -13537,6 +13772,8 @@
                   "path": "/qos/global-query/user-queue-abnormal-allocations/user-queue-abnormal-allocation/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -13583,24 +13820,32 @@
                   "path": "/qos/global-query/user-queue-resources/user-queue-resource/free-cir-resource",
                   "type": "string",
                   "label": "free-cir-resource",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/user-queue-resources/user-queue-resource/free-id-resource",
                   "type": "string",
                   "label": "free-id-resource",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/user-queue-resources/user-queue-resource/free-pir-resource",
                   "type": "string",
                   "label": "free-pir-resource",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/user-queue-resources/user-queue-resource/resource-pool",
                   "type": "string",
                   "label": "resource-pool",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -13608,6 +13853,8 @@
                   "path": "/qos/global-query/user-queue-resources/user-queue-resource/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true,
                   "isKey": true
                 },
@@ -13615,6 +13862,8 @@
                   "path": "/qos/global-query/user-queue-resources/user-queue-resource/tm-type",
                   "type": "string",
                   "label": "tm-type",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -13622,18 +13871,24 @@
                   "path": "/qos/global-query/user-queue-resources/user-queue-resource/used-cir-resource",
                   "type": "string",
                   "label": "used-cir-resource",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/user-queue-resources/user-queue-resource/used-id-resource",
                   "type": "string",
                   "label": "used-id-resource",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 },
                 {
                   "path": "/qos/global-query/user-queue-resources/user-queue-resource/used-pir-resource",
                   "type": "string",
                   "label": "used-pir-resource",
+                  "minLength": 1,
+                  "maxLength": 16,
                   "readonly": true
                 }
               ]
@@ -13680,6 +13935,8 @@
                   "path": "/qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/classifier-name",
                   "type": "string",
                   "label": "classifier-name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "readonly": true,
                   "isKey": true
                 },
@@ -13811,6 +14068,8 @@
                   "path": "/qos/global-query/vlan-classifier-statisticss/vlan-classifier-statistics/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -14035,6 +14294,8 @@
                           "path": "/qos/global-query/vlan-traffic-policy-statisticss/vlan-traffic-policy-statistics/rule-based-statisticss/rule-based-statistics/acl-name",
                           "type": "string",
                           "label": "acl-name",
+                          "minLength": 1,
+                          "maxLength": 63,
                           "readonly": true
                         },
                         {
@@ -14164,6 +14425,8 @@
                   "path": "/qos/global-query/vlan-traffic-policy-statisticss/vlan-traffic-policy-statistics/traffic-policy-name",
                   "type": "string",
                   "label": "traffic-policy-name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "readonly": true
                 },
                 {
@@ -14243,6 +14506,8 @@
                   "path": "/qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/classifier-name",
                   "type": "string",
                   "label": "classifier-name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "readonly": true,
                   "isKey": true
                 },
@@ -14374,6 +14639,8 @@
                   "path": "/qos/global-query/vpn-classifier-statisticss/vpn-classifier-statistics/slot-id",
                   "type": "string",
                   "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 32,
                   "readonly": true,
                   "isKey": true
                 },
@@ -14596,6 +14863,8 @@
                           "path": "/qos/global-query/vpn-traffic-policy-statisticss/vpn-traffic-policy-statistics/rule-based-staticss/rule-based-statics/acl-name",
                           "type": "string",
                           "label": "acl-name",
+                          "minLength": 1,
+                          "maxLength": 63,
                           "readonly": true
                         },
                         {
@@ -14725,6 +14994,8 @@
                   "path": "/qos/global-query/vpn-traffic-policy-statisticss/vpn-traffic-policy-statistics/traffic-policy-name",
                   "type": "string",
                   "label": "traffic-policy-name",
+                  "minLength": 1,
+                  "maxLength": 127,
                   "readonly": true
                 },
                 {
@@ -14809,6 +15080,8 @@
                           "path": "/qos/queue-scheduler-template/buffer-policys/buffer-policy/buffer-mode-interfaces/buffer-mode-interface/ifname",
                           "type": "string",
                           "label": "ifname",
+                          "minLength": 1,
+                          "maxLength": 63,
                           "isKey": true
                         }
                       ],
@@ -14863,6 +15136,8 @@
                           "path": "/qos/queue-scheduler-template/buffer-policys/buffer-policy/buffer-mode-slots/buffer-mode-slot/slot-id",
                           "type": "string",
                           "label": "slot-id",
+                          "minLength": 1,
+                          "maxLength": 32,
                           "isKey": true
                         }
                       ],
@@ -14877,6 +15152,8 @@
                   "path": "/qos/queue-scheduler-template/buffer-policys/buffer-policy/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 }
               ]
@@ -14939,6 +15216,8 @@
                   "path": "/qos/queue-scheduler-template/channel-profiles/channel-profile/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 }
               ]
@@ -14959,6 +15238,8 @@
                   "path": "/qos/queue-scheduler-template/flow-mappings/flow-mapping/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 },
                 {
@@ -15397,6 +15678,8 @@
                   "path": "/qos/queue-scheduler-template/flow-queues/flow-queue/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 },
                 {
@@ -15748,7 +16031,9 @@
                           "type": "string",
                           "label": "random-discard",
                           "required": true,
-                          "pattern": "(0\\.[1-9])|([1-4]\\.[0-9])|[1-5]|(5\\.0)"
+                          "pattern": "(0\\.[1-9])|([1-4]\\.[0-9])|[1-5]|(5\\.0)",
+                          "minLength": 1,
+                          "maxLength": 3
                         },
                         {
                           "path": "/qos/queue-scheduler-template/flow-queues/flow-queue/normal-mode-random-discards/normal-mode-random-discard/service-class",
@@ -16255,7 +16540,9 @@
                           "type": "string",
                           "label": "random-discard",
                           "required": true,
-                          "pattern": "(0\\.[1-9])|([1-4]\\.[0-9])|[1-5]|(5\\.0)"
+                          "pattern": "(0\\.[1-9])|([1-4]\\.[0-9])|[1-5]|(5\\.0)",
+                          "minLength": 1,
+                          "maxLength": 3
                         }
                       ],
                       "presence": true
@@ -16699,6 +16986,8 @@
                   "path": "/qos/queue-scheduler-template/port-queue-templates/port-queue-template/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 },
                 {
@@ -17530,6 +17819,8 @@
                   "path": "/qos/queue-scheduler-template/priority-templates/priority-template/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 48,
                   "isKey": true
                 },
                 {
@@ -18005,7 +18296,9 @@
                 {
                   "path": "/qos/queue-scheduler-template/profiles/profile/description",
                   "type": "string",
-                  "label": "description"
+                  "label": "description",
+                  "minLength": 1,
+                  "maxLength": 63
                 },
                 {
                   "path": "/qos/queue-scheduler-template/profiles/profile/eight-cos-mode-queues",
@@ -18127,6 +18420,8 @@
                   "path": "/qos/queue-scheduler-template/profiles/profile/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 63,
                   "isKey": true
                 },
                 {
@@ -18935,6 +19230,8 @@
                   "path": "/qos/queue-scheduler-template/qos-queue-templates/qos-queue-template/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 },
                 {
@@ -19052,6 +19349,8 @@
                   "path": "/qos/queue-scheduler-template/queue-4cos-mappings/queue-4cos-mapping/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 },
                 {
@@ -19154,6 +19453,8 @@
                   "path": "/qos/queue-scheduler-template/service-templates/service-template/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 },
                 {
@@ -19215,7 +19516,9 @@
                 {
                   "path": "/qos/queue-scheduler-template/service-templates/service-template/slot-id",
                   "type": "string",
-                  "label": "slot-id"
+                  "label": "slot-id",
+                  "minLength": 1,
+                  "maxLength": 32
                 }
               ]
             }
@@ -19235,6 +19538,8 @@
                   "path": "/qos/queue-scheduler-template/sub-port-queues/sub-port-queue/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 },
                 {
@@ -19387,6 +19692,8 @@
                   "path": "/qos/queue-scheduler-template/user-group-queues/user-group-queue/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 },
                 {
@@ -19558,6 +19865,8 @@
                           "path": "/qos/queue-scheduler-template/user-group-queues/user-group-queue/user-group-queue-statisticss/user-group-queue-statistics/group-name",
                           "type": "string",
                           "label": "group-name",
+                          "minLength": 1,
+                          "maxLength": 32,
                           "readonly": true
                         },
                         {
@@ -19634,6 +19943,8 @@
                           "type": "string",
                           "label": "slot-id",
                           "pattern": "((c[cl]c\\d+/)|(\\d+/))?\\d+",
+                          "minLength": 1,
+                          "maxLength": 32,
                           "readonly": true,
                           "isKey": true
                         }
@@ -19713,6 +20024,8 @@
                   "path": "/qos/queue-scheduler-template/user-queue-templates/user-queue-template/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 63,
                   "isKey": true
                 },
                 {
@@ -20001,6 +20314,8 @@
                   "path": "/qos/wred-template/flow-wreds/flow-wred/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 },
                 {
@@ -20090,6 +20405,8 @@
                   "path": "/qos/wred-template/port-wreds/port-wred/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 },
                 {
@@ -20419,6 +20736,8 @@
                   "path": "/qos/wred-template/wreds/wred/name",
                   "type": "string",
                   "label": "name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "isKey": true
                 }
               ]

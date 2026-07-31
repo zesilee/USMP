@@ -362,6 +362,9 @@
     "undelete": "取消删除",
     "stagedOk": "已加入待提交变更",
     "markedDelete": "已标记待删除（提交后生效）",
-    "pendingCreateRemoved": "已移除该待创建条目"
+    "pendingCreateRemoved": "已移除该待创建条目",
+    "lengthBoth": "合法长度: [{min}..{max}]",
+    "lengthMin": "合法长度: ≥ {min}",
+    "lengthMax": "合法长度: ≤ {max}"
   }
 }

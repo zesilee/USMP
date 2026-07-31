@@ -17,13 +17,17 @@
               "path": "/xpl/as-path-lists/as-path-list/content",
               "type": "string",
               "label": "content",
-              "required": true
+              "required": true,
+              "minLength": 1,
+              "maxLength": 16380
             },
             {
               "path": "/xpl/as-path-lists/as-path-list/name",
               "type": "string",
               "label": "name",
               "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "minLength": 1,
+              "maxLength": 200,
               "isKey": true
             }
           ]
@@ -44,13 +48,17 @@
               "path": "/xpl/community-lists/community-list/content",
               "type": "string",
               "label": "content",
-              "required": true
+              "required": true,
+              "minLength": 1,
+              "maxLength": 16380
             },
             {
               "path": "/xpl/community-lists/community-list/name",
               "type": "string",
               "label": "name",
               "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "minLength": 1,
+              "maxLength": 200,
               "isKey": true
             }
           ]
@@ -71,13 +79,17 @@
               "path": "/xpl/ext-community-rt-lists/ext-community-rt-list/content",
               "type": "string",
               "label": "content",
-              "required": true
+              "required": true,
+              "minLength": 1,
+              "maxLength": 16380
             },
             {
               "path": "/xpl/ext-community-rt-lists/ext-community-rt-list/name",
               "type": "string",
               "label": "name",
               "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "minLength": 1,
+              "maxLength": 200,
               "isKey": true
             }
           ]
@@ -98,13 +110,17 @@
               "path": "/xpl/ext-community-soo-lists/ext-community-soo-list/content",
               "type": "string",
               "label": "content",
-              "required": true
+              "required": true,
+              "minLength": 1,
+              "maxLength": 16380
             },
             {
               "path": "/xpl/ext-community-soo-lists/ext-community-soo-list/name",
               "type": "string",
               "label": "name",
               "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "minLength": 1,
+              "maxLength": 200,
               "isKey": true
             }
           ]
@@ -119,7 +135,9 @@
         {
           "path": "/xpl/global/content",
           "type": "string",
-          "label": "content"
+          "label": "content",
+          "minLength": 1,
+          "maxLength": 16380
         }
       ]
     },
@@ -158,6 +176,8 @@
               "type": "string",
               "label": "name",
               "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "minLength": 1,
+              "maxLength": 200,
               "isKey": true
             }
           ]
@@ -178,13 +198,17 @@
               "path": "/xpl/ipv4-prefix-lists/ipv4-prefix-list/content",
               "type": "string",
               "label": "content",
-              "required": true
+              "required": true,
+              "minLength": 1,
+              "maxLength": 16380
             },
             {
               "path": "/xpl/ipv4-prefix-lists/ipv4-prefix-list/name",
               "type": "string",
               "label": "name",
               "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "minLength": 1,
+              "maxLength": 200,
               "isKey": true
             }
           ]
@@ -205,13 +229,17 @@
               "path": "/xpl/ipv6-prefix-lists/ipv6-prefix-list/content",
               "type": "string",
               "label": "content",
-              "required": true
+              "required": true,
+              "minLength": 1,
+              "maxLength": 16380
             },
             {
               "path": "/xpl/ipv6-prefix-lists/ipv6-prefix-list/name",
               "type": "string",
               "label": "name",
               "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "minLength": 1,
+              "maxLength": 200,
               "isKey": true
             }
           ]
@@ -232,13 +260,17 @@
               "path": "/xpl/large-community-lists/large-community-list/content",
               "type": "string",
               "label": "content",
-              "required": true
+              "required": true,
+              "minLength": 1,
+              "maxLength": 16380
             },
             {
               "path": "/xpl/large-community-lists/large-community-list/name",
               "type": "string",
               "label": "name",
               "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "minLength": 1,
+              "maxLength": 200,
               "isKey": true
             }
           ]
@@ -259,13 +291,17 @@
               "path": "/xpl/rd-lists/rd-list/content",
               "type": "string",
               "label": "content",
-              "required": true
+              "required": true,
+              "minLength": 1,
+              "maxLength": 16380
             },
             {
               "path": "/xpl/rd-lists/rd-list/name",
               "type": "string",
               "label": "name",
               "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "minLength": 1,
+              "maxLength": 200,
               "isKey": true
             }
           ]
@@ -286,13 +322,17 @@
               "path": "/xpl/route-filters/route-filter/content",
               "type": "string",
               "label": "content",
-              "required": true
+              "required": true,
+              "minLength": 1,
+              "maxLength": 16380
             },
             {
               "path": "/xpl/route-filters/route-filter/name",
               "type": "string",
               "label": "name",
               "pattern": "\\s*(([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})|([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200}[\\(](($)?[0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})(([,]($)?[0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200}){0,7})[\\)]))\\s*",
+              "minLength": 1,
+              "maxLength": 200,
               "isKey": true
             }
           ]
@@ -313,13 +353,17 @@
               "path": "/xpl/route-flow-group-lists/route-flow-group-list/content",
               "type": "string",
               "label": "content",
-              "required": true
+              "required": true,
+              "minLength": 1,
+              "maxLength": 16380
             },
             {
               "path": "/xpl/route-flow-group-lists/route-flow-group-list/name",
               "type": "string",
               "label": "name",
               "pattern": "\\s*([0-9a-zA-Z][0-9a-zA-Z\\-_\\.]{0,200})\\s*",
+              "minLength": 1,
+              "maxLength": 200,
               "isKey": true
             }
           ]

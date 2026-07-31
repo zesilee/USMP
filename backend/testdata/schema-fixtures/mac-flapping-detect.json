@@ -48,6 +48,7 @@
               "type": "string",
               "label": "address",
               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255,
               "isKey": true
             },
             {

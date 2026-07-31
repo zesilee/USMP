@@ -13,18 +13,21 @@
           "path": "/multicast/default-parameter/load-splitting-rule",
           "type": "string",
           "label": "load-splitting-rule",
+          "maxLength": 47,
           "readonly": true
         },
         {
           "path": "/multicast/default-parameter/multi-topology",
           "type": "string",
           "label": "multi-topology",
+          "maxLength": 47,
           "readonly": true
         },
         {
           "path": "/multicast/default-parameter/route-selection-rule",
           "type": "string",
           "label": "route-selection-rule",
+          "maxLength": 47,
           "readonly": true
         }
       ]
@@ -402,6 +405,8 @@
               "path": "/multicast/ssm-mapping-policys/ssm-mapping-policy/policy-name",
               "type": "string",
               "label": "policy-name",
+              "minLength": 1,
+              "maxLength": 31,
               "isKey": true
             }
           ]

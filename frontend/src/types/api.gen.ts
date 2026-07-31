@@ -1207,7 +1207,10 @@ export interface components {
              *     （如 rpc 输入 if-name→接口名）。配置叶目前不填（omitempty），首用于 rpc 输入。
              */
             leafRef?: string;
+            maxLength?: number;
             maximum?: number;
+            /** @description MinLength/MaxLength 承载字符串 `length` 约束（D9）：前端合成「合法长度」占位（FE-22）。 */
+            minLength?: number;
             minimum?: number;
             /** @description Must 携带 YANG `must` 约束（XPath 表达式 + 提示），驱动前端跨字段校验（R05）。 */
             must?: components["schemas"]["api.MustRule"][];

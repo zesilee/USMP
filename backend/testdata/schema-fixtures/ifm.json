@@ -329,6 +329,8 @@
               "path": "/ifm/interfaces/interface/aggregation-name",
               "type": "string",
               "label": "aggregation-name",
+              "minLength": 1,
+              "maxLength": 63,
               "readonly": true
             },
             {
@@ -998,6 +1000,8 @@
                   "path": "/ifm/interfaces/interface/common-statistics/in-use-rate",
                   "type": "string",
                   "label": "in-use-rate",
+                  "minLength": 1,
+                  "maxLength": 50,
                   "readonly": true
                 },
                 {
@@ -1022,6 +1026,8 @@
                   "path": "/ifm/interfaces/interface/common-statistics/out-use-rate",
                   "type": "string",
                   "label": "out-use-rate",
+                  "minLength": 1,
+                  "maxLength": 50,
                   "readonly": true
                 },
                 {
@@ -1506,7 +1512,9 @@
             {
               "path": "/ifm/interfaces/interface/description",
               "type": "string",
-              "label": "description"
+              "label": "description",
+              "minLength": 1,
+              "maxLength": 242
             },
             {
               "path": "/ifm/interfaces/interface/down-delay-time",
@@ -1629,6 +1637,8 @@
                   "type": "string",
                   "label": "mac-address",
                   "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                  "minLength": 1,
+                  "maxLength": 14,
                   "readonly": true
                 },
                 {
@@ -2117,7 +2127,9 @@
                                                   "type": "string",
                                                   "label": "dot1q-8021p",
                                                   "required": true,
-                                                  "pattern": "([0-9]|,|\\+|\\-|\\(|\\))+"
+                                                  "pattern": "([0-9]|,|\\+|\\-|\\(|\\))+",
+                                                  "minLength": 1,
+                                                  "maxLength": 31
                                                 },
                                                 {
                                                   "path": "/ifm/interfaces/interface/ethernet/l2-sub-interface/dot1q/policy-vlans/policy-vlan/vlan-id-begin",
@@ -3530,7 +3542,9 @@
                                               "path": "/ifm/interfaces/interface/ethernet/l3-sub-interface/user-vlan-common/user-vlan-dot1q/descriptions/description/description",
                                               "type": "string",
                                               "label": "description",
-                                              "required": true
+                                              "required": true,
+                                              "minLength": 1,
+                                              "maxLength": 128
                                             },
                                             {
                                               "path": "/ifm/interfaces/interface/ethernet/l3-sub-interface/user-vlan-common/user-vlan-dot1q/descriptions/description/vlan-id",
@@ -3581,7 +3595,9 @@
                                               "path": "/ifm/interfaces/interface/ethernet/l3-sub-interface/user-vlan-common/user-vlan-qinqs/descriptions/description/description",
                                               "type": "string",
                                               "label": "description",
-                                              "required": true
+                                              "required": true,
+                                              "minLength": 1,
+                                              "maxLength": 128
                                             },
                                             {
                                               "path": "/ifm/interfaces/interface/ethernet/l3-sub-interface/user-vlan-common/user-vlan-qinqs/descriptions/description/pe-vlan-id",
@@ -3765,7 +3781,9 @@
                             {
                               "path": "/ifm/interfaces/interface/ethernet/l3-sub-interface/vlan-groups/vlan-group/description",
                               "type": "string",
-                              "label": "description"
+                              "label": "description",
+                              "minLength": 1,
+                              "maxLength": 31
                             },
                             {
                               "path": "/ifm/interfaces/interface/ethernet/l3-sub-interface/vlan-groups/vlan-group/id",
@@ -4365,7 +4383,9 @@
                       "path": "/ifm/interfaces/interface/ethernet/main-interface/qinq-protocol",
                       "type": "string",
                       "label": "qinq-protocol",
-                      "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 6
                     },
                     {
                       "path": "/ifm/interfaces/interface/ethernet/main-interface/vlan-swap",
@@ -4414,7 +4434,9 @@
                   "path": "/ifm/interfaces/interface/evpn/esi",
                   "type": "string",
                   "label": "esi",
-                  "pattern": "( *(00([0-9a-fA-F]){2}\\.(([0-9a-fA-F]){4}\\.){3}(([0-9a-fA-F]){4}))? *)"
+                  "pattern": "( *(00([0-9a-fA-F]){2}\\.(([0-9a-fA-F]){4}\\.){3}(([0-9a-fA-F]){4}))? *)",
+                  "minLength": 1,
+                  "maxLength": 24
                 },
                 {
                   "path": "/ifm/interfaces/interface/evpn/esi-name",
@@ -4437,6 +4459,7 @@
                   "type": "string",
                   "label": "pbb-source-mac",
                   "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                  "maxLength": 255,
                   "when": "../name",
                   "must": [
                     {
@@ -4550,7 +4573,9 @@
                                   "type": "string",
                                   "label": "mask",
                                   "required": true,
-                                  "pattern": "((([1-9]?[0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))"
+                                  "pattern": "((([1-9]?[0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))",
+                                  "minLength": 9,
+                                  "maxLength": 15
                                 },
                                 {
                                   "path": "/ifm/interfaces/interface/ipv4/addresses/address/type",
@@ -4662,6 +4687,8 @@
                               "type": "string",
                               "label": "mask",
                               "pattern": "((([1-9]?[0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([1-9]?[0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))",
+                              "minLength": 9,
+                              "maxLength": 15,
                               "readonly": true
                             },
                             {
@@ -4752,7 +4779,8 @@
                           "type": "string",
                           "label": "mac-addr",
                           "required": true,
-                          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                          "maxLength": 255
                         },
                         {
                           "path": "/ifm/interfaces/interface/ipv4/static-arps/static-arp/pevid",
@@ -5703,6 +5731,8 @@
                               "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/auto-negotiation-capability",
                               "type": "string",
                               "label": "auto-negotiation-capability",
+                              "minLength": 1,
+                              "maxLength": 192,
                               "readonly": true
                             },
                             {
@@ -5741,6 +5771,8 @@
                               "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/chassis-id",
                               "type": "string",
                               "label": "chassis-id",
+                              "minLength": 1,
+                              "maxLength": 765,
                               "readonly": true
                             },
                             {
@@ -5807,12 +5839,15 @@
                                   "type": "string",
                                   "label": "mac-address",
                                   "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                                  "maxLength": 14,
                                   "readonly": true
                                 },
                                 {
                                   "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/ddp-tlv/serial-number",
                                   "type": "string",
                                   "label": "serial-number",
+                                  "minLength": 1,
+                                  "maxLength": 33,
                                   "readonly": true
                                 }
                               ]
@@ -5841,6 +5876,8 @@
                                   "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/identity-tlv/identity",
                                   "type": "string",
                                   "label": "identity",
+                                  "minLength": 1,
+                                  "maxLength": 508,
                                   "readonly": true
                                 }
                               ]
@@ -5939,6 +5976,8 @@
                                       "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/management-addresss/management-address/oid",
                                       "type": "string",
                                       "label": "oid",
+                                      "minLength": 1,
+                                      "maxLength": 640,
                                       "readonly": true
                                     },
                                     {
@@ -6054,6 +6093,8 @@
                                       "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/management-addresss/management-address/value",
                                       "type": "string",
                                       "label": "value",
+                                      "minLength": 1,
+                                      "maxLength": 93,
                                       "readonly": true,
                                       "isKey": true
                                     }
@@ -6280,12 +6321,16 @@
                               "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/port-description",
                               "type": "string",
                               "label": "port-description",
+                              "minLength": 1,
+                              "maxLength": 256,
                               "readonly": true
                             },
                             {
                               "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/port-id",
                               "type": "string",
                               "label": "port-id",
+                              "minLength": 1,
+                              "maxLength": 765,
                               "readonly": true
                             },
                             {
@@ -6339,6 +6384,8 @@
                               "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/protocol-identity",
                               "type": "string",
                               "label": "protocol-identity",
+                              "minLength": 1,
+                              "maxLength": 64,
                               "readonly": true
                             },
                             {
@@ -6401,24 +6448,32 @@
                               "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/system-capabilities-enabled",
                               "type": "string",
                               "label": "system-capabilities-enabled",
+                              "minLength": 1,
+                              "maxLength": 90,
                               "readonly": true
                             },
                             {
                               "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/system-capabilities-supported",
                               "type": "string",
                               "label": "system-capabilities-supported",
+                              "minLength": 1,
+                              "maxLength": 90,
                               "readonly": true
                             },
                             {
                               "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/system-description",
                               "type": "string",
                               "label": "system-description",
+                              "minLength": 1,
+                              "maxLength": 256,
                               "readonly": true
                             },
                             {
                               "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/system-name",
                               "type": "string",
                               "label": "system-name",
+                              "minLength": 1,
+                              "maxLength": 256,
                               "readonly": true
                             },
                             {
@@ -6445,12 +6500,16 @@
                                       "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv/info",
                                       "type": "string",
                                       "label": "info",
+                                      "minLength": 1,
+                                      "maxLength": 1600,
                                       "readonly": true
                                     },
                                     {
                                       "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv/oui",
                                       "type": "string",
                                       "label": "oui",
+                                      "minLength": 1,
+                                      "maxLength": 12,
                                       "readonly": true,
                                       "isKey": true
                                     },
@@ -6483,6 +6542,8 @@
                                       "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/unknown-tlvs/unknown-tlv/info",
                                       "type": "string",
                                       "label": "info",
+                                      "minLength": 1,
+                                      "maxLength": 1600,
                                       "readonly": true
                                     },
                                     {
@@ -6522,6 +6583,8 @@
                                       "path": "/ifm/interfaces/interface/lldp/session/neighbors/neighbor/vlan-names/vlan-name/value",
                                       "type": "string",
                                       "label": "value",
+                                      "minLength": 1,
+                                      "maxLength": 33,
                                       "readonly": true
                                     }
                                   ]
@@ -6894,7 +6957,8 @@
               "path": "/ifm/interfaces/interface/mac-address",
               "type": "string",
               "label": "mac-address",
-              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255
             },
             {
               "path": "/ifm/interfaces/interface/macsec",
@@ -6955,7 +7019,9 @@
                           "path": "/ifm/interfaces/interface/macsec/ckn-caks/ckn-cak/cak",
                           "type": "string",
                           "label": "cak",
-                          "required": true
+                          "required": true,
+                          "minLength": 1,
+                          "maxLength": 432
                         },
                         {
                           "path": "/ifm/interfaces/interface/macsec/ckn-caks/ckn-cak/cak-type",
@@ -6973,7 +7039,9 @@
                           "path": "/ifm/interfaces/interface/macsec/ckn-caks/ckn-cak/ckn",
                           "type": "string",
                           "label": "ckn",
-                          "required": true
+                          "required": true,
+                          "minLength": 2,
+                          "maxLength": 64
                         }
                       ],
                       "presence": true
@@ -7370,7 +7438,9 @@
                                     {
                                       "path": "/ifm/interfaces/interface/mirror/evc-l2-port-mirrors/dot1q-types/dot1q-type/group-name",
                                       "type": "string",
-                                      "label": "group-name"
+                                      "label": "group-name",
+                                      "minLength": 1,
+                                      "maxLength": 31
                                     },
                                     {
                                       "path": "/ifm/interfaces/interface/mirror/evc-l2-port-mirrors/dot1q-types/dot1q-type/identify",
@@ -7471,7 +7541,9 @@
                                     {
                                       "path": "/ifm/interfaces/interface/mirror/evc-l2-port-mirrors/pubs/pub/group-name",
                                       "type": "string",
-                                      "label": "group-name"
+                                      "label": "group-name",
+                                      "minLength": 1,
+                                      "maxLength": 31
                                     },
                                     {
                                       "path": "/ifm/interfaces/interface/mirror/evc-l2-port-mirrors/pubs/pub/instance-name",
@@ -7543,7 +7615,9 @@
                                     {
                                       "path": "/ifm/interfaces/interface/mirror/evc-l2-port-mirrors/qinq-types/qinq-type/group-name",
                                       "type": "string",
-                                      "label": "group-name"
+                                      "label": "group-name",
+                                      "minLength": 1,
+                                      "maxLength": 31
                                     },
                                     {
                                       "path": "/ifm/interfaces/interface/mirror/evc-l2-port-mirrors/qinq-types/qinq-type/identify",
@@ -7923,7 +7997,9 @@
                       "type": "string",
                       "label": "observe-index",
                       "required": true,
-                      "pattern": "(null0)|((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|[1-9]){1}((,(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|[1-9])){0,7}))"
+                      "pattern": "(null0)|((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|[1-9]){1}((,(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|[1-9])){0,7}))",
+                      "minLength": 1,
+                      "maxLength": 50
                     }
                   ],
                   "presence": true
@@ -8025,7 +8101,8 @@
                       "path": "/ifm/interfaces/interface/mirror/port-observe/destination-mac",
                       "type": "string",
                       "label": "destination-mac",
-                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255
                     },
                     {
                       "path": "/ifm/interfaces/interface/mirror/port-observe/observe-index",
@@ -8128,6 +8205,8 @@
               "path": "/ifm/interfaces/interface/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 63,
               "isKey": true
             },
             {
@@ -8161,6 +8240,8 @@
               "type": "string",
               "label": "number",
               "pattern": "(\\d+/\\d+/\\d+/\\d+)|(\\d+/\\d+/\\d+)|(\\d+/\\d+)|(\\d+)|(\\d+/\\d+/\\d+[:]\\d+)|(\\d+/\\d+/\\d+[:]\\d+[:]\\d+[:]\\d+)|(\\d+/\\d+/\\d+/\\d+[:]\\d+)|(\\d+/\\d+/\\d+/\\d+[:]\\d+[:]\\d+[:]\\d+)|(\\d+/\\d+/\\d+/\\d+/\\d+[:]\\d+)|(\\d+/\\d+[:]\\d+)",
+              "minLength": 1,
+              "maxLength": 63,
               "operationExclude": [
                 "update"
               ],
@@ -8201,7 +8282,8 @@
                       "path": "/ifm/interfaces/interface/nve/attribute/phys-address",
                       "type": "string",
                       "label": "phys-address",
-                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255
                     },
                     {
                       "path": "/ifm/interfaces/interface/nve/attribute/source-vtep-ip",
@@ -8875,6 +8957,8 @@
               "path": "/ifm/interfaces/interface/position",
               "type": "string",
               "label": "position",
+              "minLength": 1,
+              "maxLength": 256,
               "readonly": true
             },
             {
@@ -11067,6 +11151,8 @@
                           "path": "/ifm/interfaces/interface/qos/profile-applys/profile-apply/group-name",
                           "type": "string",
                           "label": "group-name",
+                          "minLength": 1,
+                          "maxLength": 31,
                           "when": "../linkage-bandwidth='disable'",
                           "operationExclude": [
                             "create",
@@ -12161,6 +12247,8 @@
                           "type": "string",
                           "label": "slot-id",
                           "pattern": "(c[cl]c\\d+/)?\\d+",
+                          "minLength": 1,
+                          "maxLength": 32,
                           "isKey": true
                         },
                         {
@@ -12200,7 +12288,9 @@
                         {
                           "path": "/ifm/interfaces/interface/qos/sub-port-queue-applys/sub-port-queue-apply/group-name",
                           "type": "string",
-                          "label": "group-name"
+                          "label": "group-name",
+                          "minLength": 1,
+                          "maxLength": 31
                         },
                         {
                           "path": "/ifm/interfaces/interface/qos/sub-port-queue-applys/sub-port-queue-apply/sub-port-queue-name",
@@ -12545,6 +12635,8 @@
                       "path": "/ifm/interfaces/interface/qos/trust-upstream/diffserv-domain-name",
                       "type": "string",
                       "label": "diffserv-domain-name",
+                      "minLength": 1,
+                      "maxLength": 48,
                       "dynamicDefault": true
                     }
                   ]
@@ -12669,6 +12761,8 @@
                           "path": "/ifm/interfaces/interface/qos/user-group-queue-applys/user-group-queue-apply/group-name",
                           "type": "string",
                           "label": "group-name",
+                          "minLength": 1,
+                          "maxLength": 31,
                           "operationExclude": [
                             "create",
                             "update",
@@ -13054,6 +13148,8 @@
                           "path": "/ifm/interfaces/interface/qos/user-vlan-user-group-queue-applys/user-vlan-user-group-queue-apply/group-name",
                           "type": "string",
                           "label": "group-name",
+                          "minLength": 1,
+                          "maxLength": 31,
                           "operationExclude": [
                             "update",
                             "delete"
@@ -13245,6 +13341,8 @@
                           "path": "/ifm/interfaces/interface/qos/wreds/wred/drop-profile-name",
                           "type": "string",
                           "label": "drop-profile-name",
+                          "minLength": 1,
+                          "maxLength": 31,
                           "isKey": true
                         }
                       ]
@@ -13374,6 +13472,8 @@
                           "path": "/ifm/interfaces/interface/routing/static-routing/ldp-sync-routes/sync-state",
                           "type": "string",
                           "label": "sync-state",
+                          "minLength": 1,
+                          "maxLength": 10,
                           "readonly": true
                         }
                       ]
@@ -13722,6 +13822,8 @@
                               "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/auto-negotiation-capability",
                               "type": "string",
                               "label": "auto-negotiation-capability",
+                              "minLength": 1,
+                              "maxLength": 192,
                               "readonly": true
                             },
                             {
@@ -13760,6 +13862,8 @@
                               "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/chassis-id",
                               "type": "string",
                               "label": "chassis-id",
+                              "minLength": 1,
+                              "maxLength": 765,
                               "readonly": true
                             },
                             {
@@ -13910,6 +14014,8 @@
                                       "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/management-addresss/management-address/oid",
                                       "type": "string",
                                       "label": "oid",
+                                      "minLength": 1,
+                                      "maxLength": 640,
                                       "readonly": true
                                     },
                                     {
@@ -14025,6 +14131,8 @@
                                       "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/management-addresss/management-address/value",
                                       "type": "string",
                                       "label": "value",
+                                      "minLength": 1,
+                                      "maxLength": 93,
                                       "readonly": true,
                                       "isKey": true
                                     }
@@ -14251,12 +14359,16 @@
                               "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/port-description",
                               "type": "string",
                               "label": "port-description",
+                              "minLength": 1,
+                              "maxLength": 256,
                               "readonly": true
                             },
                             {
                               "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/port-id",
                               "type": "string",
                               "label": "port-id",
+                              "minLength": 1,
+                              "maxLength": 765,
                               "readonly": true
                             },
                             {
@@ -14310,6 +14422,8 @@
                               "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/protocol-identity",
                               "type": "string",
                               "label": "protocol-identity",
+                              "minLength": 1,
+                              "maxLength": 64,
                               "readonly": true
                             },
                             {
@@ -14372,24 +14486,32 @@
                               "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/system-capabilities-enabled",
                               "type": "string",
                               "label": "system-capabilities-enabled",
+                              "minLength": 1,
+                              "maxLength": 90,
                               "readonly": true
                             },
                             {
                               "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/system-capabilities-supported",
                               "type": "string",
                               "label": "system-capabilities-supported",
+                              "minLength": 1,
+                              "maxLength": 90,
                               "readonly": true
                             },
                             {
                               "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/system-description",
                               "type": "string",
                               "label": "system-description",
+                              "minLength": 1,
+                              "maxLength": 256,
                               "readonly": true
                             },
                             {
                               "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/system-name",
                               "type": "string",
                               "label": "system-name",
+                              "minLength": 1,
+                              "maxLength": 256,
                               "readonly": true
                             },
                             {
@@ -14416,12 +14538,16 @@
                                       "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv/info",
                                       "type": "string",
                                       "label": "info",
+                                      "minLength": 1,
+                                      "maxLength": 1600,
                                       "readonly": true
                                     },
                                     {
                                       "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/unknown-organizationally-defined-tlvs/unknown-organizationally-defined-tlv/oui",
                                       "type": "string",
                                       "label": "oui",
+                                      "minLength": 1,
+                                      "maxLength": 12,
                                       "readonly": true,
                                       "isKey": true
                                     },
@@ -14454,6 +14580,8 @@
                                       "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/unknown-tlvs/unknown-tlv/info",
                                       "type": "string",
                                       "label": "info",
+                                      "minLength": 1,
+                                      "maxLength": 1600,
                                       "readonly": true
                                     },
                                     {
@@ -14493,6 +14621,8 @@
                                       "path": "/ifm/interfaces/interface/sub-interface-lldp/session/neighbors/neighbor/vlan-names/vlan-name/value",
                                       "type": "string",
                                       "label": "value",
+                                      "minLength": 1,
+                                      "maxLength": 33,
                                       "readonly": true
                                     }
                                   ]
@@ -14652,12 +14782,16 @@
                           "path": "/ifm/interfaces/interface/trunk/forwardings/forwarding/master-port",
                           "type": "string",
                           "label": "master-port",
+                          "minLength": 1,
+                          "maxLength": 63,
                           "readonly": true
                         },
                         {
                           "path": "/ifm/interfaces/interface/trunk/forwardings/forwarding/slave-port",
                           "type": "string",
                           "label": "slave-port",
+                          "minLength": 1,
+                          "maxLength": 63,
                           "readonly": true
                         }
                       ]
@@ -14786,12 +14920,14 @@
                           "path": "/ifm/interfaces/interface/trunk/lacp/error-packets/content",
                           "type": "string",
                           "label": "content",
+                          "maxLength": 512,
                           "readonly": true
                         },
                         {
                           "path": "/ifm/interfaces/interface/trunk/lacp/error-packets/port-name",
                           "type": "string",
                           "label": "port-name",
+                          "maxLength": 64,
                           "readonly": true
                         },
                         {
@@ -14826,7 +14962,8 @@
                           "path": "/ifm/interfaces/interface/trunk/lacp/m-lag/sys-mac",
                           "type": "string",
                           "label": "sys-mac",
-                          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                          "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                          "maxLength": 255
                         },
                         {
                           "path": "/ifm/interfaces/interface/trunk/lacp/m-lag/sys-priority",
@@ -14854,6 +14991,7 @@
                       "type": "string",
                       "label": "oper-sysmac",
                       "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255,
                       "readonly": true
                     },
                     {
@@ -14920,7 +15058,8 @@
                       "path": "/ifm/interfaces/interface/trunk/lacp/sys-mac",
                       "type": "string",
                       "label": "sys-mac",
-                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255
                     },
                     {
                       "path": "/ifm/interfaces/interface/trunk/lacp/sys-priority",
@@ -15048,12 +15187,15 @@
                               "path": "/ifm/interfaces/interface/trunk/members/member/lacp/actor-state",
                               "type": "string",
                               "label": "actor-state",
+                              "minLength": 8,
+                              "maxLength": 8,
                               "readonly": true
                             },
                             {
                               "path": "/ifm/interfaces/interface/trunk/members/member/lacp/actor-sysid",
                               "type": "string",
                               "label": "actor-sysid",
+                              "maxLength": 255,
                               "readonly": true
                             },
                             {
@@ -15081,6 +15223,8 @@
                               "path": "/ifm/interfaces/interface/trunk/members/member/lacp/partner-state",
                               "type": "string",
                               "label": "partner-state",
+                              "minLength": 8,
+                              "maxLength": 8,
                               "readonly": true
                             },
                             {
@@ -15088,6 +15232,7 @@
                               "type": "string",
                               "label": "partner-sysid",
                               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                              "maxLength": 255,
                               "readonly": true
                             },
                             {
@@ -15101,6 +15246,7 @@
                               "path": "/ifm/interfaces/interface/trunk/members/member/lacp/partner-sysprimac",
                               "type": "string",
                               "label": "partner-sysprimac",
+                              "maxLength": 255,
                               "readonly": true
                             },
                             {
@@ -15216,12 +15362,15 @@
                                   "path": "/ifm/interfaces/interface/trunk/members/member/lacp/port-negotiate-parameter/actor-state",
                                   "type": "string",
                                   "label": "actor-state",
+                                  "minLength": 8,
+                                  "maxLength": 8,
                                   "readonly": true
                                 },
                                 {
                                   "path": "/ifm/interfaces/interface/trunk/members/member/lacp/port-negotiate-parameter/actor-sysid",
                                   "type": "string",
                                   "label": "actor-sysid",
+                                  "maxLength": 255,
                                   "readonly": true
                                 },
                                 {
@@ -15249,6 +15398,8 @@
                                   "path": "/ifm/interfaces/interface/trunk/members/member/lacp/port-negotiate-parameter/partner-state",
                                   "type": "string",
                                   "label": "partner-state",
+                                  "minLength": 8,
+                                  "maxLength": 8,
                                   "readonly": true
                                 },
                                 {
@@ -15256,6 +15407,7 @@
                                   "type": "string",
                                   "label": "partner-sysid",
                                   "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                                  "maxLength": 255,
                                   "readonly": true
                                 },
                                 {
@@ -15269,6 +15421,7 @@
                                   "path": "/ifm/interfaces/interface/trunk/members/member/lacp/port-negotiate-parameter/partner-sysprimac",
                                   "type": "string",
                                   "label": "partner-sysprimac",
+                                  "maxLength": 255,
                                   "readonly": true
                                 },
                                 {
@@ -15765,7 +15918,9 @@
                             {
                               "path": "/ifm/interfaces/interface/tunnel-protocol/gre-tunnel/key",
                               "type": "string",
-                              "label": "key"
+                              "label": "key",
+                              "minLength": 1,
+                              "maxLength": 128
                             },
                             {
                               "path": "/ifm/interfaces/interface/tunnel-protocol/gre-tunnel/mtu-check-enable",
@@ -15897,7 +16052,9 @@
                             {
                               "path": "/ifm/interfaces/interface/tunnel-protocol/mgre-tunnel/key",
                               "type": "string",
-                              "label": "key"
+                              "label": "key",
+                              "minLength": 1,
+                              "maxLength": 128
                             },
                             {
                               "path": "/ifm/interfaces/interface/tunnel-protocol/mgre-tunnel/source",
@@ -16539,6 +16696,8 @@
               "path": "/ifm/interfaces/interface/vs-name",
               "type": "string",
               "label": "vs-name",
+              "minLength": 1,
+              "maxLength": 50,
               "readonly": true
             }
           ]
@@ -16599,6 +16758,8 @@
               "path": "/ifm/remote-interfaces/remote-interface/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 63,
               "readonly": true,
               "isKey": true
             },
@@ -16637,6 +16798,8 @@
                   "path": "/ifm/remote-interfaces/remote-interface/remote-statistics-state/in-use-rate",
                   "type": "string",
                   "label": "in-use-rate",
+                  "minLength": 1,
+                  "maxLength": 50,
                   "readonly": true
                 },
                 {
@@ -16675,6 +16838,8 @@
                   "path": "/ifm/remote-interfaces/remote-interface/remote-statistics-state/out-use-rate",
                   "type": "string",
                   "label": "out-use-rate",
+                  "minLength": 1,
+                  "maxLength": 50,
                   "readonly": true
                 }
               ]
@@ -16699,24 +16864,28 @@
               "path": "/ifm/static-dimension-ranges/static-dimension-range/card-range",
               "type": "string",
               "label": "card-range",
+              "maxLength": 63,
               "readonly": true
             },
             {
               "path": "/ifm/static-dimension-ranges/static-dimension-range/chassis-range",
               "type": "string",
               "label": "chassis-range",
+              "maxLength": 63,
               "readonly": true
             },
             {
               "path": "/ifm/static-dimension-ranges/static-dimension-range/port-range",
               "type": "string",
               "label": "port-range",
+              "maxLength": 63,
               "readonly": true
             },
             {
               "path": "/ifm/static-dimension-ranges/static-dimension-range/slot-range",
               "type": "string",
               "label": "slot-range",
+              "maxLength": 63,
               "readonly": true
             },
             {

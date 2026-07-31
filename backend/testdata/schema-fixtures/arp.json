@@ -98,12 +98,15 @@
               "type": "string",
               "label": "mac-addr",
               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255,
               "readonly": true
             },
             {
               "path": "/arp/bd-tracks/bd-track/new-ifname",
               "type": "string",
               "label": "new-ifname",
+              "minLength": 1,
+              "maxLength": 63,
               "readonly": true,
               "isKey": true
             },
@@ -111,6 +114,8 @@
               "path": "/arp/bd-tracks/bd-track/old-ifname",
               "type": "string",
               "label": "old-ifname",
+              "minLength": 1,
+              "maxLength": 63,
               "readonly": true,
               "isKey": true
             },
@@ -166,6 +171,8 @@
               "path": "/arp/cached-statistics/cached-statistic/evn-name",
               "type": "string",
               "label": "evn-name",
+              "minLength": 1,
+              "maxLength": 31,
               "readonly": true,
               "isKey": true
             },
@@ -173,6 +180,8 @@
               "path": "/arp/cached-statistics/cached-statistic/if-name",
               "type": "string",
               "label": "if-name",
+              "minLength": 1,
+              "maxLength": 63,
               "readonly": true
             },
             {
@@ -188,6 +197,7 @@
               "type": "string",
               "label": "mac-addr",
               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255,
               "readonly": true
             },
             {
@@ -238,6 +248,8 @@
               "path": "/arp/current-speed-limits/current-speed-limit/slot-id",
               "type": "string",
               "label": "slot-id",
+              "minLength": 1,
+              "maxLength": 24,
               "readonly": true,
               "isKey": true
             },
@@ -319,6 +331,8 @@
               "path": "/arp/duplicate-items/duplicate-item/if-name",
               "type": "string",
               "label": "if-name",
+              "minLength": 1,
+              "maxLength": 63,
               "readonly": true
             },
             {
@@ -333,6 +347,7 @@
               "type": "string",
               "label": "mac-addr",
               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255,
               "readonly": true,
               "isKey": true
             },
@@ -405,6 +420,8 @@
               "path": "/arp/entry-statistics/entry-statistic/slot-id",
               "type": "string",
               "label": "slot-id",
+              "minLength": 1,
+              "maxLength": 24,
               "readonly": true,
               "isKey": true
             },
@@ -435,12 +452,16 @@
               "path": "/arp/error-packets/error-packet/if-name",
               "type": "string",
               "label": "if-name",
+              "minLength": 1,
+              "maxLength": 63,
               "readonly": true
             },
             {
               "path": "/arp/error-packets/error-packet/receive-content",
               "type": "string",
               "label": "receive-content",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
@@ -463,6 +484,8 @@
               "path": "/arp/error-packets/error-packet/slot-id",
               "type": "string",
               "label": "slot-id",
+              "minLength": 1,
+              "maxLength": 24,
               "readonly": true,
               "isKey": true
             }
@@ -796,6 +819,7 @@
               "type": "string",
               "label": "header-dst-mac",
               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255,
               "readonly": true
             },
             {
@@ -803,6 +827,7 @@
               "type": "string",
               "label": "header-src-mac",
               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255,
               "readonly": true
             },
             {
@@ -832,6 +857,7 @@
               "type": "string",
               "label": "local-mac",
               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255,
               "readonly": true
             },
             {
@@ -852,6 +878,8 @@
               "path": "/arp/ip-conflicts/ip-conflict/receive-ifname",
               "type": "string",
               "label": "receive-ifname",
+              "minLength": 1,
+              "maxLength": 63,
               "readonly": true
             },
             {
@@ -859,6 +887,7 @@
               "type": "string",
               "label": "receive-mac",
               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255,
               "readonly": true
             },
             {
@@ -872,6 +901,8 @@
               "path": "/arp/ip-conflicts/ip-conflict/slot-id",
               "type": "string",
               "label": "slot-id",
+              "minLength": 1,
+              "maxLength": 24,
               "readonly": true
             },
             {
@@ -918,6 +949,7 @@
               "type": "string",
               "label": "mac-addr",
               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255,
               "readonly": true
             },
             {
@@ -987,6 +1019,7 @@
               "type": "string",
               "label": "mac-addr",
               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255,
               "readonly": true
             },
             {
@@ -1020,6 +1053,8 @@
               "path": "/arp/query-entries/query-entry/slot-id",
               "type": "string",
               "label": "slot-id",
+              "minLength": 1,
+              "maxLength": 24,
               "readonly": true
             },
             {
@@ -1117,6 +1152,8 @@
               "path": "/arp/speed-limits/speed-limit/slot-id",
               "type": "string",
               "label": "slot-id",
+              "minLength": 1,
+              "maxLength": 24,
               "isKey": true
             },
             {
@@ -1173,7 +1210,8 @@
               "type": "string",
               "label": "mac-addr",
               "required": true,
-              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+              "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255
             },
             {
               "path": "/arp/static-arps/static-arp/ni-name",
@@ -1326,6 +1364,8 @@
               "path": "/arp/statisticss/statistics/slot-id",
               "type": "string",
               "label": "slot-id",
+              "minLength": 1,
+              "maxLength": 24,
               "readonly": true,
               "isKey": true
             }
@@ -1358,6 +1398,7 @@
               "type": "string",
               "label": "mac-addr",
               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+              "maxLength": 255,
               "readonly": true
             },
             {

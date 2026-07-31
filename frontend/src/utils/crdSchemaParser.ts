@@ -17,6 +17,9 @@ export interface Field {
   hidden?: boolean
   minimum?: number
   maximum?: number
+  /** 字符串 length 约束（D9）：合成「合法长度」占位（FE-22）。 */
+  minLength?: number
+  maxLength?: number
   options?: { label: string; value: string | number }[]
   group?: string
   default?: any
@@ -53,6 +56,8 @@ interface OpenAPIProperty {
   enum?: (string | number)[]
   minimum?: number
   maximum?: number
+  minLength?: number
+  maxLength?: number
   pattern?: string
   default?: any
   properties?: Record<string, OpenAPIProperty>
@@ -91,6 +96,8 @@ export function parseCRDSchemaToFields(schema: any): Field[] {
       pattern: prop.pattern,
       minimum: prop.minimum,
       maximum: prop.maximum,
+      minLength: prop.minLength,
+      maxLength: prop.maxLength,
       options: prop.enum?.map(v => ({ label: String(v), value: v })),
       group: prop['x-custom-group'] || i18n.global.t('nav.otherGroup'),
       default: prop.default,
@@ -129,6 +136,8 @@ function parseNestedProperties(
       pattern: prop.pattern,
       minimum: prop.minimum,
       maximum: prop.maximum,
+      minLength: prop.minLength,
+      maxLength: prop.maxLength,
       options: prop.enum?.map(v => ({ label: String(v), value: v })),
       group: prop['x-custom-group'],
       default: prop.default,

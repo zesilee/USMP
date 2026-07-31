@@ -31,6 +31,8 @@
               "path": "/system-resources-usage/resources/resource/resource-name",
               "type": "string",
               "label": "resource-name",
+              "minLength": 1,
+              "maxLength": 64,
               "readonly": true,
               "isKey": true
             },
@@ -38,6 +40,8 @@
               "path": "/system-resources-usage/resources/resource/slot",
               "type": "string",
               "label": "slot",
+              "minLength": 1,
+              "maxLength": 16,
               "readonly": true,
               "isKey": true
             },

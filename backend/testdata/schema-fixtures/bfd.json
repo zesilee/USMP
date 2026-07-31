@@ -27,6 +27,8 @@
               "path": "/bfd/all-sessions/all-session/bind-application",
               "type": "string",
               "label": "bind-application",
+              "minLength": 1,
+              "maxLength": 127,
               "readonly": true
             },
             {
@@ -121,6 +123,8 @@
               "path": "/bfd/all-sessions/all-session/description",
               "type": "string",
               "label": "description",
+              "minLength": 1,
+              "maxLength": 51,
               "readonly": true
             },
             {
@@ -279,6 +283,8 @@
               "path": "/bfd/all-sessions/all-session/fsm-board-slot",
               "type": "string",
               "label": "fsm-board-slot",
+              "minLength": 1,
+              "maxLength": 19,
               "readonly": true
             },
             {
@@ -420,6 +426,8 @@
               "path": "/bfd/all-sessions/all-session/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 64,
               "readonly": true,
               "isKey": true
             },
@@ -915,18 +923,24 @@
                   "path": "/bfd/all-sessions/all-session/statistics/time-from-create",
                   "type": "string",
                   "label": "time-from-create",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "readonly": true
                 },
                 {
                   "path": "/bfd/all-sessions/all-session/statistics/time-from-down",
                   "type": "string",
                   "label": "time-from-down",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "readonly": true
                 },
                 {
                   "path": "/bfd/all-sessions/all-session/statistics/time-from-up",
                   "type": "string",
                   "label": "time-from-up",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "readonly": true
                 }
               ]
@@ -1060,6 +1074,8 @@
               "path": "/bfd/all-sessions/all-session/vsi-name",
               "type": "string",
               "label": "vsi-name",
+              "minLength": 1,
+              "maxLength": 31,
               "readonly": true
             },
             {
@@ -1116,7 +1132,9 @@
               "path": "/bfd/authentication-keys/authentication-key/cipher-string",
               "type": "string",
               "label": "cipher-string",
-              "required": true
+              "required": true,
+              "minLength": 1,
+              "maxLength": 148
             },
             {
               "path": "/bfd/authentication-keys/authentication-key/key-id",
@@ -1207,6 +1225,8 @@
               "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/bind-application",
               "type": "string",
               "label": "bind-application",
+              "minLength": 1,
+              "maxLength": 127,
               "readonly": true
             },
             {
@@ -1352,6 +1372,8 @@
               "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/fsm-board-slot",
               "type": "string",
               "label": "fsm-board-slot",
+              "minLength": 1,
+              "maxLength": 15,
               "readonly": true
             },
             {
@@ -1481,6 +1503,8 @@
               "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/main-session-name",
               "type": "string",
               "label": "main-session-name",
+              "minLength": 1,
+              "maxLength": 64,
               "readonly": true
             },
             {
@@ -1538,6 +1562,8 @@
               "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/session-name",
               "type": "string",
               "label": "session-name",
+              "minLength": 1,
+              "maxLength": 64,
               "readonly": true
             },
             {
@@ -1601,12 +1627,16 @@
               "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/vrf-name",
               "type": "string",
               "label": "vrf-name",
+              "minLength": 1,
+              "maxLength": 31,
               "readonly": true
             },
             {
               "path": "/bfd/bfd-bundle-sessions/bfd-bundle-session/vsi-name",
               "type": "string",
               "label": "vsi-name",
+              "minLength": 1,
+              "maxLength": 31,
               "readonly": true
             },
             {
@@ -1740,6 +1770,8 @@
               "path": "/bfd/crc-ip-sessions/crc-ip-session/local-bit-err-rate",
               "type": "string",
               "label": "local-bit-err-rate",
+              "minLength": 1,
+              "maxLength": 8,
               "readonly": true
             },
             {
@@ -1758,6 +1790,8 @@
               "path": "/bfd/crc-ip-sessions/crc-ip-session/remote-bit-err-rate",
               "type": "string",
               "label": "remote-bit-err-rate",
+              "minLength": 1,
+              "maxLength": 8,
               "readonly": true
             },
             {
@@ -1801,6 +1835,8 @@
               "path": "/bfd/crc-ip-sessions/crc-ip-session/vrf-name",
               "type": "string",
               "label": "vrf-name",
+              "minLength": 1,
+              "maxLength": 31,
               "readonly": true
             }
           ]
@@ -1906,6 +1942,8 @@
               "path": "/bfd/crc-lsp-sessions/crc-lsp-session/lsp-inbount-interfaces",
               "type": "leaf-list",
               "label": "lsp-inbount-interfaces",
+              "minLength": 1,
+              "maxLength": 63,
               "readonly": true
             },
             {
@@ -1951,6 +1989,8 @@
               "path": "/bfd/crc-lsp-sessions/crc-lsp-session/out-if-name",
               "type": "string",
               "label": "out-if-name",
+              "minLength": 1,
+              "maxLength": 63,
               "readonly": true
             },
             {
@@ -2298,6 +2338,8 @@
           "type": "string",
           "label": "process-central-slot",
           "pattern": "(^\\w{0,3}\\d{0,2}(/\\d{1,2}){0,1}$)",
+          "minLength": 1,
+          "maxLength": 19,
           "when": "../process-mode = 'central'"
         },
         {
@@ -2305,6 +2347,8 @@
           "type": "string",
           "label": "process-central-slot2",
           "pattern": "(^\\w{0,3}\\d{0,2}(/\\d{1,2}){0,1}$)",
+          "minLength": 1,
+          "maxLength": 19,
           "when": "../process-mode = 'central' and ../process-central-slot",
           "must": [
             {
@@ -2369,6 +2413,8 @@
               "path": "/bfd/mul-cast-sessions/mul-cast-session/bind-application",
               "type": "string",
               "label": "bind-application",
+              "minLength": 1,
+              "maxLength": 127,
               "readonly": true
             },
             {
@@ -2387,6 +2433,8 @@
               "path": "/bfd/mul-cast-sessions/mul-cast-session/description",
               "type": "string",
               "label": "description",
+              "minLength": 1,
+              "maxLength": 51,
               "readonly": true
             },
             {
@@ -2407,6 +2455,8 @@
               "path": "/bfd/mul-cast-sessions/mul-cast-session/fsm-board-slot",
               "type": "string",
               "label": "fsm-board-slot",
+              "minLength": 1,
+              "maxLength": 19,
               "readonly": true
             },
             {
@@ -2784,12 +2834,16 @@
               "path": "/bfd/mul-cast-sessions/mul-cast-session/opaque-id",
               "type": "string",
               "label": "opaque-id",
+              "minLength": 1,
+              "maxLength": 255,
               "readonly": true
             },
             {
               "path": "/bfd/mul-cast-sessions/mul-cast-session/p2mp-id",
               "type": "string",
               "label": "p2mp-id",
+              "minLength": 1,
+              "maxLength": 29,
               "readonly": true
             },
             {
@@ -2823,6 +2877,8 @@
               "path": "/bfd/mul-cast-sessions/mul-cast-session/session-name",
               "type": "string",
               "label": "session-name",
+              "minLength": 1,
+              "maxLength": 64,
               "readonly": true,
               "isKey": true
             },
@@ -2905,6 +2961,8 @@
               "path": "/bfd/mul-cast-sessions/mul-cast-session/track-interface",
               "type": "string",
               "label": "track-interface",
+              "minLength": 1,
+              "maxLength": 63,
               "readonly": true
             }
           ]
@@ -3141,7 +3199,9 @@
               "path": "/bfd/sessions/session/description",
               "type": "string",
               "label": "description",
-              "pattern": "([^\\s?]+[\\s]*[^?]*[^\\s?]+|[^\\s?]*)"
+              "pattern": "([^\\s?]+[\\s]*[^?]*[^\\s?]+|[^\\s?]*)",
+              "minLength": 1,
+              "maxLength": 51
             },
             {
               "path": "/bfd/sessions/session/detect-multiplier",
@@ -3181,7 +3241,9 @@
                       "path": "/bfd/sessions/session/groups/group/sub-select-slot-id",
                       "type": "string",
                       "label": "sub-select-slot-id",
-                      "required": true
+                      "required": true,
+                      "minLength": 1,
+                      "maxLength": 19
                     }
                   ]
                 }
@@ -3192,6 +3254,8 @@
               "type": "string",
               "label": "name",
               "pattern": "([^\\s?]+[\\s]*[^?]*[^\\s?]+|[^\\s?]*)",
+              "minLength": 1,
+              "maxLength": 64,
               "isKey": true
             },
             {
@@ -3552,12 +3616,16 @@
                                     {
                                       "path": "/bfd/sessions/session/select-board-slot-auto-ipv4",
                                       "type": "string",
-                                      "label": "select-board-slot-auto-ipv4"
+                                      "label": "select-board-slot-auto-ipv4",
+                                      "minLength": 1,
+                                      "maxLength": 19
                                     },
                                     {
                                       "path": "/bfd/sessions/session/select-board-slot2-auto-ipv4",
                                       "type": "string",
                                       "label": "select-board-slot2-auto-ipv4",
+                                      "minLength": 1,
+                                      "maxLength": 19,
                                       "when": "../select-board-slot-auto-ipv4",
                                       "must": [
                                         {
@@ -3659,12 +3727,16 @@
                                     {
                                       "path": "/bfd/sessions/session/select-board-slot-auto-ipv6",
                                       "type": "string",
-                                      "label": "select-board-slot-auto-ipv6"
+                                      "label": "select-board-slot-auto-ipv6",
+                                      "minLength": 1,
+                                      "maxLength": 19
                                     },
                                     {
                                       "path": "/bfd/sessions/session/select-board-slot2-auto-ipv6",
                                       "type": "string",
                                       "label": "select-board-slot2-auto-ipv6",
+                                      "minLength": 1,
+                                      "maxLength": 19,
                                       "when": "../select-board-slot-auto-ipv6",
                                       "must": [
                                         {
@@ -3761,6 +3833,8 @@
                                               "type": "string",
                                               "label": "cipher-string-multicast-ipv4",
                                               "required": true,
+                                              "minLength": 1,
+                                              "maxLength": 148,
                                               "when": "../auth-algorithm-multicast-ipv4='met-sha1'"
                                             },
                                             {
@@ -4005,6 +4079,8 @@
                                       "path": "/bfd/sessions/session/select-board-slot-static-ipv4",
                                       "type": "string",
                                       "label": "select-board-slot-static-ipv4",
+                                      "minLength": 1,
+                                      "maxLength": 19,
                                       "must": [
                                         {
                                           "expr": "../destination-address-static-unicast-ipv4 and not(../out-if-name-static-unicast-ipv4)"
@@ -4015,6 +4091,8 @@
                                       "path": "/bfd/sessions/session/select-board-slot2-static-ipv4",
                                       "type": "string",
                                       "label": "select-board-slot2-static-ipv4",
+                                      "minLength": 1,
+                                      "maxLength": 19,
                                       "when": "../select-board-slot-static-ipv4",
                                       "must": [
                                         {
@@ -4125,12 +4203,16 @@
                                     {
                                       "path": "/bfd/sessions/session/select-board-slot-static-ipv6",
                                       "type": "string",
-                                      "label": "select-board-slot-static-ipv6"
+                                      "label": "select-board-slot-static-ipv6",
+                                      "minLength": 1,
+                                      "maxLength": 19
                                     },
                                     {
                                       "path": "/bfd/sessions/session/select-board-slot2-static-ipv6",
                                       "type": "string",
                                       "label": "select-board-slot2-static-ipv6",
+                                      "minLength": 1,
+                                      "maxLength": 19,
                                       "when": "../select-board-slot-static-ipv6",
                                       "must": [
                                         {

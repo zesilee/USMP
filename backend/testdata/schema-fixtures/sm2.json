@@ -17,6 +17,7 @@
               "path": "/sm2/sm2-key-pairs/sm2-key-pair/host-key-code",
               "type": "string",
               "label": "host-key-code",
+              "maxLength": 2048,
               "readonly": true,
               "supportFilter": true
             },
@@ -25,6 +26,8 @@
               "type": "string",
               "label": "key-pair-label",
               "pattern": "[a-zA-Z0-9_]*",
+              "minLength": 1,
+              "maxLength": 35,
               "isKey": true
             },
             {
@@ -52,12 +55,16 @@
               "type": "string",
               "label": "key-code",
               "required": true,
+              "minLength": 1,
+              "maxLength": 1024,
               "supportFilter": true
             },
             {
               "path": "/sm2/sm2-peer-keys/sm2-peer-key/key-name",
               "type": "string",
               "label": "key-name",
+              "minLength": 1,
+              "maxLength": 40,
               "isKey": true
             }
           ]

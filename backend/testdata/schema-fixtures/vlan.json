@@ -97,6 +97,8 @@
               "path": "/vlan/dynamic-vlans/dynamic-vlan/description",
               "type": "string",
               "label": "description",
+              "minLength": 1,
+              "maxLength": 80,
               "readonly": true
             },
             {
@@ -245,6 +247,7 @@
                       "type": "string",
                       "label": "mac-addr",
                       "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255,
                       "readonly": true
                     },
                     {
@@ -477,6 +480,7 @@
                       "type": "string",
                       "label": "gateway-mac",
                       "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255,
                       "readonly": true
                     },
                     {
@@ -510,6 +514,7 @@
                               "type": "string",
                               "label": "mac-addr",
                               "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                              "maxLength": 255,
                               "readonly": true
                             },
                             {
@@ -556,6 +561,8 @@
               "type": "string",
               "label": "description",
               "pattern": "([^? \\n\\r\\t][^?\\n\\r\\t]*[^? \\n\\r\\t])|[^? \\n\\r\\t]",
+              "minLength": 1,
+              "maxLength": 80,
               "dynamicDefault": true
             },
             {
@@ -780,7 +787,9 @@
             {
               "path": "/vlan/vlans/vlan/name",
               "type": "string",
-              "label": "name"
+              "label": "name",
+              "minLength": 1,
+              "maxLength": 31
             },
             {
               "path": "/vlan/vlans/vlan/statistic-discard",

@@ -362,6 +362,9 @@
     "undelete": "Undo Delete",
     "stagedOk": "Added to pending changes",
     "markedDelete": "Marked for deletion (effective after commit)",
-    "pendingCreateRemoved": "Pending-create entry removed"
+    "pendingCreateRemoved": "Pending-create entry removed",
+    "lengthBoth": "Valid length: [{min}..{max}]",
+    "lengthMin": "Valid length: ≥ {min}",
+    "lengthMax": "Valid length: ≤ {max}"
   }
 }

@@ -26,7 +26,9 @@
           "path": "/anyflow/global/aggregation-service-port",
           "type": "leaf-list",
           "label": "aggregation-service-port",
-          "pattern": "\\d+(\\.\\.\\d+)?"
+          "pattern": "\\d+(\\.\\.\\d+)?",
+          "minLength": 1,
+          "maxLength": 32
         },
         {
           "path": "/anyflow/global/aging-time",

@@ -17,13 +17,17 @@
               "path": "/acl/group6s/group6/description",
               "type": "string",
               "label": "description",
-              "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+              "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+              "minLength": 1,
+              "maxLength": 127
             },
             {
               "path": "/acl/group6s/group6/identity",
               "type": "string",
               "label": "identity",
               "pattern": "([1-3]\\d{3})|([6-9]\\d{3})|([0-9a-zA-Z]([^\\s]*))",
+              "minLength": 1,
+              "maxLength": 64,
               "isKey": true
             },
             {
@@ -95,6 +99,8 @@
                       "type": "string",
                       "label": "description",
                       "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "minLength": 1,
+                      "maxLength": 127,
                       "supportFilter": true
                     },
                     {
@@ -273,6 +279,8 @@
                       "type": "string",
                       "label": "name",
                       "pattern": "[^_\\s][^\\s]*",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     },
                     {
@@ -611,6 +619,8 @@
                       "type": "string",
                       "label": "description",
                       "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "minLength": 1,
+                      "maxLength": 127,
                       "supportFilter": true
                     },
                     {
@@ -653,6 +663,8 @@
                       "type": "string",
                       "label": "name",
                       "pattern": "[^\\s\\?]*",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     },
                     {
@@ -794,7 +806,9 @@
                       "path": "/acl/group6s/group6/rule-interfaces/rule-interface/description",
                       "type": "string",
                       "label": "description",
-                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "minLength": 1,
+                      "maxLength": 127
                     },
                     {
                       "path": "/acl/group6s/group6/rule-interfaces/rule-interface/id",
@@ -853,6 +867,8 @@
                       "type": "string",
                       "label": "name",
                       "pattern": "[^_\\s][^\\s]*",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     },
                     {
@@ -914,13 +930,17 @@
               "path": "/acl/groups/group/description",
               "type": "string",
               "label": "description",
-              "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+              "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+              "minLength": 1,
+              "maxLength": 127
             },
             {
               "path": "/acl/groups/group/identity",
               "type": "string",
               "label": "identity",
               "pattern": "([1-9]\\d{3})|(10[0-9]{3})|(23[0-9]{3})|(99999)|([0-9a-zA-Z]([^\\s]*))",
+              "minLength": 1,
+              "maxLength": 64,
               "isKey": true
             },
             {
@@ -999,6 +1019,8 @@
                       "type": "string",
                       "label": "description",
                       "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "minLength": 1,
+                      "maxLength": 127,
                       "supportFilter": true
                     },
                     {
@@ -1213,6 +1235,8 @@
                       "type": "string",
                       "label": "name",
                       "pattern": "[^_\\s][^\\s]*",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     },
                     {
@@ -1648,7 +1672,9 @@
                       "path": "/acl/groups/group/rule-arps/rule-arp/description",
                       "type": "string",
                       "label": "description",
-                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "minLength": 1,
+                      "maxLength": 127
                     },
                     {
                       "path": "/acl/groups/group/rule-arps/rule-arp/dest-ipaddr",
@@ -1666,6 +1692,7 @@
                       "type": "string",
                       "label": "dest-mac",
                       "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255,
                       "when": "not(../packet-mode='request')",
                       "must": [
                         {
@@ -1678,6 +1705,7 @@
                       "type": "string",
                       "label": "dest-mac-mask",
                       "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255,
                       "when": "not(../packet-mode='request')",
                       "must": [
                         {
@@ -1724,6 +1752,8 @@
                       "type": "string",
                       "label": "name",
                       "pattern": "[^_\\s][^\\s]*",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     },
                     {
@@ -1757,6 +1787,7 @@
                       "type": "string",
                       "label": "source-mac",
                       "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255,
                       "must": [
                         {
                           "expr": "(../source-mac and ../source-mac-mask) or (not (../source-mac) and not (../source-mac-mask))"
@@ -1768,6 +1799,7 @@
                       "type": "string",
                       "label": "source-mac-mask",
                       "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255,
                       "must": [
                         {
                           "expr": "(../source-mac and ../source-mac-mask) or (not (../source-mac) and not (../source-mac-mask))"
@@ -1847,6 +1879,8 @@
                       "type": "string",
                       "label": "description",
                       "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "minLength": 1,
+                      "maxLength": 127,
                       "supportFilter": true
                     },
                     {
@@ -1910,6 +1944,8 @@
                       "type": "string",
                       "label": "name",
                       "pattern": "[^_\\s][^\\s]*",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     },
                     {
@@ -2048,6 +2084,8 @@
                       "type": "string",
                       "label": "ce-vlan-id-mask",
                       "pattern": "0[xX][a-fA-F0-9]{1,3}",
+                      "minLength": 3,
+                      "maxLength": 5,
                       "must": [
                         {
                           "expr": "../ce-vlan-id"
@@ -2064,19 +2102,23 @@
                       "path": "/acl/groups/group/rule-ethernets/rule-ethernet/description",
                       "type": "string",
                       "label": "description",
-                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "minLength": 1,
+                      "maxLength": 127
                     },
                     {
                       "path": "/acl/groups/group/rule-ethernets/rule-ethernet/dest-mac",
                       "type": "string",
                       "label": "dest-mac",
-                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255
                     },
                     {
                       "path": "/acl/groups/group/rule-ethernets/rule-ethernet/dest-mac-mask",
                       "type": "string",
                       "label": "dest-mac-mask",
                       "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255,
                       "when": "../dest-mac"
                     },
                     {
@@ -2108,13 +2150,17 @@
                       "type": "string",
                       "label": "frame-mask",
                       "pattern": "0[xX][a-fA-F0-9]{1,4}",
+                      "minLength": 3,
+                      "maxLength": 6,
                       "when": "../frame-type"
                     },
                     {
                       "path": "/acl/groups/group/rule-ethernets/rule-ethernet/frame-type",
                       "type": "string",
                       "label": "frame-type",
-                      "pattern": "0[xX][a-fA-F0-9]{1,4}"
+                      "pattern": "0[xX][a-fA-F0-9]{1,4}",
+                      "minLength": 3,
+                      "maxLength": 6
                     },
                     {
                       "path": "/acl/groups/group/rule-ethernets/rule-ethernet/id",
@@ -2144,6 +2190,8 @@
                       "type": "string",
                       "label": "name",
                       "pattern": "[^_\\s][^\\s]*",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     },
                     {
@@ -2157,13 +2205,15 @@
                       "path": "/acl/groups/group/rule-ethernets/rule-ethernet/source-mac",
                       "type": "string",
                       "label": "source-mac",
-                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}"
+                      "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255
                     },
                     {
                       "path": "/acl/groups/group/rule-ethernets/rule-ethernet/source-mac-mask",
                       "type": "string",
                       "label": "source-mac-mask",
                       "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                      "maxLength": 255,
                       "when": "../source-mac"
                     },
                     {
@@ -2189,6 +2239,8 @@
                       "type": "string",
                       "label": "vlan-id-mask",
                       "pattern": "0[xX][a-fA-F0-9]{1,3}",
+                      "minLength": 3,
+                      "maxLength": 5,
                       "must": [
                         {
                           "expr": "../vlan-id"
@@ -2251,7 +2303,9 @@
                       "path": "/acl/groups/group/rule-interfaces/rule-interface/description",
                       "type": "string",
                       "label": "description",
-                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "minLength": 1,
+                      "maxLength": 127
                     },
                     {
                       "path": "/acl/groups/group/rule-interfaces/rule-interface/id",
@@ -2310,6 +2364,8 @@
                       "type": "string",
                       "label": "name",
                       "pattern": "[^_\\s][^\\s]*",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     },
                     {
@@ -2353,7 +2409,9 @@
                       "path": "/acl/groups/group/rule-mplss/rule-mpls/description",
                       "type": "string",
                       "label": "description",
-                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "minLength": 1,
+                      "maxLength": 127
                     },
                     {
                       "path": "/acl/groups/group/rule-mplss/rule-mpls/id",
@@ -2431,6 +2489,8 @@
                       "type": "string",
                       "label": "name",
                       "pattern": "[^_\\s][^\\s]*",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     },
                     {
@@ -2496,7 +2556,9 @@
                       "path": "/acl/groups/group/rule-users/rule-user/description",
                       "type": "string",
                       "label": "description",
-                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])"
+                      "pattern": "[^\\?\\s](([^\\?\\s]*)|[^\\t\\?]*[^\\?\\s])",
+                      "minLength": 1,
+                      "maxLength": 127
                     },
                     {
                       "path": "/acl/groups/group/rule-users/rule-user/id",
@@ -2526,6 +2588,8 @@
                       "type": "string",
                       "label": "name",
                       "pattern": "[^_\\s][^\\s]*",
+                      "minLength": 1,
+                      "maxLength": 32,
                       "isKey": true
                     },
                     {
@@ -2656,7 +2720,9 @@
                       "path": "/acl/groups/group/rule-users/rule-user/user-rule1",
                       "type": "string",
                       "label": "user-rule1",
-                      "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10
                     },
                     {
                       "path": "/acl/groups/group/rule-users/rule-user/user-rule1-mask",
@@ -2664,6 +2730,8 @@
                       "label": "user-rule1-mask",
                       "required": true,
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule1"
                     },
                     {
@@ -2671,6 +2739,8 @@
                       "type": "string",
                       "label": "user-rule2",
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule1"
                     },
                     {
@@ -2679,6 +2749,8 @@
                       "label": "user-rule2-mask",
                       "required": true,
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule2"
                     },
                     {
@@ -2686,6 +2758,8 @@
                       "type": "string",
                       "label": "user-rule3",
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule2"
                     },
                     {
@@ -2694,6 +2768,8 @@
                       "label": "user-rule3-mask",
                       "required": true,
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule3"
                     },
                     {
@@ -2701,6 +2777,8 @@
                       "type": "string",
                       "label": "user-rule4",
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule3"
                     },
                     {
@@ -2709,6 +2787,8 @@
                       "label": "user-rule4-mask",
                       "required": true,
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule4"
                     },
                     {
@@ -2716,6 +2796,8 @@
                       "type": "string",
                       "label": "user-rule5",
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule4"
                     },
                     {
@@ -2724,6 +2806,8 @@
                       "label": "user-rule5-mask",
                       "required": true,
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule5"
                     },
                     {
@@ -2731,6 +2815,8 @@
                       "type": "string",
                       "label": "user-rule6",
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule5"
                     },
                     {
@@ -2739,6 +2825,8 @@
                       "label": "user-rule6-mask",
                       "required": true,
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule6"
                     },
                     {
@@ -2746,6 +2834,8 @@
                       "type": "string",
                       "label": "user-rule7",
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule6"
                     },
                     {
@@ -2754,6 +2844,8 @@
                       "label": "user-rule7-mask",
                       "required": true,
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule7"
                     },
                     {
@@ -2761,6 +2853,8 @@
                       "type": "string",
                       "label": "user-rule8",
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule7"
                     },
                     {
@@ -2769,6 +2863,8 @@
                       "label": "user-rule8-mask",
                       "required": true,
                       "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10,
                       "when": "../user-rule8"
                     }
                   ]
@@ -2875,6 +2971,8 @@
               "path": "/acl/ip-pool6s/ip-pool6/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             }
           ]
@@ -2970,6 +3068,8 @@
               "path": "/acl/ip-pools/ip-pool/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             }
           ]
@@ -2990,6 +3090,8 @@
               "path": "/acl/port-pools/port-pool/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 32,
               "isKey": true
             },
             {

@@ -59,6 +59,8 @@
               "path": "/monitor-group/groups/group/name",
               "type": "string",
               "label": "name",
+              "minLength": 1,
+              "maxLength": 31,
               "isKey": true
             },
             {

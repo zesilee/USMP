@@ -204,6 +204,8 @@
               "path": "/mirror/instances/instance/instance-name",
               "type": "string",
               "label": "instance-name",
+              "minLength": 1,
+              "maxLength": 31,
               "isKey": true
             },
             {
@@ -274,14 +276,18 @@
                       "type": "string",
                       "label": "payload-mask",
                       "required": true,
-                      "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10
                     },
                     {
                       "path": "/mirror/observe-user-define-acls/observe-user-define-acl/offsets/offset/payload-value",
                       "type": "string",
                       "label": "payload-value",
                       "required": true,
-                      "pattern": "(0x|0X)?[0-9a-fA-F]+"
+                      "pattern": "(0x|0X)?[0-9a-fA-F]+",
+                      "minLength": 1,
+                      "maxLength": 10
                     }
                   ]
                 }

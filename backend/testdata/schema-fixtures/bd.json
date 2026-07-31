@@ -218,6 +218,8 @@
                   "path": "/bd/instances/instance/arp-user-entry/flag",
                   "type": "string",
                   "label": "flag",
+                  "minLength": 1,
+                  "maxLength": 24,
                   "readonly": true
                 },
                 {
@@ -232,6 +234,7 @@
                   "type": "string",
                   "label": "mac-addr",
                   "pattern": "[0-9a-f]{4}(-[0-9a-f]{4}){2}",
+                  "maxLength": 255,
                   "readonly": true
                 },
                 {
@@ -253,6 +256,8 @@
                   "path": "/bd/instances/instance/bind-service/evpn-name",
                   "type": "string",
                   "label": "evpn-name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "readonly": true
                 },
                 {
@@ -267,6 +272,8 @@
                   "path": "/bd/instances/instance/bind-service/vsi-name",
                   "type": "string",
                   "label": "vsi-name",
+                  "minLength": 1,
+                  "maxLength": 31,
                   "readonly": true
                 }
               ]
@@ -302,7 +309,9 @@
             {
               "path": "/bd/instances/instance/description",
               "type": "string",
-              "label": "description"
+              "label": "description",
+              "minLength": 1,
+              "maxLength": 80
             },
             {
               "path": "/bd/instances/instance/encapsulation",
@@ -329,6 +338,8 @@
                   "type": "string",
                   "label": "esi",
                   "pattern": "( *(00([0-9a-fA-F]){2}\\.(([0-9a-fA-F]){4}\\.){3}(([0-9a-fA-F]){4}))? *)",
+                  "minLength": 1,
+                  "maxLength": 24,
                   "when": "../name and ../../nvo3:nvo3/nvo3:vni-list/nvo3:vni[../nvo3:split-horizon='true']"
                 },
                 {
@@ -459,7 +470,9 @@
                         {
                           "path": "/bd/instances/instance/mirror/bd-port-mirrors/bd-port-mirror/group-name",
                           "type": "string",
-                          "label": "group-name"
+                          "label": "group-name",
+                          "minLength": 1,
+                          "maxLength": 31
                         },
                         {
                           "path": "/bd/instances/instance/mirror/bd-port-mirrors/bd-port-mirror/instance-name",
@@ -492,7 +505,9 @@
                           "path": "/bd/instances/instance/nvo3/map-vnis/map-vni/split-group",
                           "type": "string",
                           "label": "split-group",
-                          "required": true
+                          "required": true,
+                          "minLength": 1,
+                          "maxLength": 31
                         },
                         {
                           "path": "/bd/instances/instance/nvo3/map-vnis/map-vni/vni",

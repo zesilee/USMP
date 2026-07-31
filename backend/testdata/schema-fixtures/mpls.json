@@ -102,6 +102,8 @@
                   "path": "/mpls/common/cross-connects/cross-connect/xc-in-interface-name",
                   "type": "string",
                   "label": "xc-in-interface-name",
+                  "minLength": 1,
+                  "maxLength": 63,
                   "readonly": true
                 },
                 {
@@ -128,6 +130,8 @@
                   "path": "/mpls/common/cross-connects/cross-connect/xc-out-interface-name",
                   "type": "string",
                   "label": "xc-out-interface-name",
+                  "minLength": 1,
+                  "maxLength": 63,
                   "readonly": true
                 },
                 {
@@ -336,6 +340,8 @@
                   "path": "/mpls/common/ilm-label-stacks/ilm-label-stack/out-interface-name",
                   "type": "string",
                   "label": "out-interface-name",
+                  "minLength": 1,
+                  "maxLength": 63,
                   "readonly": true
                 },
                 {
@@ -348,6 +354,8 @@
                   "path": "/mpls/common/ilm-label-stacks/ilm-label-stack/type",
                   "type": "string",
                   "label": "type",
+                  "minLength": 1,
+                  "maxLength": 50,
                   "readonly": true
                 }
               ]
