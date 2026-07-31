@@ -65,6 +65,7 @@ func (s *Server) setupRoutes() {
 			// 在 gin 1.10 共存（静态优先），先注册以示意优先级。
 			changesetHandler := NewChangesetHandler(s.manager)
 			configGroup.POST("/changeset/preview", changesetHandler.Preview)
+			configGroup.POST("/changeset/commit", changesetHandler.Commit)
 			configGroup.GET("/:ip/*path", configHandler.GetConfig)
 			configGroup.POST("/:ip/*path", configHandler.SetConfig)
 			configGroup.DELETE("/:ip/*path", configHandler.DeleteConfig)

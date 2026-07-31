@@ -139,9 +139,16 @@ func (t *TxCoordinator) Push(ctx context.Context, frags []Fragment) map[string]T
 }
 
 // prepare pushes one device's fragments into its candidate (no commit).
+// Fragment 按 Op/RawXML 映射为 client.Change（CS-04）：缺省 merge→AddChange、
+// delete→DeleteChange（目标在 OldValue）、RawXML→预编码字符串透传；未知 Op
+// 与无目标 delete 明确报错，不发送猜测报文（R08）。
 func (t *TxCoordinator) prepare(ctx context.Context, c txClient, frags []Fragment) error {
 	for _, f := range frags {
-		res, err := c.Set(ctx, []client.Change{{Type: client.AddChange, Path: f.Path, NewValue: f.Config}}, client.WithCommit(false))
+		ch, err := fragmentChange(f)
+		if err != nil {
+			return err
+		}
+		res, err := c.Set(ctx, []client.Change{ch}, client.WithCommit(false))
 		if err != nil {
 			return err
 		}
@@ -150,6 +157,24 @@ func (t *TxCoordinator) prepare(ctx context.Context, c txClient, frags []Fragmen
 		}
 	}
 	return nil
+}
+
+// fragmentChange 把单个 Fragment 映射为 client.Change。
+func fragmentChange(f Fragment) (client.Change, error) {
+	if f.RawXML != "" {
+		return client.Change{Type: client.AddChange, Path: f.Path, NewValue: f.RawXML}, nil
+	}
+	switch f.Op {
+	case FragmentOpMerge:
+		return client.Change{Type: client.AddChange, Path: f.Path, NewValue: f.Config}, nil
+	case FragmentOpDelete:
+		if f.Config == nil {
+			return client.Change{}, fmt.Errorf("delete fragment for %s/%s missing keyed target", f.Device, f.Module)
+		}
+		return client.Change{Type: client.DeleteChange, Path: f.Path, OldValue: f.Config}, nil
+	default:
+		return client.Change{}, fmt.Errorf("unknown fragment op %q for %s/%s", f.Op, f.Device, f.Module)
+	}
 }
 
 // discardAll best-effort discards candidates on the named devices (R08 —

@@ -196,6 +196,76 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/config/changeset/commit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** 变更集批量原子提交（整体生效或整体回退） */
+        post: {
+            parameters: {
+                query?: {
+                    /** @description 覆盖业务意图归属硬锁（force=true，审计留痕） */
+                    force?: boolean;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: components["requestBodies"]["api.ChangesetReq"];
+            responses: {
+                /** @description 已提交并触发对账 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.ChangesetCommitData"];
+                        };
+                    };
+                };
+                /** @description 变更集解析失败 */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+                /** @description 路径被业务意图认领（无 force 拒绝） */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.OwnershipRejection"];
+                        };
+                    };
+                };
+                /** @description 设备下发失败（已整体回退） */
+                502: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/config/changeset/preview": {
         parameters: {
             query?: never;
@@ -213,12 +283,7 @@ export interface paths {
                 path?: never;
                 cookie?: never;
             };
-            /** @description 单设备变更集 */
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["api.ChangesetReq"];
-                };
-            };
+            requestBody: components["requestBodies"]["api.ChangesetReq"];
             responses: {
                 /** @description 预览结果 */
                 200: {
@@ -1001,6 +1066,15 @@ export interface components {
             label?: string;
             name?: string;
         };
+        "api.ChangesetCommitData": {
+            device?: string;
+            entries?: number;
+            /** @description NonTransactional 标记设备缺 :confirmed-commit 降级普通 commit（DP-08）。 */
+            non_transactional?: boolean;
+            reconciliation?: components["schemas"]["api.ReconcileInfo"];
+            /** @description COMMITTED */
+            status?: string;
+        };
         "api.ChangesetEntryReq": {
             /** @description update：字段级清除的叶名（CS-05） */
             cleared?: string[];
@@ -1297,7 +1371,14 @@ export interface components {
     };
     responses: never;
     parameters: never;
-    requestBodies: never;
+    requestBodies: {
+        /** @description 单设备变更集 */
+        "api.ChangesetReq": {
+            content: {
+                "application/json": components["schemas"]["api.ChangesetReq"];
+            };
+        };
+    };
     headers: never;
     pathItems: never;
 }

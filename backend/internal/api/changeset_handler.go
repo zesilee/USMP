@@ -10,6 +10,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/openconfig/ygot/ygot"
 
+	"github.com/leezesi/usmp/backend/internal/intent"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/diff"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
@@ -23,12 +25,20 @@ type ChangesetHandler struct {
 	manager manager.Manager
 	// fetch 与 ConfigHandler 同源的设备读闭包（可注入测试）。
 	fetch func(ctx context.Context, ip, path string) (interface{}, error)
+	// push 执行 candidate 两阶段原子下发（生产为 intent.TxCoordinator，
+	// 可注入测试）。
+	push intent.Pusher
 }
 
-// NewChangesetHandler 构造变更集 handler，设备读闭包与 ConfigHandler 同实现。
+// NewChangesetHandler 构造变更集 handler：设备读闭包与 ConfigHandler 同实现，
+// 下发通道复用意图侧 2PC 协调器（共享 ClientPool/DeviceStore 与设备锁）。
 func NewChangesetHandler(mgr manager.Manager) *ChangesetHandler {
 	cfg := NewConfigHandler(mgr)
-	return &ChangesetHandler{manager: mgr, fetch: cfg.fetch}
+	return &ChangesetHandler{
+		manager: mgr,
+		fetch:   cfg.fetch,
+		push:    intent.NewTxCoordinator(mgr.GetClientPool(), mgr.GetDeviceStore(), 0),
+	}
 }
 
 // ChangesetEntryReq 是变更集单条目（前端 changeset store 的序列化形态）。
@@ -109,8 +119,14 @@ func (h *ChangesetHandler) Preview(c *gin.Context) {
 
 	data := ChangesetPreviewData{Device: req.Device, Entries: make([]ChangesetPreviewEntry, 0, len(entries))}
 	engine := diff.NewDefaultDiffEngine()
+	// 同锚点基线在单次请求内只取一次（多条目常落同一 list，避免重复实时回读）。
+	memo := map[string]baselineResult{}
 	for _, pe := range entries {
-		res := h.previewOne(pe, req.Device, engine)
+		if _, ok := memo[pe.anchor]; !ok {
+			b, src := h.baseline(req.Device, pe)
+			memo[pe.anchor] = baselineResult{value: b, source: src}
+		}
+		res := h.previewOne(pe, memo[pe.anchor], engine)
 		for _, ch := range res.Diff {
 			switch ch.Type {
 			case "ADD":
@@ -195,13 +211,18 @@ func decodeEntry(e ChangesetEntryReq) (previewEntry, error) {
 	return pe, nil
 }
 
+// baselineResult 是单锚点的基线取值与来源（请求内 memo）。
+type baselineResult struct {
+	value  interface{}
+	source string
+}
+
 // previewOne 计算单条目的预览：基线→diff→正向/回滚报文。
-func (h *ChangesetHandler) previewOne(pe previewEntry, device string, engine *diff.DefaultDiffEngine) ChangesetPreviewEntry {
+func (h *ChangesetHandler) previewOne(pe previewEntry, base baselineResult, engine *diff.DefaultDiffEngine) ChangesetPreviewEntry {
 	res := ChangesetPreviewEntry{Op: pe.req.Op, Path: pe.req.Path, Diff: []DiffChangeDTO{}}
 
-	baseline, source := h.baseline(device, pe)
-	res.BaselineSource = source
-	baseSubset, baseCount := containerSubset(baseline, pe.target)
+	res.BaselineSource = base.source
+	baseSubset, baseCount := containerSubset(base.value, pe.target)
 
 	// diff 树（引擎为反射比对，纯函数；delete 与 cleared 叶手工补齐——
 	// 声明式 subset diff 刻意表达不了删除，见 config-delete-semantics）。
@@ -349,6 +370,162 @@ func appendClearedDiff(dst []DiffChangeDTO, pe previewEntry, baseSubset interfac
 		}
 	}
 	return dst
+}
+
+// ChangesetCommitData 是 POST /config/changeset/commit 的 data 负载。
+type ChangesetCommitData struct {
+	Status  string `json:"status"` // COMMITTED
+	Device  string `json:"device"`
+	Entries int    `json:"entries"`
+	// NonTransactional 标记设备缺 :confirmed-commit 降级普通 commit（DP-08）。
+	NonTransactional bool          `json:"non_transactional,omitempty"`
+	Reconciliation   ReconcileInfo `json:"reconciliation"`
+}
+
+// Commit 批量原子提交（CS-04）：单设备变更集经 candidate 两阶段整体下发，
+// 任一失败设备回到提交前状态；desired/缓存/审计仅在设备 commit 成功后落地
+// （先写 desired 会让周期对账绕过 2PC 把失败变更重新推上去）。
+//
+// @Summary  变更集批量原子提交（整体生效或整体回退）
+// @Tags     config
+// @Accept   json
+// @Produce  json
+// @Param    changeset body ChangesetReq true "单设备变更集"
+// @Param    force query bool false "覆盖业务意图归属硬锁（force=true，审计留痕）"
+// @Success  200 {object} Response{data=ChangesetCommitData} "已提交并触发对账"
+// @Failure  400 {object} Response "变更集解析失败"
+// @Failure  409 {object} Response{data=OwnershipRejection} "路径被业务意图认领（无 force 拒绝）"
+// @Failure  502 {object} Response "设备下发失败（已整体回退）"
+// @Router   /config/changeset/commit [post]
+func (h *ChangesetHandler) Commit(c *gin.Context) {
+	force := c.Query("force") == "true"
+	req, entries, ok := h.decodeChangeset(c)
+	if !ok {
+		return
+	}
+
+	// 归属硬锁（BR-11 口径，CS-04）：任一条目路径被认领且无 force → 整体 409。
+	ownerSet := map[string]bool{}
+	var owners []string
+	for _, pe := range entries {
+		for _, o := range intent.DefaultOwnership.Owners(req.Device, pe.req.Path) {
+			if !ownerSet[o] {
+				ownerSet[o] = true
+				owners = append(owners, o)
+			}
+		}
+	}
+	if len(owners) > 0 && !force {
+		rejectOwnedPath(c, owners)
+		return
+	}
+
+	frags, err := changesetFragments(req.Device, entries)
+	if err != nil {
+		Error(c, 400, err.Error())
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+	defer cancel()
+	res, resOK := h.push.Push(ctx, frags)[req.Device]
+	if !resOK {
+		// 下发通道未返回该设备结局——按失败处理，绝不当成功（R08）。
+		Error(c, 502, "提交失败: 下发通道未返回设备 "+req.Device+" 的结局")
+		return
+	}
+	if res.Err != nil {
+		// 整体回退已由 2PC 完成（candidate discard）；控制器侧零痕迹（R08/§9）。
+		Error(c, 502, "提交失败（设备已整体回退）: "+res.Err.Error())
+		return
+	}
+
+	// 设备 commit 成功——desired/缓存/审计/对账按序落地。
+	anchors := map[string]bool{}
+	for _, pe := range entries {
+		anchors[pe.anchor] = true
+		var werr error
+		var summary string
+		switch pe.req.Op {
+		case "delete":
+			werr = storeConfigDeleted(h.manager.GetConfigStore(), req.Device, pe.anchor, pe.target)
+			summary = "delete " + summarizeDeleted(pe.target)
+		default:
+			werr = storeConfigMerged(h.manager.GetConfigStore(), req.Device, pe.anchor, pe.target)
+			summary = summarizeSubmitted(pe.req.Payload)
+			if len(pe.req.Cleared) > 0 {
+				summary += fmt.Sprintf("（清除叶: %s）", strings.Join(pe.req.Cleared, ","))
+			}
+		}
+		if werr != nil {
+			// 设备已生效而 desired 写失败：如实报错（下一次对账会以设备实际态
+			// 回读收敛，不会回滚设备——诚实呈现优于假装失败）。
+			Error(c, 500, "设备已提交，但 desired 存储失败: "+werr.Error())
+			return
+		}
+		h.manager.GetAuditStore().Record(audit.Record{
+			DeviceIP:     req.Device,
+			Path:         pe.req.Path,
+			Summary:      summary,
+			Triggered:    true,
+			Forced:       force && len(owners) > 0,
+			ForcedOwners: forcedOwners(force, owners),
+		})
+	}
+	h.manager.GetRunningCache().InvalidatePrefix(req.Device + "|")
+	triggered := false
+	for a := range anchors {
+		if h.manager.TriggerReconcile(req.Device, a) {
+			triggered = true
+		}
+	}
+
+	Success(c, ChangesetCommitData{
+		Status:           "COMMITTED",
+		Device:           req.Device,
+		Entries:          len(entries),
+		NonTransactional: res.NonTransactional,
+		Reconciliation: ReconcileInfo{
+			Triggered: triggered,
+			Message:   "Changeset committed. Reconciliation will verify device state.",
+		},
+	}, "Changeset committed")
+}
+
+// changesetFragments 把解码后的条目映射为 2PC 片段（CS-04）：create/update →
+// merge 片段（+cleared 叶的预编码 RawXML 片段，CS-05）、delete → delete 片段。
+func changesetFragments(device string, entries []previewEntry) ([]intent.Fragment, error) {
+	frags := make([]intent.Fragment, 0, len(entries))
+	for _, pe := range entries {
+		gs, ok := pe.target.(ygot.GoStruct)
+		if !ok {
+			return nil, fmt.Errorf("条目 %s: 目标类型 %T 不是 GoStruct", pe.req.Path, pe.target)
+		}
+		switch pe.req.Op {
+		case "delete":
+			frags = append(frags, intent.Fragment{
+				Device: device, Module: pe.desc.Module, Path: pe.anchor,
+				Config: gs, Op: intent.FragmentOpDelete,
+			})
+		default:
+			frags = append(frags, intent.Fragment{
+				Device: device, Module: pe.desc.Module, Path: pe.anchor, Config: gs,
+			})
+			if len(pe.req.Cleared) > 0 {
+				if pe.desc.XML == nil {
+					return nil, fmt.Errorf("条目 %s: 模块 %s 无 XML 通道，无法表达字段级删除", pe.req.Path, pe.desc.Module)
+				}
+				raw, err := encodeClearedLeaves(pe.desc, gs, pe.req.Cleared)
+				if err != nil {
+					return nil, fmt.Errorf("条目 %s: 清除叶编码失败: %w", pe.req.Path, err)
+				}
+				frags = append(frags, intent.Fragment{
+					Device: device, Module: pe.desc.Module, Path: pe.anchor, RawXML: raw,
+				})
+			}
+		}
+	}
+	return frags, nil
 }
 
 // --- 反射工具（container = 单 map 字段的 ygot 容器，与 xmlcodec 同约定）---
