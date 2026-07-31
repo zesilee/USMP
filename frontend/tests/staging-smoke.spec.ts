@@ -63,17 +63,19 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   // 全部由 schema 派生。以下把原「表单动态渲染/when 显隐/校验拦截/SPA 切换」回归
   // 断言迁移到控制台，并新增「种子行/高级搜索」断言。
 
-  test('VLAN 旧路由重定向到控制台，新增表单动态渲染出 YANG 字段', async ({ page }) => {
+  test('VLAN 旧路由重定向到控制台，创建表单动态渲染出 YANG 字段', async ({ page }) => {
     await page.goto('/config/vlan', { waitUntil: 'networkidle' })
     await expect(page).toHaveURL(/module\/vlan/)
 
     await pickDevice(page)
     await page.getByRole('tab', { name: 'VLAN列表', exact: true }).click()
-    await page.getByRole('button', { name: '新增' }).first().click()
+    await page.getByRole('button', { name: '创建' }).first().click()
 
-    // 抽屉里出现 schema 驱动的字段（UI-03 后标签经 snd res 本地化）；
-    // 限定 .el-drawer——列表列头同名且固定列副本隐藏，裸 first() 会命中隐藏 cell。
-    await expect(page.locator('.el-drawer').getByText('VLAN管理状态', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    // 详情编辑区（FE-21 master-detail，抽屉退役）出现 schema 驱动的字段
+    //（UI-03 后标签经 snd res 本地化）；限定 pane——列表列头同名且固定列
+    // 副本隐藏，裸 first() 会命中隐藏 cell。
+    const pane = page.locator('[data-test="item-detail-pane"]')
+    await expect(pane.getByText('VLAN管理状态', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
   // 空表单提交应被前端校验拦截（§9）：缺主键 id 时「下发并对账」禁用。
@@ -81,20 +83,21 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await page.goto('/module/vlan', { waitUntil: 'networkidle' })
     await pickDevice(page)
     await page.getByRole('tab', { name: 'VLAN列表', exact: true }).click()
-    await page.getByRole('button', { name: '新增' }).first().click()
-    await expect(page.locator('.el-drawer').getByText('VLAN管理状态', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    await page.getByRole('button', { name: '创建' }).first().click()
+    const pane = page.locator('[data-test="item-detail-pane"]')
+    await expect(pane.getByText('VLAN管理状态', { exact: false }).first()).toBeVisible({ timeout: 15000 })
 
-    await expect(page.getByRole('button', { name: /下发并对账/ })).toBeDisabled()
+    await expect(pane.locator('[data-test="detail-submit"]')).toBeDisabled()
   })
 
-  // 接口（华为 IFM）：Tab 由模块根派生，interfaces 列表 Tab 内新增表单动态渲染。
-  test('接口控制台 Tab 派生 + 新增表单动态渲染出 YANG 字段', async ({ page }) => {
+  // 接口（华为 IFM）：Tab 由模块根派生，interfaces 列表 Tab 内创建表单动态渲染。
+  test('接口控制台 Tab 派生 + 创建表单动态渲染出 YANG 字段', async ({ page }) => {
     await page.goto('/config/interface', { waitUntil: 'networkidle' })
     await expect(page).toHaveURL(/module\/ifm/)
 
     await pickDevice(page)
     await page.getByRole('tab', { name: '接口列表', exact: true }).click()
-    await page.getByRole('button', { name: '新增' }).first().click()
+    await page.getByRole('button', { name: '创建' }).first().click()
 
     // mtu 为 IFM 叶子名，schema 动态渲染才会出现
     await expect(page.getByText('mtu', { exact: false }).first()).toBeVisible({ timeout: 15000 })
@@ -140,22 +143,22 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   })
 
   // config=false 只读字段回显（NS-08/BR-01）：读路径 <get> 带回状态种子，
-  // 编辑抽屉内 dynamic/mac-address 以禁用态展示状态值。
-  test('接口编辑抽屉回显 config=false 状态字段（dynamic/mac-address）', async ({ page }) => {
+  // 详情编辑区（FE-21）内 dynamic 嵌套组成为二级 Tab，mac-address 以禁用态展示状态值。
+  test('接口详情区回显 config=false 状态字段（dynamic/mac-address）', async ({ page }) => {
     await page.goto('/module/ifm', { waitUntil: 'networkidle' })
     await pickDevice(page)
     await page.getByRole('tab', { name: '接口列表', exact: true }).click()
     await expect(page.getByText('200GE0/1/0', { exact: true }).first()).toBeVisible({ timeout: 20000 })
 
-    // 打开种子行 200GE0/1/0 的编辑抽屉
+    // 打开种子行 200GE0/1/0 的详情编辑区（master-detail，FE-21）
     const row = page.locator('.el-table__row', { hasText: '200GE0/1/0' }).first()
     await row.getByRole('button', { name: '编辑' }).click()
 
-    // dynamic 容器渲染为「接口动态信息」el-form-item（组标题在 form-item 标签上，
-    // SND i18n 汉化），嵌套子叶为 .sub-field（标签「生效MAC地址」）。
-    const drawer = page.locator('.el-drawer')
-    const dynItem = drawer.locator('.el-form-item').filter({ hasText: '接口动态信息' }).first()
-    const macRow = dynItem.locator('.sub-field').filter({ hasText: '生效MAC地址' }).first()
+    // dynamic 嵌套容器（SND i18n 汉化为「接口动态信息」）现为详情区二级 Tab；
+    // 切过去后其子叶渲染为 .sub-field（标签「生效MAC地址」）。
+    const pane = page.locator('[data-test="item-detail-pane"]')
+    await pane.getByRole('tab', { name: '接口动态信息', exact: true }).click()
+    const macRow = pane.locator('.sub-field').filter({ hasText: '生效MAC地址' }).first()
     await expect(macRow.locator('input').first()).toHaveValue('00:e0:fc:12:34:01', { timeout: 15000 })
     await expect(macRow.locator('input').first()).toBeDisabled()
   })
@@ -181,26 +184,26 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   })
 
   // 接口 when 约束（FE-07）：parent-name 由 YANG `when "../class='sub-interface'"` 门控。
-  // 断言限定在 .el-drawer 内（页面其他区域可能出现同名文本）。
+  // 断言限定在详情编辑区内（页面其他区域可能出现同名文本）。
   test('接口 when 约束：class=sub-interface 才显现 parent-name（数据驱动显隐）', async ({ page }) => {
     await page.goto('/module/ifm', { waitUntil: 'networkidle' })
     await pickDevice(page)
     await page.getByRole('tab', { name: '接口列表', exact: true }).click()
-    await page.getByRole('button', { name: '新增' }).first().click()
+    await page.getByRole('button', { name: '创建' }).first().click()
 
-    const drawer = page.locator('.el-drawer')
-    await expect(drawer.getByText('接口类别', { exact: false }).first()).toBeVisible({ timeout: 15000 })
-    await expect(drawer.locator('.el-form-item__label', { hasText: '主接口名' })).toHaveCount(0)
+    const pane = page.locator('[data-test="item-detail-pane"]')
+    await expect(pane.getByText('接口类别', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    await expect(pane.locator('.el-form-item__label', { hasText: '主接口名' })).toHaveCount(0)
 
     // 精确定位 class 字段的下拉（UI-03 后标签为「接口类别」），
     // 并只点“可见”的下拉项（teleport 的历史下拉会残留在 DOM 中）。
-    const classItem = drawer.locator('.el-form-item', {
+    const classItem = pane.locator('.el-form-item', {
       has: page.locator('.el-form-item__label', { hasText: /^接口类别$/ }),
     })
     await classItem.locator('.el-select').click()
     await page.locator('.el-select-dropdown__item:visible', { hasText: 'sub-interface' }).first().click()
 
-    await expect(drawer.getByText('主接口名', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    await expect(pane.getByText('主接口名', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
   // SPA 内从 VLAN 模块切到 IFM 模块应重载 schema（回归门禁：路由参数变化 → schema 重载）。
@@ -219,7 +222,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
 
     // 设备上下文跨模块保持：无需重新选设备
     await page.getByRole('tab', { name: '接口列表', exact: true }).click()
-    await page.getByRole('button', { name: '新增' }).first().click()
+    await page.getByRole('button', { name: '创建' }).first().click()
 
     // 接口独有字段 mtu 应出现（若仍沿用 VLAN schema 则不会有）
     await expect(page.getByText('mtu', { exact: false }).first()).toBeVisible({ timeout: 15000 })

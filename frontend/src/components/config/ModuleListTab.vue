@@ -1,12 +1,29 @@
 <template>
   <div class="module-list-tab">
-    <!-- 工具栏：新增 + 高级搜索折叠开关（FE-11）；只读 Tab 无编辑入口（FE-14） -->
+    <!-- 工具区（FE-11）：创建/刷新 + 高级搜索开关 + 列设置；只读 Tab 无编辑入口（FE-14） -->
     <div class="toolbar">
-      <el-button v-if="!tab.readonly" type="primary" :icon="Plus" :disabled="!device" @click="openAdd">{{ t('common.add') }}</el-button>
+      <el-button v-if="!tab.readonly" type="primary" :icon="Plus" :disabled="!device" data-test="list-create" @click="openCreate">
+        {{ t('common.create') }}
+      </el-button>
+      <el-button :icon="RefreshRight" :disabled="!device" data-test="list-refresh" @click="load()">
+        {{ t('common.refresh') }}
+      </el-button>
       <el-button v-if="searchFields.length" link type="primary" class="adv-toggle" @click="searchOpen = !searchOpen">
         {{ t('console.advancedSearch') }}
         <el-icon><ArrowUp v-if="searchOpen" /><ArrowDown v-else /></el-icon>
       </el-button>
+      <div class="toolbar-spacer" />
+      <!-- 列设置（FE-11）：全集勾选显隐，默认集=分层前 9 -->
+      <el-popover placement="bottom-end" :width="220" trigger="click">
+        <template #reference>
+          <el-button :icon="Setting" circle data-test="column-settings" :title="t('console.columnSettings')" />
+        </template>
+        <el-checkbox-group v-model="visibleCols" class="col-settings">
+          <el-checkbox v-for="c in allColumns" :key="c.path" :value="c.path" :label="c.path">
+            {{ c.label }}
+          </el-checkbox>
+        </el-checkbox-group>
+      </el-popover>
     </div>
 
     <!-- 高级搜索面板：字段集 = support-filter 标注的叶（默认折叠） -->
@@ -35,15 +52,27 @@
 
     <el-alert v-if="error" :title="error" type="warning" :closable="false" show-icon />
 
-    <!-- 模型驱动数据表：列由 schema 分层派生；enum→Tag、up/down→状态点；
-         带 when 的列按行数据求值，不满足显示 “-”（FE-11） -->
-    <el-table :data="pagedRows" stripe v-loading="loading" class="list-table">
+    <!-- 模型驱动数据表（FE-11）：多选列 + 全列排序 + enum/boolean 列头筛选 +
+         列设置显隐；点行/点编辑 → 下方详情区（FE-21），抽屉退役。 -->
+    <el-table
+      ref="tableRef"
+      :data="pagedRows"
+      stripe
+      v-loading="loading"
+      class="list-table"
+      highlight-current-row
+      @row-click="onRowClick"
+    >
+      <el-table-column type="selection" width="42" />
       <el-table-column
-        v-for="col in columns"
+        v-for="col in shownColumns"
         :key="col.path"
         :prop="keyOf(col)"
         :label="col.label"
         min-width="140"
+        sortable
+        :filters="headerFilters(col)"
+        :filter-method="headerFilters(col) ? makeFilterMethod(col) : undefined"
       >
         <template #default="{ row }">
           <span v-if="!cellVisible(col, row)" class="cell-na">-</span>
@@ -59,16 +88,17 @@
           <span v-else>{{ rowVal(row, col) }}</span>
         </template>
       </el-table-column>
-      <el-table-column v-if="!tab.readonly && (canUpdate || canDelete)" :label="t('common.actions')" width="130" fixed="right">
+      <el-table-column v-if="!tab.readonly" :label="t('common.actions')" width="200" fixed="right">
         <template #default="{ row }">
-          <el-button v-if="canUpdate" type="primary" size="small" link @click="openEdit(row)">{{ t('common.edit') }}</el-button>
+          <el-button v-if="canUpdate" type="primary" size="small" link @click.stop="openEdit(row)">{{ t('common.edit') }}</el-button>
           <el-button
             v-if="canDelete"
             type="danger"
             size="small"
             link
-            @click="onDelete(row)"
+            @click.stop="onDelete(row)"
           >{{ t('common.delete') }}</el-button>
+          <el-button type="primary" size="small" link @click.stop="fetchSource">{{ t('console.fetchSource') }}</el-button>
         </template>
       </el-table-column>
       <template #empty>
@@ -76,65 +106,50 @@
       </template>
     </el-table>
 
-    <!-- 分页（客户端，FE-11） -->
-    <div class="pager">
+    <!-- 查询时间戳 + 总记录数（过滤后全集）+ 分页（含跳页，FE-11） -->
+    <div class="table-footer">
+      <span v-if="queryAt" data-test="query-summary" class="query-summary">
+        {{ t('console.queryFinished', { time: queryAt, total: filteredRows.length }) }}
+      </span>
       <el-pagination
         v-model:current-page="page"
         v-model:page-size="pageSize"
         :total="filteredRows.length"
         :page-sizes="[10, 20, 50]"
-        layout="total, sizes, prev, pager, next"
+        layout="total, sizes, prev, pager, next, jumper"
         background
       />
     </div>
 
-    <!-- 新增/编辑抽屉：模型驱动表单 + 差异预览 + 对账进度（复用既有编排）；
-         只读 Tab（state 子树）无编辑语义，整个抽屉不渲染（FE-14）。 -->
-    <el-drawer v-if="!tab.readonly" v-model="drawerVisible" :title="editing ? t('common.edit') : t('common.add')" size="560px"
-      :close-on-click-modal="!flowActive" :close-on-press-escape="!flowActive" @closed="onDrawerClosed">
-      <template v-if="!flowActive">
-        <el-form ref="formRef" :model="form.formData" :rules="form.rules.value" label-position="top" class="config-form">
-          <el-form-item v-for="field in form.visibleFields.value" :key="field.path" :label="field.label"
-            :prop="form.keyOf(field)">
-            <FieldRenderer v-if="field.type === 'choice'" :field="field" :model-value="form.choiceScope(field)"
-              @update:model-value="form.onChoiceUpdate(field, $event)" />
-            <FieldRenderer v-else :field="field" :disabled="(editing && isCreateOnly(field)) || !!field.readonly"
-              :model-value="form.formData[form.keyOf(field)]"
-              @update:model-value="form.formData[form.keyOf(field)] = $event" />
-          </el-form-item>
-        </el-form>
-        <DiffPreview :diff="form.diff.value" />
-        <div class="form-tip">{{ t('console.formTip') }}</div>
-      </template>
-      <ReconcileSteps v-else :progress="submitFlow.progress.value" :timed-out="submitFlow.timedOut.value" />
-
-      <template #footer>
-        <template v-if="!flowActive">
-          <el-button @click="drawerVisible = false">{{ t('common.cancel') }}</el-button>
-          <el-button type="primary" :disabled="!form.submittable.value" @click="submit">{{ t('console.pushAndReconcile') }}</el-button>
-        </template>
-        <el-button v-else type="primary" :disabled="!flowDone" @click="drawerVisible = false">
-          {{ flowDone ? t('common.close') : t('console.reconciling') }}
-        </el-button>
-      </template>
-    </el-drawer>
+    <!-- 列表详情同屏编辑区（FE-21）：点行/编辑=编辑态、创建=空表单；只读 Tab 不渲染 -->
+    <ItemDetailPane
+      v-if="detailMode && !tab.readonly"
+      ref="paneRef"
+      :tab="tab"
+      :root-name="rootName"
+      :device="device"
+      :mode="detailMode"
+      :row="selectedRow"
+      :post-key="postKey || leafName(listField)"
+      @close="closeDetail"
+      @saved="onSaved"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, watch } from 'vue'
+import { ref, reactive, computed, watch, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Plus, ArrowDown, ArrowUp } from '@element-plus/icons-vue'
-import { ElMessage, ElMessageBox, type FormInstance } from 'element-plus'
+import { Plus, ArrowDown, ArrowUp, RefreshRight, Setting } from '@element-plus/icons-vue'
+import { ElMessage, ElMessageBox, type TableInstance } from 'element-plus'
 import { getConfig, deleteConfig } from '../../api'
 import { ownershipRejectionOf, confirmOwnershipOverride } from '../../composables/ownershipGate'
-import { useConfigSubmit } from '../../composables/useConfigSubmit'
-import { useConfigForm } from '../../composables/useConfigForm'
 import { useFreshnessStore } from '../../stores/freshness'
 import type { Field } from '../../utils/crdSchemaParser'
 import type { ConsoleTab } from '../../utils/moduleConsole'
 import {
   deriveColumns,
+  deriveAllColumns,
   deriveKeyField,
   filterableFields,
   filterRows,
@@ -143,9 +158,7 @@ import {
   statusTone,
   leafName,
 } from '../../utils/moduleConsole'
-import FieldRenderer from './FieldRenderer.vue'
-import DiffPreview from './DiffPreview.vue'
-import ReconcileSteps from './ReconcileSteps.vue'
+import ItemDetailPane from './ItemDetailPane.vue'
 
 const props = defineProps<{
   tab: ConsoleTab
@@ -158,20 +171,38 @@ const { t } = useI18n()
 const listField = computed<Field>(() => props.tab.listField || props.tab.field)
 const configPath = computed(() => configPathFor(props.rootName, props.tab.field.path))
 const keyField = computed(() => deriveKeyField(listField.value))
-const columns = computed(() => deriveColumns(listField.value))
+const allColumns = computed(() => deriveAllColumns(listField.value))
 const searchFields = computed(() => filterableFields(listField.value))
-// 编辑表单字段：list 全部子字段——readonly 叶禁用回显，payload/校验排除在 useConfigForm（FE-14）。
-const itemFields = computed<Field[]>(() => listField.value.fields || [])
 
-// list 级 operation-exclude 门禁（FE-11）；叶级 exclude 见 isCreateOnly。
+// 列设置（FE-11）：默认显示集 = 分层前 9；勾选态仅本页会话内生效。
+const visibleCols = ref<string[]>(deriveColumns(listField.value, 9).map((c) => c.path))
+watch(listField, (lf) => {
+  visibleCols.value = deriveColumns(lf, 9).map((c) => c.path)
+})
+const shownColumns = computed(() => allColumns.value.filter((c) => visibleCols.value.includes(c.path)))
+
+// 列头筛选（FE-11）：enum 用选项集、boolean 用 true/false；其余列走高级搜索。
+function headerFilters(col: Field): { text: string; value: any }[] | undefined {
+  if (col.type === 'enum' && col.options?.length) {
+    return col.options.map((o) => ({ text: String(o.label ?? o.value), value: o.value }))
+  }
+  if (col.type === 'boolean') {
+    return [
+      { text: 'true', value: true },
+      { text: 'false', value: false },
+    ]
+  }
+  return undefined
+}
+function makeFilterMethod(col: Field) {
+  return (value: any, row: Record<string, any>) => String(row[keyOf(col)]) === String(value)
+}
+
+// list 级 operation-exclude 门禁（FE-11）。
 const canUpdate = computed(() => !props.tab.field.operationExclude?.includes('update') &&
   !listField.value.operationExclude?.includes('update'))
 const canDelete = computed(() => !props.tab.field.operationExclude?.includes('delete') &&
   !listField.value.operationExclude?.includes('delete'))
-
-function isCreateOnly(f: Field): boolean {
-  return !!f.operationExclude?.includes('update')
-}
 
 function keyOf(f: Field): string {
   return leafName(f)
@@ -193,6 +224,8 @@ function tagType(col: Field, row: Record<string, any>) {
 const items = ref<Record<string, any>[]>([])
 const loading = ref(false)
 const error = ref('')
+// 查询完成时刻（FE-11）：随每次 load/获取数据源刷新。
+const queryAt = ref('')
 // POST 包裹键：默认 list 名，回读命中容器名（如 vlan 的 vlans）时跟随实际键。
 const postKey = ref('')
 
@@ -216,7 +249,7 @@ function normalizeRows(subtree: any): { rows: Record<string, any>[]; key: string
   return { rows: [], key: candidates[0] }
 }
 
-async function load() {
+async function load(force = false) {
   if (!props.device) {
     items.value = []
     return
@@ -224,7 +257,7 @@ async function load() {
   loading.value = true
   error.value = ''
   try {
-    const res = await getConfig(props.device, configPath.value)
+    const res = await getConfig(props.device, configPath.value, force)
     const payload = res.data?.data
     useFreshnessStore().record({
       cache_age_seconds: payload?.cache_age_seconds,
@@ -234,15 +267,24 @@ async function load() {
     const { rows, key } = normalizeRows(payload?.data ?? payload)
     items.value = rows
     postKey.value = key
+    queryAt.value = new Date().toLocaleString()
+    syncCurrentRow()
   } catch (e: any) {
-    error.value = e?.response?.data?.message || e?.message || t('console.readFailed')
-    items.value = []
+    error.value = e?.response?.data?.message || e?.message || (force ? t('console.fetchSourceFailed') : t('console.readFailed'))
+    // 强制回读失败保留原列表（§9 保留原配置）；常规加载失败清空避免陈旧数据误导。
+    if (!force) items.value = []
   } finally {
     loading.value = false
   }
 }
 
-watch(() => props.device, load, { immediate: true })
+// 行操作「获取数据源」（FE-11/BR-04）：force_refresh 绕缓存回读该 list 路径。
+// API 无单行读取粒度——整表回读并保持行选中，不伪造单行语义。
+function fetchSource() {
+  return load(true)
+}
+
+watch(() => props.device, () => load(), { immediate: true })
 
 // ===== 高级搜索（草稿→应用，查询/重置，FE-11） =====
 const searchOpen = ref(false)
@@ -268,53 +310,80 @@ const pagedRows = computed(() =>
   filteredRows.value.slice((page.value - 1) * pageSize.value, page.value * pageSize.value),
 )
 
-// ===== 新增/编辑抽屉（复用通用表单编排 + 对账流） =====
-const drawerVisible = ref(false)
-const editing = ref(false)
-const formRef = ref<FormInstance>()
-const form = useConfigForm(itemFields, keyField)
-// useConfigSubmit 在 run() 时读取 opts 字段，故传响应式代理以跟随 postKey。
-const submitOpts = reactive({ configPath: '', listKey: '' })
-watch([configPath, postKey, listField], () => {
-  submitOpts.configPath = configPath.value
-  submitOpts.listKey = postKey.value || leafName(listField.value)
-}, { immediate: true })
-const submitFlow = useConfigSubmit(submitOpts)
+// ===== 列表详情同屏（FE-21）：选中行 + 详情态，切行/切建带未提交草稿确认 =====
+const tableRef = ref<TableInstance>()
+const paneRef = ref<InstanceType<typeof ItemDetailPane>>()
+const selectedRow = ref<Record<string, any> | null>(null)
+const detailMode = ref<'edit' | 'create' | null>(null)
 
-const flowActive = computed(() => submitFlow.phase.value !== 'idle')
-const flowDone = computed(() => submitFlow.progress.value.done || submitFlow.timedOut.value)
-
-function openAdd() {
-  editing.value = false
-  submitFlow.reset()
-  form.resetForm()
-  formRef.value?.clearValidate()
-  drawerVisible.value = true
-}
-
-function openEdit(row: Record<string, any>) {
-  editing.value = true
-  submitFlow.reset()
-  form.resetForm({ ...row })
-  drawerVisible.value = true
-}
-
-async function submit() {
-  if (!props.device) return
-  if (formRef.value) {
-    try {
-      await formRef.value.validate()
-    } catch {
-      /* 行内提示即可；下方权威门禁拦截 */
-    }
+// 未提交草稿守卫（FE-21 负路径）：取消则停留原条目、草稿保留。
+async function ensureNoDraft(): Promise<boolean> {
+  if (!detailMode.value || !paneRef.value?.dirty) return true
+  try {
+    await ElMessageBox.confirm(t('console.unsavedSwitch'), t('console.unsavedTitle'), {
+      type: 'warning',
+      confirmButtonText: t('common.confirm'),
+      cancelButtonText: t('common.cancel'),
+    })
+    return true
+  } catch {
+    return false
   }
-  if (form.blocked.value) return
-  await submitFlow.run(props.device, form.visiblePayload())
-  if (submitFlow.phase.value !== 'error') await load()
 }
 
-function onDrawerClosed() {
-  submitFlow.reset()
+function highlight(row: Record<string, any> | null) {
+  nextTick(() => tableRef.value?.setCurrentRow(row ?? undefined))
+}
+
+async function openEdit(row: Record<string, any>) {
+  if (props.tab.readonly) return
+  const same = detailMode.value === 'edit' && selectedRow.value?.[keyField.value] === row[keyField.value]
+  if (same) return
+  if (!(await ensureNoDraft())) {
+    highlight(selectedRow.value) // 行点击已把高亮切走：退回原选中行
+    return
+  }
+  selectedRow.value = row
+  detailMode.value = 'edit'
+  highlight(row)
+}
+
+function onRowClick(row: Record<string, any>) {
+  void openEdit(row)
+}
+
+async function openCreate() {
+  if (!(await ensureNoDraft())) return
+  selectedRow.value = null
+  detailMode.value = 'create'
+  highlight(null)
+}
+
+function closeDetail() {
+  detailMode.value = null
+  selectedRow.value = null
+  highlight(null)
+}
+
+// 重载后行对象身份变化：按主键把选中行对齐到新数据（详情表单同步刷新）。
+function syncCurrentRow() {
+  if (detailMode.value !== 'edit' || !selectedRow.value) return
+  const key = selectedRow.value[keyField.value]
+  const found = items.value.find((r) => r[keyField.value] === key) || null
+  selectedRow.value = found
+  if (!found) detailMode.value = null // 条目已消失（如他处删除）：收起详情，不悬挂陈旧表单
+  highlight(found)
+}
+
+// 提交成功（FE-21）：刷新列表并保持详情区展开为该条目（创建态切为编辑态）。
+async function onSaved(key: string) {
+  await load()
+  const found = items.value.find((r) => String(r[keyField.value]) === key) || null
+  if (found) {
+    selectedRow.value = found
+    detailMode.value = 'edit'
+    highlight(found)
+  }
 }
 
 // ===== 行删除（FE-16，命令语义）：确认 → DELETE → 成功刷新 / 失败如实透出（§9） =====
@@ -344,6 +413,8 @@ async function onDelete(row: Record<string, any>) {
     }
     ElMessage.success(t('console.deletedReconcile'))
     error.value = ''
+    // 删除的是当前详情条目 → 收起详情（不悬挂已删数据）。
+    if (selectedRow.value?.[keyField.value] === key) closeDetail()
     await load()
   } catch (e: any) {
     // 设备/门禁错误如实展示，列表保持原状（R08/§9）。
@@ -365,8 +436,19 @@ async function onDelete(row: Record<string, any>) {
   gap: 4px;
 }
 
+.toolbar-spacer {
+  flex: 1;
+}
+
 .adv-toggle {
   margin-left: 8px;
+}
+
+.col-settings {
+  display: flex;
+  flex-direction: column;
+  max-height: 320px;
+  overflow-y: auto;
 }
 
 .search-panel {
@@ -409,19 +491,15 @@ async function onDelete(row: Record<string, any>) {
   background: var(--st-off, #c45656);
 }
 
-.pager {
+.table-footer {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.config-form {
-  padding: 0 4px;
-}
-
-.form-tip {
-  margin-top: 14px;
-  font-size: 11.5px;
-  line-height: 1.6;
-  color: var(--ink-3, #93a2b1);
+.query-summary {
+  font-size: 12.5px;
+  color: var(--ink-2, #5c6b7a);
 }
 </style>

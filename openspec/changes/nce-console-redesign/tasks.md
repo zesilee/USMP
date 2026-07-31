@@ -17,13 +17,13 @@
 
 ## 2. master-detail 重构（PR-2）
 
-- [ ] 2.1 F2 红灯：`ItemDetailPane` 组件测试——点行高亮+展开、面包屑主键、二级 Tab 渲染、关闭收起、创建态空表单、未提交草稿切行确认、只读 Tab 无编辑区
-- [ ] 2.2 实现 `ItemDetailPane`（提交编排 useConfigForm/useConfigSubmit/DiffPreview/ReconcileSteps 迁入；即时下发语义不变）
-- [ ] 2.3 ModuleListTab 接入详情区并**删除 el-drawer 编辑路径**；「创建」入详情区创建态
-- [ ] 2.4 F2 红灯→实现：列表工具区——刷新按钮、多选框列、查询时间戳+总记录数、分页加「前往」跳页
-- [ ] 2.5 F2 红灯→实现：列设置（全集勾选显隐、默认 9 列、横向滚动）、全列客户端排序、enum/boolean 列头筛选
-- [ ] 2.6 F2 红灯→实现：行操作「获取数据源」（force_refresh 回读、时间戳/新鲜度更新、失败如实报错保持原状）
-- [ ] 2.7 F3 真浏览器：master-detail 点行/切行/关闭、列头筛选弹层、列设置弹层、详情区嵌套 list 增删改
+- [x] 2.1 F2 红灯：`ItemDetailPane` 组件测试——点行高亮+展开、面包屑主键、二级 Tab 渲染、关闭收起、创建态空表单、未提交草稿切行确认、只读 Tab 无编辑区
+- [x] 2.2 实现 `ItemDetailPane`（提交编排 useConfigForm/useConfigSubmit/DiffPreview/ReconcileSteps 迁入；即时下发语义不变）
+- [x] 2.3 ModuleListTab 接入详情区并**删除 el-drawer 编辑路径**；「创建」入详情区创建态
+- [x] 2.4 F2 红灯→实现：列表工具区——刷新按钮、多选框列、查询时间戳+总记录数、分页加「前往」跳页
+- [x] 2.5 F2 红灯→实现：列设置（全集勾选显隐、默认 9 列、横向滚动）、全列客户端排序、enum/boolean 列头筛选
+- [x] 2.6 F2 红灯→实现：行操作「获取数据源」（force_refresh 回读、时间戳/新鲜度更新、失败如实报错保持原状）
+- [x] 2.7 F3 真浏览器：master-detail 点行/切行/关闭、列头筛选弹层、列设置弹层、详情区嵌套 list 增删改
 - [ ] 2.8 F4：staging-smoke 抽屉断言全部改写为 master-detail 交互，`make e2e-local` 全绿
 - [ ] 2.9 覆盖率棘轮上调核对，commit + PR-2
 
