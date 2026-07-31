@@ -99,8 +99,228 @@
           "widget": "enum"
         }
       ],
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "bundle-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "config-pst",
+          "widget": "enum"
+        },
+        {
+          "name": "create-type",
+          "widget": "enum"
+        },
+        {
+          "name": "echo-passive",
+          "widget": "enum"
+        },
+        {
+          "name": "encap-type",
+          "widget": "enum"
+        },
+        {
+          "name": "link-type",
+          "widget": "enum"
+        },
+        {
+          "name": "main-sub-role",
+          "widget": "enum"
+        },
+        {
+          "name": "node",
+          "widget": "enum"
+        },
+        {
+          "name": "pis",
+          "widget": "enum"
+        },
+        {
+          "name": "process-pst",
+          "widget": "enum"
+        },
+        {
+          "name": "pw-secondary",
+          "widget": "enum"
+        },
+        {
+          "name": "pw-ttl-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "te-backup",
+          "widget": "enum"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "basic-acl-num",
+          "widget": "number"
+        },
+        {
+          "name": "bind-application",
+          "widget": "string"
+        },
+        {
+          "name": "color",
+          "widget": "number"
+        },
+        {
+          "name": "demand-enable",
+          "widget": "boolean"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "destination-address",
+          "widget": "string"
+        },
+        {
+          "name": "detect-multiplier",
+          "widget": "number"
+        },
+        {
+          "name": "dot1q-vid",
+          "widget": "number"
+        },
+        {
+          "name": "fsm-board-slot",
+          "widget": "string"
+        },
+        {
+          "name": "lag",
+          "widget": "boolean"
+        },
+        {
+          "name": "local-discriminator",
+          "widget": "number"
+        },
+        {
+          "name": "local-vc-label",
+          "widget": "number"
+        },
+        {
+          "name": "lsp-token",
+          "widget": "number"
+        },
+        {
+          "name": "min-echo-rx-int",
+          "widget": "number"
+        },
+        {
+          "name": "min-rx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "min-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "next-hop",
+          "widget": "string"
+        },
+        {
+          "name": "out-if-name",
+          "widget": "string"
+        },
+        {
+          "name": "pw-ttl",
+          "widget": "number"
+        },
+        {
+          "name": "qinq-ce-vid",
+          "widget": "number"
+        },
+        {
+          "name": "qinq-pe-vid",
+          "widget": "number"
+        },
+        {
+          "name": "remote-discriminator",
+          "widget": "number"
+        },
+        {
+          "name": "remote-peer",
+          "widget": "string"
+        },
+        {
+          "name": "remote-vc-label",
+          "widget": "number"
+        },
+        {
+          "name": "segment-list-id",
+          "widget": "number"
+        },
+        {
+          "name": "shut-down",
+          "widget": "boolean"
+        },
+        {
+          "name": "source-address",
+          "widget": "string"
+        },
+        {
+          "name": "swap-vc-label",
+          "widget": "number"
+        },
+        {
+          "name": "tos-exp",
+          "widget": "number"
+        },
+        {
+          "name": "track-interface",
+          "widget": "string"
+        },
+        {
+          "name": "tunnel-name",
+          "widget": "string"
+        },
+        {
+          "name": "vc-id",
+          "widget": "number"
+        },
+        {
+          "name": "vrf-name",
+          "widget": "string"
+        },
+        {
+          "name": "vsi-name",
+          "widget": "string"
+        },
+        {
+          "name": "vsi-peer-address",
+          "widget": "string"
+        },
+        {
+          "name": "wtr-timer-int",
+          "widget": "number"
+        }
+      ],
       "filterable": [
         "local-discriminator"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "running",
+          "kind": "form"
+        },
+        {
+          "name": "statistics",
+          "kind": "form"
+        }
       ]
     },
     "authentication-keys": {
@@ -131,7 +351,39 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "peer-ip",
+          "widget": "string"
+        },
+        {
+          "name": "session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "vpn-name",
+          "widget": "string"
+        },
+        {
+          "name": "auth-algorithm",
+          "widget": "enum"
+        },
+        {
+          "name": "cipher-string",
+          "widget": "string"
+        },
+        {
+          "name": "key-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "bfd-bundle-sessions": {
       "keyField": "local-discriminator",
@@ -173,9 +425,149 @@
           "widget": "enum"
         }
       ],
+      "allColumns": [
+        {
+          "name": "local-discriminator",
+          "widget": "number"
+        },
+        {
+          "name": "bundle-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "create-type",
+          "widget": "enum"
+        },
+        {
+          "name": "detect-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "disp-session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "link-type",
+          "widget": "enum"
+        },
+        {
+          "name": "local-diag",
+          "widget": "enum"
+        },
+        {
+          "name": "main-sub-role",
+          "widget": "enum"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "act-detect-multiplier",
+          "widget": "number"
+        },
+        {
+          "name": "act-rx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "act-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "bind-application",
+          "widget": "string"
+        },
+        {
+          "name": "dest-port",
+          "widget": "number"
+        },
+        {
+          "name": "destination-address",
+          "widget": "string"
+        },
+        {
+          "name": "detect-multiplier",
+          "widget": "number"
+        },
+        {
+          "name": "detect-time",
+          "widget": "number"
+        },
+        {
+          "name": "fsm-board-slot",
+          "widget": "string"
+        },
+        {
+          "name": "main-session-name",
+          "widget": "string"
+        },
+        {
+          "name": "min-rx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "min-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "out-if-name",
+          "widget": "string"
+        },
+        {
+          "name": "pw-secondary",
+          "widget": "boolean"
+        },
+        {
+          "name": "remote-discriminator",
+          "widget": "number"
+        },
+        {
+          "name": "session-name",
+          "widget": "string"
+        },
+        {
+          "name": "source-address",
+          "widget": "string"
+        },
+        {
+          "name": "sub-session-count",
+          "widget": "number"
+        },
+        {
+          "name": "te-backup",
+          "widget": "boolean"
+        },
+        {
+          "name": "tos-exp",
+          "widget": "number"
+        },
+        {
+          "name": "tunnel-id",
+          "widget": "number"
+        },
+        {
+          "name": "vrf-name",
+          "widget": "string"
+        },
+        {
+          "name": "vsi-name",
+          "widget": "string"
+        },
+        {
+          "name": "wtr-timer-int",
+          "widget": "number"
+        }
+      ],
       "filterable": [
         "disp-session-type",
         "out-if-name"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
       ]
     },
     "bind-interfaces": {
@@ -194,7 +586,27 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "if-oper-status",
+          "widget": "enum"
+        },
+        {
+          "name": "session-count",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "crc-ip-sessions": {
       "keyField": "destination-address",
@@ -236,7 +648,75 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "destination-address",
+          "widget": "string"
+        },
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "fault-type",
+          "widget": "enum"
+        },
+        {
+          "name": "session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "actual-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "dest-port",
+          "widget": "number"
+        },
+        {
+          "name": "detect-multiplier",
+          "widget": "number"
+        },
+        {
+          "name": "fsm-board-id",
+          "widget": "number"
+        },
+        {
+          "name": "local-bit-err-rate",
+          "widget": "string"
+        },
+        {
+          "name": "max-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "min-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "remote-bit-err-rate",
+          "widget": "string"
+        },
+        {
+          "name": "source-address",
+          "widget": "string"
+        },
+        {
+          "name": "tos-exp",
+          "widget": "number"
+        },
+        {
+          "name": "vrf-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "crc-lsp-sessions": {
       "keyField": "ingress-lsr-id",
@@ -278,9 +758,89 @@
           "widget": "string"
         }
       ],
+      "allColumns": [
+        {
+          "name": "ingress-lsr-id",
+          "widget": "string"
+        },
+        {
+          "name": "lsp-id",
+          "widget": "number"
+        },
+        {
+          "name": "tunnel-id",
+          "widget": "number"
+        },
+        {
+          "name": "fault-type",
+          "widget": "enum"
+        },
+        {
+          "name": "lsp-role",
+          "widget": "enum"
+        },
+        {
+          "name": "session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "actual-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "dest-port",
+          "widget": "number"
+        },
+        {
+          "name": "destination-address",
+          "widget": "string"
+        },
+        {
+          "name": "detect-multiplier",
+          "widget": "number"
+        },
+        {
+          "name": "fsm-board-id",
+          "widget": "number"
+        },
+        {
+          "name": "lsp-token",
+          "widget": "number"
+        },
+        {
+          "name": "max-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "min-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "out-if-name",
+          "widget": "string"
+        },
+        {
+          "name": "source-address",
+          "widget": "string"
+        },
+        {
+          "name": "tos-exp",
+          "widget": "number"
+        },
+        {
+          "name": "tunnel-name",
+          "widget": "string"
+        }
+      ],
       "filterable": [
         "lsp-role",
         "tunnel-name"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
       ]
     },
     "crc-sec-sessions": {
@@ -323,7 +883,59 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "if-name",
+          "widget": "string"
+        },
+        {
+          "name": "fault-type",
+          "widget": "enum"
+        },
+        {
+          "name": "session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "actual-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "dest-port",
+          "widget": "number"
+        },
+        {
+          "name": "destination-address",
+          "widget": "string"
+        },
+        {
+          "name": "detect-multiplier",
+          "widget": "number"
+        },
+        {
+          "name": "fsm-board-id",
+          "widget": "number"
+        },
+        {
+          "name": "max-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "min-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "tos-exp",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "mul-cast-sessions": {
       "keyField": "local-discriminator",
@@ -365,7 +977,107 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "local-discriminator",
+          "widget": "number"
+        },
+        {
+          "name": "session-name",
+          "widget": "string"
+        },
+        {
+          "name": "create-type",
+          "widget": "enum"
+        },
+        {
+          "name": "link-type",
+          "widget": "enum"
+        },
+        {
+          "name": "multicast-session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "session-type",
+          "widget": "enum"
+        },
+        {
+          "name": "bind-application",
+          "widget": "string"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "destination-address",
+          "widget": "string"
+        },
+        {
+          "name": "detect-multiplier",
+          "widget": "number"
+        },
+        {
+          "name": "fsm-board-slot",
+          "widget": "string"
+        },
+        {
+          "name": "lsp-id",
+          "widget": "number"
+        },
+        {
+          "name": "min-rx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "min-tx-interval",
+          "widget": "number"
+        },
+        {
+          "name": "opaque-id",
+          "widget": "string"
+        },
+        {
+          "name": "p2mp-id",
+          "widget": "string"
+        },
+        {
+          "name": "p2mp-ingress-lsr-id",
+          "widget": "string"
+        },
+        {
+          "name": "p2mp-tunnel-id",
+          "widget": "number"
+        },
+        {
+          "name": "remote-discriminator",
+          "widget": "number"
+        },
+        {
+          "name": "root-ip",
+          "widget": "string"
+        },
+        {
+          "name": "tos-exp",
+          "widget": "number"
+        },
+        {
+          "name": "track-interface",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "multi-cast-session-running",
+          "kind": "form"
+        }
+      ]
     },
     "sessions": {
       "keyField": "name",
@@ -391,7 +1103,43 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "admin-down",
+          "widget": "boolean"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "detect-multiplier",
+          "widget": "number"
+        },
+        {
+          "name": "wtr-time",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "groups",
+          "kind": "list"
+        },
+        {
+          "name": "running",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

@@ -39,7 +39,63 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "last-up-time",
+          "widget": "string"
+        },
+        {
+          "name": "total-up-time",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "vpls",
+          "kind": "form"
+        },
+        {
+          "name": "vpws-bgp",
+          "kind": "form"
+        },
+        {
+          "name": "vpws-ldp",
+          "kind": "form"
+        },
+        {
+          "name": "vpws-local-ccc",
+          "kind": "form"
+        },
+        {
+          "name": "vpws-remote-ccc",
+          "kind": "form"
+        },
+        {
+          "name": "vpws-switch",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

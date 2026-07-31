@@ -39,7 +39,27 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "policy-name",
+          "widget": "string"
+        },
+        {
+          "name": "policy-exist",
+          "widget": "enum"
+        },
+        {
+          "name": "count",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "tunnel-infos": {
       "keyField": "id",
@@ -77,7 +97,47 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "id",
+          "widget": "string"
+        },
+        {
+          "name": "status",
+          "widget": "enum"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "cost",
+          "widget": "number"
+        },
+        {
+          "name": "destination",
+          "widget": "string"
+        },
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "sr-te-policy-color",
+          "widget": "number"
+        },
+        {
+          "name": "sr-te-policy-group",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "tunnel-policys": {
       "keyField": "name",
@@ -91,7 +151,31 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "ipv4-set",
+          "kind": "form"
+        },
+        {
+          "name": "ipv6-set",
+          "kind": "form"
+        }
+      ]
     },
     "tunnel-statisticss": {
       "keyField": "type",
@@ -105,7 +189,23 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "number",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

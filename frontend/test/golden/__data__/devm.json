@@ -103,7 +103,47 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "init-status",
+          "widget": "enum"
+        },
+        {
+          "name": "register-status",
+          "widget": "enum"
+        },
+        {
+          "name": "hard-type",
+          "widget": "string"
+        },
+        {
+          "name": "port-num",
+          "widget": "number"
+        },
+        {
+          "name": "type",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "pic",
+          "kind": "form"
+        }
+      ]
     },
     "cf-cards": {
       "keyField": "position",
@@ -137,7 +177,43 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "serial-number",
+          "widget": "string"
+        },
+        {
+          "name": "card-type",
+          "widget": "string"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "memory-free",
+          "widget": "number"
+        },
+        {
+          "name": "memory-size",
+          "widget": "number"
+        },
+        {
+          "name": "memory-used",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "chassiss": {
       "keyField": "position",
@@ -179,7 +255,107 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "current-run-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "next-run-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "alarm-exist-days",
+          "widget": "number"
+        },
+        {
+          "name": "board-num",
+          "widget": "number"
+        },
+        {
+          "name": "current-id",
+          "widget": "number"
+        },
+        {
+          "name": "dust-clean-cycle",
+          "widget": "number"
+        },
+        {
+          "name": "entity-last-change",
+          "widget": "number"
+        },
+        {
+          "name": "fan-num",
+          "widget": "number"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "last-clean-date",
+          "widget": "string"
+        },
+        {
+          "name": "next-id",
+          "widget": "number"
+        },
+        {
+          "name": "power-num",
+          "widget": "number"
+        },
+        {
+          "name": "service-type",
+          "widget": "string"
+        },
+        {
+          "name": "slot-num",
+          "widget": "number"
+        },
+        {
+          "name": "status-last-change",
+          "widget": "number"
+        },
+        {
+          "name": "type",
+          "widget": "string"
+        },
+        {
+          "name": "up-time",
+          "widget": "number"
+        },
+        {
+          "name": "up-to-last-clean",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "dustproof-attribute",
+          "kind": "form"
+        },
+        {
+          "name": "fan-attribute",
+          "kind": "form"
+        },
+        {
+          "name": "monitor-board-changes",
+          "kind": "list"
+        },
+        {
+          "name": "power-supply-attribute",
+          "kind": "form"
+        }
+      ]
     },
     "containers": {
       "keyField": "position",
@@ -201,7 +377,35 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "equiped-entity-type",
+          "widget": "string"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "type",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "supported-entity-types",
+          "kind": "list"
+        }
+      ]
     },
     "entity-classes": {
       "keyField": "class-name",
@@ -219,7 +423,27 @@
           "widget": "boolean"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "class-name",
+          "widget": "enum"
+        },
+        {
+          "name": "is-resetable",
+          "widget": "boolean"
+        },
+        {
+          "name": "is-switchoverable",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "inconsistent-entitys": {
       "keyField": "class",
@@ -249,7 +473,39 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "class",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "serial-number",
+          "widget": "string"
+        },
+        {
+          "name": "logical-type",
+          "widget": "enum"
+        },
+        {
+          "name": "oper-state",
+          "widget": "enum"
+        },
+        {
+          "name": "physical-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "logic-containers": {
       "keyField": "position",
@@ -271,7 +527,35 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "container-type",
+          "widget": "enum"
+        },
+        {
+          "name": "equiped-entity-type",
+          "widget": "enum"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "supported-entity-types",
+          "kind": "list"
+        }
+      ]
     },
     "logic-entitys": {
       "keyField": "class",
@@ -313,7 +597,59 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "class",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "serial-number",
+          "widget": "string"
+        },
+        {
+          "name": "oper-state",
+          "widget": "enum"
+        },
+        {
+          "name": "vendor-type",
+          "widget": "enum"
+        },
+        {
+          "name": "entity-description",
+          "widget": "string"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "memo",
+          "widget": "string"
+        },
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "parent-index",
+          "widget": "number"
+        },
+        {
+          "name": "parent-relative-position",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "logic-ports": {
       "keyField": "port-type",
@@ -351,7 +687,47 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "port-type",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "serial-number",
+          "widget": "string"
+        },
+        {
+          "name": "admin-state",
+          "widget": "enum"
+        },
+        {
+          "name": "hard-type",
+          "widget": "enum"
+        },
+        {
+          "name": "level",
+          "widget": "enum"
+        },
+        {
+          "name": "enable-transmission-delay",
+          "widget": "number"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "lpu-boards": {
       "keyField": "position",
@@ -393,7 +769,99 @@
           "widget": "boolean"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "next-service-type",
+          "widget": "enum"
+        },
+        {
+          "name": "service-type",
+          "widget": "enum"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "clock-8k-port",
+          "widget": "string"
+        },
+        {
+          "name": "current-l3-clk",
+          "widget": "number"
+        },
+        {
+          "name": "flash-size",
+          "widget": "number"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "is-register",
+          "widget": "boolean"
+        },
+        {
+          "name": "np-rdram-size",
+          "widget": "number"
+        },
+        {
+          "name": "np-sram-size",
+          "widget": "number"
+        },
+        {
+          "name": "pic-num",
+          "widget": "number"
+        },
+        {
+          "name": "register-time",
+          "widget": "string"
+        },
+        {
+          "name": "sdram-size",
+          "widget": "number"
+        },
+        {
+          "name": "sub-slot-num",
+          "widget": "number"
+        },
+        {
+          "name": "up-time",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "driver",
+          "kind": "form"
+        },
+        {
+          "name": "loadbalance",
+          "kind": "form"
+        },
+        {
+          "name": "mirror",
+          "kind": "form"
+        },
+        {
+          "name": "sflow",
+          "kind": "form"
+        },
+        {
+          "name": "unicast-forward",
+          "kind": "form"
+        }
+      ]
     },
     "mpu-boards": {
       "keyField": "position",
@@ -435,7 +903,87 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "ls-role",
+          "widget": "enum"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "cfcard-size",
+          "widget": "number"
+        },
+        {
+          "name": "cfcard2-size",
+          "widget": "number"
+        },
+        {
+          "name": "flash-size",
+          "widget": "number"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "is-register",
+          "widget": "boolean"
+        },
+        {
+          "name": "last-reset-reason",
+          "widget": "string"
+        },
+        {
+          "name": "last-reset-time",
+          "widget": "string"
+        },
+        {
+          "name": "nvram-size",
+          "widget": "number"
+        },
+        {
+          "name": "register-time",
+          "widget": "string"
+        },
+        {
+          "name": "sdram-size",
+          "widget": "number"
+        },
+        {
+          "name": "up-time",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "loadbalance",
+          "kind": "form"
+        },
+        {
+          "name": "mirror",
+          "kind": "form"
+        },
+        {
+          "name": "sflow",
+          "kind": "form"
+        },
+        {
+          "name": "unicast-forward",
+          "kind": "form"
+        }
+      ]
     },
     "offlines": {
       "keyField": "class",
@@ -449,7 +997,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "class",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "physical-entitys": {
       "keyField": "class",
@@ -491,7 +1055,103 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "class",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "serial-number",
+          "widget": "string"
+        },
+        {
+          "name": "admin-state",
+          "widget": "enum"
+        },
+        {
+          "name": "running-state",
+          "widget": "enum"
+        },
+        {
+          "name": "standby-state",
+          "widget": "enum"
+        },
+        {
+          "name": "alias",
+          "widget": "string"
+        },
+        {
+          "name": "board-index",
+          "widget": "number"
+        },
+        {
+          "name": "chassis-index",
+          "widget": "number"
+        },
+        {
+          "name": "contained-index",
+          "widget": "number"
+        },
+        {
+          "name": "entity-description",
+          "widget": "string"
+        },
+        {
+          "name": "firmware-version",
+          "widget": "string"
+        },
+        {
+          "name": "hardware-version",
+          "widget": "string"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "is-fru",
+          "widget": "boolean"
+        },
+        {
+          "name": "ls-name",
+          "widget": "string"
+        },
+        {
+          "name": "module-name",
+          "widget": "string"
+        },
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "parent-relative-position",
+          "widget": "number"
+        },
+        {
+          "name": "software-version",
+          "widget": "string"
+        },
+        {
+          "name": "system-oid",
+          "widget": "string"
+        },
+        {
+          "name": "vendor-type",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "ports": {
       "keyField": "position",
@@ -533,10 +1193,66 @@
           "widget": "string"
         }
       ],
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "admin-state",
+          "widget": "enum"
+        },
+        {
+          "name": "hard-type",
+          "widget": "enum"
+        },
+        {
+          "name": "loopback-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "medium-type",
+          "widget": "enum"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "enable-transmission-delay",
+          "widget": "number"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "last-down-time",
+          "widget": "string"
+        },
+        {
+          "name": "last-up-time",
+          "widget": "string"
+        },
+        {
+          "name": "optical-equipped",
+          "widget": "boolean"
+        },
+        {
+          "name": "physical-bandwidth",
+          "widget": "number"
+        }
+      ],
       "filterable": [
         "index",
         "medium-type",
         "type"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
       ]
     },
     "sfu-boards": {
@@ -575,7 +1291,47 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "flash-size",
+          "widget": "number"
+        },
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "is-register",
+          "widget": "boolean"
+        },
+        {
+          "name": "register-time",
+          "widget": "string"
+        },
+        {
+          "name": "sdram-size",
+          "widget": "number"
+        },
+        {
+          "name": "up-time",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

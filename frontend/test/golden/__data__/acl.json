@@ -47,9 +47,49 @@
           "widget": "number"
         }
       ],
+      "allColumns": [
+        {
+          "name": "identity",
+          "widget": "string"
+        },
+        {
+          "name": "match-order",
+          "widget": "enum"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "step",
+          "widget": "number"
+        }
+      ],
       "filterable": [
         "match-order",
         "type"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "rule-advances",
+          "kind": "list"
+        },
+        {
+          "name": "rule-basics",
+          "kind": "list"
+        },
+        {
+          "name": "rule-interfaces",
+          "kind": "list"
+        }
       ]
     },
     "groups": {
@@ -80,9 +120,69 @@
           "widget": "number"
         }
       ],
+      "allColumns": [
+        {
+          "name": "identity",
+          "widget": "string"
+        },
+        {
+          "name": "match-order",
+          "widget": "enum"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "number",
+          "widget": "number"
+        },
+        {
+          "name": "step",
+          "widget": "number"
+        }
+      ],
       "filterable": [
         "match-order",
         "type"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "rule-advances",
+          "kind": "list"
+        },
+        {
+          "name": "rule-arps",
+          "kind": "list"
+        },
+        {
+          "name": "rule-basics",
+          "kind": "list"
+        },
+        {
+          "name": "rule-ethernets",
+          "kind": "list"
+        },
+        {
+          "name": "rule-interfaces",
+          "kind": "list"
+        },
+        {
+          "name": "rule-mplss",
+          "kind": "list"
+        },
+        {
+          "name": "rule-users",
+          "kind": "list"
+        }
       ]
     },
     "ip-pool6s": {
@@ -105,10 +205,34 @@
           "widget": "boolean"
         }
       ],
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "bgp-peer-vpn",
+          "widget": "enum"
+        },
+        {
+          "name": "bgp-peer-vpn-name",
+          "widget": "string"
+        },
+        {
+          "name": "apply-bgp-ipv6-peer",
+          "widget": "boolean"
+        }
+      ],
       "filterable": [
         "apply-bgp-ipv6-peer",
         "bgp-peer-vpn",
         "bgp-peer-vpn-name"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
       ]
     },
     "ip-pools": {
@@ -131,10 +255,38 @@
           "widget": "boolean"
         }
       ],
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "bgp-peer-vpn",
+          "widget": "enum"
+        },
+        {
+          "name": "bgp-peer-vpn-name",
+          "widget": "string"
+        },
+        {
+          "name": "apply-bgp-ipv4-peer",
+          "widget": "boolean"
+        }
+      ],
       "filterable": [
         "apply-bgp-ipv4-peer",
         "bgp-peer-vpn",
         "bgp-peer-vpn-name"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "ipaddrs",
+          "kind": "list"
+        }
       ]
     },
     "port-pools": {
@@ -145,7 +297,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "ports",
+          "kind": "list"
+        }
+      ]
     }
   },
   "tree": [

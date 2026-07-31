@@ -79,7 +79,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "nodes",
+          "kind": "list"
+        }
+      ]
     },
     "community-filters": {
       "keyField": "name",
@@ -93,7 +109,31 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "advanced-nodes",
+          "kind": "list"
+        },
+        {
+          "name": "basic-nodes",
+          "kind": "list"
+        }
+      ]
     },
     "community-lists": {
       "keyField": "name",
@@ -103,7 +143,19 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "eth-tag-filters": {
       "keyField": "name",
@@ -113,7 +165,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "eth-tag-members",
+          "kind": "list"
+        }
+      ]
     },
     "ext-community-encapsulation-filters": {
       "keyField": "name",
@@ -127,7 +195,31 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "advanced-nodes",
+          "kind": "list"
+        },
+        {
+          "name": "basic-nodes",
+          "kind": "list"
+        }
+      ]
     },
     "ext-community-filters": {
       "keyField": "name",
@@ -141,7 +233,31 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "advanced-nodes",
+          "kind": "list"
+        },
+        {
+          "name": "basic-nodes",
+          "kind": "list"
+        }
+      ]
     },
     "ext-community-segmented-nexthop-filters": {
       "keyField": "name",
@@ -155,7 +271,31 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "advanced-nodes",
+          "kind": "list"
+        },
+        {
+          "name": "basic-nodes",
+          "kind": "list"
+        }
+      ]
     },
     "ext-community-soo-filters": {
       "keyField": "name",
@@ -169,7 +309,31 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "advanced-nodes",
+          "kind": "list"
+        },
+        {
+          "name": "basic-nodes",
+          "kind": "list"
+        }
+      ]
     },
     "ipv4-prefix-filters": {
       "keyField": "name",
@@ -191,7 +355,35 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "deny-count",
+          "widget": "number"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "permit-count",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "nodes",
+          "kind": "list"
+        }
+      ]
     },
     "ipv6-prefix-filters": {
       "keyField": "name",
@@ -213,7 +405,35 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "deny-count",
+          "widget": "number"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "permit-count",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "nodes",
+          "kind": "list"
+        }
+      ]
     },
     "large-community-filters": {
       "keyField": "name",
@@ -227,7 +447,31 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "advanced-nodes",
+          "kind": "list"
+        },
+        {
+          "name": "basic-nodes",
+          "kind": "list"
+        }
+      ]
     },
     "large-community-lists": {
       "keyField": "name",
@@ -237,7 +481,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "large-community-members",
+          "kind": "list"
+        }
+      ]
     },
     "mac-filters": {
       "keyField": "name",
@@ -247,7 +507,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "mac-members",
+          "kind": "list"
+        }
+      ]
     },
     "policy-definitions": {
       "keyField": "name",
@@ -257,7 +533,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "nodes",
+          "kind": "list"
+        }
+      ]
     },
     "rd-filters": {
       "keyField": "name",
@@ -267,7 +559,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "nodes",
+          "kind": "list"
+        }
+      ]
     },
     "tunnel-selectors": {
       "keyField": "name",
@@ -277,7 +585,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "nodes",
+          "kind": "list"
+        }
+      ]
     },
     "vni-filters": {
       "keyField": "name",
@@ -287,7 +611,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "vni-members",
+          "kind": "list"
+        }
+      ]
     }
   },
   "tree": [

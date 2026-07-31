@@ -35,7 +35,19 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "policy-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "endpoint-groups": {
       "keyField": "segment-id",
@@ -61,8 +73,48 @@
           "widget": "boolean"
         }
       ],
+      "allColumns": [
+        {
+          "name": "segment-id",
+          "widget": "number"
+        },
+        {
+          "name": "intra-epg-behavior",
+          "widget": "enum"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "segment-name",
+          "widget": "string"
+        },
+        {
+          "name": "statistics-enable",
+          "widget": "boolean"
+        }
+      ],
       "filterable": [
         "segment-name"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "any-member",
+          "kind": "form"
+        },
+        {
+          "name": "ip-members",
+          "kind": "list"
+        },
+        {
+          "name": "ipv6-members",
+          "kind": "list"
+        }
       ]
     },
     "segment-behaviors": {
@@ -77,7 +129,23 @@
           "widget": "boolean"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "behavior-name",
+          "widget": "string"
+        },
+        {
+          "name": "statistics-enable",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "segment-classifiers": {
       "keyField": "classifier-name",
@@ -87,7 +155,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "classifier-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "rules",
+          "kind": "list"
+        }
+      ]
     },
     "segment-policys": {
       "keyField": "policy-name",
@@ -97,7 +181,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "policy-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "classifier-behavior-combinations",
+          "kind": "list"
+        }
+      ]
     }
   },
   "tree": [

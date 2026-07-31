@@ -35,7 +35,31 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "direction",
+          "widget": "enum"
+        },
+        {
+          "name": "interface-name",
+          "widget": "string"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "flow-sample-count",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "slot-statistics": {
       "keyField": "collector-id",
@@ -69,7 +93,43 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "collector-id",
+          "widget": "number"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "counter-sample-count",
+          "widget": "number"
+        },
+        {
+          "name": "flow-sample-count",
+          "widget": "number"
+        },
+        {
+          "name": "inbound-flow-sample-count",
+          "widget": "number"
+        },
+        {
+          "name": "outbound-flow-sample-count",
+          "widget": "number"
+        },
+        {
+          "name": "packet-count",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

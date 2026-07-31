@@ -111,7 +111,35 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "access-right",
+          "widget": "enum"
+        },
+        {
+          "name": "acl",
+          "widget": "string"
+        },
+        {
+          "name": "alias-name",
+          "widget": "string"
+        },
+        {
+          "name": "view-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "ipv6-sources": {
       "keyField": "src-ipv6-address",
@@ -125,7 +153,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "src-ipv6-address",
+          "widget": "string"
+        },
+        {
+          "name": "vpn-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "local-users": {
       "keyField": "name",
@@ -159,7 +203,43 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "auth-protocol",
+          "widget": "enum"
+        },
+        {
+          "name": "priv-protocol",
+          "widget": "enum"
+        },
+        {
+          "name": "active-status",
+          "widget": "string"
+        },
+        {
+          "name": "auth-key",
+          "widget": "string"
+        },
+        {
+          "name": "left-lock-time",
+          "widget": "number"
+        },
+        {
+          "name": "priv-key",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "mib-views": {
       "keyField": "sub-tree",
@@ -177,7 +257,27 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "sub-tree",
+          "widget": "string"
+        },
+        {
+          "name": "view-name",
+          "widget": "string"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "ntfy-fltr-prfs": {
       "keyField": "name",
@@ -195,7 +295,27 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "subtree",
+          "widget": "string"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "source-interfaces": {
       "keyField": "interface-name",
@@ -205,7 +325,19 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "interface-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "standard-communitys": {
       "keyField": "alias-name",
@@ -231,7 +363,35 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "alias-name",
+          "widget": "string"
+        },
+        {
+          "name": "access-right",
+          "widget": "enum"
+        },
+        {
+          "name": "acl",
+          "widget": "string"
+        },
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "view-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "target-hosts": {
       "keyField": "nms-name",
@@ -273,7 +433,103 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "nms-name",
+          "widget": "string"
+        },
+        {
+          "name": "heart-beat-time",
+          "widget": "number"
+        },
+        {
+          "name": "target-inform-resend-times",
+          "widget": "number"
+        },
+        {
+          "name": "target-inform-timeout",
+          "widget": "number"
+        },
+        {
+          "name": "domain",
+          "widget": "enum"
+        },
+        {
+          "name": "notify-type",
+          "widget": "enum"
+        },
+        {
+          "name": "address",
+          "widget": "string"
+        },
+        {
+          "name": "confirmed-num",
+          "widget": "number"
+        },
+        {
+          "name": "dropped-num",
+          "widget": "number"
+        },
+        {
+          "name": "ext-vb",
+          "widget": "boolean"
+        },
+        {
+          "name": "failed-num",
+          "widget": "number"
+        },
+        {
+          "name": "interface-name",
+          "widget": "string"
+        },
+        {
+          "name": "is-need-heart-beat",
+          "widget": "boolean"
+        },
+        {
+          "name": "is-public-net",
+          "widget": "boolean"
+        },
+        {
+          "name": "notify-fltr-profile-name",
+          "widget": "string"
+        },
+        {
+          "name": "pending-num",
+          "widget": "number"
+        },
+        {
+          "name": "port-number",
+          "widget": "number"
+        },
+        {
+          "name": "private-netmanager",
+          "widget": "boolean"
+        },
+        {
+          "name": "retries-num",
+          "widget": "number"
+        },
+        {
+          "name": "sent-num",
+          "widget": "number"
+        },
+        {
+          "name": "status",
+          "widget": "boolean"
+        },
+        {
+          "name": "vpn-instance-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "usm-users": {
       "keyField": "user-name",
@@ -315,7 +571,59 @@
           "widget": "boolean"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "user-name",
+          "widget": "string"
+        },
+        {
+          "name": "auth-key",
+          "widget": "string"
+        },
+        {
+          "name": "priv-key",
+          "widget": "string"
+        },
+        {
+          "name": "auth-protocol",
+          "widget": "enum"
+        },
+        {
+          "name": "priv-protocol",
+          "widget": "enum"
+        },
+        {
+          "name": "acl-number",
+          "widget": "string"
+        },
+        {
+          "name": "active-status",
+          "widget": "string"
+        },
+        {
+          "name": "group-name",
+          "widget": "string"
+        },
+        {
+          "name": "is-auth-localized",
+          "widget": "boolean"
+        },
+        {
+          "name": "is-priv-localized",
+          "widget": "boolean"
+        },
+        {
+          "name": "left-lock-time",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "v3-groups": {
       "keyField": "group-name",
@@ -345,7 +653,39 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "group-name",
+          "widget": "string"
+        },
+        {
+          "name": "security-level",
+          "widget": "enum"
+        },
+        {
+          "name": "acl-number",
+          "widget": "string"
+        },
+        {
+          "name": "notify-view-name",
+          "widget": "string"
+        },
+        {
+          "name": "read-view-name",
+          "widget": "string"
+        },
+        {
+          "name": "write-view-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

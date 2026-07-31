@@ -31,7 +31,31 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "address-family",
+          "widget": "enum"
+        },
+        {
+          "name": "apply-explicit-null-label",
+          "widget": "boolean"
+        },
+        {
+          "name": "enable-inter-area-segmented",
+          "widget": "boolean"
+        },
+        {
+          "name": "mvpn-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "ipv6-underlay-globals": {
       "keyField": "address-family",
@@ -45,7 +69,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "address-family",
+          "widget": "enum"
+        },
+        {
+          "name": "mvpn-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

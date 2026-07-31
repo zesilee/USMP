@@ -43,7 +43,39 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "controller-address",
+          "widget": "string"
+        },
+        {
+          "name": "vpn-name",
+          "widget": "string"
+        },
+        {
+          "name": "role",
+          "widget": "enum"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "agent-address",
+          "widget": "string"
+        },
+        {
+          "name": "up-time",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

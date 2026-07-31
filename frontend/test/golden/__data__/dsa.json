@@ -35,9 +35,29 @@
           "widget": "string"
         }
       ],
+      "allColumns": [
+        {
+          "name": "key-pair-label",
+          "widget": "string"
+        },
+        {
+          "name": "key-size",
+          "widget": "enum"
+        },
+        {
+          "name": "host-key-code",
+          "widget": "string"
+        }
+      ],
       "filterable": [
         "host-key-code",
         "key-size"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
       ]
     },
     "peer-keys": {
@@ -56,9 +76,29 @@
           "widget": "string"
         }
       ],
+      "allColumns": [
+        {
+          "name": "key-name",
+          "widget": "string"
+        },
+        {
+          "name": "encoding-type",
+          "widget": "enum"
+        },
+        {
+          "name": "key-code",
+          "widget": "string"
+        }
+      ],
       "filterable": [
         "encoding-type",
         "key-code"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
       ]
     }
   },

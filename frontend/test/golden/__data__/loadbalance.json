@@ -75,7 +75,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "forward-type",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "dlb-enables": {
       "keyField": "vpn-name",
@@ -85,7 +101,19 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "vpn-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "hash-instructions": {
       "keyField": "query-type",
@@ -103,7 +131,31 @@
           "widget": "boolean"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "query-type",
+          "widget": "enum"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "tunnel-gtp-enable",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "infos",
+          "kind": "form"
+        }
+      ]
     },
     "hash-key-ip-slots": {
       "keyField": "slot-id",
@@ -117,7 +169,23 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "ip-type",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

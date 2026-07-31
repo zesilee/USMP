@@ -19,7 +19,43 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "id",
+          "widget": "number"
+        },
+        {
+          "name": "mode",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "evpl-statistics",
+          "kind": "form"
+        },
+        {
+          "name": "evpn",
+          "kind": "form"
+        },
+        {
+          "name": "interfaces",
+          "kind": "list"
+        },
+        {
+          "name": "nvo3",
+          "kind": "form"
+        },
+        {
+          "name": "peers",
+          "kind": "list"
+        }
+      ]
     }
   },
   "tree": [

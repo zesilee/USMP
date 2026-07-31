@@ -75,7 +75,27 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "backup-group-name",
+          "widget": "string"
+        },
+        {
+          "name": "if-name1",
+          "widget": "string"
+        },
+        {
+          "name": "if-name2",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "high-re-modes": {
       "keyField": "position",
@@ -85,7 +105,19 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "ipv4-ttl-expired-forwards": {
       "keyField": "nexthop-group-id",
@@ -95,7 +127,23 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "nexthop-group-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "ipv4-nexthop-addrs",
+          "kind": "list"
+        }
+      ]
     },
     "ipv6-ttl-expired-forwards": {
       "keyField": "nexthop-group-id",
@@ -105,7 +153,23 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "nexthop-group-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "ipv6-nexthop-addrs",
+          "kind": "list"
+        }
+      ]
     },
     "na-anti-attack-statistics": {
       "keyField": "slot-id",
@@ -123,7 +187,27 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "na-drop-count",
+          "widget": "number"
+        },
+        {
+          "name": "na-tocpu-count",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

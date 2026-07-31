@@ -55,7 +55,27 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "server-ip",
+          "widget": "string"
+        },
+        {
+          "name": "server-port",
+          "widget": "number"
+        },
+        {
+          "name": "register-state",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "global-states": {
       "keyField": "chassis-id",
@@ -85,7 +105,39 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "chassis-id",
+          "widget": "string"
+        },
+        {
+          "name": "active-state",
+          "widget": "enum"
+        },
+        {
+          "name": "license-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "active-filename",
+          "widget": "string"
+        },
+        {
+          "name": "esn",
+          "widget": "string"
+        },
+        {
+          "name": "revoke-ticket",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "license-files": {
       "keyField": "chassis-id",
@@ -103,7 +155,35 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "chassis-id",
+          "widget": "string"
+        },
+        {
+          "name": "filename",
+          "widget": "string"
+        },
+        {
+          "name": "filesize",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "features",
+          "kind": "list"
+        },
+        {
+          "name": "general",
+          "kind": "form"
+        }
+      ]
     },
     "license-items": {
       "keyField": "name",
@@ -145,7 +225,111 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "emergency-state",
+          "widget": "enum"
+        },
+        {
+          "name": "status",
+          "widget": "enum"
+        },
+        {
+          "name": "trial-state",
+          "widget": "enum"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "current-value",
+          "widget": "number"
+        },
+        {
+          "name": "default-value",
+          "widget": "number"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "emergency-remain-day",
+          "widget": "number"
+        },
+        {
+          "name": "emergency-remain-times",
+          "widget": "number"
+        },
+        {
+          "name": "expired-date",
+          "widget": "string"
+        },
+        {
+          "name": "maximum-value",
+          "widget": "number"
+        },
+        {
+          "name": "trial-remain-day",
+          "widget": "number"
+        },
+        {
+          "name": "trial-remain-times",
+          "widget": "number"
+        },
+        {
+          "name": "used-value",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "port-aggregations",
+          "kind": "list"
+        },
+        {
+          "name": "port-core-aggregations",
+          "kind": "list"
+        },
+        {
+          "name": "port-hqoss",
+          "kind": "list"
+        },
+        {
+          "name": "port-l3vpn-evpns",
+          "kind": "list"
+        },
+        {
+          "name": "port-l3vpns",
+          "kind": "list"
+        },
+        {
+          "name": "port-macsecs",
+          "kind": "list"
+        },
+        {
+          "name": "port-peerings",
+          "kind": "list"
+        },
+        {
+          "name": "port-service-enhances",
+          "kind": "list"
+        },
+        {
+          "name": "port-srv6s",
+          "kind": "list"
+        }
+      ]
     },
     "license-sale-items": {
       "keyField": "name",
@@ -163,7 +347,31 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "sale-value",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "license-items",
+          "kind": "list"
+        }
+      ]
     },
     "resource-thresholds": {
       "keyField": "name",
@@ -185,7 +393,31 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "configurable-switch",
+          "widget": "boolean"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "threshold",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "resource-usages": {
       "keyField": "name",
@@ -203,7 +435,55 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "active-value",
+          "widget": "number"
+        },
+        {
+          "name": "usage",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "port-aggregations",
+          "kind": "list"
+        },
+        {
+          "name": "port-core-aggregations",
+          "kind": "list"
+        },
+        {
+          "name": "port-l3vpn-evpns",
+          "kind": "list"
+        },
+        {
+          "name": "port-l3vpns",
+          "kind": "list"
+        },
+        {
+          "name": "port-peerings",
+          "kind": "list"
+        },
+        {
+          "name": "port-service-enhances",
+          "kind": "list"
+        },
+        {
+          "name": "port-srv6s",
+          "kind": "list"
+        }
+      ]
     },
     "spec-items": {
       "keyField": "name",
@@ -237,7 +517,43 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "type",
+          "widget": "enum"
+        },
+        {
+          "name": "current-value",
+          "widget": "number"
+        },
+        {
+          "name": "default-value",
+          "widget": "number"
+        },
+        {
+          "name": "description",
+          "widget": "string"
+        },
+        {
+          "name": "maximum-value",
+          "widget": "number"
+        },
+        {
+          "name": "minimum-value",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "stack-sale-items": {
       "keyField": "chassis-id",
@@ -247,7 +563,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "chassis-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "license-sale-items",
+          "kind": "list"
+        }
+      ]
     }
   },
   "tree": [

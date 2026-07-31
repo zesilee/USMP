@@ -123,7 +123,43 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "area-id",
+          "widget": "number"
+        },
+        {
+          "name": "chassis-position",
+          "widget": "string"
+        },
+        {
+          "name": "area-assigned-power",
+          "widget": "string"
+        },
+        {
+          "name": "area-left-power",
+          "widget": "string"
+        },
+        {
+          "name": "area-rated-power",
+          "widget": "string"
+        },
+        {
+          "name": "area-used-power",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "board-energys",
+          "kind": "list"
+        }
+      ]
     },
     "board-powers": {
       "keyField": "position",
@@ -165,7 +201,51 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "current-power",
+          "widget": "string"
+        },
+        {
+          "name": "efficiency",
+          "widget": "string"
+        },
+        {
+          "name": "electrical-value",
+          "widget": "string"
+        },
+        {
+          "name": "entity-index",
+          "widget": "number"
+        },
+        {
+          "name": "pcb-name",
+          "widget": "string"
+        },
+        {
+          "name": "power-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "rated-power",
+          "widget": "string"
+        },
+        {
+          "name": "voltage-value",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "bootinfos": {
       "keyField": "position",
@@ -183,7 +263,27 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "rot",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "chassis-run-modes": {
       "keyField": "chassis-id",
@@ -209,7 +309,35 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "chassis-id",
+          "widget": "string"
+        },
+        {
+          "name": "current-run-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "next-run-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "current-run-cluster",
+          "widget": "string"
+        },
+        {
+          "name": "next-run-cluster",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "check-running-software-safes": {
       "keyField": "item",
@@ -239,7 +367,39 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "item",
+          "widget": "enum"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "result",
+          "widget": "enum"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "pkgsha256hash",
+          "widget": "string"
+        },
+        {
+          "name": "runsha256hash",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "electric-current-infos": {
       "keyField": "address",
@@ -281,7 +441,63 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "address",
+          "widget": "string"
+        },
+        {
+          "name": "channel",
+          "widget": "number"
+        },
+        {
+          "name": "i2c",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "current",
+          "widget": "string"
+        },
+        {
+          "name": "fatal-high-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "fatal-low-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "major-high-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "major-low-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "pcb-name",
+          "widget": "string"
+        },
+        {
+          "name": "required-current",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "electronic-labels": {
       "keyField": "entity-class",
@@ -323,7 +539,103 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "entity-class",
+          "widget": "enum"
+        },
+        {
+          "name": "entity-serial-number",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "archives-info-version",
+          "widget": "string"
+        },
+        {
+          "name": "barcode",
+          "widget": "string"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "bom-english-desc",
+          "widget": "string"
+        },
+        {
+          "name": "bom-local-desc",
+          "widget": "string"
+        },
+        {
+          "name": "entity-asset-id",
+          "widget": "string"
+        },
+        {
+          "name": "entity-bomid",
+          "widget": "string"
+        },
+        {
+          "name": "entity-clei-code",
+          "widget": "string"
+        },
+        {
+          "name": "entity-elabel-extend",
+          "widget": "string"
+        },
+        {
+          "name": "entity-elabel-version",
+          "widget": "string"
+        },
+        {
+          "name": "entity-index",
+          "widget": "number"
+        },
+        {
+          "name": "entity-issue-number",
+          "widget": "string"
+        },
+        {
+          "name": "entity-model",
+          "widget": "string"
+        },
+        {
+          "name": "entity-open-bomid",
+          "widget": "string"
+        },
+        {
+          "name": "entity-update-log",
+          "widget": "string"
+        },
+        {
+          "name": "manufacturer-code",
+          "widget": "string"
+        },
+        {
+          "name": "manufacturer-date",
+          "widget": "string"
+        },
+        {
+          "name": "manufacturer-name",
+          "widget": "string"
+        },
+        {
+          "name": "silk-screen",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "inner-links": {
       "keyField": "left-chassis-position",
@@ -365,7 +677,55 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "left-chassis-position",
+          "widget": "string"
+        },
+        {
+          "name": "link-type",
+          "widget": "enum"
+        },
+        {
+          "name": "right-chassis-position",
+          "widget": "string"
+        },
+        {
+          "name": "alarm-state",
+          "widget": "enum"
+        },
+        {
+          "name": "left-chassis-type",
+          "widget": "enum"
+        },
+        {
+          "name": "operation-state",
+          "widget": "enum"
+        },
+        {
+          "name": "right-chassis-type",
+          "widget": "enum"
+        },
+        {
+          "name": "link-index",
+          "widget": "string"
+        },
+        {
+          "name": "link-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "physical-inner-links",
+          "kind": "list"
+        }
+      ]
     },
     "interface-match-check-states": {
       "keyField": "position",
@@ -379,7 +739,23 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "object",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "io-inspect-attributes": {
       "keyField": "index",
@@ -401,7 +777,31 @@
           "widget": "enum"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "alarm-name",
+          "widget": "string"
+        },
+        {
+          "name": "default-states",
+          "widget": "enum"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "io-inspect-states": {
       "keyField": "index",
@@ -431,7 +831,39 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "index",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "alarm-status",
+          "widget": "enum"
+        },
+        {
+          "name": "default-states",
+          "widget": "enum"
+        },
+        {
+          "name": "states",
+          "widget": "enum"
+        },
+        {
+          "name": "alarm-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "mbusnodes": {
       "keyField": "slot-id",
@@ -461,7 +893,39 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "board-type",
+          "widget": "string"
+        },
+        {
+          "name": "eeprom-number",
+          "widget": "number"
+        },
+        {
+          "name": "register",
+          "widget": "string"
+        },
+        {
+          "name": "temperature-monitor-number",
+          "widget": "number"
+        },
+        {
+          "name": "voltage-monitor-number",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "multi-chassis-attributes": {
       "keyField": "current-chassis-id",
@@ -479,7 +943,27 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "current-chassis-id",
+          "widget": "number"
+        },
+        {
+          "name": "chassis-type",
+          "widget": "enum"
+        },
+        {
+          "name": "next-chassis-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "slave-defaults": {
       "keyField": "chassis-id",
@@ -497,7 +981,27 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "chassis-id",
+          "widget": "string"
+        },
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "slave-default",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "slot-statistics": {
       "keyField": "chassis-id",
@@ -519,7 +1023,31 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "chassis-id",
+          "widget": "string"
+        },
+        {
+          "name": "slot-type",
+          "widget": "enum"
+        },
+        {
+          "name": "online-slot-number",
+          "widget": "number"
+        },
+        {
+          "name": "total-slot-number",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "stratum-3-clocks": {
       "keyField": "slot-id",
@@ -545,7 +1073,35 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "board-device-type",
+          "widget": "enum"
+        },
+        {
+          "name": "clock-type",
+          "widget": "enum"
+        },
+        {
+          "name": "switch-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "clock-slot-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "system-sync-clocks": {
       "keyField": "slot-id",
@@ -575,7 +1131,39 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "slot-id",
+          "widget": "string"
+        },
+        {
+          "name": "board-device-type",
+          "widget": "enum"
+        },
+        {
+          "name": "clock-type",
+          "widget": "enum"
+        },
+        {
+          "name": "lock-state",
+          "widget": "enum"
+        },
+        {
+          "name": "switch-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "clock-slot-id",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "temperature2s": {
       "keyField": "position",
@@ -617,8 +1205,72 @@
           "widget": "number"
         }
       ],
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "sensor-id",
+          "widget": "number"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "current-temperature",
+          "widget": "number"
+        },
+        {
+          "name": "fan-adjust-high-temperature",
+          "widget": "number"
+        },
+        {
+          "name": "fan-adjust-low-temperature",
+          "widget": "number"
+        },
+        {
+          "name": "fatal-threshold",
+          "widget": "number"
+        },
+        {
+          "name": "fatal-threshold-percent",
+          "widget": "number"
+        },
+        {
+          "name": "major-threshold",
+          "widget": "number"
+        },
+        {
+          "name": "major-threshold-percent",
+          "widget": "number"
+        },
+        {
+          "name": "minor-threshold",
+          "widget": "number"
+        },
+        {
+          "name": "minor-threshold-percent",
+          "widget": "number"
+        },
+        {
+          "name": "pcb-name",
+          "widget": "string"
+        },
+        {
+          "name": "sensor-name",
+          "widget": "string"
+        }
+      ],
       "filterable": [
         "sensor-name"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
       ]
     },
     "temperatures": {
@@ -661,7 +1313,87 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "address",
+          "widget": "string"
+        },
+        {
+          "name": "channel",
+          "widget": "number"
+        },
+        {
+          "name": "i2c",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "fan-tmax",
+          "widget": "number"
+        },
+        {
+          "name": "fan-tmin",
+          "widget": "number"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "current-temperature",
+          "widget": "number"
+        },
+        {
+          "name": "entity-index",
+          "widget": "number"
+        },
+        {
+          "name": "fan-tmax-states",
+          "widget": "number"
+        },
+        {
+          "name": "fan-tmin-states",
+          "widget": "number"
+        },
+        {
+          "name": "fatal",
+          "widget": "number"
+        },
+        {
+          "name": "fatal-alarm-threshold",
+          "widget": "number"
+        },
+        {
+          "name": "major",
+          "widget": "number"
+        },
+        {
+          "name": "major-alarm-threshold",
+          "widget": "number"
+        },
+        {
+          "name": "minor",
+          "widget": "number"
+        },
+        {
+          "name": "minor-alarm-threshold",
+          "widget": "number"
+        },
+        {
+          "name": "pcb-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "voltageinfos": {
       "keyField": "address",
@@ -703,7 +1435,87 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "address",
+          "widget": "string"
+        },
+        {
+          "name": "channel",
+          "widget": "number"
+        },
+        {
+          "name": "i2c",
+          "widget": "number"
+        },
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "current-voltage",
+          "widget": "string"
+        },
+        {
+          "name": "entity-index",
+          "widget": "number"
+        },
+        {
+          "name": "fatal-voltage-threshold-high",
+          "widget": "number"
+        },
+        {
+          "name": "fatal-voltage-threshold-low",
+          "widget": "number"
+        },
+        {
+          "name": "high-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "low-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "major-high-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "major-low-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "major-voltage-threshold-high",
+          "widget": "number"
+        },
+        {
+          "name": "major-voltage-threshold-low",
+          "widget": "number"
+        },
+        {
+          "name": "pcb-name",
+          "widget": "string"
+        },
+        {
+          "name": "required-voltage",
+          "widget": "string"
+        },
+        {
+          "name": "voltage-ratio",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "voltages": {
       "keyField": "position",
@@ -745,8 +1557,80 @@
           "widget": "string"
         }
       ],
+      "allColumns": [
+        {
+          "name": "position",
+          "widget": "string"
+        },
+        {
+          "name": "sensor-id",
+          "widget": "number"
+        },
+        {
+          "name": "state",
+          "widget": "enum"
+        },
+        {
+          "name": "current-voltage",
+          "widget": "string"
+        },
+        {
+          "name": "fatal-high-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "fatal-high-threshold-percent",
+          "widget": "number"
+        },
+        {
+          "name": "fatal-low-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "fatal-low-threshold-percent",
+          "widget": "number"
+        },
+        {
+          "name": "major-high-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "major-high-threshold-percent",
+          "widget": "number"
+        },
+        {
+          "name": "major-low-threshold",
+          "widget": "string"
+        },
+        {
+          "name": "major-low-threshold-percent",
+          "widget": "number"
+        },
+        {
+          "name": "pcb-name",
+          "widget": "string"
+        },
+        {
+          "name": "ratio",
+          "widget": "string"
+        },
+        {
+          "name": "required-voltage",
+          "widget": "string"
+        },
+        {
+          "name": "sensor-name",
+          "widget": "string"
+        }
+      ],
       "filterable": [
         "sensor-name"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
       ]
     }
   },

@@ -51,7 +51,55 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "name",
+          "widget": "string"
+        },
+        {
+          "name": "cryptographic-algorithm",
+          "widget": "enum"
+        },
+        {
+          "name": "mode",
+          "widget": "enum"
+        },
+        {
+          "name": "policy",
+          "widget": "enum"
+        },
+        {
+          "name": "confident-offset",
+          "widget": "number"
+        },
+        {
+          "name": "include-sci",
+          "widget": "boolean"
+        },
+        {
+          "name": "keyserver-priority",
+          "widget": "number"
+        },
+        {
+          "name": "mka-life",
+          "widget": "number"
+        },
+        {
+          "name": "replay-window",
+          "widget": "number"
+        },
+        {
+          "name": "sak-life",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

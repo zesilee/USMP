@@ -55,7 +55,83 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "id",
+          "widget": "number"
+        },
+        {
+          "name": "mode",
+          "widget": "enum"
+        },
+        {
+          "name": "path-cost-standard",
+          "widget": "enum"
+        },
+        {
+          "name": "bpdu-protection",
+          "widget": "boolean"
+        },
+        {
+          "name": "enable",
+          "widget": "boolean"
+        },
+        {
+          "name": "forward-delay",
+          "widget": "number"
+        },
+        {
+          "name": "hello-time",
+          "widget": "number"
+        },
+        {
+          "name": "max-age",
+          "widget": "number"
+        },
+        {
+          "name": "max-hops",
+          "widget": "number"
+        },
+        {
+          "name": "region-name",
+          "widget": "string"
+        },
+        {
+          "name": "revision-level",
+          "widget": "number"
+        },
+        {
+          "name": "tc-protection",
+          "widget": "boolean"
+        },
+        {
+          "name": "tc-protection-interval",
+          "widget": "number"
+        },
+        {
+          "name": "tc-protection-threshold",
+          "widget": "number"
+        },
+        {
+          "name": "timer-factor",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "default-instance",
+          "kind": "form"
+        },
+        {
+          "name": "instances",
+          "kind": "list"
+        }
+      ]
     }
   },
   "tree": [

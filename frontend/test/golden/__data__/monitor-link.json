@@ -23,7 +23,35 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "id",
+          "widget": "number"
+        },
+        {
+          "name": "enable",
+          "widget": "boolean"
+        },
+        {
+          "name": "recover-time",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        },
+        {
+          "name": "downlink-interfaces",
+          "kind": "list"
+        },
+        {
+          "name": "uplink-interfaces",
+          "kind": "list"
+        }
+      ]
     }
   },
   "tree": [

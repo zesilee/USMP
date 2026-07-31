@@ -83,7 +83,31 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "output-direction",
+          "widget": "string"
+        },
+        {
+          "name": "channel-id",
+          "widget": "string"
+        },
+        {
+          "name": "channel-name",
+          "widget": "string"
+        },
+        {
+          "name": "default-channel-id",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "domain-servers": {
       "keyField": "is-default-vpn",
@@ -125,7 +149,67 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "is-default-vpn",
+          "widget": "boolean"
+        },
+        {
+          "name": "server-domain",
+          "widget": "string"
+        },
+        {
+          "name": "vrf-name",
+          "widget": "string"
+        },
+        {
+          "name": "facility",
+          "widget": "enum"
+        },
+        {
+          "name": "level",
+          "widget": "enum"
+        },
+        {
+          "name": "timestamp",
+          "widget": "enum"
+        },
+        {
+          "name": "transport-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "channel-id",
+          "widget": "string"
+        },
+        {
+          "name": "channel-name",
+          "widget": "string"
+        },
+        {
+          "name": "is-brief-format",
+          "widget": "boolean"
+        },
+        {
+          "name": "is-security-only",
+          "widget": "boolean"
+        },
+        {
+          "name": "server-port",
+          "widget": "number"
+        },
+        {
+          "name": "ssl-policy-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "info-center-buffers": {
       "keyField": "buffer-name",
@@ -167,7 +251,51 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "buffer-name",
+          "widget": "string"
+        },
+        {
+          "name": "channel-id",
+          "widget": "number"
+        },
+        {
+          "name": "channel-name",
+          "widget": "string"
+        },
+        {
+          "name": "cur-buffer-size",
+          "widget": "number"
+        },
+        {
+          "name": "current-message",
+          "widget": "number"
+        },
+        {
+          "name": "dropped-message",
+          "widget": "number"
+        },
+        {
+          "name": "enable-flag",
+          "widget": "boolean"
+        },
+        {
+          "name": "max-buffer-size",
+          "widget": "number"
+        },
+        {
+          "name": "overwrite-message",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "info-center-channels": {
       "keyField": "channel-id",
@@ -185,7 +313,27 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "channel-id",
+          "widget": "number"
+        },
+        {
+          "name": "channel-default-name",
+          "widget": "string"
+        },
+        {
+          "name": "channel-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "info-center-filters": {
       "keyField": "feature-name",
@@ -199,7 +347,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "feature-name",
+          "widget": "string"
+        },
+        {
+          "name": "filter-log-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "info-center-sources": {
       "keyField": "channel-id",
@@ -241,7 +405,51 @@
           "widget": "boolean"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "channel-id",
+          "widget": "string"
+        },
+        {
+          "name": "module-name",
+          "widget": "string"
+        },
+        {
+          "name": "enable-debug-level",
+          "widget": "enum"
+        },
+        {
+          "name": "enable-log-level",
+          "widget": "enum"
+        },
+        {
+          "name": "enable-trap-level",
+          "widget": "enum"
+        },
+        {
+          "name": "channel-name",
+          "widget": "string"
+        },
+        {
+          "name": "enable-debug",
+          "widget": "boolean"
+        },
+        {
+          "name": "enable-log",
+          "widget": "boolean"
+        },
+        {
+          "name": "enable-trap",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "info-center-statistics": {
       "keyField": "module-name",
@@ -283,7 +491,51 @@
           "widget": "number"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "module-name",
+          "widget": "string"
+        },
+        {
+          "name": "drop-debug",
+          "widget": "number"
+        },
+        {
+          "name": "drop-diaglog",
+          "widget": "number"
+        },
+        {
+          "name": "drop-eventtrap",
+          "widget": "number"
+        },
+        {
+          "name": "drop-log",
+          "widget": "number"
+        },
+        {
+          "name": "receive-debug",
+          "widget": "number"
+        },
+        {
+          "name": "receive-diaglog",
+          "widget": "number"
+        },
+        {
+          "name": "receive-eventtrap",
+          "widget": "number"
+        },
+        {
+          "name": "receive-log",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "log-switch-list": {
       "keyField": "feature-name",
@@ -309,7 +561,35 @@
           "widget": "boolean"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "feature-name",
+          "widget": "string"
+        },
+        {
+          "name": "log-name",
+          "widget": "string"
+        },
+        {
+          "name": "log-level",
+          "widget": "enum"
+        },
+        {
+          "name": "log-type",
+          "widget": "enum"
+        },
+        {
+          "name": "security-log-flag",
+          "widget": "boolean"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     },
     "logbuffers": {
       "keyField": "sequence",
@@ -335,43 +615,7 @@
           "widget": "string"
         }
       ],
-      "filterable": [
-        "endtime",
-        "level",
-        "starttime"
-      ]
-    },
-    "logfiles": {
-      "keyField": "logfile-type",
-      "columns": [
-        {
-          "name": "logfile-type",
-          "widget": "enum"
-        },
-        {
-          "name": "max-file-num",
-          "widget": "number"
-        },
-        {
-          "name": "max-file-size",
-          "widget": "number"
-        }
-      ],
-      "filterable": []
-    },
-    "modules": {
-      "keyField": "module-name",
-      "columns": [
-        {
-          "name": "module-name",
-          "widget": "string"
-        }
-      ],
-      "filterable": []
-    },
-    "securitybuffers": {
-      "keyField": "sequence",
-      "columns": [
+      "allColumns": [
         {
           "name": "sequence",
           "widget": "number"
@@ -397,6 +641,130 @@
         "endtime",
         "level",
         "starttime"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
+    },
+    "logfiles": {
+      "keyField": "logfile-type",
+      "columns": [
+        {
+          "name": "logfile-type",
+          "widget": "enum"
+        },
+        {
+          "name": "max-file-num",
+          "widget": "number"
+        },
+        {
+          "name": "max-file-size",
+          "widget": "number"
+        }
+      ],
+      "allColumns": [
+        {
+          "name": "logfile-type",
+          "widget": "enum"
+        },
+        {
+          "name": "max-file-num",
+          "widget": "number"
+        },
+        {
+          "name": "max-file-size",
+          "widget": "number"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
+    },
+    "modules": {
+      "keyField": "module-name",
+      "columns": [
+        {
+          "name": "module-name",
+          "widget": "string"
+        }
+      ],
+      "allColumns": [
+        {
+          "name": "module-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
+    },
+    "securitybuffers": {
+      "keyField": "sequence",
+      "columns": [
+        {
+          "name": "sequence",
+          "widget": "number"
+        },
+        {
+          "name": "level",
+          "widget": "enum"
+        },
+        {
+          "name": "endtime",
+          "widget": "string"
+        },
+        {
+          "name": "log-content",
+          "widget": "string"
+        },
+        {
+          "name": "starttime",
+          "widget": "string"
+        }
+      ],
+      "allColumns": [
+        {
+          "name": "sequence",
+          "widget": "number"
+        },
+        {
+          "name": "level",
+          "widget": "enum"
+        },
+        {
+          "name": "endtime",
+          "widget": "string"
+        },
+        {
+          "name": "log-content",
+          "widget": "string"
+        },
+        {
+          "name": "starttime",
+          "widget": "string"
+        }
+      ],
+      "filterable": [
+        "endtime",
+        "level",
+        "starttime"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
       ]
     },
     "servers": {
@@ -439,6 +807,88 @@
           "widget": "string"
         }
       ],
+      "allColumns": [
+        {
+          "name": "ip-type",
+          "widget": "enum"
+        },
+        {
+          "name": "ipaddress",
+          "widget": "string"
+        },
+        {
+          "name": "is-default-vpn",
+          "widget": "boolean"
+        },
+        {
+          "name": "vrf-name",
+          "widget": "string"
+        },
+        {
+          "name": "facility",
+          "widget": "enum"
+        },
+        {
+          "name": "level",
+          "widget": "enum"
+        },
+        {
+          "name": "timestamp",
+          "widget": "enum"
+        },
+        {
+          "name": "transport-mode",
+          "widget": "enum"
+        },
+        {
+          "name": "channel-id",
+          "widget": "string"
+        },
+        {
+          "name": "channel-name",
+          "widget": "string"
+        },
+        {
+          "name": "dns-identifier-name",
+          "widget": "string"
+        },
+        {
+          "name": "facility-mask",
+          "widget": "string"
+        },
+        {
+          "name": "host-name",
+          "widget": "string"
+        },
+        {
+          "name": "is-activated",
+          "widget": "boolean"
+        },
+        {
+          "name": "is-brief-format",
+          "widget": "boolean"
+        },
+        {
+          "name": "is-security-only",
+          "widget": "boolean"
+        },
+        {
+          "name": "port",
+          "widget": "number"
+        },
+        {
+          "name": "severity-mask",
+          "widget": "string"
+        },
+        {
+          "name": "source-ip",
+          "widget": "string"
+        },
+        {
+          "name": "ssl-policy-name",
+          "widget": "string"
+        }
+      ],
       "filterable": [
         "channel-id",
         "facility",
@@ -447,6 +897,12 @@
         "source-ip",
         "timestamp",
         "transport-mode"
+      ],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
       ]
     },
     "trapbuffers": {
@@ -461,7 +917,23 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "sequence",
+          "widget": "number"
+        },
+        {
+          "name": "trap-content",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

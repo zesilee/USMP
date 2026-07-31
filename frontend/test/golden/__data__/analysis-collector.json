@@ -31,7 +31,35 @@
           "widget": "string"
         }
       ],
-      "filterable": []
+      "allColumns": [
+        {
+          "name": "id",
+          "widget": "number"
+        },
+        {
+          "name": "dst-port",
+          "widget": "number"
+        },
+        {
+          "name": "host-address",
+          "widget": "string"
+        },
+        {
+          "name": "src-address",
+          "widget": "string"
+        },
+        {
+          "name": "vpn-name",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
     }
   },
   "tree": [

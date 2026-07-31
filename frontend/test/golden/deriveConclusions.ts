@@ -13,8 +13,10 @@
 //   这些都是对 schema 的**变换**而非副本。name(label) 丢弃，path 已是稳定标识。
 import {
   deriveTabs,
+  deriveDetailTabs,
   deriveKeyField,
   deriveColumns,
+  deriveAllColumns,
   filterableFields,
   leafName,
 } from '../../src/utils/moduleConsole'
@@ -24,7 +26,11 @@ import type { Field } from '../../src/utils/crdSchemaParser'
 export interface ListConclusion {
   keyField: string
   columns: { name: string; widget: Field['type'] }[]
+  /** 可用列全集（FE-11 列设置）：同层序不封顶，columns 恒为其前缀。 */
+  allColumns: { name: string; widget: Field['type'] }[]
   filterable: string[]
+  /** 详情二级 Tab 序列（FE-21 deriveDetailTabs）：__main__ 主表单 + 嵌套子 Tab。 */
+  detailTabs: { name: string; kind: 'list' | 'form' }[]
 }
 
 export interface TreeNodeConclusion {
@@ -57,7 +63,9 @@ export function conclusionsFor(module: string, fields: Field[]): Conclusions {
       lists[t.name] = {
         keyField: deriveKeyField(t.listField),
         columns: deriveColumns(t.listField).map((f) => ({ name: leafName(f), widget: f.type })),
+        allColumns: deriveAllColumns(t.listField).map((f) => ({ name: leafName(f), widget: f.type })),
         filterable: filterableFields(t.listField).map((f) => leafName(f)),
+        detailTabs: deriveDetailTabs(t.listField).map((d) => ({ name: d.name, kind: d.kind as 'list' | 'form' })),
       }
     }
   }
