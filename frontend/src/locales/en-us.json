@@ -47,7 +47,8 @@
       "off": "Offline",
       "unknown": "Not reconciled",
       "attention": "Needs attention"
-    }
+    },
+    "create": "Create"
   },
   "header": {
     "fleet": "Home",
@@ -299,6 +300,13 @@
       "done": "Executed",
       "doneReply": "Executed: {reply}",
       "failed": "Execution failed"
-    }
+    },
+    "queryFinished": "{time} query finished, total: {total}",
+    "fetchSource": "Fetch Source",
+    "fetchSourceFailed": "Failed to fetch from device",
+    "columnSettings": "Columns",
+    "unsavedTitle": "Unsaved Changes",
+    "unsavedSwitch": "The detail pane has unsaved changes which will be discarded. Continue?",
+    "backToForm": "Back to Edit"
   }
 }

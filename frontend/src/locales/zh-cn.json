@@ -47,7 +47,8 @@
       "off": "离线",
       "unknown": "未对账",
       "attention": "需处理"
-    }
+    },
+    "create": "创建"
   },
   "header": {
     "fleet": "首页",
@@ -299,6 +300,13 @@
       "done": "已执行",
       "doneReply": "已执行：{reply}",
       "failed": "执行失败"
-    }
+    },
+    "queryFinished": "{time} 查询结束，总记录数: {total}",
+    "fetchSource": "获取数据源",
+    "fetchSourceFailed": "获取数据源失败",
+    "columnSettings": "列设置",
+    "unsavedTitle": "未提交修改",
+    "unsavedSwitch": "当前详情有未提交的修改，切换后将丢弃，是否继续？",
+    "backToForm": "返回编辑"
   }
 }
