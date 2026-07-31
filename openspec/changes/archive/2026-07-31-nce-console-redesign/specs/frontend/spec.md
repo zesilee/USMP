@@ -28,7 +28,7 @@
 
 ### Requirement: FE-02 分组与校验
 
-Field 带 group/pattern/min/max/required 时，前端渲染 SHALL 按分组组织（>1 分组时 SHALL 渲染为二级 Tab，NCE 形态；Tab 集合超宽 SHALL 以「更多」溢出收纳），并由约束生成校验 rules；校验失败 SHALL NOT 提交，且 SHALL 行内提示 YANG 约束（§9、R08）。
+Field 带 group/pattern/min/max/required 时，前端渲染 SHALL 按分组组织（>1 分组时 SHALL 渲染为二级 Tab，NCE 形态；Tab 集合超宽 SHALL 可横向滚动收纳（不截断）），并由约束生成校验 rules；校验失败 SHALL NOT 提交，且 SHALL 行内提示 YANG 约束（§9、R08）。
 
 #### Scenario: 多分组二级 Tab
 - **WHEN** 字段分布在 >1 个 group
@@ -97,7 +97,7 @@ Field 带 group/pattern/min/max/required 时，前端渲染 SHALL 按分组组�
 
 ### Requirement: FE-21 列表详情同屏编辑区（master-detail）
 
-列表 Tab 点击行或行「编辑」SHALL 高亮该行并在表格下方展开详情编辑区，SHALL NOT 使用抽屉/弹窗承载编辑表单。详情编辑区 SHALL 含：条目面包屑（`<list 标签> > <主键值>`）、关闭按钮（收起详情区并取消行高亮）、二级 Tab（由 `deriveDetailTabs` 派生：list 条目标量叶→首个主表单 Tab，嵌套 group→子表单 Tab，嵌套 list→子表格 Tab；超宽以「更多」溢出）、以及既有提交编排（差异预览、下发、对账进度——一期仍为即时下发语义）。工具栏「创建」SHALL 在详情编辑区打开空表单（创建态），与编辑同屏同构。只读 Tab（FE-14）SHALL 无详情编辑区（保持只读视图）。切换选中行 SHALL 重载详情表单并丢弃未提交草稿前 SHALL NOT 静默——存在未提交变更时 SHALL 提示确认。
+列表 Tab 点击行或行「编辑」SHALL 高亮该行并在表格下方展开详情编辑区，SHALL NOT 使用抽屉/弹窗承载编辑表单。详情编辑区 SHALL 含：条目面包屑（`<list 标签> > <主键值>`）、关闭按钮（收起详情区并取消行高亮）、二级 Tab（由 `deriveDetailTabs` 派生：list 条目标量叶→首个主表单 Tab，嵌套 group→子表单 Tab，嵌套 list→子表格 Tab；超宽横向滚动收纳）、以及既有提交编排（差异预览、下发、对账进度——一期仍为即时下发语义）。工具栏「创建」SHALL 在详情编辑区打开空表单（创建态），与编辑同屏同构。只读 Tab（FE-14）SHALL 无详情编辑区（保持只读视图）。切换选中行 SHALL 重载详情表单并丢弃未提交草稿前 SHALL NOT 静默——存在未提交变更时 SHALL 提示确认。
 
 #### Scenario: 点行展开详情
 
