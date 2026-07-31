@@ -12,7 +12,6 @@ import (
 	"time"
 
 	yangdriver "github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
-	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 	"github.com/scrapli/scrapligo/driver/netconf"
 	"github.com/scrapli/scrapligo/driver/opoptions"
 	"github.com/scrapli/scrapligo/driver/options"
@@ -573,31 +572,11 @@ func constructSubtreeFilter(path string) string {
 }
 
 func (c *NETCONFClient) marshalChange(change Change) (string, error) {
-	if change.Type == DeleteChange {
-		return marshalDeleteChange(change.OldValue)
-	}
-	if change.NewValue == nil {
-		// 非删除变更缺 NewValue 无从编码——明确报错优于发送无目标的裸元素（R08）。
-		return "", fmt.Errorf("marshal change: nil NewValue for %s change at %s", change.Type, change.Path)
-	}
-
-	// If the value is already a byte slice/string, use it directly
-	switch v := change.NewValue.(type) {
-	case string:
-		return v, nil
-	case []byte:
-		return string(v), nil
-	}
-
-	// Registry-first dispatch (XC-04)：按 GoStruct 类型（容器或 diff 引擎产出的
-	// 内层 list map 形态）查驱动描述符，命中则由通用引擎按描述符数据编码。
-	// 未命中降级为通用 xml.Marshal 兜底链（R08）。
-	if d, ok := yangdriver.XMLEncoderForValue(change.NewValue); ok {
-		gs, err := d.WrapXMLValue(change.NewValue)
-		if err != nil {
-			return "", err
-		}
-		return xmlcodec.Encode(d.XML, gs)
+	// 注册表分派与删除编码提取为导出纯函数（CS-01）；仅在注册表未命中且
+	// 非删除变更时降级到本方法保留的 legacy xml.Marshal 兜底链（R08）。
+	out, encErr := EncodeChangeXML(change)
+	if encErr == nil || !errors.Is(encErr, ErrNoXMLEncoder) || change.Type == DeleteChange {
+		return out, encErr
 	}
 
 	// Try xml.Marshal for other types
@@ -689,12 +668,5 @@ const NetconfBaseNS = "urn:ietf:params:xml:ns:netconf:base:1.0"
 // 经驱动注册表 + 通用引擎（ΛListKeyMap）编码（XC-03）；未注册模型返回明确
 // 错误，绝不发送无目标的裸 delete 元素（R08）。
 func marshalDeleteChange(target interface{}) (string, error) {
-	if d, ok := yangdriver.XMLEncoderForValue(target); ok {
-		gs, err := d.WrapXMLValue(target)
-		if err != nil {
-			return "", err
-		}
-		return xmlcodec.EncodeDelete(d.XML, gs)
-	}
-	return "", fmt.Errorf("marshal delete: unsupported model %T", target)
+	return encodeDeleteXML(target)
 }
