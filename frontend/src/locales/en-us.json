@@ -317,6 +317,35 @@
     "rangeBoth": "Valid range: [{min}, {max}]",
     "rangeMin": "Valid range: ≥ {min}",
     "rangeMax": "Valid range: ≤ {max}",
-    "clearFieldTip": "Clear this field — it will not be pushed this time (not a device-side delete)"
+    "clearFieldTip": "Clear this field — it will not be pushed this time (not a device-side delete)",
+    "batch": {
+      "changes": "Changes",
+      "dryRun": "Dry Run",
+      "reset": "Reset",
+      "commit": "Commit Config",
+      "hint": "New pending changes detected, please commit in time",
+      "resetConfirmTitle": "Reset Changes",
+      "resetConfirm": "All pending changes for this device ({count}) will be discarded and forms restored to device data. Reset?",
+      "legendAdd": "Added({n})",
+      "legendModify": "Modified({n})",
+      "legendDelete": "Deleted({n})",
+      "colAttr": "Attribute",
+      "colBefore": "Before",
+      "colAfter": "After",
+      "empty": "No pending changes",
+      "dryRunTitle": "Dry Run Result",
+      "tabPayload": "Pending Device Data",
+      "tabDiff": "NE Data Diff",
+      "payloadHint": "Pending device data: the protocol messages exchanged between controller and device.",
+      "diffHint": "Before: target device config stored by the controller (source: {source}). After: target config computed by this dry run.",
+      "forward": "Forward Message",
+      "rollback": "Rollback Message",
+      "deviceName": "Device: ",
+      "unsupported": "This module does not support message preview",
+      "baselineDesired": "controller desired config",
+      "baselineCache": "cached readback",
+      "baselineDevice": "live device readback",
+      "baselineNone": "no baseline (computed as new config)"
+    }
   }
 }

@@ -317,6 +317,35 @@
     "rangeBoth": "整数 合法范围: [{min}, {max}]",
     "rangeMin": "整数 合法范围: ≥ {min}",
     "rangeMax": "整数 合法范围: ≤ {max}",
-    "clearFieldTip": "清空该字段，本次不下发（非设备侧删除）"
+    "clearFieldTip": "清空该字段，本次不下发（非设备侧删除）",
+    "batch": {
+      "changes": "变更内容",
+      "dryRun": "试运行",
+      "reset": "重置",
+      "commit": "提交配置",
+      "hint": "检索到新内容变更，请及时提交",
+      "resetConfirmTitle": "重置变更",
+      "resetConfirm": "将清空当前设备的全部待提交变更（{count} 条），表单恢复为设备实际数据。确定重置？",
+      "legendAdd": "增加({n})",
+      "legendModify": "修改({n})",
+      "legendDelete": "删除({n})",
+      "colAttr": "属性",
+      "colBefore": "变更前",
+      "colAfter": "变更后",
+      "empty": "暂无待提交变更",
+      "dryRunTitle": "试运行结果",
+      "tabPayload": "待下发设备数据",
+      "tabDiff": "网元数据差异对比",
+      "payloadHint": "待下发设备数据，内容为控制器与设备交互的协议报文。",
+      "diffHint": "变更前：控制器保存的目标设备配置（来源：{source}）。变更后：本次试运行计算出的目标设备配置。",
+      "forward": "正向报文",
+      "rollback": "回滚报文",
+      "deviceName": "设备名称：",
+      "unsupported": "该模块不支持报文预览",
+      "baselineDesired": "控制器期望配置",
+      "baselineCache": "缓存回读",
+      "baselineDevice": "设备实时回读",
+      "baselineNone": "无基线（按全新配置计算）"
+    }
   }
 }

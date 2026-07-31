@@ -18,6 +18,9 @@
             {{ t('console.ownedBadge', { n: ownershipIntents.length }) }}
           </el-tag>
         </el-tooltip>
+        <!-- 攒批工具栏（FE-23，一期预留位）：变更内容/试运行/重置/提交配置。
+             提交编排 PR-5 接入（commit-request 暂为占位事件）。 -->
+        <BatchToolbar v-if="store.selectedDeviceIp" :device="store.selectedDeviceIp" />
         <!-- 全局设备上下文（FE-10）：下拉直绑 store，选一次跨模块保持。 -->
         <el-select v-model="store.selectedDeviceIp" :placeholder="t('console.selectDevicePlaceholder')" style="width: 220px">
           <el-option v-for="d in store.devices" :key="d.id" :label="d.ip" :value="d.ip" />
@@ -74,6 +77,7 @@ import { useMenuStore } from '../stores/menu'
 import { useDeviceStore } from '../stores/device'
 import type { Field } from '../utils/crdSchemaParser'
 import { deriveTabs, deriveRpcTabs, type ConsoleTab, type RpcDef } from '../utils/moduleConsole'
+import BatchToolbar from '../components/config/BatchToolbar.vue'
 import ModuleListTab from '../components/config/ModuleListTab.vue'
 import ModuleFormTab from '../components/config/ModuleFormTab.vue'
 import RpcExecuteTab from '../components/config/RpcExecuteTab.vue'
