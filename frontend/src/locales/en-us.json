@@ -270,7 +270,8 @@
       "headPre": "Push preview · ",
       "headPost": " change(s)",
       "tagNew": "New",
-      "empty": "No changes yet · edit fields to preview the push diff here"
+      "empty": "No changes yet · edit fields to preview the push diff here",
+      "tagRemoved": "Removed"
     },
     "steps": {
       "title": "Reconciling · Reconciler",
@@ -345,7 +346,22 @@
       "baselineDesired": "controller desired config",
       "baselineCache": "cached readback",
       "baselineDevice": "live device readback",
-      "baselineNone": "no baseline (computed as new config)"
-    }
+      "baselineNone": "no baseline (computed as new config)",
+      "commitConfirm": "Commit {count} pending changes to the device in one transaction (all-or-nothing). Continue?",
+      "leaveConfirm": "There are pending changes; drafts will be lost after leaving. Leave anyway?"
+    },
+    "stageChange": "OK",
+    "clearFieldTipDelete": "After commit this item will be deleted from the device",
+    "moreActions": "More",
+    "batchDelete": "Batch Delete",
+    "batchDeleteConfirm": "Mark {n} selected records for deletion (effective after commit). Continue?",
+    "batchMarkedDelete": "{n} records marked for deletion",
+    "markCreate": "Pending Create",
+    "markUpdate": "Modified",
+    "markDelete": "Pending Delete",
+    "undelete": "Undo Delete",
+    "stagedOk": "Added to pending changes",
+    "markedDelete": "Marked for deletion (effective after commit)",
+    "pendingCreateRemoved": "Pending-create entry removed"
   }
 }

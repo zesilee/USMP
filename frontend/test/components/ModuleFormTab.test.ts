@@ -1,24 +1,30 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
-import { createPinia } from 'pinia'
+import { createPinia, setActivePinia, type Pinia } from 'pinia'
 import ElementPlus from 'element-plus'
 import ModuleFormTab from '../../src/components/config/ModuleFormTab.vue'
 import { getConfig, setConfig } from '../../src/api'
+import { useChangesetStore } from '../../src/stores/changeset'
 import { deriveTabs } from '../../src/utils/moduleConsole'
 import { ifmNestedSchema } from '../views/moduleConsole.fixture'
 
 vi.mock('../../src/api')
+
 
 const globalTab = deriveTabs(ifmNestedSchema.fields).find((t) => t.name === 'global')!
 
 function mountTab() {
   return mount(ModuleFormTab, {
     props: { tab: globalTab, rootName: 'ifm', device: '10.0.0.1' },
-    global: { plugins: [createPinia(), ElementPlus] },
+    global: { plugins: [pinia, ElementPlus] },
   })
 }
 
+let pinia: Pinia
+
 beforeEach(() => {
+  pinia = createPinia()
+  setActivePinia(pinia)
   vi.clearAllMocks()
   vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: {} } } } as any)
   vi.mocked(setConfig).mockResolvedValue({ data: { data: {} } } as any)
@@ -39,7 +45,7 @@ describe('ModuleFormTab · 嵌套 group 二级 Tab（FE-02 NCE 形态）', () =>
     const dampTab = deriveTabs(ifmNestedSchema.fields).find((t) => t.name === 'damp')!
     const w = mount(ModuleFormTab, {
       props: { tab: dampTab, rootName: 'ifm', device: '10.0.0.1' },
-      global: { plugins: [createPinia(), ElementPlus] },
+      global: { plugins: [pinia, ElementPlus] },
     })
     await flushPromises()
     expect(w.findAll('.el-tabs__item')).toHaveLength(0)
@@ -80,7 +86,7 @@ describe('ModuleFormTab · presence 容器（FE-12）', () => {
     brokenTab.field.fields.find((f: any) => f.label === 'ipv4-conflict-enable').must = [{ expr: '((' }]
     const w = mount(ModuleFormTab, {
       props: { tab: brokenTab, rootName: 'ifm', device: '10.0.0.1' },
-      global: { plugins: [createPinia(), ElementPlus] },
+      global: { plugins: [pinia, ElementPlus] },
     })
     await flushPromises()
     const vm = w.vm as any
@@ -107,7 +113,11 @@ describe('ModuleFormTab · 全局属性校验（statistic-interval，FE-11/FE-07
     expect(vm.form.mustViolations.value).toHaveLength(0)
     expect(vm.form.submittable.value).toBe(true)
     await vm.submit()
-    expect(setConfig).toHaveBeenCalledWith('10.0.0.1', 'ifm:ifm/ifm:global', expect.objectContaining({ 'statistic-interval': 300 }))
+    // 攒批（FE-03）：确定=入变更集，零写请求
+    expect(setConfig).not.toHaveBeenCalled()
+    const entry = useChangesetStore().entryFor('10.0.0.1', '/ifm:ifm/ifm:global')
+    expect(entry?.op).toBe('update')
+    expect(entry?.payload?.['statistic-interval']).toBe(300)
   })
 
   it('回读回填：GET 值 seed 进表单；GET 失败降级为空表单 + 告警（§9）', async () => {
@@ -125,7 +135,7 @@ describe('ModuleFormTab · 全局属性校验（statistic-interval，FE-11/FE-07
     expect((w2.vm as any).form.formData['statistic-interval']).toBeUndefined()
   })
 
-  it('下发失败原样透出后端错误（§9，不伪装成功）', async () => {
+  it('确定入集与网络无关：API 异常也不影响入集（攒批语义）', async () => {
     vi.mocked(setConfig).mockRejectedValue({ response: { data: { message: 'no converter for path' } } })
     const w = mountTab()
     await flushPromises()
@@ -134,7 +144,8 @@ describe('ModuleFormTab · 全局属性校验（statistic-interval，FE-11/FE-07
     await flushPromises()
     await vm.submit()
     await flushPromises()
-    expect(w.text()).toContain('no converter for path')
+    expect(useChangesetStore().countFor('10.0.0.1')).toBe(1)
+    expect(w.find('.el-alert').exists()).toBe(false)
   })
 })
 
@@ -157,7 +168,7 @@ describe('ModuleFormTab · readonly 降级（FE-14）', () => {
     } as any)
     const w = mount(ModuleFormTab, {
       props: { tab: mixedTab, rootName: 'ifm', device: '10.0.0.1' },
-      global: { plugins: [createPinia(), ElementPlus] },
+      global: { plugins: [pinia, ElementPlus] },
     })
     await flushPromises()
     const vm = w.vm as any
@@ -192,7 +203,7 @@ describe('ModuleFormTab · readonly 降级（FE-14）', () => {
     vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: { 'protocol-up-count': 3 } } } } as any)
     const w = mount(ModuleFormTab, {
       props: { tab: roTab, rootName: 'ifm', device: '10.0.0.1' },
-      global: { plugins: [createPinia(), ElementPlus] },
+      global: { plugins: [pinia, ElementPlus] },
     })
     await flushPromises()
     expect(w.text()).not.toContain('下发')
@@ -218,7 +229,7 @@ describe('ModuleFormTab · dynamicDefault 空值语义（FE-15）', () => {
     vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: {} } } } as any)
     const w = mount(ModuleFormTab, {
       props: { tab: dynTab, rootName: 'ifm', device: '10.0.0.1' },
-      global: { plugins: [createPinia(), ElementPlus] },
+      global: { plugins: [pinia, ElementPlus] },
     })
     await flushPromises()
     const vm = w.vm as any
@@ -262,7 +273,7 @@ describe('ModuleFormTab · readonly 叶 must 不入门禁（FE-14 回归）', ()
     } as any)
     const w = mount(ModuleFormTab, {
       props: { tab, rootName: 'ifm', device: '10.0.0.1' },
-      global: { plugins: [createPinia(), ElementPlus] },
+      global: { plugins: [pinia, ElementPlus] },
     })
     await flushPromises()
     const vm = w.vm as any
@@ -271,51 +282,5 @@ describe('ModuleFormTab · readonly 叶 must 不入门禁（FE-14 回归）', ()
     // readonly 叶的 must 不入权威门禁：可正常提交可编辑改动
     expect(vm.form.blocked.value).toBe(false)
     expect(vm.form.submittable.value).toBe(true)
-  })
-})
-
-// FE-18 二期（F2）：表单下发命中归属硬锁 409 → 阻断确认 → force 重发 / 取消中止。
-describe('ModuleFormTab · 归属硬锁 409 阻断确认', () => {
-  const rejected409 = {
-    data: { code: 409, success: false, message: '路径由业务意图管理', data: { intents: ['default/biz-100'] } },
-  } as any
-
-  it('409 → 确认 → 携 force 重发，成功展示 force 分支警告', async () => {
-    const { ElMessageBox } = await import('element-plus')
-    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
-    vi.mocked(setConfig)
-      .mockResolvedValueOnce(rejected409)
-      .mockResolvedValueOnce({
-        data: { code: 0, success: true, data: { ownershipWarning: { intents: ['default/biz-100'], message: '会覆盖' } } },
-      } as any)
-    const w = mountTab()
-    await flushPromises()
-    const vm = w.vm as any
-    vm.form.formData['statistic-interval'] = 300
-    await flushPromises()
-    await vm.submit()
-    await flushPromises()
-
-    expect(confirmSpy).toHaveBeenCalled()
-    expect(String(confirmSpy.mock.calls[0][0])).toContain('default/biz-100')
-    expect(vi.mocked(setConfig).mock.calls.length).toBe(2)
-    expect(vi.mocked(setConfig).mock.calls[1][3]).toBe(true)
-    expect(w.text()).not.toContain('路径由业务意图管理')
-  })
-
-  it('409 → 取消 → 中止：不重发、不置错误态', async () => {
-    const { ElMessageBox } = await import('element-plus')
-    vi.spyOn(ElMessageBox, 'confirm').mockRejectedValue('cancel')
-    vi.mocked(setConfig).mockResolvedValue(rejected409)
-    const w = mountTab()
-    await flushPromises()
-    const vm = w.vm as any
-    vm.form.formData['statistic-interval'] = 300
-    await flushPromises()
-    await vm.submit()
-    await flushPromises()
-
-    expect(vi.mocked(setConfig).mock.calls.length).toBe(1)
-    expect(w.find('.el-alert').exists()).toBe(false)
   })
 })
