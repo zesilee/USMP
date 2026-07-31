@@ -90,6 +90,50 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(pane.locator('[data-test="detail-submit"]')).toBeDisabled()
   })
 
+  // 攒批闭环（FE-03/FE-21/FE-23 二期）：创建入集 → 徽标/变更内容 → 提交配置 →
+  // 原子下发收敛 → 列表出现新条目。唯一一条 write-path 冒烟（对 staging 模拟网元）。
+  test('攒批闭环：创建 VLAN 入集 → 变更内容核对 → 提交配置 → 列表可见', async ({ page }) => {
+    const vlanId = String(3000 + (Date.now() % 900)) // 避开种子与历史运行残留
+    await page.goto('/module/vlan', { waitUntil: 'networkidle' })
+    await pickDevice(page)
+    await page.getByRole('tab', { name: 'VLAN列表', exact: true }).click()
+    await page.getByRole('button', { name: '创建' }).first().click()
+
+    const pane = page.locator('[data-test="item-detail-pane"]')
+    await expect(pane.getByText('VLAN标识', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    // key 叶（VLAN标识，number 控件）：定位该表单项内的输入框
+    await pane
+      .locator('.el-form-item')
+      .filter({ hasText: 'VLAN标识' })
+      .first()
+      .locator('input')
+      .first()
+      .fill(vlanId)
+    await expect(pane.locator('[data-test="detail-submit"]')).toBeEnabled()
+    await pane.locator('[data-test="detail-submit"]').click()
+
+    // 入集：待创建标记行 + 工具栏徽标
+    await expect(page.locator('[data-test="mark-create"]').first()).toBeVisible()
+    await expect(page.locator('.el-badge__content').first()).toHaveText(/[1-9]/)
+
+    // 变更内容弹窗核对后关闭
+    await page.locator('[data-test="batch-changes"]').click()
+    const changesDialog = page.getByRole('dialog').filter({ hasText: '变更内容' })
+    await expect(changesDialog.getByText(vlanId, { exact: false }).first()).toBeVisible()
+    await changesDialog.locator('.el-dialog__headerbtn').click()
+
+    // 提交配置：确认 → 进度弹窗 → 完成关闭
+    await page.locator('[data-test="batch-commit"]').click()
+    await page.getByRole('button', { name: '确定' }).last().click()
+    const commitDialog = page.getByRole('dialog').filter({ hasText: '提交配置' })
+    await expect(commitDialog.locator('[data-test="commit-close"]')).toBeEnabled({ timeout: 30000 })
+    await expect(commitDialog.locator('[data-test="commit-error"]')).toHaveCount(0)
+    await commitDialog.locator('[data-test="commit-close"]').click()
+
+    // 提交后：徽标清零、列表出现新条目（限定数据行作用域防隐藏面板误命中）
+    await expect(page.locator('.el-table__row').filter({ hasText: vlanId }).first()).toBeVisible({ timeout: 15000 })
+  })
+
   // 接口（华为 IFM）：Tab 由模块根派生，interfaces 列表 Tab 内创建表单动态渲染。
   test('接口控制台 Tab 派生 + 创建表单动态渲染出 YANG 字段', async ({ page }) => {
     await page.goto('/config/interface', { waitUntil: 'networkidle' })

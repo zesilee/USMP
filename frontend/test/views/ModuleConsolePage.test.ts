@@ -14,6 +14,7 @@ vi.mock('../../src/api')
 const routeState = vi.hoisted(() => ({ params: { module: 'ifm' } as Record<string, string> }))
 vi.mock('vue-router', () => ({
   useRoute: () => routeState,
+  onBeforeRouteLeave: () => {},
 }))
 
 let pinia: ReturnType<typeof createPinia>
@@ -150,5 +151,69 @@ describe('ModuleConsolePage · rpc 直达路由（FE-19）', () => {
     await flushPromises()
     expect(w.find('[data-test="select-device-empty"]').exists()).toBe(true)
     expect(w.findComponent(RpcExecuteTab).exists()).toBe(false)
+  })
+})
+
+describe('ModuleConsolePage · 攒批提交/重置编排（FE-03/FE-23）', () => {
+  async function seedAndMount() {
+    const { useChangesetStore } = await import('../../src/stores/changeset')
+    const cs = useChangesetStore()
+    cs.upsert('192.168.1.1', {
+      op: 'update',
+      path: '/ifm:ifm/ifm:interfaces',
+      listKey: 'interface',
+      keyValue: 'GE0/0/1',
+      payload: { name: 'GE0/0/1', description: 'x' },
+      cleared: [],
+      baseline: null,
+      label: 'interface GE0/0/1',
+    })
+    const w = mountPage()
+    await flushPromises()
+    return { w, cs }
+  }
+
+  it('提交配置：确认后打开提交进度弹窗（commit-request → BatchCommitDialog）', async () => {
+    const { ElMessageBox } = await import('element-plus')
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockResolvedValue('confirm' as any)
+    const { w } = await seedAndMount()
+    const BatchToolbar = (await import('../../src/components/config/BatchToolbar.vue')).default
+    const BatchCommitDialog = (await import('../../src/components/config/BatchCommitDialog.vue')).default
+
+    w.findComponent(BatchToolbar).vm.$emit('commit-request')
+    await flushPromises()
+
+    expect(confirmSpy).toHaveBeenCalled()
+    expect(String(confirmSpy.mock.calls[0][0])).toContain('1')
+    expect(w.findComponent(BatchCommitDialog).props('visible')).toBe(true)
+    confirmSpy.mockRestore()
+  })
+
+  it('提交确认取消：弹窗不开（变更集保留）', async () => {
+    const { ElMessageBox } = await import('element-plus')
+    const confirmSpy = vi.spyOn(ElMessageBox, 'confirm').mockRejectedValue('cancel')
+    const { w, cs } = await seedAndMount()
+    const BatchToolbar = (await import('../../src/components/config/BatchToolbar.vue')).default
+    const BatchCommitDialog = (await import('../../src/components/config/BatchCommitDialog.vue')).default
+
+    w.findComponent(BatchToolbar).vm.$emit('commit-request')
+    await flushPromises()
+
+    expect(w.findComponent(BatchCommitDialog).props('visible')).toBe(false)
+    expect(cs.countFor('192.168.1.1')).toBe(1)
+    confirmSpy.mockRestore()
+  })
+
+  it('重置事件：Tab 内容组件重挂（表单回设备实际态、标记行还原）', async () => {
+    const { w } = await seedAndMount()
+    const BatchToolbar = (await import('../../src/components/config/BatchToolbar.vue')).default
+    const ModuleListTab = (await import('../../src/components/config/ModuleListTab.vue')).default
+    const before = w.findComponent(ModuleListTab).vm
+
+    w.findComponent(BatchToolbar).vm.$emit('reset')
+    await flushPromises()
+
+    const after = w.findComponent(ModuleListTab).vm
+    expect(after).not.toBe(before)
   })
 })

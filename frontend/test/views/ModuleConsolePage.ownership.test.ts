@@ -12,6 +12,7 @@ import { ifmNestedSchema } from './moduleConsole.fixture'
 
 vi.mock('vue-router', () => ({
   useRoute: () => ({ params: { module: 'vlan' } }),
+  onBeforeRouteLeave: () => {},
 }))
 
 let pinia: ReturnType<typeof createPinia>

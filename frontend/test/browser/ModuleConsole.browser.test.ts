@@ -33,6 +33,7 @@ const nestedSchema = {
 
 vi.mock('vue-router', () => ({
   useRoute: () => ({ params: { module: 'ifm' }, query: {} }),
+  onBeforeRouteLeave: () => {},
 }))
 
 describe('ModuleConsolePage（真浏览器）· 设备下拉写全局上下文', () => {

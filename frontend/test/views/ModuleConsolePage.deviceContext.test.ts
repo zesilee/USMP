@@ -15,7 +15,7 @@ const mockRouteBox = vi.hoisted(() => ({ current: null as any }))
 vi.mock('vue-router', async () => {
   const { reactive } = await import('vue')
   mockRouteBox.current = reactive({ params: { module: 'ifm' }, query: {} as Record<string, unknown> })
-  return { useRoute: () => mockRouteBox.current }
+  return { useRoute: () => mockRouteBox.current, onBeforeRouteLeave: () => {} }
 })
 const mockRoute = () => mockRouteBox.current
 

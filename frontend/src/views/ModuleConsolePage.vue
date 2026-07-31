@@ -20,7 +20,12 @@
         </el-tooltip>
         <!-- 攒批工具栏（FE-23，一期预留位）：变更内容/试运行/重置/提交配置。
              提交编排 PR-5 接入（commit-request 暂为占位事件）。 -->
-        <BatchToolbar v-if="store.selectedDeviceIp" :device="store.selectedDeviceIp" />
+        <BatchToolbar
+          v-if="store.selectedDeviceIp"
+          :device="store.selectedDeviceIp"
+          @commit-request="onCommitRequest"
+          @reset="onBatchReset"
+        />
         <!-- 全局设备上下文（FE-10）：下拉直绑 store，选一次跨模块保持。 -->
         <el-select v-model="store.selectedDeviceIp" :placeholder="t('console.selectDevicePlaceholder')" style="width: 220px">
           <el-option v-for="d in store.devices" :key="d.id" :label="d.ip" :value="d.ip" />
@@ -58,26 +63,31 @@
          保留各 Tab 表单/搜索状态。 -->
     <el-tabs v-else-if="tabs.length" v-model="activeTab" class="console-tabs">
       <el-tab-pane v-for="tab in tabs" :key="tab.name" :label="tab.label" :name="tab.name">
-        <ModuleListTab v-if="tab.kind === 'list'" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" />
-        <ModuleFormTab v-else :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" />
+        <!-- consoleEpoch：重置/提交成功后整体重挂 → 表单/列表回设备实际态并清标记 -->
+        <ModuleListTab v-if="tab.kind === 'list'" :key="consoleEpoch" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" />
+        <ModuleFormTab v-else :key="consoleEpoch" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" />
       </el-tab-pane>
     </el-tabs>
     <el-empty v-else-if="!schemaError" :description="t('console.schemaLoading')" />
+    <BatchCommitDialog v-model:visible="commitOpen" :device="store.selectedDeviceIp" @committed="onCommitted" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, onBeforeRouteLeave } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { ElMessageBox } from 'element-plus'
 import { getYangSchema, getOwnership } from '../api'
 import { localizeFields, localizeRpcs } from '../composables/useFieldLabels'
 import { useLocaleStore } from '../stores/locale'
 import { useMenuStore } from '../stores/menu'
 import { useDeviceStore } from '../stores/device'
+import { useChangesetStore } from '../stores/changeset'
 import type { Field } from '../utils/crdSchemaParser'
 import { deriveTabs, deriveRpcTabs, type ConsoleTab, type RpcDef } from '../utils/moduleConsole'
 import BatchToolbar from '../components/config/BatchToolbar.vue'
+import BatchCommitDialog from '../components/config/BatchCommitDialog.vue'
 import ModuleListTab from '../components/config/ModuleListTab.vue'
 import ModuleFormTab from '../components/config/ModuleFormTab.vue'
 import RpcExecuteTab from '../components/config/RpcExecuteTab.vue'
@@ -87,6 +97,46 @@ const localeStore = useLocaleStore()
 const menuStore = useMenuStore()
 const { t } = useI18n()
 const store = useDeviceStore()
+const changeset = useChangesetStore()
+
+// ===== 攒批提交/重置编排（FE-03/FE-23） =====
+const commitOpen = ref(false)
+// 重置/提交成功 → 重挂 Tab 内容组件：表单回设备实际态、列表标记行还原。
+const consoleEpoch = ref(0)
+
+async function onCommitRequest() {
+  const n = changeset.countFor(store.selectedDeviceIp)
+  if (!n) return
+  try {
+    await ElMessageBox.confirm(
+      t('console.batch.commitConfirm', { count: n }),
+      t('console.batch.commit'),
+      { type: 'warning' },
+    )
+  } catch {
+    return
+  }
+  commitOpen.value = true
+}
+
+function onCommitted() {
+  consoleEpoch.value++
+}
+
+function onBatchReset() {
+  consoleEpoch.value++
+}
+
+// 路由离开确认（FE-23 负路径）：存在未提交变更时提示；取消停留、变更集保留。
+onBeforeRouteLeave(async () => {
+  if (!changeset.countFor(store.selectedDeviceIp)) return true
+  try {
+    await ElMessageBox.confirm(t('console.batch.leaveConfirm'), t('console.batch.changes'), { type: 'warning' })
+    return true
+  } catch {
+    return false
+  }
+})
 
 const moduleName = computed(() => String(route.params.module || ''))
 // rpc 直达模式（FE-19）：/module/:module/rpc/:rpcName，仅渲染该 rpc 执行面板。
