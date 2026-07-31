@@ -307,6 +307,12 @@
     "columnSettings": "列设置",
     "unsavedTitle": "未提交修改",
     "unsavedSwitch": "当前详情有未提交的修改，切换后将丢弃，是否继续？",
-    "backToForm": "返回编辑"
+    "backToForm": "返回编辑",
+    "boolOn": "打开",
+    "boolOff": "关闭",
+    "rangeBoth": "整数 合法范围: [{min}, {max}]",
+    "rangeMin": "整数 合法范围: ≥ {min}",
+    "rangeMax": "整数 合法范围: ≤ {max}",
+    "clearFieldTip": "清空该字段，本次不下发（非设备侧删除）"
   }
 }

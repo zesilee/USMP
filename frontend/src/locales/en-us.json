@@ -307,6 +307,12 @@
     "columnSettings": "Columns",
     "unsavedTitle": "Unsaved Changes",
     "unsavedSwitch": "The detail pane has unsaved changes which will be discarded. Continue?",
-    "backToForm": "Back to Edit"
+    "backToForm": "Back to Edit",
+    "boolOn": "On",
+    "boolOff": "Off",
+    "rangeBoth": "Valid range: [{min}, {max}]",
+    "rangeMin": "Valid range: ≥ {min}",
+    "rangeMax": "Valid range: ≤ {max}",
+    "clearFieldTip": "Clear this field — it will not be pushed this time (not a device-side delete)"
   }
 }

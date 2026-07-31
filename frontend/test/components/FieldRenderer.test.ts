@@ -27,12 +27,15 @@ describe('FieldRenderer Component', () => {
     expect(wrapper.findComponent({ name: 'ElInputNumber' }).exists()).toBe(true)
   })
 
-  it('should render ElSwitch for boolean type', () => {
+  it('boolean 渲染「打开/关闭」radio 而非开关（FE-01 NCE 形态）', () => {
     const wrapper = mount(FieldRenderer, {
       props: { field: { ...baseField, type: 'boolean' }, modelValue: false },
       global: { plugins: [ElementPlus] }
     })
-    expect(wrapper.findComponent({ name: 'ElSwitch' }).exists()).toBe(true)
+    expect(wrapper.findComponent({ name: 'ElRadioGroup' }).exists()).toBe(true)
+    expect(wrapper.findComponent({ name: 'ElSwitch' }).exists()).toBe(false)
+    const labels = wrapper.findAll('.el-radio').map((r) => r.text())
+    expect(labels).toEqual(['打开', '关闭'])
   })
 
   it('should render ElSelect for enum type', () => {
@@ -48,6 +51,79 @@ describe('FieldRenderer Component', () => {
       global: { plugins: [ElementPlus] }
     })
     expect(wrapper.findComponent({ name: 'ElSelect' }).exists()).toBe(true)
+  })
+})
+
+describe('FieldRenderer · boolean radio 值语义（FE-01）', () => {
+  it('选「打开」emit true、「关闭」emit false；禁用态透传', async () => {
+    const w = mount(FieldRenderer, {
+      props: { field: { path: '/x/en', type: 'boolean' as const, label: 'en' }, modelValue: undefined },
+      global: { plugins: [ElementPlus] },
+    })
+    const radios = w.findAll('.el-radio input[type="radio"]')
+    await radios[0].setValue()
+    expect(w.emitted('update:modelValue')?.at(-1)).toEqual([true])
+    await radios[1].setValue()
+    expect(w.emitted('update:modelValue')?.at(-1)).toEqual([false])
+
+    const disabled = mount(FieldRenderer, {
+      props: { field: { path: '/x/en', type: 'boolean' as const, label: 'en', readonly: true }, modelValue: true },
+      global: { plugins: [ElementPlus] },
+    })
+    expect(disabled.findAll('.el-radio.is-disabled')).toHaveLength(2)
+  })
+
+  it('可选 boolean 未选：两个 radio 均未选中（不入 payload 语义由表单层保证）', () => {
+    const w = mount(FieldRenderer, {
+      props: { field: { path: '/x/en', type: 'boolean' as const, label: 'en' }, modelValue: undefined },
+      global: { plugins: [ElementPlus] },
+    })
+    expect(w.findAll('.el-radio.is-checked')).toHaveLength(0)
+  })
+})
+
+describe('FieldRenderer · 约束合成占位（FE-22）', () => {
+  it('数值 range 合成「整数 合法范围」占位', () => {
+    const w = mount(FieldRenderer, {
+      props: {
+        field: { path: '/x/mac-age', type: 'number' as const, label: 'mac-age', minimum: 60, maximum: 1000000 },
+        modelValue: undefined,
+      },
+      global: { plugins: [ElementPlus] },
+    })
+    expect(w.find('input').attributes('placeholder')).toBe('整数 合法范围: [60, 1000000]')
+  })
+
+  it('单边界 range 合成 ≥/≤ 形态；无约束无占位', () => {
+    const minOnly = mount(FieldRenderer, {
+      props: { field: { path: '/x/a', type: 'number' as const, label: 'a', minimum: 10 }, modelValue: undefined },
+      global: { plugins: [ElementPlus] },
+    })
+    expect(minOnly.find('input').attributes('placeholder')).toContain('≥ 10')
+    const none = mount(FieldRenderer, {
+      props: { field: { path: '/x/b', type: 'number' as const, label: 'b' }, modelValue: undefined },
+      global: { plugins: [ElementPlus] },
+    })
+    expect(none.find('input').attributes('placeholder') || '').toBe('')
+  })
+
+  it('优先级：显式 placeholder > dynamicDefault > range 合成', () => {
+    const dyn = mount(FieldRenderer, {
+      props: {
+        field: { path: '/x/c', type: 'number' as const, label: 'c', minimum: 1, maximum: 9, dynamicDefault: true },
+        modelValue: undefined,
+      },
+      global: { plugins: [ElementPlus] },
+    })
+    expect(dyn.find('input').attributes('placeholder')).toContain('系统自动分配')
+    const explicit = mount(FieldRenderer, {
+      props: {
+        field: { path: '/x/d', type: 'number' as const, label: 'd', minimum: 1, maximum: 9, placeholder: '自定义' },
+        modelValue: undefined,
+      },
+      global: { plugins: [ElementPlus] },
+    })
+    expect(explicit.find('input').attributes('placeholder')).toBe('自定义')
   })
 })
 

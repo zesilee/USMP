@@ -55,7 +55,10 @@ describe('ModuleConsolePage · Tab 由模块根派生（零模块硬编码，FE-
     const w = mountPage()
     await flushPromises()
     await flushPromises() // res 懒加载重标（UI-03）落定
-    const labels = w.findAll('.el-tabs__item').map((n) => n.text().trim())
+    // 只取一级 Tab 栏（FE-02 后表单 Tab 内还有嵌套分组二级 Tab，裸查会混入）。
+    const labels = w
+      .findAll('.console-tabs > .el-tabs__header .el-tabs__item')
+      .map((n) => n.text().trim())
     // UI-03：Tab 标签经 snd res 本地化（zh 默认）；tab name 仍为 YANG 节点名。
     expect(labels).toEqual(['全局配置属性', '接口物理状态振荡抑制使能', '接口列表', '自动恢复时间列表'])
     const vm = w.vm as any

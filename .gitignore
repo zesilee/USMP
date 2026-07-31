@@ -53,3 +53,4 @@ frontend/package-lock.json
 # 仅 frontend/src/types/api.gen.ts 提交入库
 backend/docs/openapi/
 backend/data/
+frontend/test/browser/__screenshots__/
