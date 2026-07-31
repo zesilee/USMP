@@ -11,7 +11,11 @@
     "brandSub": "Switch Mgmt",
     "sideFoot": "无数据库 · TTL 缓存",
     "fallbackInterface": "接口管理",
-    "fallbackVlan": "VLAN 配置"
+    "fallbackVlan": "VLAN 配置",
+    "treeSearchPlaceholder": "请输入模型节点名称",
+    "expandAll": "展开全部",
+    "collapseAll": "收起全部",
+    "searchNoMatch": "无匹配节点"
   },
   "common": {
     "language": "语言",

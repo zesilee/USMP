@@ -22,6 +22,7 @@ function mockLeftTree(data: any[] | Error) {
 
 vi.mock('@element-plus/icons-vue', () => ({
   WarningFilled: { template: '<span />' },
+  Search: { template: '<span />' },
   DataLine: { template: '<span />' },
   Monitor: { template: '<span />' },
   Connection: { template: '<span />' },
@@ -235,5 +236,98 @@ describe('Sidebar · SND 左树（LT-03）', () => {
     await new Promise((r) => setTimeout(r))
     expect(wrapper.find('[data-test="module-item-ifm"]').exists()).toBe(true)
     expect(wrapper.find('[data-test^="lefttree-leaf"]').exists()).toBe(false)
+  })
+})
+
+describe('Sidebar · 左树搜索与展开收起（LT-05）', () => {
+  const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+      { path: '/', name: 'dashboard', component: {} },
+      { path: '/module/:module', name: 'module-console', component: {} },
+      { path: '/module/:module/rpc/:rpcName', name: 'module-rpc', component: {} },
+    ],
+  })
+
+  const tree = [
+    {
+      zh: '以太网交换', en: 'Ethernet Switching',
+      children: [
+        { zh: 'VLAN', en: 'VLAN', children: [
+          { zh: 'huawei-vlan', en: 'huawei-vlan', sourceModule: 'huawei-vlan', available: true, module: 'vlan', children: [
+            { zh: 'VLAN配置', en: 'VLAN Config', kind: 'container', name: 'vlan' },
+          ]},
+        ]},
+      ],
+    },
+    {
+      zh: '安全', en: 'Security',
+      children: [{ zh: 'huawei-dsa', en: 'huawei-dsa', sourceModule: 'huawei-dsa', available: false }],
+    },
+  ]
+
+  beforeEach(() => {
+    setActivePinia(createPinia())
+    vi.restoreAllMocks()
+  })
+
+  async function mountTree() {
+    mockLeftTree(tree)
+    mockYangModules([])
+    const wrapper = mount(Sidebar, { global: { plugins: [router, ElementPlus] } })
+    await new Promise((r) => setTimeout(r))
+    return wrapper
+  }
+
+  it('左树就绪时渲染搜索框与展开/收起全部控件', async () => {
+    const w = await mountTree()
+    expect(w.find('[data-test="lefttree-search"]').exists()).toBe(true)
+    expect(w.find('[data-test="lefttree-expand-all"]').exists()).toBe(true)
+    expect(w.find('[data-test="lefttree-collapse-all"]').exists()).toBe(true)
+  })
+
+  it('搜索命中：保留祖先链并自动展开，未命中分支剪除；清空恢复全树', async () => {
+    const w = await mountTree()
+    await w.find('input[data-test="lefttree-search"]').setValue('VLAN配置')
+    await new Promise((r) => setTimeout(r))
+    expect(w.find('[data-test="lefttree-group-以太网交换"]').exists()).toBe(true)
+    expect(w.find('[data-test="lefttree-group-安全"]').exists()).toBe(false)
+    // 祖先链自动展开：命中的 container 节点直接可见
+    expect(w.findAll('.el-sub-menu.is-opened').length).toBeGreaterThanOrEqual(3)
+    expect(w.find('[data-test="lefttree-node-vlan"]').exists()).toBe(true)
+
+    await w.find('input[data-test="lefttree-search"]').setValue('')
+    await new Promise((r) => setTimeout(r))
+    expect(w.find('[data-test="lefttree-group-安全"]').exists()).toBe(true)
+  })
+
+  it('命中不可用叶：保留且仍为禁用占位（LT-05 负路径）', async () => {
+    const w = await mountTree()
+    await w.find('input[data-test="lefttree-search"]').setValue('huawei-dsa')
+    await new Promise((r) => setTimeout(r))
+    const leaf = w.find('[data-test="lefttree-leaf-huawei-dsa"]')
+    expect(leaf.exists()).toBe(true)
+    expect(leaf.classes()).toContain('is-disabled')
+  })
+
+  it('无命中：空态提示而非空白（R08）', async () => {
+    const w = await mountTree()
+    await w.find('input[data-test="lefttree-search"]').setValue('不存在的节点xyz')
+    await new Promise((r) => setTimeout(r))
+    expect(w.find('[data-test="lefttree-no-match"]').exists()).toBe(true)
+    expect(w.find('[data-test^="lefttree-group"]').exists()).toBe(false)
+  })
+
+  it('展开全部/收起全部切换树的 open 状态', async () => {
+    const w = await mountTree()
+    expect(w.findAll('.el-sub-menu.is-opened').length).toBe(0)
+    await w.find('[data-test="lefttree-expand-all"]').trigger('click')
+    await new Promise((r) => setTimeout(r))
+    // 以太网交换 / VLAN / huawei-vlan 三层 + native-config 壳
+    expect(w.findAll('.el-sub-menu.is-opened').length).toBeGreaterThanOrEqual(4)
+    await w.find('[data-test="lefttree-collapse-all"]').trigger('click')
+    await new Promise((r) => setTimeout(r))
+    // 收起全部只收树内节点，原生配置壳保持展开（树仍可见）
+    expect(w.findAll('.el-sub-menu.is-opened').length).toBe(1)
   })
 })

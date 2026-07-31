@@ -11,7 +11,11 @@
     "brandSub": "Switch Mgmt",
     "sideFoot": "No DB · TTL cache",
     "fallbackInterface": "Interface Management",
-    "fallbackVlan": "VLAN Configuration"
+    "fallbackVlan": "VLAN Configuration",
+    "treeSearchPlaceholder": "Search model node",
+    "expandAll": "Expand All",
+    "collapseAll": "Collapse All",
+    "searchNoMatch": "No matching nodes"
   },
   "common": {
     "language": "Language",

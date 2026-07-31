@@ -9,6 +9,7 @@
     </div>
 
     <el-menu
+      ref="menuRef"
       class="nav"
       :default-active="activeMenu"
       :collapse="isCollapsed"
@@ -32,7 +33,24 @@
           <span>{{ t('nav.nativeConfig') }}</span>
         </template>
         <template v-if="leftTreeReady">
-          <LeftTreeMenu :nodes="leftTree" index-prefix="lt" />
+          <!-- 特性列表工具行（LT-05）：节点名搜索 + 一键展开/收起（NCE 形态） -->
+          <li class="lt-toolbar" @click.stop>
+            <el-input
+              v-model="ltQuery"
+              size="small"
+              clearable
+              data-test="lefttree-search"
+              :placeholder="t('nav.treeSearchPlaceholder')"
+            >
+              <template #prefix><el-icon><Search /></el-icon></template>
+            </el-input>
+            <el-icon class="lt-tool-btn" data-test="lefttree-expand-all" :title="t('nav.expandAll')" @click="expandAll"><Expand /></el-icon>
+            <el-icon class="lt-tool-btn" data-test="lefttree-collapse-all" :title="t('nav.collapseAll')" @click="collapseAll"><Fold /></el-icon>
+          </li>
+          <li v-if="ltQuery.trim() && !filteredTree.length" class="lt-empty" data-test="lefttree-no-match">
+            {{ t('nav.searchNoMatch') }}
+          </li>
+          <LeftTreeMenu :nodes="filteredTree" index-prefix="lt" />
         </template>
         <!-- 降级：任务域分组（FE-13）：任一模块带 category 时按组渲染，未标注归「其他」；
              全部未标注则平铺（等价旧形态）。 -->
@@ -106,17 +124,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, nextTick, ref, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { useMenuStore } from '../../stores/menu'
+import type { MenuInstance } from 'element-plus'
+import { useMenuStore, type LeftTreeNode } from '../../stores/menu'
+import { filterLeftTree } from '../../utils/leftTreeFilter'
 import LeftTreeMenu from './LeftTreeMenu.vue'
-import { DataLine, Monitor, Connection, Document, Tools, Fold, Expand, Share } from '@element-plus/icons-vue'
+import { DataLine, Monitor, Connection, Document, Tools, Fold, Expand, Share, Search } from '@element-plus/icons-vue'
 
 const route = useRoute()
 const menuStore = useMenuStore()
 const { t } = useI18n()
 
+const menuRef = ref<MenuInstance>()
 const activeMenu = computed(() => route.path)
 const isCollapsed = computed(() => menuStore.isCollapsed)
 const nativeModules = computed(() => menuStore.nativeModules)
@@ -125,6 +146,44 @@ const nativeGrouped = computed(() => nativeGroups.value.some((g) => g.category))
 const leftTree = computed(() => menuStore.leftTree)
 const leftTreeReady = computed(() => leftTree.value.length > 0)
 const businessModules = computed(() => menuStore.businessModules)
+
+// ===== 左树搜索与展开收起（LT-05）=====
+const ltQuery = ref('')
+const filteredTree = computed(() => filterLeftTree(leftTree.value, ltQuery.value))
+
+// 与 LeftTreeMenu 的 index 生成规则同构：分组与「带 children 的可用模块叶」
+// 渲染为 el-sub-menu，索引 `${prefix}-${i}`；container/rpc 子节点为 menu-item 不递归。
+function subIndexes(nodes: LeftTreeNode[], prefix: string): string[] {
+  const out: string[] = []
+  nodes.forEach((node, i) => {
+    const idx = `${prefix}-${i}`
+    if (node.kind) return
+    if (node.sourceModule) {
+      if (node.available && node.children?.length) out.push(idx)
+      return
+    }
+    out.push(idx)
+    out.push(...subIndexes(node.children || [], idx))
+  })
+  return out
+}
+
+function expandAll() {
+  menuRef.value?.open('native-config')
+  for (const idx of subIndexes(filteredTree.value, 'lt')) menuRef.value?.open(idx)
+}
+
+// 收起全部只收树内节点：原生配置壳保持展开，树本身仍可见。
+function collapseAll() {
+  for (const idx of subIndexes(filteredTree.value, 'lt')) menuRef.value?.close(idx)
+}
+
+// 搜索即过滤：命中自动展开祖先链到命中层；清空恢复默认折叠态（LT-05）。
+watch(ltQuery, async (q) => {
+  await nextTick()
+  if (q.trim()) expandAll()
+  else for (const idx of subIndexes(leftTree.value, 'lt')) menuRef.value?.close(idx)
+})
 
 onMounted(() => {
   // 左树为主路径；nativeModules 仍加载（业务菜单 + 左树降级路径共用）。
@@ -231,6 +290,32 @@ function toggleCollapse() {
 }
 .nav :deep(.el-sub-menu .el-menu-item) {
   min-width: 0;
+}
+
+/* 左树工具行（LT-05）：搜索 + 展开/收起全部 */
+.lt-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px 4px;
+  list-style: none;
+}
+
+.lt-tool-btn {
+  cursor: pointer;
+  color: var(--ink-3);
+  flex-shrink: 0;
+}
+
+.lt-tool-btn:hover {
+  color: var(--primary);
+}
+
+.lt-empty {
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  list-style: none;
 }
 
 /* 侧栏底部状态 */
