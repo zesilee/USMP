@@ -348,7 +348,8 @@
       "baselineDevice": "live device readback",
       "baselineNone": "no baseline (computed as new config)",
       "commitConfirm": "Commit {count} pending changes to the device in one transaction (all-or-nothing). Continue?",
-      "leaveConfirm": "There are pending changes; drafts will be lost after leaving. Leave anyway?"
+      "leaveConfirm": "There are pending changes; drafts will be lost after leaving. Leave anyway?",
+      "noPayload": "(no payload)"
     },
     "stageChange": "OK",
     "clearFieldTipDelete": "After commit this item will be deleted from the device",

@@ -129,3 +129,59 @@ describe('DryRunDialog · 试运行弹窗（FE-23，调 preview 接口）', () =
     expect(document.body.querySelector('[data-test="dryrun-error"]')).toBeTruthy()
   })
 })
+
+describe('DryRunDialog · 报文格式化呈现（FE-23 可读性）', () => {
+  it('报文按标签折行并带行号：不再是糊成一行的裸文本', async () => {
+    seedOne()
+    vi.mocked(previewChangeset).mockResolvedValue(previewOK as any)
+    mountDialog()
+    await flushPromises()
+
+    const viewers = document.body.querySelectorAll('[data-test="xml-viewer"]')
+    expect(viewers.length).toBeGreaterThanOrEqual(2) // 正向 + 回滚
+
+    const forward = viewers[0]
+    const lines = forward.querySelectorAll('.xml-line')
+    // <vlan><id>10</id><description>x</description></vlan> → 4 行（含合并的文本叶）
+    expect(lines.length).toBe(4)
+    // 行号从 1 递增
+    expect(Array.from(lines).map((l) => l.querySelector('.ln')!.textContent)).toEqual(['1', '2', '3', '4'])
+    // 缩进真实存在（子元素 padding-left 非 0）
+    const childCode = lines[1].querySelector('.code') as HTMLElement
+    expect(childCode.style.paddingLeft).not.toBe('0em')
+    // 内容无损：拼接后仍是原报文
+    const text = Array.from(lines)
+      .map((l) => l.querySelector('.code')!.textContent)
+      .join('')
+    expect(text).toBe('<vlan><id>10</id><description>x</description></vlan>')
+  })
+
+  it('报文经 token 渲染而非 v-html：注入片段被当文本转义（XSS 防线）', async () => {
+    seedOne()
+    const evil = {
+      ...previewOK,
+      data: {
+        ...previewOK.data,
+        data: {
+          ...previewOK.data.data,
+          entries: [
+            {
+              op: 'update',
+              path: VLAN_PATH,
+              baseline_source: 'cache',
+              forward_xml: '<vlan><description>&lt;img src=x onerror=alert(1)&gt;</description></vlan>',
+              rollback_xml: '',
+              diff: [],
+            },
+          ],
+        },
+      },
+    }
+    vi.mocked(previewChangeset).mockResolvedValue(evil as any)
+    mountDialog()
+    await flushPromises()
+
+    expect(document.body.querySelector('img')).toBeNull()
+    expect(document.body.textContent).toContain('onerror=alert(1)')
+  })
+})
