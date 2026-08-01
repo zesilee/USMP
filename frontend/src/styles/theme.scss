@@ -277,11 +277,11 @@ html, body {
 
 // 表格 - 浅色 iMaster
 .el-table {
-  --el-table-bg-color: $bg-card;
-  --el-table-tr-bg-color: $bg-card;
-  --el-table-text-color: $text-primary;
-  --el-table-header-text-color: $text-secondary;
-  --el-table-border-color: $border-color;
+  --el-table-bg-color: #{$bg-card};
+  --el-table-tr-bg-color: #{$bg-card};
+  --el-table-text-color: #{$text-primary};
+  --el-table-header-text-color: #{$text-secondary};
+  --el-table-border-color: #{$border-color};
 
   border-radius: $radius-lg;
   overflow: hidden;
@@ -324,7 +324,7 @@ html, body {
 
 // 树形控件
 .el-tree {
-  --el-tree-node-hover-bg-color: $bg-hover;
+  --el-tree-node-hover-bg-color: #{$bg-hover};
   --el-tree-node-content-bg-color: transparent;
   background-color: transparent;
   color: $text-primary;
@@ -347,8 +347,8 @@ html, body {
 
 // 卡片（浅色 iMaster：克制，无上浮，hover 仅微增阴影）
 .el-card {
-  --el-card-bg-color: $bg-card;
-  --el-card-border-color: $border-color;
+  --el-card-bg-color: #{$bg-card};
+  --el-card-border-color: #{$border-color};
   border-radius: $radius-card;
   box-shadow: $shadow-e1;
   transition: box-shadow $transition-base;
@@ -360,7 +360,7 @@ html, body {
 
 // 抽屉
 .el-drawer {
-  --el-drawer-bg-color: $bg-card;
+  --el-drawer-bg-color: #{$bg-card};
   font-family: $font-family;
 
   .el-drawer__header {
@@ -377,9 +377,9 @@ html, body {
 
 // 对话框
 .el-dialog {
-  --el-dialog-bg-color: $bg-card;
-  --el-dialog-title-color: $text-primary;
-  --el-dialog-border-color: $border-color;
+  --el-dialog-bg-color: #{$bg-card};
+  --el-dialog-title-color: #{$text-primary};
+  --el-dialog-border-color: #{$border-color};
   border-radius: $radius-xl;
   box-shadow: $shadow-e4;
   font-family: $font-family;
@@ -435,9 +435,9 @@ html, body {
 }
 
 .el-select-dropdown {
-  --el-select-dropdown-bg-color: $bg-card;
-  --el-option-hover-bg-color: $bg-hover;
-  --el-option-selected-bg-color: $color-primary-bg;
+  --el-select-dropdown-bg-color: #{$bg-card};
+  --el-option-hover-bg-color: #{$bg-hover};
+  --el-option-selected-bg-color: #{$color-primary-bg};
   border-color: $border-color;
   box-shadow: $shadow-e3;
 }
@@ -445,9 +445,9 @@ html, body {
 // 分页
 .el-pagination {
   --el-pagination-bg-color: transparent;
-  --el-pagination-text-color: $text-secondary;
-  --el-pagination-button-bg-color: $bg-elevated;
-  --el-pagination-button-disabled-bg-color: $bg-card;
+  --el-pagination-text-color: #{$text-secondary};
+  --el-pagination-button-bg-color: #{$bg-elevated};
+  --el-pagination-button-disabled-bg-color: #{$bg-card};
   font-family: $font-family;
 
   .btn-prev, .btn-next {
