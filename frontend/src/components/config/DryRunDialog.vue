@@ -21,11 +21,11 @@
           <div v-else class="xml-panes">
             <div class="xml-pane">
               <div class="pane-title">{{ t('console.batch.forward') }}</div>
-              <pre class="xml-body">{{ e.forward_xml }}</pre>
+              <XmlViewer :xml="e.forward_xml" />
             </div>
             <div class="xml-pane">
               <div class="pane-title">{{ t('console.batch.rollback') }}</div>
-              <pre class="xml-body">{{ e.rollback_xml }}</pre>
+              <XmlViewer :xml="e.rollback_xml" />
             </div>
           </div>
         </div>
@@ -58,6 +58,7 @@
 import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { previewChangeset, type ChangesetPreviewDataDTO } from '../../api'
+import XmlViewer from './XmlViewer.vue'
 import { useChangesetStore } from '../../stores/changeset'
 
 const props = defineProps<{ visible: boolean; device: string }>()
@@ -137,16 +138,6 @@ const baselineLabel = computed(() => {
   padding: 6px 10px;
   border-bottom: 1px solid var(--el-border-color);
   background: var(--el-fill-color-light);
-}
-.xml-body {
-  margin: 0;
-  padding: 8px 10px;
-  font-size: 12px;
-  line-height: 1.6;
-  max-height: 320px;
-  overflow: auto;
-  white-space: pre-wrap;
-  word-break: break-all;
 }
 .cell-added {
   color: var(--el-color-success);

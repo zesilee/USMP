@@ -348,7 +348,8 @@
       "baselineDevice": "设备实时回读",
       "baselineNone": "无基线（按全新配置计算）",
       "commitConfirm": "将把 {count} 条待提交变更一次性下发到设备（整体生效或整体回退）。确定提交？",
-      "leaveConfirm": "存在未提交的配置变更，离开页面后草稿将丢失。确定离开？"
+      "leaveConfirm": "存在未提交的配置变更，离开页面后草稿将丢失。确定离开？",
+      "noPayload": "（无报文）"
     },
     "stageChange": "确定",
     "clearFieldTipDelete": "清除后提交将从设备删除该配置项",
