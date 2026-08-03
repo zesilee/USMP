@@ -6,7 +6,7 @@
 |------|------|
 | 定位 | 无数据库、高并发、模型驱动的交换机设备管理平台 |
 | 架构 | yang-controller-runtime 声明式配置管理 **[R01: 禁止更换]** |
-| 语言 | Go 1.21+ / Vue3 |
+| 语言 | Go 1.22（交付要求钉死，2026-08-03；依赖须兼容 1.22，禁止引入要求更高 Go 版本的依赖/语法） / Vue3 |
 | 协议 | NETCONF (SSH 830)；gNMI (9339/9340) 为规划能力（空壳已删，工厂显式未实现错误） **[R02: 禁止旧协议]** |
 
 ## §2 架构红线
@@ -37,7 +37,7 @@
 
 | 层 | 选型 | 依赖 | 约束 |
 |----|------|------|------|
-| 后端 | Go 1.21+ / yang-controller-runtime / Gin | ygot, scrapligo | §4 分层架构 |
+| 后端 | Go 1.22（钉死） / yang-controller-runtime / Gin | ygot, scrapligo | §4 分层架构 |
 | 模型 | YANG + ygot | openconfig/ygot | R04: 自动生成 |
 | 协议 | NETCONF (SSH 830) + gNMI | RFC6241, openconfig/gnmi | R02: 禁止旧协议 |
 | 缓存 | TTL+LRU 内存 | 协程安全 | R03: 无数据库, Key=IP+YANG路径, TTL 30s, 下发后失效 |

@@ -26,7 +26,7 @@ jobs:
 
       - uses: actions/setup-go@v5
         with:
-          go-version: '1.21'
+          go-version-file: backend/go.mod
 
       - name: Go Mod Download
         run: go mod download
@@ -43,11 +43,16 @@ jobs:
             echo "::error::Some tests failed"
             exit 1
           fi
-          go tool cover -func=coverage.out 2>/dev/null || true
+          # 口径归一化：只统计带测试的包。Go 1.22 的 -coverprofile 会把无测试包
+          # （含巨型 internal/generated/*）计入分母，直接用原始 profile 数值会随
+          # Go 版本漂移；过滤后口径与历史基线一致（详见 backend/.coverage-baseline）。
+          go list -f '{{if or .TestGoFiles .XTestGoFiles}}{{.ImportPath}}{{end}}' ./... | grep -v '^$' > tested-pkgs.txt
+          awk -F: 'NR==FNR {pkg[$0]=1; next} /^mode:/ {print; next} { file=$1; dir=file; sub(/\/[^\/]*$/, "", dir); if (dir in pkg) print }' tested-pkgs.txt coverage.out > coverage.filtered.out
+          go tool cover -func=coverage.filtered.out 2>/dev/null || true
 
       - name: Check Coverage Baseline
         run: |
-          CURRENT=$(go tool cover -func=coverage.out 2>/dev/null | grep total | awk '{print $3}' | sed 's/%//' || echo "0")
+          CURRENT=$(go tool cover -func=coverage.filtered.out 2>/dev/null | grep total | awk '{print $3}' | sed 's/%//' || echo "0")
           echo "Current coverage: ${CURRENT}%"
           if [ -f .coverage-baseline ]; then
             BASELINE=$(cat .coverage-baseline)

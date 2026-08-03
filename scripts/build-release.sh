@@ -11,11 +11,15 @@
 #
 # 目标平台缺省 linux/amd64（docker 镜像内使用），可用 USMP_GOOS/USMP_GOARCH 覆盖。
 # 打包依赖 zip 或 python3 之一（python3 路径会保留可执行位）。
+#
+# Go 工具链：交付要求钉死 1.22，缺省 GOTOOLCHAIN=go1.22.12（本机没有会自动下载）。
+# 离线且已装 1.22.x 的构建机可用 USMP_GOTOOLCHAIN=local 跳过下载。
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 GOOS="${USMP_GOOS:-linux}"
 GOARCH="${USMP_GOARCH:-amd64}"
+export GOTOOLCHAIN="${USMP_GOTOOLCHAIN:-go1.22.12}"
 OUT="${USMP_RELEASE_OUT:-$ROOT/release}"
 STAGE="$OUT/stage"
 PKG="$STAGE/usmp"
