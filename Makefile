@@ -99,7 +99,7 @@ sync-snd-i18n: ## 同步 SND i18n res 到前端入库副本（前端镜像上下
 	@echo "✅ sync-snd-i18n 完成（vendored 副本勿手改，升级 snd 包后重跑）"
 
 gen-contract: ## 生成 API 契约类型：Go 注解 → OpenAPI → 前端 TS（后端为唯一真源）
-	cd backend && go tool swag init -g main.go -o docs/openapi \
+	cd backend && go run github.com/swaggo/swag/cmd/swag init -g main.go -o docs/openapi \
 		--parseDependency --parseInternal --outputTypes json,yaml
 	cd backend && npx --yes swagger2openapi@7.0.8 docs/openapi/swagger.json -o docs/openapi/openapi3.json
 	cd frontend && npm run gen:api

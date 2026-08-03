@@ -3,7 +3,7 @@
 #
 # 扫描 backend/internal/generated/*/gen.conf，对每个厂商包执行：
 #   ygot generator（版本由 backend/go.mod 锁定）→ genfix 后处理（跨平台，CG-02）
-#   → 格式化收尾：单文件模式 gofmt；拆分模式 go tool goimports（ygot -output_dir
+#   → 格式化收尾：单文件模式 gofmt；拆分模式 go run goimports（ygot -output_dir
 #     给每个文件写同一份 import 块，须剪未用 import 才能编译，版本同由 go.mod 锁定）
 # 输出双模式（gen.conf 可选键 split_count 控制）：
 #   未设置 → 单文件 all.gen.go（向后兼容，小厂商包零迁移）
@@ -89,7 +89,7 @@ for conf in "$GEN_DIR"/*/gen.conf; do
                     -ignore_unsupported=true \
                     $modules &&
                 go run ./tools/genfix "internal/generated/$pkg"/*.go &&
-                go tool goimports -w "internal/generated/$pkg"
+                go run golang.org/x/tools/cmd/goimports -w "internal/generated/$pkg"
         )
     else
         echo "gen-yang: 生成 $pkg（modules: $modules）"
