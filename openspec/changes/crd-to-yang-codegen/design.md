@@ -93,7 +93,7 @@ Kind 取 `BusinessVlanNet`、模块名 `usmp-business-vlan-net`——与现役 `
 - 生成物：`backend/internal/yang/models/usmp-business-vlan-net.yang`（与手写意图模型同目录，头注释标 generated）。
 - ygot：新建 `backend/internal/generated/businessdemo/gen.conf`（manifest 管线自动消费，零脚本改动）→ `make gen-yang VENDOR=businessdemo`。**独立包不并入 `business` 包**：demo 生命周期独立（北向正式 CRD 到位后可整目录替换/删除），并入会让退役变成外科手术。
 - schema 树：测试内 `AddYgotSchemaWithVendor(ds, businessdemoSchema, "usmp")` 断言注册成功、树形完整——不改运行期 `load.go`。
-- 前端渲染证明：`tools/schemadump/main.go` 追加加载 businessdemo 包 → `make gen-schema-fixtures` 出 `usmp-business-vlan-net.json` fixture → 前端派生黄金套件（GD-01）自动覆盖新模块，`deriveTabs/deriveColumns/deriveKeyField` 黄金入库。schemadump 是构建期工具，加载 demo 包不影响运行期 `/yang/modules`。
+- 前端渲染证明：`tools/schemadump/main.go` 追加加载 businessdemo 包 → `make gen-schema-fixtures` 出 `business-vlan-net.json`（模块名=顶层容器名，AddYgotSchemaWithVendor 命名口径） fixture → 前端派生黄金套件（GD-01）自动覆盖新模块，`deriveTabs/deriveColumns/deriveKeyField` 黄金入库。schemadump 是构建期工具，加载 demo 包不影响运行期 `/yang/modules`。
 
 ### D8 Makefile / 门禁
 

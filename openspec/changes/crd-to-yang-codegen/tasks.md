@@ -18,7 +18,7 @@
 
 - [x] 3.1 生成 `backend/internal/yang/models/usmp-business-vlan-net.yang`（工具产出，单独 commit）；新建 `internal/generated/businessdemo/gen.conf` 并 `make gen-yang VENDOR=businessdemo` 出 ygot 包（生成物 commit）
 - [x] 3.2 先写红灯：schema 树注册测试（`AddYgotSchemaWithVendor` businessdemo，断言 container/list/leaf 层级与 range/pattern/mandatory 元数据在位）——随后绿灯
-- [x] 3.3 `tools/schemadump/main.go` 追加加载 businessdemo 包 → `make gen-schema-fixtures` 出 `usmp-business-vlan-net.json`；fixture 语义变化注记（README/头注释）
+- [x] 3.3 `tools/schemadump/main.go` 追加加载 businessdemo 包 → `make gen-schema-fixtures` 出 `business-vlan-net.json`（模块名=顶层容器名，AddYgotSchemaWithVendor 命名口径）；fixture 语义变化注记（README/头注释）
 - [x] 3.4 前端派生黄金：跑黄金生成，`usmp-business-vlan-net` 黄金入库，deriveTabs/deriveColumns/deriveKeyField 全绿（GD-01）；受影响模块人工核对（SF-04）
 
 ## 4. Makefile 与门禁（C2Y-06）

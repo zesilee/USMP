@@ -109,7 +109,9 @@ func TestGeneratedYangParses(t *testing.T) {
 	if vt := root.Dir["vlan-type"]; vt == nil || vt.Type == nil || vt.Type.Kind != yang.Yenum {
 		t.Error("vlan-type should map enum to enumeration")
 	} else if names := vt.Type.Enum.Names(); len(names) != 2 || names[0] != "common" || names[1] != "super" {
-		t.Errorf("vlan-type enum should keep declaration order [common super], got %v", names)
+		// 注意：goyang Enum.Names() 按字典序返回，此断言校验的是**名字集合**
+		// 完整（common/super 恰为字典序）；enum 序差在往返对账中双侧排序归一。
+		t.Errorf("vlan-type enum names should be [common super], got %v", names)
 	}
 	if en := root.Dir["enabled"]; en == nil || en.Type == nil || en.Type.Kind != yang.Ybool {
 		t.Error("enabled should map boolean to boolean")
@@ -237,6 +239,28 @@ func TestGenerateMappingBranches(t *testing.T) {
                   minimum: 0
                   maximum: 100000`,
 			wants: []string{"type uint32 {", `range "0..100000";`},
+		},
+		{
+			// 全量基类型边界 → 裸类型：goyang 给无 range 整型附带全量 Range，
+			// crdgen 会输出这类边界，反向必须收敛回裸类型（C2Y-04 闭环）。
+			name: "full base-type range collapses to bare uint16",
+			props: `              type: object
+              properties:
+                port:
+                  type: integer
+                  minimum: 0
+                  maximum: 65535`,
+			wants: []string{"type uint16;"},
+		},
+		{
+			name: "full int64 range collapses to bare int64",
+			props: `              type: object
+              properties:
+                counter:
+                  type: integer
+                  minimum: -9223372036854775808
+                  maximum: 9223372036854775807`,
+			wants: []string{"type int64;"},
 		},
 	}
 	for _, tc := range cases {

@@ -39,6 +39,24 @@ func TestBusinessDemoSchemaRegisters(t *testing.T) {
 				t.Errorf("business-vlan-net schema missing child %q", name)
 			}
 		}
+		// 约束元数据存活：range/mandatory/pattern 穿过 CRD→YANG→ygot→schema 树全链。
+		if v, ok := root.Child("vlan-id"); ok && v != nil {
+			leaf := v.(schema.LeafNode)
+			if !leaf.Mandatory() {
+				t.Error("vlan-id should stay mandatory through the pipeline")
+			}
+			if lo, ok := leaf.RangeMin(); !ok || lo != 1 {
+				t.Errorf("vlan-id RangeMin = %v,%v want 1,true", lo, ok)
+			}
+			if hi, ok := leaf.RangeMax(); !ok || hi != 4094 {
+				t.Errorf("vlan-id RangeMax = %v,%v want 4094,true", hi, ok)
+			}
+		}
+		if n, ok := root.Child("name"); ok && n != nil {
+			if p := n.(schema.LeafNode).Pattern(); p != "[A-Za-z0-9_-]{1,31}" {
+				t.Errorf("name pattern = %q, want huawei-vlan aligned pattern", p)
+			}
+		}
 		// 嵌套容器与 list 子级也要可达（qos/priority、devices/ip+access-ports）。
 		if qos, ok := root.Child("qos"); ok && qos != nil {
 			if prio, ok := qos.(schema.ContainerNode).Child("priority"); !ok || prio == nil {

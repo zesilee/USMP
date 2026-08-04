@@ -31,7 +31,8 @@ fi
 # 2. Generated 目录保护 (R04: regen-and-diff——生成物改动必须可由管线复现；
 #    与 CI compliance 同口径，README/doc.go 等纯文档不触发)
 # ──────────────────────────────────────────────
-GENERATED=$(echo "$STAGED_FILES" | grep -E '^backend/internal/generated/' | grep -vE '(README\.md|doc\.go)$' || true)
+# yang/models 亦触发：改 CRD→重生成 .yang 但忘跑 gen-yang 时，陈旧 ygot 生成物在本地即拦（与 CI 对称）
+GENERATED=$(echo "$STAGED_FILES" | grep -E '^(backend/internal/generated/|backend/internal/yang/models/)' | grep -vE '(README\.md|doc\.go)$' || true)
 if [ -n "$GENERATED" ]; then
   echo -e "${YELLOW}[pre-commit] 检测到生成物/manifest 变更 → regen-and-diff 验证 (R04)...${NC}"
   if ! make gen-yang >/dev/null 2>&1; then
@@ -44,16 +45,18 @@ if [ -n "$GENERATED" ]; then
   fi
 fi
 
-# 北向 CRD→YANG 反向派生生成物（C2Y-06，与 CI compliance 同口径 CG-03）
+# 北向 CRD→YANG 反向派生生成物（C2Y-06，与 CI compliance 同口径 CG-03）。
+# diff 只收窄到工具产物文件：同目录还住着手写意图模型，扫全目录会被无关未暂存改动误伤。
 CRD2YANG=$(echo "$STAGED_FILES" | grep -E '^(backend/internal/yang/models/usmp-business-vlan-net\.yang|backend/tools/crd2yang/)' || true)
 if [ -n "$CRD2YANG" ]; then
   echo -e "${YELLOW}[pre-commit] 检测到 crd2yang 生成物/工具变更 → regen-and-diff 验证 (C2Y-06)...${NC}"
-  if ! make gen-crd2yang >/dev/null 2>&1; then
+  if ! CRD2YANG_OUT=$(make gen-crd2yang 2>&1); then
     echo -e "${RED}[C2Y-06] 拒绝: make gen-crd2yang 执行失败${NC}"
+    echo "$CRD2YANG_OUT" | tail -5 | sed 's/^/  /'
     FAILED=1
-  elif ! git diff --quiet backend/internal/yang/models/; then
+  elif ! git diff --quiet backend/internal/yang/models/usmp-business-vlan-net.yang; then
     echo -e "${RED}[C2Y-06] 拒绝: 生成的 YANG 与 make gen-crd2yang 输出不一致（生成物勿手改，改北向 CRD/工具后重跑）${NC}"
-    git diff --stat backend/internal/yang/models/ | sed 's/^/  /'
+    git diff --stat backend/internal/yang/models/usmp-business-vlan-net.yang | sed 's/^/  /'
     FAILED=1
   fi
 fi

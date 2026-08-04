@@ -244,10 +244,29 @@ func emitStringType(w *writer, s *apiextv1.JSONSchemaProps, path string) error {
 	return nil
 }
 
+// fullRanges 把 YANG 整型基类型映射到其全量取值范围的 float64 精确表示。
+// goyang 对**无** range 语句的整型也会附带基类型全量 Range（实测 v1.6.0），
+// 因此 crdgen 会对「无界」整型输出 ±全量边界的 minimum/maximum；反向把这类
+// 边界规范化回裸类型（不带 range 语句），闭合 C2Y-04 往返。
+// 注：int64/uint64 的边界超出 float64 精确整数域，常量转换后分别为 ±2^63 与
+// 2^64——与 JSON/YAML 解析同一路径得到的值一致，比较仍是精确的。
+var fullRanges = []struct {
+	typ      string
+	min, max float64
+}{
+	{"int8", -128, 127},
+	{"int16", -32768, 32767},
+	{"int32", -2147483648, 2147483647},
+	{"int64", -9223372036854775808, 9223372036854775807},
+	{"uint8", 0, 255},
+	{"uint16", 0, 65535},
+	{"uint32", 0, 4294967295},
+	{"uint64", 0, 18446744073709551615},
+}
+
 func emitIntegerType(w *writer, s *apiextv1.JSONSchemaProps, path string) error {
 	switch {
 	case s.Minimum == nil && s.Maximum == nil:
-		// crdgen 对无 range 的整型不出 min/max，反向对称回 int64。
 		w.line("type int64;")
 		return nil
 	case s.Minimum == nil || s.Maximum == nil:
@@ -260,8 +279,16 @@ func emitIntegerType(w *writer, s *apiextv1.JSONSchemaProps, path string) error 
 	if min > max {
 		return fmt.Errorf("%s: minimum %v exceeds maximum %v", path, min, max)
 	}
+	// 全量基类型边界 → 裸类型（见 fullRanges 注释）。
+	for _, fr := range fullRanges {
+		if min == fr.min && max == fr.max {
+			w.line("type %s;", fr.typ)
+			return nil
+		}
+	}
 	// float64 只能精确表示 ±2^53 内的整数：越界转换会静默回绕、腐蚀 range
-	//（如 MaxInt64 → MinInt64）。fail-fast 而非产出错误语义（C2Y-03）。
+	//（如 MaxInt64 → MinInt64）。全量边界已在上面兜住，其余越界 fail-fast
+	// 而非产出错误语义（C2Y-03）。
 	const exactLimit = float64(1 << 53)
 	if min < -exactLimit || max > exactLimit {
 		return fmt.Errorf("%s: integer bound beyond ±2^53 cannot be represented exactly in JSON/float64 — drop the bounds or narrow the range", path)

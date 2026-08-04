@@ -65,7 +65,7 @@
 #### Scenario: 前端派生黄金
 
 - **WHEN** 执行 `make gen-schema-fixtures` 后运行前端派生黄金套件
-- **THEN** `usmp-business-vlan-net.json` fixture SHALL 存在且 deriveTabs/deriveColumns/deriveKeyField 黄金 SHALL 全绿
+- **THEN** `business-vlan-net.json` fixture（模块名=顶层容器名） SHALL 存在且 deriveTabs/deriveColumns/deriveKeyField 黄金 SHALL 全绿
 
 ### Requirement: C2Y-06 生成物 SHALL 受 regen-and-diff 门禁保护
 
