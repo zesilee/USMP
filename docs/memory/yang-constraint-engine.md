@@ -26,3 +26,5 @@ metadata:
 **待办（sync 时）**：迁移 `yang-api` 主 spec 到 OpenSpec CLI 标准格式（delta 已 MODIFIED BR-03/04 修正陈旧「硬编码 schema」契约）。
 
 **must 存在性语义（2026-08-04 真机回归）**：mustViolations 已按 RFC7950 §7.5.3 收窄——叶子（标量/leaf-list）未赋值=节点不存在，其 must 不评估（false/0 是有效值）；when=false 与 presence 容器早已同语义，叶子曾是漏网口径。背景：ifm statistic-mode 自引用 must 在旧行为下恒违例，门禁强迫选值、真机又按接口类型裁剪该叶（unknown-element 拒收），创建接口两头堵死。改约束评估语义前先想「节点存在性」三口径：when / presence / 叶子赋值。
+
+**enum 漏列教训（同日二次回归）**：must 存在性判定的叶类型清单首版漏了 `enum`（statistic-mode 真实 FieldDef 即 enum），string 建模的测试全绿但真机照拦。军规：**回归测试必须按后端真实 FieldDef 形态逐字建模**（先 dump 再写测试）；新增叶类型时 isLeafKind 与 FieldRenderer LEAF_TYPES 两处同步。
