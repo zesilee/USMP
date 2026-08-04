@@ -25,13 +25,17 @@ origin: 用户拍板 2026-08-04「按4波方案做自研替代」；评估结论
 
 ## 四波计划
 
-- [ ] **Wave 1（本 worktree，进行中）**：协议核心 `pkg/yang-runtime/client/netconfcore`
+- [x] **Wave 1**：协议核心 `pkg/yang-runtime/client/netconfcore`
   —— RFC6242 封帧（EOM `]]>]]>` + chunked `\n#len\n…\n##\n`，hello 恒用 EOM、
   协商后切换）、hello 构造/解析/能力协商（base:1.1 优先）。纯 stdlib，B1 全矩阵
-  （拆包/粘包/畸形头/超限防 OOM/并发 race）。
-- [ ] **Wave 2**：SSH 传输（x/crypto/ssh，netconf subsystem）+ RPC 引擎（有锁
-  message-id、请求-应答关联、rpc-error 解析、context 超时、带界优雅关闭）+ 8 动作
-  操作层。B1 + B2 集成（netconfsim 端到端）。
+  （拆包/粘包/畸形头/超限防 OOM/并发 race）。—— PR #258 合入 2026-08-04；
+  评审揪出 EOM 定界符粘连丢字节 bug 已修
+- [ ] **Wave 2（本波）**：SSH 传输（x/crypto/ssh，netconf subsystem）+ RPC 引擎
+  （有锁 message-id、请求-应答关联、rpc-error 解析、context 超时看门狗、带界优雅
+  关闭、异常即判死快速失败）+ Session 8 动作操作层。B1（net.Pipe 假服务端覆盖
+  chunked 1.1 全链路）+ B2 集成（真 SSH ↔ netconfsim）。
+  实测踩坑已记：sim 按行读流，EOM 定界符后必须补 \n（scrapligo 同款），读端
+  对帧间空白宽容。
 - [ ] **Wave 3**：工厂双路径——`USMP_NETCONF_IMPL=scrapligo|core`（缺省 scrapligo），
   NETCONFClient 内部按开关走新旧实现；两路各跑全量 client 测试套 + e2e smoke。
 - [ ] **Wave 4**：真机灰度验证（华为 CE，重点：1.1 chunked、超大回包、hello 怪癖、
