@@ -19,7 +19,7 @@
 - [合入授权](merge-authorization.md) — CI 全绿的 PR 直接自助 merge（2026-07-18 显式授权），契约破坏/范围扩张仍先确认
 - [snd融合四期计划](snd-integration-program.md) — 做YANG基线/左树/i18n/能力协商前必读：snd整包融合拍板(全树+渐进生成、CRD人工role+能力实测、①基线→②角色协商→③左树→④i18n)、基线漂移实测、yang-models依赖触点清单
 - [SND驱动注册表](snd-driver-registry.md) — 加新厂商/新YANG模块前必读：注册表(#134)+通用XML编解码引擎(#136-138)+manifest生成管线(#140)已交付、**P5-4剪出(不接非华为设备,能力零成本待命)**、加模块=注册一条描述符+gen.conf加模块名、R04已regen-and-diff化勿手改generated/、namespace须显式登记、注册可达性靠空白导入、golden方法论、超限PR三段拆法
-- [scrapligo并发坑](scrapligo-concurrency-pitfalls.md) — 改NETCONF client/排查「持续500 EOF」/合堆叠PR前必读：scrapligo v1.4.0非并发安全(messageID++/Write无锁)+死连接Close死锁+被强杀时内部竞态；opMu串行化+isTransportError自愈已修(#131)；测试注入用优雅关闭别杀sim；**堆叠PR在base先合后再合=合进死分支不到main(#129翻车)**
+- [scrapligo并发坑·历史](scrapligo-concurrency-pitfalls.md) — **scrapligo已删除(2026-08-04),本条仅存历史背景** 改NETCONF client/排查「持续500 EOF」/合堆叠PR前必读：scrapligo v1.4.0非并发安全(messageID++/Write无锁)+死连接Close死锁+被强杀时内部竞态；opMu串行化+isTransportError自愈已修(#131)；测试注入用优雅关闭别杀sim；**堆叠PR在base先合后再合=合进死分支不到main(#129翻车)**
 - [删除语义](config-delete-semantics.md) — 改写链路/删除/netconfsim前必读：声明式通道刻意删不了(walkMap subset)→DELETE命令通道、先移desired再下发、sim已接RFC edit-config(整树替换退役)、opMu写事务串行化、华为vlan key是id；**PR#145「内置接口删不掉」根因=写链路漏发模块顶层容器`<ifm>/<vlan>`发扁平根→设备嵌套树匹配不到,已修为嵌套+Decode锚定容器解vlan同名歧义**
 - [呈现元数据收割](ext-ui-annotations.md) — 扩展注解词汇/改FieldDef前必读：模块级扩展不存活运行期schema(task-name走构建期codegen)、3模块仅4种存量扩展、自造ui-*已决策推迟、R04门禁禁提交generated/、readonly-must门禁死锁模式
 - [通用模块控制台](generic-module-console.md) — 改 /module 控制台/FieldDef/呈现扩展前必读：交付状态、路径派生规律、presence/删除债、rebase 注意
@@ -53,4 +53,4 @@
 - [攒批提交二期](nce-batch-commit.md) — 做配置台提交链路/变更集/试运行相关前必读：二期全交付(变更集/preview/commit 2PC/即时下发退役)、desired后写时序、pr-size不豁免openspec文档、worktree真目录node_modules勿再symlink、vitest4 unhandled rejection红整套件、阈值86/79/80/87+后端72.3
 - [发布打包](release-packaging.md) — 做交付/部署/改打包链路前必读：scripts/build-release.sh 一键出 zip(bin+web+start.sh)、静态站=自研Go二进制免nginx、start.sh=POSIX sh可当ENTRYPOINT、python zipfile兜底保留+x、冒烟用干净alpine容器别抢本机8080
 - [Go1.22钉死](go-122-pin.md) — 升依赖/加语法/改CI/查覆盖率前必读：交付钉死1.22全链(go.mod/Docker/CI/打包)、依赖天花板(ygot v0.29.20/x-crypto v0.33/swag v1.16.4)、tool指令改tools.go+go run、覆盖率口径已归一化基线72.5
-- [scrapligo自研替代](netconf-selfdev.md) — 碰NETCONF client/netconfcore/连接排查前必读：Wave1-3已合入(双路径并行、缺省仍scrapligo、USMP_NETCONF_IMPL=core切自研)、等价性CI锁定、**Wave4真机门禁:通过前禁切缺省禁删scrapligo**、两个封帧兼容坑
+- [NETCONF自研引擎](netconf-selfdev.md) — 碰NETCONF client/netconfcore/连接排查/加依赖前必读：**scrapligo已删(NC-01红线,守护测试拦重引,无运行时回退)**、netconfcore=唯一引擎、真机验证移交测试团队(手册docs/netconf-core-field-validation.md,结论回来前勿用于生产设备变更)、三个封帧兼容坑
