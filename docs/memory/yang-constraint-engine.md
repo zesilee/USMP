@@ -24,3 +24,5 @@ metadata:
 **测试**：后端全绿+`-race` 全绿；前端 **302 单测 + vue-tsc 全绿**；F4 staging-smoke 加「class=sub-interface 显现 parent-name」（断言限定 `.el-drawer`——左侧 SchemaTree 恒列全叶）。**完整 e2e 交 macos-staging CI**（本地 docker 全栈冒烟 USMP_SKIP_E2E 跳过）。
 
 **待办（sync 时）**：迁移 `yang-api` 主 spec 到 OpenSpec CLI 标准格式（delta 已 MODIFIED BR-03/04 修正陈旧「硬编码 schema」契约）。
+
+**must 存在性语义（2026-08-04 真机回归）**：mustViolations 已按 RFC7950 §7.5.3 收窄——叶子（标量/leaf-list）未赋值=节点不存在，其 must 不评估（false/0 是有效值）；when=false 与 presence 容器早已同语义，叶子曾是漏网口径。背景：ifm statistic-mode 自引用 must 在旧行为下恒违例，门禁强迫选值、真机又按接口类型裁剪该叶（unknown-element 拒收），创建接口两头堵死。改约束评估语义前先想「节点存在性」三口径：when / presence / 叶子赋值。
