@@ -88,3 +88,75 @@ describe('useConfigForm · payload 深层排除 readonly 状态叶（FE-14）', 
     expect(p.name).toBe('a')
   })
 })
+
+// 真机回归（T07，unknown-element 拒绝）：编辑态表单被设备回读整行填满后，
+// 「确定」的下发载荷只能带「主键 + 用户改过的字段」。设备按接口类型裁剪
+// 叶能力（statistic-mode 等），把回读值原样回推会被 rpc-error unknown-element
+// 拒绝（2026-08-04 真机创建接口即此因）。
+describe('useConfigForm · changedPayload 只含主键与改动字段', () => {
+  const kf = ref('name')
+  const editFields = ref<Field[]>([
+    { path: '/ifm/interfaces/interface/name', type: 'string', label: 'name', isKey: true },
+    { path: '/ifm/interfaces/interface/description', type: 'string', label: 'description' },
+    { path: '/ifm/interfaces/interface/statistic-mode', type: 'string', label: 'statistic-mode' },
+    { path: '/ifm/interfaces/interface/admin-status', type: 'string', label: 'admin-status' },
+    { path: '/ifm/interfaces/interface/auto-name', type: 'string', label: 'auto-name', dynamicDefault: true },
+    {
+      path: '/ifm/interfaces/interface/statistics-cfg',
+      type: 'group',
+      label: 'statistics-cfg',
+      fields: [
+        { path: '/ifm/interfaces/interface/statistics-cfg/interval', type: 'number', label: 'interval' },
+        { path: '/ifm/interfaces/interface/statistics-cfg/oper', type: 'string', label: 'oper', readonly: true },
+      ],
+    },
+  ] as Field[])
+  const seed = () => ({
+    name: 'GE0/0/1',
+    description: 'uplink',
+    'statistic-mode': 'interface-based',
+    'admin-status': 'up',
+    'statistics-cfg': { interval: 30, oper: 'on' },
+  })
+
+  it('编辑态：未改字段（statistic-mode 等回读值）不入载荷，主键+改动字段保留', () => {
+    const form = useConfigForm(editFields, kf)
+    form.resetForm(seed())
+    form.formData['description'] = 'core-link'
+    const p = form.changedPayload()
+    expect(p['name'], '主键恒入载荷').toBe('GE0/0/1')
+    expect(p['description']).toBe('core-link')
+    expect('statistic-mode' in p, '未改动的回读字段不得回推设备').toBe(false)
+    expect('admin-status' in p).toBe(false)
+    expect('statistics-cfg' in p).toBe(false)
+  })
+
+  it('嵌套 group 内改动可被识别（原位修改，深快照基线）', () => {
+    const form = useConfigForm(editFields, kf)
+    form.resetForm(seed())
+    form.formData['statistics-cfg'].interval = 60
+    const p = form.changedPayload()
+    expect(p['statistics-cfg']?.interval, '嵌套改动须入载荷').toBe(60)
+    expect(p['statistics-cfg']?.oper, 'readonly 子叶仍被剥除').toBeUndefined()
+    expect('statistic-mode' in p).toBe(false)
+  })
+
+  it('创建态（空基线）：全部已填字段入载荷（与既有创建行为一致）', () => {
+    const form = useConfigForm(editFields, kf)
+    form.resetForm({})
+    form.formData['name'] = 'GE9/9/9'
+    form.formData['description'] = 'new'
+    const p = form.changedPayload()
+    expect(p['name']).toBe('GE9/9/9')
+    expect(p['description']).toBe('new')
+  })
+
+  it('dynamicDefault 叶空值仍不入载荷（FE-15 语义保持）', () => {
+    const form = useConfigForm(editFields, kf)
+    form.resetForm(seed())
+    form.formData['description'] = 'x'
+    form.formData['auto-name'] = ''
+    const p = form.changedPayload()
+    expect('auto-name' in p).toBe(false)
+  })
+})

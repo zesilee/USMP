@@ -154,6 +154,24 @@ describe('ItemDetailPane · 表单编辑（FE-11 门禁语义迁移）', () => {
     expect(w.emitted('staged')?.[0]?.[0]).toBe('200GE0/1/0.1')
   })
 
+  it('编辑态载荷 = 主键+改动字段（真机 unknown-element 回归）：未动的回读字段不回推', async () => {
+    const w = mountPane()
+    await flushPromises()
+    const vm = w.vm as any
+    vm.form.formData['description'] = 'only-this-changed'
+    await flushPromises()
+    await vm.submit()
+    await flushPromises()
+    const entry = useChangesetStore().entryFor('10.0.0.1', '/ifm:ifm/ifm:interfaces', '200GE0/1/0.1')!
+    expect(entry.payload?.['name'], '主键定位条目，恒在载荷').toBe('200GE0/1/0.1')
+    expect(entry.payload?.['description']).toBe('only-this-changed')
+    // 行数据带回的其余字段（admin-status 等）用户没动，设备按接口类型裁剪
+    // 叶能力，原样回推会被 rpc-error unknown-element 拒绝。
+    expect('admin-status' in (entry.payload ?? {}), '未改动回读字段不得入载荷').toBe(false)
+    // 基线仍是整行（回滚报文依赖完整旧值）。
+    expect(entry.baseline?.['admin-status']).toBe('down')
+  })
+
   it('创建态确定：op=create 入集（FE-21 创建态入集）', async () => {
     const w = mountPane({ mode: 'create', row: null })
     await flushPromises()

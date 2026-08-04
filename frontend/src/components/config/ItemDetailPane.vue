@@ -56,7 +56,7 @@ import { ref, computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Key, Delete } from '@element-plus/icons-vue'
 import type { FormInstance } from 'element-plus'
-import { useConfigForm } from '../../composables/useConfigForm'
+import { useConfigForm, snapshotBaseline } from '../../composables/useConfigForm'
 import { useChangesetStore } from '../../stores/changeset'
 import type { Field } from '../../utils/crdSchemaParser'
 import {
@@ -161,7 +161,9 @@ watch(
     form.resetForm(seed)
     // diff/dirty 基线锚定设备实际态（首次快照）：变更集回填值应呈现为「已改动」。
     if (pending && pending.op !== 'delete') {
-      form.original.value = { ...(pending.baseline ?? (props.row ? { ...props.row } : {})) }
+      // 深快照（changedPayload 依赖）：浅拷贝会让嵌套对象与 formData 共享引用，
+      // 原位编辑同步改掉基线 → 嵌套改动被误判「未变」而丢出载荷。
+      form.original.value = snapshotBaseline(pending.baseline ?? (props.row ? { ...props.row } : {}))
     }
     formRef.value?.clearValidate()
     activeDetail.value = '__main__'
@@ -187,7 +189,9 @@ async function submit() {
     path: configPath.value,
     listKey: postListKey.value,
     keyValue,
-    payload: form.visiblePayload(),
+    // 主键+改动字段（真机 unknown-element 回归）：回读整行原样回推会被设备按
+    // 接口类型裁剪的叶（statistic-mode 等）拒绝；merge 稀疏语义只需改动集。
+    payload: form.changedPayload(),
     cleared,
     baseline: { ...form.original.value },
     label: `${props.tab.label} ${keyValue}`,
