@@ -1,0 +1,51 @@
+---
+id: netconf-client-selfdev
+title: 自研 NETCONF 客户端替代 scrapligo（四波渐进，双路径并行切换）
+status: in_progress
+priority: high
+branch: 每波独立 worktree 分支（wave1: worktree-netconf-core-wave1）
+worktree: .claude/worktrees/worktree-netconf-core-wave1
+updated: 2026-08-04
+origin: 用户拍板 2026-08-04「按4波方案做自研替代」；评估结论见当日会话（使用面=client 单包 8 动作、netconfsim 已自研服务端、真机兼容是唯一硬风险）
+---
+
+## 背景与约束
+
+- scrapligo v1.4.0 使用面：仅 `pkg/yang-runtime/client`（netconf.go/rpc.go），8 个动作：
+  Open(密码认证/免严格HostKey/端口/socket超时)、GetConfig(datastore+subtree filter)、
+  EditConfig、Commit、Commit-confirmed(+timeout)+Confirm/取消、RPC(任意payload)、
+  ServerCapabilities、Close。业务代码只依赖自有 NETCONFClient 接口，替换零波及。
+- 已知 scrapligo 缺陷（自研要根治，勿复刻）：messageID++ 无锁、死连接 Close 死锁、
+  被强杀内部竞态、异常关闭协程泄漏。现网补丁：opMu 串行化 + 有界关闭 + 故意泄漏（见
+  netconf.go 注释与记忆 [[scrapligo-concurrency-pitfalls]]）。
+- Go 1.22 钉死（记忆 [[go-122-pin]]）：新代码禁 1.23+ 语法；x/crypto v0.33 可用（已在依赖）。
+- 军规：TDD 红绿（T01/T05）、B1 表格+race、B2 打 netconfsim（T02/T06）、存量改造
+  必须「旧保留+新并行+双路径验证→切换→删除」（§5.3）。netconfsim 只报 base:1.0
+  （EOM 封帧），chunked 1.1 路径靠单测 + 真机验证。
+
+## 四波计划
+
+- [ ] **Wave 1（本 worktree，进行中）**：协议核心 `pkg/yang-runtime/client/netconfcore`
+  —— RFC6242 封帧（EOM `]]>]]>` + chunked `\n#len\n…\n##\n`，hello 恒用 EOM、
+  协商后切换）、hello 构造/解析/能力协商（base:1.1 优先）。纯 stdlib，B1 全矩阵
+  （拆包/粘包/畸形头/超限防 OOM/并发 race）。
+- [ ] **Wave 2**：SSH 传输（x/crypto/ssh，netconf subsystem）+ RPC 引擎（有锁
+  message-id、请求-应答关联、rpc-error 解析、context 超时、带界优雅关闭）+ 8 动作
+  操作层。B1 + B2 集成（netconfsim 端到端）。
+- [ ] **Wave 3**：工厂双路径——`USMP_NETCONF_IMPL=scrapligo|core`（缺省 scrapligo），
+  NETCONFClient 内部按开关走新旧实现；两路各跑全量 client 测试套 + e2e smoke。
+- [ ] **Wave 4**：真机灰度验证（华为 CE，重点：1.1 chunked、超大回包、hello 怪癖、
+  keepalive）→ 缺省切 core → 稳定后删 scrapligo 依赖 + opMu 全局串行化等补丁代码，
+  go.mod 移除 scrapligo。**门禁：真机验证通过前禁止切缺省。**
+
+## 上下文恢复提示
+
+- 评估细节与代码量分解：会话 2026-08-04；接口清单看 netconf.go 的 NETCONFClient 方法。
+- chunked 编解码要点：chunk-size 首位非零、≤4294967295；`\n#` 后窥探 `#`=结束帧；
+  防 OOM 设总量上限。hello 阶段永远 EOM。
+- 现网测试套（client/*_test.go 20+ 文件）= 换芯验收卷子，Wave 3 起两路全跑。
+- 真机窗口是日程不确定项；Wave 4 前所有波次不改变缺省行为（scrapligo 继续在岗）。
+
+## 恢复指令
+
+`/task resume netconf-client-selfdev`；看本文件四波勾选状态接着做未完成波次。
