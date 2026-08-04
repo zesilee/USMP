@@ -1,7 +1,7 @@
 # USMP Makefile — 标准开发命令
 # 用法: make <target>
 
-.PHONY: setup bootstrap test test-netconf-core lint compliance hook-install hook-verify help \
+.PHONY: setup bootstrap test lint compliance hook-install hook-verify help \
 	staging-up staging-down staging-logs staging-ps e2e-local gen-contract gen-yang gen-crd gen-schema-fixtures sync-snd-i18n dev \
 	memory-link memory-check memory-test
 
@@ -56,9 +56,6 @@ hook-verify: ## 验证 Git Hooks 是否激活
 # ──────────────────────────────────────────────
 test: ## 全量测试
 	cd backend && go test ./... -race -count=1 -timeout=120s
-
-test-netconf-core: ## client 测试套跑在自研 NETCONF 芯上（双路径并行期，Wave 3）
-	cd backend && USMP_NETCONF_IMPL=core go test ./pkg/yang-runtime/client/... -race -count=1 -timeout=300s
 
 lint: ## Go vet + Go fmt 检查
 	cd backend && go vet ./...

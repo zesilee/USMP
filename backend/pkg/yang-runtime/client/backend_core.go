@@ -22,8 +22,11 @@ type coreBackend struct {
 	sess *netconfcore.Session
 }
 
-// coreOpTimeout 缺省单操作超时（对齐 scrapligo op-timeout 量级）。
+// coreOpTimeout 缺省单操作超时（沿用原 scrapligo op-timeout 量级）。
 const coreOpTimeout = 60 * time.Second
+
+// closeTimeout 有界优雅关闭上限：超过即判定连接已死，强切传输层。
+const closeTimeout = 5 * time.Second
 
 func dialCore(info DeviceConnectionInfo) (ncDriver, error) {
 	conn, err := netconfcore.DialSSH(info.IP, info.Port, info.Username, info.Password, info.Timeout)

@@ -13,7 +13,6 @@ import (
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client/netconfcore"
 	yangdriver "github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
-	"github.com/scrapli/scrapligo/util"
 )
 
 // NETCONFDefaultPort is the default NETCONF port
@@ -22,12 +21,9 @@ const NETCONFDefaultPort = 830
 // NETCONFClient implements Client interface for NETCONF protocol
 type NETCONFClient struct {
 	// opMu 串行化同一连接上的所有 RPC（含整段写事务 edit-config…commit/discard）。
-	// scrapligo 的 Driver 非并发安全：buildPayload 的 messageID++ 无锁（并发时
-	// 产生重复 message-id，响应被错领/丢失后 RPC 挂到 op-timeout），Channel.Write
-	// 也无锁（并发写使 NETCONF 帧字节交错，设备端解析卡死）；且两个并发 Set 交错
-	// 会把彼此的变更混进同一 candidate（2PC 原子性破坏，R09）。并发调用方
-	// （API handler、各 Reconciler）在此排队，而不是并发打到 driver 上。
-	// （自研 core 路径会话内部自带串行化，但写事务的跨 RPC 原子性仍靠 opMu。）
+	// netconfcore 会话单 RPC 已内部串行化，但两个并发 Set 交错仍会把彼此的变更
+	// 混进同一 candidate（2PC 原子性破坏，R09），写事务的跨 RPC 原子性靠 opMu。
+	// 并发调用方（API handler、各 Reconciler）在此排队。
 	opMu      sync.Mutex
 	mu        sync.RWMutex
 	info      DeviceConnectionInfo
@@ -114,8 +110,6 @@ func isTransportError(err error) bool {
 		return false
 	}
 	if errors.Is(err, io.EOF) ||
-		errors.Is(err, util.ErrTimeoutError) ||
-		errors.Is(err, util.ErrConnectionError) ||
 		errors.Is(err, netconfcore.ErrSessionDead) ||
 		errors.Is(err, context.DeadlineExceeded) {
 		return true

@@ -1,12 +1,13 @@
 package client
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io"
 	"testing"
 
-	"github.com/scrapli/scrapligo/util"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client/netconfcore"
 )
 
 // isTransportError 判定「会话已不可用、须重拨」——误判 false 会退回死连接
@@ -20,9 +21,10 @@ func TestIsTransportError(t *testing.T) {
 		{"nil error", nil, false},
 		{"raw io.EOF", io.EOF, true},
 		{"wrapped io.EOF", fmt.Errorf("get failed: %w", io.EOF), true},
-		{"scrapligo timeout", util.ErrTimeoutError, true},
-		{"wrapped scrapligo timeout", fmt.Errorf("op: %w", util.ErrTimeoutError), true},
-		{"scrapligo connection error", util.ErrConnectionError, true},
+		{"core 会话判死", netconfcore.ErrSessionDead, true},
+		{"wrapped core 会话判死", fmt.Errorf("op: %w", netconfcore.ErrSessionDead), true},
+		{"ctx 截止超时", context.DeadlineExceeded, true},
+		{"wrapped ctx 截止超时", fmt.Errorf("op: %w", context.DeadlineExceeded), true},
 		{"EOF in message text", errors.New("read EOF from channel"), true},
 		{"connection reset", errors.New("read tcp: connection reset by peer"), true},
 		{"broken pipe", errors.New("write tcp: broken pipe"), true},

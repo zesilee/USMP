@@ -68,12 +68,6 @@ jobs:
             echo "$CURRENT" > .coverage-baseline
           fi
 
-      - name: Client suite over self-developed NETCONF core (双路径, Wave 3)
-        run: |
-          # scrapligo 自研替代并行期：整套 client 测试在 core 芯上再跑一遍，
-          # 两路行为等价由此步锁定（openspec/tasks/netconf-client-selfdev.md）。
-          USMP_NETCONF_IMPL=core go test ./pkg/yang-runtime/client/... -race -count=1 -timeout=300s
-
       - name: Go Vet
         run: go vet ./...
 
