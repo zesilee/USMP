@@ -14,3 +14,5 @@ metadata:
 - 协议兼容坑（真机调试直接参考）：①按行读流服务端要求 EOM 定界符后补 `\n`；②EOM→chunked 切换残留帧尾空白，读端须宽容帧间 `\r\n`；③载荷尾 `]` 与定界符粘连需尾部后缀比对切帧。
 - 总纲/波次记录：`openspec/tasks/netconf-client-selfdev.md`（PR #258/#260/#261/#262 + 本移除 PR）。
 - 相关：[[scrapligo-concurrency-pitfalls]]（已成历史背景：三缺陷=自研动机，core 已根治）、[[go-122-pin]]（netconfcore 禁 1.23+ 语法）。
+
+**真机首战·get-config 过滤器坑（2026-08-04 修复）**：constructFilter 曾是自造 XPath 形态 `<filter … select="/ifm:ifm/…"/>`——RFC6241 无 type 缺省按 **subtree** 解释，空元素=什么都不选，真机正确回空 `<data/>` → 界面接口/VLAN 列表全空 + 对账拿空实际态永久漂移。已改与状态读同源（constructSubtreeFilter + `<filter type="subtree">` 外裹）。**同修 sim 保真**：netconfsim get-config 曾无视过滤器整树返回（掩体！），现按 RFC 三分支：无 filter=全量 / filter 空=空 data / 有 filter=子树匹配。诊断法宝：`curl /api/v1/config/<ip>/<path>` 返回的 data 是 base64 原始 rpc-reply，解码即见设备真实回复。
