@@ -30,14 +30,19 @@ origin: 用户拍板 2026-08-04「按4波方案做自研替代」；评估结论
   协商后切换）、hello 构造/解析/能力协商（base:1.1 优先）。纯 stdlib，B1 全矩阵
   （拆包/粘包/畸形头/超限防 OOM/并发 race）。—— PR #258 合入 2026-08-04；
   评审揪出 EOM 定界符粘连丢字节 bug 已修
-- [ ] **Wave 2（本波，超 TM04 拆两段）**：2a=会话+RPC 引擎（有锁 message-id、
-  超时看门狗判死、Close 幂等；net.Pipe 假服务端覆盖 chunked 1.1 全链路）——
-  **PR #260 合入 2026-08-04**；2b=SSH 传输（x/crypto/ssh netconf subsystem）+
-  8 动作操作层 + B2 集成（真 SSH ↔ netconfsim）——本分支。
+- [x] **Wave 2（超 TM04 拆两段）**：2a=会话+RPC 引擎（有锁 message-id、超时
+  看门狗判死、Close 幂等；net.Pipe 假服务端覆盖 chunked 1.1 全链路）——
+  PR #260 合入 2026-08-04；2b=SSH 传输 + 8 动作操作层 + B2 集成（真 SSH ↔
+  netconfsim）——PR #261 合入 2026-08-04。
   实测踩坑已记：sim 按行读流，EOM 定界符后必须补 \n（scrapligo 同款），读端
   对帧间空白宽容。原整波 PR #259 因体积关闭，内容无损散入 2a/2b。
-- [ ] **Wave 3**：工厂双路径——`USMP_NETCONF_IMPL=scrapligo|core`（缺省 scrapligo），
-  NETCONFClient 内部按开关走新旧实现；两路各跑全量 client 测试套 + e2e smoke。
+- [x] **Wave 3（本分支 PR）**：ncDriver 切换缝 + `USMP_NETCONF_IMPL=scrapligo|core`
+  （**缺省仍 scrapligo**）。scrapligo 全部怪癖补丁原样迁入 backend_scrapligo
+  （Kill=Channel.Close+recover、有界 Close）；core 芯经 backend_core 适配
+  （rpc-error 折算 Failed、无截止 ctx 补 60s 默认操作超时、错误文案对齐
+  "failed to open NETCONF connection"——AUTO 分派测试锁定的契约）。
+  **两路各自全量绿**：现网 20+ 测试文件在 scrapligo 与 core 上均通过；
+  compliance CI 新增双路径步骤 + `make test-netconf-core` 本地入口。
 - [ ] **Wave 4**：真机灰度验证（华为 CE，重点：1.1 chunked、超大回包、hello 怪癖、
   keepalive）→ 缺省切 core → 稳定后删 scrapligo 依赖 + opMu 全局串行化等补丁代码，
   go.mod 移除 scrapligo。**门禁：真机验证通过前禁止切缺省。**
