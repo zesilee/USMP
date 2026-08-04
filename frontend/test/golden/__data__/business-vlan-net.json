@@ -1,0 +1,140 @@
+{
+  "module": "business-vlan-net",
+  "tabs": [
+    {
+      "name": "__basic__",
+      "kind": "form"
+    },
+    {
+      "name": "devices",
+      "kind": "list"
+    },
+    {
+      "name": "qos",
+      "kind": "form"
+    }
+  ],
+  "lists": {
+    "devices": {
+      "keyField": "ip",
+      "columns": [
+        {
+          "name": "ip",
+          "widget": "string"
+        }
+      ],
+      "allColumns": [
+        {
+          "name": "ip",
+          "widget": "string"
+        }
+      ],
+      "filterable": [],
+      "detailTabs": [
+        {
+          "name": "__main__",
+          "kind": "form"
+        }
+      ]
+    }
+  },
+  "tree": [
+    {
+      "path": "/business-vlan-net/description",
+      "kind": "leaf",
+      "depth": 0,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-net/devices",
+      "kind": "list",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-net/devices/access-ports",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "leaf-list",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-net/devices/ip",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-net/devices/trunk-ports",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "leaf-list",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-net/enabled",
+      "kind": "leaf",
+      "depth": 0,
+      "dataType": "boolean",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-net/name",
+      "kind": "leaf",
+      "depth": 0,
+      "dataType": "string",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-net/qos",
+      "kind": "container",
+      "depth": 0,
+      "isConfig": false,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-net/qos/priority",
+      "kind": "leaf",
+      "depth": 1,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    },
+    {
+      "path": "/business-vlan-net/vlan-id",
+      "kind": "leaf",
+      "depth": 0,
+      "dataType": "number",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": true
+    },
+    {
+      "path": "/business-vlan-net/vlan-type",
+      "kind": "leaf",
+      "depth": 0,
+      "dataType": "enum",
+      "isConfig": true,
+      "isReadonly": false,
+      "required": false
+    }
+  ]
+}

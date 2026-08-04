@@ -1,5 +1,6 @@
 # 项目记忆索引
 
+- [北向CRD→YANG工具](crd-to-yang-codegen.md) — 碰北向对接/crd2yang/往返对账/businessdemo 前必读：goyang全量Range陷阱、enum字典序、demo隔离锚点(勿接线load.go)、接线剩余债=多Kind业务API泛化；代码检视一律独立agent
 - [左树模块级展开](left-tree-module-expansion.md) — 改左树/加模块/加rpc前必读：左树已深到模块级(container+rpc平铺入树、点rpc直达/module/:m/rpc/:name)、rpc入口唯一在左树(Tab栏已退)、children构建期烘焙双语、rpcgen清单=taskname超集有守护测试、叶判定改sourceModule口径、E2E点叶=展开
 
 - [YANG rpc执行](yang-rpc-execution.md) — 做/改 rpc(运维操作:清计数/重启接口)相关前必读：四层链路(rpcgen构建期提取→/yang/schema列rpc→ExecuteRPC执行→RpcExecuteTab前端)全交付(#228/#229/#230)、ExecuteRPC不重试(有副作用)、rpc不入缓存、全部执行前确认+高危升级、两个follow-up均已交付(leafref下拉#232+标签本地化#233,localizeRpcs键规律/只改label)、worktree前端踩坑(node_modules勿symlink+leafref下拉污染e2e断言+勿npx vitest)、docker服旧包坑
