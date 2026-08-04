@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/leezesi/usmp/backend/internal/generated/businessdemo"
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
@@ -22,6 +23,19 @@ func main() {
 	if err != nil {
 		log.Fatalf("schemadump: load schema: %v", err)
 	}
+
+	// 示例北向派生模型（crd-to-yang-codegen C2Y-05）：仅构建期并入 fixture 集，
+	// 供前端派生黄金覆盖；不进运行期 Load()（D7，见 yangschema/businessdemo_test.go
+	// 的隔离锚点）。schemadump 是独立短命进程，这里的扩注不外溢运行期。
+	ds, ok := s.(*schema.DefaultSchema)
+	if !ok {
+		log.Fatalf("schemadump: unexpected schema impl %T (cannot append demo modules)", s)
+	}
+	bs, err := businessdemo.Schema()
+	if err != nil {
+		log.Fatalf("schemadump: load businessdemo schema: %v", err)
+	}
+	schema.AddYgotSchemaWithVendor(ds, bs, "usmp")
 
 	n, err := run(s, *output)
 	if err != nil {

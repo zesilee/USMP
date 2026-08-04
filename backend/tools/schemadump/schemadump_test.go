@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/leezesi/usmp/backend/internal/api"
+	"github.com/leezesi/usmp/backend/internal/generated/businessdemo"
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
@@ -177,6 +179,30 @@ func TestExportAll_Deterministic(t *testing.T) {
 		}
 		if string(a) != string(b) {
 			t.Errorf("module %q: non-deterministic export (run1 != run2, %d vs %d bytes)", name, len(a), len(b))
+		}
+	}
+}
+
+// C2Y-05 —— 示例北向派生模型（businessdemo）可被 exportAll 导出为 fixture：
+// 前端派生黄金（GD-01）覆盖该模块的前提。main 里的并入是薄接线，这里测导出能力。
+func TestExportAllIncludesBusinessDemo(t *testing.T) {
+	bs, err := businessdemo.Schema()
+	if err != nil {
+		t.Fatalf("businessdemo.Schema: %v", err)
+	}
+	ds := schema.NewSchema()
+	schema.AddYgotSchemaWithVendor(ds, bs, "usmp")
+	fixtures, err := exportAll(ds)
+	if err != nil {
+		t.Fatalf("exportAll: %v", err)
+	}
+	fx, ok := fixtures["business-vlan-net"]
+	if !ok {
+		t.Fatalf("fixture business-vlan-net missing, got %v", sortedNames(fixtures))
+	}
+	for _, want := range []string{"vlan-id", "devices", "access-ports", "qos"} {
+		if !strings.Contains(string(fx), want) {
+			t.Errorf("business-vlan-net fixture missing %q", want)
 		}
 	}
 }
