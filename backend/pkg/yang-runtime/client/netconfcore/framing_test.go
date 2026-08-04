@@ -90,6 +90,30 @@ func TestEOMDelimiterSplitAcrossReads(t *testing.T) {
 	}
 }
 
+func TestEOMWriterAppendsNewlineAfterDelimiter(t *testing.T) {
+	// 按行读流的服务端（netconfsim/部分真机）依赖定界符后的 \n 完成收包
+	var buf bytes.Buffer
+	_ = NewEOMWriter(&buf).WriteFrame([]byte("<rpc/>"))
+	if got := buf.String(); got != "<rpc/>"+eomDelimiter+"\n" {
+		t.Fatalf("线上字节 = %q", got)
+	}
+}
+
+func TestEOMReaderSkipsLeadingWhitespace(t *testing.T) {
+	// 对端在定界符后附加 \r\n 时，残留不得污染下一帧内容
+	raw := "\r\n<a/>]]>]]>\n\n<b/>]]>]]>\n"
+	r := NewEOMReader(strings.NewReader(raw))
+	for _, want := range []string{"<a/>", "<b/>"} {
+		got, err := r.ReadFrame()
+		if err != nil || string(got) != want {
+			t.Fatalf("= %q err=%v, want %q", got, err, want)
+		}
+	}
+	if _, err := r.ReadFrame(); !errors.Is(err, io.EOF) {
+		t.Fatalf("尾随空白后流尽应干净 EOF, got %v", err)
+	}
+}
+
 func TestEOMTruncatedStream(t *testing.T) {
 	// 无定界符即断流：必须报错（ErrUnexpectedEOF），不能把半帧当整帧
 	r := NewEOMReader(strings.NewReader("<rpc>half"))
@@ -180,12 +204,21 @@ func TestChunkedSplitAcrossReads(t *testing.T) {
 	}
 }
 
+func TestChunkedTolerantOfInterframeWhitespace(t *testing.T) {
+	// EOM hello 切 chunked 的过渡残留 \r\n、部分实现帧尾附加换行：跳过后正常收帧
+	raw := "\r\n\n#5\nhello\n##\n"
+	got, err := NewChunkedReader(strings.NewReader(raw)).ReadFrame()
+	if err != nil || string(got) != "hello" {
+		t.Fatalf("= %q err=%v", got, err)
+	}
+}
+
 func TestChunkedMalformed(t *testing.T) {
 	tests := []struct {
 		name string
 		raw  string
 	}{
-		{"缺 LF-hash 前导", "#5\nhello\n##\n"},
+		{"帧首非 # 非空白", "x\n#5\nhello\n##\n"},
 		{"chunk-size 非数字", "\n#ab\nhello\n##\n"},
 		{"chunk-size 前导零", "\n#05\nhello\n##\n"},
 		{"chunk-size 为零", "\n#0\n\n##\n"},
