@@ -43,9 +43,13 @@ origin: 用户拍板 2026-08-04「按4波方案做自研替代」；评估结论
   "failed to open NETCONF connection"——AUTO 分派测试锁定的契约）。
   **两路各自全量绿**：现网 20+ 测试文件在 scrapligo 与 core 上均通过；
   compliance CI 新增双路径步骤 + `make test-netconf-core` 本地入口。
-- [ ] **Wave 4**：真机灰度验证（华为 CE，重点：1.1 chunked、超大回包、hello 怪癖、
-  keepalive）→ 缺省切 core → 稳定后删 scrapligo 依赖 + opMu 全局串行化等补丁代码，
-  go.mod 移除 scrapligo。**门禁：真机验证通过前禁止切缺省。**
+- [ ] **Wave 4（已移交测试团队，2026-08-04 用户拍板）**：真机灰度验证（华为 CE，
+  重点：1.1 chunked、超大回包、hello 怪癖、keepalive）→ 缺省切 core → 稳定后删
+  scrapligo 依赖 + opMu 全局串行化等补丁代码，go.mod 移除 scrapligo。
+  **门禁：测试团队真机结论回来前禁止切缺省、禁止删旧引擎。**
+  实验室 IP 当时不可达，验证由测试团队按手册独立执行：
+  [docs/netconf-core-field-validation.md](../../docs/netconf-core-field-validation.md)
+  （切换/回退方法、V1-V8 验证清单、留证要求、收官动作划分）。
 
 ## 上下文恢复提示
 
