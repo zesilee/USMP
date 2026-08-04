@@ -53,3 +53,4 @@
 - [攒批提交二期](nce-batch-commit.md) — 做配置台提交链路/变更集/试运行相关前必读：二期全交付(变更集/preview/commit 2PC/即时下发退役)、desired后写时序、pr-size不豁免openspec文档、worktree真目录node_modules勿再symlink、vitest4 unhandled rejection红整套件、阈值86/79/80/87+后端72.3
 - [发布打包](release-packaging.md) — 做交付/部署/改打包链路前必读：scripts/build-release.sh 一键出 zip(bin+web+start.sh)、静态站=自研Go二进制免nginx、start.sh=POSIX sh可当ENTRYPOINT、python zipfile兜底保留+x、冒烟用干净alpine容器别抢本机8080
 - [Go1.22钉死](go-122-pin.md) — 升依赖/加语法/改CI/查覆盖率前必读：交付钉死1.22全链(go.mod/Docker/CI/打包)、依赖天花板(ygot v0.29.20/x-crypto v0.33/swag v1.16.4)、tool指令改tools.go+go run、覆盖率口径已归一化基线72.5
+- [scrapligo自研替代](netconf-selfdev.md) — 碰NETCONF client/netconfcore/连接排查前必读：Wave1-3已合入(双路径并行、缺省仍scrapligo、USMP_NETCONF_IMPL=core切自研)、等价性CI锁定、**Wave4真机门禁:通过前禁切缺省禁删scrapligo**、两个封帧兼容坑
