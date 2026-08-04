@@ -30,3 +30,5 @@ metadata:
 - commit ≤500 行、PR ≤1000 行：大改版按「纯逻辑派生层→组件→接入」切 PR，测试先行 commit 可先着地。
 
 **二期已交付**（见 [[nce-batch-commit]]，2026-07-31）。原二期待办：攒批变更集+变更内容 diff+试运行（正向/回滚报文、网元差异对比）+重置/提交配置/导出/配置项；多选批量操作；「更多▾」列表批量菜单；string length 占位元数据（后端 schema 透出）。
+
+**真机接入回归（2026-08-04）**：编辑态入集载荷已由「整行 visiblePayload」改为 **changedPayload = 主键+相对基线改动字段**（ItemDetailPane/ModuleFormTab 双切；BusinessConsolePage 意图表单有意保留全量）。因：真机按接口类型裁剪 config 叶能力（statistic-mode 等），回读整行原样回推被 rpc-error unknown-element 拒绝。正确性前提=基线**深快照**（snapshotBaseline）：浅拷贝下嵌套对象与 formData 共享引用，原位编辑同步污染基线→嵌套改动被误判未变。配套：2PC prepare 已修为 per-change 错误优先透出设备 rpc-error 细节（与 pushDeleteToDevice 同口径），界面不再只见「one or more changes failed」。

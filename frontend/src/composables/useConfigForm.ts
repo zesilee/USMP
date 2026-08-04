@@ -13,6 +13,17 @@ export interface UseConfigFormOptions {
   removals?: boolean
 }
 
+// 基线深快照：seed 的嵌套对象（group/嵌套 list 行）与 formData 共享引用，浅拷贝
+// 会让原位编辑同时改掉基线、changedPayload 永远判「未变」。JSON 深拷贝（数据均为
+// 纯 JSON 回读值）切断共享；失败降级浅拷贝（R08，行为等同旧版）。
+export function snapshotBaseline(seed: Record<string, any>): Record<string, any> {
+  try {
+    return JSON.parse(JSON.stringify(seed))
+  } catch {
+    return { ...seed }
+  }
+}
+
 export function useConfigForm(
   fields: Ref<Field[]> | ComputedRef<Field[]>,
   keyField?: Ref<string> | ComputedRef<string>,
@@ -170,10 +181,37 @@ export function useConfigForm(
     return out
   }
 
+  // 值级变更判定：标量沿用 computeDiff 的 norm 口径；对象/数组（group/嵌套 list
+  // 原位编辑）按 JSON 序列化比较——norm 会把对象折叠成 "[object Object]" 而失真。
+  function valueChanged(now: any, was: any): boolean {
+    const isObj = (v: any) => v !== null && typeof v === 'object'
+    if (isObj(now) || isObj(was)) {
+      try {
+        return JSON.stringify(now ?? null) !== JSON.stringify(was ?? null)
+      } catch {
+        return true // 无法序列化（循环引用等）宁可多发不静默丢改动（R08）
+      }
+    }
+    return (now ?? '').toString().trim() !== (was ?? '').toString().trim()
+  }
+
+  // 下发载荷 = 主键 + 相对基线改过的字段（真机 unknown-element 回归）：设备按
+  // 接口/节点类型裁剪叶能力（statistic-mode 类），把回读整行原样回推会被拒。
+  // 未改动字段不代表用户意图，不入载荷；NETCONF merge 是稀疏语义，只发改动即正确。
+  function changedPayload(): Record<string, any> {
+    const full = visiblePayload()
+    const kf = keyField?.value ?? ''
+    const out: Record<string, any> = {}
+    for (const k of Object.keys(full)) {
+      if ((kf && k === kf) || valueChanged(formData[k], original.value[k])) out[k] = full[k]
+    }
+    return out
+  }
+
   function resetForm(seed: Record<string, any> = {}) {
     Object.keys(formData).forEach((k) => delete formData[k])
     Object.assign(formData, seed)
-    original.value = { ...seed }
+    original.value = snapshotBaseline(seed)
   }
 
   return {
@@ -193,6 +231,7 @@ export function useConfigForm(
     choiceScope,
     onChoiceUpdate,
     visiblePayload,
+    changedPayload,
     resetForm,
   }
 }

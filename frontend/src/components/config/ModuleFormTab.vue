@@ -198,7 +198,9 @@ async function submit() {
   changeset.upsert(props.device, {
     op: 'update',
     path: '/' + configPath.value,
-    payload: form.visiblePayload(),
+    // 只发改动字段（真机 unknown-element 回归）：容器表单同样被回读值填满，
+    // 原样回推会被设备能力裁剪的叶拒绝。
+    payload: form.changedPayload(),
     cleared: form.clearedKeys.value,
     baseline: { ...form.original.value },
     label: props.tab.label,

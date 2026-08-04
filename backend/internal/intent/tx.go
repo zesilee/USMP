@@ -149,11 +149,21 @@ func (t *TxCoordinator) prepare(ctx context.Context, c txClient, frags []Fragmen
 			return err
 		}
 		res, err := c.Set(ctx, []client.Change{ch}, client.WithCommit(false))
+		// per-change 错误优先（§9 诚实透出）：聚合错误（"one or more changes
+		// failed"）会吞掉设备 rpc-error 细节（unknown-element/unknown-namespace
+		// 的具体元素名），与 pushDeleteToDevice 同口径。
+		if res != nil && !res.Success {
+			for _, cr := range res.Changes {
+				if cr.Error != nil {
+					return fmt.Errorf("edit-config rejected: %w", cr.Error)
+				}
+			}
+			if err == nil {
+				return fmt.Errorf("edit-config rejected: %s", res.Message)
+			}
+		}
 		if err != nil {
 			return err
-		}
-		if res != nil && !res.Success {
-			return fmt.Errorf("edit-config rejected: %s", res.Message)
 		}
 	}
 	return nil
