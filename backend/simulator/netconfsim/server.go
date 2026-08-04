@@ -322,33 +322,41 @@ func (s *sshServer) handleGet(msg, msgID string) string {
 	if err, ok := s.scenario.ErrorOnRPC["get"]; ok {
 		return errorReply(msgID, err.Error())
 	}
-	data, err := s.store.GetFiltered([]byte(extractFilter(msg)))
+	inner, present := extractFilter(msg)
+	if present && inner == "" {
+		// 空 filter=什么都不选（RFC6241 subtree 语义，与真机对齐）。
+		return fmt.Sprintf(`<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="%s"><data/></rpc-reply>`, msgID)
+	}
+	data, err := s.store.GetFiltered([]byte(inner))
 	if err != nil {
 		return errorReply(msgID, err.Error())
 	}
 	return fmt.Sprintf(`<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="%s"><data>%s</data></rpc-reply>`, msgID, data)
 }
 
-// extractFilter returns the inner content of the RPC's <filter> element, or ""
-// when absent/self-closing (raw-string scan, same style as the other handlers).
-func extractFilter(msg string) string {
+// extractFilter returns the inner content of the RPC's <filter> element and
+// whether a <filter> element is present at all (raw-string scan, same style as
+// the other handlers). RFC6241 subtree 语义：present 且 inner 为空 = 什么都不选
+// （须回空 <data/>）；absent 才是全量读——两者曾被混同为全量，掩盖了客户端发
+// 空过滤器的真机 bug（真机回空、sim 回全量）。
+func extractFilter(msg string) (inner string, present bool) {
 	start := strings.Index(msg, "<filter")
 	if start == -1 {
-		return ""
+		return "", false
 	}
 	open := strings.Index(msg[start:], ">")
 	if open == -1 {
-		return ""
+		return "", true
 	}
 	if strings.HasSuffix(msg[start:start+open+1], "/>") {
-		return ""
+		return "", true
 	}
-	inner := msg[start+open+1:]
-	end := strings.LastIndex(inner, "</filter>")
+	rest := msg[start+open+1:]
+	end := strings.LastIndex(rest, "</filter>")
 	if end == -1 {
-		return ""
+		return "", true
 	}
-	return strings.TrimSpace(inner[:end])
+	return strings.TrimSpace(rest[:end]), true
 }
 
 func (s *sshServer) handleGetConfig(msg, msgID string) string {
@@ -359,9 +367,21 @@ func (s *sshServer) handleGetConfig(msg, msgID string) string {
 		source = "candidate"
 	}
 
+	// subtree filter 保真（真机对齐）：空 filter=空 data、有 filter=只回匹配子树、
+	// 无 filter=全量。曾无条件全量，掩盖客户端过滤器 bug。
+	inner, present := extractFilter(msg)
+	if present && inner == "" {
+		return fmt.Sprintf(`<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="%s"><data/></rpc-reply>`, msgID)
+	}
+
 	var config []byte
 	if source == "candidate" {
 		config = s.store.GetCandidate()
+	} else if inner != "" {
+		var err error
+		if config, err = s.store.GetConfigFiltered([]byte(inner)); err != nil {
+			return errorReply(msgID, err.Error())
+		}
 	} else {
 		config = s.store.GetRunning()
 	}

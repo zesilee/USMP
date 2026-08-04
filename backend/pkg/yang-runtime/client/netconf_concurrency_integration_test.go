@@ -89,8 +89,16 @@ func TestNETCONFClient_ConcurrentGet_SingleConnection(t *testing.T) {
 					errCh <- fmt.Errorf("get %s round %d: %w", path, round, err)
 					return
 				}
-				if !strings.Contains(fmt.Sprintf("%s", res.Data), "GE0/0/1") {
+				// subtree filter 保真后（真机对齐），只有 interfaces 路径含种子接口；
+				// 其余路径合法为空。本测试的目标是并发下应答不串线/不损坏：
+				// interfaces 路径必须每轮都读到种子，其他路径必须不携带接口数据
+				//（若旧全量兜底回归，非 interfaces 路径会重新出现 GE0/0/1 → 红）。
+				hasSeed := strings.Contains(fmt.Sprintf("%s", res.Data), "GE0/0/1")
+				if path == "/ifm:ifm/ifm:interfaces" && !hasSeed {
 					errCh <- fmt.Errorf("get %s round %d: response missing seeded interface, got %.200s", path, round, res.Data)
+				}
+				if path != "/ifm:ifm/ifm:interfaces" && hasSeed {
+					errCh <- fmt.Errorf("get %s round %d: 应答串线（非接口路径读到接口数据）: %.200s", path, round, res.Data)
 				}
 			}(p, i)
 		}

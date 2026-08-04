@@ -440,10 +440,17 @@ func (c *NETCONFClient) ConfirmCommit(ctx context.Context) error {
 	return nil
 }
 
+// constructFilter builds the complete <filter> element for <get-config>（真机
+// 回归）：曾是自造 XPath 形态 `<filter … select="/ifm:ifm/…"/>`——RFC6241 无
+// type 缺省按 subtree 解释，空元素=什么都不选，真机正确回空 <data/>（列表全空
+// +对账永久漂移）。改与状态读同源：constructSubtreeFilter 生成带命名空间的
+// 嵌套 subtree 体，外裹 <filter type="subtree">；空路径返回 "" = 全量读。
 func (c *NETCONFClient) constructFilter(path string) string {
-	// For simplicity, we use an XPath filter for the path
-	// Convert /interfaces/interface[name='eth0'] to XPath notation
-	return fmt.Sprintf(`<filter xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" select="%s"/>`, path)
+	sub := constructSubtreeFilter(path)
+	if sub == "" {
+		return ""
+	}
+	return `<filter type="subtree">` + sub + `</filter>`
 }
 
 // constructSubtreeFilter builds a subtree-filter body for the <get> RPC from a
