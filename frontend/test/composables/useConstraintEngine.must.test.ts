@@ -56,6 +56,33 @@ describe('useConstraintEngine · must 跨字段校验（数据驱动，无硬编
       },
     ]
 
+    // 真机二次回归（T07）：statistic-mode 的真实 FieldDef 是 type='enum'（带
+    // options 下拉），首修的叶判定漏了 enum——测试用 string 建模绕开了真实形态，
+    // 真机复测仍被门禁拦。此例按后端 buildYangSchemaNested 实际输出逐字建模。
+    it('enum 叶（真实 FieldDef 形态）未选 → 无违例', () => {
+      const realShape: Field[] = [
+        { path: '/ifm/interfaces/interface/l2-mode-enable', type: 'boolean', label: 'l2-mode-enable' },
+        { path: '/ifm/interfaces/interface/statistic-enable', type: 'boolean', label: 'statistic-enable' },
+        {
+          path: '/ifm/interfaces/interface/statistic-mode',
+          type: 'enum',
+          label: 'statistic-mode',
+          options: [
+            { label: 'interface-based', value: 'interface-based' },
+            { label: 'vlan-group-based', value: 'vlan-group-based' },
+          ],
+          must: [{ expr: "../statistic-mode = 'interface-based' or (../l2-mode-enable = 'true' and ../statistic-enable = 'true')" }],
+        } as Field,
+      ]
+      const form = ref<Record<string, any>>({})
+      const { mustViolations } = useConstraintEngine(realShape, form)
+      expect(mustViolations.value).toEqual([])
+      form.value['statistic-mode'] = 'vlan-group-based' // 选了违反值 → 正常违例
+      expect(mustViolations.value.map((v) => v.path)).toContain('/ifm/interfaces/interface/statistic-mode')
+      form.value['statistic-mode'] = '' // 清空回未选 → 违例消失
+      expect(mustViolations.value).toEqual([])
+    })
+
     it('未填（undefined/空串）→ 无违例，不再强迫用户选值', () => {
       const form = ref<Record<string, any>>({})
       const { mustViolations } = useConstraintEngine(smFields, form)

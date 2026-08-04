@@ -3,10 +3,11 @@ import type { Field } from '../utils/crdSchemaParser'
 import { evalPredicate } from '../utils/xpathEval'
 import { i18n } from '../i18n'
 
-// 叶子类字段（标量/leaf-list）：未赋值即节点不存在；容器/列表/choice 的存在性
-// 由上层 presence 语义处理，不在此判定。
+// 叶子类字段（标量/enum/leaf-list）：未赋值即节点不存在；容器/列表/choice 的
+// 存在性由上层 presence 语义处理，不在此判定。enum 曾漏列（statistic-mode 真机
+// 二次回归）——与 FieldRenderer 的 LEAF_TYPES 同口径，新增叶类型两处同步。
 function isLeafKind(t: Field['type']): boolean {
-  return t === 'string' || t === 'number' || t === 'boolean' || t === 'leaf-list'
+  return t === 'string' || t === 'number' || t === 'boolean' || t === 'enum' || t === 'leaf-list'
 }
 
 function leafSeg(f: Field): string {
