@@ -43,9 +43,17 @@ origin: 用户拍板 2026-08-04「按4波方案做自研替代」；评估结论
   "failed to open NETCONF connection"——AUTO 分派测试锁定的契约）。
   **两路各自全量绿**：现网 20+ 测试文件在 scrapligo 与 core 上均通过；
   compliance CI 新增双路径步骤 + `make test-netconf-core` 本地入口。
-- [ ] **Wave 4**：真机灰度验证（华为 CE，重点：1.1 chunked、超大回包、hello 怪癖、
-  keepalive）→ 缺省切 core → 稳定后删 scrapligo 依赖 + opMu 全局串行化等补丁代码，
-  go.mod 移除 scrapligo。**门禁：真机验证通过前禁止切缺省。**
+- [x] **Wave 4 软件部分（本分支 PR，交付红线 NC-01 触发提前收口）**：
+  用户 2026-08-04 拍板「版本交付编译不能依赖 scrapligo」→ 原「真机通过后再切」
+  门禁被交付要求覆盖：core 切唯一引擎、backend_scrapligo 与 USMP_NETCONF_IMPL
+  开关拆除、go.mod/go.sum 零 scrapli、守护测试 no_scrapligo_guard_test.go
+  防重引（NC-01）、CI 双路径步骤与 make test-netconf-core 随拆。
+  scrapligo 时代补丁保留项：opMu（写事务跨 RPC 原子性仍需要）；拆除项：
+  Close 死锁 workaround/故意协程泄漏（core 无此缺陷）。
+- [ ] **Wave 4 真机验证（移交测试团队，实验室 IP 不可达）**：按手册
+  [docs/netconf-core-field-validation.md](../../docs/netconf-core-field-validation.md)
+  执行 V1-V8（头号目标 1.1 chunked）。**注意：已无运行时回退开关，阻断性问题
+  回退 = 换 2026-08-04 前旧版本包；结论回传前勿用于生产设备变更。**
 
 ## 上下文恢复提示
 
