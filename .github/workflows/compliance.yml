@@ -91,13 +91,19 @@ jobs:
           # 生成物改动合法当且仅当可由管线复现：触及生成物/管线/模型指针时
           # 重跑 make gen-yang 并断言零漂移（取代旧的无条件冻结 generated/）
           git fetch --depth=1 origin main 2>/dev/null || true
-          CHANGED=$(git diff --name-only origin/main HEAD 2>/dev/null | grep -E '^(backend/internal/generated/|backend/internal/yang/models/|backend/tools/genfix/|backend/tools/crdgen/|deploy/crds/|scripts/gen-yang\.sh|snd/ce6866p-yang/)' || true)
+          CHANGED=$(git diff --name-only origin/main HEAD 2>/dev/null | grep -E '^(backend/internal/generated/|backend/internal/yang/models/|backend/tools/genfix/|backend/tools/crdgen/|backend/tools/crd2yang/|deploy/crds/|scripts/gen-yang\.sh|snd/ce6866p-yang/)' || true)
           if [ -z "$CHANGED" ]; then
             echo "No generated-pipeline related changes, skipping regen check"
             exit 0
           fi
           echo "Regen-relevant changes detected:"
           echo "$CHANGED"
+          # 北向 CRD→YANG 反向派生（C2Y-06）：先于 gen-yang——生成的 .yang 是下游 ygot 的输入
+          make gen-crd2yang
+          if ! git diff --exit-code backend/internal/yang/models/; then
+            echo "::error::[C2Y-06] Generated YANG drift: backend/internal/yang/models/ 与 make gen-crd2yang 输出不一致（生成物勿手改，改北向 CRD/工具后重跑 make gen-crd2yang 提交）"
+            exit 1
+          fi
           make gen-yang
           if ! git diff --exit-code backend/internal/generated/; then
             echo "::error::[R04] Generated code drift: backend/internal/generated/ 与 make gen-yang 输出不一致（生成物勿手改，改 YANG/gen.conf 后重跑 make gen-yang 提交）"

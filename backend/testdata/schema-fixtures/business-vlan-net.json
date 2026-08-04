@@ -1,0 +1,86 @@
+{
+  "module": "business-vlan-net",
+  "title": "business-vlan-net",
+  "vendor": "usmp",
+  "fields": [
+    {
+      "path": "/business-vlan-net/description",
+      "type": "string",
+      "label": "description",
+      "pattern": ".{1,80}"
+    },
+    {
+      "path": "/business-vlan-net/devices",
+      "type": "list",
+      "label": "devices",
+      "fields": [
+        {
+          "path": "/business-vlan-net/devices/access-ports",
+          "type": "leaf-list",
+          "label": "access-ports",
+          "pattern": ".{1,63}"
+        },
+        {
+          "path": "/business-vlan-net/devices/ip",
+          "type": "string",
+          "label": "ip",
+          "pattern": "([0-9]{1,3}\\.){3}[0-9]{1,3}",
+          "isKey": true
+        },
+        {
+          "path": "/business-vlan-net/devices/trunk-ports",
+          "type": "leaf-list",
+          "label": "trunk-ports",
+          "pattern": ".{1,63}"
+        }
+      ]
+    },
+    {
+      "path": "/business-vlan-net/enabled",
+      "type": "boolean",
+      "label": "enabled"
+    },
+    {
+      "path": "/business-vlan-net/name",
+      "type": "string",
+      "label": "name",
+      "pattern": "[A-Za-z0-9_-]{1,31}"
+    },
+    {
+      "path": "/business-vlan-net/qos",
+      "type": "group",
+      "label": "qos",
+      "fields": [
+        {
+          "path": "/business-vlan-net/qos/priority",
+          "type": "number",
+          "label": "priority",
+          "maximum": 7
+        }
+      ]
+    },
+    {
+      "path": "/business-vlan-net/vlan-id",
+      "type": "number",
+      "label": "vlan-id",
+      "required": true,
+      "minimum": 1,
+      "maximum": 4094
+    },
+    {
+      "path": "/business-vlan-net/vlan-type",
+      "type": "enum",
+      "label": "vlan-type",
+      "options": [
+        {
+          "label": "common",
+          "value": "common"
+        },
+        {
+          "label": "super",
+          "value": "super"
+        }
+      ]
+    }
+  ]
+}

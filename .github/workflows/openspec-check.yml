@@ -61,8 +61,8 @@ jobs:
                 FAILED=1
               fi
             done
-            echo "→ openspec validate ${CHANGE}"
-            if ! openspec validate "$CHANGE"; then
+            echo "→ openspec validate ${CHANGE} --type change"
+            if ! openspec validate "$CHANGE" --type change; then
               echo "::error::[change] ${CHANGE} delta spec 校验失败（见 SPEC_CONVENTIONS.md §4）"
               FAILED=1
             fi
