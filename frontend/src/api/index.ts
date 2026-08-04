@@ -27,6 +27,23 @@ export const getDeviceStatus = (ip: string) => {
   return api.get<ApiEnvelope<DeviceConnStatus>>(`/devices/${ip}/status`)
 }
 
+// 添加设备并即时建连（POST /devices）；port 缺省 830、vendor 缺省 huawei 由后端兜底
+export const addDevice = (payload: {
+  ip: string
+  port?: number
+  username: string
+  password: string
+  vendor?: string
+  role?: string
+}) => {
+  return api.post<ApiEnvelope<unknown>>('/devices', payload)
+}
+
+// 移除设备（DELETE /devices/:ip）
+export const removeDevice = (ip: string) => {
+  return api.delete<ApiEnvelope<unknown>>(`/devices/${ip}`)
+}
+
 // Reconcile API —— 全网/单设备对账结局（desired↔actual 收敛），供概览大盘消费。
 export const getFleetReconcile = () => {
   return api.get<ApiEnvelope<FleetReconcileData>>('/reconcile/status')

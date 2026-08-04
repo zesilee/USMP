@@ -15,8 +15,40 @@
           <el-option v-for="v in vendors" :key="v" :label="v" :value="v" />
         </el-select>
         <el-button :icon="Refresh" @click="handleRefresh" :loading="loading">{{ t('common.refresh') }}</el-button>
+        <el-button type="primary" :icon="Plus" data-test="add-device-btn" @click="openAddDialog">{{ t('devices.addDevice') }}</el-button>
       </div>
     </div>
+
+    <el-dialog v-model="addDialogVisible" :title="t('devices.addDeviceTitle')" width="460px">
+      <div data-test="add-device-dialog">
+        <el-form ref="addFormRef" :model="addForm" :rules="addRules" label-width="90px">
+          <el-form-item :label="t('devices.fieldIp')" prop="ip" data-test="add-ip">
+            <el-input v-model="addForm.ip" placeholder="7.225.21.14" />
+          </el-form-item>
+          <el-form-item :label="t('devices.fieldPort')" prop="port" data-test="add-port">
+            <el-input v-model="addForm.port" placeholder="830" />
+          </el-form-item>
+          <el-form-item :label="t('devices.fieldUsername')" prop="username" data-test="add-username">
+            <el-input v-model="addForm.username" autocomplete="off" />
+          </el-form-item>
+          <el-form-item :label="t('devices.fieldPassword')" prop="password" data-test="add-password">
+            <el-input v-model="addForm.password" type="password" show-password autocomplete="new-password" />
+          </el-form-item>
+          <el-form-item :label="t('devices.fieldVendor')" prop="vendor" data-test="add-vendor">
+            <el-input v-model="addForm.vendor" placeholder="huawei" />
+          </el-form-item>
+          <el-form-item :label="t('devices.fieldRole')" prop="role" data-test="add-role">
+            <el-input v-model="addForm.role" :placeholder="t('devices.rolePlaceholder')" />
+          </el-form-item>
+        </el-form>
+      </div>
+      <template #footer>
+        <el-button @click="addDialogVisible = false">{{ t('common.cancel') }}</el-button>
+        <el-button type="primary" data-test="add-submit" :loading="adding" @click="submitAddDevice">
+          {{ t('common.confirm') }}
+        </el-button>
+      </template>
+    </el-dialog>
 
     <el-table :data="paginatedRows" class="device-table" v-loading="loading">
       <el-table-column :label="t('devices.colIp')" width="150">
@@ -54,6 +86,7 @@
         <template #default="{ row }">
           <el-button type="primary" size="small" link @click="goToConfig(row)">{{ t('devices.viewConfig') }}</el-button>
           <el-button type="info" size="small" link @click="handleTestConnection(row)">{{ t('devices.testConnection') }}</el-button>
+          <el-button type="danger" size="small" link data-test="device-delete-btn" @click="handleDelete(row)">{{ t('common.delete') }}</el-button>
         </template>
       </el-table-column>
       <template #empty>
@@ -70,14 +103,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { Refresh, Search } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
+import { Plus, Refresh, Search } from '@element-plus/icons-vue'
+import { ElMessage, ElMessageBox, type FormInstance, type FormRules } from 'element-plus'
 import { useDeviceStore } from '../stores/device'
-import { getFleetReconcile } from '../api'
+import { addDevice, getFleetReconcile, removeDevice } from '../api'
 import { deriveDeviceRows, type DeviceRow } from '../utils/deviceRows'
+import { validateDeviceForm, toAddDevicePayload } from '../utils/deviceForm'
 import type { FleetInput } from '../composables/useFleetOverview'
 import ReconcileChip from '../components/dashboard/ReconcileChip.vue'
 import Sparkline from '../components/common/Sparkline.vue'
@@ -143,6 +177,88 @@ function goToConfig(row: DeviceRow) {
   // query 仍携带以保证 URL 可分享（双写幂等）。
   store.selectDevice(row.ip)
   router.push({ name: 'module-console', params: { module: 'ifm' }, query: { device: row.ip } })
+}
+
+// ── 添加/删除设备（后端 POST/DELETE /devices 早已就绪，此处补前端入口）──
+
+const addDialogVisible = ref(false)
+const adding = ref(false)
+const addFormRef = ref<FormInstance>()
+const addForm = reactive({ ip: '', port: '', username: '', password: '', vendor: '', role: '' })
+
+const ipv4Re = /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/
+const addRules: FormRules = {
+  ip: [
+    { required: true, message: () => t('devices.ruleIpRequired'), trigger: 'blur' },
+    {
+      validator: (_r, v, cb) => (v && !ipv4Re.test(v) ? cb(new Error(t('devices.ruleIpInvalid'))) : cb()),
+      trigger: ['blur', 'change'],
+    },
+  ],
+  port: [
+    {
+      validator: (_r, v, cb) => {
+        if (!v) return cb()
+        const n = Number(v)
+        return Number.isInteger(n) && n >= 1 && n <= 65535 ? cb() : cb(new Error(t('devices.rulePortInvalid')))
+      },
+      trigger: ['blur', 'change'],
+    },
+  ],
+  username: [{ required: true, message: () => t('devices.ruleUserRequired'), trigger: 'blur' }],
+  password: [{ required: true, message: () => t('devices.rulePassRequired'), trigger: 'blur' }],
+  // BR-14 同口径：≤32 位 [A-Za-z0-9_-]
+  role: [
+    {
+      validator: (_r, v, cb) => (v && !/^[A-Za-z0-9_-]{1,32}$/.test(v) ? cb(new Error(t('devices.ruleRoleInvalid'))) : cb()),
+      trigger: ['blur', 'change'],
+    },
+  ],
+}
+
+function openAddDialog() {
+  Object.assign(addForm, { ip: '', port: '', username: '', password: '', vendor: '', role: '' })
+  addFormRef.value?.clearValidate()
+  addDialogVisible.value = true
+}
+
+async function submitAddDevice() {
+  // 闸门用纯函数（与渲染无关，见 utils/deviceForm 注释）；el-form 的 rules 只
+  // 负责行内提示，故这里额外触发一次 validate() 把错误渲染出来（结果不作判据）。
+  const errors = validateDeviceForm(addForm)
+  addFormRef.value?.validate().catch(() => undefined)
+  if (Object.keys(errors).length > 0) {
+    const firstKey = Object.values(errors)[0]
+    if (firstKey) ElMessage.error(t(firstKey))
+    return
+  }
+  adding.value = true
+  try {
+    await addDevice(toAddDevicePayload(addForm))
+    ElMessage.success(t('devices.addSuccess', { ip: addForm.ip.trim() }))
+    addDialogVisible.value = false
+    await load()
+  } catch (e: any) {
+    // 后端拒绝（连不上/参数不合规）：不关框，展示原因供改后重试
+    ElMessage.error(t('devices.addFailed', { reason: e?.response?.data?.message || e?.message || e }))
+  } finally {
+    adding.value = false
+  }
+}
+
+async function handleDelete(row: DeviceRow) {
+  try {
+    await ElMessageBox.confirm(t('devices.deleteConfirm', { ip: row.ip }), t('common.delete'), { type: 'warning' })
+  } catch {
+    return // 用户取消
+  }
+  try {
+    await removeDevice(row.ip)
+    ElMessage.success(t('devices.deleteSuccess', { ip: row.ip }))
+    await load()
+  } catch (e: any) {
+    ElMessage.error(t('devices.deleteFailed', { reason: e?.response?.data?.message || e?.message || e }))
+  }
 }
 
 async function handleTestConnection(row: DeviceRow) {
