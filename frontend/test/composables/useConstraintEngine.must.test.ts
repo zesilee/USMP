@@ -39,6 +39,55 @@ describe('useConstraintEngine · must 跨字段校验（数据驱动，无硬编
     expect(mustViolations.value).toEqual([])
   })
 
+  // 真机回归（T07，CE6866 创建接口死循环）：statistic-mode 挂自引用 must
+  // 「../statistic-mode='interface-based' or (../l2-mode-enable='true' and
+  // ../statistic-enable='true')」。RFC7950 §7.5.3：must 只约束存在的节点——
+  // 叶子未赋值=节点不存在，must 不适用。旧行为把未填也判违例 → 门禁强迫用户
+  // 选值 → 设备按接口类型裁剪该叶 → rpc-error unknown-element，两头堵死。
+  describe('叶子未赋值 → 其 must 不适用（节点不存在语义）', () => {
+    const smFields: Field[] = [
+      { path: '/ifm/interfaces/interface/l2-mode-enable', type: 'boolean', label: 'l2-mode-enable' },
+      { path: '/ifm/interfaces/interface/statistic-enable', type: 'boolean', label: 'statistic-enable' },
+      {
+        path: '/ifm/interfaces/interface/statistic-mode',
+        type: 'string',
+        label: 'statistic-mode',
+        must: [{ expr: "../statistic-mode = 'interface-based' or (../l2-mode-enable = 'true' and ../statistic-enable = 'true')" }],
+      },
+    ]
+
+    it('未填（undefined/空串）→ 无违例，不再强迫用户选值', () => {
+      const form = ref<Record<string, any>>({})
+      const { mustViolations } = useConstraintEngine(smFields, form)
+      expect(mustViolations.value).toEqual([])
+      form.value['statistic-mode'] = ''
+      expect(mustViolations.value).toEqual([])
+    })
+
+    it('填了值 → must 正常评估：满足无违例、违反有违例', () => {
+      const form = ref<Record<string, any>>({ 'statistic-mode': 'interface-based' })
+      const { mustViolations } = useConstraintEngine(smFields, form)
+      expect(mustViolations.value).toEqual([])
+      form.value['statistic-mode'] = 'vlan-based' // l2/statistic-enable 未开 → 违反
+      expect(mustViolations.value.map((v) => v.path)).toContain('/ifm/interfaces/interface/statistic-mode')
+    })
+
+    it('引用他叶的 must：载体叶未填同样跳过（reuse 未填不评估 suppress>reuse）', () => {
+      const form = ref<Record<string, any>>({ suppress: 2000 })
+      const { mustViolations } = useConstraintEngine(mustFields, form)
+      expect(mustViolations.value.filter((v) => v.path === '/d/reuse')).toEqual([])
+    })
+
+    it('布尔 false 与数值 0 是有效值，must 照常评估', () => {
+      const f: Field[] = [
+        { path: '/d/n', type: 'number', label: 'n', must: [{ expr: '../n > 0' }] },
+      ]
+      const form = ref<Record<string, any>>({ n: 0 })
+      const { mustViolations } = useConstraintEngine(f, form)
+      expect(mustViolations.value.map((v) => v.path)).toContain('/d/n')
+    })
+  })
+
   it('must 表达式解析失败 → 不阻断 + 记录告警（R08）', () => {
     const f: Field[] = [{ path: '/d/bad', type: 'number', label: 'bad', must: [{ expr: '../a = = 1' }] }]
     const form = ref<Record<string, any>>({})
