@@ -43,3 +43,7 @@ nginx 只听 IPv4 → connection refused。打 `127.0.0.1` 立即 healthy。纯�
 `openspec validate --all --strict` 32/32 过。冷 `go build ./...` ≈1m46s（2 核，慢但可用）。
 
 **待用户确认**：仓库 GitHub 上现为 **PUBLIC**，与 [[cicd-self-hosted]] 记的"已转 PRIVATE"矛盾。
+
+## 磁盘容量隐患（2026-08-04 实录）
+
+本机根盘仅 48G，`/root/.cache/go-build` 会涨到 6-7G，叠加 docker 构建层后 push 的 e2e 镜像构建会以 `no space left on device` 失败（表现为 pre-push 拦截）。急救：`rm -rf /root/.cache/go-build/*`（安全，只是下次编译慢）＋ `docker builder prune -af`。docker system df 的 Build Cache 数字可能全为 ACTIVE 不可回收，别指望它。

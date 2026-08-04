@@ -1,16 +1,22 @@
 ---
 id: crd-to-yang-codegen
 title: 北向 CRD→YANG 反向代码生成工具（crd2yang，crdgen 镜像）
-status: in_progress
+status: completed
 priority: medium
-branch: worktree-crd-to-yang-codegen
+branch: (已合入 main PR #268，分支可清理)
 worktree: .claude/worktrees/crd-to-yang-codegen
-change: openspec/changes/crd-to-yang-codegen（C2Y-01~06）
+change: archive/2026-08-04-crd-to-yang-codegen（C2Y-01~06，PR #268 合入，2026-08-04 收官）
 updated: 2026-08-04
 origin: 用户 2026-08-04 提出：北向「网络自动化服务」（K8s）以 CRD 发布业务契约，USMP 代码生成工具需增 CRD→YANG 能力，生成的 YANG 作为业务网络配置；不用仓库现有 CRD，自建对齐华为 YANG 规范的示例 CRD 验证
 ---
 
-## 上下文恢复提示
+## 交付状态（2026-08-04 收官）
+
+- PR #268 合入 main：crd2yang 工具 + 示例 BusinessVlanNet CRD + 往返对账 + businessdemo 管线验证链 + 三层门禁 + 覆盖率棘轮 73.3。
+- 顺手修 CI 通用缺陷：openspec-check 校验 change 补 --type change（change 与 spec 同名歧义）。
+- 后续债（另立 change）：北向正式 CRD 接入=运行期接线（多 Kind 业务 API 泛化 + 意图展开规则）+ 退役 businessdemo。
+
+## 上下文恢复提示（历史留档）
 
 - 工作方式：**所有代码检视都启独立 agent**（用户 2026-08-04 拍板，本任务已执行）。
 - 范围拍板：只做转换工具，不照 refactor-by-crd.md 整体重构（Scrapligo/前端直连 K8s/Stack A 旧 Kind 三处撞红线，均剪出）；示例模型不接线运行期 load.go（业务控制台单 Kind 写死，挂菜单会出死页面）。
