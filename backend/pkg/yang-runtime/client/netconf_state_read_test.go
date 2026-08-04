@@ -181,7 +181,7 @@ func TestNETCONFClient_GetWithStateData_SelfHeal(t *testing.T) {
 	// 报错——此前这里 Fatalf 会把失败引向 cleanup 里对半死 driver 的二次 Close
 	// 死锁（CI 卡满 5 分钟包超时的根因触发点）。
 	c.mu.Lock()
-	deadDriver := c.driver
+	deadDriver := c.backend
 	c.mu.Unlock()
 	if deadDriver == nil {
 		t.Fatal("expected live driver after successful get")
@@ -211,7 +211,7 @@ func TestNETCONFClient_CloseAfterConnectionLoss_Bounded(t *testing.T) {
 		t.Fatalf("initial get: %v", err)
 	}
 	c.mu.Lock()
-	deadDriver := c.driver
+	deadDriver := c.backend
 	c.mu.Unlock()
 	_ = deadDriver.Close() // 第一次 Close：把 driver 弄成半死态
 
