@@ -3,6 +3,21 @@ import type { Field } from '../utils/crdSchemaParser'
 import { evalPredicate } from '../utils/xpathEval'
 import { i18n } from '../i18n'
 
+// 叶子类字段（标量/leaf-list）：未赋值即节点不存在；容器/列表/choice 的存在性
+// 由上层 presence 语义处理，不在此判定。
+function isLeafKind(t: Field['type']): boolean {
+  return t === 'string' || t === 'number' || t === 'boolean' || t === 'leaf-list'
+}
+
+function leafSeg(f: Field): string {
+  return f.path.split('/').filter(Boolean).pop() || f.path
+}
+
+// 未赋值判定：undefined/null/空串（表单清空）/空 leaf-list。false 与 0 是有效值。
+function isUnsetLeaf(v: any): boolean {
+  return v === undefined || v === null || v === '' || (Array.isArray(v) && v.length === 0)
+}
+
 // useConstraintEngine —— 通用约束引擎（FE-07）。把 schema 中每个字段的 YANG `when`
 // XPath 表达式对当前表单数据求值为响应式 `visible` 状态。100% 数据驱动、零厂商/
 // 模型/字段名硬编码；表达式非法时降级为「可见 + 告警」（R08），绝不崩。
@@ -42,6 +57,10 @@ export function useConstraintEngine(
     for (const f of toValue(fields) ?? []) {
       if (!f.must?.length) continue
       if (!(vmap[f.path] ?? true)) continue // 隐藏字段跳过
+      // RFC7950 §7.5.3：must 只约束存在的节点。叶子未赋值=节点不存在，其 must
+      // 不适用（与 when=false 同理；presence 容器由上层过滤）。否则自引用 must
+      //（如 ifm statistic-mode）会强迫用户为设备按类型裁剪的叶选值，真机拒收。
+      if (isLeafKind(f.type) && isUnsetLeaf(ctx[leafSeg(f)])) continue
       for (const rule of f.must) {
         const r = evalPredicate(rule.expr, ctx)
         if ('value' in r && r.value === false) {
