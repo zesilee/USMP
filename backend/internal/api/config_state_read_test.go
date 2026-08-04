@@ -41,7 +41,7 @@ func (c *optCaptureClient) DiscardCandidate(context.Context) error { return nil 
 
 // 读路径必须以 WithStateData 发起（<get>），否则设备不会返回状态数据。
 func TestFetchFromDevice_RequestsStateData(t *testing.T) {
-	cc := &optCaptureClient{xml: `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces/></ifm>`}
+	cc := &optCaptureClient{xml: `<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces/></ifm>`}
 	h := NewConfigHandler(fakePoolManager{pool: &fakePool{client: cc}})
 
 	_, err := h.fetchFromDevice(context.Background(), "192.168.1.1", "/ifm:ifm/ifm:interfaces")
@@ -51,7 +51,7 @@ func TestFetchFromDevice_RequestsStateData(t *testing.T) {
 
 // 回读含状态子树：RFC7951 结构原样带出（前端只读控件由此回显）。
 func TestFetchFromDevice_ParsesStateSubtree(t *testing.T) {
-	xml := `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces>` +
+	xml := `<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces>` +
 		`<interface><name>GE0/0/1</name><mtu>1500</mtu>` +
 		`<dynamic><oper-status>1</oper-status><mac-address>00:aa:bb:cc:dd:ee</mac-address></dynamic>` +
 		`</interface></interfaces></ifm>`
@@ -93,17 +93,17 @@ func TestConfigStateRead_EndToEnd(t *testing.T) {
 	defer sim.Stop()
 
 	sim.SetRunningConfigXML([]byte(`<config>` +
-		`<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces>` +
+		`<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces>` +
 		`<interface><name>GE0/0/1</name><mtu>1500</mtu></interface></interfaces></ifm>` +
-		`<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans>` +
+		`<vlan xmlns="urn:huawei:yang:huawei-vlan"><vlans>` +
 		`<vlan><id>100</id><name>office</name></vlan></vlans></vlan>` +
 		`</config>`))
 	if err := sim.SetStateDataXML([]byte(
-		`<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces>` +
+		`<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces>` +
 			`<interface><name>GE0/0/1</name>` +
 			`<dynamic><oper-status>1</oper-status><mac-address>00:aa:bb:cc:dd:ee</mac-address></dynamic>` +
 			`</interface></interfaces></ifm>` +
-			`<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans>` +
+			`<vlan xmlns="urn:huawei:yang:huawei-vlan"><vlans>` +
 			`<vlan><id>100</id><statistics><inbound-packets>12345</inbound-packets><inbound-bytes>67890</inbound-bytes></statistics></vlan></vlans></vlan>`)); err != nil {
 		t.Fatalf("SetStateDataXML: %v", err)
 	}
@@ -157,7 +157,7 @@ func TestConfigStateRead_EndToEnd(t *testing.T) {
 
 // 设备无状态数据：回读结构与改动前等值，不构造空状态占位。
 func TestFetchFromDevice_NoStateDataUnchanged(t *testing.T) {
-	xml := `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces>` +
+	xml := `<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces>` +
 		`<interface><name>GE0/0/1</name><mtu>1500</mtu></interface></interfaces></ifm>`
 	p := &fakePool{client: &xmlClient{xml: xml}}
 	h := NewConfigHandler(fakePoolManager{pool: p})

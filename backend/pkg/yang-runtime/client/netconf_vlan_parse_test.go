@@ -10,7 +10,7 @@ import (
 // 设备 get-config 回读的 VLAN XML 必须能解析进 ygot map（key=uint16 VLAN id）。
 // 与 IFM 同源：ygot 结构体无 xml tag，encoding/xml 无法填 map → actual 恒空 → VLAN 永久漂移。
 func TestParseHuaweiVlanVlansXML_Flat(t *testing.T) {
-	data := []byte(`<data><vlans xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan">` +
+	data := []byte(`<data><vlans xmlns="urn:huawei:yang:huawei-vlan">` +
 		`<vlan><id>100</id><name>v100</name><description>uplink</description>` +
 		`<admin-status>2</admin-status><type>1</type><mac-learning>1</mac-learning></vlan>` +
 		`</vlans></data>`)
@@ -31,7 +31,7 @@ func TestParseHuaweiVlanVlansXML_Flat(t *testing.T) {
 }
 
 func TestParseHuaweiVlanVlansXML_MemberPorts(t *testing.T) {
-	data := []byte(`<vlans xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan">` +
+	data := []byte(`<vlans xmlns="urn:huawei:yang:huawei-vlan">` +
 		`<vlan><id>200</id><member-ports>` +
 		`<member-port><interface-name>GE0/0/1</interface-name><access-type>2</access-type></member-port>` +
 		`<member-port><interface-name>GE0/0/2</interface-name></member-port>` +

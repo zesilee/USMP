@@ -14,7 +14,7 @@ import (
 // sim 只报 base:1.0 → 走 EOM；chunked 1.1 路径由 session_test 的 net.Pipe
 // 假服务端覆盖，真机验证在 Wave 4。
 
-const seedVlanXML = `<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans><vlan><id>10</id><name>seed10</name></vlan></vlans></vlan>`
+const seedVlanXML = `<vlan xmlns="urn:huawei:yang:huawei-vlan"><vlans><vlan><id>10</id><name>seed10</name></vlan></vlans></vlan>`
 
 func dialSim(t *testing.T) (*netsim.Simulator, *Session) {
 	t.Helper()
@@ -65,7 +65,7 @@ func TestIntegrationHelloAndCapabilities(t *testing.T) {
 func TestIntegrationGetConfig(t *testing.T) {
 	_, s := dialSim(t)
 	reply, err := s.GetConfig(context.Background(), "running",
-		`<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"/>`)
+		`<vlan xmlns="urn:huawei:yang:huawei-vlan"/>`)
 	if err != nil {
 		t.Fatalf("GetConfig: %v", err)
 	}
@@ -76,7 +76,7 @@ func TestIntegrationGetConfig(t *testing.T) {
 
 func TestIntegrationEditConfigRoundTrip(t *testing.T) {
 	sim, s := dialSim(t)
-	edit := `<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans><vlan><id>20</id><name>wave2</name></vlan></vlans></vlan>`
+	edit := `<vlan xmlns="urn:huawei:yang:huawei-vlan"><vlans><vlan><id>20</id><name>wave2</name></vlan></vlans></vlan>`
 	if _, err := s.EditConfig(context.Background(), "running", edit); err != nil {
 		t.Fatalf("EditConfig: %v", err)
 	}
@@ -105,7 +105,7 @@ func TestIntegrationConcurrentClients(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		go func() {
 			_, err := s.GetConfig(context.Background(), "running",
-				`<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"/>`)
+				`<vlan xmlns="urn:huawei:yang:huawei-vlan"/>`)
 			done <- err
 		}()
 	}

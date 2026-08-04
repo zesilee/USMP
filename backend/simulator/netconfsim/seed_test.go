@@ -28,7 +28,7 @@ func TestDemoSeedConfigLoadsAndFilters(t *testing.T) {
 	}
 
 	// IFM 子树过滤（后端 get-config filter 形态）应仅返回 ifm 子树且含全部接口。
-	filtered, err := ds.GetConfigFiltered([]byte(`<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces/></ifm>`))
+	filtered, err := ds.GetConfigFiltered([]byte(`<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces/></ifm>`))
 	if err != nil {
 		t.Fatalf("GetConfigFiltered: %v", err)
 	}

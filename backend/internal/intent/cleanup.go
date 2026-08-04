@@ -10,6 +10,7 @@ import (
 
 	"github.com/openconfig/ygot/ygot"
 
+	"github.com/leezesi/usmp/backend/internal/drivers"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
@@ -143,7 +144,7 @@ func cleanupChanges(claims []Claim) ([]client.Change, error) {
 // key-matches the same stored nodes; operation="remove" keeps retries
 // idempotent (no data-missing on the second pass).
 func l2RemoveXML(port string) string {
-	return fmt.Sprintf(`<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces><interface><name>%s</name><ethernet><main-interface><l2-attribute xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" nc:operation="remove"/></main-interface></ethernet></interface></interfaces></ifm>`, xmlEscape(port))
+	return fmt.Sprintf(`<ifm xmlns="%s"><interfaces><interface><name>%s</name><ethernet><main-interface><l2-attribute xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" nc:operation="remove"/></main-interface></ethernet></interface></interfaces></ifm>`, drivers.HuaweiIfmNS, xmlEscape(port))
 }
 
 func xmlEscape(s string) string {

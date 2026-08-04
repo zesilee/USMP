@@ -1,1 +1,1 @@
-{urn:huawei:params:xml:ns:yang:huawei-ifm}ifm({urn:huawei:params:xml:ns:yang:huawei-ifm}interfaces({urn:huawei:params:xml:ns:yang:huawei-ifm}interface({urn:huawei:params:xml:ns:yang:huawei-ifm}name(LoopBack0))))
+{urn:huawei:yang:huawei-ifm}ifm({urn:huawei:yang:huawei-ifm}interfaces({urn:huawei:yang:huawei-ifm}interface({urn:huawei:yang:huawei-ifm}name(LoopBack0))))

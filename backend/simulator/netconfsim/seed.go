@@ -5,7 +5,7 @@ package netconfsim
 // 指向对应主接口），供 staging 演示与 E2E 冒烟断言。枚举值为设备侧数字形态
 // （class: 1=main/2=sub；type: 93=200GE/16=Vlanif；admin-status: 2=up/1=down；
 // link-protocol: 1=ethernet），与 ParseHuaweiIfmInterfacesXML 回读解析对齐。
-const DemoSeedConfig = `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
+const DemoSeedConfig = `<ifm xmlns="urn:huawei:yang:huawei-ifm">
     <interfaces>
       <interface>
         <name>200GE0/1/0</name>
@@ -62,7 +62,7 @@ const DemoSeedConfig = `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
 // physical-status: 2=up/1=down，与 admin-status 语义呼应：两条在网主接口 up、
 // spare 备用口物理 down、两条 admin-down 子接口 down）；bandwidth 单位 kbit/s
 // （200GE=200000000）。经 SetStateDataXML 注入，不落配置树、get-config 不可见。
-const DemoStateSeed = `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
+const DemoStateSeed = `<ifm xmlns="urn:huawei:yang:huawei-ifm">
     <interfaces>
       <interface>
         <name>200GE0/1/0</name>

@@ -43,7 +43,7 @@ func TestConvertConfigRejectsLegacyIntegerEnum(t *testing.T) {
 // 回读值不满足本地 YANG pattern（如设备返回带点号的子接口 number）时，decode 必须
 // 仍产出 RFC7951 map 而非降级为不透明 XML bytes（R08：一叶异常不拖垮整个回读）。
 func TestDecodeRunningConfigSkipsValidationOnReadback(t *testing.T) {
-	raw := []byte(`<data><ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces>` +
+	raw := []byte(`<data><ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces>` +
 		`<interface><name>200GE0/1/0.1</name><class>2</class><number>0/1/0.1</number></interface>` +
 		`</interfaces></ifm></data>`)
 	out := decodeRunningConfig("/ifm:ifm/ifm:interfaces", raw)

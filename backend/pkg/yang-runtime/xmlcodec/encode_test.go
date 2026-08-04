@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	vlanNS = "urn:huawei:params:xml:ns:yang:huawei-vlan"
-	ifmNS  = "urn:huawei:params:xml:ns:yang:huawei-ifm"
+	vlanNS = "urn:huawei:yang:huawei-vlan"
+	ifmNS  = "urn:huawei:yang:huawei-ifm"
 )
 
 func vlanSpec() *Spec {

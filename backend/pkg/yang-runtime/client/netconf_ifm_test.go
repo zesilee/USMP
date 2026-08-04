@@ -15,14 +15,14 @@ func strPtr(s string) *string {
 func TestBuildHuaweiIfmInterfacesXML_NilInput(t *testing.T) {
 	result, err := buildHuaweiIfmInterfacesXML(nil)
 	require.NoError(t, err)
-	assert.Equal(t, `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces/></ifm>`, result)
+	assert.Equal(t, `<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces/></ifm>`, result)
 }
 
 func TestBuildHuaweiIfmInterfacesXML_EmptyInput(t *testing.T) {
 	ifaces := &huawei.HuaweiIfm_Ifm_Interfaces{}
 	result, err := buildHuaweiIfmInterfacesXML(ifaces)
 	require.NoError(t, err)
-	assert.Equal(t, `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces/></ifm>`, result)
+	assert.Equal(t, `<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces/></ifm>`, result)
 }
 
 func TestBuildHuaweiIfmInterfacesXML_SingleInterface(t *testing.T) {
@@ -49,7 +49,7 @@ func TestBuildHuaweiIfmInterfacesXML_SingleInterface(t *testing.T) {
 	result, err := buildHuaweiIfmInterfacesXML(ifaces)
 	require.NoError(t, err)
 
-	assert.Contains(t, result, `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces>`)
+	assert.Contains(t, result, `<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces>`)
 	assert.Contains(t, result, `<interface>`)
 	assert.Contains(t, result, `<name>GigabitEthernet0/0/1</name>`)
 	assert.Contains(t, result, `<description>Test Interface</description>`)

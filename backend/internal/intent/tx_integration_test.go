@@ -121,7 +121,7 @@ func TestTxPushPreservesManualConfig_Integration(t *testing.T) {
 		t.Skip("skipping integration test in short mode")
 	}
 	simA, simB := startTxSim(t, "127.0.0.1", nil), startTxSim(t, "127.0.0.2", nil)
-	simA.SetRunningConfigXML([]byte(`<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans><vlan><id>300</id><name>manual</name></vlan></vlans></vlan>`))
+	simA.SetRunningConfigXML([]byte(`<vlan xmlns="urn:huawei:yang:huawei-vlan"><vlans><vlan><id>300</id><name>manual</name></vlan></vlans></vlan>`))
 	tx := txStack(t, simA, simB)
 
 	results := tx.Push(context.Background(), mustExpand(t, 100))
@@ -261,7 +261,7 @@ func TestDriftRepairSingleDevice_Integration(t *testing.T) {
 	writeDesired(cs, nil, frags)
 
 	// 漂移：设备侧 vlan 100 被手工清掉。
-	simA.SetRunningConfigXML([]byte(`<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans><vlan><id>999</id><name>other</name></vlan></vlans></vlan>`))
+	simA.SetRunningConfigXML([]byte(`<vlan xmlns="urn:huawei:yang:huawei-vlan"><vlans><vlan><id>999</id><name>other</name></vlan></vlans></vlan>`))
 	if _, ok := simA.RunningHuaweiVLANs()[100]; ok {
 		t.Fatal("precondition: drift not injected")
 	}
