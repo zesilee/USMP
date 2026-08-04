@@ -4,10 +4,10 @@
 
 ## 1. 示例 CRD 与工具骨架（B1 红灯先行）
 
-- [ ] 1.1 编写示例 CRD `testdata/businessvlannets.crd.yaml`（Kind=BusinessVlanNet，约束逐条对齐 huawei-vlan/huawei-ifm：vlan-id 1..4094、name 1..31、description 1..80、devices list map-keys=[ip]、mode enum、leaf-list、嵌套 container、mandatory；带 D3 全套注解）
-- [ ] 1.2 `tools/crd2yang/` 骨架：`Options`/`Generate` 签名 + main.go flag 解析；先写 B1 表格驱动测试（C2Y-01/02/03 全分支 + 负路径：缺 revision、多 served 版本、无 key 对象数组、oneOf fail-fast）——红灯
-- [ ] 1.3 实现 manifest 解析 + 注解/缺省派生（C2Y-02）+ 结构映射（C2Y-03：container/list/leaf-list/integer 宽度推导/pattern/enum/mandatory 剥离 key）+ YANG 文本渲染（含 task-name 扩展、generated-from 溯源、description）——绿灯
-- [ ] 1.4 golden 测试：`testdata/businessvlannets.golden.yang` 入库，goyang 解析零错误断言（C2Y-01）
+- [x] 1.1 编写示例 CRD `testdata/businessvlannets.crd.yaml`（Kind=BusinessVlanNet，约束逐条对齐 huawei-vlan/huawei-ifm：vlan-id 1..4094、name 1..31、description 1..80、devices list map-keys=[ip]、mode enum、leaf-list、嵌套 container、mandatory；带 D3 全套注解）
+- [x] 1.2 `tools/crd2yang/` 骨架：`Options`/`Generate` 签名 + main.go flag 解析；先写 B1 表格驱动测试（C2Y-01/02/03 全分支 + 负路径：缺 revision、多 served 版本、无 key 对象数组、oneOf fail-fast）——红灯
+- [x] 1.3 实现 manifest 解析 + 注解/缺省派生（C2Y-02）+ 结构映射（C2Y-03：container/list/leaf-list/integer 宽度推导/pattern/enum/mandatory 剥离 key）+ YANG 文本渲染（含 task-name 扩展、generated-from 溯源、description）——绿灯
+- [x] 1.4 golden 测试：`testdata/businessvlannets.golden.yang` 入库，goyang 解析零错误断言（C2Y-01）
 
 ## 2. 往返对账（C2Y-04）
 
