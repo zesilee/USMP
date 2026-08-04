@@ -28,6 +28,6 @@
 
 ## 5. 收尾
 
-- [ ] 5.1 覆盖率棘轮：后端新增包补测后核对 `.coverage-baseline` 不降、按需上调（T08）
-- [ ] 5.2 `go-code-review-check` 通过；What/Why/How 三段式 commit 整理；记忆更新（`docs: 记忆更新` 单独 commit，MEM04）
+- [x] 5.1 覆盖率棘轮：后端新增包补测后核对 `.coverage-baseline` 不降、按需上调（T08）
+- [x] 5.2 `go-code-review-check` 通过；What/Why/How 三段式 commit 整理；记忆更新（`docs: 记忆更新` 单独 commit，MEM04）
 - [ ] 5.3 完成分支流程（§6.3 选项 B：push + PR），CI 全绿后自助 merge（合入授权口径）
