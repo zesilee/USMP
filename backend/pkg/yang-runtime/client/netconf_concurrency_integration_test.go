@@ -132,7 +132,7 @@ func TestNETCONFClient_ReconnectAfterConnectionLoss(t *testing.T) {
 
 	// 制造「死连接但自认在线」：关掉 driver，不改 connected/driver 字段。
 	c.mu.Lock()
-	deadDriver := c.driver
+	deadDriver := c.backend
 	c.mu.Unlock()
 	if deadDriver == nil {
 		t.Fatal("expected live driver after successful get")

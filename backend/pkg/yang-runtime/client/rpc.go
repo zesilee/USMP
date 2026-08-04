@@ -5,9 +5,6 @@ import (
 	"fmt"
 	"strings"
 	"time"
-
-	"github.com/scrapli/scrapligo/driver/netconf"
-	"github.com/scrapli/scrapligo/util"
 )
 
 // RPCInput is one input leaf of an rpc execution (DP-10).
@@ -36,28 +33,20 @@ func (c *NETCONFClient) ExecuteRPC(ctx context.Context, namespace, rpcName strin
 	defer c.opMu.Unlock()
 
 	payload := buildRPCPayload(namespace, rpcName, inputs)
-	withPayload := func(o interface{}) error {
-		op, ok := o.(*netconf.OperationOptions)
-		if !ok {
-			return util.ErrIgnoredOption
-		}
-		op.Filter = payload
-		return nil
-	}
 
-	driver, err := c.ensureConnected()
+	backend, err := c.ensureConnected()
 	if err != nil {
 		return &RPCResult{Error: err, Timestamp: time.Now()}, err
 	}
 
-	resp, err := driver.RPC(withPayload)
+	resp, err := backend.RPC(ctx, payload)
 	if err != nil {
 		if isTransportError(err) {
 			c.markDisconnected()
 		}
 		return &RPCResult{Error: err, Timestamp: time.Now()}, err
 	}
-	if resp == nil {
+	if len(resp.Result) == 0 {
 		e := fmt.Errorf("empty rpc reply")
 		return &RPCResult{Error: e, Timestamp: time.Now()}, e
 	}

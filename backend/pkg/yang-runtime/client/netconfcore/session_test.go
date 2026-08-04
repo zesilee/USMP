@@ -296,6 +296,23 @@ func TestSessionContextTimeoutKillsSession(t *testing.T) {
 	_ = s // keep first session alive till cleanup
 }
 
+func TestSessionAbortNonBlocking(t *testing.T) {
+	s := newTestSession(t, caps10, nil)
+	done := make(chan struct{})
+	go func() { s.Abort(); s.Abort(); close(done) }() // 幂等且不取锁
+	select {
+	case <-done:
+	case <-time.After(2 * time.Second):
+		t.Fatal("Abort 不得阻塞")
+	}
+	if _, err := s.Do(context.Background(), []byte("<x/>")); err == nil {
+		t.Fatal("Abort 后 Do 应失败")
+	}
+	if _, err := s.Do(context.Background(), []byte("<x/>")); !errors.Is(err, ErrSessionDead) {
+		t.Fatalf("Abort 后会话应判死, got %v", err)
+	}
+}
+
 func TestSessionCloseIdempotent(t *testing.T) {
 	s := newTestSession(t, caps10, nil)
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)

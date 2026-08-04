@@ -231,6 +231,13 @@ func (s *Session) kill(cause error) {
 	_ = s.conn.Close()
 }
 
+// Abort 非阻塞强切传输层（不发 close-session、不取会话锁）：在途与后续操作
+// 将以传输错误失败并自行判死会话。供上层「标记死连接」路径使用——那里绝不能
+// 因等待在途操作而阻塞（对照 scrapligo 死连接 Close 死锁的根治）。幂等。
+func (s *Session) Abort() {
+	_ = s.conn.Close()
+}
+
 // Close 优雅关闭：best-effort 发 <close-session>（ctx 限时），随后必然切断
 // 连接。幂等，可与 Do 并发调用。
 func (s *Session) Close(ctx context.Context) error {
