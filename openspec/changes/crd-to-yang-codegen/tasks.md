@@ -11,8 +11,8 @@
 
 ## 2. 往返对账（C2Y-04）
 
-- [ ] 2.1 先写红灯：集成测试 CRD→crd2yang→YANG→（os/exec `go run ../crdgen`）→CRD′，归一化比对器（剥 x-kubernetes-*、key 并回 required）+ 深度相等断言，`testing.Short()` 跳过
-- [ ] 2.2 修通往返零失真（宽度推导/required 剥离/pattern 序列化等失真点在此收敛）——绿灯
+- [x] 2.1 先写红灯：集成测试 CRD→crd2yang→YANG→（os/exec `go run ../crdgen`）→CRD′，归一化比对器（剥 x-kubernetes-*、key 并回 required）+ 深度相等断言，`testing.Short()` 跳过
+- [x] 2.2 修通往返零失真（宽度推导/required 剥离/pattern 序列化等失真点在此收敛）——绿灯
 
 ## 3. 管线接入（C2Y-05）
 
