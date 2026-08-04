@@ -11,14 +11,14 @@ import (
 func TestBuildHuaweiVlanVlansXML_NilInput(t *testing.T) {
 	result, err := buildHuaweiVlanVlansXML(nil)
 	require.NoError(t, err)
-	assert.Equal(t, `<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans/></vlan>`, result)
+	assert.Equal(t, `<vlan xmlns="urn:huawei:yang:huawei-vlan"><vlans/></vlan>`, result)
 }
 
 func TestBuildHuaweiVlanVlansXML_EmptyInput(t *testing.T) {
 	vlans := &huawei.HuaweiVlan_Vlan_Vlans{}
 	result, err := buildHuaweiVlanVlansXML(vlans)
 	require.NoError(t, err)
-	assert.Equal(t, `<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans/></vlan>`, result)
+	assert.Equal(t, `<vlan xmlns="urn:huawei:yang:huawei-vlan"><vlans/></vlan>`, result)
 }
 
 func TestBuildHuaweiVlanVlansXML_SingleVlan(t *testing.T) {
@@ -45,7 +45,7 @@ func TestBuildHuaweiVlanVlansXML_SingleVlan(t *testing.T) {
 	require.NoError(t, err)
 
 	// Verify the result contains expected elements
-	assert.Contains(t, result, `<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans>`)
+	assert.Contains(t, result, `<vlan xmlns="urn:huawei:yang:huawei-vlan"><vlans>`)
 	assert.Contains(t, result, `<vlan>`)
 	assert.Contains(t, result, `<id>100</id>`)
 	assert.Contains(t, result, `<name>TestVLAN</name>`)
@@ -155,7 +155,7 @@ func TestMarshalChange_HuaweiVlan(t *testing.T) {
 	result, err := nc.marshalChange(change)
 	require.NoError(t, err)
 
-	assert.Contains(t, result, `<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans>`)
+	assert.Contains(t, result, `<vlan xmlns="urn:huawei:yang:huawei-vlan"><vlans>`)
 	assert.Contains(t, result, `<id>100</id>`)
 	assert.Contains(t, result, `<name>TestVLAN</name>`)
 }

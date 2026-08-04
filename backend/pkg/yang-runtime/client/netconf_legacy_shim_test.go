@@ -62,6 +62,6 @@ func buildHuaweiIfmInterfacesXML(ifaces *huawei.HuaweiIfm_Ifm_Interfaces) (strin
 // NS 常量 shim：生产常量已随手写 builder 退役（namespace 成为驱动注册数据，
 // 见 internal/drivers），历史断言原文保留。
 const (
-	HuaweiVlanNS = "urn:huawei:params:xml:ns:yang:huawei-vlan"
-	HuaweiIfmNS  = "urn:huawei:params:xml:ns:yang:huawei-ifm"
+	HuaweiVlanNS = "urn:huawei:yang:huawei-vlan"
+	HuaweiIfmNS  = "urn:huawei:yang:huawei-ifm"
 )

@@ -13,7 +13,7 @@ import (
 // ConfirmCommit 发确认 commit 转正；超时未确认由设备侧自动回滚（回读可验证）；
 // 设备未宣告 :confirmed-commit capability 时明确报错且不发送 RPC。
 
-const txVlanXML = `<vlan xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlans><vlan><id>100</id><name>tx-vlan</name></vlan></vlans></vlan>`
+const txVlanXML = `<vlan xmlns="urn:huawei:yang:huawei-vlan"><vlans><vlan><id>100</id><name>tx-vlan</name></vlan></vlans></vlan>`
 
 // supportsConfirmedCommit 能力判定：兼容 :1.0/:1.1 URN，不被无关 capability 误命中。
 func TestSupportsConfirmedCommit(t *testing.T) {

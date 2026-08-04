@@ -9,7 +9,7 @@ import (
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
 )
 
-const ifmNS = "urn:huawei:params:xml:ns:yang:huawei-ifm"
+const ifmNS = "urn:huawei:yang:huawei-ifm"
 
 // DP-10/NS-09 端到端：client.ExecuteRPC → 模拟网元识别 custom rpc、记录、返回 ok/
 // rpc-error。覆盖成功 + 设备拒绝负路径（T02）。

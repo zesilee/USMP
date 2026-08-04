@@ -28,7 +28,7 @@ func (c *xmlClient) DiscardCandidate(context.Context) error                     
 // bytes. Returning raw bytes (base64 over JSON) is why the "接口配置" list page
 // could not extract any rows for a freshly added interface.
 func TestFetchFromDevice_ParsesIfmInterfaces(t *testing.T) {
-	xml := `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces>` +
+	xml := `<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces>` +
 		`<interface><name>GigabitEthernet0/0/2</name></interface></interfaces></ifm>`
 	p := &fakePool{client: &xmlClient{xml: xml}}
 	h := NewConfigHandler(fakePoolManager{pool: p})

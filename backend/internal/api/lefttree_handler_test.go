@@ -109,7 +109,7 @@ func TestLeftTreeDeviceSupported(t *testing.T) {
 	}
 	gin.SetMode(gin.TestMode)
 	h, deviceID, cleanup := newDeviceYangHarness(t, []string{
-		"urn:huawei:params:xml:ns:yang:huawei-vlan?module=huawei-vlan&revision=2020-02-07",
+		"urn:huawei:yang:huawei-vlan?module=huawei-vlan&revision=2020-02-07",
 	})
 	defer cleanup()
 

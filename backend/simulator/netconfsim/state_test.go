@@ -11,14 +11,14 @@ import (
 // 纯状态容器并入、同名叶状态覆盖）；get-config 不含状态；写操作不触碰状态树。
 
 const (
-	stateIfmRunning = `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
+	stateIfmRunning = `<ifm xmlns="urn:huawei:yang:huawei-ifm">
   <interfaces>
     <interface><name>200GE0/1/0</name><mtu>9216</mtu><description>uplink</description></interface>
     <interface><name>200GE0/1/1</name><mtu>9216</mtu></interface>
   </interfaces>
 </ifm>`
 
-	stateIfmOverlay = `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
+	stateIfmOverlay = `<ifm xmlns="urn:huawei:yang:huawei-ifm">
   <interfaces>
     <interface>
       <name>200GE0/1/0</name>
@@ -97,7 +97,7 @@ func TestStateOverlayMergesIntoListEntry(t *testing.T) {
 func TestStateOverlayDropsUnmatchedListEntry(t *testing.T) {
 	ds := newTreeDatastore()
 	mustSetRunning(t, ds, stateIfmRunning)
-	mustSetState(t, ds, `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
+	mustSetState(t, ds, `<ifm xmlns="urn:huawei:yang:huawei-ifm">
   <interfaces>
     <interface><name>GhostIf</name><dynamic><oper-status>2</oper-status></dynamic></interface>
   </interfaces>
@@ -115,7 +115,7 @@ func TestStateOverlayDropsUnmatchedListEntry(t *testing.T) {
 func TestStateOverlayCreatesPureStateContainers(t *testing.T) {
 	ds := newTreeDatastore()
 	mustSetRunning(t, ds, stateIfmRunning)
-	mustSetState(t, ds, `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
+	mustSetState(t, ds, `<ifm xmlns="urn:huawei:yang:huawei-ifm">
   <ipv4-interface-count><total>2</total></ipv4-interface-count>
 </ifm>
 <sysstat xmlns="urn:example:sysstat"><cpu-usage>17</cpu-usage></sysstat>`)
@@ -133,7 +133,7 @@ func TestStateOverlayCreatesPureStateContainers(t *testing.T) {
 func TestStateOverlayLeafStateWins(t *testing.T) {
 	ds := newTreeDatastore()
 	mustSetRunning(t, ds, stateIfmRunning)
-	mustSetState(t, ds, `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
+	mustSetState(t, ds, `<ifm xmlns="urn:huawei:yang:huawei-ifm">
   <interfaces>
     <interface><name>200GE0/1/0</name><mtu>1500</mtu></interface>
   </interfaces>
@@ -172,7 +172,7 @@ func TestStateOverlaySurvivesConfigWrites(t *testing.T) {
 	mustSetRunning(t, ds, stateIfmRunning)
 	mustSetState(t, ds, stateIfmOverlay)
 
-	if err := ds.EditConfig([]byte(`<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
+	if err := ds.EditConfig([]byte(`<ifm xmlns="urn:huawei:yang:huawei-ifm">
   <interfaces><interface><name>200GE0/1/0</name><description>rewired</description></interface></interfaces>
 </ifm>`)); err != nil {
 		t.Fatalf("EditConfig: %v", err)
@@ -221,7 +221,7 @@ func TestStateOverlayFilteredGet(t *testing.T) {
 	mustSetRunning(t, ds, stateIfmRunning)
 	mustSetState(t, ds, stateIfmOverlay)
 
-	out := mustGetFiltered(t, ds, `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
+	out := mustGetFiltered(t, ds, `<ifm xmlns="urn:huawei:yang:huawei-ifm">
   <interfaces><interface><name>200GE0/1/0</name></interface></interfaces>
 </ifm>`)
 	got := treeFromXML(t, out)
@@ -266,7 +266,7 @@ func TestStateOverlayMergesThroughConfigWrapper(t *testing.T) {
 	}
 
 	// 带 filter 的读同样不得命中「状态树顶层兄弟」旁路
-	filtered := mustGetFiltered(t, ds, `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces><interface><name>200GE0/1/0</name></interface></interfaces></ifm>`)
+	filtered := mustGetFiltered(t, ds, `<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces><interface><name>200GE0/1/0</name></interface></interfaces></ifm>`)
 	fgot := treeFromXML(t, filtered)
 	fifaces := fgot.find("ifm", "interfaces").children("interface")
 	if len(fifaces) != 1 || fifaces[0].child("dynamic") == nil || fifaces[0].child("mtu") == nil {

@@ -223,7 +223,7 @@ func TestHuaweiDescriptors_VlanDecodeSmoke(t *testing.T) {
 	if !ok {
 		t.Fatal("vlan 解码描述符应命中")
 	}
-	xml := []byte(`<vlans xmlns="urn:huawei:params:xml:ns:yang:huawei-vlan"><vlan><id>10</id><name>t</name></vlan></vlans>`)
+	xml := []byte(`<vlans xmlns="urn:huawei:yang:huawei-vlan"><vlan><id>10</id><name>t</name></vlan></vlans>`)
 	parsed, err := d.DecodeXML(xml)
 	if err != nil || parsed == nil {
 		t.Fatalf("vlan XML 解码应成功: %v", err)

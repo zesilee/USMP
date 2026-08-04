@@ -16,7 +16,7 @@ import (
 // DP-09 NETCONF <get> 状态读：WithStateData 置位发 <get>（携由 path 构造的
 // subtree filter），缺省仍 get-config；断线自愈语义与既有读一致。
 
-const testIfmStateXML = `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
+const testIfmStateXML = `<ifm xmlns="urn:huawei:yang:huawei-ifm">
   <interfaces>
     <interface>
       <name>GE0/0/1</name>
@@ -48,12 +48,12 @@ func TestConstructSubtreeFilter(t *testing.T) {
 		{
 			"registered module nested path",
 			"/ifm:ifm/ifm:interfaces",
-			`<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces/></ifm>`,
+			`<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces/></ifm>`,
 		},
 		{
 			"anchor root only",
 			"/ifm:ifm",
-			`<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"/>`,
+			`<ifm xmlns="urn:huawei:yang:huawei-ifm"/>`,
 		},
 		{
 			"unregistered module falls back to no namespace",
@@ -63,7 +63,7 @@ func TestConstructSubtreeFilter(t *testing.T) {
 		{
 			"predicate stripped",
 			"/ifm:ifm/ifm:interfaces/interface[name='GE0/0/1']",
-			`<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces><interface/></interfaces></ifm>`,
+			`<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces><interface/></interfaces></ifm>`,
 		},
 		{"empty path", "/", ""},
 	}

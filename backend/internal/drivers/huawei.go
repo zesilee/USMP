@@ -21,12 +21,14 @@ import (
 )
 
 // Huawei module XML namespaces（驱动数据，随描述符注册）。
+// 一律取 8.20.10 设备 YANG 包声明的 module namespace（RFC7950：模块 namespace
+// 即其数据节点的 XML namespace，真实设备据此校验，不匹配即 rpc-error
+// unknown-namespace）。VLAN/IFM 曾误用旧式 params:xml:ns 形态——模拟网元不校验
+// 所以测试全绿，真机下发即拒；守护测试 TestRegisteredNamespacesMatchDeviceYang
+// 以 snd/ce6866p-yang/ 为真理源拦截此类漂移。
 const (
-	HuaweiVlanNS = "urn:huawei:params:xml:ns:yang:huawei-vlan"
-	HuaweiIfmNS  = "urn:huawei:params:xml:ns:yang:huawei-ifm"
-	// HuaweiBgpNS 取 8.20.10 huawei-bgp.yang 声明的 module namespace（RFC7950：
-	// 模块 namespace 即其数据节点的 XML namespace，真实 8.20.10 设备据此校验）。
-	// 注意与 VLAN/IFM 上面两条的旧式 params:xml:ns 形态不同——各模块用自身声明值；
+	HuaweiVlanNS = "urn:huawei:yang:huawei-vlan"
+	HuaweiIfmNS  = "urn:huawei:yang:huawei-ifm"
 	// namespace 须显式（内嵌 gzip schema 的 Entry.Namespace() 实测返回空，不可派生）。
 	HuaweiBgpNS = "urn:huawei:yang:huawei-bgp"
 	// HuaweiNetworkInstanceNS 取 8.20.10 huawei-network-instance.yang 声明的 module

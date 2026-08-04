@@ -15,7 +15,7 @@ import (
 func TestParseHuaweiIfmInterfacesXML_PresentationLeaves(t *testing.T) {
 	xmlData := []byte(`
 <data>
-  <ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm">
+  <ifm xmlns="urn:huawei:yang:huawei-ifm">
     <interfaces>
       <interface>
         <name>200GE0/1/0.1</name>

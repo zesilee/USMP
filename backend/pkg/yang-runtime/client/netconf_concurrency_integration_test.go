@@ -24,7 +24,7 @@ import (
 // ClientPool.Get 的 IsConnected() 检查形同虚设，死客户端被永久复用，
 // 之后所有请求瞬间 EOF。
 
-const testIfmRunningXML = `<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces><interface><name>GE0/0/1</name><type>93</type><class>1</class><mtu>1500</mtu></interface></interfaces></ifm>`
+const testIfmRunningXML = `<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces><interface><name>GE0/0/1</name><type>93</type><class>1</class><mtu>1500</mtu></interface></interfaces></ifm>`
 
 func startSim(t *testing.T) *netsim.Simulator {
 	t.Helper()

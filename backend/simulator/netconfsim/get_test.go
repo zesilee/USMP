@@ -60,7 +60,7 @@ func TestHandleGetReturnsMergedTree(t *testing.T) {
 func TestHandleGetAppliesSubtreeFilter(t *testing.T) {
 	s := newGetTestServer(t)
 	reply := s.handleRequest(`<rpc message-id="8" ` + rpcNS + `><get><filter type="subtree">` +
-		`<ifm xmlns="urn:huawei:params:xml:ns:yang:huawei-ifm"><interfaces><interface><name>200GE0/1/0</name></interface></interfaces></ifm>` +
+		`<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces><interface><name>200GE0/1/0</name></interface></interfaces></ifm>` +
 		`</filter></get></rpc>`)
 	if !strings.Contains(reply, "<dynamic>") {
 		t.Fatalf("filtered get missing state subtree: %.500s", reply)
