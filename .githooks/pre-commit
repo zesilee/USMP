@@ -44,6 +44,20 @@ if [ -n "$GENERATED" ]; then
   fi
 fi
 
+# 北向 CRD→YANG 反向派生生成物（C2Y-06，与 CI compliance 同口径 CG-03）
+CRD2YANG=$(echo "$STAGED_FILES" | grep -E '^(backend/internal/yang/models/usmp-business-vlan-net\.yang|backend/tools/crd2yang/)' || true)
+if [ -n "$CRD2YANG" ]; then
+  echo -e "${YELLOW}[pre-commit] 检测到 crd2yang 生成物/工具变更 → regen-and-diff 验证 (C2Y-06)...${NC}"
+  if ! make gen-crd2yang >/dev/null 2>&1; then
+    echo -e "${RED}[C2Y-06] 拒绝: make gen-crd2yang 执行失败${NC}"
+    FAILED=1
+  elif ! git diff --quiet backend/internal/yang/models/; then
+    echo -e "${RED}[C2Y-06] 拒绝: 生成的 YANG 与 make gen-crd2yang 输出不一致（生成物勿手改，改北向 CRD/工具后重跑）${NC}"
+    git diff --stat backend/internal/yang/models/ | sed 's/^/  /'
+    FAILED=1
+  fi
+fi
+
 # ──────────────────────────────────────────────
 # 3. Go vet (静态分析)
 # ──────────────────────────────────────────────

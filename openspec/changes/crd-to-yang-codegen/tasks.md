@@ -23,8 +23,8 @@
 
 ## 4. Makefile 与门禁（C2Y-06）
 
-- [ ] 4.1 Makefile 增 `gen-crd2yang` target（+.PHONY）；本地验证幂等（连跑两次零 diff）
-- [ ] 4.2 `compliance.yml` regen-and-diff 块追加 `make gen-crd2yang`（置于 gen-yang 之前）+ CHANGED grep 白名单；`.githooks/pre-commit` 同口径（CG-03）；手改 `.yang` 漂移被拦验证
+- [x] 4.1 Makefile 增 `gen-crd2yang` target（+.PHONY）；本地验证幂等（连跑两次零 diff）
+- [x] 4.2 `compliance.yml` regen-and-diff 块追加 `make gen-crd2yang`（置于 gen-yang 之前）+ CHANGED grep 白名单；`.githooks/pre-commit` 同口径（CG-03）；手改 `.yang` 漂移被拦验证
 
 ## 5. 收尾
 
