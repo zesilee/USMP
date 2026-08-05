@@ -154,6 +154,89 @@ describe('ModuleConsolePage · rpc 直达路由（FE-19）', () => {
   })
 })
 
+describe('ModuleConsolePage · 设备不支持预标记（FE-24/CN-05）', () => {
+  it('schema 请求带 device；unsupported 预标记以 prop 透传给 Tab 组件、Tab 头淡化标记', async () => {
+    vi.mocked(getYangSchema).mockResolvedValue({
+      data: { success: true, data: { ...ifmNestedSchema, unsupported: ['interfaces'] } },
+    } as any)
+    const w = mountPage()
+    await flushPromises()
+    await flushPromises() // res 懒加载重标落定
+    // ?device= 透出（CN-05）：进控制台取 schema 即带设备，零额外请求拿预标记
+    expect(vi.mocked(getYangSchema).mock.calls.at(-1)![2]).toBe('192.168.1.1')
+
+    const ModuleListTab = (await import('../../src/components/config/ModuleListTab.vue')).default
+    const listTabs = w.findAllComponents(ModuleListTab)
+    const marked = listTabs.find((c) => (c.props('tab') as any).name === 'interfaces')!
+    const normal = listTabs.find((c) => (c.props('tab') as any).name === 'auto-recovery-times')!
+    expect(marked.props('unsupported')).toBe(true)
+    expect(normal.props('unsupported')).toBe(false)
+    // Tab 头淡化标记（诚实透出：不隐藏页签，仅视觉降级）
+    expect(w.find('[data-test="tab-unsupported"]').exists()).toBe(true)
+  })
+
+  it('schema 无 unsupported 键（空集省略）：全部 Tab 不预标记、无淡化标记', async () => {
+    const w = mountPage()
+    await flushPromises()
+    await flushPromises()
+    const ModuleListTab = (await import('../../src/components/config/ModuleListTab.vue')).default
+    const listTabs = w.findAllComponents(ModuleListTab)
+    expect(listTabs.every((c) => c.props('unsupported') === false)).toBe(true)
+    expect(w.find('[data-test="tab-unsupported"]').exists()).toBe(false)
+  })
+
+  it('设备切换：重新拉 schema（预标记随设备刷新）', async () => {
+    mountPage()
+    await flushPromises()
+    const before = vi.mocked(getYangSchema).mock.calls.length
+    useDeviceStore().selectDevice('192.168.1.2')
+    await flushPromises()
+    expect(vi.mocked(getYangSchema).mock.calls.length).toBe(before + 1)
+    expect(vi.mocked(getYangSchema).mock.calls.at(-1)![2]).toBe('192.168.1.2')
+  })
+
+  // 运行中学习回同步：组件本地转占位/重试恢复须回写 unsupportedTabs——
+  // 否则 Tab 头不淡化，且 consoleEpoch 重挂后组件带陈旧 prop 又回占位态。
+  it('子组件 emit unsupported-change：true 入 unsupportedTabs（Tab 头淡化）、false 移除', async () => {
+    const w = mountPage()
+    await flushPromises()
+    await flushPromises()
+    const ModuleListTab = (await import('../../src/components/config/ModuleListTab.vue')).default
+    const comp = w.findAllComponents(ModuleListTab).find((c) => (c.props('tab') as any).name === 'interfaces')!
+
+    comp.vm.$emit('unsupported-change', true)
+    await flushPromises()
+    expect((w.vm as any).unsupportedTabs).toContain('interfaces')
+    expect(w.find('[data-test="tab-unsupported"]').exists()).toBe(true)
+    expect(comp.props('unsupported')).toBe(true)
+
+    comp.vm.$emit('unsupported-change', false)
+    await flushPromises()
+    expect((w.vm as any).unsupportedTabs).not.toContain('interfaces')
+    expect(w.find('[data-test="tab-unsupported"]').exists()).toBe(false)
+    expect(comp.props('unsupported')).toBe(false)
+  })
+
+  it('重试成功后重挂（consoleEpoch++）：不再带陈旧预标记重生占位态（回退回归）', async () => {
+    vi.mocked(getYangSchema).mockResolvedValue({
+      data: { success: true, data: { ...ifmNestedSchema, unsupported: ['interfaces'] } },
+    } as any)
+    const w = mountPage()
+    await flushPromises()
+    await flushPromises()
+    const ModuleListTab = (await import('../../src/components/config/ModuleListTab.vue')).default
+    const comp = w.findAllComponents(ModuleListTab).find((c) => (c.props('tab') as any).name === 'interfaces')!
+    // 组件内重试成功 → emit false 回同步
+    comp.vm.$emit('unsupported-change', false)
+    await flushPromises()
+    // 提交/重置触发整体重挂：新组件不得再收到陈旧 unsupported=true
+    ;(w.vm as any).consoleEpoch++
+    await flushPromises()
+    const remounted = w.findAllComponents(ModuleListTab).find((c) => (c.props('tab') as any).name === 'interfaces')!
+    expect(remounted.props('unsupported')).toBe(false)
+  })
+})
+
 describe('ModuleConsolePage · 攒批提交/重置编排（FE-03/FE-23）', () => {
   async function seedAndMount() {
     const { useChangesetStore } = await import('../../src/stores/changeset')

@@ -15,7 +15,7 @@ vi.mock('axios', () => ({
   },
 }))
 
-import { getConfig } from '../../src/api'
+import { getConfig, getYangSchema } from '../../src/api'
 
 beforeEach(() => {
   mocks.get.mockReset()
@@ -43,5 +43,31 @@ describe('getConfig 请求形状（F1）', () => {
     const [, cfg] = mocks.get.mock.calls.at(-1)!
     expect(cfg.params.force_refresh).toBe(true)
     expect(cfg.params.include_state).toBe(true)
+  })
+})
+
+// FE-24/CN-05：getYangSchema 可选 device 参数——带 device 时后端响应附
+// unsupported 预标记（该设备已学习的不支持子路径，相对模块根首段）。
+describe('getYangSchema 请求形状（FE-24）', () => {
+  it('device 参数透传：params 同时含 form 与 device', () => {
+    getYangSchema('devm', 'nested', '10.0.0.1')
+    const [url, cfg] = mocks.get.mock.calls.at(-1)!
+    expect(url).toBe('/yang/schema/devm')
+    expect(cfg.params.form).toBe('nested')
+    expect(cfg.params.device).toBe('10.0.0.1')
+  })
+
+  it('不带 device：契约不变（无 device 键，向后兼容）', () => {
+    getYangSchema('devm', 'nested')
+    const [, cfg] = mocks.get.mock.calls.at(-1)!
+    expect(cfg.params.form).toBe('nested')
+    expect('device' in cfg.params).toBe(false)
+  })
+
+  it('仅 device 无 form：不带 form 键', () => {
+    getYangSchema('devm', undefined, '10.0.0.1')
+    const [, cfg] = mocks.get.mock.calls.at(-1)!
+    expect('form' in cfg.params).toBe(false)
+    expect(cfg.params.device).toBe('10.0.0.1')
   })
 })

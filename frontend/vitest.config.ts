@@ -32,10 +32,10 @@ export default defineConfig({
       // 后端时是 ECONNREFUSED，真实 funcs 仅 77.44。阈值是地板不是目标，只锁 CI 可
       // 复现的下界，不锁被本地环境灌水的值。
       thresholds: {
-        statements: 86,
-        branches: 79,
-        functions: 80,
-        lines: 87
+        statements: 86.2,
+        branches: 79.3,
+        functions: 80.8,
+        lines: 87.2
       }
     }
   },

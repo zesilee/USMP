@@ -312,3 +312,88 @@ describe('ModuleFormTab · readonly 叶 must 不入门禁（FE-14 回归）', ()
     expect(vm.form.submittable.value).toBe(true)
   })
 })
+
+describe('ModuleFormTab · 设备不支持占位态（FE-24）', () => {
+  const unsupportedEnvelope = {
+    data: { code: 500, success: false, message: 'unsupported node on device', data: { reason: 'node-unsupported' } },
+  }
+
+  function mountUnsupported() {
+    return mount(ModuleFormTab, {
+      props: { tab: globalTab, rootName: 'ifm', device: '10.0.0.1', unsupported: true },
+      global: { plugins: [pinia, ElementPlus] },
+    })
+  }
+
+  it('预标记（CN-05）：unsupported prop=true → 占位区 + 零取数请求 + 无入集/下发入口', async () => {
+    const w = mountUnsupported()
+    await flushPromises()
+    expect(vi.mocked(getConfig)).not.toHaveBeenCalled()
+    expect(w.find('[data-test="node-unsupported"]').exists()).toBe(true)
+    expect(w.text()).toContain('当前设备不支持此功能')
+    expect(w.find('[data-test="node-unsupported-retry"]').exists()).toBe(true)
+    // 既有内容区整体不渲染：无表单、无操作区（自然无「确定」入集入口）
+    expect(w.find('.config-form').exists()).toBe(false)
+    expect(w.find('.actions').exists()).toBe(false)
+  })
+
+  it('运行中学习：回读返回 node-unsupported 信封 → 即时转占位，不弹裸错误', async () => {
+    vi.mocked(getConfig).mockResolvedValue(unsupportedEnvelope as any)
+    const w = mountTab()
+    await flushPromises()
+    expect(w.find('[data-test="node-unsupported"]').exists()).toBe(true)
+    expect(w.find('.el-alert').exists()).toBe(false)
+  })
+
+  it('普通错误不误转（负路径）：无 reason 的读失败沿用空表单 + 告警（§9）', async () => {
+    vi.mocked(getConfig).mockRejectedValue({ response: { data: { message: '设备离线' } } })
+    const w = mountTab()
+    await flushPromises()
+    expect(w.find('[data-test="node-unsupported"]').exists()).toBe(false)
+    expect(w.find('.el-alert').exists()).toBe(true)
+  })
+
+  it('重试恢复：点重试 → forceRefresh 回读成功 → 表单正常渲染并回填', async () => {
+    vi.mocked(getConfig).mockResolvedValue({
+      data: { data: { data: { 'statistic-interval': 120 } } },
+    } as any)
+    const w = mountUnsupported()
+    await flushPromises()
+    await w.find('[data-test="node-unsupported-retry"]').trigger('click')
+    await flushPromises()
+    const last = vi.mocked(getConfig).mock.calls.at(-1)!
+    expect(last[2]).toBe(true) // force_refresh 通道（后端成功即清标记）
+    expect(w.find('[data-test="node-unsupported"]').exists()).toBe(false)
+    expect((w.vm as any).form.formData['statistic-interval']).toBe(120)
+  })
+
+  it('重试仍不支持：占位态保留', async () => {
+    vi.mocked(getConfig).mockResolvedValue(unsupportedEnvelope as any)
+    const w = mountUnsupported()
+    await flushPromises()
+    await w.find('[data-test="node-unsupported-retry"]').trigger('click')
+    await flushPromises()
+    expect(w.find('[data-test="node-unsupported"]').exists()).toBe(true)
+  })
+
+  // 页面回同步契约：ModuleConsolePage 靠此事件增删 unsupportedTabs——否则重试
+  // 成功后 consoleEpoch 重挂会带陈旧 :unsupported=true 重生、又回占位态。
+  it('运行中学习 emit unsupported-change true；重试成功 emit false', async () => {
+    vi.mocked(getConfig).mockResolvedValueOnce(unsupportedEnvelope as any)
+    const w = mountTab()
+    await flushPromises()
+    expect(w.emitted('unsupported-change')?.at(-1)).toEqual([true])
+
+    // 重试成功（默认 mock 回空配置）→ 恢复并回报 false
+    await w.find('[data-test="node-unsupported-retry"]').trigger('click')
+    await flushPromises()
+    expect(w.emitted('unsupported-change')?.at(-1)).toEqual([false])
+  })
+
+  it('普通错误/正常加载不 emit（事件只在不支持状态翻转时发）', async () => {
+    vi.mocked(getConfig).mockRejectedValueOnce({ response: { data: { message: '设备离线' } } })
+    const w = mountTab()
+    await flushPromises()
+    expect(w.emitted('unsupported-change')).toBeUndefined()
+  })
+})

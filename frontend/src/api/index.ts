@@ -169,9 +169,11 @@ export const getLeftTree = (device?: string) => {
 
 // YANG 模块动态表单 schema。走 api 客户端（绝对 baseURL，staging 下 nginx 不代理 /api，
 // 故不能用裸相对 fetch）。form='nested' 返回嵌套树（保留 member-ports 等 list-in-list）。
-export const getYangSchema = (module: string, form?: 'nested') => {
+// device（FE-24/CN-05）：带设备时响应附 unsupported 预标记（该设备已学习的不支持
+// 子路径，相对模块根首段；空集省略键），不带时契约不变（向后兼容）。
+export const getYangSchema = (module: string, form?: 'nested', device?: string) => {
   return api.get<ApiResponse<any>>(`/yang/schema/${module}`, {
-    params: form ? { form } : {},
+    params: { ...(form ? { form } : {}), ...(device ? { device } : {}) },
   })
 }
 

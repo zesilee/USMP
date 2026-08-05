@@ -27,10 +27,10 @@
 
 ## 5. 前端占位降级态（FE-24，F1+F2）
 
-- [ ] 5.1 测试先行（F1）：错误 reason 解析 util、schema unsupported 预标记派生
-- [ ] 5.2 测试先行（F2）：预标记页签直接占位不取数；运行中 node-unsupported 即时转态不弹错；普通错误不误转；占位区无创建/编辑/下发入口；重试走 force_refresh 成功恢复
-- [ ] 5.3 实现 ModuleListTab/ModuleFormTab 占位态 + Tab 头淡化标记 + api reason 解析
-- [ ] 5.4 变更集提交链路命中 node-unsupported 的友好提示（F2）
+- [x] 5.1 测试先行（F1）：错误 reason 解析 util、schema unsupported 预标记派生
+- [x] 5.2 测试先行（F2）：预标记页签直接占位不取数；运行中 node-unsupported 即时转态不弹错；普通错误不误转；占位区无创建/编辑/下发入口；重试走 force_refresh 成功恢复
+- [x] 5.3 实现 ModuleListTab/ModuleFormTab 占位态 + Tab 头淡化标记 + api reason 解析
+- [x] 5.4 变更集提交链路命中 node-unsupported 的友好提示（F2）
 
 ## 6. 收尾
 

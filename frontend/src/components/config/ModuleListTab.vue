@@ -1,5 +1,15 @@
 <template>
   <div class="module-list-tab">
+    <!-- 设备不支持占位态（FE-24）：预标记或运行中学习到 node-unsupported 时整体
+         替换内容区——无创建/编辑/删除/下发入口；重试走 force_refresh 逃生通道。 -->
+    <div v-if="nodeUnsupported" class="node-unsupported" data-test="node-unsupported">
+      <el-empty :description="t('console.nodeUnsupported')">
+        <el-button type="primary" data-test="node-unsupported-retry" @click="load(true)">
+          {{ t('console.nodeUnsupportedRetry') }}
+        </el-button>
+      </el-empty>
+    </div>
+    <template v-else>
     <!-- 工具区（FE-11）：创建/刷新 + 高级搜索开关 + 列设置；只读 Tab 无编辑入口（FE-14） -->
     <div class="toolbar">
       <el-button v-if="!tab.readonly" type="primary" :icon="Plus" :disabled="!device" data-test="list-create" @click="openCreate">
@@ -165,6 +175,7 @@
       @close="closeDetail"
       @staged="onStaged"
     />
+    </template>
   </div>
 </template>
 
@@ -174,6 +185,7 @@ import { useI18n } from 'vue-i18n'
 import { Plus, ArrowDown, ArrowUp, RefreshRight, Setting } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox, type TableInstance } from 'element-plus'
 import { getConfig } from '../../api'
+import { nodeUnsupportedFromEnvelope, nodeUnsupportedFromError } from '../../utils/nodeSupport'
 import { useFreshnessStore } from '../../stores/freshness'
 import { useChangesetStore } from '../../stores/changeset'
 import type { Field } from '../../utils/crdSchemaParser'
@@ -195,6 +207,8 @@ const props = defineProps<{
   tab: ConsoleTab
   rootName: string
   device: string
+  /** FE-24：schema unsupported 预标记（CN-05），true 时不发取数、渲染占位态。 */
+  unsupported?: boolean
 }>()
 
 const { t } = useI18n()
@@ -283,17 +297,41 @@ function normalizeRows(subtree: any): { rows: Record<string, any>[]; key: string
   return { rows: [], key: candidates[0] }
 }
 
+// ===== 设备不支持占位态（FE-24）=====
+// 初始 = schema 预标记（CN-05，进控制台零请求直接占位）；运行中收到结构化
+// node-unsupported 即时转态。重试（load(true)）走 force_refresh 逃生通道，
+// 后端成功即自动清标记，本地同步恢复正常渲染。
+const nodeUnsupported = ref(!!props.unsupported)
+// 回同步契约：本地翻转（运行中学习/重试恢复）回报页面级 unsupportedTabs——
+// 否则 Tab 头不淡化，且 consoleEpoch 重挂后又收到陈旧 prop 回退占位态。
+const emit = defineEmits<{ (e: 'unsupported-change', unsupported: boolean): void }>()
+watch(nodeUnsupported, (v) => emit('unsupported-change', v))
+watch(() => props.unsupported, (v) => {
+  const was = nodeUnsupported.value
+  nodeUnsupported.value = !!v
+  // 预标记解除（设备切换后新 schema 落定）：恢复取数，不留空表格。
+  if (was && !v) void load()
+})
+
 async function load(force = false) {
   if (!props.device) {
     items.value = []
     return
   }
+  // 预标记/已学习不支持：不打设备（FE-24）；重试显式 force 才放行。
+  if (nodeUnsupported.value && !force) return
   loading.value = true
   error.value = ''
   try {
     // 只读 Tab（config false state 子树）走 <get> 状态通道：running 配置 schema
     // 无此类节点，<get-config> 会被真机以 unknown-element 拒绝（FE-14 真机回归）。
     const res = await getConfig(props.device, configPath.value, force, !!props.tab.readonly)
+    // 信封为 HTTP 200 统一格式：不支持语义在成功回调里识别（不弹裸错误）。
+    if (nodeUnsupportedFromEnvelope(res.data)) {
+      nodeUnsupported.value = true
+      return
+    }
+    nodeUnsupported.value = false
     const payload = res.data?.data
     useFreshnessStore().record({
       cache_age_seconds: payload?.cache_age_seconds,
@@ -306,6 +344,11 @@ async function load(force = false) {
     queryAt.value = new Date().toLocaleString()
     syncCurrentRow()
   } catch (e: any) {
+    // 不支持语义（非 200 兜底形态）同转占位，不显示裸错误（FE-24）。
+    if (nodeUnsupportedFromError(e)) {
+      nodeUnsupported.value = true
+      return
+    }
     error.value = e?.response?.data?.message || e?.message || (force ? t('console.fetchSourceFailed') : t('console.readFailed'))
     // 强制回读失败保留原列表（§9 保留原配置）；常规加载失败清空避免陈旧数据误导。
     if (!force) items.value = []

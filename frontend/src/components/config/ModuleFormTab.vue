@@ -1,5 +1,15 @@
 <template>
   <div class="module-form-tab">
+    <!-- 设备不支持占位态（FE-24）：预标记或运行中学习到 node-unsupported 时整体
+         替换表单区——无入集/下发入口；重试走 force_refresh 逃生通道。 -->
+    <div v-if="nodeUnsupported" class="node-unsupported" data-test="node-unsupported">
+      <el-empty :description="t('console.nodeUnsupported')">
+        <el-button type="primary" data-test="node-unsupported-retry" @click="load(true)">
+          {{ t('console.nodeUnsupportedRetry') }}
+        </el-button>
+      </el-empty>
+    </div>
+    <template v-else>
     <el-alert v-if="error" :title="error" type="warning" :closable="false" show-icon />
 
     <el-form ref="formRef" :model="form.formData" :rules="form.rules.value" label-position="top" class="config-form">
@@ -58,6 +68,7 @@
     <div v-else class="actions">
       <span class="form-tip">{{ t('console.readonlyTip') }}</span>
     </div>
+    </template>
   </div>
 </template>
 
@@ -67,6 +78,7 @@ import { useI18n } from 'vue-i18n'
 import { Key, Delete } from '@element-plus/icons-vue'
 import { ElMessage, type FormInstance } from 'element-plus'
 import { getConfig } from '../../api'
+import { nodeUnsupportedFromEnvelope, nodeUnsupportedFromError } from '../../utils/nodeSupport'
 import { useConfigForm } from '../../composables/useConfigForm'
 import { useChangesetStore } from '../../stores/changeset'
 import { evalPredicate } from '../../utils/xpathEval'
@@ -79,6 +91,8 @@ const props = defineProps<{
   tab: ConsoleTab
   rootName: string
   device: string
+  /** FE-24：schema unsupported 预标记（CN-05），true 时不发取数、渲染占位态。 */
+  unsupported?: boolean
 }>()
 
 const { t } = useI18n()
@@ -156,17 +170,41 @@ watch(
   },
 )
 
+// ===== 设备不支持占位态（FE-24）=====
+// 初始 = schema 预标记（CN-05，进控制台零请求直接占位）；运行中收到结构化
+// node-unsupported 即时转态。重试（load(true)）走 force_refresh 逃生通道，
+// 后端成功即自动清标记，本地同步恢复正常渲染。
+const nodeUnsupported = ref(!!props.unsupported)
+// 回同步契约：本地翻转（运行中学习/重试恢复）回报页面级 unsupportedTabs——
+// 否则 Tab 头不淡化，且 consoleEpoch 重挂后又收到陈旧 prop 回退占位态。
+const emit = defineEmits<{ (e: 'unsupported-change', unsupported: boolean): void }>()
+watch(nodeUnsupported, (v) => emit('unsupported-change', v))
+watch(() => props.unsupported, (v) => {
+  const was = nodeUnsupported.value
+  nodeUnsupported.value = !!v
+  // 预标记解除（设备切换后新 schema 落定）：恢复取数，不留空表单。
+  if (was && !v) void load()
+})
+
 // ===== 读回填 =====
-async function load() {
+async function load(force = false) {
   error.value = ''
   if (!props.device) {
     form.resetForm()
     return
   }
+  // 预标记/已学习不支持：不打设备（FE-24）；重试显式 force 才放行。
+  if (nodeUnsupported.value && !force) return
   try {
     // 只读 Tab（config false state 子树）走 <get> 状态通道：<get-config> 对
     // 此类节点会被真机以 unknown-element 拒绝（FE-14 真机回归）。
-    const res = await getConfig(props.device, configPath.value, false, !!props.tab.readonly)
+    const res = await getConfig(props.device, configPath.value, force, !!props.tab.readonly)
+    // 信封为 HTTP 200 统一格式：不支持语义在成功回调里识别（不弹裸错误）。
+    if (nodeUnsupportedFromEnvelope(res.data)) {
+      nodeUnsupported.value = true
+      return
+    }
+    nodeUnsupported.value = false
     const payload = res.data?.data
     const subtree = payload?.data ?? payload ?? {}
     const seed: Record<string, any> = {}
@@ -176,13 +214,18 @@ async function load() {
     }
     form.resetForm(seed)
   } catch (e: any) {
+    // 不支持语义（非 200 兜底形态）同转占位，不显示裸错误（FE-24）。
+    if (nodeUnsupportedFromError(e)) {
+      nodeUnsupported.value = true
+      return
+    }
     // 后端暂不支持该路径读时如实降级：空表单 + 告警（§9，不伪装成功）。
     form.resetForm()
     error.value = e?.response?.data?.message || e?.message || t('console.readFailed')
   }
 }
 
-watch(() => props.device, load, { immediate: true })
+watch(() => props.device, () => load(), { immediate: true })
 
 // ===== 确定=入变更集（FE-03 攒批）：不发写请求；归属硬锁与下发经「提交配置」 =====
 const changeset = useChangesetStore()

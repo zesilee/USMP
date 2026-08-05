@@ -62,10 +62,17 @@
          rpc 不再进 Tab 栏（FE-19 导航落点=左树）。Tab 组件常驻（不销毁），切换
          保留各 Tab 表单/搜索状态。 -->
     <el-tabs v-else-if="tabs.length" v-model="activeTab" class="console-tabs">
-      <el-tab-pane v-for="tab in tabs" :key="tab.name" :label="tab.label" :name="tab.name">
+      <el-tab-pane v-for="tab in tabs" :key="tab.name" :name="tab.name">
+        <!-- FE-24 Tab 头淡化：设备不支持的页签诚实透出（不隐藏），仅视觉降级。 -->
+        <template #label>
+          <span
+            :class="{ 'tab-unsupported': unsupportedTabs.includes(tab.name) }"
+            :data-test="unsupportedTabs.includes(tab.name) ? 'tab-unsupported' : undefined"
+          >{{ tab.label }}</span>
+        </template>
         <!-- consoleEpoch：重置/提交成功后整体重挂 → 表单/列表回设备实际态并清标记 -->
-        <ModuleListTab v-if="tab.kind === 'list'" :key="consoleEpoch" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" />
-        <ModuleFormTab v-else :key="consoleEpoch" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" />
+        <ModuleListTab v-if="tab.kind === 'list'" :key="consoleEpoch" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" :unsupported="unsupportedTabs.includes(tab.name)" @unsupported-change="onTabUnsupportedChange(tab.name, $event)" />
+        <ModuleFormTab v-else :key="consoleEpoch" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" :unsupported="unsupportedTabs.includes(tab.name)" @unsupported-change="onTabUnsupportedChange(tab.name, $event)" />
       </el-tab-pane>
     </el-tabs>
     <el-empty v-else-if="!schemaError" :description="t('console.schemaLoading')" />
@@ -215,12 +222,26 @@ async function relabelFields() {
   }
 }
 
+// 设备不支持预标记（FE-24/CN-05）：schema ?device= 响应附 unsupported（相对模块根
+// 首段名 = Tab name）；空集省略键。命中的 Tab 直接占位、不发取数请求。
+const unsupportedTabs = ref<string[]>([])
+
+// 运行中学习回同步（FE-24）：组件本地转占位/重试恢复时增删预标记集——保证
+// Tab 头淡化即时呈现，且 consoleEpoch 重挂后组件拿到的 prop 与实态一致。
+function onTabUnsupportedChange(name: string, unsupported: boolean) {
+  const has = unsupportedTabs.value.includes(name)
+  if (unsupported && !has) unsupportedTabs.value = [...unsupportedTabs.value, name]
+  else if (!unsupported && has) unsupportedTabs.value = unsupportedTabs.value.filter((n) => n !== name)
+}
+
 async function loadSchema() {
   schemaError.value = ''
   schemaFields.value = []
   try {
-    const res = await getYangSchema(moduleName.value, 'nested')
+    // 带设备取 schema：零额外请求拿到该设备的不支持预标记（CN-05）。
+    const res = await getYangSchema(moduleName.value, 'nested', store.selectedDeviceIp || undefined)
     const data = res.data?.data
+    unsupportedTabs.value = (data?.unsupported ?? []) as string[]
     rawFields = data?.fields ?? []
     rawRpcs = (data?.rpcs ?? []) as RpcDef[]
     rpcs.value = rawRpcs
@@ -240,6 +261,8 @@ async function loadSchema() {
 watch(() => localeStore.locale, relabelFields)
 
 watch(moduleName, loadSchema)
+// 设备切换重拉 schema（FE-24）：unsupported 预标记按设备学习，不可跨设备沿用。
+watch(() => store.selectedDeviceIp, () => loadSchema())
 // immediate：全局上下文使「挂载时设备已选中」成为主流程（查看配置入口/跨页返回），
 // 仅靠变化触发会漏掉首帧归属查询（FE-18 徽标静默缺失）。
 watch([() => store.selectedDeviceIp, moduleName], loadOwnership, { immediate: true })
@@ -267,5 +290,10 @@ onMounted(async () => {
   background: #fff;
   border-radius: 8px;
   padding: 4px 16px 16px;
+}
+
+/* FE-24：设备不支持页签的 Tab 头淡化（诚实透出，不隐藏） */
+.tab-unsupported {
+  color: var(--ink-3, #93a2b1);
 }
 </style>
