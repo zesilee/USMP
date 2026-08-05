@@ -291,7 +291,9 @@ async function load(force = false) {
   loading.value = true
   error.value = ''
   try {
-    const res = await getConfig(props.device, configPath.value, force)
+    // 只读 Tab（config false state 子树）走 <get> 状态通道：running 配置 schema
+    // 无此类节点，<get-config> 会被真机以 unknown-element 拒绝（FE-14 真机回归）。
+    const res = await getConfig(props.device, configPath.value, force, !!props.tab.readonly)
     const payload = res.data?.data
     useFreshnessStore().record({
       cache_age_seconds: payload?.cache_age_seconds,

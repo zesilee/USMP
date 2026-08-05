@@ -59,13 +59,18 @@ export const getLogs = (params: { device?: string; status?: string; limit?: numb
 }
 
 // Config API - 通用 YANG 配置接口。
-// includeState=true 走按需状态通道（<get>，绕缓存）：只用于单行谓词读——
-// 整列表带状态在真机上极慢（读通道拆分，2026-08-05）。
+// includeState=true 走按需状态通道（<get>，绕缓存），两类场景：
+// ① config 列表附带状态：真机整列表极慢，只许单行谓词读（读通道拆分）；
+// ② 纯 config false 子树（只读 Tab）：running 配置 schema 无此类节点，
+//    <get-config> 被真机以 unknown-element 拒绝，<get> 是唯一读法。
+// 状态读超时对齐后端设备侧 30s（config_handler）：默认 15s 会在真机大
+// 状态子树上先于后端超时，前端报错而后端实际成功。
 export const getConfig = (ip: string, path: string, forceRefresh = false, includeState = false) => {
   // 移除 path 开头的斜杠
   const cleanPath = path.startsWith('/') ? path.slice(1) : path
   return api.get<ApiResponse<any>>(`/config/${ip}/${cleanPath}`, {
-    params: { force_refresh: forceRefresh, ...(includeState ? { include_state: true } : {}) }
+    params: { force_refresh: forceRefresh, ...(includeState ? { include_state: true } : {}) },
+    ...(includeState ? { timeout: 30000 } : {}),
   })
 }
 
