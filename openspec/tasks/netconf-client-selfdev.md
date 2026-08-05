@@ -1,7 +1,7 @@
 ---
 id: netconf-client-selfdev
 title: 自研 NETCONF 客户端替代 scrapligo（四波渐进，双路径并行切换）
-status: in_progress
+status: completed
 priority: high
 branch: 每波独立 worktree 分支（wave1: worktree-netconf-core-wave1）
 worktree: .claude/worktrees/worktree-netconf-core-wave1
@@ -50,10 +50,15 @@ origin: 用户拍板 2026-08-04「按4波方案做自研替代」；评估结论
   防重引（NC-01）、CI 双路径步骤与 make test-netconf-core 随拆。
   scrapligo 时代补丁保留项：opMu（写事务跨 RPC 原子性仍需要）；拆除项：
   Close 死锁 workaround/故意协程泄漏（core 无此缺陷）。
-- [ ] **Wave 4 真机验证（移交测试团队，实验室 IP 不可达）**：按手册
-  [docs/netconf-core-field-validation.md](../../docs/netconf-core-field-validation.md)
-  执行 V1-V8（头号目标 1.1 chunked）。**注意：已无运行时回退开关，阻断性问题
-  回退 = 换 2026-08-04 前旧版本包；结论回传前勿用于生产设备变更。**
+- [x] **Wave 4 真机验证（2026-08-04/05 实际联调实证，超出原手册范围）**：用户
+  真机（CE9866"vgw"，8.20.10，kind 部署对接）两天联调覆盖并验证：SSH 830 建连
+  + hello 协商（framing=1.1 chunked，555 能力）、edit-config/commit 写链路
+  （创建 VLAN/Eth-Trunk 成功）、get/get-config 读链路、**1.1 chunked 大报文
+  重组（1MB/34 块闭环，头号目标达成）**、rpc-error 解析、超时/重连。过程揪出
+  9 个真机专属 bug（PR#267-#278：namespace 形态、载荷回推、must 语义、subtree
+  过滤器、路径规范化、读超时、读通道拆分、解码毒杀），全部修复+回归+sim 保真
+  收严；界面接口/VLAN 列表最终验证正常。原手册留存供测试团队按 V1-V8 清单
+  正式复核（confirmed-commit 真机路径等边角未覆盖）。
 
 ## 上下文恢复提示
 
