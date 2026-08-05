@@ -446,3 +446,75 @@ describe('ModuleListTab · 行删除入变更集（FE-16 攒批）', () => {
     expect(w.find('[data-test="mark-update"]').exists()).toBe(true)
   })
 })
+
+describe('ModuleListTab · 设备不支持占位态（FE-24）', () => {
+  const unsupportedEnvelope = {
+    data: { code: 500, success: false, message: 'unsupported node on device', data: { reason: 'node-unsupported' } },
+  }
+
+  function mountUnsupported() {
+    return mount(ModuleListTab, {
+      props: { tab: interfacesTab, rootName: 'ifm', device: '10.0.0.1', unsupported: true },
+      global: { plugins: [pinia, ElementPlus] },
+    })
+  }
+
+  it('预标记（CN-05）：unsupported prop=true → 占位区 + 零取数请求 + 无创建/编辑入口', async () => {
+    const w = mountUnsupported()
+    await flushPromises()
+    expect(vi.mocked(getConfig)).not.toHaveBeenCalled()
+    expect(w.find('[data-test="node-unsupported"]').exists()).toBe(true)
+    expect(w.text()).toContain('当前设备不支持此功能')
+    expect(w.find('[data-test="node-unsupported-retry"]').exists()).toBe(true)
+    // 既有内容区整体不渲染：无创建按钮、无表格（自然无编辑/删除/下发入口）
+    expect(w.find('[data-test="list-create"]').exists()).toBe(false)
+    expect(w.find('.el-table').exists()).toBe(false)
+  })
+
+  it('运行中学习：取数返回 node-unsupported 信封 → 即时转占位，不弹裸错误', async () => {
+    vi.mocked(getConfig).mockResolvedValue(unsupportedEnvelope as any)
+    const w = mountTab()
+    await flushPromises()
+    expect(w.find('[data-test="node-unsupported"]').exists()).toBe(true)
+    expect(w.find('.el-alert').exists()).toBe(false)
+  })
+
+  it('运行中学习（axios 错误形态）：reason 位于 e.response.data.data → 同转占位', async () => {
+    vi.mocked(getConfig).mockRejectedValue({
+      response: { data: { code: 500, success: false, data: { reason: 'node-unsupported' } } },
+    })
+    const w = mountTab()
+    await flushPromises()
+    expect(w.find('[data-test="node-unsupported"]').exists()).toBe(true)
+    expect(w.find('.el-alert').exists()).toBe(false)
+  })
+
+  it('普通错误不误转（负路径）：无 reason 的错误沿用告警呈现', async () => {
+    vi.mocked(getConfig).mockRejectedValue({ response: { data: { message: '设备离线' } } })
+    const w = mountTab()
+    await flushPromises()
+    expect(w.find('[data-test="node-unsupported"]').exists()).toBe(false)
+    expect(w.find('.el-alert').exists()).toBe(true)
+    expect(w.text()).toContain('设备离线')
+  })
+
+  it('重试恢复：点重试 → force_refresh 取数成功 → 占位退场、列表正常渲染', async () => {
+    const w = mountUnsupported()
+    await flushPromises()
+    await w.find('[data-test="node-unsupported-retry"]').trigger('click')
+    await flushPromises()
+    const last = vi.mocked(getConfig).mock.calls.at(-1)!
+    expect(last[2]).toBe(true) // force_refresh 通道（后端成功即清标记）
+    expect(w.find('[data-test="node-unsupported"]').exists()).toBe(false)
+    expect(w.findAll('.el-table__body tr')).toHaveLength(5)
+  })
+
+  it('重试仍不支持：占位态保留（信封仍带 reason）', async () => {
+    vi.mocked(getConfig).mockResolvedValue(unsupportedEnvelope as any)
+    const w = mountUnsupported()
+    await flushPromises()
+    await w.find('[data-test="node-unsupported-retry"]').trigger('click')
+    await flushPromises()
+    expect(w.find('[data-test="node-unsupported"]').exists()).toBe(true)
+  })
+})

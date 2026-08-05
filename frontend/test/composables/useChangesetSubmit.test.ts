@@ -74,6 +74,20 @@ describe('useChangesetSubmit · 提交编排（FE-03 攒批）', () => {
     expect(vi.mocked(getConfig)).not.toHaveBeenCalled()
   })
 
+  it('commit 命中 node-unsupported：友好文案替代原始 message，变更集保留（FE-24）', async () => {
+    const s = seed(1)
+    vi.mocked(commitChangeset).mockResolvedValue({
+      data: { code: 500, success: false, message: 'edit-config unknown-element cards', data: { reason: 'node-unsupported' } },
+    } as any)
+    const flow = useChangesetSubmit({ delay: noDelay })
+
+    expect(await flow.run(DEV)).toBe(false)
+    expect(flow.phase.value).toBe('error')
+    expect(flow.error.value).toBe('部分配置项此设备不支持，已整体取消提交')
+    expect(flow.error.value).not.toContain('unknown-element')
+    expect(s.countFor(DEV)).toBe(1)
+  })
+
   it('归属硬锁 409 → 确认 → 携 force 重发；取消 → 中止且变更集保留', async () => {
     const s = seed(1)
     const rejected = { data: { code: 409, success: false, message: '路径由业务意图管理', data: { intents: ['default/biz-1'] } } }

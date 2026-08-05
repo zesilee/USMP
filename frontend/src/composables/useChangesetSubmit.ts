@@ -1,6 +1,8 @@
 import { computed, ref } from 'vue'
 import { commitChangeset, getConfig, getDeviceReconcile } from '../api'
+import { i18n } from '../i18n'
 import { useChangesetStore } from '../stores/changeset'
+import { nodeUnsupportedFromEnvelope } from '../utils/nodeSupport'
 import { confirmOwnershipOverride, ownershipRejectionOf } from './ownershipGate'
 import {
   deriveReconcileProgress,
@@ -86,7 +88,11 @@ export function useChangesetSubmit(opts: UseChangesetSubmitOptions = {}) {
       }
       const env = (res?.data ?? {}) as { success?: boolean; message?: string }
       if (!env.success) {
-        error.value = env.message || 'commit failed'
+        // 设备不支持（FE-24/BR-12）：结构化 reason 转友好文案——2PC 整批已被
+        // 后端拒绝，原始 message（unknown-element 细节）不直接透给用户。
+        error.value = nodeUnsupportedFromEnvelope(env)
+          ? i18n.global.t('console.nodeUnsupportedCommit')
+          : env.message || 'commit failed'
         phase.value = 'error'
         return false
       }

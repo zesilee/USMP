@@ -154,6 +154,48 @@ describe('ModuleConsolePage · rpc 直达路由（FE-19）', () => {
   })
 })
 
+describe('ModuleConsolePage · 设备不支持预标记（FE-24/CN-05）', () => {
+  it('schema 请求带 device；unsupported 预标记以 prop 透传给 Tab 组件、Tab 头淡化标记', async () => {
+    vi.mocked(getYangSchema).mockResolvedValue({
+      data: { success: true, data: { ...ifmNestedSchema, unsupported: ['interfaces'] } },
+    } as any)
+    const w = mountPage()
+    await flushPromises()
+    await flushPromises() // res 懒加载重标落定
+    // ?device= 透出（CN-05）：进控制台取 schema 即带设备，零额外请求拿预标记
+    expect(vi.mocked(getYangSchema).mock.calls.at(-1)![2]).toBe('192.168.1.1')
+
+    const ModuleListTab = (await import('../../src/components/config/ModuleListTab.vue')).default
+    const listTabs = w.findAllComponents(ModuleListTab)
+    const marked = listTabs.find((c) => (c.props('tab') as any).name === 'interfaces')!
+    const normal = listTabs.find((c) => (c.props('tab') as any).name === 'auto-recovery-times')!
+    expect(marked.props('unsupported')).toBe(true)
+    expect(normal.props('unsupported')).toBe(false)
+    // Tab 头淡化标记（诚实透出：不隐藏页签，仅视觉降级）
+    expect(w.find('[data-test="tab-unsupported"]').exists()).toBe(true)
+  })
+
+  it('schema 无 unsupported 键（空集省略）：全部 Tab 不预标记、无淡化标记', async () => {
+    const w = mountPage()
+    await flushPromises()
+    await flushPromises()
+    const ModuleListTab = (await import('../../src/components/config/ModuleListTab.vue')).default
+    const listTabs = w.findAllComponents(ModuleListTab)
+    expect(listTabs.every((c) => c.props('unsupported') === false)).toBe(true)
+    expect(w.find('[data-test="tab-unsupported"]').exists()).toBe(false)
+  })
+
+  it('设备切换：重新拉 schema（预标记随设备刷新）', async () => {
+    mountPage()
+    await flushPromises()
+    const before = vi.mocked(getYangSchema).mock.calls.length
+    useDeviceStore().selectDevice('192.168.1.2')
+    await flushPromises()
+    expect(vi.mocked(getYangSchema).mock.calls.length).toBe(before + 1)
+    expect(vi.mocked(getYangSchema).mock.calls.at(-1)![2]).toBe('192.168.1.2')
+  })
+})
+
 describe('ModuleConsolePage · 攒批提交/重置编排（FE-03/FE-23）', () => {
   async function seedAndMount() {
     const { useChangesetStore } = await import('../../src/stores/changeset')
