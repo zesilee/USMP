@@ -28,6 +28,8 @@ type ChangesetHandler struct {
 	// push 执行 candidate 两阶段原子下发（生产为 intent.TxCoordinator，
 	// 可注入测试）。
 	push intent.Pusher
+	// support 节点级不支持集视图（BR-12 写门禁，与 ConfigHandler 同口径）。
+	support func(ip string) nodeSupportView
 }
 
 // NewChangesetHandler 构造变更集 handler：设备读闭包与 ConfigHandler 同实现，
@@ -38,6 +40,7 @@ func NewChangesetHandler(mgr manager.Manager) *ChangesetHandler {
 		manager: mgr,
 		fetch:   cfg.fetch,
 		push:    intent.NewTxCoordinator(mgr.GetClientPool(), mgr.GetDeviceStore(), 0),
+		support: cfg.support,
 	}
 }
 
@@ -420,6 +423,17 @@ func (h *ChangesetHandler) Commit(c *gin.Context) {
 		return
 	}
 
+	// 节点不支持写门禁（BR-12）：2PC 全有全无，任一条目命中即整体拒绝且不打
+	// 设备（恢复通道=GET force_refresh 重试成功清标记）。
+	if view := h.support(req.Device); view != nil {
+		for _, pe := range entries {
+			if view.IsUnsupportedPath(pe.req.Path) {
+				rejectNodeUnsupported(c, pe.req.Path)
+				return
+			}
+		}
+	}
+
 	frags, err := changesetFragments(req.Device, entries)
 	if err != nil {
 		Error(c, 400, err.Error())
@@ -435,6 +449,17 @@ func (h *ChangesetHandler) Commit(c *gin.Context) {
 		return
 	}
 	if res.Err != nil {
+		// 写通道学习（CN-04）：设备拒绝可归因为某条目路径的 unknown-element 时
+		// 入集并结构化透出（下次同路径提交快速失败；2PC 已整体回退无半配）。
+		if view := h.support(req.Device); view != nil {
+			for _, pe := range entries {
+				if client.UnknownElementForPath(pe.req.Path, res.Err) {
+					view.MarkUnsupportedPath(pe.req.Path)
+					rejectNodeUnsupported(c, pe.req.Path)
+					return
+				}
+			}
+		}
 		// 整体回退已由 2PC 完成（candidate discard）；控制器侧零痕迹（R08/§9）。
 		Error(c, 502, "提交失败（设备已整体回退）: "+res.Err.Error())
 		return

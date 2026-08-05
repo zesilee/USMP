@@ -83,6 +83,16 @@ func (p *DefaultClientPool) Get(info DeviceConnectionInfo) (Client, error) {
 	return client, err
 }
 
+// Peek returns the existing client for ip without dialing (nil, false when
+// absent). 供只读能力查询（如节点不支持集视图，BR-12）——查询绝不能触发建连：
+// 未注册/离线设备会白付整段拨号超时（实测把 api 测试包拖慢 3 倍）。
+func (p *DefaultClientPool) Peek(ip string) (Client, bool) {
+	p.mu.RLock()
+	defer p.mu.RUnlock()
+	c, ok := p.clients[ip]
+	return c, ok
+}
+
 // Release implements ClientPool interface
 func (p *DefaultClientPool) Release(ip string) {
 	// No-op - we keep one client per device permanently

@@ -621,6 +621,56 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/devices/{ip}/capabilities": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 查询设备 hello capabilities 原文 */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description 设备 IP */
+                    ip: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description capabilities 原文；离线为空列表+negotiated:false */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.DeviceCapabilitiesData"];
+                        };
+                    };
+                };
+                /** @description 设备未注册 */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/devices/{ip}/reconcile": {
         parameters: {
             query?: never;
@@ -1142,6 +1192,10 @@ export interface components {
             reconciliation?: components["schemas"]["api.ReconcileInfo"];
             status?: string;
         };
+        "api.DeviceCapabilitiesData": {
+            capabilities?: string[];
+            negotiated?: boolean;
+        };
         "api.DeviceConnStatus": {
             connected?: boolean;
             running?: boolean;
@@ -1359,6 +1413,11 @@ export interface components {
             /** @description RPCs 是该模块的 rpc（RPC-02）：与配置节点平级，input 复用 FieldDef 渲染。 */
             rpcs?: components["schemas"]["api.RPCSchema"][];
             title?: string;
+            /**
+             * @description Unsupported 该设备已学习的不支持子路径（相对模块根首段名，CN-05）：仅
+             *     ?device= 形态携带，空集省略；前端据此预标记占位 Tab（FE-24）。
+             */
+            unsupported?: string[];
             vendor?: string;
         };
         "github_com_leezesi_usmp_backend_pkg_yang-runtime_status.Status": {

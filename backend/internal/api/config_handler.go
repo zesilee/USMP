@@ -35,6 +35,65 @@ type ConfigHandler struct {
 	// pushDelete 同步下发单条目删除（BR-09，命令语义）。可注入以便无设备/模拟器
 	// 测试；默认 pushDeleteToDevice。
 	pushDelete func(ctx context.Context, ip string, target interface{}) error
+	// support 返回设备的节点级不支持集视图（BR-12/CN-04），无可用连接返回 nil
+	// （行为退化为既有链路）。可注入以便无设备测试；默认经连接池可选接口断言。
+	support func(ip string) nodeSupportView
+}
+
+// nodeSupportView 连接实现的可选能力（与 ServerCapabilities 同款断言模式，
+// 不扩 client.Client 接口面）：节点级不支持集的查/标/清。
+type nodeSupportView interface {
+	IsUnsupportedPath(string) bool
+	MarkUnsupportedPath(string)
+	ClearUnsupportedPath(string)
+	UnsupportedPathsUnder(string) []string
+}
+
+// unsupportedTabsFor 该设备在模块根下已学习的不支持子路径，折算为相对模块根
+// 的首段局部名（CN-05，前端 Tab 预标记用）。无连接/无学习返回 nil（键省略）。
+func unsupportedTabsFor(mgr manager.Manager, deviceID, rootName string) []string {
+	view := supportViewFromPool(mgr, deviceID)
+	if view == nil {
+		return nil
+	}
+	prefix := rootName + ":" + rootName
+	seen := map[string]bool{}
+	var out []string
+	for _, p := range view.UnsupportedPathsUnder(prefix) {
+		rest := strings.TrimPrefix(strings.TrimPrefix(p, prefix), "/")
+		if rest == "" {
+			continue
+		}
+		seg := rest
+		if i := strings.IndexByte(seg, '/'); i >= 0 {
+			seg = seg[:i]
+		}
+		if i := strings.IndexByte(seg, '['); i >= 0 {
+			seg = seg[:i]
+		}
+		if i := strings.LastIndexByte(seg, ':'); i >= 0 {
+			seg = seg[i+1:]
+		}
+		if seg != "" && !seen[seg] {
+			seen[seg] = true
+			out = append(out, seg)
+		}
+	}
+	sort.Strings(out)
+	return out
+}
+
+// reasonNodeUnsupported BR-12 结构化错误标识：设备软件版本无此节点。
+const reasonNodeUnsupported = "node-unsupported"
+
+// nodeUnsupportedData 错误响应 data 负载（前端以 reason 判定占位态，FE-24）。
+type nodeUnsupportedData struct {
+	Reason string `json:"reason"`
+}
+
+func rejectNodeUnsupported(c *gin.Context, path string) {
+	ErrorWithData(c, 500, "Device does not support this node: "+path,
+		nodeUnsupportedData{Reason: reasonNodeUnsupported})
 }
 
 // NewConfigHandler creates a new ConfigHandler
@@ -43,7 +102,36 @@ func NewConfigHandler(mgr manager.Manager) *ConfigHandler {
 	h.fetch = h.fetchFromDevice
 	h.fetchState = h.fetchStateFromDevice
 	h.pushDelete = h.pushDeleteToDevice
+	h.support = h.supportFromPool
 	return h
+}
+
+// supportFromPool resolves the device's connection and type-asserts the node
+// support capability. 设备未注册/建连失败返回 nil（不因能力查询引入新错误面）。
+func (h *ConfigHandler) supportFromPool(ip string) nodeSupportView {
+	return supportViewFromPool(h.manager, ip)
+}
+
+// supportViewFromPool 包级复用（ConfigHandler/ChangesetHandler 同口径取视图）。
+// 只 Peek 不拨号：能力查询绝不能触发建连（未注册/离线设备会白付拨号超时）；
+// 无既有连接时返回 nil——学习/清标记的调用点都在设备请求之后，届时连接已存在。
+func supportViewFromPool(mgr manager.Manager, ip string) nodeSupportView {
+	info, _ := device.ResolveConn(mgr.GetDeviceStore(), ip)
+	peeker, ok := mgr.GetClientPool().(interface {
+		Peek(string) (client.Client, bool)
+	})
+	if !ok {
+		return nil
+	}
+	cli, ok := peeker.Peek(info.IP)
+	if !ok {
+		return nil
+	}
+	v, ok := cli.(nodeSupportView)
+	if !ok {
+		return nil
+	}
+	return v
 }
 
 // fetchFromDevice reads running config from the device via the client pool.
@@ -80,6 +168,29 @@ func (h *ConfigHandler) fetchVia(ctx context.Context, ip, path string, withState
 		return nil, err
 	}
 	return decodeRunningConfig(path, result.Data), nil
+}
+
+// learnNodeUnsupported 归因学习（CN-04）：设备错误可归因为 unknown-element 时
+// 入集并返回 true（当次即转结构化错误，无需第二次请求）。视图在错误发生后
+// 再取（Peek）：请求刚打过设备，连接此刻已在池中。不可归因或无视图返回
+// false（走既有错误路径）。
+func (h *ConfigHandler) learnNodeUnsupported(ip, path string, err error) bool {
+	if !client.UnknownElementForPath(path, err) {
+		return false
+	}
+	view := h.support(ip)
+	if view == nil {
+		return false
+	}
+	view.MarkUnsupportedPath(path)
+	return true
+}
+
+// clearUnsupported force 重试成功后的恢复动作（BR-12）。
+func (h *ConfigHandler) clearUnsupported(ip, path string) {
+	if view := h.support(ip); view != nil {
+		view.ClearUnsupportedPath(path)
+	}
 }
 
 // runKey builds the running-cache key "ip|path", normalising a trailing slash
@@ -178,6 +289,14 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 	key := runKey(ip, path)
 	ttlSec := int(rc.TTL().Seconds())
 
+	// 节点级不支持快速失败（BR-12）：已学习路径不再打设备；force_refresh 绕过
+	// 重试（成功即清标记——设备升级后的恢复通道）。视图经 Peek 取自既有连接
+	// （绝不拨号）；无连接=无学习记忆，检查自然跳过。
+	if view := h.support(ip); view != nil && !forceRefresh && view.IsUnsupportedPath(path) {
+		rejectNodeUnsupported(c, path)
+		return
+	}
+
 	// include_state=true → 状态通道（<get>，按需）：恒走设备取新鲜状态，
 	// 不读不写配置缓存（状态求实时；多为单行谓词读，缓存无意义且会污染配置读）。
 	if c.Query("include_state") == "true" {
@@ -185,12 +304,19 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 		defer cancel()
 		data, err := h.fetchState(ctx, ip, path)
 		if err != nil {
+			if h.learnNodeUnsupported(ip, path, err) {
+				rejectNodeUnsupported(c, path)
+				return
+			}
 			if errors.Is(err, errDeviceNotConnected) {
 				Error(c, 503, "Device is not connected")
 				return
 			}
 			Error(c, 500, "Failed to get state: "+err.Error())
 			return
+		}
+		if forceRefresh {
+			h.clearUnsupported(ip, path)
 		}
 		Success(c, ConfigGetData{Data: data, Cached: false, TTLSeconds: ttlSec, Source: "device"}, "Configuration retrieved")
 		return
@@ -216,12 +342,19 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 
 	data, err := h.fetch(ctx, ip, path)
 	if err != nil {
+		if h.learnNodeUnsupported(ip, path, err) {
+			rejectNodeUnsupported(c, path)
+			return
+		}
 		if errors.Is(err, errDeviceNotConnected) {
 			Error(c, 503, "Device is not connected")
 			return
 		}
 		Error(c, 500, "Failed to get configuration: "+err.Error())
 		return
+	}
+	if forceRefresh {
+		h.clearUnsupported(ip, path)
 	}
 
 	rc.Set(key, data)
@@ -261,6 +394,13 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	owners := intent.DefaultOwnership.Owners(ip, path)
 	if len(owners) > 0 && !force {
 		rejectOwnedPath(c, owners)
+		return
+	}
+
+	// 节点不支持写门禁（BR-12）：设备版本没有的节点不接受下发（无 force 逃生——
+	// 恢复通道是 GET force_refresh 重试成功清标记后写自然恢复）。
+	if view := h.support(ip); view != nil && view.IsUnsupportedPath(path) {
+		rejectNodeUnsupported(c, path)
 		return
 	}
 

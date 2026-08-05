@@ -66,6 +66,14 @@ func TestNodeSupportSetOps(t *testing.T) {
 	if c.IsUnsupportedPath("devm:devm/devm:ports") {
 		t.Fatal("未标记路径不得命中")
 	}
+	// 子树命中（BR-12「落在不支持路径下」）：后代路径同样命中
+	if !c.IsUnsupportedPath("devm:devm/devm:cards/devm:card[position='1']") {
+		t.Fatal("已标记路径的后代应命中")
+	}
+	// 段边界：devm:cards2 不是 devm:cards 的后代
+	if c.IsUnsupportedPath("devm:devm/devm:cards2") {
+		t.Fatal("同前缀异段名不得误命中")
+	}
 	c.ClearUnsupportedPath("devm:devm/devm:cards")
 	if c.IsUnsupportedPath("devm:devm/devm:cards") {
 		t.Fatal("清除后不得命中")
