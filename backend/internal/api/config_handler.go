@@ -29,6 +29,9 @@ type ConfigHandler struct {
 	// fetch reads a device's running config at a path. Injectable so cache
 	// behaviour can be tested without a device/sim; defaults to fetchFromDevice.
 	fetch func(ctx context.Context, ip, path string) (interface{}, error)
+	// fetchState 状态通道（<get>，include_state=true 的按需读）：绕缓存且不写
+	// 缓存。可注入以便无设备测试；默认 fetchStateFromDevice。
+	fetchState func(ctx context.Context, ip, path string) (interface{}, error)
 	// pushDelete 同步下发单条目删除（BR-09，命令语义）。可注入以便无设备/模拟器
 	// 测试；默认 pushDeleteToDevice。
 	pushDelete func(ctx context.Context, ip string, target interface{}) error
@@ -38,12 +41,26 @@ type ConfigHandler struct {
 func NewConfigHandler(mgr manager.Manager) *ConfigHandler {
 	h := &ConfigHandler{manager: mgr}
 	h.fetch = h.fetchFromDevice
+	h.fetchState = h.fetchStateFromDevice
 	h.pushDelete = h.pushDeleteToDevice
 	return h
 }
 
 // fetchFromDevice reads running config from the device via the client pool.
+// 快通道（真机回归）：<get-config> 只读配置。真机 <get> 在大 list 子树上收集
+// 全量硬件状态可 30s+ 不回首字节（wire 抓包实证），列表/基线读一律走此通道；
+// 状态经 fetchStateFromDevice 按需单独取（多为单行谓词读）。
 func (h *ConfigHandler) fetchFromDevice(ctx context.Context, ip, path string) (interface{}, error) {
+	return h.fetchVia(ctx, ip, path, false)
+}
+
+// fetchStateFromDevice 状态通道（BR-01/DP-09）：发 <get>，回读同时携带
+// config=false 状态子树（接口 dynamic、VLAN status 等），前端只读控件回显。
+func (h *ConfigHandler) fetchStateFromDevice(ctx context.Context, ip, path string) (interface{}, error) {
+	return h.fetchVia(ctx, ip, path, true)
+}
+
+func (h *ConfigHandler) fetchVia(ctx context.Context, ip, path string, withState bool) (interface{}, error) {
 	// DS-06: resolve full connection info via the shared helper (unregistered
 	// devices degrade to AUTO/no-credential).
 	info, _ := device.ResolveConn(h.manager.GetDeviceStore(), ip)
@@ -54,9 +71,11 @@ func (h *ConfigHandler) fetchFromDevice(ctx context.Context, ip, path string) (i
 	if !cli.IsConnected() {
 		return nil, errDeviceNotConnected
 	}
-	// WithStateData（BR-01/DP-09）：发 <get> 而非 <get-config>，回读同时携带
-	// config=false 状态子树（接口 dynamic、VLAN status 等），前端只读控件回显。
-	result, err := cli.Get(ctx, path, client.WithDatastore("running"), client.WithStateData())
+	opts := []client.GetOption{client.WithDatastore("running")}
+	if withState {
+		opts = append(opts, client.WithStateData())
+	}
+	result, err := cli.Get(ctx, path, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -158,6 +177,24 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 	rc := h.manager.GetRunningCache()
 	key := runKey(ip, path)
 	ttlSec := int(rc.TTL().Seconds())
+
+	// include_state=true → 状态通道（<get>，按需）：恒走设备取新鲜状态，
+	// 不读不写配置缓存（状态求实时；多为单行谓词读，缓存无意义且会污染配置读）。
+	if c.Query("include_state") == "true" {
+		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+		defer cancel()
+		data, err := h.fetchState(ctx, ip, path)
+		if err != nil {
+			if errors.Is(err, errDeviceNotConnected) {
+				Error(c, 503, "Device is not connected")
+				return
+			}
+			Error(c, 500, "Failed to get state: "+err.Error())
+			return
+		}
+		Success(c, ConfigGetData{Data: data, Cached: false, TTLSeconds: ttlSec, Source: "device"}, "Configuration retrieved")
+		return
+	}
 
 	// Serve fresh cache (§8 TTL 30s) unless a refresh is forced. A hit reflects
 	// config freshness only; device liveness is /devices/:ip/status.

@@ -3,7 +3,7 @@ import { mount, flushPromises } from '@vue/test-utils'
 import { createPinia, setActivePinia, type Pinia } from 'pinia'
 import ElementPlus from 'element-plus'
 import ItemDetailPane from '../../src/components/config/ItemDetailPane.vue'
-import { setConfig, getDeviceReconcile } from '../../src/api'
+import { setConfig, getConfig, getDeviceReconcile } from '../../src/api'
 import { useChangesetStore } from '../../src/stores/changeset'
 import { deriveTabs } from '../../src/utils/moduleConsole'
 import type { Field } from '../../src/utils/crdSchemaParser'
@@ -29,8 +29,18 @@ const nestedList: Field = {
     { path: '/ifm/interfaces/interface/trap-thresholds/trap-threshold/kind', type: 'string', label: 'kind', isKey: true },
   ],
 }
+// 只读状态组（读通道拆分回归）：dynamic 为 config=false 容器，值经按需状态读合入。
+const dynamicGroup: Field = {
+  path: '/ifm/interfaces/interface/dynamic',
+  type: 'group',
+  label: 'dynamic',
+  readonly: true,
+  fields: [
+    { path: '/ifm/interfaces/interface/dynamic/mac-address', type: 'string', label: 'mac-address', readonly: true },
+  ],
+}
 const baseList = ifmNestedSchema.fields.find((f) => f.label === 'interfaces')!.fields![0]
-const richList: Field = { ...baseList, fields: [...(baseList.fields || []), nestedGroup, nestedList] }
+const richList: Field = { ...baseList, fields: [...(baseList.fields || []), nestedGroup, nestedList, dynamicGroup] }
 const richTab = {
   ...deriveTabs(ifmNestedSchema.fields).find((t) => t.name === 'interfaces')!,
   listField: richList,
@@ -274,6 +284,36 @@ describe('ItemDetailPane · 表单编辑（FE-11 门禁语义迁移）', () => {
     expect(vm.form.blocked.value).toBe(true)
     await vm.submit()
     expect(vi.mocked(setConfig)).not.toHaveBeenCalled()
+  })
+
+  it('编辑态按需取单行状态（读通道拆分）：include_state 谓词读 + 只读值合入展示', async () => {
+    vi.mocked(getConfig).mockResolvedValue({
+      data: { data: { data: { interface: [
+        { name: '200GE0/1/0.1', dynamic: { 'mac-address': '00:aa:bb:cc:dd:ee' } },
+      ] } } },
+    } as any)
+    const w = mountPane()
+    await flushPromises()
+    // 谓词单行读 + includeState=true（整列表 <get> 真机 30s+ 不回，禁止）
+    const call = vi.mocked(getConfig).mock.calls.find((c) => String(c[1]).includes("[name='200GE0/1/0.1']"))
+    expect(call, '应发起该行的谓词状态读').toBeTruthy()
+    expect(call?.[3], '状态读须带 includeState').toBe(true)
+    const vm = w.vm as any
+    expect(vm.form.formData['dynamic']?.['mac-address'], '只读状态值合入表单展示').toBe('00:aa:bb:cc:dd:ee')
+    w.unmount()
+  })
+
+  it('创建态不发状态读；状态读失败静默降级（R08）', async () => {
+    vi.mocked(getConfig).mockRejectedValue(new Error('boom'))
+    const wc = mountPane({ mode: 'create', row: null })
+    await flushPromises()
+    expect(vi.mocked(getConfig)).not.toHaveBeenCalled()
+    wc.unmount()
+
+    const w = mountPane()
+    await flushPromises() // reject 被吞，不炸组件
+    expect((w.vm as any).form.formData['name']).toBe('200GE0/1/0.1')
+    w.unmount()
   })
 
   it('行切换（row prop 变化）重置表单为新行数据', async () => {

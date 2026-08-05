@@ -29,10 +29,18 @@ func TestConstructFilterIsSubtree(t *testing.T) {
 			path: "/vlan:vlan/vlan:vlans",
 			want: `<filter type="subtree"><vlan xmlns="urn:huawei:yang:huawei-vlan"><vlans/></vlan></filter>`,
 		},
+		// 读通道拆分（按需单行状态读）：list 谓词改为 RFC6241 content-match——
+		// <interface><name>GE0/0/1</name></interface> 只选中该行子树，真机毫秒级
+		// 返回；整列表 <get> 全量状态在真机上 30s+ 不回首字节（wire 实证）。
 		{
-			name: "带 list 谓词剥除（整列表读）",
+			name: "list 谓词=content-match 单行读",
 			path: "/ifm:ifm/ifm:interfaces/ifm:interface[name='GE0/0/1']",
-			want: `<filter type="subtree"><ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces><interface/></interfaces></ifm></filter>`,
+			want: `<filter type="subtree"><ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces><interface><name>GE0/0/1</name></interface></interfaces></ifm></filter>`,
+		},
+		{
+			name: "谓词值 XML 转义",
+			path: `/ifm:ifm/ifm:interfaces/ifm:interface[name='a<b&"c']`,
+			want: `<filter type="subtree"><ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces><interface><name>a&lt;b&amp;&#34;c</name></interface></interfaces></ifm></filter>`,
 		},
 		{
 			name: "空路径=全量读不带 filter",

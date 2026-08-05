@@ -39,17 +39,29 @@ func (c *optCaptureClient) Close() error                           { return nil 
 func (c *optCaptureClient) IsConnected() bool                      { return true }
 func (c *optCaptureClient) DiscardCandidate(context.Context) error { return nil }
 
-// 读路径必须以 WithStateData 发起（<get>），否则设备不会返回状态数据。
-func TestFetchFromDevice_RequestsStateData(t *testing.T) {
+// 真机回归（读通道拆分）：缺省读路径必须是 <get-config>（config-only 快通道）。
+// 真机 <get> 在 ifm interfaces 子树上收集全量硬件状态可长达 30s+ 不回首字节
+// （wire 抓包实证），列表读走 <get> 会把整个控制台拖死；状态改按需单独取。
+func TestFetchFromDevice_ConfigOnlyFastChannel(t *testing.T) {
 	cc := &optCaptureClient{xml: `<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces/></ifm>`}
 	h := NewConfigHandler(fakePoolManager{pool: &fakePool{client: cc}})
 
 	_, err := h.fetchFromDevice(context.Background(), "192.168.1.1", "/ifm:ifm/ifm:interfaces")
 	assert.NoError(t, err)
-	assert.True(t, cc.opts.IncludeState, "读路径应携 WithStateData（发 <get> 才能带回 config=false 数据）")
+	assert.False(t, cc.opts.IncludeState, "缺省读必须走 <get-config> 快通道（真机 <get> 大状态子树会拖死）")
 }
 
-// 回读含状态子树：RFC7951 结构原样带出（前端只读控件由此回显）。
+// 按需状态通道：fetchStateFromDevice 以 WithStateData 发起（<get>）。
+func TestFetchStateFromDevice_RequestsStateData(t *testing.T) {
+	cc := &optCaptureClient{xml: `<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces/></ifm>`}
+	h := NewConfigHandler(fakePoolManager{pool: &fakePool{client: cc}})
+
+	_, err := h.fetchStateFromDevice(context.Background(), "192.168.1.1", "/ifm:ifm/ifm:interfaces")
+	assert.NoError(t, err)
+	assert.True(t, cc.opts.IncludeState, "状态通道应携 WithStateData（发 <get> 才能带回 config=false 数据）")
+}
+
+// 回读含状态子树：RFC7951 结构原样带出（前端只读控件由此回显）——状态通道语义。
 func TestFetchFromDevice_ParsesStateSubtree(t *testing.T) {
 	xml := `<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces>` +
 		`<interface><name>GE0/0/1</name><mtu>1500</mtu>` +
@@ -58,7 +70,7 @@ func TestFetchFromDevice_ParsesStateSubtree(t *testing.T) {
 	p := &fakePool{client: &xmlClient{xml: xml}}
 	h := NewConfigHandler(fakePoolManager{pool: p})
 
-	got, err := h.fetchFromDevice(context.Background(), "192.168.1.1", "/ifm:ifm/ifm:interfaces")
+	got, err := h.fetchStateFromDevice(context.Background(), "192.168.1.1", "/ifm:ifm/ifm:interfaces")
 	assert.NoError(t, err)
 
 	m, ok := got.(map[string]interface{})
@@ -118,7 +130,7 @@ func TestConfigStateRead_EndToEnd(t *testing.T) {
 	ctx := context.Background()
 
 	// IFM：dynamic 状态容器随配置一起回读
-	got, err := h.fetchFromDevice(ctx, "sim", "/ifm:ifm/ifm:interfaces")
+	got, err := h.fetchStateFromDevice(ctx, "sim", "/ifm:ifm/ifm:interfaces")
 	assert.NoError(t, err)
 	m, ok := got.(map[string]interface{})
 	assert.True(t, ok, "ifm 回读应为 RFC7951 map")
@@ -138,7 +150,7 @@ func TestConfigStateRead_EndToEnd(t *testing.T) {
 
 	// VLAN：statistics 状态容器（config false 计数器）随配置一起回读。
 	// 注意 RFC7951 语义：uint64 序列化为字符串。
-	got, err = h.fetchFromDevice(ctx, "sim", "/vlan:vlan/vlan:vlans")
+	got, err = h.fetchStateFromDevice(ctx, "sim", "/vlan:vlan/vlan:vlans")
 	assert.NoError(t, err)
 	m, ok = got.(map[string]interface{})
 	assert.True(t, ok, "vlan 回读应为 RFC7951 map")

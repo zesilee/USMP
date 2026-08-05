@@ -58,12 +58,14 @@ export const getLogs = (params: { device?: string; status?: string; limit?: numb
   return api.get<ApiEnvelope<AuditListData>>('/logs', { params })
 }
 
-// Config API - 通用 YANG 配置接口
-export const getConfig = (ip: string, path: string, forceRefresh = false) => {
+// Config API - 通用 YANG 配置接口。
+// includeState=true 走按需状态通道（<get>，绕缓存）：只用于单行谓词读——
+// 整列表带状态在真机上极慢（读通道拆分，2026-08-05）。
+export const getConfig = (ip: string, path: string, forceRefresh = false, includeState = false) => {
   // 移除 path 开头的斜杠
   const cleanPath = path.startsWith('/') ? path.slice(1) : path
   return api.get<ApiResponse<any>>(`/config/${ip}/${cleanPath}`, {
-    params: { force_refresh: forceRefresh }
+    params: { force_refresh: forceRefresh, ...(includeState ? { include_state: true } : {}) }
   })
 }
 

@@ -58,6 +58,8 @@ import { Key, Delete } from '@element-plus/icons-vue'
 import type { FormInstance } from 'element-plus'
 import { useConfigForm, snapshotBaseline } from '../../composables/useConfigForm'
 import { useChangesetStore } from '../../stores/changeset'
+import { getConfig } from '../../api'
+import { mergeReadonlyState } from '../../utils/configState'
 import type { Field } from '../../utils/crdSchemaParser'
 import {
   deriveDetailTabs,
@@ -167,9 +169,35 @@ watch(
     }
     formRef.value?.clearValidate()
     activeDetail.value = '__main__'
+    void loadRowState()
   },
   { immediate: true },
 )
+
+// 按需单行状态读（读通道拆分，真机回归）：列表读走 config-only 快通道后，行数据
+// 不含 config=false 状态；编辑态打开时按谓词只读该行（真机毫秒级），把只读值
+// 合入表单展示。失败静默降级（R08）：状态回显缺失不阻塞编辑。
+async function loadRowState() {
+  if (props.mode !== 'edit' || !props.device || !props.row) return
+  const keyVal = String(props.row[keyField.value] ?? '')
+  if (!keyVal) return
+  try {
+    const res = await getConfig(
+      props.device,
+      `${configPath.value}/${postListKey.value}[${keyField.value}='${keyVal}']`,
+      false,
+      true,
+    )
+    const sub = res.data?.data?.data ?? res.data?.data
+    const v = sub?.[postListKey.value] ?? sub?.[leafName(listField.value)]
+    const stateRow = Array.isArray(v) ? v[0] : v && typeof v === 'object' ? (Object.values(v)[0] as any) : undefined
+    // 异步竞态防线：回包时行已切换则丢弃。
+    if (String(props.row?.[keyField.value] ?? '') !== keyVal) return
+    mergeReadonlyState(itemFields.value, form.formData, stateRow)
+  } catch {
+    /* 状态读失败不打扰编辑（§9 优雅降级） */
+  }
+}
 
 // 确定 = 写入变更集（FE-21 攒批）：不发任何写请求；提交经工具栏「提交配置」。
 async function submit() {
