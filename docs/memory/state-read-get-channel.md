@@ -20,3 +20,5 @@ config=false 状态字段端到端显示已交付（2026-07-21，PR#219 代码 +
 - 坑4 模型差异：该型号 vlan 条目无 `status` 叶，VLAN 状态面是 `statistics` 计数器容器（uint64 RFC7951 序列化为字符串）。
 - sim 状态合并语义：复用 edit-config 键匹配（wellKnownListKeys），无配置匹配的 keyed list 条目丢弃（防删除后幽灵）；纯状态容器照常并入；get-config 恒不泄漏状态。
 - 覆盖率棘轮已上调：后端 71.0、前端 84/78/77/84（[[test-governance-military-rules]] 的旧值过期）。
+
+**读通道拆分（2026-08-05 真机回归，覆盖本条早期结论）**：GET /config 缺省已改走 **<get-config> config-only 快通道**（真机 <get> 在 ifm interfaces 收集全量硬件状态 30s+ 不回首字节，wire 实证）；config=false 状态改**按需单行读**——`include_state=true` + 谓词路径 `/…/interface[name='X']`（constructSubtreeFilter 已把谓词转 RFC6241 content-match），绕缓存不写缓存，详情面板 mergeReadonlyState 只合只读字段。列表页状态列一期不显示。
