@@ -1,5 +1,7 @@
 # 项目记忆索引
 
+- [回读子树剥层契约](readback-subtree-peel.md) — 改回读形状/decodeRunningConfig/加消费方前必读：响应契约=以请求路径为根的子树(PR#281 peelToPath)、谓词段停剥返回父容器、批量接入模块解码根=模块根曾致devm「一行且位置=port」、症状速查=主键列显示list名
+
 - [北向CRD→YANG工具](crd-to-yang-codegen.md) — 碰北向对接/crd2yang/往返对账/businessdemo 前必读：goyang全量Range陷阱、enum字典序、demo隔离锚点(勿接线load.go)、接线剩余债=多Kind业务API泛化；代码检视一律独立agent
 - [左树模块级展开](left-tree-module-expansion.md) — 改左树/加模块/加rpc前必读：左树已深到模块级(container+rpc平铺入树、点rpc直达/module/:m/rpc/:name)、rpc入口唯一在左树(Tab栏已退)、children构建期烘焙双语、rpcgen清单=taskname超集有守护测试、叶判定改sourceModule口径、E2E点叶=展开
 
