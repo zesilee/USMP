@@ -11,7 +11,7 @@
 
 - [换机器环境清单](server-migration-env-checklist.md) — 迁服务器/新环境首跑必读：迁移会丢 gh 二进制(→push 直接炸)、node_modules 半旧(→前端测试全灭)、Playwright 要装两套浏览器(1217+1228)、hooksPath 绝对路径误报；含全绿基线与容器 unhealthy 误报解释
 
-- [状态读<get>通道](state-read-get-channel.md) — 做状态相关功能/真机接入前必读：config=false 显示链路已交付(PR#219/#220)、四坑(config壳归一化/payload深层剥除/scrapligo filter双包/vlan无status叶)、覆盖率棘轮新值(后端71.0、前端84/78/77/84)
+- [状态读<get>通道](state-read-get-channel.md) — 做状态相关功能/真机接入前必读：config=false 显示链路已交付(PR#219/#220)、四坑(config壳归一化/payload深层剥除/scrapligo filter双包/vlan无status叶)、只读Tab整树走<get>是单行读约定的合法例外(真机get-config拒state节点,PR#282)、coverage误提交存量债
 
 - [K8s PaaS部署约束](k8s-paas-deployment-constraints.md) — 任何存储/HA/意图层/CRD设计前必读：USMP=K8s内PaaS底座组件、必须多实例、禁本地存储、持久化=CRD(当载体不当架构)；business-network-config 四拍板(公共契约CRD+YANG→CRD codegen、跨设备2PC、意图层多实例就绪、首能力VLAN打通+软归属)；**已全量交付归档(2026-07-16, PR#164-#173)**；**全局HA也已交付(PR#175-#180)**：Device CRD store+Secret凭据、ResolveConn收敛、leader.Gate统一选主、AuditRecord CRD；follow-up全清零(2026-07-17)：旧桥接退役PR#186-#191(Stack A载体归零+纯删除门禁豁免)、硬锁二期PR#192-#193(409拒绝+force审计留痕+前端阻断确认)
 
