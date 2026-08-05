@@ -61,9 +61,11 @@ func TestConstructSubtreeFilter(t *testing.T) {
 			`<nosuch><things/></nosuch>`,
 		},
 		{
-			"predicate stripped",
+			// 语义升级（读通道拆分）：谓词不再剥除，转 RFC6241 content-match
+			// 单行选中——按需单行状态读的地基（整列表 <get> 真机 30s+ 不回）。
+			"predicate becomes content-match",
 			"/ifm:ifm/ifm:interfaces/interface[name='GE0/0/1']",
-			`<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces><interface/></interfaces></ifm>`,
+			`<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces><interface><name>GE0/0/1</name></interface></interfaces></ifm>`,
 		},
 		{"empty path", "/", ""},
 	}

@@ -186,3 +186,41 @@ func TestSetConfig_StoreFailDoesNotInvalidate(t *testing.T) {
 	getConfigReq(h, "10.0.0.1", "/vlan:vlan/vlan:vlans", false) // still cached
 	assert.Equal(t, 1, calls, "a rejected push must not invalidate the cache")
 }
+
+// 读通道拆分（真机回归）：include_state=true → 走状态通道（h.fetchState）、
+// 绕缓存且不写缓存（状态求新鲜、且多为单行谓词读，缓存无意义还会污染配置读）。
+func TestGetConfig_IncludeStateUsesStateChannelNoCache(t *testing.T) {
+	cfgCalls, stateCalls := 0, 0
+	h := newConfigHandlerWithFetch(func(ctx context.Context, ip, path string) (interface{}, error) {
+		cfgCalls++
+		return map[string]interface{}{"cfg": true}, nil
+	})
+	h.fetchState = func(ctx context.Context, ip, path string) (interface{}, error) {
+		stateCalls++
+		return map[string]interface{}{"state": true}, nil
+	}
+
+	w := httptest.NewRecorder()
+	c, _ := gin.CreateTestContext(w)
+	c.Params = gin.Params{{Key: "ip", Value: "10.0.0.1"}, {Key: "path", Value: "/ifm:ifm/ifm:interfaces"}}
+	c.Request = httptest.NewRequest(http.MethodGet, "/?include_state=true", nil)
+	h.GetConfig(c)
+	d := decodeConfigData(t, w)
+	assert.Equal(t, 0, cfgCalls, "状态读不走配置快通道")
+	assert.Equal(t, 1, stateCalls, "状态读走状态通道")
+	assert.False(t, d.Cached)
+	assert.Equal(t, "device", d.Source)
+
+	// 状态读不得写缓存：随后的普通读必须是 miss → 走配置通道。
+	d2 := decodeConfigData(t, getConfigReq(h, "10.0.0.1", "/ifm:ifm/ifm:interfaces", false))
+	assert.Equal(t, 1, cfgCalls, "状态读不得污染配置缓存")
+	assert.False(t, d2.Cached)
+
+	// 普通读命中缓存后，include_state 仍强制走设备（新鲜状态）。
+	w3 := httptest.NewRecorder()
+	c3, _ := gin.CreateTestContext(w3)
+	c3.Params = gin.Params{{Key: "ip", Value: "10.0.0.1"}, {Key: "path", Value: "/ifm:ifm/ifm:interfaces"}}
+	c3.Request = httptest.NewRequest(http.MethodGet, "/?include_state=true", nil)
+	h.GetConfig(c3)
+	assert.Equal(t, 2, stateCalls, "缓存命中不拦状态读")
+}

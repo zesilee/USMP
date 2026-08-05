@@ -453,11 +453,14 @@ func (c *NETCONFClient) constructFilter(path string) string {
 	return `<filter type="subtree">` + sub + `</filter>`
 }
 
-// constructSubtreeFilter builds a subtree-filter body for the <get> RPC from a
-// config path（如 /ifm:ifm/ifm:interfaces → <ifm xmlns="…"><interfaces/></ifm>）。
+// constructSubtreeFilter builds a subtree-filter body for the <get>/<get-config>
+// RPC from a config path（如 /ifm:ifm/ifm:interfaces → <ifm xmlns="…"><interfaces/></ifm>）。
 // 模块命名空间经驱动注册表解析（未注册模块降级为无命名空间通配，subtree
-// filter 语义下匹配任意命名空间）；list 谓词剥除（整列表读，与写路径的谓词
-// 拒绝语义对齐）。空路径返回 ""（scrapligo 不构造 filter → 全量 <get>）。
+// filter 语义下匹配任意命名空间）。list 谓词 [key='val'] 转为 RFC6241
+// content-match（<interface><name>val</name></interface> 只选中该行——按需单行
+// 状态读的地基；整列表 <get> 全量状态真机 30s+ 不回首字节，wire 实证）；
+// 非 key='val' 形态的谓词整体剥除（与写路径的谓词拒绝语义对齐）。
+// 空路径返回 ""（不构造 filter → 全量读）。
 func constructSubtreeFilter(path string) string {
 	// 路径规范化（真机回归，wire 抓包实证）：前导双斜杠（URL 手拼等来源）会让
 	// 驱动注册表的 HasPrefix 匹配落空 → namespace 静默丢失 → 严格设备 subtree
@@ -466,33 +469,57 @@ func constructSubtreeFilter(path string) string {
 	if norm == "/" {
 		return ""
 	}
-	// 谓词值可含 "/"（如 [name='GE0/0/1']），须在按 "/" 切段前整体剥除 […] 区段。
-	stripped := norm
-	if strings.Contains(stripped, "[") {
-		var sb strings.Builder
-		depth := 0
-		for _, r := range stripped {
-			switch {
-			case r == '[':
-				depth++
-			case r == ']' && depth > 0:
-				depth--
-			case depth == 0:
-				sb.WriteRune(r)
+	type filterSeg struct{ name, predKey, predVal string }
+	var segs []filterSeg
+	var cur strings.Builder
+	depth := 0
+	flush := func() {
+		raw := cur.String()
+		cur.Reset()
+		if raw == "" {
+			return
+		}
+		name, pk, pv := raw, "", ""
+		if i := strings.IndexByte(raw, '['); i >= 0 {
+			name = raw[:i]
+			body := strings.TrimSuffix(raw[i+1:], "]")
+			if j := strings.IndexByte(body, '='); j >= 0 {
+				k := strings.TrimSpace(body[:j])
+				v := strings.TrimSpace(body[j+1:])
+				if len(v) >= 2 && (v[0] == '\'' || v[0] == '"') && v[len(v)-1] == v[0] {
+					pk, pv = k, v[1:len(v)-1]
+					if c := strings.IndexByte(pk, ':'); c >= 0 {
+						pk = pk[c+1:]
+					}
+				}
 			}
 		}
-		stripped = sb.String()
-	}
-	var names []string
-	for _, seg := range strings.Split(strings.Trim(stripped, "/"), "/") {
-		if i := strings.Index(seg, ":"); i >= 0 {
-			seg = seg[i+1:]
+		if c := strings.IndexByte(name, ':'); c >= 0 {
+			name = name[c+1:]
 		}
-		if seg != "" {
-			names = append(names, seg)
+		if name != "" {
+			segs = append(segs, filterSeg{name, pk, pv})
 		}
 	}
-	if len(names) == 0 {
+	// 谓词值可含 "/"（如 [name='GE0/0/1']）：括号深度内的 "/" 不切段。
+	for _, r := range strings.Trim(norm, "/") {
+		switch {
+		case r == '[':
+			depth++
+			cur.WriteRune(r)
+		case r == ']':
+			if depth > 0 {
+				depth--
+			}
+			cur.WriteRune(r)
+		case r == '/' && depth == 0:
+			flush()
+		default:
+			cur.WriteRune(r)
+		}
+	}
+	flush()
+	if len(segs) == 0 {
 		return ""
 	}
 	ns := ""
@@ -500,21 +527,33 @@ func constructSubtreeFilter(path string) string {
 		ns = d.XML.Namespace
 	}
 	var b strings.Builder
-	for i, name := range names {
+	for i, sg := range segs {
 		b.WriteByte('<')
-		b.WriteString(name)
+		b.WriteString(sg.name)
 		if i == 0 && ns != "" {
 			fmt.Fprintf(&b, ` xmlns=%q`, ns)
 		}
-		if i == len(names)-1 {
+		if i == len(segs)-1 && sg.predKey == "" {
 			b.WriteString("/>")
-		} else {
+			continue
+		}
+		b.WriteByte('>')
+		if sg.predKey != "" {
+			b.WriteByte('<')
+			b.WriteString(sg.predKey)
+			b.WriteByte('>')
+			_ = xml.EscapeText(&b, []byte(sg.predVal))
+			b.WriteString("</")
+			b.WriteString(sg.predKey)
 			b.WriteByte('>')
 		}
 	}
-	for i := len(names) - 2; i >= 0; i-- {
+	for i := len(segs) - 1; i >= 0; i-- {
+		if i == len(segs)-1 && segs[i].predKey == "" {
+			continue
+		}
 		b.WriteString("</")
-		b.WriteString(names[i])
+		b.WriteString(segs[i].name)
 		b.WriteByte('>')
 	}
 	return b.String()
