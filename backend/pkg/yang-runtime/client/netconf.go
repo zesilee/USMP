@@ -459,7 +459,13 @@ func (c *NETCONFClient) constructFilter(path string) string {
 // filter 语义下匹配任意命名空间）；list 谓词剥除（整列表读，与写路径的谓词
 // 拒绝语义对齐）。空路径返回 ""（scrapligo 不构造 filter → 全量 <get>）。
 func constructSubtreeFilter(path string) string {
-	norm := strings.TrimRight(strings.TrimSpace(path), "/")
+	// 路径规范化（真机回归，wire 抓包实证）：前导双斜杠（URL 手拼等来源）会让
+	// 驱动注册表的 HasPrefix 匹配落空 → namespace 静默丢失 → 严格设备 subtree
+	// 匹配不到回空。统一收敛为单前导斜杠形态再做后续解析。
+	norm := "/" + strings.Trim(strings.TrimSpace(path), "/")
+	if norm == "/" {
+		return ""
+	}
 	// 谓词值可含 "/"（如 [name='GE0/0/1']），须在按 "/" 切段前整体剥除 […] 区段。
 	stripped := norm
 	if strings.Contains(stripped, "[") {
