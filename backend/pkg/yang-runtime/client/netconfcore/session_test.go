@@ -327,3 +327,31 @@ func TestSessionCloseIdempotent(t *testing.T) {
 		t.Fatalf("关闭后 Do 应 ErrSessionDead, got %v", err)
 	}
 }
+
+// CN-04 归因地基：华为 313 形态 unknown-element 的 bad-element 须被结构化
+// 提取（error-info>bad-element），供上层按请求路径归因。
+func TestSessionRPCErrorBadElement(t *testing.T) {
+	s := newTestSession(t, caps10, func(req []byte) []byte {
+		m := msgIDRe.FindSubmatch(req)
+		return []byte(fmt.Sprintf(`<rpc-reply message-id="%s" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <rpc-error>
+    <error-type>application</error-type>
+    <error-tag>unknown-element</error-tag>
+    <error-severity>error</error-severity>
+    <error-message xml:lang="en">Unexpected element: cards.</error-message>
+    <error-info xmlns:nc-ext="urn:huawei:yang:huawei-ietf-netconf-ext">
+      <bad-element>cards</bad-element>
+      <nc-ext:error-info-code>313</nc-ext:error-info-code>
+    </error-info>
+  </rpc-error>
+</rpc-reply>`, m[1]))
+	})
+	_, err := s.Do(context.Background(), []byte("<x/>"))
+	var re *RPCReplyError
+	if !errors.As(err, &re) {
+		t.Fatalf("应为 *RPCReplyError, got %T: %v", err, err)
+	}
+	if re.Errors[0].Tag != "unknown-element" || re.Errors[0].BadElement != "cards" {
+		t.Fatalf("bad-element 未提取: %+v", re.Errors[0])
+	}
+}

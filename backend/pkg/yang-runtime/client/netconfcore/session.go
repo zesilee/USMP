@@ -28,6 +28,9 @@ type RPCError struct {
 	Tag      string `xml:"error-tag"`
 	Severity string `xml:"error-severity"`
 	Message  string `xml:"error-message"`
+	// BadElement error-info>bad-element（华为 unknown-element/313 形态携带的
+	// 被拒节点名），供上层按请求路径归因（CN-04）。缺失为空串。
+	BadElement string `xml:"error-info>bad-element"`
 }
 
 // RPCReplyError 应答中 severity=error 的错误集合（业务错误，非传输错误）。
