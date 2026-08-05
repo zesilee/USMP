@@ -112,6 +112,7 @@ func NewSession(ctx context.Context, conn io.ReadWriteCloser) (*Session, error) 
 		return nil, err
 	}
 
+	wireLogf("session %d established, framing=%v, server-caps=%d", hello.SessionID, framing, len(hello.Capabilities))
 	s := &Session{
 		conn:      conn,
 		framing:   framing,
@@ -164,10 +165,13 @@ func (s *Session) Do(ctx context.Context, body []byte) ([]byte, error) {
 		`<?xml version="1.0" encoding="UTF-8"?><rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="%d">%s</rpc>`,
 		id, body)
 
+	wireLog("send", []byte(envelope))
 	raw, err := s.exchangeLocked(ctx, []byte(envelope))
 	if err != nil {
+		wireLogf("recv-error: %v", err)
 		return nil, err
 	}
+	wireLog("recv", raw)
 
 	var reply rpcReply
 	if err := xml.Unmarshal(raw, &reply); err != nil {
