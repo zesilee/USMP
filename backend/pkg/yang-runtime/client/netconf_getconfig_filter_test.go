@@ -39,6 +39,20 @@ func TestConstructFilterIsSubtree(t *testing.T) {
 			path: "",
 			want: "",
 		},
+		// 真机回归（wire 抓包实证，2026-08-05）：路径带前导双斜杠时，驱动注册表
+		// 前缀匹配（HasPrefix "/ifm:ifm"）落空 → namespace 静默丢失 →
+		// <ifm> 无 xmlns → 严格设备 subtree 匹配不到，秒回空 <data/>。
+		// 路径规范化后任意数量前导斜杠都必须解析出 namespace。
+		{
+			name: "前导双斜杠仍须带 namespace",
+			path: "//ifm:ifm/ifm:interfaces",
+			want: `<filter type="subtree"><ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces/></ifm></filter>`,
+		},
+		{
+			name: "仅斜杠=全量读不带 filter",
+			path: "///",
+			want: "",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

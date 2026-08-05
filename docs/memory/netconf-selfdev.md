@@ -16,3 +16,5 @@ metadata:
 - 相关：[[scrapligo-concurrency-pitfalls]]（已成历史背景：三缺陷=自研动机，core 已根治）、[[go-122-pin]]（netconfcore 禁 1.23+ 语法）。
 
 **真机首战·get-config 过滤器坑（2026-08-04 修复）**：constructFilter 曾是自造 XPath 形态 `<filter … select="/ifm:ifm/…"/>`——RFC6241 无 type 缺省按 **subtree** 解释，空元素=什么都不选，真机正确回空 `<data/>` → 界面接口/VLAN 列表全空 + 对账拿空实际态永久漂移。已改与状态读同源（constructSubtreeFilter + `<filter type="subtree">` 外裹）。**同修 sim 保真**：netconfsim get-config 曾无视过滤器整树返回（掩体！），现按 RFC 三分支：无 filter=全量 / filter 空=空 data / 有 filter=子树匹配。诊断法宝：`curl /api/v1/config/<ip>/<path>` 返回的 data 是 base64 原始 rpc-reply，解码即见设备真实回复。
+
+**双斜杠丢 namespace 坑（wire 抓包实证，已修）**：路径前导双斜杠（`//ifm:ifm/…`，URL 手拼常见）曾让注册表 HasPrefix 落空→filter 丢 xmlns→严格真机回空；constructSubtreeFilter 已做单斜杠规范化。**排障心法**：sim 的每一处宽容（namespace 通配/无视过滤器/空 filter 当全量）都是真机 bug 的掩体，修 bug 时同步收严 sim。
