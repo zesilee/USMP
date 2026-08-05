@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"strings"
 
 	"github.com/openconfig/ygot/ygot"
@@ -28,7 +29,12 @@ func decodeRunningConfig(path string, data interface{}) interface{} {
 	// 解码器按驱动描述符注册表查表（DR-03）——不再散落路径字符串匹配。
 	var parsed ygot.GoStruct
 	if d, ok := driver.DecoderFor(path); ok {
-		if p, err := d.DecodeXML(raw); err == nil {
+		p, err := d.DecodeXML(raw)
+		if err != nil {
+			// 解码失败必须留痕（真机排障教训：静默原始透传=前端零行+无线索，
+			// 两天才定位到此）。仍降级透传原始字节（R08），但日志说清败因。
+			log.Printf("decodeRunningConfig: %s 解码失败，降级原始透传（前端将无行可渲染）: %v", path, err)
+		} else {
 			parsed = p
 		}
 	}
