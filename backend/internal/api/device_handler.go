@@ -334,15 +334,6 @@ func (h *DeviceHandler) RemoveDevice(c *gin.Context) {
 	Success(c, nil, "Device removed successfully")
 }
 
-// GetStatus gets device status
-//
-// @Summary  查询设备运行/连接状态
-// @Tags     devices
-// @Produce  json
-// @Param    ip path string true "设备 IP"
-// @Success  200 {object} Response{data=DeviceConnStatus} "运行与连接状态"
-// @Failure  404 {object} Response "设备不存在"
-// @Router   /devices/{ip}/status [get]
 // DeviceCapabilitiesData 是 GET /devices/:ip/capabilities 的负载（CN-06）：
 // hello capabilities 原文（零加工），供诊断与 deviations 侦察（二期捷径评估）。
 type DeviceCapabilitiesData struct {
@@ -374,6 +365,15 @@ func (h *DeviceHandler) GetCapabilities(c *gin.Context) {
 		"Device capabilities retrieved")
 }
 
+// GetStatus gets device status
+//
+// @Summary  查询设备运行/连接状态
+// @Tags     devices
+// @Produce  json
+// @Param    ip path string true "设备 IP"
+// @Success  200 {object} Response{data=DeviceConnStatus} "运行与连接状态"
+// @Failure  404 {object} Response "设备不存在"
+// @Router   /devices/{ip}/status [get]
 func (h *DeviceHandler) GetStatus(c *gin.Context) {
 	ip := c.Param("ip")
 

@@ -712,6 +712,56 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/devices/{ip}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** 查询设备运行/连接状态 */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description 设备 IP */
+                    ip: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 运行与连接状态 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"] & {
+                            data?: components["schemas"]["api.DeviceConnStatus"];
+                        };
+                    };
+                };
+                /** @description 设备不存在 */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/logs": {
         parameters: {
             query?: never;
@@ -1145,6 +1195,10 @@ export interface components {
         "api.DeviceCapabilitiesData": {
             capabilities?: string[];
             negotiated?: boolean;
+        };
+        "api.DeviceConnStatus": {
+            connected?: boolean;
+            running?: boolean;
         };
         "api.DeviceListData": {
             devices?: components["schemas"]["api.DeviceStatus"][];
