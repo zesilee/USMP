@@ -164,7 +164,9 @@ async function load() {
     return
   }
   try {
-    const res = await getConfig(props.device, configPath.value)
+    // 只读 Tab（config false state 子树）走 <get> 状态通道：<get-config> 对
+    // 此类节点会被真机以 unknown-element 拒绝（FE-14 真机回归）。
+    const res = await getConfig(props.device, configPath.value, false, !!props.tab.readonly)
     const payload = res.data?.data
     const subtree = payload?.data ?? payload ?? {}
     const seed: Record<string, any> = {}

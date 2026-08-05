@@ -210,6 +210,34 @@ describe('ModuleFormTab · readonly 降级（FE-14）', () => {
     // state 值照常回显
     expect((w.vm as any).form.formData['protocol-up-count']).toBe(3)
   })
+
+  // 真机回归：config false 子树对 <get-config> 是 unknown-element（华为 devm
+  // physical-entitys/schedule-reboot 实测），只读 Tab 回读必须走状态通道。
+  it('整 Tab readonly：取数走状态通道（getConfig 第 4 参 includeState=true）', async () => {
+    const roTab = deriveTabs([
+      {
+        path: '/ifm/ipv4-interface-count',
+        type: 'group' as const,
+        label: 'ipv4-interface-count',
+        readonly: true,
+        fields: [
+          { path: '/ifm/ipv4-interface-count/protocol-up-count', type: 'number' as const, label: 'protocol-up-count', readonly: true },
+        ],
+      },
+    ])[0]
+    mount(ModuleFormTab, {
+      props: { tab: roTab, rootName: 'ifm', device: '10.0.0.1' },
+      global: { plugins: [pinia, ElementPlus] },
+    })
+    await flushPromises()
+    expect(vi.mocked(getConfig).mock.calls.at(-1)![3]).toBe(true)
+  })
+
+  it('可编辑 Tab 仍走配置通道：includeState 不置位', async () => {
+    mountTab()
+    await flushPromises()
+    expect(vi.mocked(getConfig).mock.calls.at(-1)![3]).toBeFalsy()
+  })
 })
 
 describe('ModuleFormTab · dynamicDefault 空值语义（FE-15）', () => {

@@ -306,6 +306,25 @@ describe('ModuleListTab · 只读列表 Tab（FE-14）', () => {
     const headers = w.findAll('.el-table__header th .cell').map((n) => n.text().trim())
     expect(headers).toContain('操作')
   })
+
+  // 真机回归：config false 子树不存在于 running 配置 schema，<get-config> 会被
+  // 华为真机以 unknown-element 拒绝（devm physical-entitys/schedule-reboot 实测）。
+  // 只读 Tab 必须走 <get> 状态通道（include_state=true）。
+  it('只读 Tab 取数走状态通道：getConfig 第 4 参 includeState=true', async () => {
+    vi.mocked(getConfig).mockResolvedValue({ data: { data: { data: { 'remote-interface': [] } } } } as any)
+    mount(ModuleListTab, {
+      props: { tab: roTab, rootName: 'ifm', device: '10.0.0.1' },
+      global: { plugins: [createPinia(), ElementPlus] },
+    })
+    await flushPromises()
+    expect(vi.mocked(getConfig).mock.calls.at(-1)![3]).toBe(true)
+  })
+
+  it('可编辑 Tab 仍走配置通道：includeState 不置位', async () => {
+    mountTab()
+    await flushPromises()
+    expect(vi.mocked(getConfig).mock.calls.at(-1)![3]).toBeFalsy()
+  })
 })
 
 describe('ModuleListTab · 行删除入变更集（FE-16 攒批）', () => {
