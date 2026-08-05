@@ -15,9 +15,9 @@
 
 ## 3. config-api 快速失败与 force 逃生（BR-12，B3+B2）
 
-- [ ] 3.1 测试先行：已标记路径 GET 不打设备且 reason=node-unsupported；首次学习当次即结构化；force_refresh 绕过+成功清标记+失败保留；写路径/变更集命中拒绝
-- [ ] 3.2 实现 GET/POST /config 与变更集提交的门禁及错误语义
-- [ ] 3.3 B2 集成：sim 注入下全链路（读→占位错误→force 恢复）
+- [x] 3.1 测试先行：已标记路径 GET 不打设备且 reason=node-unsupported；首次学习当次即结构化；force_refresh 绕过+成功清标记+失败保留；写路径/变更集命中拒绝
+- [x] 3.2 实现 GET/POST /config 与变更集提交的门禁及错误语义
+- [x] 3.3 B2 集成：sim 注入下全链路（读→学习→关注入仍快速失败→force 恢复）
 
 ## 4. schema 透出（CN-05/CN-06，B3）
 

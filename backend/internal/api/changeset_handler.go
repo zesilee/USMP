@@ -28,6 +28,8 @@ type ChangesetHandler struct {
 	// push 执行 candidate 两阶段原子下发（生产为 intent.TxCoordinator，
 	// 可注入测试）。
 	push intent.Pusher
+	// support 节点级不支持集视图（BR-12 写门禁，与 ConfigHandler 同口径）。
+	support func(ip string) nodeSupportView
 }
 
 // NewChangesetHandler 构造变更集 handler：设备读闭包与 ConfigHandler 同实现，
@@ -38,6 +40,7 @@ func NewChangesetHandler(mgr manager.Manager) *ChangesetHandler {
 		manager: mgr,
 		fetch:   cfg.fetch,
 		push:    intent.NewTxCoordinator(mgr.GetClientPool(), mgr.GetDeviceStore(), 0),
+		support: cfg.support,
 	}
 }
 
@@ -418,6 +421,17 @@ func (h *ChangesetHandler) Commit(c *gin.Context) {
 	if len(owners) > 0 && !force {
 		rejectOwnedPath(c, owners)
 		return
+	}
+
+	// 节点不支持写门禁（BR-12）：2PC 全有全无，任一条目命中即整体拒绝且不打
+	// 设备（恢复通道=GET force_refresh 重试成功清标记）。
+	if view := h.support(req.Device); view != nil {
+		for _, pe := range entries {
+			if view.IsUnsupportedPath(pe.req.Path) {
+				rejectNodeUnsupported(c, pe.req.Path)
+				return
+			}
+		}
 	}
 
 	frags, err := changesetFragments(req.Device, entries)
