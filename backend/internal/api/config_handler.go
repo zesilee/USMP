@@ -46,6 +46,41 @@ type nodeSupportView interface {
 	IsUnsupportedPath(string) bool
 	MarkUnsupportedPath(string)
 	ClearUnsupportedPath(string)
+	UnsupportedPathsUnder(string) []string
+}
+
+// unsupportedTabsFor 该设备在模块根下已学习的不支持子路径，折算为相对模块根
+// 的首段局部名（CN-05，前端 Tab 预标记用）。无连接/无学习返回 nil（键省略）。
+func unsupportedTabsFor(mgr manager.Manager, deviceID, rootName string) []string {
+	view := supportViewFromPool(mgr, deviceID)
+	if view == nil {
+		return nil
+	}
+	prefix := rootName + ":" + rootName
+	seen := map[string]bool{}
+	var out []string
+	for _, p := range view.UnsupportedPathsUnder(prefix) {
+		rest := strings.TrimPrefix(strings.TrimPrefix(p, prefix), "/")
+		if rest == "" {
+			continue
+		}
+		seg := rest
+		if i := strings.IndexByte(seg, '/'); i >= 0 {
+			seg = seg[:i]
+		}
+		if i := strings.IndexByte(seg, '['); i >= 0 {
+			seg = seg[:i]
+		}
+		if i := strings.LastIndexByte(seg, ':'); i >= 0 {
+			seg = seg[i+1:]
+		}
+		if seg != "" && !seen[seg] {
+			seen[seg] = true
+			out = append(out, seg)
+		}
+	}
+	sort.Strings(out)
+	return out
 }
 
 // reasonNodeUnsupported BR-12 结构化错误标识：设备软件版本无此节点。

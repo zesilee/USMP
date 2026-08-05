@@ -47,6 +47,8 @@ func (s *Server) setupRoutes() {
 			deviceGroup.POST("", deviceHandler.AddDevice)
 			deviceGroup.DELETE("/:ip", deviceHandler.RemoveDevice)
 			deviceGroup.GET("/:ip/status", deviceHandler.GetStatus)
+			// hello capabilities 原文（CN-06：诊断 + deviations 侦察）
+			deviceGroup.GET("/:ip/capabilities", deviceHandler.GetCapabilities)
 			// Per-device reconcile outcome (desired↔actual convergence)
 			deviceGroup.GET("/:ip/reconcile", reconcileHandler.GetDeviceReconcile)
 		}

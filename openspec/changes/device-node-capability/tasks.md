@@ -21,9 +21,9 @@
 
 ## 4. schema 透出（CN-05/CN-06，B3）
 
-- [ ] 4.1 测试先行：`?device=` 响应附 unsupported（相对模块根首段）、空集省略键、无参数契约不变、未注册 404
-- [ ] 4.2 实现 yang_handler 透出；重新生成前端契约（契约漂移门禁）
-- [ ] 4.3 测试先行 + 实现：`GET /devices/:ip/capabilities` hello 原文透出（在线原文数组/未注册 404/离线空列表+negotiated:false）
+- [x] 4.1 测试先行：`?device=` 响应附 unsupported（相对模块根首段）、空集省略键、无参数契约不变、未注册 404
+- [x] 4.2 实现 yang_handler 透出；重新生成前端契约（契约漂移门禁）
+- [x] 4.3 测试先行 + 实现：`GET /devices/:ip/capabilities` hello 原文透出（在线原文数组/未注册 404/离线空列表+negotiated:false）
 
 ## 5. 前端占位降级态（FE-24，F1+F2）
 

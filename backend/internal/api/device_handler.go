@@ -343,6 +343,37 @@ func (h *DeviceHandler) RemoveDevice(c *gin.Context) {
 // @Success  200 {object} Response{data=DeviceConnStatus} "运行与连接状态"
 // @Failure  404 {object} Response "设备不存在"
 // @Router   /devices/{ip}/status [get]
+// DeviceCapabilitiesData 是 GET /devices/:ip/capabilities 的负载（CN-06）：
+// hello capabilities 原文（零加工），供诊断与 deviations 侦察（二期捷径评估）。
+type DeviceCapabilitiesData struct {
+	Capabilities []string `json:"capabilities"`
+	Negotiated   bool     `json:"negotiated"`
+}
+
+// GetCapabilities 透出设备 hello capabilities 原文（CN-06）。
+//
+// @Summary  查询设备 hello capabilities 原文
+// @Tags     devices
+// @Produce  json
+// @Param    ip path string true "设备 IP"
+// @Success  200 {object} Response{data=DeviceCapabilitiesData} "capabilities 原文；离线为空列表+negotiated:false"
+// @Failure  404 {object} Response "设备未注册"
+// @Router   /devices/{ip}/capabilities [get]
+func (h *DeviceHandler) GetCapabilities(c *gin.Context) {
+	ip := c.Param("ip")
+	info, ok := h.manager.GetDeviceStore().Get(ip)
+	if !ok {
+		Error(c, 404, "device not registered: "+ip)
+		return
+	}
+	caps, negotiated := helloCapabilities(h.manager, info)
+	if caps == nil {
+		caps = []string{} // 离线降级：空列表 + negotiated:false，不 5xx（R08）
+	}
+	Success(c, DeviceCapabilitiesData{Capabilities: caps, Negotiated: negotiated},
+		"Device capabilities retrieved")
+}
+
 func (h *DeviceHandler) GetStatus(c *gin.Context) {
 	ip := c.Param("ip")
 

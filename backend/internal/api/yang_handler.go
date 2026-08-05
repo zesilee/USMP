@@ -105,6 +105,9 @@ type YangSchema struct {
 	ListCols []FieldDef `json:"listCols,omitempty"`
 	// RPCs 是该模块的 rpc（RPC-02）：与配置节点平级，input 复用 FieldDef 渲染。
 	RPCs []RPCSchema `json:"rpcs,omitempty"`
+	// Unsupported 该设备已学习的不支持子路径（相对模块根首段名，CN-05）：仅
+	// ?device= 形态携带，空集省略；前端据此预标记占位 Tab（FE-24）。
+	Unsupported []string `json:"unsupported,omitempty"`
 }
 
 // RPCSchema 是一个 rpc 的呈现契约（RPC-02/04）：名称、高危标记、input 字段树。
@@ -191,6 +194,12 @@ type NegotiatedModules struct {
 // deviceCapabilities returns the device's NETCONF hello capabilities via the
 // shared ClientPool（连接即缓存：能力随连接生命周期，重连自动刷新，CN-01）。
 func (h *YangHandler) deviceCapabilities(info client.DeviceConnectionInfo) ([]string, bool) {
+	return helloCapabilities(h.manager, info)
+}
+
+// helloCapabilities 包级复用（ListModules 协商 / GetCapabilities 原文透出，
+// CN-02/CN-06 同口径）。
+func helloCapabilities(mgr manager.Manager, info client.DeviceConnectionInfo) ([]string, bool) {
 	if info.Port == 0 {
 		info.Port = 830
 	}
@@ -198,7 +207,7 @@ func (h *YangHandler) deviceCapabilities(info client.DeviceConnectionInfo) ([]st
 		// 探测型建连：不可达设备不得拖死 API（对齐 probeOnline）。
 		info.Timeout = 3 * time.Second
 	}
-	cl, err := h.manager.GetClientPool().Get(info)
+	cl, err := mgr.GetClientPool().Get(info)
 	if err != nil || cl == nil {
 		return nil, false
 	}
@@ -246,11 +255,22 @@ func (h *YangHandler) GetSchema(c *gin.Context) {
 
 	if mod, ok := h.manager.GetSchema().Module(module); ok {
 		// ?form=nested 返回嵌套树 schema（保留 list-in-list 结构，如 VLAN member-ports）
+		var sch YangSchema
 		if c.Query("form") == "nested" {
-			Success(c, buildYangSchemaNested(mod), "Schema retrieved successfully")
-			return
+			sch = buildYangSchemaNested(mod)
+		} else {
+			sch = buildYangSchema(mod)
 		}
-		Success(c, buildYangSchema(mod), "Schema retrieved successfully")
+		// CN-05：?device= 附该设备已学习的不支持子路径（相对模块根首段名）。
+		// 设备未注册沿用 CN-02 的 404 语义；无学习/无连接为空集省略键。
+		if deviceID := c.Query("device"); deviceID != "" {
+			if _, ok := h.manager.GetDeviceStore().Get(deviceID); !ok {
+				Error(c, 404, "device not registered: "+deviceID)
+				return
+			}
+			sch.Unsupported = unsupportedTabsFor(h.manager, deviceID, mod.Root().Name())
+		}
+		Success(c, sch, "Schema retrieved successfully")
 		return
 	}
 

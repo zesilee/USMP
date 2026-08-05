@@ -34,6 +34,15 @@ func (f *fakeSupportView) ClearUnsupportedPath(p string) {
 	f.cleared = append(f.cleared, p)
 	delete(f.set, p)
 }
+func (f *fakeSupportView) UnsupportedPathsUnder(prefix string) []string {
+	var out []string
+	for p := range f.set {
+		if p == prefix || strings.HasPrefix(p, prefix+"/") {
+			out = append(out, p)
+		}
+	}
+	return out
+}
 
 func newNodeUnsupportedHandler(view *fakeSupportView, fetch func(ctx context.Context, ip, path string) (interface{}, error)) *ConfigHandler {
 	h := NewConfigHandler(manager.New())
