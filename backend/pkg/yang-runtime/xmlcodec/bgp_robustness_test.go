@@ -91,7 +91,8 @@ func TestBgpDecode_MalformedXML(t *testing.T) {
 		{"截断未闭合", `<bgp xmlns="urn:huawei:yang:huawei-bgp"><base-process><enable>true`},
 		{"标签错配", `<bgp><base-process><enable>true</as></base-process></bgp>`},
 		{"叶内非法嵌套", `<bgp><base-process><enable><x>1</x></enable></base-process></bgp>`},
-		{"非数值到 uint 叶", `<bgp><base-process><as-path-limit>notnum</as-path-limit></base-process></bgp>`},
+		// 「非数值到 uint 叶」已迁出：值级错误改叶级容错（跳过该叶，见
+		// TestDecodeToleratesUnknownLeafValues）——真机新款取值不得毒死整树。
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {

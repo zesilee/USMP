@@ -5,6 +5,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
+	"log"
 	"reflect"
 	"strconv"
 
@@ -166,7 +167,11 @@ func decodeField(dec *xml.Decoder, start xml.StartElement, fv reflect.Value) err
 			fv.SetInt(n)
 			return nil
 		}
-		return fmt.Errorf("leaf %s: unknown enum value %q", tag, text)
+		// 叶级容错（R08，真机回归）：设备回读值超出本地模型（新款设备枚举）时
+		// 跳过该叶继续——一个叶不得毒死整棵树（1MB 回读整体降级=界面零行）。
+		// 展示哲学与 EmitJSON SkipValidation 同源；写路径不经此解码不受影响。
+		log.Printf("xmlcodec: leaf %s: 未知枚举值 %q，已跳过（设备值超出本地模型）", tag, text)
+		return nil
 	}
 	switch fv.Kind() {
 	case reflect.Ptr:
@@ -182,7 +187,8 @@ func decodeField(dec *xml.Decoder, start xml.StartElement, fv reflect.Value) err
 		}
 		out := reflect.New(fv.Type().Elem())
 		if err := parseScalar(out.Elem(), text); err != nil {
-			return fmt.Errorf("leaf %s: %w", tag, err)
+			log.Printf("xmlcodec: leaf %s: 值 %q 解析失败，已跳过（叶级容错）: %v", tag, text, err)
+			return nil
 		}
 		fv.Set(out)
 		return nil
@@ -210,7 +216,8 @@ func decodeField(dec *xml.Decoder, start xml.StartElement, fv reflect.Value) err
 		}
 		item := reflect.New(fv.Type().Elem())
 		if err := parseScalar(item.Elem(), text); err != nil {
-			return fmt.Errorf("leaf-list %s: %w", tag, err)
+			log.Printf("xmlcodec: leaf-list %s: 值 %q 解析失败，已跳过（叶级容错）: %v", tag, text, err)
+			return nil
 		}
 		fv.Set(reflect.Append(fv, item.Elem()))
 		return nil

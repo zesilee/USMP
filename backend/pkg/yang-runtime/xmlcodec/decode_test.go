@@ -2,7 +2,6 @@ package xmlcodec
 
 import (
 	"reflect"
-	"strings"
 	"testing"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
@@ -123,12 +122,20 @@ func TestDecodeEdgeCases(t *testing.T) {
 			t.Errorf("admin-status=up 未解码为枚举常量: %#v", got.Vlan[1])
 		}
 	})
-	t.Run("unknown enum value errors", func(t *testing.T) {
-		// 真正非法的枚举值（非名非整数）SHALL 报错命名该叶（R08，不静默）。
+	t.Run("unknown enum value tolerated", func(t *testing.T) {
+		// 语义升级（真机回归）：非名非整数的枚举值=设备取值超出本地模型，
+		// 叶级容错跳过（留日志），条目与后续叶不受影响——不再整树报错。
 		got := &huawei.HuaweiVlan_Vlan_Vlans{}
-		err := Decode(vlanSpec(), []byte(`<vlans><vlan><id>1</id><admin-status>bogus-xyz</admin-status></vlan></vlans>`), got)
-		if err == nil || !strings.Contains(err.Error(), "admin-status") {
-			t.Errorf("want parse error naming the leaf, got %v", err)
+		err := Decode(vlanSpec(), []byte(`<vlans><vlan><id>1</id><admin-status>bogus-xyz</admin-status><name>n1</name></vlan></vlans>`), got)
+		if err != nil {
+			t.Fatalf("叶级异常不得整树失败: %v", err)
+		}
+		v := got.Vlan[1]
+		if v == nil || v.Name == nil || *v.Name != "n1" {
+			t.Errorf("异常叶之后的正常叶应继续解析: %#v", v)
+		}
+		if v != nil && v.AdminStatus != 0 {
+			t.Errorf("未知枚举叶应保持未设置")
 		}
 	})
 	t.Run("nil destination", func(t *testing.T) {
@@ -171,5 +178,51 @@ func TestDecodeConcurrent(t *testing.T) {
 		if err := <-done; err != nil {
 			t.Fatal(err)
 		}
+	}
+}
+
+// 真机回归（T07，CE9866 界面接口全空终局）：设备回读值超出本地模型时（新款
+// 设备的枚举值/异形标量），叶级解析失败必须**跳过该叶继续**，不得毒死整棵
+// 树——1MB 回读因一个叶失败整体降级原始透传，前端零行可渲染且无任何日志。
+// 展示路径哲学与 EmitJSON SkipValidation 同源（R08）；结构性 XML 错误仍致命。
+func TestDecodeToleratesUnknownLeafValues(t *testing.T) {
+	spec := ifmSpec()
+	xmlIn := `<ifm xmlns="urn:huawei:yang:huawei-ifm"><interfaces>` +
+		`<interface><name>GE0/0/1</name><class>1</class><mtu>1500</mtu></interface>` +
+		// 未知枚举值（本地模型没有的新款取值）+ 非法数字标量
+		`<interface><name>XGE9/9/9</name><class>enum-from-newer-device</class><mtu>not-a-number</mtu><description>ok</description></interface>` +
+		`</interfaces></ifm>`
+	v := &huawei.HuaweiIfm_Ifm_Interfaces{}
+	if err := Decode(spec, []byte(xmlIn), v); err != nil {
+		t.Fatalf("叶级异常不得整树失败: %v", err)
+	}
+	if len(v.Interface) != 2 {
+		t.Fatalf("两个接口都应解出，got %d", len(v.Interface))
+	}
+	good := v.Interface["GE0/0/1"]
+	if good == nil || good.Mtu == nil || *good.Mtu != 1500 {
+		t.Errorf("正常接口不受影响")
+	}
+	bad := v.Interface["XGE9/9/9"]
+	if bad == nil {
+		t.Fatal("异常叶所在接口仍应存在")
+	}
+	if bad.Description == nil || *bad.Description != "ok" {
+		t.Errorf("异常叶之后的正常叶应继续解析")
+	}
+	if bad.Mtu != nil {
+		t.Errorf("非法标量叶应保持未设置，got %v", *bad.Mtu)
+	}
+	if bad.Class != 0 {
+		t.Errorf("未知枚举叶应保持未设置，got %v", bad.Class)
+	}
+}
+
+// 结构性错误（残缺 XML）仍必须致命——容错只限叶级取值。
+func TestDecodeStructuralErrorStillFatal(t *testing.T) {
+	spec := ifmSpec()
+	v := &huawei.HuaweiIfm_Ifm_Interfaces{}
+	if err := Decode(spec, []byte(`<ifm><interfaces><interface><name>x`), v); err == nil {
+		t.Fatal("残缺 XML 应报错")
 	}
 }
