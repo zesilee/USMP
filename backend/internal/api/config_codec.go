@@ -28,6 +28,7 @@ func decodeRunningConfig(path string, data interface{}) interface{} {
 
 	// 解码器按驱动描述符注册表查表（DR-03）——不再散落路径字符串匹配。
 	var parsed ygot.GoStruct
+	var anchor string
 	if d, ok := driver.DecoderFor(path); ok {
 		p, err := d.DecodeXML(raw)
 		if err != nil {
@@ -36,6 +37,9 @@ func decodeRunningConfig(path string, data interface{}) interface{} {
 			log.Printf("decodeRunningConfig: %s 解码失败，降级原始透传（前端将无行可渲染）: %v", path, err)
 		} else {
 			parsed = p
+			// DecodeXML 的解码根即 EncodeAnchor 容器（手写块与 registerPlain 均如此
+			// 构造），剥层以它为基准把 emit 结果对齐到请求 path。
+			anchor = d.EncodeAnchor
 		}
 	}
 	if parsed == nil {
@@ -52,7 +56,85 @@ func decodeRunningConfig(path string, data interface{}) interface{} {
 	if err := json.Unmarshal([]byte(js), &out); err != nil {
 		return data
 	}
-	return out
+	return peelToPath(out, anchor, path)
+}
+
+// peelToPath 把「以解码根（anchor）为根」的 RFC7951 map 剥到「以请求 path 为根」的
+// 子树——批量接入模块（registerPlain）的解码根恒为模块根容器，读子路径（list Tab、
+// 表单 Tab、leafref 拉取）若不剥层，前端会把容器键当数据行渲染（真机 devm ports
+// 「一行且位置=port」症状）。规则：
+//   - 段对齐按局部名（去模块前缀）——ni 存在 /ni: 与 /network-instance: 双前缀口径，
+//     前端谓词段（port[...]）也不带前缀，按前缀比对会误判；
+//   - 谓词段（含 '['）停剥：单行状态读（include_state）契约是返回谓词段的父容器
+//     子树（前端 sub[listKey] 取行），且 RFC7951 map 无法按谓词索引数组；
+//   - 中途键缺失（设备该子树无数据）→ 空 map（前端零行）；
+//   - 中途值非 map（形状意外）→ 返回已剥到的层（R08 降级，不伪造也不整树透出）。
+//
+// 前 skip 段只数段数、不校验与 anchor 局部名对齐——对齐由注册纪律保证
+// （MatchDecode 前缀与 EncodeAnchor 同根，见 registerPlain / huawei.go 手写块）；
+// MatchDecode 宽于 anchor 的路径（如 /ifm:ifm/ifm:global）本就解不出数据，
+// 剥成空 map 是比旧「整树透出错误数据」更安全的降级。
+func peelToPath(m map[string]interface{}, anchor, path string) interface{} {
+	segs := pathLocals(path)
+	skip := len(pathLocals(anchor))
+	if anchor == "" || len(segs) < skip {
+		return m
+	}
+	var cur interface{} = m
+	for _, seg := range segs[skip:] {
+		if strings.Contains(seg, "[") {
+			break
+		}
+		node, ok := cur.(map[string]interface{})
+		if !ok {
+			break
+		}
+		child, ok := lookupLocal(node, seg)
+		if !ok {
+			return map[string]interface{}{}
+		}
+		cur = child
+	}
+	return cur
+}
+
+// pathLocals 把配置路径拆成局部名段（去模块前缀，保留谓词部分）。
+// 已知局限：按 '/' 切分不感知引号，谓词值含 '/'（如 position='MEth0/0/0'）会把
+// 谓词错切成多段——当前无害，因 peelToPath 遇首个含 '[' 的段即停剥、错切尾段
+// 永不被访问。若将来改停剥逻辑（如支持按谓词索引数组），须先把此函数改成
+// 引号感知切分。
+func pathLocals(path string) []string {
+	raw := strings.Split(strings.Trim(path, "/"), "/")
+	segs := make([]string, 0, len(raw))
+	for _, s := range raw {
+		if s == "" {
+			continue
+		}
+		// 只剥谓词前的模块前缀（谓词内可能含 ':'，如命名空间限定的 key）。
+		name, pred := s, ""
+		if i := strings.Index(s, "["); i >= 0 {
+			name, pred = s[:i], s[i:]
+		}
+		if j := strings.Index(name, ":"); j >= 0 {
+			name = name[j+1:]
+		}
+		segs = append(segs, name+pred)
+	}
+	return segs
+}
+
+// lookupLocal 按局部名取子节点：RFC7951 emit 在跨模块边界（augment 子树）会带
+// "module:name" 前缀键，同模块子节点为裸名，两种形态都须命中。
+func lookupLocal(node map[string]interface{}, local string) (interface{}, bool) {
+	if v, ok := node[local]; ok {
+		return v, true
+	}
+	for k, v := range node {
+		if i := strings.Index(k, ":"); i >= 0 && k[i+1:] == local {
+			return v, true
+		}
+	}
+	return nil, false
 }
 
 // convertConfig decodes request data into a typed desired config via the single
