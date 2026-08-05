@@ -20,3 +20,5 @@ metadata:
 **双斜杠丢 namespace 坑（wire 抓包实证，已修）**：路径前导双斜杠（`//ifm:ifm/…`，URL 手拼常见）曾让注册表 HasPrefix 落空→filter 丢 xmlns→严格真机回空；constructSubtreeFilter 已做单斜杠规范化。**排障心法**：sim 的每一处宽容（namespace 通配/无视过滤器/空 filter 当全量）都是真机 bug 的掩体，修 bug 时同步收严 sim。
 
 **解码毒杀坑（真机终局一环，已修）**：设备取值超出本地 YANG 模型（CE9866 值 vs CE6866P 包）时，xmlcodec 单叶解码失败曾整树报错→decodeRunningConfig 静默透传原始字节→界面零行且无日志。已改**叶级容错**（跳过留日志，结构错误仍致命）+ 解码失败留痕。排障链完整口诀：抓包开关看收发→chunk 进度分快慢→解码日志看毒叶。
+
+**真机验证闭环（2026-08-05）**：CE9866 真机联调两天九关全通（PR#267-#278），chunked 1MB/34 块重组实证、界面接口/VLAN 列表正常——netconf-client-selfdev 任务 Wave 4 实质完成、已标 completed。设备模型代差（CE9866 值超出 CE6866P 包，如 gratuitous-send=accord-global）由叶级容错兜底、日志留痕；要在界面配置这类字段时按日志补模型即可。
