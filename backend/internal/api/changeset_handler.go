@@ -265,7 +265,7 @@ func (h *ChangesetHandler) baseline(device string, pe previewEntry) (interface{}
 			return conv, "cache"
 		}
 	}
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	if raw, err := h.fetch(ctx, device, pe.anchor); err == nil {
 		if conv := h.convertBaseline(pe.anchor, raw); conv != nil {
