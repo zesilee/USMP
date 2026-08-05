@@ -375,4 +375,25 @@ describe('ModuleFormTab · 设备不支持占位态（FE-24）', () => {
     await flushPromises()
     expect(w.find('[data-test="node-unsupported"]').exists()).toBe(true)
   })
+
+  // 页面回同步契约：ModuleConsolePage 靠此事件增删 unsupportedTabs——否则重试
+  // 成功后 consoleEpoch 重挂会带陈旧 :unsupported=true 重生、又回占位态。
+  it('运行中学习 emit unsupported-change true；重试成功 emit false', async () => {
+    vi.mocked(getConfig).mockResolvedValueOnce(unsupportedEnvelope as any)
+    const w = mountTab()
+    await flushPromises()
+    expect(w.emitted('unsupported-change')?.at(-1)).toEqual([true])
+
+    // 重试成功（默认 mock 回空配置）→ 恢复并回报 false
+    await w.find('[data-test="node-unsupported-retry"]').trigger('click')
+    await flushPromises()
+    expect(w.emitted('unsupported-change')?.at(-1)).toEqual([false])
+  })
+
+  it('普通错误/正常加载不 emit（事件只在不支持状态翻转时发）', async () => {
+    vi.mocked(getConfig).mockRejectedValueOnce({ response: { data: { message: '设备离线' } } })
+    const w = mountTab()
+    await flushPromises()
+    expect(w.emitted('unsupported-change')).toBeUndefined()
+  })
 })

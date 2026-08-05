@@ -175,6 +175,10 @@ watch(
 // node-unsupported 即时转态。重试（load(true)）走 force_refresh 逃生通道，
 // 后端成功即自动清标记，本地同步恢复正常渲染。
 const nodeUnsupported = ref(!!props.unsupported)
+// 回同步契约：本地翻转（运行中学习/重试恢复）回报页面级 unsupportedTabs——
+// 否则 Tab 头不淡化，且 consoleEpoch 重挂后又收到陈旧 prop 回退占位态。
+const emit = defineEmits<{ (e: 'unsupported-change', unsupported: boolean): void }>()
+watch(nodeUnsupported, (v) => emit('unsupported-change', v))
 watch(() => props.unsupported, (v) => {
   const was = nodeUnsupported.value
   nodeUnsupported.value = !!v

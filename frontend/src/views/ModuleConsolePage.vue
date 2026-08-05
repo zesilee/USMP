@@ -71,8 +71,8 @@
           >{{ tab.label }}</span>
         </template>
         <!-- consoleEpoch：重置/提交成功后整体重挂 → 表单/列表回设备实际态并清标记 -->
-        <ModuleListTab v-if="tab.kind === 'list'" :key="consoleEpoch" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" :unsupported="unsupportedTabs.includes(tab.name)" />
-        <ModuleFormTab v-else :key="consoleEpoch" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" :unsupported="unsupportedTabs.includes(tab.name)" />
+        <ModuleListTab v-if="tab.kind === 'list'" :key="consoleEpoch" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" :unsupported="unsupportedTabs.includes(tab.name)" @unsupported-change="onTabUnsupportedChange(tab.name, $event)" />
+        <ModuleFormTab v-else :key="consoleEpoch" :tab="tab" :root-name="rootName" :device="store.selectedDeviceIp" :unsupported="unsupportedTabs.includes(tab.name)" @unsupported-change="onTabUnsupportedChange(tab.name, $event)" />
       </el-tab-pane>
     </el-tabs>
     <el-empty v-else-if="!schemaError" :description="t('console.schemaLoading')" />
@@ -225,6 +225,14 @@ async function relabelFields() {
 // 设备不支持预标记（FE-24/CN-05）：schema ?device= 响应附 unsupported（相对模块根
 // 首段名 = Tab name）；空集省略键。命中的 Tab 直接占位、不发取数请求。
 const unsupportedTabs = ref<string[]>([])
+
+// 运行中学习回同步（FE-24）：组件本地转占位/重试恢复时增删预标记集——保证
+// Tab 头淡化即时呈现，且 consoleEpoch 重挂后组件拿到的 prop 与实态一致。
+function onTabUnsupportedChange(name: string, unsupported: boolean) {
+  const has = unsupportedTabs.value.includes(name)
+  if (unsupported && !has) unsupportedTabs.value = [...unsupportedTabs.value, name]
+  else if (!unsupported && has) unsupportedTabs.value = unsupportedTabs.value.filter((n) => n !== name)
+}
 
 async function loadSchema() {
   schemaError.value = ''
