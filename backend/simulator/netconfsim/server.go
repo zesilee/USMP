@@ -327,6 +327,9 @@ func (s *sshServer) handleGet(msg, msgID string) string {
 		// 空 filter=什么都不选（RFC6241 subtree 语义，与真机对齐）。
 		return fmt.Sprintf(`<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="%s"><data/></rpc-reply>`, msgID)
 	}
+	if _, chain, hit := matchUnknownElement(s.scenario.UnknownElementPaths, inner); hit {
+		return unknownElementReply(msgID, "get", chain)
+	}
 	data, err := s.store.GetFiltered([]byte(inner))
 	if err != nil {
 		return errorReply(msgID, err.Error())
@@ -372,6 +375,9 @@ func (s *sshServer) handleGetConfig(msg, msgID string) string {
 	inner, present := extractFilter(msg)
 	if present && inner == "" {
 		return fmt.Sprintf(`<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="%s"><data/></rpc-reply>`, msgID)
+	}
+	if _, chain, hit := matchUnknownElement(s.scenario.UnknownElementPaths, inner); hit {
+		return unknownElementReply(msgID, "get-config", chain)
 	}
 
 	var config []byte
@@ -448,6 +454,9 @@ func (s *sshServer) handleEditConfig(msg, msgID string) string {
 	}
 	configContent = strings.TrimSpace(configContent)
 	log.Printf("handleEditConfig: extracted config: %.500s", configContent)
+	if _, chain, hit := matchUnknownElement(s.scenario.UnknownElementPaths, configContent); hit {
+		return unknownElementReply(msgID, "edit-config", chain)
+	}
 
 	// Per-operation edit-config 语义（RFC 6241 §7.2，treeDatastore.EditConfig）：
 	// merge 默认 + 显式 operation（create/delete/remove/replace）。这是 editconfig.go

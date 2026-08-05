@@ -10,6 +10,10 @@ type ScenarioConfig struct {
 	// hello and rejects <commit><confirmed/> RPCs, for capability-missing
 	// negative-path tests (NS-07).
 	DisableConfirmedCommit bool
+	// UnknownElementPaths injects Huawei-style unknown-element rejections (CN-04
+	// 地基): get/get-config/edit-config whose body contains one of these
+	// local-name chains (e.g. "devm/cards") is refused with error-info-code 313.
+	UnknownElementPaths []string
 }
 
 // NewScenarioConfig creates a new scenario with defaults (no errors).

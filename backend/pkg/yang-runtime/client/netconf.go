@@ -29,6 +29,9 @@ type NETCONFClient struct {
 	info      DeviceConnectionInfo
 	backend   ncDriver
 	connected bool
+	// nodeSupport 节点级不支持集（CN-04）：自带锁，独立于 mu（避免与连接状态
+	// 锁交叉）；connect() 清空（重连重学）。
+	nodeSupport nodeSupport
 }
 
 // NewNETCONFClient creates a new NETCONF client and connects immediately
@@ -64,6 +67,8 @@ func (c *NETCONFClient) connect() error {
 	}
 	c.backend = backend
 	c.connected = true
+	// 重连清空不支持集（CN-04）：设备可能已升级，学习结果随连接生命周期。
+	c.resetNodeSupport()
 	return nil
 }
 
@@ -171,6 +176,17 @@ func (c *NETCONFClient) Get(ctx context.Context, path string, opts ...GetOption)
 		return &GetResult{
 			Error: err,
 		}, err
+	}
+
+	// 业务级 rpc-error（设备拒绝，会话仍可用）必须透出为错误：曾只有 Set 检查
+	// Failed，Get 把整段 rpc-error XML 当数据成功返回——真机 unknown-element
+	// （设备版本无此节点，CN-04）因此被解码层吞成空/乱数据而非错误。
+	if resp.Failed != nil {
+		return &GetResult{
+			Path:      path,
+			Timestamp: time.Now(),
+			Error:     resp.Failed,
+		}, resp.Failed
 	}
 
 	if len(resp.Result) == 0 {
