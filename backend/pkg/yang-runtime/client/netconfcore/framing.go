@@ -143,6 +143,9 @@ func (c *chunkedReader) ReadFrame() ([]byte, error) {
 			if first && errors.Is(err, io.EOF) {
 				return nil, io.EOF
 			}
+			// chunk 级观测（真机排障）：读帧失败时打出已累计字节——
+			// 「设备慢」与「解析卡死在半帧」在完整帧日志里都隐形，靠这行区分。
+			wireLogf("chunked read error after partial %dB: %v", buf.Len(), err)
 			return nil, err
 		}
 		first = false
@@ -156,8 +159,10 @@ func (c *chunkedReader) ReadFrame() ([]byte, error) {
 			return nil, fmt.Errorf("netconfcore: 帧累计超上限 %d 字节，切断（防异常设备）", maxFrameSize)
 		}
 		if _, err := io.CopyN(&buf, c.r, int64(size)); err != nil {
+			wireLogf("chunked read error after partial %dB: chunk 数据不足", buf.Len())
 			return nil, fmt.Errorf("netconfcore: chunk 数据不足 %d 字节: %w", size, io.ErrUnexpectedEOF)
 		}
+		wireLogf("chunk %dB (total %dB)", size, buf.Len())
 	}
 }
 

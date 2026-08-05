@@ -66,3 +66,50 @@ func TestWireDebugTruncatesLargePayload(t *testing.T) {
 		t.Errorf("截断标记缺失")
 	}
 }
+
+// chunk 级观测（真机排障二段）：完整帧迟迟收不齐时（设备慢 vs 解析卡死无法
+// 区分），开关开启下 chunked 读端须逐 chunk 打点（尺寸+累计），读帧失败时打出
+// 已累计字节数——没有这层，卡在半帧的会话在日志里完全隐形。
+func TestWireDebugLogsChunkProgress(t *testing.T) {
+	t.Setenv("USMP_NETCONF_WIRE_DEBUG", "1")
+	var buf bytes.Buffer
+	prev := log.Writer()
+	log.SetOutput(&buf)
+	defer log.SetOutput(prev)
+
+	// 两个 chunk（5B + 3B）+ 正常结束。
+	r := NewChunkedReader(strings.NewReader("\n#5\nhello\n#3\nxyz\n##\n"))
+	frame, err := r.ReadFrame()
+	if err != nil || string(frame) != "helloxyz" {
+		t.Fatalf("ReadFrame: %q, %v", frame, err)
+	}
+	out := buf.String()
+	if !strings.Contains(out, "chunk 5B") || !strings.Contains(out, "chunk 3B") {
+		t.Errorf("chunk 进度日志缺失: %s", out)
+	}
+
+	// 断流半帧：错误路径须打出已累计字节。
+	buf.Reset()
+	r2 := NewChunkedReader(strings.NewReader("\n#5\nhel"))
+	if _, err := r2.ReadFrame(); err == nil {
+		t.Fatal("断流须报错")
+	}
+	if !strings.Contains(buf.String(), "partial") {
+		t.Errorf("断流路径缺已累计字节日志: %s", buf.String())
+	}
+}
+
+func TestWireDebugChunkSilentWhenOff(t *testing.T) {
+	t.Setenv("USMP_NETCONF_WIRE_DEBUG", "")
+	var buf bytes.Buffer
+	prev := log.Writer()
+	log.SetOutput(&buf)
+	defer log.SetOutput(prev)
+	r := NewChunkedReader(strings.NewReader("\n#5\nhello\n##\n"))
+	if _, err := r.ReadFrame(); err != nil {
+		t.Fatal(err)
+	}
+	if buf.Len() != 0 {
+		t.Errorf("开关关闭时 chunk 层不得输出: %s", buf.String())
+	}
+}
