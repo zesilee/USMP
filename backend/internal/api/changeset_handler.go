@@ -449,6 +449,17 @@ func (h *ChangesetHandler) Commit(c *gin.Context) {
 		return
 	}
 	if res.Err != nil {
+		// 写通道学习（CN-04）：设备拒绝可归因为某条目路径的 unknown-element 时
+		// 入集并结构化透出（下次同路径提交快速失败；2PC 已整体回退无半配）。
+		if view := h.support(req.Device); view != nil {
+			for _, pe := range entries {
+				if client.UnknownElementForPath(pe.req.Path, res.Err) {
+					view.MarkUnsupportedPath(pe.req.Path)
+					rejectNodeUnsupported(c, pe.req.Path)
+					return
+				}
+			}
+		}
 		// 整体回退已由 2PC 完成（candidate discard）；控制器侧零痕迹（R08/§9）。
 		Error(c, 502, "提交失败（设备已整体回退）: "+res.Err.Error())
 		return

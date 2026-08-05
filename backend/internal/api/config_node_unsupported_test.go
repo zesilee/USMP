@@ -11,6 +11,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/internal/intent"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client/netconfcore"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/stretchr/testify/assert"
@@ -209,6 +210,44 @@ func TestChangesetCommit_NodeUnsupported_Rejected(t *testing.T) {
 	assert.NotEqual(t, 0, code)
 	assert.Equal(t, "node-unsupported", data["reason"])
 	assert.Equal(t, 0, push.calls, "不得向设备下发")
+}
+
+// 快速失败子树语义（BR-12「落在其下」）：标记父路径后，后代谓词路径（如
+// 详情面板单行状态读）同样被拒。集合层子树匹配须用真实集合（零值可用），
+// 假视图的 exact-map 测不到。
+func TestGetConfig_NodeUnsupported_DescendantFastFail(t *testing.T) {
+	calls := 0
+	real := &client.NETCONFClient{}
+	real.MarkUnsupportedPath("vlan:vlan/vlan:vlans")
+	h := newNodeUnsupportedHandler(nil, func(ctx context.Context, ip, path string) (interface{}, error) {
+		calls++
+		return "data", nil
+	})
+	h.support = func(ip string) nodeSupportView { return real }
+
+	w := getConfigReqQS(h, "10.0.0.1", "/vlan:vlan/vlan:vlans/vlan:vlan[id='10']", "include_state=true")
+	code, _, data := decodeEnvelope(t, w)
+	assert.Equal(t, 0, calls, "后代路径同样不得打设备")
+	assert.NotEqual(t, 0, code)
+	assert.Equal(t, "node-unsupported", data["reason"])
+}
+
+// 写通道学习（CN-04）：2PC 下发返回可归因 unknown-element → 该条目路径入集、
+// 响应带 reason（下次同路径提交快速失败）。
+func TestChangesetCommit_NodeUnsupported_LearnsFromPushError(t *testing.T) {
+	push := &fakePusher{results: map[string]intent.TxResult{"10.0.0.1": {
+		Device: "10.0.0.1", Err: unknownElemErr("vlans"),
+	}}}
+	h, _ := newCommitHandlerForTest(push)
+	view := &fakeSupportView{set: map[string]bool{}}
+	h.support = func(ip string) nodeSupportView { return view }
+
+	body := `{"device":"10.0.0.1","entries":[{"op":"update","path":"/vlan:vlan/vlan:vlans","payload":{"vlan":[{"id":10}]}}]}`
+	w := commitReq(h, body, "")
+	code, _, data := decodeEnvelope(t, w)
+	assert.NotEqual(t, 0, code)
+	assert.Equal(t, "node-unsupported", data["reason"])
+	assert.Contains(t, view.marked, "/vlan:vlan/vlan:vlans")
 }
 
 // 写门禁：POST /config 命中不支持路径 → 拒绝、不入 desired、带 reason。

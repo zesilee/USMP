@@ -39,11 +39,24 @@ func (n *nodeSupport) unmark(path string) {
 	delete(n.paths, normalizeNodePath(path))
 }
 
+// has 命中判定含子树语义（BR-12「落在不支持路径下」）：path 等于某标记项，
+// 或是其按段边界的后代（标记 devm:cards 时 devm:cards/card[...] 同拒）。
 func (n *nodeSupport) has(path string) bool {
+	p := normalizeNodePath(path)
 	n.mu.RLock()
 	defer n.mu.RUnlock()
-	_, ok := n.paths[normalizeNodePath(path)]
-	return ok
+	if _, ok := n.paths[p]; ok {
+		return true
+	}
+	for i := len(p) - 1; i > 0; i-- {
+		if p[i] != '/' {
+			continue
+		}
+		if _, ok := n.paths[p[:i]]; ok {
+			return true
+		}
+	}
+	return false
 }
 
 // under returns marked paths that equal prefix or live below it（按段边界，

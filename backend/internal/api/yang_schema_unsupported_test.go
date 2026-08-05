@@ -3,10 +3,21 @@ package api
 import (
 	"net/http/httptest"
 	"testing"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 )
+
+// clientConnInfoUnreachable 指向不可达地址（TEST-NET-3，CN-06 离线降级用）。
+// 不能用 127.0.0.1：连接池按 info.IP 作键，会与 sim 的既有连接串键。
+func clientConnInfoUnreachable() client.DeviceConnectionInfo {
+	return client.DeviceConnectionInfo{
+		IP: "203.0.113.1", Port: 830, Protocol: client.ProtocolNETCONF, Timeout: 500 * time.Millisecond,
+	}
+}
 
 // CN-05/CN-06（tasks 4.1/4.3）：schema ?device= 透出已学习不支持子路径；
 // /devices/:ip/capabilities 透出 hello 原文。
@@ -122,4 +133,20 @@ func TestDeviceCapabilities_NegativePaths(t *testing.T) {
 	h.GetCapabilities(c)
 	code, _, _ := decodeEnvelope(t, w)
 	assert.Equal(t, 404, code)
+
+	// 已注册但建连失败（离线）→ 空列表 + negotiated:false，不 5xx（CN-06 降级）
+	assert.NoError(t, yh.manager.GetDeviceStore().Put("dead-dev", clientConnInfoUnreachable()))
+	w2 := httptest.NewRecorder()
+	c2, _ := gin.CreateTestContext(w2)
+	c2.Params = gin.Params{{Key: "ip", Value: "dead-dev"}}
+	c2.Request = httptest.NewRequest("GET", "/", nil)
+	h.GetCapabilities(c2)
+	var data struct {
+		Capabilities []string `json:"capabilities"`
+		Negotiated   bool     `json:"negotiated"`
+	}
+	decodeData(t, w2.Body.Bytes(), &data)
+	assert.False(t, data.Negotiated)
+	assert.NotNil(t, data.Capabilities)
+	assert.Empty(t, data.Capabilities)
 }

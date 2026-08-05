@@ -58,6 +58,9 @@ sim 新增 `SetUnknownElementPaths([]string)`（或等价注入）：get-config/
 ## Risks / Trade-offs
 
 - **sim 注入盲区（检视记录）**：sim 的无 filter 全量读提前返回，不受按路径注入约束——现有消费路径全带 filter 暂无实害；若后续链路出现全量读需回补。
+- **写通道学习边界（检视修订）**：同步下发通道（变更集 Commit 2PC）学习；SetConfig 异步声明式通道的 reconciler 推送错误不经 API，不学习（desired 只存在于用户已配路径，暴露面小；若将来高频出现，另在 reconciler 层接入）。
+- **命中语义（检视修订）**：IsUnsupportedPath 为按段边界的子树匹配——标记父路径后其后代（详情面板单行谓词读等）同拒，非仅 exact。
+- **模块根整体不支持（检视记录）**：学到模块根本身时 unsupported 折算为空（首段无从谈起），前端各 Tab 首次点开各学一次——可接受。
 - **归因面（检视记录）**：bad-element 与请求路径任意段名匹配即入集，配置体内与路径段重名的后代节点被拒时会标记整条路径——force 逃生+重连清空兜底，接受为残余风险。
 
 - **误学风险**：设备瞬时异常若恰以 unknown-element 形态返回会被误标——force_refresh 逃生 + 重连清空兜底；D1 归因保守进一步压低概率。
