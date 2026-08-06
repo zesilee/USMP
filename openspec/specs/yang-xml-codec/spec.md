@@ -3,9 +3,7 @@
 ## Purpose
 
 通用 NETCONF XML 编解码引擎（`pkg/yang-runtime/xmlcodec`）：任意 ygot GoStruct 的 encode / decode / 键式 delete 编码，数据来源仅 ygot 生成物（`path:` struct tag、内嵌 SchemaTree、`ΛListKeyMap()`）与驱动描述符登记的编解码数据（模块 namespace 为显式数据——内嵌 gzip schema 的 `Entry.Namespace()` 实测为空，无法派生）。新增 YANG 模块零 XML 代码，是 SND 声明式化（P5）的编解码承载层。由 change `snd-xml-codec` 引入（PR #136/#137/#138，2026-07-09）。
-
 ## Requirements
-
 ### Requirement: XC-01 通用 XML 编码（schema/tag 数据驱动）
 
 系统 SHALL 提供通用 NETCONF XML 编码器（`pkg/yang-runtime/xmlcodec`）：对任意 ygot GoStruct，元素名 SHALL 取自 ygot 生成的 `path:` struct tag。list 容器 SHALL 嵌套在其 YANG 模块顶层容器（如 `<ifm>`/`<vlan>`，祖先容器名从 schema `Entry.Parent` 链派生、止于合成 fake root）之内；模块 namespace SHALL 声明在最外层容器上、内层容器继承（对齐真机与模拟器种子 `DemoSeedConfig` 的嵌套结构——扁平根会在设备数据树里匹配不到既有嵌套条目）。编码 SHALL NOT 依赖任何 per-model 手写字段序列化或元素名字符串替换。编码 SHALL 复刻既有跳发语义：nil 指针叶不发、enum 零值（UNSET）不发、nil 嵌套容器不发、空 list 发自闭合 list 容器（仍包裹在模块容器内）；list 条目 key 叶 SHALL 为首元素（key 叶为 nil 时以 map key 回退）；文本内容 SHALL 做 XML 转义。编码 SHALL NOT 按 schema config-false 过滤（华为模型将在发字段标 config-false，过滤破坏行为等价）。遇到不支持的字段形态 SHALL 返回明确错误（R08，不静默丢字段、不 panic）。
@@ -32,7 +30,11 @@
 
 ### Requirement: XC-02 通用 XML 解码（回读全字段对称）
 
-系统 SHALL 提供通用 NETCONF XML 解码器：对 get-config 回读原文（无论包裹在 `<rpc-reply>`/`<data>`、模块顶层容器或裸容器、无论 namespace 前缀），SHALL 在 list 容器（root，如 `<vlans>`/`<interfaces>`）之内定位 list 条目元素并填充 ygot GoStruct（含 list map、嵌套 list、enum、指针叶）。锚定 list 容器 SHALL 消解「模块顶层容器名与条目名同名」的歧义（华为 `<vlan><vlans><vlan>` 外层模块容器与条目同名 `vlan`，裸扫条目名会误把外层容器当条目）。解码字段覆盖 SHALL 为编码字段的超集（同一份 tag 数据驱动，SHALL NOT 出现「可下发但回读丢失」的字段），呈现叶（config-false，如 class/parent-name）SHALL 照常透出。条目 key SHALL 经 `ΛListKeyMap()` 获取，key 叶缺失时 SHALL 合成 key 保留条目（宽容语义）。空输入或无条目 SHALL 返回非 nil 空容器；非法 XML 或非数值 enum 文本 SHALL 返回明确错误。
+系统 SHALL 提供通用 NETCONF XML 解码器：对 get-config 回读原文（无论包裹在 `<rpc-reply>`/`<data>`、模块顶层容器或裸容器、无论 namespace 前缀），SHALL 在 list 容器（root，如 `<vlans>`/`<interfaces>`）之内定位 list 条目元素并填充 ygot GoStruct（含 list map、嵌套 list、enum、指针叶）。锚定 list 容器 SHALL 消解「模块顶层容器名与条目名同名」的歧义（华为 `<vlan><vlans><vlan>` 外层模块容器与条目同名 `vlan`，裸扫条目名会误把外层容器当条目）。解码字段覆盖 SHALL 为编码字段的超集（同一份 tag 数据驱动，SHALL NOT 出现「可下发但回读丢失」的字段），呈现叶（config-false，如 class/parent-name）SHALL 照常透出。
+
+条目 key SHALL 经 `ΛListKeyMap()` 获取；**单键列表**以该键值为 map key，**多键（复合键）列表**（map key 为 ygot 生成的复合 key struct，如 devm `physical-entity` 的 class+position+serial-number）SHALL 按 key struct 字段的 `path:` tag 从 `ΛListKeyMap()` 结果填充复合 key struct 作为 map key，SHALL NOT 因键数量 > 1 而报错或丢弃整表。此机制对根级列表与嵌套列表 SHALL 一致适用。key 叶缺失时 SHALL 合成 key 保留条目（宽容语义）：单键列表合成标量 key；多键列表 SHALL 从条目自身键字段复制可得值构造 key struct（缺失字段为零值），条目不丢弃。空输入或无条目 SHALL 返回非 nil 空容器；非法 XML 或非数值 enum 文本 SHALL 返回明确错误。
+
+> 范围注记：键式删除编码（XC-03）的「多 key list SHALL 返回明确不支持错误」契约**保持不变**——多键列表绝大多数为 config-false 状态/统计表，删除支持由真实需求驱动另行变更。
 
 #### Scenario: 编解码往返恒等
 - **WHEN** 对全字段 fixture 先 XC-01 编码再 XC-02 解码
@@ -49,6 +51,22 @@
 #### Scenario: 全字段端到端收敛（B2）
 - **WHEN** 全字段配置经模拟网元下发→回读→二次对账
 - **THEN** 第二轮 SHALL 收敛（Changes==0），SHALL NOT 因回读字段缺失产生永久漂移
+
+#### Scenario: 多键列表回读解码（回归：devm/fib 空表）
+- **WHEN** 解码含多键列表条目的回读原文（如 devm `physical-entitys/physical-entity`（key: class+position+serial-number）、fib `route-statistics` 下多键统计条目）
+- **THEN** 每个条目 SHALL 以按 `path:` tag 填充的复合 key struct 入 map，全部键叶与非键字段正确还原，SHALL NOT 报 `multi-key lists unsupported`、SHALL NOT 整树降级
+
+#### Scenario: 嵌套多键列表解码
+- **WHEN** 解码的条目内含嵌套多键 list（`decodeField` Map 分支）
+- **THEN** 嵌套条目 SHALL 与根级列表同机制以复合 key struct 入 map，字段正确还原
+
+#### Scenario: 多键列表键叶缺失（宽容语义）
+- **WHEN** 多键列表某条目的部分键叶在回读原文中缺失
+- **THEN** 条目 SHALL 以「已有键字段 + 缺失字段零值」构造的 key struct 保留入 map，SHALL NOT 丢弃条目或整树报错
+
+#### Scenario: 多键 key struct 字段不可转换（负路径）
+- **WHEN** `ΛListKeyMap()` 返回值与 key struct 字段类型不可转换（生成物不一致等异常形态）
+- **THEN** SHALL 返回命名该 list 的明确错误（R08，不 panic、不静默错键）
 
 ### Requirement: XC-03 键式删除编码（ΛListKeyMap 驱动）
 
@@ -73,7 +91,6 @@
 #### Scenario: 未注册类型降级（负路径）
 - **WHEN** Change.NewValue 为无描述符覆盖的类型
 - **THEN** SHALL 直接走通用 `xml.Marshal` 兜底链，SHALL NOT 报「未注册」硬错误，SHALL NOT 经任何 openconfig 类型特判
-
 
 ### Requirement: XC-05 plain-container 根模块编解码（容器根，非 list 根）
 
@@ -182,3 +199,4 @@ per-node namespace 引入 SHALL NOT 改变**单模块树**（vlan/ifm/bgp/system
 #### Scenario: 真正非法枚举文本解码报错
 - **WHEN** 解码一个既非合法值域名、又非整数的枚举文本
 - **THEN** 引擎 SHALL 返回命名该 leaf 的明确错误（R08，不静默）
+
