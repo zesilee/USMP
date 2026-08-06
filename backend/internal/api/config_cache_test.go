@@ -187,9 +187,10 @@ func TestSetConfig_StoreFailDoesNotInvalidate(t *testing.T) {
 	assert.Equal(t, 1, calls, "a rejected push must not invalidate the cache")
 }
 
-// 读通道拆分（真机回归）：include_state=true → 走状态通道（h.fetchState）、
-// 绕缓存且不写缓存（状态求新鲜、且多为单行谓词读，缓存无意义还会污染配置读）。
-func TestGetConfig_IncludeStateUsesStateChannelNoCache(t *testing.T) {
+// 读通道拆分（真机回归）：include_state=true → 走状态通道（h.fetchState），
+// 与运行配置缓存双向隔离——状态读不写配置缓存、配置缓存命中不拦状态读。
+// BR-14 起状态通道有独立快照缓存（同通道复读命中快照，见 config_listpage_test）。
+func TestGetConfig_IncludeStateUsesStateChannel(t *testing.T) {
 	cfgCalls, stateCalls := 0, 0
 	h := newConfigHandlerWithFetch(func(ctx context.Context, ip, path string) (interface{}, error) {
 		cfgCalls++
@@ -216,11 +217,21 @@ func TestGetConfig_IncludeStateUsesStateChannelNoCache(t *testing.T) {
 	assert.Equal(t, 1, cfgCalls, "状态读不得污染配置缓存")
 	assert.False(t, d2.Cached)
 
-	// 普通读命中缓存后，include_state 仍强制走设备（新鲜状态）。
+	// 配置缓存命中不拦状态读；BR-14：状态读命中的是自己的快照（不再打设备），
+	// 且绝不误取配置缓存的值。
 	w3 := httptest.NewRecorder()
 	c3, _ := gin.CreateTestContext(w3)
 	c3.Params = gin.Params{{Key: "ip", Value: "10.0.0.1"}, {Key: "path", Value: "/ifm:ifm/ifm:interfaces"}}
 	c3.Request = httptest.NewRequest(http.MethodGet, "/?include_state=true", nil)
 	h.GetConfig(c3)
-	assert.Equal(t, 2, stateCalls, "缓存命中不拦状态读")
+	assert.Equal(t, 1, stateCalls, "状态快照命中不再打设备（BR-14）")
+	var env3 struct {
+		Data struct {
+			Data   map[string]interface{} `json:"data"`
+			Source string                 `json:"source"`
+		} `json:"data"`
+	}
+	assert.NoError(t, json.Unmarshal(w3.Body.Bytes(), &env3))
+	assert.Equal(t, "cache", env3.Data.Source)
+	assert.Equal(t, true, env3.Data.Data["state"], "快照命中必须取状态树，不得误取配置缓存")
 }

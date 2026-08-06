@@ -41,7 +41,8 @@ GET /config/:ip/*path?limit=50&offset=0&filter=name~=GE&filter=admin-status==up&
 - `filter` 可重复，语法 `<leaf><op><value>`，op 仅 `==`（等值）与 `~=`（包含，大小写不敏感）；多条件 AND。`<leaf>` 支持嵌套路径（`bandwidth-type/bandwidth-mbps/bandwidth`），值按字符串比较（RFC7951 数值/布尔先字符串化）。
 - `sort` 单字段 + `sort_dir`；两侧均可解析为数值时按数值比较，否则字符串比较。未给 `sort` 时保持快照内原序（同一快照内翻页顺序稳定）。
 - 分页模式响应 data：`{"rows": [...], "total": N, "limit": L, "offset": O}` + 既有新鲜度字段（cached/cache_age_seconds/ttl_seconds/source）。`rows` 元素 = 原 list 条目对象（带类型 JSON，不做 NCE 式 key/value 平铺）。
-- 目标路径非 list 节点却带 `limit` → 400 明确报错（不静默忽略，防前端误用）。list 判定优先走 schema；schema 查不到时以「子树根下唯一数组值」兜底判定（与前端 normalizeRows 同规则），仍无数组则 400。
+- 目标路径非 list 节点却带 `limit` → 400 明确报错（不静默忽略，防前端误用）。list 判定优先走 schema（谓词剥除后查询）；schema 查不到时以「子树根下唯一数组值」兜底判定（与前端 normalizeRows 同规则），仍无数组则 400。
+- **嵌套 list 谓词下钻（apply 期补充决策）**：FIB routes 挂在三键父 list 内，谓词路径是其唯一寻址形态，而回读剥层契约「谓词段停剥」够不到它。分页模式下由行提取器接手：在停剥返回的父容器子树上按谓词键值索引唯一行、继续下钻到目标数组；未命中→空页、多命中→400。无参读取的停剥契约零改动（存量消费方安全）。已知边界：谓词值含 `/`（如 if-name）受 pathLocals 切分局限暂不支持——FIB 父 list 三键（vrf/af/position）不含 `/`，一期够用，触雷时明确报错。
 
 ### D3 状态快照缓存：独立实例、默认 TTL 30s
 

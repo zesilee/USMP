@@ -4,12 +4,15 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"os"
 	"sort"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/leezesi/usmp/backend/internal/cache"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/internal/intent"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
@@ -38,6 +41,10 @@ type ConfigHandler struct {
 	// support 返回设备的节点级不支持集视图（BR-12/CN-04），无可用连接返回 nil
 	// （行为退化为既有链路）。可注入以便无设备测试；默认经连接池可选接口断言。
 	support func(ip string) nodeSupportView
+	// stateCache 状态快照缓存（BR-14/CC-07）：include_state 读取的短 TTL 快照，
+	// 独立于运行配置缓存——写后失效（InvalidatePrefix）刻意不触及本实例，
+	// TTL 经 USMP_STATE_SNAPSHOT_TTL 独立配置（默认 30s）。
+	stateCache *cache.TTLLRUCache
 }
 
 // nodeSupportView 连接实现的可选能力（与 ServerCapabilities 同款断言模式，
@@ -96,6 +103,22 @@ func rejectNodeUnsupported(c *gin.Context, path string) {
 		nodeUnsupportedData{Reason: reasonNodeUnsupported})
 }
 
+// stateSnapshotTTL 解析 USMP_STATE_SNAPSHOT_TTL（CC-07）：Go duration（"10s"）
+// 或纯秒数（"10"），非法/缺省回落 30s（R08 配置错误不崩溃）。
+func stateSnapshotTTL() time.Duration {
+	raw := os.Getenv("USMP_STATE_SNAPSHOT_TTL")
+	if raw == "" {
+		return 30 * time.Second
+	}
+	if d, err := time.ParseDuration(raw); err == nil && d > 0 {
+		return d
+	}
+	if sec, err := strconv.Atoi(raw); err == nil && sec > 0 {
+		return time.Duration(sec) * time.Second
+	}
+	return 30 * time.Second
+}
+
 // NewConfigHandler creates a new ConfigHandler
 func NewConfigHandler(mgr manager.Manager) *ConfigHandler {
 	h := &ConfigHandler{manager: mgr}
@@ -103,6 +126,8 @@ func NewConfigHandler(mgr manager.Manager) *ConfigHandler {
 	h.fetchState = h.fetchStateFromDevice
 	h.pushDelete = h.pushDeleteToDevice
 	h.support = h.supportFromPool
+	// 容量 256：状态快照条目大（万级行整树），上限收紧靠 LRU 兜底淘汰（CC-07）。
+	h.stateCache = cache.NewTTLLRUCache(256, stateSnapshotTTL(), time.Minute)
 	return h
 }
 
@@ -285,40 +310,39 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 	path := c.Param("path") // *path already includes leading slash
 	forceRefresh := c.Query("force_refresh") == "true"
 
+	// BR-13：分页参数解析先行——非法参数在触达缓存/设备前 400（不静默忽略）。
+	lq, lqErr := parseListQuery(c.Request.URL.Query())
+	if lqErr != nil {
+		Error(c, 400, "分页参数非法: "+lqErr.Error())
+		return
+	}
+
+	// 分页模式的谓词路径：设备取数/缓存键截到首个谓词段之前的父容器（整列表
+	// 连键取回，快照共享；深路径 filter 选不回祖先 list 键叶，下钻会匹配不到行）。
+	// 无参数读取（lq==nil）不受影响——单行谓词读契约原样。
+	fetchPath := path
+	if lq != nil {
+		if fp, ok := predicateFetchPath(path); ok {
+			fetchPath = fp
+		}
+	}
+
 	rc := h.manager.GetRunningCache()
-	key := runKey(ip, path)
+	key := runKey(ip, fetchPath)
 	ttlSec := int(rc.TTL().Seconds())
 
 	// 节点级不支持快速失败（BR-12）：已学习路径不再打设备；force_refresh 绕过
 	// 重试（成功即清标记——设备升级后的恢复通道）。视图经 Peek 取自既有连接
 	// （绝不拨号）；无连接=无学习记忆，检查自然跳过。
-	if view := h.support(ip); view != nil && !forceRefresh && view.IsUnsupportedPath(path) {
-		rejectNodeUnsupported(c, path)
+	if view := h.support(ip); view != nil && !forceRefresh && view.IsUnsupportedPath(fetchPath) {
+		rejectNodeUnsupported(c, fetchPath)
 		return
 	}
 
-	// include_state=true → 状态通道（<get>，按需）：恒走设备取新鲜状态，
-	// 不读不写配置缓存（状态求实时；多为单行谓词读，缓存无意义且会污染配置读）。
+	// include_state=true → 状态通道（<get>，按需）：BR-14 改为短 TTL 快照缓存
+	// 优先（万级状态表翻页秒开），force_refresh 绕过直打设备（实时逃生门）。
 	if c.Query("include_state") == "true" {
-		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-		defer cancel()
-		data, err := h.fetchState(ctx, ip, path)
-		if err != nil {
-			if h.learnNodeUnsupported(ip, path, err) {
-				rejectNodeUnsupported(c, path)
-				return
-			}
-			if errors.Is(err, errDeviceNotConnected) {
-				Error(c, 503, "Device is not connected")
-				return
-			}
-			Error(c, 500, "Failed to get state: "+err.Error())
-			return
-		}
-		if forceRefresh {
-			h.clearUnsupported(ip, path)
-		}
-		Success(c, ConfigGetData{Data: data, Cached: false, TTLSeconds: ttlSec, Source: "device"}, "Configuration retrieved")
+		h.serveStateRead(c, ip, path, fetchPath, key, lq, forceRefresh)
 		return
 	}
 
@@ -326,13 +350,7 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 	// config freshness only; device liveness is /devices/:ip/status.
 	if !forceRefresh {
 		if val, age, ok := rc.GetWithAge(key); ok {
-			Success(c, ConfigGetData{
-				Data:            val,
-				Cached:          true,
-				CacheAgeSeconds: int(age.Seconds()),
-				TTLSeconds:      ttlSec,
-				Source:          "cache",
-			}, "Configuration retrieved (cached)")
+			h.respondConfig(c, val, lq, path, true, int(age.Seconds()), ttlSec, "cache", "Configuration retrieved (cached)")
 			return
 		}
 	}
@@ -340,10 +358,10 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	data, err := h.fetch(ctx, ip, path)
+	data, err := h.fetch(ctx, ip, fetchPath)
 	if err != nil {
-		if h.learnNodeUnsupported(ip, path, err) {
-			rejectNodeUnsupported(c, path)
+		if h.learnNodeUnsupported(ip, fetchPath, err) {
+			rejectNodeUnsupported(c, fetchPath)
 			return
 		}
 		if errors.Is(err, errDeviceNotConnected) {
@@ -354,17 +372,68 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 		return
 	}
 	if forceRefresh {
-		h.clearUnsupported(ip, path)
+		h.clearUnsupported(ip, fetchPath)
 	}
 
 	rc.Set(key, data)
+	h.respondConfig(c, data, lq, path, false, 0, ttlSec, "device", "Configuration retrieved")
+}
+
+// serveStateRead 状态通道读（BR-14）：快照缓存优先（键 = runKey(ip, fetchPath)，
+// 实例独立于运行配置缓存——写后失效不触及），未命中/过期/force_refresh 经
+// <get> 全量回读并回填快照。分页参数与状态读可组合：切片作用于快照；
+// path（含谓词的原始路径）用于行提取下钻，fetchPath 用于设备取数与学习。
+func (h *ConfigHandler) serveStateRead(c *gin.Context, ip, path, fetchPath, key string, lq *ListQueryParams, forceRefresh bool) {
+	ttlSec := int(h.stateCache.TTL().Seconds())
+	if !forceRefresh {
+		if val, age, ok := h.stateCache.GetWithAge(key); ok {
+			h.respondConfig(c, val, lq, path, true, int(age.Seconds()), ttlSec, "cache", "Configuration retrieved (cached)")
+			return
+		}
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	data, err := h.fetchState(ctx, ip, fetchPath)
+	if err != nil {
+		if h.learnNodeUnsupported(ip, fetchPath, err) {
+			rejectNodeUnsupported(c, fetchPath)
+			return
+		}
+		if errors.Is(err, errDeviceNotConnected) {
+			Error(c, 503, "Device is not connected")
+			return
+		}
+		Error(c, 500, "Failed to get state: "+err.Error())
+		return
+	}
+	if forceRefresh {
+		h.clearUnsupported(ip, fetchPath)
+	}
+	h.stateCache.Set(key, data)
+	h.respondConfig(c, data, lq, path, false, 0, ttlSec, "device", "Configuration retrieved")
+}
+
+// respondConfig 组装 GET /config 响应：lq 非 nil 时行提取 + 查询切片（BR-13，
+// data 变为 ListPage 形状），目标非 list/无法定位行数组 → 400；lq 为 nil 保持
+// 整树形状不变（回读子树剥层契约回归锚点）。
+func (h *ConfigHandler) respondConfig(c *gin.Context, data interface{}, lq *ListQueryParams, path string, cached bool, ageSec, ttlSec int, source, msg string) {
+	payload := data
+	if lq != nil {
+		rows, err := extractListRows(h.manager.GetSchema(), path, data)
+		if err != nil {
+			Error(c, 400, err.Error())
+			return
+		}
+		payload = applyListQuery(rows, *lq)
+	}
 	Success(c, ConfigGetData{
-		Data:            data,
-		Cached:          false,
-		CacheAgeSeconds: 0,
+		Data:            payload,
+		Cached:          cached,
+		CacheAgeSeconds: ageSec,
 		TTLSeconds:      ttlSec,
-		Source:          "device",
-	}, "Configuration retrieved")
+		Source:          source,
+	}, msg)
 }
 
 // SetConfig sets the desired configuration and triggers reconciliation
