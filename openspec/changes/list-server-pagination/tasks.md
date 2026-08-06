@@ -30,5 +30,5 @@
 
 ## 5. 收尾门禁
 
-- [ ] 5.1 `make e2e-local` staging smoke 全绿（含 frontend/ 改动的 pre-push 门禁）；派生黄金全量跑一遍确认零漂移（未改派生逻辑的证据）
-- [ ] 5.2 `go test ./...` 全量 `-race` 全绿 + `go-code-review-check` 通过 + What/Why/How 提交
+- [x] 5.1 `make e2e-local` staging smoke 全绿（含 frontend/ 改动的 pre-push 门禁）；派生黄金全量跑一遍确认零漂移（未改派生逻辑的证据）
+- [x] 5.2 `go test ./...` 全量 `-race` 全绿 + `go-code-review-check` 通过 + What/Why/How 提交
