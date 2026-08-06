@@ -23,12 +23,12 @@
 
 ## 4. 前端：双模式列表（F1 + F2）
 
-- [ ] 4.1 红灯：F1 单测——api 层新查询参数编码（同步刷 GetConfig swagger @Param 注释 + 重生成前端契约，防漂移门禁）（limit/offset/filter/sort 序列化、include_state 组合）；搜索面板条件 → `filter` 参数映射（等值/包含）
-- [ ] 4.2 红灯：F2 组件单测——FE-25 五个 Scenario（小表零回归不发新请求/大表翻页带参重请求/搜索下推且页码复位/pending create 本地叠加不计 total/获取数据源复位第一页）+ loading 态
-- [ ] 4.3 实现 ModuleListTab 双模式（首读 limit=200 自适应、服务端模式翻页/搜索/排序下推、total 展示、loading、pending 行叠加），4.1/4.2 全绿
-- [ ] 4.4 覆盖率棘轮：新增用例后按 T08 上调前端 vitest thresholds 与后端 `.coverage-baseline`
+- [x] 4.1 红灯：F1 单测——api 层新查询参数编码（同步刷 GetConfig swagger @Param 注释 + 重生成前端契约，防漂移门禁）（limit/offset/filter/sort 序列化、include_state 组合）；搜索面板条件 → `filter` 参数映射（等值/包含）
+- [x] 4.2 红灯：F2 组件单测——FE-25 五个 Scenario（小表零回归不发新请求/大表翻页带参重请求/搜索下推且页码复位/pending create 本地叠加不计 total/获取数据源复位第一页）+ loading 态
+- [x] 4.3 实现 ModuleListTab 双模式（首读 limit=200 自适应、服务端模式翻页/搜索/排序下推、total 展示、loading、pending 行叠加），4.1/4.2 全绿
+- [x] 4.4 覆盖率棘轮：新增用例后按 T08 上调前端 vitest thresholds 与后端 `.coverage-baseline`
 
 ## 5. 收尾门禁
 
-- [ ] 5.1 `make e2e-local` staging smoke 全绿（含 frontend/ 改动的 pre-push 门禁）；派生黄金全量跑一遍确认零漂移（未改派生逻辑的证据）
-- [ ] 5.2 `go test ./...` 全量 `-race` 全绿 + `go-code-review-check` 通过 + What/Why/How 提交
+- [x] 5.1 `make e2e-local` staging smoke 全绿（含 frontend/ 改动的 pre-push 门禁）；派生黄金全量跑一遍确认零漂移（未改派生逻辑的证据）
+- [x] 5.2 `go test ./...` 全量 `-race` 全绿 + `go-code-review-check` 通过 + What/Why/How 提交

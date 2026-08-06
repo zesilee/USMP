@@ -65,11 +65,45 @@ export const getLogs = (params: { device?: string; status?: string; limit?: numb
 //    <get-config> 被真机以 unknown-element 拒绝，<get> 是唯一读法。
 // 状态读超时对齐后端设备侧 30s（config_handler）：默认 15s 会在真机大
 // 状态子树上先于后端超时，前端报错而后端实际成功。
-export const getConfig = (ip: string, path: string, forceRefresh = false, includeState = false) => {
+// BR-13 服务端 list 查询（FE-25）：limit 出现即分页模式，响应 data 变为
+// {rows,total,limit,offset}；filters 为已编码的 "<leaf>==<v>"/"<leaf>~=<v>" 条目。
+export interface ListQuery {
+  limit: number
+  offset?: number
+  filters?: string[]
+  sort?: string
+  sortDir?: 'asc' | 'desc'
+}
+
+export const getConfig = (
+  ip: string,
+  path: string,
+  forceRefresh = false,
+  includeState = false,
+  query?: ListQuery,
+) => {
   // 移除 path 开头的斜杠
   const cleanPath = path.startsWith('/') ? path.slice(1) : path
+  if (!query) {
+    return api.get<ApiResponse<any>>(`/config/${ip}/${cleanPath}`, {
+      params: { force_refresh: forceRefresh, ...(includeState ? { include_state: true } : {}) },
+      ...(includeState ? { timeout: 30000 } : {}),
+    })
+  }
+  // filter 可重复：axios 对数组默认序列化成 filter[]=，后端只认 filter=——
+  // 用 URLSearchParams 显式控制。
+  const params = new URLSearchParams()
+  if (forceRefresh) params.set('force_refresh', 'true')
+  if (includeState) params.set('include_state', 'true')
+  params.set('limit', String(query.limit))
+  if (query.offset) params.set('offset', String(query.offset))
+  for (const f of query.filters ?? []) params.append('filter', f)
+  if (query.sort) {
+    params.set('sort', query.sort)
+    params.set('sort_dir', query.sortDir ?? 'asc')
+  }
   return api.get<ApiResponse<any>>(`/config/${ip}/${cleanPath}`, {
-    params: { force_refresh: forceRefresh, ...(includeState ? { include_state: true } : {}) },
+    params,
     ...(includeState ? { timeout: 30000 } : {}),
   })
 }
