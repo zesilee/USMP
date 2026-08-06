@@ -288,15 +288,17 @@ func parseScalar(v reflect.Value, text string) error {
 	return nil
 }
 
-// entryKey derives the map key for a decoded list entry: the single key from
-// ΛListKeyMap when present, else a synthesized fallback（legacy 宽容语义：
-// 无 key 的回读条目不丢弃）. Multi-key lists are explicitly unsupported.
+// entryKey derives the map key for a decoded list entry. Single-key lists use
+// the one value from ΛListKeyMap; multi-key lists (keyType is a generated
+// composite key struct) fill the struct by `path:` tag from the same map.
+// Key leaves missing → synthesized/partial fallback（legacy 宽容语义：
+// 无 key 的回读条目不丢弃）.
 func entryKey(entry reflect.Value, keyType reflect.Type, elemTag string, idx int) (reflect.Value, error) {
+	if keyType.Kind() == reflect.Struct {
+		return structKey(entry, keyType, elemTag)
+	}
 	if kh, ok := entry.Interface().(ygot.KeyHelperGoStruct); ok {
 		if km, err := kh.ΛListKeyMap(); err == nil {
-			if len(km) > 1 {
-				return reflect.Value{}, fmt.Errorf("list %s: multi-key lists unsupported", elemTag)
-			}
 			for _, kv := range km {
 				rv := reflect.ValueOf(kv)
 				if !rv.Type().ConvertibleTo(keyType) {
@@ -317,4 +319,47 @@ func entryKey(entry reflect.Value, keyType reflect.Type, elemTag string, idx int
 	default:
 		return reflect.Value{}, fmt.Errorf("list %s: cannot synthesize key of type %s", elemTag, keyType)
 	}
+}
+
+// structKey builds a composite key struct for a multi-key list entry: each key
+// struct field is filled from ΛListKeyMap by its `path:` tag (the map's keys
+// are the YANG leaf names, same source as the tags). When ΛListKeyMap errors
+// (any key leaf missing) the key is built from the entry's own same-named
+// fields instead — present leaves keep their value, missing ones stay zero —
+// so the entry survives（宽容语义对齐单键合成 key；回读展示不丢行优先）. Entries
+// whose fallback keys collide (same present leaves, same gaps) overwrite —
+// last one wins（仅畸形回读可达；不向键值注入合成占位污染前端展示真值）.
+func structKey(entry reflect.Value, keyType reflect.Type, elemTag string) (reflect.Value, error) {
+	key := reflect.New(keyType).Elem()
+	var km map[string]interface{}
+	if kh, ok := entry.Interface().(ygot.KeyHelperGoStruct); ok {
+		km, _ = kh.ΛListKeyMap() // nil on error → per-field fallback below
+	}
+	ev := reflect.Indirect(entry)
+	for i := 0; i < keyType.NumField(); i++ {
+		f := keyType.Field(i)
+		if kv, ok := km[f.Tag.Get("path")]; ok {
+			rv := reflect.ValueOf(kv)
+			if !rv.Type().ConvertibleTo(f.Type) {
+				return reflect.Value{}, fmt.Errorf("list %s: key %s type %s not convertible to %s", elemTag, f.Name, rv.Type(), f.Type)
+			}
+			key.Field(i).Set(rv.Convert(f.Type))
+			continue
+		}
+		// Fallback: copy the entry's same-named field (deref pointers), zero if absent.
+		sf := ev.FieldByName(f.Name)
+		if !sf.IsValid() {
+			continue
+		}
+		if sf.Kind() == reflect.Ptr {
+			if sf.IsNil() {
+				continue
+			}
+			sf = sf.Elem()
+		}
+		if sf.Type().ConvertibleTo(f.Type) {
+			key.Field(i).Set(sf.Convert(f.Type))
+		}
+	}
+	return key, nil
 }
