@@ -436,8 +436,9 @@ func makeBenchRows(n int) []interface{} {
 	return rows
 }
 
-// design D2 承诺：10k 行 filter+sort+slice 毫秒量级。500ms 为防退化护栏
-// （宽松上界防 CI 抖动误报——真实耗时应 <50ms，退化成 O(N²) 才会撞线）。
+// design D2 承诺：10k 行 filter+sort+slice 毫秒量级。3s 为防退化护栏：
+// CI 弱机 + -race 下实测 ~0.6s（500ms 上界曾在 CI 误报），3s 仍能拦住
+// O(N²) 级退化（那会是分钟级），不拦正常抖动。
 func TestListQuery10kGuard(t *testing.T) {
 	rows := makeBenchRows(10000)
 	start := time.Now()
@@ -451,8 +452,8 @@ func TestListQuery10kGuard(t *testing.T) {
 		// offset 5000 == 过滤后 total → 越界空页
 		t.Errorf("total=%d rows=%d, want 5000/0", p.Total, len(p.Rows))
 	}
-	if elapsed > 500*time.Millisecond {
-		t.Errorf("10k 行查询耗时 %v，超过 500ms 护栏（疑似复杂度退化）", elapsed)
+	if elapsed > 3*time.Second {
+		t.Errorf("10k 行查询耗时 %v，超过 3s 护栏（疑似复杂度退化）", elapsed)
 	}
 }
 
