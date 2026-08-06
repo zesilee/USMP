@@ -10,7 +10,19 @@
 
 **不携带 `limit` 时，响应形状与行为 SHALL 与现状完全一致**（回读子树剥层契约不变）。
 
-目标路径非 list 节点却携带 `limit` SHALL 返回 400 及含路径的明确错误；list 判定 SHALL 优先走 schema，schema 未覆盖时以「子树根下唯一数组值」兜底判定，两者均失败才拒绝。
+目标路径非 list 节点却携带 `limit` SHALL 返回 400 及含路径的明确错误；list 判定 SHALL 优先走 schema（谓词剥除后查询），schema 未覆盖时以「子树根下唯一数组值」兜底判定，两者均失败才拒绝。
+
+**嵌套 list（谓词锚定下钻）**：目标 list 的祖先段可含键谓词（如 `/fib:fib/unicast-afs/unicast-af[vrf-name=x][af-type=y][position=z]/routes`，FIB 万级路由的唯一寻址形态）。分页模式 SHALL 在整树/快照之上按谓词键值索引唯一行后继续下钻提取目标行数组；谓词未命中任何行 SHALL 返回空页（total=0，设备无该行=合法空态），命中多行 SHALL 400（键不完整）。**无分页参数时的谓词读取契约（停剥返回父容器）SHALL 保持不变**。
+
+#### Scenario: 谓词锚定嵌套 list 分页
+
+- **WHEN** 对 `/fib:fib/.../unicast-af[三键谓词]/routes` 携 `limit=50&offset=100` GET（af 行内含千级 route）
+- **THEN** rows SHALL 为该 af 行内 route 数组的第 101–150 行，total 为该行内 route 总数
+
+#### Scenario: 谓词未命中返回空页（边界）
+
+- **WHEN** 谓词键值在快照中无匹配行时携 `limit` GET
+- **THEN** SHALL 返回 `rows=[]`、`total=0`，信封码 200
 
 #### Scenario: 分页读取大 list
 

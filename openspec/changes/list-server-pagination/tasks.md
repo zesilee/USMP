@@ -18,8 +18,8 @@
 
 ## 3. 后端：模拟网元大表集成（B2）
 
-- [ ] 3.1 集成测试（`*_integration_test.go`，`testing.Short()` 跳过）：netconfsim `SetStateDataXML` 注入千行级 FIB 状态子树（五键复合 list）→ 经 API 分页读取：首读回填快照、翻页不新增 sim 请求计数、force_refresh 重拉、过滤命中正确行
-- [ ] 3.2 配置类大表同链路验证：sim 种入 500 行 vlan/interface，无参读取形状回归 + 带参分页一致性（total=无参行数）
+- [x] 3.1 集成测试（`*_integration_test.go`，`testing.Short()` 跳过）：netconfsim `SetStateDataXML` 注入千行级 FIB 状态子树（五键复合 list）→ 经 API 分页读取：首读回填快照、翻页不新增 sim 请求计数、force_refresh 重拉、过滤命中正确行
+- [x] 3.2 配置类大表同链路验证：sim 种入 500 行 vlan/interface，无参读取形状回归 + 带参分页一致性（total=无参行数）
 
 ## 4. 前端：双模式列表（F1 + F2）
 
