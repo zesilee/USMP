@@ -87,6 +87,7 @@
       :row-class-name="rowClass"
       @row-click="onRowClick"
       @selection-change="onSelectionChange"
+      @sort-change="onSortChange"
     >
       <el-table-column type="selection" width="42" />
       <!-- 变更集标记合成视图（FE-11 二期）：待创建/已修改/待删除 -->
@@ -103,9 +104,9 @@
         :prop="keyOf(col)"
         :label="col.label"
         min-width="140"
-        sortable
-        :filters="headerFilters(col)"
-        :filter-method="headerFilters(col) ? makeFilterMethod(col) : undefined"
+        :sortable="serverMode ? 'custom' : true"
+        :filters="serverMode ? undefined : headerFilters(col)"
+        :filter-method="!serverMode && headerFilters(col) ? makeFilterMethod(col) : undefined"
       >
         <template #default="{ row }">
           <span v-if="!cellVisible(col, row)" class="cell-na">-</span>
@@ -150,15 +151,17 @@
     <!-- 查询时间戳 + 总记录数（过滤后全集）+ 分页（含跳页，FE-11） -->
     <div class="table-footer">
       <span v-if="queryAt" data-test="query-summary" class="query-summary">
-        {{ t('console.queryFinished', { time: queryAt, total: filteredRows.length }) }}
+        {{ t('console.queryFinished', { time: queryAt, total: totalCount }) }}
       </span>
       <el-pagination
         v-model:current-page="page"
         v-model:page-size="pageSize"
-        :total="filteredRows.length"
+        :total="totalCount"
         :page-sizes="[10, 20, 50]"
         layout="total, sizes, prev, pager, next, jumper"
         background
+        @current-change="onPageChange"
+        @size-change="onPageChange"
       />
     </div>
 
@@ -184,7 +187,7 @@ import { ref, reactive, computed, watch, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Plus, ArrowDown, ArrowUp, RefreshRight, Setting } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox, type TableInstance } from 'element-plus'
-import { getConfig } from '../../api'
+import { getConfig, type ListQuery } from '../../api'
 import { nodeUnsupportedFromEnvelope, nodeUnsupportedFromError } from '../../utils/nodeSupport'
 import { useFreshnessStore } from '../../stores/freshness'
 import { useChangesetStore } from '../../stores/changeset'
@@ -196,6 +199,7 @@ import {
   deriveKeyField,
   filterableFields,
   filterRows,
+  buildServerFilters,
   cellVisible,
   configPathFor,
   statusTone,
@@ -313,6 +317,45 @@ watch(() => props.unsupported, (v) => {
   if (was && !v) void load()
 })
 
+// ===== 双模式（FE-25）：首读 limit=200 自适应 =====
+// total ≤ 阈值：一次已拿全量 → 纯前端模式（现状交互零回归、零额外往返）；
+// total > 阈值：服务端模式——翻页/搜索/排序映射为 BR-13 查询参数重新请求。
+const SERVER_PAGE_THRESHOLD = 200
+const serverMode = ref(false)
+const serverTotal = ref(0)
+const sortState = ref<{ prop: string; order: 'ascending' | 'descending' } | null>(null)
+
+// 分页模式响应形状判定（BR-13 ListPage）。
+function isListPage(body: any): body is { rows: Record<string, any>[]; total: number } {
+  return !!body && typeof body === 'object' && Array.isArray(body.rows) && typeof body.total === 'number'
+}
+
+// requestRows 统一取数：信封不支持语义/新鲜度/错误处理一处收口。
+// 返回 body（ListPage 或整树子树），nodeUnsupported 转态时返回 undefined。
+async function requestRows(force: boolean, query?: ListQuery): Promise<any> {
+  // 只读 Tab（config false state 子树）走 <get> 状态通道：running 配置 schema
+  // 无此类节点，<get-config> 会被真机以 unknown-element 拒绝（FE-14 真机回归）。
+  const res = await getConfig(props.device, configPath.value, force, !!props.tab.readonly, query)
+  // 信封为 HTTP 200 统一格式：不支持语义在成功回调里识别（不弹裸错误）。
+  if (nodeUnsupportedFromEnvelope(res.data)) {
+    nodeUnsupported.value = true
+    return undefined
+  }
+  nodeUnsupported.value = false
+  // 带参被拒（如该路径实际非 list，信封 400）：回退旧读法一次（R08 降级，
+  // 行为等同改动前）。
+  if (query && res.data?.success === false) {
+    return requestRows(force, undefined)
+  }
+  const payload = res.data?.data
+  useFreshnessStore().record({
+    cache_age_seconds: payload?.cache_age_seconds,
+    ttl_seconds: payload?.ttl_seconds,
+    source: payload?.source,
+  })
+  return payload?.data ?? payload
+}
+
 async function load(force = false) {
   if (!props.device) {
     items.value = []
@@ -323,47 +366,85 @@ async function load(force = false) {
   loading.value = true
   error.value = ''
   try {
-    // 只读 Tab（config false state 子树）走 <get> 状态通道：running 配置 schema
-    // 无此类节点，<get-config> 会被真机以 unknown-element 拒绝（FE-14 真机回归）。
-    const res = await getConfig(props.device, configPath.value, force, !!props.tab.readonly)
-    // 信封为 HTTP 200 统一格式：不支持语义在成功回调里识别（不弹裸错误）。
-    if (nodeUnsupportedFromEnvelope(res.data)) {
-      nodeUnsupported.value = true
-      return
+    const body = await requestRows(force, { limit: SERVER_PAGE_THRESHOLD, offset: 0 })
+    if (body === undefined && nodeUnsupported.value) return
+    if (isListPage(body)) {
+      serverTotal.value = body.total
+      if (body.total > SERVER_PAGE_THRESHOLD) {
+        // 大表 → 服务端模式：立即取当前页窗口（切自后端快照，零设备往返）。
+        serverMode.value = true
+        if (force) page.value = 1 // 获取数据源/强刷复位第一页（FE-25）
+        await pageLoad(force)
+        return
+      }
+      serverMode.value = false
+      items.value = body.rows
+      postKey.value = leafName(listField.value)
+    } else {
+      // 整树形状（回退旧读法/旧后端）：与改动前完全一致的客户端路径。
+      serverMode.value = false
+      const { rows, key } = normalizeRows(body)
+      items.value = rows
+      postKey.value = key
     }
-    nodeUnsupported.value = false
-    const payload = res.data?.data
-    useFreshnessStore().record({
-      cache_age_seconds: payload?.cache_age_seconds,
-      ttl_seconds: payload?.ttl_seconds,
-      source: payload?.source,
-    })
-    const { rows, key } = normalizeRows(payload?.data ?? payload)
-    items.value = rows
-    postKey.value = key
     queryAt.value = new Date().toLocaleString()
     syncCurrentRow()
   } catch (e: any) {
-    // 不支持语义（非 200 兜底形态）同转占位，不显示裸错误（FE-24）。
-    if (nodeUnsupportedFromError(e)) {
-      nodeUnsupported.value = true
-      return
-    }
-    error.value = e?.response?.data?.message || e?.message || (force ? t('console.fetchSourceFailed') : t('console.readFailed'))
-    // 强制回读失败保留原列表（§9 保留原配置）；常规加载失败清空避免陈旧数据误导。
-    if (!force) items.value = []
+    handleLoadError(e, force)
   } finally {
     loading.value = false
   }
 }
 
-// 行操作「获取数据源」（FE-11/BR-04）：force_refresh 绕缓存回读该 list 路径。
-// API 无单行读取粒度——整表回读并保持行选中，不伪造单行语义。
+// pageLoad 服务端模式取一页：翻页/每页条数/高级搜索/排序全部下推（FE-25）。
+async function pageLoad(force = false) {
+  loading.value = true
+  error.value = ''
+  try {
+    const body = await requestRows(force, {
+      limit: pageSize.value,
+      offset: (page.value - 1) * pageSize.value,
+      filters: buildServerFilters(applied.value, searchFields.value),
+      sort: sortState.value?.prop || undefined,
+      sortDir: sortState.value?.order === 'descending' ? 'desc' : 'asc',
+    })
+    if (body === undefined && nodeUnsupported.value) return
+    if (isListPage(body)) {
+      items.value = body.rows
+      serverTotal.value = body.total
+      if (!postKey.value) postKey.value = leafName(listField.value)
+    }
+    queryAt.value = new Date().toLocaleString()
+    syncCurrentRow()
+  } catch (e: any) {
+    handleLoadError(e, force)
+  } finally {
+    loading.value = false
+  }
+}
+
+function handleLoadError(e: any, force: boolean) {
+  // 不支持语义（非 200 兜底形态）同转占位，不显示裸错误（FE-24）。
+  if (nodeUnsupportedFromError(e)) {
+    nodeUnsupported.value = true
+    return
+  }
+  error.value = e?.response?.data?.message || e?.message || (force ? t('console.fetchSourceFailed') : t('console.readFailed'))
+  // 强制回读失败保留原列表（§9 保留原配置）；常规加载失败清空避免陈旧数据误导。
+  if (!force) items.value = []
+}
+
+// 行操作「获取数据源」（FE-11/BR-04）：force_refresh 绕缓存/快照全量重拉，
+// 服务端模式复位第一页（FE-25）。API 无单行读取粒度——不伪造单行语义。
 function fetchSource() {
   return load(true)
 }
 
-watch(() => props.device, () => load(), { immediate: true })
+watch(() => props.device, () => {
+  // 设备切换：回自适应探测（模式/排序随新设备数据重新落定）。
+  sortState.value = null
+  void load()
+}, { immediate: true })
 
 // ===== 高级搜索（草稿→应用，查询/重置，FE-11） =====
 const searchOpen = ref(false)
@@ -373,11 +454,27 @@ const applied = ref<Record<string, any>>({})
 function applySearch() {
   applied.value = { ...draft }
   page.value = 1
+  // 服务端模式：搜索下推为 filter 参数重新请求，不在本地对当前页再过滤（FE-25）。
+  if (serverMode.value) void pageLoad()
 }
 function resetSearch() {
   Object.keys(draft).forEach((k) => delete draft[k])
   applied.value = {}
   page.value = 1
+  if (serverMode.value) void pageLoad()
+}
+
+// 服务端模式排序下推（FE-25）：列头 sortable=custom，变更即重新请求并复位页码。
+function onSortChange({ prop, order }: { prop: string; order: 'ascending' | 'descending' | null }) {
+  if (!serverMode.value) return
+  sortState.value = order ? { prop, order } : null
+  page.value = 1
+  void pageLoad()
+}
+
+// 分页事件（用户交互才触发，程序改 v-model 不会）：服务端模式重新取页。
+function onPageChange() {
+  if (serverMode.value) void pageLoad()
 }
 
 // 标记合成视图（FE-11 二期）：设备行 + 变更集待创建行（按主键去重，设备行优先）。
@@ -401,14 +498,22 @@ function rowClass({ row }: { row: Record<string, any> }): string {
   return m ? `row-${m}` : ''
 }
 
-const filteredRows = computed(() => filterRows(mergedItems.value, applied.value, searchFields.value))
+// 服务端模式：过滤已在后端完成，本地不再二次过滤（items 即当前页窗口，
+// pending create 行仍本地叠加、不计入服务端 total——FE-25）。
+const filteredRows = computed(() =>
+  serverMode.value ? mergedItems.value : filterRows(mergedItems.value, applied.value, searchFields.value),
+)
 
-// ===== 分页（客户端） =====
+// ===== 分页（双模式）=====
 const page = ref(1)
 const pageSize = ref(10)
 const pagedRows = computed(() =>
-  filteredRows.value.slice((page.value - 1) * pageSize.value, page.value * pageSize.value),
+  serverMode.value
+    ? filteredRows.value
+    : filteredRows.value.slice((page.value - 1) * pageSize.value, page.value * pageSize.value),
 )
+// 分页器/总记录数数据源：服务端模式取响应 total（FE-11 UI 元素不变）。
+const totalCount = computed(() => (serverMode.value ? serverTotal.value : filteredRows.value.length))
 
 // ===== 列表详情同屏（FE-21）：选中行 + 详情态，切行/切建带未提交草稿确认 =====
 const tableRef = ref<TableInstance>()

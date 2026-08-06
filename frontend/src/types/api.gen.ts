@@ -323,7 +323,22 @@ export interface paths {
         /** 读取设备指定 YANG 路径的运行配置 */
         get: {
             parameters: {
-                query?: never;
+                query?: {
+                    /** @description 绕缓存/快照强制回读设备（BR-04/BR-14） */
+                    force_refresh?: boolean;
+                    /** @description 状态通道 <get>：含 config=false 数据，短 TTL 快照缓存（BR-14） */
+                    include_state?: boolean;
+                    /** @description 分页模式（BR-13，仅 YANG list 路径）：每页行数 1..1000，出现即分页，data 变为 {rows,total,limit,offset} */
+                    limit?: number;
+                    /** @description 分页起始行（缺省 0） */
+                    offset?: number;
+                    /** @description 过滤条件，可重复：<leaf>==<值> 等值 / <leaf>~=<值> 包含（AND 组合） */
+                    filter?: string[];
+                    /** @description 排序字段（叶名，支持嵌套路径） */
+                    sort?: string;
+                    /** @description 排序方向 asc|desc（缺省 asc） */
+                    sort_dir?: string;
+                };
                 header?: never;
                 path: {
                     /** @description 设备 IP */
@@ -335,7 +350,7 @@ export interface paths {
             };
             requestBody?: never;
             responses: {
-                /** @description 运行配置 */
+                /** @description 运行配置（无分页参数：data 为子树；分页模式：data 为行切片与总数） */
                 200: {
                     headers: {
                         [name: string]: unknown;
@@ -344,6 +359,15 @@ export interface paths {
                         "application/json": components["schemas"]["api.Response"] & {
                             data?: components["schemas"]["api.ConfigGetData"];
                         };
+                    };
+                };
+                /** @description 分页参数非法或目标非 list 节点 */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["api.Response"];
                     };
                 };
                 /** @description 获取失败 */

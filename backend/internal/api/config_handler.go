@@ -299,9 +299,17 @@ func forcedOwners(force bool, owners []string) []string {
 // @Summary  读取设备指定 YANG 路径的运行配置
 // @Tags     config
 // @Produce  json
-// @Param    ip   path string true "设备 IP"
-// @Param    path path string true "YANG 路径"
-// @Success  200 {object} Response{data=ConfigGetData} "运行配置"
+// @Param    ip            path  string true  "设备 IP"
+// @Param    path          path  string true  "YANG 路径"
+// @Param    force_refresh query bool   false "绕缓存/快照强制回读设备（BR-04/BR-14）"
+// @Param    include_state query bool   false "状态通道 <get>：含 config=false 数据，短 TTL 快照缓存（BR-14）"
+// @Param    limit         query int    false "分页模式（BR-13，仅 YANG list 路径）：每页行数 1..1000，出现即分页，data 变为 {rows,total,limit,offset}"
+// @Param    offset        query int    false "分页起始行（缺省 0）"
+// @Param    filter        query []string false "过滤条件，可重复：<leaf>==<值> 等值 / <leaf>~=<值> 包含（AND 组合）" collectionFormat(multi)
+// @Param    sort          query string false "排序字段（叶名，支持嵌套路径）"
+// @Param    sort_dir      query string false "排序方向 asc|desc（缺省 asc）"
+// @Success  200 {object} Response{data=ConfigGetData} "运行配置（无分页参数：data 为子树；分页模式：data 为行切片与总数）"
+// @Failure  400 {object} Response "分页参数非法或目标非 list 节点"
 // @Failure  500 {object} Response "获取失败"
 // @Failure  503 {object} Response "设备未连接"
 // @Router   /config/{ip}/{path} [get]

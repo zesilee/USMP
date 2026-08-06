@@ -184,6 +184,15 @@ export function filterRows(
   )
 }
 
+// 服务端过滤参数（FE-25）：把高级搜索条件下推为 BR-13 filter 语法，
+// 语义与 filterRows 一一对应——enum 全等（==）、其余包含（~=），空条件跳过。
+export function buildServerFilters(criteria: Record<string, any>, fields: Field[]): string[] {
+  const typeOf = new Map(fields.map((f) => [leafName(f), f.type]))
+  return Object.entries(criteria)
+    .filter(([, v]) => v !== '' && v != null)
+    .map(([k, v]) => (typeOf.get(k) === 'enum' ? `${k}==${v}` : `${k}~=${v}`))
+}
+
 // 行级 when 单元格：以该行数据为上下文求值（../x 即行内兄弟叶）。
 // 无 when 恒可见；求值失败降级可见（R08）。
 export function cellVisible(col: Field, row: Record<string, any>): boolean {
