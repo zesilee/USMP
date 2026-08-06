@@ -155,6 +155,10 @@ func TestExtractListRows(t *testing.T) {
 			map[string]interface{}{"renamed": rows3}, 3, false},
 		{"nil 子树返回空行（设备无数据）", s, "/demo:demo/demo:open/demo:entry",
 			nil, 0, false},
+		{"包裹容器（单 list 子节点）按 schema 放行", s, "/demo:demo/demo:open",
+			map[string]interface{}{"entry": rows3}, 3, false},
+		{"叶容器 schema 拒绝（负路径）", s, "/demo:demo/demo:global",
+			map[string]interface{}{"x": rows3, "y": rows3}, 0, true},
 	}
 	for _, c := range cases {
 		t.Run(c.desc, func(t *testing.T) {
@@ -173,6 +177,98 @@ func TestExtractListRows(t *testing.T) {
 			}
 		})
 	}
+}
+
+// BR-13 嵌套 list 谓词锚定下钻：FIB 形态——三键父 list 行内的 routes/route。
+// 快照根 = 停剥返回的父容器子树（{"unicast-af":[...]}），提取器按谓词索引
+// 唯一行后继续下钻；未命中=空页、多命中=400、值含 / 明确报错。
+func TestExtractListRows_PredicateDescent(t *testing.T) {
+	routes := func(n int, pfx string) []interface{} {
+		out := make([]interface{}, 0, n)
+		for i := 0; i < n; i++ {
+			out = append(out, map[string]interface{}{
+				"destination": fmt.Sprintf("10.%s.0.%d", pfx, i), "mask": float64(32),
+			})
+		}
+		return out
+	}
+	af := func(vrf, aft string, pos float64, n int, pfx string) map[string]interface{} {
+		return map[string]interface{}{
+			"vrf-name": vrf, "af-type": aft, "position": pos,
+			"routes": map[string]interface{}{"route": routes(n, pfx)},
+		}
+	}
+	subtree := map[string]interface{}{"unicast-af": []interface{}{
+		af("_public_", "ipv4unicast", 0, 5, "1"),
+		af("_public_", "ipv6unicast", 0, 2, "2"),
+		af("vpn1", "ipv4unicast", 0, 3, "3"),
+	}}
+	base := "/fib:fib/fib:unicast-afs/fib:unicast-af"
+
+	t.Run("三键谓词命中下钻到 routes 容器", func(t *testing.T) {
+		rows, err := extractListRows(nil,
+			base+"[vrf-name=_public_][af-type=ipv4unicast][position=0]/fib:routes", subtree)
+		if err != nil {
+			t.Fatalf("err = %v", err)
+		}
+		if len(rows) != 5 {
+			t.Fatalf("rows = %d, want 5", len(rows))
+		}
+		first := rows[0].(map[string]interface{})
+		if first["destination"] != "10.1.0.0" {
+			t.Errorf("first = %v, want 10.1.0.0（命中 _public_/v4 行）", first["destination"])
+		}
+	})
+	t.Run("下钻到 route list 段本身", func(t *testing.T) {
+		rows, err := extractListRows(nil,
+			base+"[vrf-name=vpn1][af-type=ipv4unicast][position=0]/fib:routes/fib:route", subtree)
+		if err != nil || len(rows) != 3 {
+			t.Fatalf("rows/err = %d/%v, want 3/nil", len(rows), err)
+		}
+	})
+	t.Run("数值键谓词按字符串化匹配", func(t *testing.T) {
+		rows, err := extractListRows(nil,
+			base+"[vrf-name=_public_][af-type=ipv6unicast][position=0]/fib:routes", subtree)
+		if err != nil || len(rows) != 2 {
+			t.Fatalf("rows/err = %d/%v, want 2/nil（position float64(0) 匹配谓词 0）", len(rows), err)
+		}
+	})
+	t.Run("引号包裹的谓词值", func(t *testing.T) {
+		rows, err := extractListRows(nil,
+			base+"[vrf-name='vpn1'][af-type=\"ipv4unicast\"][position=0]/fib:routes", subtree)
+		if err != nil || len(rows) != 3 {
+			t.Fatalf("rows/err = %d/%v, want 3/nil", len(rows), err)
+		}
+	})
+	t.Run("谓词未命中返回空页", func(t *testing.T) {
+		rows, err := extractListRows(nil,
+			base+"[vrf-name=nope][af-type=ipv4unicast][position=0]/fib:routes", subtree)
+		if err != nil || rows != nil && len(rows) != 0 {
+			t.Fatalf("rows/err = %v/%v, want 空/nil", rows, err)
+		}
+	})
+	t.Run("键不完整多命中拒绝", func(t *testing.T) {
+		_, err := extractListRows(nil, base+"[vrf-name=_public_]/fib:routes", subtree)
+		if err == nil {
+			t.Fatal("err = nil, want 多命中拒绝（键不完整）")
+		}
+	})
+	t.Run("中途容器缺失返回空页", func(t *testing.T) {
+		bare := map[string]interface{}{"unicast-af": []interface{}{
+			map[string]interface{}{"vrf-name": "x", "af-type": "y", "position": float64(0)},
+		}}
+		rows, err := extractListRows(nil,
+			"/fib:fib/fib:unicast-afs/fib:unicast-af[vrf-name=x][af-type=y][position=0]/fib:routes", bare)
+		if err != nil || len(rows) != 0 {
+			t.Fatalf("rows/err = %d/%v, want 0/nil", len(rows), err)
+		}
+	})
+	t.Run("谓词值含斜杠明确报错（已知边界）", func(t *testing.T) {
+		_, err := extractListRows(nil, base+"[vrf-name=a/b]/fib:routes", subtree)
+		if err == nil {
+			t.Fatal("err = nil, want 明确报错（pathLocals 切分局限）")
+		}
+	})
 }
 
 func lqRow(name, status string, mtu float64, extras ...map[string]interface{}) map[string]interface{} {

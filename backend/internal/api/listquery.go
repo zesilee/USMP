@@ -108,16 +108,30 @@ func parseListFilter(raw string) (ListFilter, error) {
 }
 
 // extractListRows 从整树子树中提取 list 行（BR-13）：
-//  1. 子树本身是数组 → 直接取行；
-//  2. schema 判定目标为 list 节点 → 优先按 list 名取键下数组；
-//  3. 兜底「子树根下唯一数组值」（与前端 normalizeRows 同规则）；
-//  4. schema 明确为非 list 节点、或无法定位数组 → 拒绝（调用方转 400）。
+//  1. 祖先段含键谓词（嵌套 list，FIB 形态）→ 先按谓词索引唯一行下钻
+//     （快照根 = 停剥返回的父容器子树，见 peelToPath 契约）；
+//  2. 子树/下钻结果本身是数组 → 直接取行；
+//  3. schema 判定目标为 list 节点（或单 list 子节点的包裹容器）→ 按 list 名取键下数组；
+//  4. 兜底「子树根下唯一数组值」（与前端 normalizeRows 同规则）；
+//  5. schema 明确为非 list、或无法定位数组 → 拒绝（调用方转 400）。
 //
-// nil 子树返回空行（设备无该表数据 = 合法空页，R08 不拒绝）。
+// nil 子树 / 谓词未命中 / 中途容器缺失 → 空行（设备无数据 = 合法空页，R08）。
 // 运行时路径按段剥模块前缀映射 schema 路径（与 deleteGate 同规）。
 func extractListRows(s schema.Schema, runtimePath string, subtree interface{}) ([]interface{}, error) {
 	if subtree == nil {
 		return nil, nil
+	}
+	// 谓词锚定下钻（design D2 补充决策）：无分页参数的读取不走本函数，
+	// 停剥契约不受影响。
+	if strings.Contains(runtimePath, "[") {
+		descended, empty, err := descendPredicates(runtimePath, subtree)
+		if err != nil {
+			return nil, err
+		}
+		if empty {
+			return nil, nil
+		}
+		subtree = descended
 	}
 	if rows, ok := subtree.([]interface{}); ok {
 		return rows, nil
@@ -129,14 +143,28 @@ func extractListRows(s schema.Schema, runtimePath string, subtree interface{}) (
 
 	var listName string
 	if node, found := lookupSchemaNode(s, runtimePath); found {
-		ln, isList := node.(schema.ListNode)
-		if !isList {
+		switch t := node.(type) {
+		case schema.ListNode:
+			listName = t.Name()
+		case schema.ContainerNode:
+			// 包裹容器（group 裹单 list 的常见形态，与 deleteGate 同规）：
+			// 取其唯一 list 子节点；非此形态 → 非 list 拒绝。
+			var lists []schema.Node
+			for _, ch := range t.Children() {
+				if _, isList := ch.(schema.ListNode); isList {
+					lists = append(lists, ch)
+				}
+			}
+			if len(lists) != 1 {
+				return nil, fmt.Errorf("路径 %s 在模型中不是 YANG list 节点，分页参数无效", runtimePath)
+			}
+			listName = lists[0].Name()
+		default:
 			return nil, fmt.Errorf("路径 %s 在模型中不是 YANG list 节点，分页参数无效", runtimePath)
 		}
-		listName = ln.Name()
 	}
 	if listName != "" {
-		if rows, ok := m[listName].([]interface{}); ok {
+		if rows, ok := lookupArray(m, listName); ok {
 			return rows, nil
 		}
 	}
@@ -159,17 +187,171 @@ func extractListRows(s schema.Schema, runtimePath string, subtree interface{}) (
 	}
 }
 
+// descendPredicates 从首个谓词段起沿路径下钻：谓词段按键值索引数组唯一行，
+// 普通段按局部名进容器。返回 (下钻结果, 是否空页, 错误)：
+// 未命中/中途缺失 → 空页；多命中（键不完整）→ 错误。
+// 已知边界：谓词值含 '/'（pathLocals 按 '/' 切分不感知引号）会产生带 '[' 无 ']'
+// 的破段，此处明确报错而非静默错配。
+func descendPredicates(runtimePath string, subtree interface{}) (interface{}, bool, error) {
+	segs := pathLocals(runtimePath)
+	first := -1
+	for i, seg := range segs {
+		if strings.Contains(seg, "[") {
+			first = i
+			break
+		}
+	}
+	if first < 0 {
+		return subtree, false, nil
+	}
+	cur := subtree
+	for _, seg := range segs[first:] {
+		m, ok := cur.(map[string]interface{})
+		if !ok {
+			return nil, true, nil // 中途形状意外/缺失 → 空页（R08 不崩）
+		}
+		if !strings.Contains(seg, "[") {
+			child, ok := lookupLocal(m, seg)
+			if !ok {
+				return nil, true, nil
+			}
+			cur = child
+			continue
+		}
+		name, preds, err := parsePredicateSeg(seg)
+		if err != nil {
+			return nil, false, err
+		}
+		arr, ok := lookupArray(m, name)
+		if !ok {
+			return nil, true, nil
+		}
+		var hit interface{}
+		hits := 0
+		for _, row := range arr {
+			rm, ok := row.(map[string]interface{})
+			if !ok {
+				continue
+			}
+			match := true
+			for k, v := range preds {
+				got, ok := lookupLocal(rm, k)
+				if !ok || stringifyLeaf(got) != v {
+					match = false
+					break
+				}
+			}
+			if match {
+				hit = row
+				hits++
+			}
+		}
+		switch {
+		case hits == 0:
+			return nil, true, nil // 谓词未命中 → 空页（设备无该行）
+		case hits > 1:
+			return nil, false, fmt.Errorf("路径 %s 谓词命中多行（键不完整），无法唯一锚定", runtimePath)
+		}
+		cur = hit
+	}
+	return cur, false, nil
+}
+
+// parsePredicateSeg 解析 list 谓词段 name[k1=v1][k2=v2]…：值可被单/双引号包裹。
+func parsePredicateSeg(seg string) (string, map[string]string, error) {
+	i := strings.Index(seg, "[")
+	name := seg[:i]
+	preds := map[string]string{}
+	rest := seg[i:]
+	for rest != "" {
+		if !strings.HasPrefix(rest, "[") {
+			return "", nil, fmt.Errorf("谓词段格式非法: %q", seg)
+		}
+		j := strings.Index(rest, "]")
+		if j < 0 {
+			return "", nil, fmt.Errorf("谓词段缺少 ']'（谓词值含 '/' 暂不支持）: %q", seg)
+		}
+		kv := rest[1:j]
+		eq := strings.Index(kv, "=")
+		if eq <= 0 {
+			return "", nil, fmt.Errorf("谓词键值格式非法: %q", kv)
+		}
+		val := strings.Trim(kv[eq+1:], `'"`)
+		preds[kv[:eq]] = val
+		rest = rest[j+1:]
+	}
+	if len(preds) == 0 {
+		return "", nil, fmt.Errorf("谓词段无键值: %q", seg)
+	}
+	return name, preds, nil
+}
+
+// lookupArray 按局部名取 map 下的数组值（键可能带模块前缀）。
+func lookupArray(m map[string]interface{}, local string) ([]interface{}, bool) {
+	v, ok := lookupLocal(m, local)
+	if !ok {
+		return nil, false
+	}
+	arr, ok := v.([]interface{})
+	return arr, ok
+}
+
+// predicateFetchPath 分页模式的设备取数路径：截到首个谓词段之前的父容器
+// （bracket 感知切分，谓词值可含 '/'）。深路径 subtree filter 选不回祖先 list
+// 的键叶（RFC6241 selection 语义，sim/真机同口径），谓词下钻会匹配不到行——
+// 故整列表连键取回，快照按父容器共享（不同谓词行共用一份快照）。
+// 无谓词、或谓词在首段（无父可截）→ 返回原路径与 false。
+func predicateFetchPath(path string) (string, bool) {
+	norm := "/" + strings.Trim(strings.TrimSpace(path), "/")
+	var segs []string
+	var cur strings.Builder
+	depth := 0
+	for _, r := range strings.Trim(norm, "/") {
+		switch {
+		case r == '[':
+			depth++
+			cur.WriteRune(r)
+		case r == ']':
+			if depth > 0 {
+				depth--
+			}
+			cur.WriteRune(r)
+		case r == '/' && depth == 0:
+			segs = append(segs, cur.String())
+			cur.Reset()
+		default:
+			cur.WriteRune(r)
+		}
+	}
+	if cur.Len() > 0 {
+		segs = append(segs, cur.String())
+	}
+	for i, seg := range segs {
+		if strings.Contains(seg, "[") {
+			if i == 0 {
+				return path, false
+			}
+			return "/" + strings.Join(segs[:i], "/"), true
+		}
+	}
+	return path, false
+}
+
 // lookupSchemaNode 按 deleteGate 同规把运行时路径映射到 schema 节点：
-// 逐段剥模块前缀（/vlan:vlan/vlan:vlans → /vlan/vlans）。
+// 逐段剥模块前缀并剥除 list 谓词（/vlan:vlan/vlans[id=1] → /vlan/vlans）。
 func lookupSchemaNode(s schema.Schema, runtimePath string) (schema.Node, bool) {
 	if s == nil {
 		return nil, false
 	}
 	segs := strings.Split(strings.Trim(runtimePath, "/"), "/")
 	for i, seg := range segs {
-		if j := strings.Index(seg, ":"); j >= 0 {
-			segs[i] = seg[j+1:]
+		if j := strings.Index(seg, "["); j >= 0 {
+			seg = seg[:j]
 		}
+		if j := strings.Index(seg, ":"); j >= 0 {
+			seg = seg[j+1:]
+		}
+		segs[i] = seg
 	}
 	return s.Path("/" + strings.Join(segs, "/"))
 }
