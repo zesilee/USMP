@@ -258,3 +258,41 @@ describe('FieldRenderer · 字符串 length 合成占位（FE-22/D9）', () => {
     expect(num.find('input').attributes('placeholder')).toBe('整数 合法范围: [60, 9600]')
   })
 })
+
+describe('FieldRenderer · leafref 禁自由文本（FE-19）', () => {
+  const leafrefField = {
+    path: 'if-name',
+    type: 'string' as const,
+    label: 'if-name',
+    leafRef: '/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name',
+  }
+
+  it('leafref 字段无 options（拉取失败/为空）→ 仍渲染下拉，非文本框', () => {
+    const w = mount(FieldRenderer, {
+      props: { field: leafrefField as any, modelValue: '' },
+      global: { plugins: [ElementPlus] },
+    })
+    expect(w.find('[data-test="leafref-select"]').exists()).toBe(true)
+    expect(w.find('.field-scalar').exists()).toBe(false)
+  })
+
+  it('leafref 字段有 options → 下拉含选项（既有行为回归）', () => {
+    const w = mount(FieldRenderer, {
+      props: {
+        field: { ...leafrefField, options: [{ label: '200GE0/1/0', value: '200GE0/1/0' }] } as any,
+        modelValue: '',
+      },
+      global: { plugins: [ElementPlus] },
+    })
+    expect(w.find('[data-test="leafref-select"]').exists()).toBe(true)
+  })
+
+  it('非 leafref 普通 string 字段仍渲染文本框（回归不破）', () => {
+    const w = mount(FieldRenderer, {
+      props: { field: { path: 'desc', type: 'string' as const, label: 'desc' } as any, modelValue: '' },
+      global: { plugins: [ElementPlus] },
+    })
+    expect(w.find('.field-scalar').exists()).toBe(true)
+    expect(w.find('[data-test="leafref-select"]').exists()).toBe(false)
+  })
+})

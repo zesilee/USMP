@@ -117,11 +117,26 @@ describe('RpcExecuteTab · leafref 下拉（FE-19）', () => {
     expect(vm.resolvedInputs[0].options.map((o: any) => o.value)).toEqual(['200GE0/1/0', '200GE0/1/1'])
   })
 
-  it('拉取失败/空列表 → 降级文本输入（R08，不阻断执行）', async () => {
+  it('拉取失败 → 仍渲染空下拉，禁自由文本（FE-19 负路径）', async () => {
     vi.mocked(getConfig).mockRejectedValue(new Error('offline'))
     const w = mountTab(resetTab)
     await flushPromises()
-    expect(w.find('[data-test="leafref-select"]').exists()).toBe(false)
-    expect(w.find('input').exists()).toBe(true) // 文本框兜底
+    // 禁止降级为可手输的文本框：leafref 输入永远是下拉
+    expect(w.find('[data-test="leafref-select"]').exists()).toBe(true)
+    expect(w.find('.field-scalar').exists()).toBe(false)
+    // 空态占位提示（设备离线/无可选项）——el-select 2.x 占位符渲染为文本节点
+    expect(w.find('[data-test="leafref-select"]').text()).toContain('无可选项，请确认设备在线')
+  })
+
+  it('目标 list 无实例（空列表）→ 空下拉且执行按钮保持禁用', async () => {
+    vi.mocked(getConfig).mockResolvedValue({ data: { data: { interface: [] } } } as any)
+    const w = mountTab(resetTab)
+    await flushPromises()
+    expect(w.find('[data-test="leafref-select"]').exists()).toBe(true)
+    expect(w.find('.field-scalar').exists()).toBe(false)
+    expect(w.find('[data-test="leafref-select"]').text()).toContain('无可选项，请确认设备在线')
+    // mandatory leafref 选不出值 → 校验拦截（§9）
+    const btn = w.find('[data-test="rpc-execute"]')
+    expect((btn.element as HTMLButtonElement).disabled).toBe(true)
   })
 })

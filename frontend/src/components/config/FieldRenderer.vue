@@ -1,9 +1,10 @@
 <template>
   <div class="field-renderer">
     <!-- String + options（leafref 解析出的目标值，如 rpc 输入 if-name→接口名）→
-         可搜索下拉（FE-19）；无 options 则普通文本框。 -->
+         可搜索下拉（FE-19）。leafref 字段禁自由文本：即使 options 为空（设备离线/
+         目标 list 无实例）也保持下拉（空态），不降级文本框。 -->
     <el-select
-      v-if="field.type === 'string' && field.options?.length"
+      v-if="field.type === 'string' && (field.options?.length || field.leafRef)"
       :model-value="modelValue"
       @update:model-value="$emit('update:modelValue', $event)"
       :placeholder="placeholderOf"

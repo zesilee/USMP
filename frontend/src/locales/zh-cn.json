@@ -321,6 +321,7 @@
       "highRisk": "高危",
       "tip": "执行一次设备运维操作，不修改配置、不入对账。",
       "noInput": "无输入参数",
+      "noOptions": "无可选项，请确认设备在线",
       "execute": "执行",
       "confirmTitle": "确认执行操作",
       "confirmBody": "将对设备 {device} 执行「{rpc}」：{inputs}。确定执行？",

@@ -64,17 +64,21 @@ function labelOf(f: Field): string {
   return f.label || leafName(f)
 }
 
-// 渲染用的输入字段：leafref 且已解析出目标值 → 注入 options（FieldRenderer 渲成
-// 下拉）；否则原样（文本框）。设备离线/拉取失败时 options 为空 → 降级文本输入（R08）。
+// 渲染用的输入字段：leafref 一律下拉（FE-19 禁自由文本）——有目标值注入 options，
+// 拉取失败/为空则空下拉 + 占位提示（R08 降级=空下拉而非放开手输，mandatory 由
+// submittable 自然拦截）。非 leafref 字段原样。
 const resolvedInputs = computed<Field[]>(() =>
   rpc.value.input.map((f) => {
-    const opts = leafrefOptions[keyOf(f)]
-    return f.leafRef && opts?.length ? { ...f, options: opts } : f
+    if (!f.leafRef) return f
+    const opts = leafrefOptions[keyOf(f)] ?? []
+    return opts.length
+      ? { ...f, options: opts }
+      : { ...f, options: [], placeholder: t('console.rpc.noOptions') }
   }),
 )
 
 // 拉取每个 leafref 输入的目标列表 → 下拉选项。解析路径经 getConfig+extractRows，
-// 失败静默降级（保留文本输入，不打扰执行主流程）。
+// 失败静默（选项留空，渲染层兜底空下拉，不打扰执行主流程）。
 async function loadLeafrefOptions() {
   for (const k of Object.keys(leafrefOptions)) delete leafrefOptions[k]
   if (!props.device) return
@@ -90,7 +94,7 @@ async function loadLeafrefOptions() {
         .map((v) => ({ label: v, value: v }))
       if (opts.length) leafrefOptions[keyOf(f)] = opts
     } catch {
-      /* 拉取失败降级文本输入（R08） */
+      /* 拉取失败=空选项 → 空下拉（R08） */
     }
   }
 }

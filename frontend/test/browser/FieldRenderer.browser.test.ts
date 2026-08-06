@@ -61,3 +61,63 @@ describe('FieldRenderer 嵌套 list（真浏览器）', () => {
     wrapper.unmount()
   })
 })
+
+// 真 Chromium 验证：leafref 输入禁自由文本（FE-19）。契约靠 el-select 无 allow-create
+// 兜底——此用例锁死该行为：即使 options 为空，键入任意文本+回车/失焦也不得产生值。
+describe('FieldRenderer leafref 禁自由文本（真浏览器）', () => {
+  const leafrefField: Field = {
+    path: 'if-name',
+    type: 'string',
+    label: 'if-name',
+    leafRef: '/ifm:ifm/ifm:interfaces/ifm:interface/ifm:name',
+    options: [],
+  }
+
+  it('空 options 的 leafref 下拉：键入文本+回车/失焦不 emit 任何值', async () => {
+    const wrapper = mount(FieldRenderer, {
+      global: { plugins: [ElementPlus] },
+      props: { field: leafrefField, modelValue: '' },
+      attachTo: document.body,
+    })
+    await wrapper.vm.$nextTick()
+
+    const select = wrapper.find('[data-test="leafref-select"]')
+    expect(select.exists()).toBe(true)
+    // 无普通文本框兜底
+    expect(wrapper.find('.field-scalar').exists()).toBe(false)
+
+    const input = select.find('input')
+    await input.trigger('click')
+    await input.setValue('200GE-fake/0/0')
+    await input.trigger('keydown', { key: 'Enter' })
+    await input.trigger('blur')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.emitted('update:modelValue')).toBeFalsy()
+
+    wrapper.unmount()
+  })
+
+  it('有 options 时仍只能选既有项（filterable 过滤不产生新值）', async () => {
+    const wrapper = mount(FieldRenderer, {
+      global: { plugins: [ElementPlus] },
+      props: {
+        field: { ...leafrefField, options: [{ label: '200GE0/1/0', value: '200GE0/1/0' }] },
+        modelValue: '',
+      },
+      attachTo: document.body,
+    })
+    await wrapper.vm.$nextTick()
+
+    const input = wrapper.find('[data-test="leafref-select"] input')
+    await input.trigger('click')
+    await input.setValue('no-such-interface')
+    await input.trigger('keydown', { key: 'Enter' })
+    await wrapper.vm.$nextTick()
+
+    // 过滤无命中 → 回车不选中任何值
+    expect(wrapper.emitted('update:modelValue')).toBeFalsy()
+
+    wrapper.unmount()
+  })
+})
