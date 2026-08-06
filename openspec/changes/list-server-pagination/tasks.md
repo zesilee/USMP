@@ -5,9 +5,9 @@
 
 ## 1. 后端：list 行查询引擎（B1 纯逻辑）
 
-- [ ] 1.1 红灯：`internal/api` 新增 list 查询单测（表格驱动）——行提取（schema 判定 list / 数组兜底 / 两者失败）、filter（`==`/`~=`、嵌套路径、多条件 AND、值字符串化）、sort（数值/字符串、asc/desc、无 sort 保序）、切片（offset 越界空页、limit 边界 1/1000）、race（并发查询同一快照）
-- [ ] 1.2 实现 `listquery`（行提取 → 过滤 → 排序 → 切片，纯函数、不触缓存），单测全绿
-- [ ] 1.3 基准护栏：10k 行 filter+sort+slice 基准测试，确认毫秒量级（design D2 承诺）
+- [x] 1.1 红灯：`internal/api` 新增 list 查询单测（表格驱动）——行提取（schema 判定 list / 数组兜底 / 两者失败）、filter（`==`/`~=`、嵌套路径、多条件 AND、值字符串化）、sort（数值/字符串、asc/desc、无 sort 保序）、切片（offset 越界空页、limit 边界 1/1000）、race（并发查询同一快照）
+- [x] 1.2 实现 `listquery`（行提取 → 过滤 → 排序 → 切片，纯函数、不触缓存），单测全绿
+- [x] 1.3 基准护栏：10k 行 filter+sort+slice 基准测试，确认毫秒量级（design D2 承诺）
 
 ## 2. 后端：GET /config 分页参数与状态快照缓存（B3 契约 + B1）
 
