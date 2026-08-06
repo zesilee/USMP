@@ -352,6 +352,8 @@ SHALL 在输入控件展示单位后缀。
 
 前端 SHALL 把模块的 rpc 与顶层配置容器**平级**呈现在左侧导航树的模块叶下（导航层级：模块 → container 与 rpc 并列平铺，LT-03）；模块控制台 `/module/:module` 的 Tab 栏 SHALL NOT 再出现 rpc Tab（rpc 入口唯一收敛到左树）。点击某 rpc 节点 SHALL 路由 `/module/:module/rpc/:rpcName`，右侧内容区 SHALL 仅渲染该 rpc 的执行面板：input 由 schema 的 FieldDef 渲染（复用既有渲染管线，含 leafref 下拉、mandatory 校验、单位后缀），rpc 名与 input 叶标签 SHALL 按 UI-03 本地化，执行后 SHALL 回显 rpc-reply 结果或错误。rpc 路由页 SHALL 沿用全局设备上下文与面包屑骨架（配置/厂商/模块/rpc 名）。`rpcName` 不存在于该模块 schema 时 SHALL 展示明确错误提示且不崩（R08）。渲染 SHALL 由 schema 驱动，SHALL NOT 为具体 rpc 硬编码表单。
 
+带 leafref 目标的 rpc 输入 SHALL **始终**渲染为下拉，仅可从设备实际存在的目标值中选择，SHALL NOT 允许自由文本输入、SHALL NOT 在目标列表拉取失败或为空时降级为文本框。目标列表为空（设备离线、拉取失败、目标 list 无实例）时下拉 SHALL 呈空并展示明确占位提示（R08 降级=空下拉而非放开手输）；mandatory 的 leafref 输入无值时执行按钮 SHALL 维持校验拦截。
+
 #### Scenario: rpc 与 container 平级呈现于左树
 
 - **WHEN** 展开某含 rpc 的模块（huawei-ifm）左树叶
@@ -373,6 +375,12 @@ SHALL 在输入控件展示单位后缀。
 
 - **WHEN** 打开 `/module/ifm/rpc/no-such-rpc`
 - **THEN** 内容区 SHALL 展示明确错误提示，SHALL NOT 崩溃或空白
+
+#### Scenario: leafref 输入禁自由文本（负路径）
+
+- **WHEN** 打开任一含 leafref 输入的 rpc（如 huawei-ifm `reset-if-control-flap-counts` 的 if-name），且目标列表拉取失败或为空
+- **THEN** 该输入 SHALL 仍渲染为下拉（空态+占位提示），SHALL NOT 渲染为可手输的文本框
+- **AND** 该输入为 mandatory 时执行按钮 SHALL 保持禁用
 ### Requirement: FE-20 高危 rpc 执行确认
 
 前端 SHALL 在执行任一 rpc 前弹确认（展示 rpc 名、input 值、目标设备）。对高危 rpc（highRisk 标记，如 `restart-if`）SHALL 升级为更醒目的警示确认。用户未确认时 SHALL NOT 执行。
