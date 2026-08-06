@@ -317,22 +317,32 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 		return
 	}
 
+	// 分页模式的谓词路径：设备取数/缓存键截到首个谓词段之前的父容器（整列表
+	// 连键取回，快照共享；深路径 filter 选不回祖先 list 键叶，下钻会匹配不到行）。
+	// 无参数读取（lq==nil）不受影响——单行谓词读契约原样。
+	fetchPath := path
+	if lq != nil {
+		if fp, ok := predicateFetchPath(path); ok {
+			fetchPath = fp
+		}
+	}
+
 	rc := h.manager.GetRunningCache()
-	key := runKey(ip, path)
+	key := runKey(ip, fetchPath)
 	ttlSec := int(rc.TTL().Seconds())
 
 	// 节点级不支持快速失败（BR-12）：已学习路径不再打设备；force_refresh 绕过
 	// 重试（成功即清标记——设备升级后的恢复通道）。视图经 Peek 取自既有连接
 	// （绝不拨号）；无连接=无学习记忆，检查自然跳过。
-	if view := h.support(ip); view != nil && !forceRefresh && view.IsUnsupportedPath(path) {
-		rejectNodeUnsupported(c, path)
+	if view := h.support(ip); view != nil && !forceRefresh && view.IsUnsupportedPath(fetchPath) {
+		rejectNodeUnsupported(c, fetchPath)
 		return
 	}
 
 	// include_state=true → 状态通道（<get>，按需）：BR-14 改为短 TTL 快照缓存
 	// 优先（万级状态表翻页秒开），force_refresh 绕过直打设备（实时逃生门）。
 	if c.Query("include_state") == "true" {
-		h.serveStateRead(c, ip, path, key, lq, forceRefresh)
+		h.serveStateRead(c, ip, path, fetchPath, key, lq, forceRefresh)
 		return
 	}
 
@@ -348,10 +358,10 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	data, err := h.fetch(ctx, ip, path)
+	data, err := h.fetch(ctx, ip, fetchPath)
 	if err != nil {
-		if h.learnNodeUnsupported(ip, path, err) {
-			rejectNodeUnsupported(c, path)
+		if h.learnNodeUnsupported(ip, fetchPath, err) {
+			rejectNodeUnsupported(c, fetchPath)
 			return
 		}
 		if errors.Is(err, errDeviceNotConnected) {
@@ -362,17 +372,18 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 		return
 	}
 	if forceRefresh {
-		h.clearUnsupported(ip, path)
+		h.clearUnsupported(ip, fetchPath)
 	}
 
 	rc.Set(key, data)
 	h.respondConfig(c, data, lq, path, false, 0, ttlSec, "device", "Configuration retrieved")
 }
 
-// serveStateRead 状态通道读（BR-14）：快照缓存优先（键同 runKey，实例独立于
-// 运行配置缓存——写后失效不触及），未命中/过期/force_refresh 经 <get> 全量
-// 回读并回填快照。分页参数与状态读可组合：切片作用于快照。
-func (h *ConfigHandler) serveStateRead(c *gin.Context, ip, path, key string, lq *ListQueryParams, forceRefresh bool) {
+// serveStateRead 状态通道读（BR-14）：快照缓存优先（键 = runKey(ip, fetchPath)，
+// 实例独立于运行配置缓存——写后失效不触及），未命中/过期/force_refresh 经
+// <get> 全量回读并回填快照。分页参数与状态读可组合：切片作用于快照；
+// path（含谓词的原始路径）用于行提取下钻，fetchPath 用于设备取数与学习。
+func (h *ConfigHandler) serveStateRead(c *gin.Context, ip, path, fetchPath, key string, lq *ListQueryParams, forceRefresh bool) {
 	ttlSec := int(h.stateCache.TTL().Seconds())
 	if !forceRefresh {
 		if val, age, ok := h.stateCache.GetWithAge(key); ok {
@@ -383,10 +394,10 @@ func (h *ConfigHandler) serveStateRead(c *gin.Context, ip, path, key string, lq 
 
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
-	data, err := h.fetchState(ctx, ip, path)
+	data, err := h.fetchState(ctx, ip, fetchPath)
 	if err != nil {
-		if h.learnNodeUnsupported(ip, path, err) {
-			rejectNodeUnsupported(c, path)
+		if h.learnNodeUnsupported(ip, fetchPath, err) {
+			rejectNodeUnsupported(c, fetchPath)
 			return
 		}
 		if errors.Is(err, errDeviceNotConnected) {
@@ -397,7 +408,7 @@ func (h *ConfigHandler) serveStateRead(c *gin.Context, ip, path, key string, lq 
 		return
 	}
 	if forceRefresh {
-		h.clearUnsupported(ip, path)
+		h.clearUnsupported(ip, fetchPath)
 	}
 	h.stateCache.Set(key, data)
 	h.respondConfig(c, data, lq, path, false, 0, ttlSec, "device", "Configuration retrieved")
