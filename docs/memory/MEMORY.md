@@ -1,5 +1,6 @@
 # 项目记忆索引
 
+- [大list服务端分页](list-server-pagination.md) — 做大表/分页/状态读/堆叠PR前必读：BR-13/BR-14已交付(快照出口分页+阈值200双模式+状态快照TTL可调)、谓词下钻=取数截断+键值索引双动作、sim勿包config壳、堆叠PR删分支连坐下游CLOSE、时序护栏按-race弱机×5估上界
 - [回读子树剥层契约](readback-subtree-peel.md) — 改回读形状/decodeRunningConfig/加消费方前必读：响应契约=以请求路径为根的子树(PR#281 peelToPath)、谓词段停剥返回父容器、批量接入模块解码根=模块根曾致devm「一行且位置=port」、症状速查=主键列显示list名、多键列表解码已支持(PR#290)删除通道多键刻意不支持
 
 - [北向CRD→YANG工具](crd-to-yang-codegen.md) — 碰北向对接/crd2yang/往返对账/businessdemo 前必读：goyang全量Range陷阱、enum字典序、demo隔离锚点(勿接线load.go)、接线剩余债=多Kind业务API泛化；代码检视一律独立agent
