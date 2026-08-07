@@ -340,6 +340,8 @@
     "boolOn": "On",
     "boolOff": "Off",
     "rangeBoth": "Valid range: [{min}, {max}]",
+    "defaultSuffix": ", default: {v}",
+    "defaultOnly": "Default: {v}",
     "rangeMin": "Valid range: ≥ {min}",
     "rangeMax": "Valid range: ≤ {max}",
     "clearFieldTip": "Clear this field — it will not be pushed this time (not a device-side delete)",

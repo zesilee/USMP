@@ -340,6 +340,8 @@
     "boolOn": "打开",
     "boolOff": "关闭",
     "rangeBoth": "整数 合法范围: [{min}, {max}]",
+    "defaultSuffix": "，默认值: {v}",
+    "defaultOnly": "默认值: {v}",
     "rangeMin": "整数 合法范围: ≥ {min}",
     "rangeMax": "整数 合法范围: ≤ {max}",
     "clearFieldTip": "清空该字段，本次不下发（非设备侧删除）",
