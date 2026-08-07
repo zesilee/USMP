@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gin-gonic/gin"
+	beecontext "github.com/beego/beego/v2/server/web/context"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
@@ -222,7 +222,7 @@ type DeviceConnStatus struct {
 // @Produce  json
 // @Success  200 {object} Response{data=DeviceListData} "设备列表 + 连接池统计"
 // @Router   /devices [get]
-func (h *DeviceHandler) ListDevices(c *gin.Context) {
+func (h *DeviceHandler) ListDevices(c *beecontext.Context) {
 	snapshot := h.snapshotDevices()
 
 	pool := h.manager.GetClientPool()
@@ -254,10 +254,15 @@ func (h *DeviceHandler) ListDevices(c *gin.Context) {
 // @Failure  400 {object} Response "请求非法"
 // @Failure  500 {object} Response "连接设备失败"
 // @Router   /devices [post]
-func (h *DeviceHandler) AddDevice(c *gin.Context) {
+func (h *DeviceHandler) AddDevice(c *beecontext.Context) {
 	var req AddDeviceRequest
-	if err := c.ShouldBindJSON(&req); err != nil {
+	if err := bindJSON(c, &req); err != nil {
 		Error(c, 400, "Invalid request: "+err.Error())
+		return
+	}
+	// binding:"required" 语义（gin 时代由 ShouldBindJSON 校验，beego 下显式保留）
+	if req.IP == "" || req.Username == "" || req.Password == "" {
+		Error(c, 400, "Invalid request: ip, username and password are required")
 		return
 	}
 
@@ -316,8 +321,8 @@ func (h *DeviceHandler) AddDevice(c *gin.Context) {
 // @Param    ip path string true "设备 IP"
 // @Success  200 {object} Response "移除成功"
 // @Router   /devices/{ip} [delete]
-func (h *DeviceHandler) RemoveDevice(c *gin.Context) {
-	ip := c.Param("ip")
+func (h *DeviceHandler) RemoveDevice(c *beecontext.Context) {
+	ip := c.Input.Param(":ip")
 
 	if ds := h.manager.GetDeviceStore(); ds != nil {
 		// BR-13: 删除持久化失败同样 5xx 可见。
@@ -350,8 +355,8 @@ type DeviceCapabilitiesData struct {
 // @Success  200 {object} Response{data=DeviceCapabilitiesData} "capabilities 原文；离线为空列表+negotiated:false"
 // @Failure  404 {object} Response "设备未注册"
 // @Router   /devices/{ip}/capabilities [get]
-func (h *DeviceHandler) GetCapabilities(c *gin.Context) {
-	ip := c.Param("ip")
+func (h *DeviceHandler) GetCapabilities(c *beecontext.Context) {
+	ip := c.Input.Param(":ip")
 	info, ok := h.manager.GetDeviceStore().Get(ip)
 	if !ok {
 		Error(c, 404, "device not registered: "+ip)
@@ -374,8 +379,8 @@ func (h *DeviceHandler) GetCapabilities(c *gin.Context) {
 // @Success  200 {object} Response{data=DeviceConnStatus} "运行与连接状态"
 // @Failure  404 {object} Response "设备不存在"
 // @Router   /devices/{ip}/status [get]
-func (h *DeviceHandler) GetStatus(c *gin.Context) {
-	ip := c.Param("ip")
+func (h *DeviceHandler) GetStatus(c *beecontext.Context) {
+	ip := c.Input.Param(":ip")
 
 	devInfo, exists := h.lookupDevice(ip)
 	if !exists {

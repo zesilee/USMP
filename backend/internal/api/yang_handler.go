@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/gin-gonic/gin"
+	beecontext "github.com/beego/beego/v2/server/web/context"
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
@@ -138,7 +138,7 @@ func NewYangHandler(manager manager.Manager) *YangHandler {
 // @Produce  json
 // @Success  200 {object} Response{data=[]YangModuleInfo} "模块列表"
 // @Router   /yang/modules [get]
-func (h *YangHandler) ListModules(c *gin.Context) {
+func (h *YangHandler) ListModules(c *beecontext.Context) {
 	s := h.manager.GetSchema()
 	modules := make([]YangModuleInfo, 0)
 
@@ -166,7 +166,7 @@ func (h *YangHandler) ListModules(c *gin.Context) {
 	}
 
 	// CN-02/BR-12：可选 device 参数 → 按该设备 hello 能力协商子集。
-	if deviceID := c.Query("device"); deviceID != "" {
+	if deviceID := c.Input.Query("device"); deviceID != "" {
 		info, ok := h.manager.GetDeviceStore().Get(deviceID)
 		if !ok {
 			Error(c, 404, "device not registered: "+deviceID)
@@ -250,20 +250,20 @@ func narrowModuleInfos(caps []string, modules []YangModuleInfo, m manager.Manage
 // @Param    form   query string false "nested 返回嵌套树 schema（保留 list-in-list 结构）"
 // @Success  200 {object} Response{data=YangSchema} "动态表单 schema"
 // @Router   /yang/schema/{module} [get]
-func (h *YangHandler) GetSchema(c *gin.Context) {
-	module := c.Param("module")
+func (h *YangHandler) GetSchema(c *beecontext.Context) {
+	module := c.Input.Param(":module")
 
 	if mod, ok := h.manager.GetSchema().Module(module); ok {
 		// ?form=nested 返回嵌套树 schema（保留 list-in-list 结构，如 VLAN member-ports）
 		var sch YangSchema
-		if c.Query("form") == "nested" {
+		if c.Input.Query("form") == "nested" {
 			sch = buildYangSchemaNested(mod)
 		} else {
 			sch = buildYangSchema(mod)
 		}
 		// CN-05：?device= 附该设备已学习的不支持子路径（相对模块根首段名）。
 		// 设备未注册沿用 CN-02 的 404 语义；无学习/无连接为空集省略键。
-		if deviceID := c.Query("device"); deviceID != "" {
+		if deviceID := c.Input.Query("device"); deviceID != "" {
 			if _, ok := h.manager.GetDeviceStore().Get(deviceID); !ok {
 				Error(c, 404, "device not registered: "+deviceID)
 				return

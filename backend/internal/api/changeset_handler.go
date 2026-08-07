@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gin-gonic/gin"
+	beecontext "github.com/beego/beego/v2/server/web/context"
 	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/intent"
@@ -114,7 +114,7 @@ type previewEntry struct {
 // @Success  200 {object} Response{data=ChangesetPreviewData} "预览结果"
 // @Failure  400 {object} Response "变更集解析失败"
 // @Router   /config/changeset/preview [post]
-func (h *ChangesetHandler) Preview(c *gin.Context) {
+func (h *ChangesetHandler) Preview(c *beecontext.Context) {
 	req, entries, ok := h.decodeChangeset(c)
 	if !ok {
 		return
@@ -148,9 +148,9 @@ func (h *ChangesetHandler) Preview(c *gin.Context) {
 
 // decodeChangeset 解析并解码整个变更集；任一条目非法即 400，不返回部分结果
 // （CS-01 负路径）。
-func (h *ChangesetHandler) decodeChangeset(c *gin.Context) (ChangesetReq, []previewEntry, bool) {
+func (h *ChangesetHandler) decodeChangeset(c *beecontext.Context) (ChangesetReq, []previewEntry, bool) {
 	var req ChangesetReq
-	if err := c.ShouldBindJSON(&req); err != nil {
+	if err := bindJSON(c, &req); err != nil {
 		Error(c, 400, "Invalid request: "+err.Error())
 		return req, nil, false
 	}
@@ -400,8 +400,8 @@ type ChangesetCommitData struct {
 // @Failure  409 {object} Response{data=OwnershipRejection} "路径被业务意图认领（无 force 拒绝）"
 // @Failure  502 {object} Response "设备下发失败（已整体回退）"
 // @Router   /config/changeset/commit [post]
-func (h *ChangesetHandler) Commit(c *gin.Context) {
-	force := c.Query("force") == "true"
+func (h *ChangesetHandler) Commit(c *beecontext.Context) {
+	force := c.Input.Query("force") == "true"
 	req, entries, ok := h.decodeChangeset(c)
 	if !ok {
 		return

@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/gin-gonic/gin"
+	beecontext "github.com/beego/beego/v2/server/web/context"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/status"
 )
@@ -59,11 +59,11 @@ const (
 // @Param    offset query int    false "偏移(默认 0)"
 // @Success  200 {object} Response{data=AuditListData} "操作日志"
 // @Router   /logs [get]
-func (h *AuditHandler) ListLogs(c *gin.Context) {
-	device := c.Query("device")
-	statusFilter := c.Query("status")
-	limit := parsePositive(c.Query("limit"), defaultLogLimit, maxLogLimit)
-	offset := parsePositive(c.Query("offset"), 0, 1<<31-1)
+func (h *AuditHandler) ListLogs(c *beecontext.Context) {
+	device := c.Input.Query("device")
+	statusFilter := c.Input.Query("status")
+	limit := parsePositive(c.Input.Query("limit"), defaultLogLimit, maxLogLimit)
+	offset := parsePositive(c.Input.Query("offset"), 0, 1<<31-1)
 
 	reader := h.manager.GetReconcileStatus()
 	records := h.manager.GetAuditStore().List() // newest-first

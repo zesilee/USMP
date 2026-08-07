@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
+	beecontext "github.com/beego/beego/v2/server/web/context"
 
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
@@ -39,7 +39,7 @@ type LeftTreeNodeDTO struct {
 // @Success  200 {object} Response{data=[]LeftTreeNodeDTO} "左树"
 // @Failure  404 {object} Response "device 未注册（信封）"
 // @Router   /yang/left-tree [get]
-func (h *YangHandler) LeftTree(c *gin.Context) {
+func (h *YangHandler) LeftTree(c *beecontext.Context) {
 	loaded := map[string]bool{}
 	for _, mod := range h.manager.GetSchema().Modules() {
 		loaded[mod.Name()] = true
@@ -47,7 +47,7 @@ func (h *YangHandler) LeftTree(c *gin.Context) {
 
 	// ?device=：协商可得时产出该设备支持的根容器集（CN-02 同一启发匹配）。
 	var supported map[string]bool
-	if deviceID := c.Query("device"); deviceID != "" {
+	if deviceID := c.Input.Query("device"); deviceID != "" {
 		info, ok := h.manager.GetDeviceStore().Get(deviceID)
 		if !ok {
 			Error(c, 404, "device not registered: "+deviceID)
