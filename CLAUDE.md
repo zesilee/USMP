@@ -37,7 +37,7 @@
 
 | 层 | 选型 | 依赖 | 约束 |
 |----|------|------|------|
-| 后端 | Go 1.22（钉死） / yang-controller-runtime / Gin | ygot, scrapligo | §4 分层架构 |
+| 后端 | Go 1.22（钉死） / yang-controller-runtime / Beego（web 路由层，禁止回引 gin，守护测试拦截） | ygot, netconfcore（自研，scrapligo 已删 NC-01） | §4 分层架构 |
 | 模型 | YANG + ygot | openconfig/ygot | R04: 自动生成 |
 | 协议 | NETCONF (SSH 830) + gNMI | RFC6241, openconfig/gnmi | R02: 禁止旧协议 |
 | 缓存 | TTL+LRU 内存 | 协程安全 | R03: 无数据库, Key=IP+YANG路径, TTL 30s, 下发后失效 |
