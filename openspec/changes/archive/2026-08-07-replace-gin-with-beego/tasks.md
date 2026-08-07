@@ -34,5 +34,5 @@
 ## 6. 合入与收尾
 
 - [x] 6.1 What/Why/How 三段式 commit（功能与 docs/memory 分 commit，MEM04）
-- [ ] 6.2 finishing-a-development-branch：push + PR，CI 全绿自助 merge（体积超 1000 行则按 design D9 两 PR 拆分）
-- [ ] 6.3 `/opsx:sync` 合并 netconf-simulator delta 到主 spec，`/opsx:archive` 归档
+- [x] 6.2 finishing-a-development-branch：push + PR，CI 全绿自助 merge（体积超 1000 行则按 design D9 两 PR 拆分）
+- [x] 6.3 `/opsx:sync` 合并 netconf-simulator delta 到主 spec，`/opsx:archive` 归档
