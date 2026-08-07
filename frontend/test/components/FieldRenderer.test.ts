@@ -127,6 +127,85 @@ describe('FieldRenderer · 约束合成占位（FE-22）', () => {
   })
 })
 
+describe('FieldRenderer · 默认值并入合成占位（FE-22 扩展，NCE waterMark 对齐）', () => {
+  const g = { global: { plugins: [ElementPlus] } }
+
+  it('range + default：范围段后追加「，默认值: X」', () => {
+    const w = mount(FieldRenderer, {
+      props: {
+        field: { path: '/x/iv', type: 'number' as const, label: 'iv', minimum: 10, maximum: 600, default: 300 },
+        modelValue: undefined,
+      },
+      ...g,
+    })
+    expect(w.find('input').attributes('placeholder')).toBe('整数 合法范围: [10, 600]，默认值: 300')
+  })
+
+  it('length + default：长度段后追加默认值', () => {
+    const w = mount(FieldRenderer, {
+      props: {
+        field: { path: '/x/nm', type: 'string' as const, label: 'nm', minLength: 1, maxLength: 31, default: 'vlan1' },
+        modelValue: '',
+      },
+      ...g,
+    })
+    expect(w.find('input').attributes('placeholder')).toBe('合法长度: [1..31]，默认值: vlan1')
+  })
+
+  it('仅 default（无 range/length）：单独展示「默认值: X」，值原样不本地化', () => {
+    const w = mount(FieldRenderer, {
+      props: {
+        field: { path: '/x/mode', type: 'string' as const, label: 'mode', default: 'dot1q' },
+        modelValue: '',
+      },
+      ...g,
+    })
+    expect(w.find('input').attributes('placeholder')).toBe('默认值: dot1q')
+  })
+
+  it('enum 下拉空值展示默认值占位', () => {
+    const w = mount(FieldRenderer, {
+      props: {
+        field: {
+          path: '/x/proto', type: 'enum' as const, label: 'proto', default: 'ethernet',
+          options: [
+            { label: 'ethernet', value: 'ethernet' },
+            { label: 'hdlc', value: 'hdlc' },
+            { label: 'ppp', value: 'ppp' },
+            { label: 'fr', value: 'fr' },
+          ],
+        },
+        modelValue: undefined,
+      },
+      ...g,
+    })
+    expect(w.find('.el-select__placeholder').text()).toBe('默认值: ethernet')
+  })
+
+  it('dynamicDefault 优先于 default（边界）', () => {
+    const w = mount(FieldRenderer, {
+      props: {
+        field: { path: '/x/dd', type: 'number' as const, label: 'dd', default: 5, dynamicDefault: true },
+        modelValue: undefined,
+      },
+      ...g,
+    })
+    expect(w.find('input').attributes('placeholder')).toContain('系统自动分配')
+    expect(w.find('input').attributes('placeholder')).not.toContain('默认值')
+  })
+
+  it('boolean 不合成占位（负路径）', () => {
+    const w = mount(FieldRenderer, {
+      props: {
+        field: { path: '/x/en', type: 'boolean' as const, label: 'en', default: false },
+        modelValue: undefined,
+      },
+      ...g,
+    })
+    expect(w.find('input[placeholder]').exists()).toBe(false)
+  })
+})
+
 describe('FieldRenderer · 动态缺省占位与单位后缀（FE-15）', () => {
   it('dynamicDefault 字段空值展示「系统自动分配」占位', () => {
     const w = mount(FieldRenderer, {

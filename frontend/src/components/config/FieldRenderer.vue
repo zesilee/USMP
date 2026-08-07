@@ -327,11 +327,28 @@ const lengthPlaceholder = computed<string | undefined>(() => {
   return undefined
 })
 
+// 默认值段（FE-22 扩展，NCE waterMark 对齐）：default 原样字符串化不本地化
+// （设备语义值，与列表单元格口径一致）；boolean 无占位语义不参与。
+const defaultSegment = computed<string | undefined>(() => {
+  const dv = props.field.default
+  if (dv == null || props.field.type === 'boolean') return undefined
+  return String(dv)
+})
+
+// 合成占位 = [范围/长度段][，默认值: <值>]；仅有 default → 「默认值: <值>」。
+const constraintPlaceholder = computed<string | undefined>(() => {
+  const base = rangePlaceholder.value || lengthPlaceholder.value
+  const dv = defaultSegment.value
+  if (base && dv !== undefined) return base + t('console.defaultSuffix', { v: dv })
+  if (base) return base
+  if (dv !== undefined) return t('console.defaultOnly', { v: dv })
+  return undefined
+})
+
 const placeholderOf = computed<string | undefined>(() =>
   props.field.placeholder ||
   (props.field.dynamicDefault ? t('console.autoAssigned') : undefined) ||
-  rangePlaceholder.value ||
-  lengthPlaceholder.value,
+  constraintPlaceholder.value,
 )
 
 // 数据以 YANG 叶子名（path 末段）为键，对齐后端转换（非 full path）。
