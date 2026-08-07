@@ -8,4 +8,4 @@
 
 ## 2. 收尾
 
-- [ ] 2.1 review + What/Why/How 提交 + PR 合入
+- [x] 2.1 review + What/Why/How 提交 + PR 合入
