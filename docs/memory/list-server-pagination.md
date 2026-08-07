@@ -18,4 +18,6 @@ metadata:
 - **sim 坑**：`SetRunningConfigXML` 勿包 `<config>` 壳——壳会成为 running 树根，`<get-config>` subtree filter 匹配不到回空；存量带壳用例全是只走 `<get>` 才没炸。
 - **堆叠 PR 连坐坑**（#129 变种实锤）：merge `--delete-branch` 会把以该分支为 base 的下游 PR 直接 CLOSE 且**无法重开**（base 分支已删）。正确顺序：合入时不删分支 → 用 `gh api -X PATCH .../pulls/N -f base=main` 改下游 base（本机旧版 `gh pr edit` 被 Projects classic GraphQL 弃用错误噎死）→ 再删分支。
 - **时序护栏**：10k 行查询护栏 500ms 在 CI 弱机 `-race` 下实测 0.61s 误报，已放宽 3s（拦 O(N²) 够用）——新增性能护栏一律按「-race 弱机 ×5」估上界（[[backend-ci-flaky-tests]] 同源教训）。
-- 未抄 NCE 的（评估过、刻意不做）：独立 count 接口、fields 列裁剪、key/value 平铺行、复杂 or/complex 过滤。**值得后续立项**：约束人话占位提示（NCE waterMark，构建期 codegen 塞进 FieldDef）、危险配置字段标记（riskOperation 推广）。
+- 未抄 NCE 的（评估过、刻意不做）：独立 count 接口、fields 列裁剪、key/value 平铺行、复杂 or/complex 过滤。
+- 两个 follow-up 已闭环（2026-08-07）：①约束人话占位=FE-22 补默认值段已交付（PR#298，`整数 合法范围: [10, 600]，默认值: 300`，dynamicDefault 优先不变）；②危险配置字段标记**拍板不做**——snd 模型 20 种厂商扩展里无危险标记数据源（NCE riskOperation 是自家私有元数据且抓包全 false），词表猜误伤、自造注解无领域知识（[[ext-ui-annotations]] 推迟决策同口径），等真机/业务给危险字段清单再议。
+- D01 门禁坑：delta spec 的 MODIFIED 需求块必须**整块携带全部存量 Scenario**（归档=整块替换，缺=静默丢失），只写新增 Scenario 会被 CI 拦。
