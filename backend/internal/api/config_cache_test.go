@@ -9,7 +9,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/stretchr/testify/assert"
 )
@@ -24,14 +23,11 @@ func newConfigHandlerWithFetch(fetch func(ctx context.Context, ip, path string) 
 }
 
 func getConfigReq(h *ConfigHandler, ip, path string, force bool) *httptest.ResponseRecorder {
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "ip", Value: ip}, {Key: "path", Value: path}}
 	url := "/"
 	if force {
 		url = "/?force_refresh=true"
 	}
-	c.Request = httptest.NewRequest(http.MethodGet, url, nil)
+	c, w := newTestContext(http.MethodGet, url, nil, "ip", ip, "splat", path)
 	h.GetConfig(c)
 	return w
 }
@@ -121,12 +117,8 @@ func TestGetConfig_FetchError500(t *testing.T) {
 }
 
 func postConfigReq(h *ConfigHandler, ip, path, body string) *httptest.ResponseRecorder {
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "ip", Value: ip}, {Key: "path", Value: path}}
-	req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(body))
-	req.Header.Set("Content-Type", "application/json")
-	c.Request = req
+	c, w := newTestContext(http.MethodPost, "/", strings.NewReader(body), "ip", ip, "splat", path)
+	c.Request.Header.Set("Content-Type", "application/json")
 	h.SetConfig(c)
 	return w
 }
@@ -201,10 +193,7 @@ func TestGetConfig_IncludeStateUsesStateChannel(t *testing.T) {
 		return map[string]interface{}{"state": true}, nil
 	}
 
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "ip", Value: "10.0.0.1"}, {Key: "path", Value: "/ifm:ifm/ifm:interfaces"}}
-	c.Request = httptest.NewRequest(http.MethodGet, "/?include_state=true", nil)
+	c, w := newTestContext(http.MethodGet, "/?include_state=true", nil, "ip", "10.0.0.1", "splat", "/ifm:ifm/ifm:interfaces")
 	h.GetConfig(c)
 	d := decodeConfigData(t, w)
 	assert.Equal(t, 0, cfgCalls, "状态读不走配置快通道")
@@ -219,10 +208,7 @@ func TestGetConfig_IncludeStateUsesStateChannel(t *testing.T) {
 
 	// 配置缓存命中不拦状态读；BR-14：状态读命中的是自己的快照（不再打设备），
 	// 且绝不误取配置缓存的值。
-	w3 := httptest.NewRecorder()
-	c3, _ := gin.CreateTestContext(w3)
-	c3.Params = gin.Params{{Key: "ip", Value: "10.0.0.1"}, {Key: "path", Value: "/ifm:ifm/ifm:interfaces"}}
-	c3.Request = httptest.NewRequest(http.MethodGet, "/?include_state=true", nil)
+	c3, w3 := newTestContext(http.MethodGet, "/?include_state=true", nil, "ip", "10.0.0.1", "splat", "/ifm:ifm/ifm:interfaces")
 	h.GetConfig(c3)
 	assert.Equal(t, 1, stateCalls, "状态快照命中不再打设备（BR-14）")
 	var env3 struct {

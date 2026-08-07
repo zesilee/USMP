@@ -9,7 +9,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/stretchr/testify/assert"
 )
@@ -32,14 +31,11 @@ func makeIfaceRows(n int) []interface{} {
 
 // getConfigPageReq 发起带任意 query 的 GET /config 请求。
 func getConfigPageReq(h *ConfigHandler, ip, path, rawQuery string) *httptest.ResponseRecorder {
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "ip", Value: ip}, {Key: "path", Value: path}}
 	url := "/"
 	if rawQuery != "" {
 		url = "/?" + rawQuery
 	}
-	c.Request = httptest.NewRequest(http.MethodGet, url, nil)
+	c, w := newTestContext(http.MethodGet, url, nil, "ip", ip, "splat", path)
 	h.GetConfig(c)
 	return w
 }

@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gin-gonic/gin"
+	"github.com/beego/beego/v2/server/web"
 	uns "k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -21,7 +21,7 @@ import (
 // D7 数据面（矩阵 A7 写路径 / FE-17 前提）—— 业务意图 CR 的 USMP API 代理：
 // 前端不碰 apiserver；写路径先走约束引擎校验（BIC-03 前置校验），非法 400 不落 CR。
 
-func newBizRouter(t *testing.T, objs ...client.Object) (*gin.Engine, client.Client) {
+func newBizRouter(t *testing.T, objs ...client.Object) (*web.ControllerRegister, client.Client) {
 	t.Helper()
 	sch := runtime.NewScheme()
 	sch.AddKnownTypeWithName(intent.GVK, &uns.Unstructured{})
@@ -30,13 +30,12 @@ func newBizRouter(t *testing.T, objs ...client.Object) (*gin.Engine, client.Clie
 	proto.SetGroupVersionKind(intent.GVK)
 	cl := fake.NewClientBuilder().WithScheme(sch).WithObjects(objs...).WithStatusSubresource(proto).Build()
 
-	gin.SetMode(gin.TestMode)
-	router := gin.New()
+	router := web.NewControllerRegister()
 	h := NewBusinessHandler(func() client.Client { return cl }, "default")
-	router.GET("/business/vlan-services", h.List)
-	router.GET("/business/vlan-services/:name", h.Get)
-	router.POST("/business/vlan-services", h.Apply)
-	router.DELETE("/business/vlan-services/:name", h.Delete)
+	router.Get("/business/vlan-services", h.List)
+	router.Get("/business/vlan-services/:name", h.Get)
+	router.Post("/business/vlan-services", h.Apply)
+	router.Delete("/business/vlan-services/:name", h.Delete)
 	return router, cl
 }
 
@@ -176,10 +175,9 @@ func TestBusinessDelete(t *testing.T) {
 
 // 无集群降级（BIO-01 API 面）：client 为 nil 时 503 明确报错，不 panic。
 func TestBusinessUnavailableWithoutCluster(t *testing.T) {
-	gin.SetMode(gin.TestMode)
-	router := gin.New()
+	router := web.NewControllerRegister()
 	h := NewBusinessHandler(func() client.Client { return nil }, "default")
-	router.GET("/business/vlan-services", h.List)
+	router.Get("/business/vlan-services", h.List)
 	w := httptest.NewRecorder()
 	router.ServeHTTP(w, httptest.NewRequest(http.MethodGet, "/business/vlan-services", nil))
 	if code := envelopeCode(t, w); code != 503 {

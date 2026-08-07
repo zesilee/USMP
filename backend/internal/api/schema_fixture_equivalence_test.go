@@ -4,10 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"
 	"testing"
-
-	"github.com/gin-gonic/gin"
 
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
@@ -40,10 +37,7 @@ func canonicalSchemaJSON(t *testing.T, ys YangSchema) []byte {
 // the response envelope's data field re-normalized through canonicalSchemaJSON.
 func httpSchemaData(t *testing.T, h *YangHandler, module string) []byte {
 	t.Helper()
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "module", Value: module}}
-	c.Request = httptest.NewRequest(http.MethodGet, "/api/v1/yang/schema/"+module+"?form=nested", nil)
+	c, w := newTestContext(http.MethodGet, "/api/v1/yang/schema/"+module+"?form=nested", nil, "module", module)
 	h.GetSchema(c)
 
 	var env struct {
@@ -61,7 +55,6 @@ func httpSchemaData(t *testing.T, h *YangHandler, module string) []byte {
 
 // SF-03: 对每个已加载模块，导出路径与 HTTP 路径的 schema 逐字节相等。
 func TestSchemaFixtureEquivalence_ToolMatchesHTTP(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	s, err := yangschema.Load()
 	if err != nil {
 		t.Fatalf("load schema: %v", err)
@@ -91,7 +84,6 @@ func TestSchemaFixtureEquivalence_ToolMatchesHTTP(t *testing.T) {
 // 构造一个「被污染的 HTTP 路径」（在 schema 上注入一个字段），断言 canonical 比较确实
 // 判定不等。防止 TestSchemaFixtureEquivalence_ToolMatchesHTTP 因断言写死而假绿。
 func TestSchemaFixtureEquivalence_DetectsDivergence(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	s, err := yangschema.Load()
 	if err != nil {
 		t.Fatalf("load schema: %v", err)

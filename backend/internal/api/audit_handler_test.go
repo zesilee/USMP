@@ -6,7 +6,6 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/status"
@@ -24,9 +23,7 @@ func (f fakeAuditMgr) GetAuditStore() audit.Store        { return f.audit }
 func (f fakeAuditMgr) GetReconcileStatus() status.Reader { return f.status }
 
 func listLogsReq(h *AuditHandler, query string) *httptest.ResponseRecorder {
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Request = httptest.NewRequest(http.MethodGet, "/logs"+query, nil)
+	c, w := newTestContext(http.MethodGet, "/logs"+query, nil)
 	h.ListLogs(c)
 	return w
 }

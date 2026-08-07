@@ -2,10 +2,7 @@ package api
 
 import (
 	"net/http"
-	"net/http/httptest"
 	"testing"
-
-	"github.com/gin-gonic/gin"
 
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
@@ -14,7 +11,6 @@ import (
 // RPC-02：/yang/schema/:module 响应含 rpcs 数组，input 为 FieldDef（含 leafref/
 // mandatory）；无 rpc 模块 rpcs 为空且不报错。
 func TestGetSchema_IncludesRPCs(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	s, err := yangschema.Load()
 	if err != nil {
 		t.Fatalf("load schema: %v", err)
@@ -61,7 +57,6 @@ func TestGetSchema_IncludesRPCs(t *testing.T) {
 
 // RPC-02 边界：无 rpc 的模块 rpcs 为空且不报错。
 func TestGetSchema_NoRPCModuleEmpty(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	s, err := yangschema.Load()
 	if err != nil {
 		t.Fatalf("load schema: %v", err)
@@ -80,10 +75,7 @@ func TestGetSchema_NoRPCModuleEmpty(t *testing.T) {
 
 func getNestedSchema(t *testing.T, h *YangHandler, module string) YangSchema {
 	t.Helper()
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "module", Value: module}}
-	c.Request = httptest.NewRequest(http.MethodGet, "/api/v1/yang/schema/"+module+"?form=nested", nil)
+	c, w := newTestContext(http.MethodGet, "/api/v1/yang/schema/"+module+"?form=nested", nil, "module", module)
 	h.GetSchema(c)
 	var ys YangSchema
 	decodeData(t, w.Body.Bytes(), &ys)

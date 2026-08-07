@@ -9,7 +9,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
@@ -31,9 +30,7 @@ func newChangesetHandlerForTest(fetch func(ctx context.Context, ip, path string)
 }
 
 func previewReq(h *ChangesetHandler, body string) *httptest.ResponseRecorder {
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Request = httptest.NewRequest(http.MethodPost, "/", strings.NewReader(body))
+	c, w := newTestContext(http.MethodPost, "/", strings.NewReader(body))
 	c.Request.Header.Set("Content-Type", "application/json")
 	h.Preview(c)
 	return w

@@ -6,8 +6,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gin-gonic/gin"
-
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
@@ -31,9 +29,7 @@ func offlineDeviceHarness(t *testing.T) *YangHandler {
 
 func getLeftTree(t *testing.T, h *YangHandler, query string) *httptest.ResponseRecorder {
 	t.Helper()
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Request = httptest.NewRequest("GET", "/api/v1/yang/left-tree"+query, nil)
+	c, w := newTestContext("GET", "/api/v1/yang/left-tree"+query, nil)
 	h.LeftTree(c)
 	return w
 }
@@ -65,7 +61,6 @@ func countTreeLeaves(nodes []LeftTreeNodeDTO) int {
 // TestLeftTreeShape（LT-02）：14 顶层组、65 叶全在；vlan 已加载叶 available+module；
 // 未生成模块叶 available:false 仍在树。
 func TestLeftTreeShape(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	h := newYangHandlerWithSchema(t)
 	w := getLeftTree(t, h, "")
 	if w.Code != 200 {
@@ -107,7 +102,6 @@ func TestLeftTreeDeviceSupported(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	gin.SetMode(gin.TestMode)
 	h, deviceID, cleanup := newDeviceYangHarness(t, []string{
 		"urn:huawei:yang:huawei-vlan?module=huawei-vlan&revision=2020-02-07",
 	})
@@ -129,7 +123,6 @@ func TestLeftTreeDeviceSupported(t *testing.T) {
 // TestLeftTreeDeviceOfflineOmitsSupported（LT-02 降级）：协商不可得 → 全树省略
 // supported（unknown ≠ 不支持）。
 func TestLeftTreeDeviceOfflineOmitsSupported(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	h := offlineDeviceHarness(t)
 	w := getLeftTree(t, h, "?device=dead")
 	if w.Code != 200 {
@@ -143,7 +136,6 @@ func TestLeftTreeDeviceOfflineOmitsSupported(t *testing.T) {
 
 // TestLeftTreeDeviceUnknown（负路径）：未注册设备信封 404。
 func TestLeftTreeDeviceUnknown(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	h := newYangHandlerWithSchema(t)
 	w := getLeftTree(t, h, "?device=nope")
 	var env struct {
@@ -176,7 +168,6 @@ func stringContains(s, sub string) bool {
 // TestLeftTreeModuleChildren（LT-02 children 透出）：available 叶透出模块级
 // container/rpc 平级子节点（含双语标签与 highRisk），不可用叶不透出。
 func TestLeftTreeModuleChildren(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	h := newYangHandlerWithSchema(t)
 	w := getLeftTree(t, h, "")
 	if w.Code != 200 {

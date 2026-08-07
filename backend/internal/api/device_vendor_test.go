@@ -7,16 +7,13 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/stretchr/testify/assert"
 )
 
 func postDevice(t *testing.T, h *DeviceHandler, body string) *httptest.ResponseRecorder {
 	t.Helper()
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Request = httptest.NewRequest(http.MethodPost, "/devices", strings.NewReader(body))
+	c, w := newTestContext(http.MethodPost, "/devices", strings.NewReader(body))
 	c.Request.Header.Set("Content-Type", "application/json")
 	h.AddDevice(c)
 	return w

@@ -3,8 +3,6 @@ package api
 import (
 	"testing"
 
-	"github.com/gin-gonic/gin"
-
 	yangdriver "github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
 )
 
@@ -13,7 +11,6 @@ import (
 // 宿主模块树呈现，无独立控制台语义）。可用集合缩水（回归）或清单外新增
 // 不可用叶都在此红灯。
 func TestLeftTreeFullAvailabilityBaseline(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	h := newYangHandlerWithSchema(t)
 	w := getLeftTree(t, h, "")
 	if w.Code != 200 {

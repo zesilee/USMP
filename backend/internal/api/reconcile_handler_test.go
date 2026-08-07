@@ -8,13 +8,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gin-gonic/gin"
+	beecontext "github.com/beego/beego/v2/server/web/context"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/status"
 	"github.com/stretchr/testify/assert"
 )
-
-func init() { gin.SetMode(gin.TestMode) }
 
 // fakeManager is a Manager test double that only serves reconcile status; the
 // read-only Reader interface (by design) blocks seeding through a real manager.
@@ -38,11 +36,8 @@ func seedManager() manager.Manager {
 	return fakeManager{store: st}
 }
 
-func doGet(h gin.HandlerFunc, params gin.Params) *httptest.ResponseRecorder {
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = params
-	c.Request = httptest.NewRequest(http.MethodGet, "/", nil)
+func doGet(h func(*beecontext.Context), params ...string) *httptest.ResponseRecorder {
+	c, w := newTestContext(http.MethodGet, "/", nil, params...)
 	h(c)
 	return w
 }
@@ -65,7 +60,7 @@ func recDecode(t *testing.T, w *httptest.ResponseRecorder, into interface{}) {
 
 func TestReconcile_Device_RollupWorstOutcome(t *testing.T) {
 	h := NewReconcileHandler(seedManager())
-	w := doGet(h.GetDeviceReconcile, gin.Params{{Key: "ip", Value: "10.0.0.1"}})
+	w := doGet(h.GetDeviceReconcile, "ip", "10.0.0.1")
 
 	var data DeviceReconcileData
 	recDecode(t, w, &data)
@@ -76,7 +71,7 @@ func TestReconcile_Device_RollupWorstOutcome(t *testing.T) {
 
 func TestReconcile_Device_Unknown(t *testing.T) {
 	h := NewReconcileHandler(seedManager())
-	w := doGet(h.GetDeviceReconcile, gin.Params{{Key: "ip", Value: "10.0.0.99"}})
+	w := doGet(h.GetDeviceReconcile, "ip", "10.0.0.99")
 
 	var data DeviceReconcileData
 	recDecode(t, w, &data)
@@ -86,7 +81,7 @@ func TestReconcile_Device_Unknown(t *testing.T) {
 
 func TestReconcile_Fleet_Summary(t *testing.T) {
 	h := NewReconcileHandler(seedManager())
-	w := doGet(h.GetFleetReconcile, nil)
+	w := doGet(h.GetFleetReconcile)
 
 	var data FleetReconcileData
 	recDecode(t, w, &data)
@@ -136,7 +131,7 @@ func TestRollup_LastRunFollowsWorst(t *testing.T) {
 
 func TestReconcile_Fleet_EmptyStore(t *testing.T) {
 	h := NewReconcileHandler(fakeManager{store: status.NewStore()})
-	w := doGet(h.GetFleetReconcile, nil)
+	w := doGet(h.GetFleetReconcile)
 
 	var data FleetReconcileData
 	recDecode(t, w, &data)

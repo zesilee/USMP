@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gin-gonic/gin"
+	"github.com/beego/beego/v2/server/web"
 
 	"github.com/leezesi/usmp/backend/internal/intent"
 )
@@ -31,9 +31,8 @@ func TestOwnershipQueryByPath(t *testing.T) {
 	withOwnership(t, map[string][]intent.Claim{
 		"default/biz-100": {{Device: "10.0.0.1", Module: "vlan", Path: intent.VlanPath + "/vlan[id=100]"}},
 	})
-	gin.SetMode(gin.TestMode)
-	router := gin.New()
-	router.GET("/ownership/:device", NewOwnershipHandler().Query)
+	router := web.NewControllerRegister()
+	router.Get("/ownership/:device", NewOwnershipHandler().Query)
 
 	w := httptest.NewRecorder()
 	req := httptest.NewRequest(http.MethodGet, "/ownership/10.0.0.1?path="+intent.VlanPath, nil)
@@ -70,9 +69,8 @@ func TestOwnershipQueryDeviceWide(t *testing.T) {
 			{Device: "10.0.0.1", Module: "ifm", Path: intent.IfmPath + "/interface[name=GE0/0/1]"},
 		},
 	})
-	gin.SetMode(gin.TestMode)
-	router := gin.New()
-	router.GET("/ownership/:device", NewOwnershipHandler().Query)
+	router := web.NewControllerRegister()
+	router.Get("/ownership/:device", NewOwnershipHandler().Query)
 
 	w := httptest.NewRecorder()
 	router.ServeHTTP(w, httptest.NewRequest(http.MethodGet, "/ownership/10.0.0.1", nil))

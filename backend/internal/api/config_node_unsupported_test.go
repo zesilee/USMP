@@ -9,7 +9,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/internal/intent"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client/netconfcore"
@@ -59,10 +58,7 @@ func newNodeUnsupportedHandler(view *fakeSupportView, fetch func(ctx context.Con
 }
 
 func getConfigReqQS(h *ConfigHandler, ip, path, qs string) *httptest.ResponseRecorder {
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "ip", Value: ip}, {Key: "path", Value: path}}
-	c.Request = httptest.NewRequest(http.MethodGet, "/?"+qs, nil)
+	c, w := newTestContext(http.MethodGet, "/?"+qs, nil, "ip", ip, "splat", path)
 	h.GetConfig(c)
 	return w
 }
@@ -254,10 +250,7 @@ func TestChangesetCommit_NodeUnsupported_LearnsFromPushError(t *testing.T) {
 func TestSetConfig_NodeUnsupported_Rejected(t *testing.T) {
 	view := &fakeSupportView{set: map[string]bool{"/devm:devm/devm:cards": true}}
 	h := newNodeUnsupportedHandler(view, nil)
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "ip", Value: "10.0.0.1"}, {Key: "path", Value: "/devm:devm/devm:cards"}}
-	c.Request = httptest.NewRequest(http.MethodPost, "/", strings.NewReader(`{"card":[]}`))
+	c, w := newTestContext(http.MethodPost, "/", strings.NewReader(`{"card":[]}`), "ip", "10.0.0.1", "splat", "/devm:devm/devm:cards")
 	c.Request.Header.Set("Content-Type", "application/json")
 	h.SetConfig(c)
 	code, _, data := decodeEnvelope(t, w)

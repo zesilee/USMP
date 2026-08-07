@@ -2,11 +2,8 @@ package api
 
 import (
 	"encoding/json"
-	"net/http/httptest"
 	"strings"
 	"testing"
-
-	"github.com/gin-gonic/gin"
 
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
@@ -38,12 +35,9 @@ func decodeData(t *testing.T, body []byte, v interface{}) {
 // TestGetSchemaDynamic (task 2.1): a loaded module returns a dynamically generated
 // schema (real fields), not the 2-field stub.
 func TestGetSchemaDynamic(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	h := newYangHandlerWithSchema(t)
 
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "module", Value: "vlan"}}
+	c, w := newTestContext("GET", "/", nil, "module", "vlan")
 	h.GetSchema(c)
 
 	var ys YangSchema
@@ -59,11 +53,9 @@ func TestGetSchemaDynamic(t *testing.T) {
 // TestListModulesDynamic (task 2.4): module list reflects the loaded schema tree
 // with correct per-module vendors — huawei/usmp only (BR-11).
 func TestListModulesDynamic(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	h := newYangHandlerWithSchema(t)
 
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
+	c, w := newTestContext("GET", "/", nil)
 	h.ListModules(c)
 
 	var mods []YangModuleInfo
@@ -95,11 +87,9 @@ func TestListModulesDynamic(t *testing.T) {
 // module-level `task-name` carry `category` from the build-time map; modules
 // without a mapping omit it and the endpoint never fails (R08).
 func TestListModulesCategory(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	h := newYangHandlerWithSchema(t)
 
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
+	c, w := newTestContext("GET", "/", nil)
 	h.ListModules(c)
 
 	var mods []YangModuleInfo

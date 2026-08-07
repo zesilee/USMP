@@ -2,11 +2,9 @@ package api
 
 import (
 	"net/http"
-	"net/http/httptest"
 	"strings"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/stretchr/testify/assert"
@@ -66,9 +64,7 @@ func TestDeviceHandler_AddDeviceWritesToStore(t *testing.T) {
 	h := NewDeviceHandler(mgr)
 
 	body := `{"ip":"127.0.0.1","port":830,"username":"u","password":"p"}`
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Request = httptest.NewRequest(http.MethodPost, "/devices", strings.NewReader(body))
+	c, _ := newTestContext(http.MethodPost, "/devices", strings.NewReader(body))
 	c.Request.Header.Set("Content-Type", "application/json")
 	h.AddDevice(c)
 
@@ -86,10 +82,7 @@ func TestDeviceHandler_RemoveDeviceDeletesFromStore(t *testing.T) {
 	mgr := manager.New()
 	h := NewDeviceHandler(mgr)
 
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "ip", Value: "192.168.1.1"}}
-	c.Request = httptest.NewRequest(http.MethodDelete, "/devices/192.168.1.1", nil)
+	c, _ := newTestContext(http.MethodDelete, "/devices/192.168.1.1", nil, "ip", "192.168.1.1")
 	h.RemoveDevice(c)
 
 	if _, ok := mgr.GetDeviceStore().Get("192.168.1.1"); ok {

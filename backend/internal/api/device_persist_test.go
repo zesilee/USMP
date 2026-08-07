@@ -8,7 +8,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
@@ -44,9 +43,7 @@ type persistentStore struct{ device.Store }
 func (persistentStore) Persistent() bool { return true }
 
 func addDeviceReq(h *DeviceHandler, body string) *httptest.ResponseRecorder {
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Request = httptest.NewRequest(http.MethodPost, "/devices", strings.NewReader(body))
+	c, w := newTestContext(http.MethodPost, "/devices", strings.NewReader(body))
 	c.Request.Header.Set("Content-Type", "application/json")
 	h.AddDevice(c)
 	return w
@@ -75,10 +72,7 @@ func TestRemoveDevice_PersistFailureReturns5xx(t *testing.T) {
 	mgr := manager.New(manager.WithDeviceStore(fs))
 	h := NewDeviceHandler(mgr)
 
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "ip", Value: "10.0.0.1"}}
-	c.Request = httptest.NewRequest(http.MethodDelete, "/devices/10.0.0.1", nil)
+	c, w := newTestContext(http.MethodDelete, "/devices/10.0.0.1", nil, "ip", "10.0.0.1")
 	h.RemoveDevice(c)
 
 	var resp Response
@@ -94,4 +88,28 @@ func TestSeedIgnoredOnPersistentStore(t *testing.T) {
 	NewDeviceHandler(mgr)
 
 	assert.Empty(t, mgr.GetDeviceStore().List(), "集群模式应忽略种子变量")
+}
+
+// 回归（replace-gin-with-beego）：gin binding:"required" 退场后必填校验必须保留——
+// 缺 ip/username/password 一律 400，不得放行到连接/入库路径。
+func TestAddDeviceMissingRequiredFields(t *testing.T) {
+	mgr := manager.New(manager.WithDeviceStore(device.NewStore()))
+	h := NewDeviceHandler(mgr)
+	for name, body := range map[string]string{
+		"缺ip":       `{"username":"admin","password":"admin"}`,
+		"缺username": `{"ip":"10.0.0.9","password":"admin"}`,
+		"缺password": `{"ip":"10.0.0.9","username":"admin"}`,
+		"空对象":       `{}`,
+	} {
+		t.Run(name, func(t *testing.T) {
+			w := addDeviceReq(h, body)
+			var resp Response
+			if err := json.Unmarshal(w.Body.Bytes(), &resp); err != nil {
+				t.Fatalf("解析信封: %v (body=%s)", err, w.Body.String())
+			}
+			if resp.Code != 400 {
+				t.Fatalf("envelope code = %d, want 400 (body=%s)", resp.Code, w.Body.String())
+			}
+		})
+	}
 }

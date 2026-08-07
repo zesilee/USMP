@@ -7,6 +7,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -15,8 +16,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
+	"github.com/beego/beego/v2/server/web"
+	beecontext "github.com/beego/beego/v2/server/web/context"
+	"github.com/beego/beego/v2/server/web/filter/cors"
 )
 
 // 内存 VLAN store（替代原 netsim 假模拟器）
@@ -48,11 +50,10 @@ type VLANInfo struct {
 }
 
 func main() {
-	gin.SetMode(gin.TestMode)
-	r := gin.Default()
+	r := web.NewControllerRegister()
 
 	// CORS 配置 - 允许前端访问
-	r.Use(cors.New(cors.Config{
+	_ = r.InsertFilter("*", web.BeforeRouter, cors.Allow(&cors.Options{
 		AllowOrigins:     []string{"http://localhost:3000", "http://127.0.0.1:3000", "http://localhost:5173", "http://127.0.0.1:5173"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accept"},
@@ -65,18 +66,15 @@ func main() {
 	store = newVLANStore()
 
 	// API 路由
-	api := r.Group("/api/v1")
-	{
-		// 设备 API
-		api.GET("/devices", listDevices)
-		api.GET("/devices/:ip/status", getDeviceStatus)
+	// 设备 API
+	r.Get("/api/v1/devices", listDevices)
+	r.Get("/api/v1/devices/:ip/status", getDeviceStatus)
 
-		// VLAN 配置 API
-		api.GET("/config/:ip/vlans", getVLANConfig)
-		api.POST("/config/:ip/vlans", createVLAN)
-		api.PUT("/config/:ip/vlans/:id", updateVLAN)
-		api.DELETE("/config/:ip/vlans/:id", deleteVLAN)
-	}
+	// VLAN 配置 API
+	r.Get("/api/v1/config/:ip/vlans", getVLANConfig)
+	r.Post("/api/v1/config/:ip/vlans", createVLAN)
+	r.Put("/api/v1/config/:ip/vlans/:id", updateVLAN)
+	r.Delete("/api/v1/config/:ip/vlans/:id", deleteVLAN)
 
 	// 启动 HTTP 服务器
 	srv := &http.Server{
@@ -110,9 +108,17 @@ func main() {
 	}
 }
 
+// bindJSON 对齐 gin ShouldBindJSON：直读请求体解码到 v，空体/坏 JSON 返回错误。
+func bindJSON(c *beecontext.Context, v interface{}) error {
+	if c.Request == nil || c.Request.Body == nil {
+		return errors.New("request body is empty")
+	}
+	return json.NewDecoder(c.Request.Body).Decode(v)
+}
+
 // listDevices 返回设备列表
-func listDevices(c *gin.Context) {
-	c.JSON(http.StatusOK, ApiResponse[[]map[string]interface{}]{
+func listDevices(c *beecontext.Context) {
+	_ = c.Output.JSON(ApiResponse[[]map[string]interface{}]{
 		Success: true,
 		Data: []map[string]interface{}{
 			{
@@ -123,23 +129,23 @@ func listDevices(c *gin.Context) {
 				"status":   "online",
 			},
 		},
-	})
+	}, false, false)
 }
 
 // getDeviceStatus 获取设备状态
-func getDeviceStatus(c *gin.Context) {
-	c.JSON(http.StatusOK, ApiResponse[map[string]bool]{
+func getDeviceStatus(c *beecontext.Context) {
+	_ = c.Output.JSON(ApiResponse[map[string]bool]{
 		Success: true,
 		Data: map[string]bool{
 			"running":   true,
 			"connected": true,
 		},
-	})
+	}, false, false)
 }
 
 // getVLANConfig 获取 VLAN 配置
-func getVLANConfig(c *gin.Context) {
-	forceRefresh := c.Query("force_refresh") == "true"
+func getVLANConfig(c *beecontext.Context) {
+	forceRefresh := c.Input.Query("force_refresh") == "true"
 
 	vlans := store.all()
 	result := make([]VLANInfo, 0, len(vlans))
@@ -160,32 +166,34 @@ func getVLANConfig(c *gin.Context) {
 		})
 	}
 
-	c.JSON(http.StatusOK, ApiResponse[map[string]interface{}]{
+	_ = c.Output.JSON(ApiResponse[map[string]interface{}]{
 		Success: true,
 		Data: map[string]interface{}{
 			"vlans":     result,
 			"fromCache": !forceRefresh,
 			"lastSync":  time.Now().Format(time.RFC3339),
 		},
-	})
+	}, false, false)
 }
 
 // createVLAN 创建 VLAN
-func createVLAN(c *gin.Context) {
+func createVLAN(c *beecontext.Context) {
 	var vlan VLANInfo
-	if err := c.ShouldBindJSON(&vlan); err != nil {
-		c.JSON(http.StatusBadRequest, ApiResponse[any]{
+	if err := bindJSON(c, &vlan); err != nil {
+		c.Output.SetStatus(http.StatusBadRequest)
+		_ = c.Output.JSON(ApiResponse[any]{
 			Success: false,
 			Message: fmt.Sprintf("Invalid request: %v", err),
-		})
+		}, false, false)
 		return
 	}
 
 	if vlan.ID < 1 || vlan.ID > 4094 {
-		c.JSON(http.StatusBadRequest, ApiResponse[any]{
+		c.Output.SetStatus(http.StatusBadRequest)
+		_ = c.Output.JSON(ApiResponse[any]{
 			Success: false,
 			Message: "VLAN ID must be between 1 and 4094",
-		})
+		}, false, false)
 		return
 	}
 
@@ -197,39 +205,42 @@ func createVLAN(c *gin.Context) {
 		UntaggedPorts: vlan.UntaggedPorts,
 	})
 
-	c.JSON(http.StatusOK, ApiResponse[any]{
+	_ = c.Output.JSON(ApiResponse[any]{
 		Success: true,
 		Message: "VLAN created successfully",
-	})
+	}, false, false)
 }
 
 // updateVLAN 更新 VLAN
-func updateVLAN(c *gin.Context) {
-	idStr := c.Param("id")
+func updateVLAN(c *beecontext.Context) {
+	idStr := c.Input.Param(":id")
 	var id int
 	if _, err := fmt.Sscanf(idStr, "%d", &id); err != nil {
-		c.JSON(http.StatusBadRequest, ApiResponse[any]{
+		c.Output.SetStatus(http.StatusBadRequest)
+		_ = c.Output.JSON(ApiResponse[any]{
 			Success: false,
 			Message: "Invalid VLAN ID",
-		})
+		}, false, false)
 		return
 	}
 
 	var vlan VLANInfo
-	if err := c.ShouldBindJSON(&vlan); err != nil {
-		c.JSON(http.StatusBadRequest, ApiResponse[any]{
+	if err := bindJSON(c, &vlan); err != nil {
+		c.Output.SetStatus(http.StatusBadRequest)
+		_ = c.Output.JSON(ApiResponse[any]{
 			Success: false,
 			Message: fmt.Sprintf("Invalid request: %v", err),
-		})
+		}, false, false)
 		return
 	}
 
 	existing := store.get(id)
 	if existing == nil {
-		c.JSON(http.StatusNotFound, ApiResponse[any]{
+		c.Output.SetStatus(http.StatusNotFound)
+		_ = c.Output.JSON(ApiResponse[any]{
 			Success: false,
 			Message: "VLAN not found",
-		})
+		}, false, false)
 		return
 	}
 
@@ -240,30 +251,31 @@ func updateVLAN(c *gin.Context) {
 
 	store.put(existing)
 
-	c.JSON(http.StatusOK, ApiResponse[any]{
+	_ = c.Output.JSON(ApiResponse[any]{
 		Success: true,
 		Message: "VLAN updated successfully",
-	})
+	}, false, false)
 }
 
 // deleteVLAN 删除 VLAN
-func deleteVLAN(c *gin.Context) {
-	idStr := c.Param("id")
+func deleteVLAN(c *beecontext.Context) {
+	idStr := c.Input.Param(":id")
 	var id int
 	if _, err := fmt.Sscanf(idStr, "%d", &id); err != nil {
-		c.JSON(http.StatusBadRequest, ApiResponse[any]{
+		c.Output.SetStatus(http.StatusBadRequest)
+		_ = c.Output.JSON(ApiResponse[any]{
 			Success: false,
 			Message: "Invalid VLAN ID",
-		})
+		}, false, false)
 		return
 	}
 
 	store.remove(id)
 
-	c.JSON(http.StatusOK, ApiResponse[any]{
+	_ = c.Output.JSON(ApiResponse[any]{
 		Success: true,
 		Message: "VLAN deleted successfully",
-	})
+	}, false, false)
 }
 
 // helper: JSON 响应

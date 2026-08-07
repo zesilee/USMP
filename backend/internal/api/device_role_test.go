@@ -6,16 +6,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gin-gonic/gin"
-
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 )
 
 func addDeviceRaw(t *testing.T, h *DeviceHandler, body string) *httptest.ResponseRecorder {
 	t.Helper()
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Request = httptest.NewRequest("POST", "/api/v1/devices", strings.NewReader(body))
+	c, w := newTestContext("POST", "/api/v1/devices", strings.NewReader(body))
 	c.Request.Header.Set("Content-Type", "application/json")
 	h.AddDevice(c)
 	return w
@@ -23,7 +19,6 @@ func addDeviceRaw(t *testing.T, h *DeviceHandler, body string) *httptest.Respons
 
 // TestAddDeviceWithRole（BR-14 正路径）：注册带 role → store 落库、列表透传。
 func TestAddDeviceWithRole(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	mgr := manager.New()
 	h := NewDeviceHandler(mgr)
 
@@ -36,8 +31,7 @@ func TestAddDeviceWithRole(t *testing.T) {
 		t.Fatalf("store role = %q ok=%v, want DCGW", info.Role, ok)
 	}
 
-	lw := httptest.NewRecorder()
-	lc, _ := gin.CreateTestContext(lw)
+	lc, lw := newTestContext("GET", "/", nil)
 	h.ListDevices(lc)
 	var data DeviceListData
 	decodeData(t, lw.Body.Bytes(), &data)
@@ -57,7 +51,6 @@ func TestAddDeviceWithRole(t *testing.T) {
 
 // TestAddDeviceRoleInvalid（BR-14 负路径）：非法 role → 400 不落库。
 func TestAddDeviceRoleInvalid(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	mgr := manager.New()
 	h := NewDeviceHandler(mgr)
 
@@ -85,7 +78,6 @@ func TestAddDeviceRoleInvalid(t *testing.T) {
 
 // TestAddDeviceRoleOmitted（BR-14 缺省）：不带 role → 正常注册且响应无 role 键。
 func TestAddDeviceRoleOmitted(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	mgr := manager.New()
 	h := NewDeviceHandler(mgr)
 
@@ -93,8 +85,7 @@ func TestAddDeviceRoleOmitted(t *testing.T) {
 	if w.Code != 200 {
 		t.Fatalf("add: %d %s", w.Code, w.Body.String())
 	}
-	lw := httptest.NewRecorder()
-	lc, _ := gin.CreateTestContext(lw)
+	lc, lw := newTestContext("GET", "/", nil)
 	h.ListDevices(lc)
 	var env struct {
 		Data struct {
