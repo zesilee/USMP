@@ -8,7 +8,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/leezesi/usmp/backend/internal/intent"
@@ -20,14 +19,9 @@ import (
 
 // postConfigRaw 同 postConfigReq，额外允许 query（force=true）。
 func postConfigRaw(h *ConfigHandler, ip, path, rawQuery, body string) *httptest.ResponseRecorder {
-	gin.SetMode(gin.TestMode)
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "ip", Value: ip}, {Key: "path", Value: path}}
-	req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(body))
-	req.Header.Set("Content-Type", "application/json")
-	req.URL.RawQuery = rawQuery
-	c.Request = req
+	c, w := newTestContext(http.MethodPost, "/", strings.NewReader(body), "ip", ip, "splat", path)
+	c.Request.Header.Set("Content-Type", "application/json")
+	c.Request.URL.RawQuery = rawQuery
 	h.SetConfig(c)
 	return w
 }
@@ -150,16 +144,12 @@ func TestDeleteConfig_OwnedPathRejected409(t *testing.T) {
 }
 
 func deleteConfigRaw(h *ConfigHandler, ip, path, keyQuery, forceQuery string) *httptest.ResponseRecorder {
-	gin.SetMode(gin.TestMode)
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
 	raw := keyQuery
 	if forceQuery != "" {
 		raw += "&" + forceQuery
 	}
-	c.Request = httptest.NewRequest(http.MethodDelete, "/api/v1/config/"+ip+path+"?"+raw, nil)
+	c, w := newTestContext(http.MethodDelete, "/api/v1/config/"+ip+path+"?"+raw, nil, "ip", ip, "splat", path)
 	c.Request.URL.RawQuery = raw
-	c.Params = gin.Params{{Key: "ip", Value: ip}, {Key: "path", Value: path}}
 	h.DeleteConfig(c)
 	return w
 }

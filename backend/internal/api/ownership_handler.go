@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
+	beecontext "github.com/beego/beego/v2/server/web/context"
 
 	"github.com/leezesi/usmp/backend/internal/intent"
 )
@@ -46,13 +46,13 @@ type OwnershipData struct {
 // @Success  200 {object} Response{data=OwnershipData} "归属信息（未认领时 intents/claims 为空）"
 // @Failure  400 {object} Response "缺少设备参数"
 // @Router   /ownership/{device} [get]
-func (h *OwnershipHandler) Query(c *gin.Context) {
-	device := c.Param("device")
+func (h *OwnershipHandler) Query(c *beecontext.Context) {
+	device := c.Input.Param(":device")
 	if device == "" {
 		Error(c, 400, "missing device")
 		return
 	}
-	path := c.Query("path")
+	path := c.Input.Query("path")
 	data := OwnershipData{Device: device, Path: path}
 	if path != "" {
 		data.Intents = h.index.Owners(device, path)

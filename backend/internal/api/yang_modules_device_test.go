@@ -6,8 +6,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gin-gonic/gin"
-
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
@@ -50,9 +48,7 @@ func newDeviceYangHarness(t *testing.T, caps []string) (*YangHandler, string, fu
 
 func listModulesWithQuery(t *testing.T, h *YangHandler, query string) *httptest.ResponseRecorder {
 	t.Helper()
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Request = httptest.NewRequest("GET", "/api/v1/yang/modules"+query, nil)
+	c, w := newTestContext("GET", "/api/v1/yang/modules"+query, nil)
 	h.ListModules(c)
 	return w
 }
@@ -63,7 +59,6 @@ func TestListModulesDeviceNegotiated(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	gin.SetMode(gin.TestMode)
 	h, deviceID, cleanup := newDeviceYangHarness(t, []string{
 		"urn:huawei:yang:huawei-vlan?module=huawei-vlan&revision=2020-02-07",
 		"urn:huawei:yang:huawei-ifm?module=huawei-ifm&revision=2020-02-15",
@@ -93,7 +88,6 @@ func TestListModulesDeviceNegotiated(t *testing.T) {
 
 // TestListModulesDeviceOffline（CN-02 降级）：设备已注册但不可达 → 全量 + negotiated:false，不 5xx。
 func TestListModulesDeviceOffline(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	s, err := yangschema.Load()
 	if err != nil {
 		t.Fatalf("Load schema: %v", err)
@@ -122,7 +116,6 @@ func TestListModulesDeviceOffline(t *testing.T) {
 
 // TestListModulesDeviceUnknown（CN-02 负路径）：未注册设备 → 404。
 func TestListModulesDeviceUnknown(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	h := newYangHandlerWithSchema(t)
 	w := listModulesWithQuery(t, h, "?device=nope")
 	var env struct {
@@ -140,7 +133,6 @@ func TestListModulesDeviceUnknown(t *testing.T) {
 // TestListModulesBlacklistAnnotation（CN-03）：blacklist 命中的模块（huawei-system）
 // 附 blacklisted:true 且仍在列表；未命中模块无该键。
 func TestListModulesBlacklistAnnotation(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	h := newYangHandlerWithSchema(t)
 	w := listModulesWithQuery(t, h, "")
 	var mods []YangModuleInfo

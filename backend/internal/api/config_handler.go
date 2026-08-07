@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gin-gonic/gin"
+	beecontext "github.com/beego/beego/v2/server/web/context"
 	"github.com/leezesi/usmp/backend/internal/cache"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/internal/intent"
@@ -98,7 +98,7 @@ type nodeUnsupportedData struct {
 	Reason string `json:"reason"`
 }
 
-func rejectNodeUnsupported(c *gin.Context, path string) {
+func rejectNodeUnsupported(c *beecontext.Context, path string) {
 	ErrorWithData(c, 500, "Device does not support this node: "+path,
 		nodeUnsupportedData{Reason: reasonNodeUnsupported})
 }
@@ -280,7 +280,7 @@ type OwnershipRejection struct {
 }
 
 // rejectOwnedPath 以信封码 409 拒绝命中认领路径的手改（BR-11 二期硬锁）。
-func rejectOwnedPath(c *gin.Context, owners []string) {
+func rejectOwnedPath(c *beecontext.Context, owners []string) {
 	ErrorWithData(c, 409,
 		"路径由业务意图 "+strings.Join(owners, "、")+" 管理：请先删除/修改对应意图，或携带 force=true 强制下发（意图收敛仍会覆盖）",
 		OwnershipRejection{Intents: owners})
@@ -313,10 +313,10 @@ func forcedOwners(force bool, owners []string) []string {
 // @Failure  500 {object} Response "获取失败"
 // @Failure  503 {object} Response "设备未连接"
 // @Router   /config/{ip}/{path} [get]
-func (h *ConfigHandler) GetConfig(c *gin.Context) {
-	ip := c.Param("ip")
-	path := c.Param("path") // *path already includes leading slash
-	forceRefresh := c.Query("force_refresh") == "true"
+func (h *ConfigHandler) GetConfig(c *beecontext.Context) {
+	ip := c.Input.Param(":ip")
+	path := wildcardPath(c) // *path already includes leading slash
+	forceRefresh := c.Input.Query("force_refresh") == "true"
 
 	// BR-13：分页参数解析先行——非法参数在触达缓存/设备前 400（不静默忽略）。
 	lq, lqErr := parseListQuery(c.Request.URL.Query())
@@ -349,7 +349,7 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 
 	// include_state=true → 状态通道（<get>，按需）：BR-14 改为短 TTL 快照缓存
 	// 优先（万级状态表翻页秒开），force_refresh 绕过直打设备（实时逃生门）。
-	if c.Query("include_state") == "true" {
+	if c.Input.Query("include_state") == "true" {
 		h.serveStateRead(c, ip, path, fetchPath, key, lq, forceRefresh)
 		return
 	}
@@ -391,7 +391,7 @@ func (h *ConfigHandler) GetConfig(c *gin.Context) {
 // 实例独立于运行配置缓存——写后失效不触及），未命中/过期/force_refresh 经
 // <get> 全量回读并回填快照。分页参数与状态读可组合：切片作用于快照；
 // path（含谓词的原始路径）用于行提取下钻，fetchPath 用于设备取数与学习。
-func (h *ConfigHandler) serveStateRead(c *gin.Context, ip, path, fetchPath, key string, lq *ListQueryParams, forceRefresh bool) {
+func (h *ConfigHandler) serveStateRead(c *beecontext.Context, ip, path, fetchPath, key string, lq *ListQueryParams, forceRefresh bool) {
 	ttlSec := int(h.stateCache.TTL().Seconds())
 	if !forceRefresh {
 		if val, age, ok := h.stateCache.GetWithAge(key); ok {
@@ -425,7 +425,7 @@ func (h *ConfigHandler) serveStateRead(c *gin.Context, ip, path, fetchPath, key 
 // respondConfig 组装 GET /config 响应：lq 非 nil 时行提取 + 查询切片（BR-13，
 // data 变为 ListPage 形状），目标非 list/无法定位行数组 → 400；lq 为 nil 保持
 // 整树形状不变（回读子树剥层契约回归锚点）。
-func (h *ConfigHandler) respondConfig(c *gin.Context, data interface{}, lq *ListQueryParams, path string, cached bool, ageSec, ttlSec int, source, msg string) {
+func (h *ConfigHandler) respondConfig(c *beecontext.Context, data interface{}, lq *ListQueryParams, path string, cached bool, ageSec, ttlSec int, source, msg string) {
 	payload := data
 	if lq != nil {
 		rows, err := extractListRows(h.manager.GetSchema(), path, data)
@@ -461,13 +461,13 @@ func (h *ConfigHandler) respondConfig(c *gin.Context, data interface{}, lq *List
 // @Failure  409 {object} Response{data=OwnershipRejection} "路径被业务意图认领（无 force 拒绝）"
 // @Failure  500 {object} Response "存储失败"
 // @Router   /config/{ip}/{path} [post]
-func (h *ConfigHandler) SetConfig(c *gin.Context) {
-	ip := c.Param("ip")
-	path := c.Param("path") // *path already includes leading slash
+func (h *ConfigHandler) SetConfig(c *beecontext.Context) {
+	ip := c.Input.Param(":ip")
+	path := wildcardPath(c) // *path already includes leading slash
 
 	// 归属硬锁（BR-11 二期）：认领路径缺省 409 早拒（编解码/建连之前），
 	// force=true 放行且后续审计留痕。被拒请求不产生审计记录（OA-01）。
-	force := c.Query("force") == "true"
+	force := c.Input.Query("force") == "true"
 	owners := intent.DefaultOwnership.Owners(ip, path)
 	if len(owners) > 0 && !force {
 		rejectOwnedPath(c, owners)
@@ -482,7 +482,7 @@ func (h *ConfigHandler) SetConfig(c *gin.Context) {
 	}
 
 	var data map[string]interface{}
-	if err := c.ShouldBindJSON(&data); err != nil {
+	if err := bindJSON(c, &data); err != nil {
 		Error(c, 400, "Invalid request: "+err.Error())
 		return
 	}
@@ -688,13 +688,13 @@ func (h *ConfigHandler) pushDeleteToDevice(ctx context.Context, ip string, targe
 // @Failure  409 {object} Response{data=OwnershipRejection} "条目被业务意图认领（无 force 拒绝）"
 // @Failure  502 {object} Response "设备删除失败（含 data-missing）"
 // @Router   /config/{ip}/{path} [delete]
-func (h *ConfigHandler) DeleteConfig(c *gin.Context) {
-	ip := c.Param("ip")
-	path := c.Param("path")
-	key := c.Query("key")
+func (h *ConfigHandler) DeleteConfig(c *beecontext.Context) {
+	ip := c.Input.Param(":ip")
+	path := wildcardPath(c)
+	key := c.Input.Query("key")
 
 	// 归属硬锁（BR-11 二期）：认领条目缺省 409 早拒，force=true 放行留痕。
-	force := c.Query("force") == "true"
+	force := c.Input.Query("force") == "true"
 	owners := intent.DefaultOwnership.Owners(ip, path)
 	if len(owners) > 0 && !force {
 		rejectOwnedPath(c, owners)

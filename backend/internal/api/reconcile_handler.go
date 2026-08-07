@@ -3,7 +3,7 @@ package api
 import (
 	"time"
 
-	"github.com/gin-gonic/gin"
+	beecontext "github.com/beego/beego/v2/server/web/context"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/status"
 )
@@ -79,8 +79,8 @@ func rollup(list []status.Status) (status.Outcome, time.Time) {
 // @Param    ip path string true "设备 IP"
 // @Success  200 {object} Response{data=DeviceReconcileData} "设备对账结局；从未对账返回 outcome=unknown"
 // @Router   /devices/{ip}/reconcile [get]
-func (h *ReconcileHandler) GetDeviceReconcile(c *gin.Context) {
-	ip := c.Param("ip")
+func (h *ReconcileHandler) GetDeviceReconcile(c *beecontext.Context) {
+	ip := c.Input.Param(":ip")
 	list := h.manager.GetReconcileStatus().ListByDevice(ip)
 	outcome, _ := rollup(list)
 	Success(c, DeviceReconcileData{
@@ -97,7 +97,7 @@ func (h *ReconcileHandler) GetDeviceReconcile(c *gin.Context) {
 // @Produce  json
 // @Success  200 {object} Response{data=FleetReconcileData} "全网对账结局聚合；summary 按结局计数，仅含已对账设备（unknown 需与设备列表相减派生）"
 // @Router   /reconcile/status [get]
-func (h *ReconcileHandler) GetFleetReconcile(c *gin.Context) {
+func (h *ReconcileHandler) GetFleetReconcile(c *beecontext.Context) {
 	all := h.manager.GetReconcileStatus().Snapshot()
 
 	byDevice := make(map[string][]status.Status)

@@ -5,7 +5,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
@@ -23,10 +22,7 @@ func clientConnInfoUnreachable() client.DeviceConnectionInfo {
 // /devices/:ip/capabilities 透出 hello 原文。
 
 func getSchemaReq(h *YangHandler, module, query string) *httptest.ResponseRecorder {
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "module", Value: module}}
-	c.Request = httptest.NewRequest("GET", "/api/v1/yang/schema/"+module+query, nil)
+	c, w := newTestContext("GET", "/api/v1/yang/schema/"+module+query, nil, "module", module)
 	h.GetSchema(c)
 	return w
 }
@@ -36,7 +32,6 @@ func TestGetSchema_DeviceUnsupportedExposed(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	gin.SetMode(gin.TestMode)
 	h, deviceID, cleanup := newDeviceYangHarness(t, nil)
 	defer cleanup()
 
@@ -68,7 +63,6 @@ func TestGetSchema_NoDeviceOmitsUnsupported(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	gin.SetMode(gin.TestMode)
 	h, _, cleanup := newDeviceYangHarness(t, nil)
 	defer cleanup()
 	w := getSchemaReq(h, "vlan", "")
@@ -80,7 +74,6 @@ func TestGetSchema_DeviceNoLearningOmitsKey(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	gin.SetMode(gin.TestMode)
 	h, deviceID, cleanup := newDeviceYangHarness(t, nil)
 	defer cleanup()
 	w := getSchemaReq(h, "vlan", "?device="+deviceID)
@@ -92,7 +85,6 @@ func TestDeviceCapabilities_Online(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	gin.SetMode(gin.TestMode)
 	yh, deviceID, cleanup := newDeviceYangHarness(t, []string{
 		"urn:ietf:params:netconf:base:1.0",
 		"urn:huawei:yang:huawei-vlan?module=huawei-vlan&revision=2020-02-07&deviations=huawei-vlan-deviations",
@@ -100,10 +92,7 @@ func TestDeviceCapabilities_Online(t *testing.T) {
 	defer cleanup()
 	h := NewDeviceHandler(yh.manager)
 
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "ip", Value: deviceID}}
-	c.Request = httptest.NewRequest("GET", "/", nil)
+	c, w := newTestContext("GET", "/", nil, "ip", deviceID)
 	h.GetCapabilities(c)
 
 	var data struct {
@@ -120,26 +109,19 @@ func TestDeviceCapabilities_NegativePaths(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test in short mode")
 	}
-	gin.SetMode(gin.TestMode)
 	yh, _, cleanup := newDeviceYangHarness(t, nil)
 	defer cleanup()
 	h := NewDeviceHandler(yh.manager)
 
 	// 未注册 → 404（信封 code）
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "ip", Value: "10.9.9.9"}}
-	c.Request = httptest.NewRequest("GET", "/", nil)
+	c, w := newTestContext("GET", "/", nil, "ip", "10.9.9.9")
 	h.GetCapabilities(c)
 	code, _, _ := decodeEnvelope(t, w)
 	assert.Equal(t, 404, code)
 
 	// 已注册但建连失败（离线）→ 空列表 + negotiated:false，不 5xx（CN-06 降级）
 	assert.NoError(t, yh.manager.GetDeviceStore().Put("dead-dev", clientConnInfoUnreachable()))
-	w2 := httptest.NewRecorder()
-	c2, _ := gin.CreateTestContext(w2)
-	c2.Params = gin.Params{{Key: "ip", Value: "dead-dev"}}
-	c2.Request = httptest.NewRequest("GET", "/", nil)
+	c2, w2 := newTestContext("GET", "/", nil, "ip", "dead-dev")
 	h.GetCapabilities(c2)
 	var data struct {
 		Capabilities []string `json:"capabilities"`

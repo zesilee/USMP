@@ -5,10 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"
 	"testing"
-
-	"github.com/gin-gonic/gin"
 
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
@@ -63,11 +60,8 @@ func newRPCHandlerTest(t *testing.T, cli client.Client) (*RPCHandler, string) {
 // always replies HTTP 200 with the code in the envelope; see response.go).
 func doExecute(t *testing.T, h *RPCHandler, ip, module, rpc string, inputs map[string]string) int {
 	t.Helper()
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Params = gin.Params{{Key: "ip", Value: ip}, {Key: "module", Value: module}, {Key: "rpc", Value: rpc}}
 	b, _ := json.Marshal(map[string]any{"inputs": inputs})
-	c.Request = httptest.NewRequest(http.MethodPost, "/api/v1/rpc/"+ip+"/"+module+"/"+rpc, bytes.NewReader(b))
+	c, w := newTestContext(http.MethodPost, "/api/v1/rpc/"+ip+"/"+module+"/"+rpc, bytes.NewReader(b), "ip", ip, "module", module, "rpc", rpc)
 	c.Request.Header.Set("Content-Type", "application/json")
 	h.Execute(c)
 
@@ -82,7 +76,6 @@ func doExecute(t *testing.T, h *RPCHandler, ip, module, rpc string, inputs map[s
 
 // RPC-03：成功执行——校验 mandatory、经 ExecuteRPC 下发（正确 namespace/input）、返回结果。
 func TestRPCExecute_Success(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	cli := &rpcExecClient{result: &client.RPCResult{OK: true}}
 	h, ip := newRPCHandlerTest(t, cli)
 
@@ -100,7 +93,6 @@ func TestRPCExecute_Success(t *testing.T) {
 
 // RPC-03：缺 mandatory input 拒绝，不下发。
 func TestRPCExecute_MissingMandatory(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	cli := &rpcExecClient{result: &client.RPCResult{OK: true}}
 	h, ip := newRPCHandlerTest(t, cli)
 
@@ -115,7 +107,6 @@ func TestRPCExecute_MissingMandatory(t *testing.T) {
 
 // RPC-03：未知 rpc → 404。
 func TestRPCExecute_UnknownRPC(t *testing.T) {
-	gin.SetMode(gin.TestMode)
 	cli := &rpcExecClient{result: &client.RPCResult{OK: true}}
 	h, ip := newRPCHandlerTest(t, cli)
 

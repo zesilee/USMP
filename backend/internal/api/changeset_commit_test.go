@@ -8,7 +8,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
@@ -37,9 +36,7 @@ func newCommitHandlerForTest(push intent.Pusher) (*ChangesetHandler, manager.Man
 }
 
 func commitReq(h *ChangesetHandler, body, query string) *httptest.ResponseRecorder {
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Request = httptest.NewRequest(http.MethodPost, "/"+query, strings.NewReader(body))
+	c, w := newTestContext(http.MethodPost, "/"+query, strings.NewReader(body))
 	c.Request.Header.Set("Content-Type", "application/json")
 	h.Commit(c)
 	return w

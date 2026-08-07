@@ -59,3 +59,4 @@
 - [发布打包](release-packaging.md) — 做交付/部署/改打包链路前必读：scripts/build-release.sh 一键出 zip(bin+web+start.sh)、静态站=自研Go二进制免nginx、start.sh=POSIX sh可当ENTRYPOINT、python zipfile兜底保留+x、冒烟用干净alpine容器别抢本机8080
 - [Go1.22钉死](go-122-pin.md) — 升依赖/加语法/改CI/查覆盖率前必读：交付钉死1.22全链(go.mod/Docker/CI/打包)、依赖天花板(ygot v0.29.20/x-crypto v0.33/swag v1.16.4)、tool指令改tools.go+go run、覆盖率口径已归一化基线72.5
 - [NETCONF自研引擎](netconf-selfdev.md) — 碰NETCONF client/netconfcore/连接排查/加依赖前必读：**scrapligo已删(NC-01红线,守护测试拦重引,无运行时回退)**、netconfcore=唯一引擎、真机验证移交测试团队(手册docs/netconf-core-field-validation.md,结论回来前勿用于生产设备变更)、三个封帧兼容坑
+- [gin→beego迁移](gin-to-beego-migration.md) — 碰HTTP层/加handler/升beego前必读：唯一框架=beego/v2 v2.3.0钉死(v2.3.1+要go1.24,tidy会连带抬go指令与x/crypto)、binding:required是gin专属须显式校验(标签留给swag)、:splat无前导斜杠一律wildcardPath、每Server自持ControllerRegister、no_gin_guard守护禁回流

@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 
-	"github.com/gin-gonic/gin"
+	beecontext "github.com/beego/beego/v2/server/web/context"
 
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
@@ -41,13 +41,13 @@ type rpcExecuteRequest struct {
 // @Param    rpc    path string true "rpc 名"
 // @Success  200 {object} Response "执行结果（ok/reply）"
 // @Router   /rpc/{ip}/{module}/{rpc} [post]
-func (h *RPCHandler) Execute(c *gin.Context) {
-	ip := c.Param("ip")
-	module := c.Param("module")
-	rpcName := c.Param("rpc")
+func (h *RPCHandler) Execute(c *beecontext.Context) {
+	ip := c.Input.Param(":ip")
+	module := c.Input.Param(":module")
+	rpcName := c.Input.Param(":rpc")
 
 	var req rpcExecuteRequest
-	_ = c.ShouldBindJSON(&req) // 缺 body → 空 inputs，由下方 mandatory 校验兜底
+	_ = bindJSON(c, &req) // 缺 body → 空 inputs，由下方 mandatory 校验兜底
 
 	// 查 rpc 定义（本地 slice，元素可取址）。
 	var def *yangschema.RPCDef
@@ -90,10 +90,10 @@ func (h *RPCHandler) Execute(c *gin.Context) {
 	res, err := cli.ExecuteRPC(c.Request.Context(), ns, rpcName, inputs)
 	if err != nil {
 		ErrorWithData(c, http.StatusBadGateway, "rpc failed: "+err.Error(),
-			gin.H{"reply": rpcReplyString(res)})
+			map[string]interface{}{"reply": rpcReplyString(res)})
 		return
 	}
-	Success(c, gin.H{
+	Success(c, map[string]interface{}{
 		"ok":       res.OK,
 		"reply":    rpcReplyString(res),
 		"highRisk": def.HighRisk,

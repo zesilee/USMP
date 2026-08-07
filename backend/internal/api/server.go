@@ -1,22 +1,27 @@
 package api
 
 import (
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
+	"log"
+	"net/http"
+	"time"
+
+	"github.com/beego/beego/v2/server/web"
+	beecontext "github.com/beego/beego/v2/server/web/context"
+	"github.com/beego/beego/v2/server/web/filter/cors"
 	"github.com/leezesi/usmp/backend/internal/intent"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 )
 
 // Server represents the API server
 type Server struct {
-	router  *gin.Engine
+	router  *web.ControllerRegister
 	manager manager.Manager
 }
 
 // NewServer creates a new API server
 func NewServer(manager manager.Manager) *Server {
 	s := &Server{
-		router:  gin.Default(),
+		router:  web.NewControllerRegister(),
 		manager: manager,
 	}
 
@@ -27,80 +32,71 @@ func NewServer(manager manager.Manager) *Server {
 }
 
 func (s *Server) setupCORS() {
-	config := cors.DefaultConfig()
-	config.AllowAllOrigins = true
-	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
-	config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
-	s.router.Use(cors.New(config))
+	_ = s.router.InsertFilter("*", web.BeforeRouter, cors.Allow(&cors.Options{
+		AllowAllOrigins: true,
+		AllowMethods:    []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:    []string{"Origin", "Content-Type", "Authorization"},
+		// gin-contrib/cors DefaultConfig 自带 12h 预检缓存，保持对等避免预检风暴
+		MaxAge: 12 * time.Hour,
+	}))
+	// 访问日志：承接 gin.Default() 的 Logger 中间件（运维排查依赖请求日志）
+	_ = s.router.InsertFilter("*", web.FinishRouter, func(ctx *beecontext.Context) {
+		log.Printf("%s %s -> %d", ctx.Input.Method(), ctx.Request.URL.Path, ctx.ResponseWriter.Status)
+	}, web.WithReturnOnOutput(false))
 }
 
 func (s *Server) setupRoutes() {
-	v1 := s.router.Group("/api/v1")
-	{
-		// Device endpoints
-		reconcileHandler := NewReconcileHandler(s.manager)
+	// Device endpoints
+	reconcileHandler := NewReconcileHandler(s.manager)
+	deviceHandler := NewDeviceHandler(s.manager)
+	s.router.Get("/api/v1/devices", deviceHandler.ListDevices)
+	s.router.Post("/api/v1/devices", deviceHandler.AddDevice)
+	s.router.Delete("/api/v1/devices/:ip", deviceHandler.RemoveDevice)
+	s.router.Get("/api/v1/devices/:ip/status", deviceHandler.GetStatus)
+	// hello capabilities 原文（CN-06：诊断 + deviations 侦察）
+	s.router.Get("/api/v1/devices/:ip/capabilities", deviceHandler.GetCapabilities)
+	// Per-device reconcile outcome (desired↔actual convergence)
+	s.router.Get("/api/v1/devices/:ip/reconcile", reconcileHandler.GetDeviceReconcile)
 
-		deviceGroup := v1.Group("/devices")
-		{
-			deviceHandler := NewDeviceHandler(s.manager)
-			deviceGroup.GET("", deviceHandler.ListDevices)
-			deviceGroup.POST("", deviceHandler.AddDevice)
-			deviceGroup.DELETE("/:ip", deviceHandler.RemoveDevice)
-			deviceGroup.GET("/:ip/status", deviceHandler.GetStatus)
-			// hello capabilities 原文（CN-06：诊断 + deviations 侦察）
-			deviceGroup.GET("/:ip/capabilities", deviceHandler.GetCapabilities)
-			// Per-device reconcile outcome (desired↔actual convergence)
-			deviceGroup.GET("/:ip/reconcile", reconcileHandler.GetDeviceReconcile)
-		}
+	// Fleet-wide reconcile aggregate (for the convergence dashboard)
+	s.router.Get("/api/v1/reconcile/status", reconcileHandler.GetFleetReconcile)
 
-		// Fleet-wide reconcile aggregate (for the convergence dashboard)
-		v1.GET("/reconcile/status", reconcileHandler.GetFleetReconcile)
+	// Operation audit log (config-delivery records + live reconcile outcome)
+	s.router.Get("/api/v1/logs", NewAuditHandler(s.manager).ListLogs)
 
-		// Operation audit log (config-delivery records + live reconcile outcome)
-		v1.GET("/logs", NewAuditHandler(s.manager).ListLogs)
+	// Configuration endpoints
+	configHandler := NewConfigHandler(s.manager)
+	// 攒批变更集（config-changeset）：静态段 "changeset" 与 ":ip" 参数段
+	// 在 beego 路由树共存（静态优先，行为由 beego_router_equiv_test 锁死），
+	// 先注册以示意优先级。
+	changesetHandler := NewChangesetHandler(s.manager)
+	s.router.Post("/api/v1/config/changeset/preview", changesetHandler.Preview)
+	s.router.Post("/api/v1/config/changeset/commit", changesetHandler.Commit)
+	s.router.Get("/api/v1/config/:ip/*", configHandler.GetConfig)
+	s.router.Post("/api/v1/config/:ip/*", configHandler.SetConfig)
+	s.router.Delete("/api/v1/config/:ip/*", configHandler.DeleteConfig)
 
-		// Configuration endpoints
-		configGroup := v1.Group("/config")
-		{
-			configHandler := NewConfigHandler(s.manager)
-			// 攒批变更集（config-changeset）：静态段 "changeset" 与 ":ip" 参数段
-			// 在 gin 1.10 共存（静态优先），先注册以示意优先级。
-			changesetHandler := NewChangesetHandler(s.manager)
-			configGroup.POST("/changeset/preview", changesetHandler.Preview)
-			configGroup.POST("/changeset/commit", changesetHandler.Commit)
-			configGroup.GET("/:ip/*path", configHandler.GetConfig)
-			configGroup.POST("/:ip/*path", configHandler.SetConfig)
-			configGroup.DELETE("/:ip/*path", configHandler.DeleteConfig)
-		}
+	// rpc 执行（RPC-03）：触发模块运维操作，不写缓存/不对账（§8/D4）
+	s.router.Post("/api/v1/rpc/:ip/:module/:rpc", NewRPCHandler(s.manager).Execute)
 
-		// rpc 执行（RPC-03）：触发模块运维操作，不写缓存/不对账（§8/D4）
-		v1.POST("/rpc/:ip/:module/:rpc", NewRPCHandler(s.manager).Execute)
+	// Soft-ownership query (BIO-07：原生控制台徽标/手改提示数据面)
+	s.router.Get("/api/v1/ownership/:device", NewOwnershipHandler().Query)
 
-		// Soft-ownership query (BIO-07：原生控制台徽标/手改提示数据面)
-		v1.GET("/ownership/:device", NewOwnershipHandler().Query)
+	// 业务网络配置（意图 CR 代理，design D7：前端不直连 apiserver）
+	bizHandler := NewBusinessHandler(intent.APIClient, intent.Namespace())
+	s.router.Get("/api/v1/business/vlan-services", bizHandler.List)
+	s.router.Get("/api/v1/business/vlan-services/:name", bizHandler.Get)
+	s.router.Post("/api/v1/business/vlan-services", bizHandler.Apply)
+	s.router.Delete("/api/v1/business/vlan-services/:name", bizHandler.Delete)
 
-		// 业务网络配置（意图 CR 代理，design D7：前端不直连 apiserver）
-		bizGroup := v1.Group("/business")
-		{
-			bizHandler := NewBusinessHandler(intent.APIClient, intent.Namespace())
-			bizGroup.GET("/vlan-services", bizHandler.List)
-			bizGroup.GET("/vlan-services/:name", bizHandler.Get)
-			bizGroup.POST("/vlan-services", bizHandler.Apply)
-			bizGroup.DELETE("/vlan-services/:name", bizHandler.Delete)
-		}
-
-		// YANG model endpoints
-		yangGroup := v1.Group("/yang")
-		{
-			yangHandler := NewYangHandler(s.manager)
-			yangGroup.GET("/modules", yangHandler.ListModules)
-			yangGroup.GET("/left-tree", yangHandler.LeftTree)
-			yangGroup.GET("/schema/:module", yangHandler.GetSchema)
-		}
-	}
+	// YANG model endpoints
+	yangHandler := NewYangHandler(s.manager)
+	s.router.Get("/api/v1/yang/modules", yangHandler.ListModules)
+	s.router.Get("/api/v1/yang/left-tree", yangHandler.LeftTree)
+	s.router.Get("/api/v1/yang/schema/:module", yangHandler.GetSchema)
 }
 
 // Run starts the server
 func (s *Server) Run(addr string) error {
-	return s.router.Run(addr)
+	return http.ListenAndServe(addr, s.router)
 }

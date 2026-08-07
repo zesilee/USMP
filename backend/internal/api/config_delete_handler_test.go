@@ -8,7 +8,6 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/openconfig/ygot/ygot"
@@ -29,14 +28,10 @@ func envelopeCode(t *testing.T, w *httptest.ResponseRecorder) int {
 }
 
 func deleteConfigReq(h *ConfigHandler, ip, path, key string) *httptest.ResponseRecorder {
-	gin.SetMode(gin.TestMode)
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Request = httptest.NewRequest(http.MethodDelete, "/api/v1/config/"+ip+path+"?key="+key, nil)
+	c, w := newTestContext(http.MethodDelete, "/api/v1/config/"+ip+path+"?key="+key, nil, "ip", ip, "splat", path)
 	if key != "" {
 		c.Request.URL.RawQuery = "key=" + key
 	}
-	c.Params = gin.Params{{Key: "ip", Value: ip}, {Key: "path", Value: path}}
 	h.DeleteConfig(c)
 	return w
 }
