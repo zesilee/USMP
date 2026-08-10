@@ -36,7 +36,7 @@ import { executeRpc, getConfig } from '../../api'
 import type { Field } from '../../utils/crdSchemaParser'
 import type { ConsoleTab, RpcDef } from '../../utils/moduleConsole'
 import { leafName } from '../../utils/moduleConsole'
-import { extractRows } from '../../composables/useDeviceConfig'
+import { extractRows } from '../../utils/extractRows'
 import { parseLeafref } from '../../utils/leafref'
 import FieldRenderer from './FieldRenderer.vue'
 
