@@ -59,12 +59,12 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   })
 
   // ===== 通用模块控制台（generic-module-console，FE-10~13）=====
-  // 旧 /config/vlan、/config/interface 重定向到 /module/:module；页面 Tab/列/表单
-  // 全部由 schema 派生。以下把原「表单动态渲染/when 显隐/校验拦截/SPA 切换」回归
-  // 断言迁移到控制台，并新增「种子行/高级搜索」断言。
+  // 页面 Tab/列/表单全部由 schema 派生（旧 /config/* 重定向已退役，直接访问现役路由）。
+  // 以下把原「表单动态渲染/when 显隐/校验拦截/SPA 切换」回归断言迁移到控制台，
+  // 并新增「种子行/高级搜索」断言。
 
-  test('VLAN 旧路由重定向到控制台，创建表单动态渲染出 YANG 字段', async ({ page }) => {
-    await page.goto('/config/vlan', { waitUntil: 'networkidle' })
+  test('VLAN 控制台创建表单动态渲染出 YANG 字段', async ({ page }) => {
+    await page.goto('/module/vlan', { waitUntil: 'networkidle' })
     await expect(page).toHaveURL(/module\/vlan/)
 
     await pickDevice(page)
@@ -136,7 +136,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
 
   // 接口（华为 IFM）：Tab 由模块根派生，interfaces 列表 Tab 内创建表单动态渲染。
   test('接口控制台 Tab 派生 + 创建表单动态渲染出 YANG 字段', async ({ page }) => {
-    await page.goto('/config/interface', { waitUntil: 'networkidle' })
+    await page.goto('/module/ifm', { waitUntil: 'networkidle' })
     await expect(page).toHaveURL(/module\/ifm/)
 
     await pickDevice(page)
