@@ -95,10 +95,6 @@ function switchLocale(next: AppLocale) {
 const CRUMB_KEYS: Record<string, string> = {
   dashboard: 'header.crumb.dashboard',
   devices: 'header.crumb.devices',
-  interface: 'header.crumb.interface',
-  vlan: 'header.crumb.vlan',
-  route: 'header.crumb.route',
-  native: 'header.crumb.native',
   logs: 'header.crumb.logs',
   settings: 'header.crumb.settings',
 }
