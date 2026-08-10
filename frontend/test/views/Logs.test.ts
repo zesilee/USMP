@@ -1,9 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
-import { createPinia } from 'pinia'
+import { createPinia, setActivePinia } from 'pinia'
 import ElementPlus from 'element-plus'
 import Logs from '../../src/views/Logs.vue'
 import ReconcileChip from '../../src/components/dashboard/ReconcileChip.vue'
+import { useMenuStore } from '../../src/stores/menu'
 import { getLogs } from '../../src/api'
 
 vi.mock('../../src/api')
@@ -23,7 +24,9 @@ const logsEnvelope = {
 }
 
 function mountView() {
-  return mount(Logs, { global: { plugins: [ElementPlus, createPinia()] } })
+  const pinia = createPinia()
+  setActivePinia(pinia)
+  return mount(Logs, { global: { plugins: [ElementPlus, pinia] } })
 }
 
 describe('Logs View · 操作日志', () => {
@@ -39,13 +42,29 @@ describe('Logs View · 操作日志', () => {
     expect(w.find('.el-table').exists()).toBe(true)
   })
 
-  it('派生行：opLabel/summary/对账态', async () => {
+  it('派生行：opLabel/summary/对账态（menu store 未加载→段名回退，FE-26/R08）', async () => {
     const w = mountView()
     await flushPromises()
     const vm = w.vm as any
     expect(vm.rows).toHaveLength(3)
-    expect(vm.rows[0]).toMatchObject({ device: '10.0.0.1', opLabel: 'VLAN 配置', summary: 'vlans (2)', reconcileState: 'conv' })
+    expect(vm.rows[0]).toMatchObject({ device: '10.0.0.1', opLabel: 'vlan', summary: 'vlans (2)', reconcileState: 'conv' })
     expect(vm.rows[2].reconcileState).toBe('error')
+  })
+
+  it('opLabel 用模块菜单标题，且 store 晚到时无需重拉自动升级（FE-26）', async () => {
+    const w = mountView()
+    await flushPromises()
+    const vm = w.vm as any
+    expect(vm.rows[0].opLabel).toBe('vlan') // getLogs 先返回：段名回退
+    // menu store 后到：标签响应式升级为菜单标题，无需再次 load
+    useMenuStore().nativeModules = [
+      { name: 'vlan', title: 'VLAN', vendor: 'huawei' },
+      { name: 'ifm', title: '接口管理', vendor: 'huawei' },
+    ] as any
+    await flushPromises()
+    expect(vm.rows[0].opLabel).toBe('VLAN')
+    expect(vm.rows[1].opLabel).toBe('接口管理')
+    expect(vm.rows[2].opLabel).toBe('route') // 未知模块回退段名
   })
 
   it('每行渲染对账结局 chip', async () => {

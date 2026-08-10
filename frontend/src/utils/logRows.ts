@@ -14,25 +14,23 @@ export interface LogRow {
   reconcileState: DisplayState // 当前对账结局（live-join）→ ReconcileChip 态
 }
 
-// 从 YANG path 派生一个可读的操作类型标签。
-export function opLabelOf(path: string): string {
-  const p = (path || '').toLowerCase()
-  const t = i18n.global.t
-  if (p.includes('vlan')) return t('logs.opVlan')
-  if (p.includes('ifm') || p.includes('interface')) return t('logs.opInterface')
-  if (p.includes('system')) return t('logs.opSystem')
-  if (p.includes('route')) return t('logs.opRoute')
-  return t('logs.opGeneric')
+// 从 YANG path 派生操作类型标签（FE-26，模型驱动）：取首段模块名——带命名空间前缀时
+// 前缀即模块名（vlan:vlans → vlan），否则段名本身；已知模块显示菜单标题（与左树称谓
+// 一致），未知模块回退段名，空路径回退通用标签。
+export function opLabelOf(path: string, moduleTitles?: Record<string, string>): string {
+  const seg = (path || '').split('/').filter(Boolean)[0]?.split(':')[0] ?? ''
+  if (!seg) return i18n.global.t('logs.opGeneric')
+  return moduleTitles?.[seg] ?? seg
 }
 
 // 纯函数：审计记录 → 日志行。保序（后端 newest-first）；缺失字段安全降级（R08）。
-export function deriveLogRows(logs: LogEntry[]): LogRow[] {
+export function deriveLogRows(logs: LogEntry[], moduleTitles?: Record<string, string>): LogRow[] {
   return (logs ?? []).map((l) => ({
     id: l.id ?? '',
     timestamp: l.timestamp ?? '',
     device: l.device_ip ?? '',
     path: l.path ?? '',
-    opLabel: opLabelOf(l.path ?? ''),
+    opLabel: opLabelOf(l.path ?? '', moduleTitles),
     summary: l.summary ?? '',
     actor: l.actor ?? '',
     reconcileState: OUTCOME_TO_STATE[l.outcome ?? ''] ?? 'unknown',

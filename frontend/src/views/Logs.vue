@@ -63,10 +63,18 @@ import { useI18n } from 'vue-i18n'
 import { Refresh, Search } from '@element-plus/icons-vue'
 import { getLogs } from '../api'
 import { deriveLogRows, type LogRow } from '../utils/logRows'
+import type { LogEntry } from '../types/api'
+import { useMenuStore } from '../stores/menu'
 import type { DisplayState } from '../composables/useFleetOverview'
 import ReconcileChip from '../components/dashboard/ReconcileChip.vue'
 
 const { t } = useI18n()
+
+// FE-26：操作类型标签用模块菜单标题（name→title）；store 未加载时派生层回退段名（R08）。
+const menuStore = useMenuStore()
+const moduleTitles = computed(() =>
+  Object.fromEntries(menuStore.nativeModules.map((m) => [m.name, m.title])),
+)
 
 const statusOptions = computed<{ label: string; value: DisplayState }[]>(() => [
   { label: t('common.state.conv'), value: 'conv' },
@@ -76,7 +84,10 @@ const statusOptions = computed<{ label: string; value: DisplayState }[]>(() => [
   { label: t('common.state.unknown'), value: 'unknown' },
 ])
 
-const rows = ref<LogRow[]>([])
+// 存原始审计记录，行派生走 computed：menu store 晚于 getLogs 返回时标签自动
+// 从段名升级为菜单标题（FE-26），无需重拉。
+const rawLogs = ref<LogEntry[]>([])
+const rows = computed<LogRow[]>(() => deriveLogRows(rawLogs.value, moduleTitles.value))
 const loading = ref(false)
 const searchKeyword = ref('')
 const statusFilter = ref<DisplayState | ''>('')
@@ -89,9 +100,9 @@ async function load() {
   loading.value = true
   try {
     const res = await getLogs({ limit: 500 })
-    rows.value = deriveLogRows(res.data?.data?.logs ?? [])
+    rawLogs.value = res.data?.data?.logs ?? []
   } catch {
-    rows.value = [] // 拉取失败降级空表（R08）
+    rawLogs.value = [] // 拉取失败降级空表（R08）
   } finally {
     loading.value = false
   }

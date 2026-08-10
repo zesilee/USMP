@@ -66,10 +66,6 @@
     "crumb": {
       "dashboard": "设备总览",
       "devices": "设备管理",
-      "interface": "接口配置",
-      "vlan": "VLAN 配置",
-      "route": "路由配置",
-      "native": "原生配置",
       "logs": "操作日志",
       "settings": "系统设置",
       "fallback": "概览"
@@ -146,10 +142,6 @@
     "loadingEllipsis": "加载中…",
     "emptyNone": "暂无操作日志",
     "footnote": "变更列为下发内容摘要（值级 was→now 差异待后端记录）· 操作人为 system（后端无鉴权用户上下文）· 对账结局为查询时实时态。",
-    "opVlan": "VLAN 配置",
-    "opInterface": "接口配置",
-    "opSystem": "系统配置",
-    "opRoute": "路由配置",
     "opGeneric": "配置变更"
   },
   "settings": {

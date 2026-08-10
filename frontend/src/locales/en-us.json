@@ -66,10 +66,6 @@
     "crumb": {
       "dashboard": "Device Overview",
       "devices": "Devices",
-      "interface": "Interface Configuration",
-      "vlan": "VLAN Configuration",
-      "route": "Route Configuration",
-      "native": "Native Configuration",
       "logs": "Audit Logs",
       "settings": "Settings",
       "fallback": "Overview"
@@ -146,10 +142,6 @@
     "loadingEllipsis": "Loading…",
     "emptyNone": "No audit logs",
     "footnote": "Change column is a push summary (value-level was→now diff pending backend support) · Actor is system (no authenticated user context) · Reconcile outcome is live at query time.",
-    "opVlan": "VLAN Configuration",
-    "opInterface": "Interface Configuration",
-    "opSystem": "System Configuration",
-    "opRoute": "Route Configuration",
     "opGeneric": "Config Change"
   },
   "settings": {
