@@ -228,10 +228,11 @@ must 求值失败 SHALL 降级为可用（R08）。
 ### Requirement: FE-13 模型驱动原生配置导航与路由迁移
 
 左侧**原生配置**菜单 SHALL 由 `/yang/modules` 返回的模块列表驱动生成（指向 `/module/:name`），
-加载失败 SHALL 回退既有硬编码项（R08）；旧路由 `/config/interface`、`/config/vlan`
-SHALL 重定向到对应 `/module/:module`。模块项携带 `category` 时菜单 SHALL 按 category
+加载失败 SHALL 回退既有硬编码项（R08）。模块项携带 `category` 时菜单 SHALL 按 category
 分组展示；无 `category` 的模块 SHALL 归入默认分组，分组渲染 SHALL NOT 因缺失 category 失败（R08）。
-legacy 路由 `/native/:module` 与 `/config/route` SHALL 不存在（Stack A CRD 死路已退役，生产中从未可用，无重定向义务）。
+legacy 路由 `/native/:module`、`/config/route`、`/config/interface`、`/config/vlan`
+SHALL 不存在（Stack A CRD 死路与旧配置页入口均已退役，旧地址兼容期结束，无重定向义务）；
+站内跳转 SHALL 直接使用 `/module/:module`，SHALL NOT 依赖任何旧路由。
 
 #### Scenario: 菜单生成与回退
 
@@ -249,6 +250,13 @@ legacy 路由 `/native/:module` 与 `/config/route` SHALL 不存在（Stack A CR
 
 - **WHEN** 渲染左侧导航
 - **THEN** 模块控制台菜单组标题 SHALL 为「原生配置」，SHALL NOT 存在指向 `/native/*` 的菜单项
+
+#### Scenario: 旧配置页路由退役
+
+- **WHEN** 检视路由表
+- **THEN** SHALL NOT 存在 `/config/interface`、`/config/vlan` 路径（含重定向）
+- **WHEN** 用户在 Dashboard 点击「下发配置」
+- **THEN** SHALL 直接导航到 `/module/vlan`
 ### Requirement: FE-14 state 子树只读降级
 
 通用模块控制台 SHALL 将 `readonly=true` 的字段降级为只读呈现而非可编辑控件：
