@@ -16,7 +16,8 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', name: 'dashboard', component: {} },
-    { path: '/config/vlan', name: 'vlan', component: {} }
+    // 面包屑按路由 name 取词条；用现役路径承载 name→label 映射用例（旧 /config/* 已退役）
+    { path: '/module/vlan', name: 'vlan', component: {} }
   ]
 })
 
@@ -42,7 +43,7 @@ describe('Header Component', () => {
   })
 
   it('should render breadcrumb label from route name', async () => {
-    await router.push('/config/vlan')
+    await router.push('/module/vlan')
     await router.isReady()
     const wrapper = mountHeader()
     expect(wrapper.find('.crumb').text()).toContain('VLAN 配置')

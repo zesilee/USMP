@@ -2,8 +2,8 @@
   <!-- UI-01/D4：ElementPlus locale 随语言响应切换（zh-cn/en-us），全局控件文案即时生效 -->
   <el-config-provider :locale="epLocale">
     <MainLayout>
-    <!-- :key 按路由路径重建组件：同一组件被相邻路由复用时（如 DeviceConfigPage 同时服务
-         /config/vlan 与 /config/interface），否则 setup/onMounted 不重跑 → schema 不重载。 -->
+    <!-- :key 按路由路径重建组件：同一组件被相邻路由复用时（如 ModuleConsolePage 同时服务
+         /module/vlan 与 /module/ifm），否则 setup/onMounted 不重跑 → schema 不重载。 -->
       <router-view :key="$route.path" />
     </MainLayout>
   </el-config-provider>

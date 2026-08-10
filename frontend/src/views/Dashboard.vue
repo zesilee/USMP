@@ -120,7 +120,7 @@ function formatTime(iso: string | null): string {
 }
 
 function goConfig() {
-  router.push('/config/vlan')
+  router.push('/module/vlan')
 }
 function goLogs() {
   router.push('/logs')

@@ -11,7 +11,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: {} },
-    { path: '/config/vlan', component: {} },
+    { path: '/module/vlan', component: {} },
     { path: '/logs', component: {} },
   ],
 })
@@ -91,5 +91,14 @@ describe('Dashboard View · 设备总览（真数据）', () => {
     const w = await mountDash()
     expect(w.find('.load-error').exists()).toBe(true)
     expect(w.find('.conv-pct').text()).toContain('0')
+  })
+
+  // FE-13：旧路由 /config/vlan 已退役，站内入口必须直连现役路由。
+  it('「下发配置」按钮直接导航到 /module/vlan（不经旧路由）', async () => {
+    seed(MIXED_DEVICES, MIXED_FLEET)
+    const push = vi.spyOn(router, 'push')
+    const w = await mountDash()
+    await w.find('.ph-actions .el-button--primary').trigger('click')
+    expect(push).toHaveBeenCalledWith('/module/vlan')
   })
 })

@@ -30,17 +30,8 @@ const routes = [
     name: 'module-rpc',
     component: () => import('../views/ModuleConsolePage.vue')
   },
-  // 旧配置页路由迁移到通用模块控制台（FE-13）：保留书签可达（DeviceConfigPage 已物理删除）。
-  {
-    path: '/config/interface',
-    redirect: '/module/ifm'
-  },
-  {
-    path: '/config/vlan',
-    redirect: '/module/vlan'
-  },
-  // /config/route 与 /native/:module（Stack A CRD 死路）已退役（FE-13）：
-  // 生产中从未可用（K8s API 面已退出生产），无重定向义务。
+  // legacy 路由一律不存在（FE-13）：/native/:module、/config/route（Stack A CRD 死路，
+  // 生产中从未可用）；/config/interface、/config/vlan 重定向兼容期已结束，站内入口直连 /module/:module。
   {
     path: '/logs',
     name: 'logs',
