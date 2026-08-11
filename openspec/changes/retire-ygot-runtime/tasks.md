@@ -22,8 +22,8 @@
 
 ## 3. RFC7951 JSON 通道（YN-02）
 
-- [ ] 3.1 生成器扩展：per-type `MarshalJSON`/`UnmarshalJSON` 方法生成（list map↔数组、(u)int64 字符串化、枚举值域名、union 试探、模块限定 key 兼容）
-- [ ] 3.2 JSON 通道 golden 对拍测试：全模块 fixture + union/int64/枚举/嵌套 list 构造样本，新旧 解码→编码 往返逐字节比对；负路径（未知字段/类型不符/非法枚举）行为对齐
+- [x] 3.1 生成器扩展：per-type `MarshalJSON`/`UnmarshalJSON` 方法生成（list map↔数组、(u)int64 字符串化、枚举值域名、union 试探、模块限定 key 兼容）
+- [x] 3.2 JSON 通道 golden 对拍测试：全模块 fixture + union/int64/枚举/嵌套 list 构造样本，新旧 解码→编码 往返逐字节比对；负路径（未知字段/类型不符/非法枚举）行为对齐
 - [ ] 3.3 对拍绿后切换：driver 注册表签名换 `Object`（DR-01 修订）、`internal/drivers` 描述符换新类型与生成方法、`config_codec`/`changeset_handler`/`config_delete` 的 `EmitJSON`/`Unmarshal` 调用切换
 - [ ] 3.4 存量 B2/B3 全绿 + e2e smoke 验证对外 API 形状零变化
 
