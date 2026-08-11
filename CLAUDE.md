@@ -18,7 +18,7 @@
 | R01 | 禁止更换架构 | Manager→Controller→Reconciler→Source，禁止回退 Actor 模型 |
 | R02 | 禁止旧协议 | 仅 NETCONF/gNMI，禁止 Telnet/SNMP |
 | R03 | 禁止数据库 | 仅 TTL+LRU 内存缓存；持久元信息经 K8s CRD（apiserver，平台 etcd 承载）；禁止 MySQL/Redis/SQLite 等自管数据库，多实例部署禁止本地持久文件（SC-02/SC-06） |
-| R04 | 禁止手写 YANG 结构体 | ygot 自动生成，禁止手写，禁止滥用 interface{} |
+| R04 | 禁止手写 YANG 结构体 | 自研 yanggen 自动生成（构建期工具可用 goyang），禁止手写，禁止滥用 interface{} |
 | R05 | 禁止手写固定表单 | 前端由 YANG 模型自动渲染 |
 | R06 | 禁止先代码后测试 | TDD 红绿循环，测试先行 |
 | R07 | 禁止合并流程 | OpenSpec→测试→代码→Review→Commit，不可跳过或合并 |
@@ -38,7 +38,7 @@
 | 层 | 选型 | 依赖 | 约束 |
 |----|------|------|------|
 | 后端 | Go 1.22（钉死） / yang-controller-runtime / Beego（web 路由层，禁止回引 gin，守护测试拦截） | ygot, netconfcore（自研，scrapligo 已删 NC-01） | §4 分层架构 |
-| 模型 | YANG + ygot | openconfig/ygot | R04: 自动生成 |
+| 模型 | YANG + 自研 yanggen | goyang（仅构建期；发布二进制零 openconfig，守护测试拦回引） | R04: 自动生成 |
 | 协议 | NETCONF (SSH 830) + gNMI | RFC6241, openconfig/gnmi | R02: 禁止旧协议 |
 | 缓存 | TTL+LRU 内存 | 协程安全 | R03: 无数据库, Key=IP+YANG路径, TTL 30s, 下发后失效 |
 | 前端 | Vue3 + Element Plus | Axios, Pinia | R05: YANG 自动渲染, 编辑→提交→下发联动后端, 展示设备/缓存/下发/异常状态 |
