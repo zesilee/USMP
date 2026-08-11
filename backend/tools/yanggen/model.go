@@ -26,6 +26,7 @@ type Model struct {
 // Struct is one generated container/list-member type.
 type Struct struct {
 	Name    string
+	Module  string   // 宿主节点 belonging module（JSON 键限定判定用；Device 为空）
 	Path    string   // schema 路径（注释用），如 /huawei-vlan/vlan/vlans/vlan
 	Fields  []*Field // 按 Go 字段名字典序
 	Keys    []*Field // list 成员的 key 字段，按 YANG key 语句顺序；nil=非 list 成员
@@ -35,6 +36,21 @@ type Struct struct {
 	OrderedKey string
 }
 
+// FieldKind classifies a field for JSON method generation（阶段3，§8）。
+type FieldKind int
+
+const (
+	KScalar      FieldKind = iota // 指针标量；Elem=基类型（string/uint16…）
+	KEnum                         // 非指针 E_*；Elem=枚举类型名
+	KEmpty                        // object.Empty
+	KBinary                       // object.Binary
+	KUnion                        // 非指针 union 接口；Elem=接口名
+	KUnsupported                  // interface{}
+	KContainer                    // *T；Elem=子 struct 名
+	KList                         // map[K]*T / *T_OrderedMap；Elem=子 struct 名
+	KLeafList                     // []T；Elem=元素类型（基类型/E_*/union 接口名）
+)
+
 // Field is one generated struct field.
 type Field struct {
 	GoName   string
@@ -42,6 +58,14 @@ type Field struct {
 	Module   string // module tag 值（belonging module）；_Key 字段渲染时忽略
 	Type     string // 渲染后的 Go 类型表达式
 	Ptr      bool   // 指针标量（ListKeyMap nil 检查用）
+
+	// JSON 生成元数据（§8）
+	Kind     FieldKind
+	Elem     string    // 语义元素类型（见 FieldKind 注释）
+	ElemPtr  bool      // KLeafList：元素在标量映射里是否指针形态（决定 64 位字符串化判定复用）
+	KeyType  string    // KList：map key Go 类型（复合键=_Key 名）；Ordered 时也填
+	Ordered  bool      // KList：ordered-by user
+	ElemKind FieldKind // KLeafList/KUnion 元素的次级分类（标量/枚举/联合）
 }
 
 // Enum is one generated E_ type.
@@ -113,6 +137,7 @@ func BuildModel(pkg string, entries map[string]*yang.Entry, mods map[string]*yan
 			device.Fields = append(device.Fields, &Field{
 				GoName: FieldName(c.Name), YangName: c.Name,
 				Module: belongingModule(c), Type: "*" + st.Name,
+				Kind: KContainer, Elem: st.Name,
 			})
 		}
 	}
@@ -140,7 +165,7 @@ func (b *builder) buildStruct(rootModule string, e *yang.Entry, segs []string) (
 	if st, ok := b.m.structIdx[name]; ok {
 		return st, nil // augment 并入宿主后可能被两侧遍历到；同名即同型
 	}
-	st := &Struct{Name: name, Path: "/" + rootModule + "/" + strings.Join(segs, "/")}
+	st := &Struct{Name: name, Module: belongingModule(e), Path: "/" + rootModule + "/" + strings.Join(segs, "/")}
 	b.m.structIdx[name] = st
 
 	keyNames := strings.Fields(e.Key)
@@ -169,16 +194,17 @@ func (b *builder) buildStruct(rootModule string, e *yang.Entry, segs []string) (
 			case c.RPC != nil:
 				continue
 			case c.IsLeafList():
-				elem, _, err := b.scalarType(st.Name, c)
+				elem, eptr, ekind, err := b.scalarType(st.Name, c)
 				if err != nil {
 					return err
 				}
 				st.Fields = append(st.Fields, &Field{
 					GoName: FieldName(c.Name), YangName: c.Name,
 					Module: belongingModule(c), Type: "[]" + elem,
+					Kind: KLeafList, Elem: elem, ElemPtr: eptr, ElemKind: ekind,
 				})
 			case c.IsLeaf():
-				elem, ptr, err := b.scalarType(st.Name, c)
+				elem, ptr, kind, err := b.scalarType(st.Name, c)
 				if err != nil {
 					return err
 				}
@@ -189,6 +215,7 @@ func (b *builder) buildStruct(rootModule string, e *yang.Entry, segs []string) (
 				f := &Field{
 					GoName: FieldName(c.Name), YangName: c.Name,
 					Module: belongingModule(c), Type: typ, Ptr: ptr,
+					Kind: kind, Elem: elem,
 				}
 				st.Fields = append(st.Fields, f)
 				if keySet[c.Name] {
@@ -218,6 +245,7 @@ func (b *builder) buildStruct(rootModule string, e *yang.Entry, segs []string) (
 				st.Fields = append(st.Fields, &Field{
 					GoName: FieldName(c.Name), YangName: c.Name,
 					Module: belongingModule(c), Type: typ,
+					Kind: KList, Elem: child.Name, KeyType: keyType, Ordered: orderedByUser(c),
 				})
 			default: // container
 				child, err := b.buildStruct(rootModule, c, append(append([]string{}, segs...), c.Name))
@@ -227,6 +255,7 @@ func (b *builder) buildStruct(rootModule string, e *yang.Entry, segs []string) (
 				st.Fields = append(st.Fields, &Field{
 					GoName: FieldName(c.Name), YangName: c.Name,
 					Module: belongingModule(c), Type: "*" + child.Name,
+					Kind: KContainer, Elem: child.Name,
 				})
 			}
 		}
@@ -276,69 +305,70 @@ func (b *builder) listKeyType(child *Struct, e *yang.Entry) (string, error) {
 	}
 }
 
-// scalarType maps a leaf/leaf-list entry's YANG type to (Go 元素类型, 是否指针标量)。
-func (b *builder) scalarType(hostStruct string, e *yang.Entry) (string, bool, error) {
+// scalarType maps a leaf/leaf-list entry's YANG type to
+// (Go 元素类型, 是否指针标量, JSON 分类)。
+func (b *builder) scalarType(hostStruct string, e *yang.Entry) (string, bool, FieldKind, error) {
 	return b.mapType(hostStruct, e, e.Type, false)
 }
 
-func (b *builder) mapType(hostStruct string, e *yang.Entry, t *yang.YangType, inUnion bool) (string, bool, error) {
+func (b *builder) mapType(hostStruct string, e *yang.Entry, t *yang.YangType, inUnion bool) (string, bool, FieldKind, error) {
 	if t == nil {
-		return "string", true, nil
+		return "string", true, KScalar, nil
 	}
 	switch t.Kind {
 	case yang.Ystring:
-		return "string", true, nil
+		return "string", true, KScalar, nil
 	case yang.Ybool:
-		return "bool", true, nil
+		return "bool", true, KScalar, nil
 	case yang.Yint8:
-		return "int8", true, nil
+		return "int8", true, KScalar, nil
 	case yang.Yint16:
-		return "int16", true, nil
+		return "int16", true, KScalar, nil
 	case yang.Yint32:
-		return "int32", true, nil
+		return "int32", true, KScalar, nil
 	case yang.Yint64:
-		return "int64", true, nil
+		return "int64", true, KScalar, nil
 	case yang.Yuint8:
-		return "uint8", true, nil
+		return "uint8", true, KScalar, nil
 	case yang.Yuint16:
-		return "uint16", true, nil
+		return "uint16", true, KScalar, nil
 	case yang.Yuint32:
-		return "uint32", true, nil
+		return "uint32", true, KScalar, nil
 	case yang.Yuint64:
-		return "uint64", true, nil
+		return "uint64", true, KScalar, nil
 	case yang.Ydecimal64:
-		return "float64", true, nil
+		return "float64", true, KScalar, nil
 	case yang.Yempty:
-		return "object.Empty", false, nil
+		return "object.Empty", false, KEmpty, nil
 	case yang.Ybinary:
-		return "object.Binary", false, nil
+		return "object.Binary", false, KBinary, nil
 	case yang.Yenum:
-		return b.registerEnum(hostStruct, e, t, inUnion), false, nil
+		return b.registerEnum(hostStruct, e, t, inUnion), false, KEnum, nil
 	case yang.Yidentityref:
-		return b.registerIdentity(t), false, nil
+		return b.registerIdentity(t), false, KEnum, nil
 	case yang.Yleafref:
 		target := b.resolveLeafref(e, t)
 		if target == nil {
 			warnUnsupported(e, "unresolved leafref "+t.Path)
-			return "interface{}", false, nil
+			return "interface{}", false, KUnsupported, nil
 		}
 		return b.mapTypeAtTarget(target, inUnion)
 	case yang.Yunion:
-		typ, ptr := b.registerUnion(hostStruct, e, t)
-		return typ, ptr, nil
+		typ, ptr, kind := b.registerUnion(hostStruct, e, t)
+		return typ, ptr, kind, nil
 	default:
 		// bits/instance-identifier/anyxml 等：-ignore_unsupported 语义 → interface{}。
 		warnUnsupported(e, t.Kind.String())
-		return "interface{}", false, nil
+		return "interface{}", false, KUnsupported, nil
 	}
 }
 
 // mapTypeAtTarget maps a leafref target leaf's type（宿主取目标叶所在 struct）。
-func (b *builder) mapTypeAtTarget(target *yang.Entry, inUnion bool) (string, bool, error) {
+func (b *builder) mapTypeAtTarget(target *yang.Entry, inUnion bool) (string, bool, FieldKind, error) {
 	host, err := entryStructName(target.Parent)
 	if err != nil {
 		warnUnsupported(target, "leafref target host: "+err.Error())
-		return "interface{}", false, nil
+		return "interface{}", false, KUnsupported, nil
 	}
 	return b.mapType(host, target, target.Type, inUnion)
 }
