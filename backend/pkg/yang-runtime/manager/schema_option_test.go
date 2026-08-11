@@ -7,6 +7,7 @@ import (
 	"github.com/openconfig/ygot/ytypes"
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
+	"github.com/leezesi/usmp/backend/tools/ygotbridge"
 )
 
 // TestManagerWithSchema verifies an injected pre-built schema is mounted and
@@ -18,7 +19,7 @@ func TestManagerWithSchema(t *testing.T) {
 			"host": {Name: "host", Type: &yang.YangType{Kind: yang.Ystring}},
 		}},
 	}}
-	schema.AddYgotSchema(ds, &ytypes.Schema{SchemaTree: map[string]*yang.Entry{"Device": root}})
+	ygotbridge.AddYgotSchema(ds, &ytypes.Schema{SchemaTree: map[string]*yang.Entry{"Device": root}})
 
 	m := New(WithSchema(ds))
 	got := m.GetSchema()

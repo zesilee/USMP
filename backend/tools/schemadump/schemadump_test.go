@@ -11,6 +11,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/generated/businessdemo"
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
+	"github.com/leezesi/usmp/backend/tools/ygotbridge"
 )
 
 // loadSchema loads the framework schema once for the tests, failing fast.
@@ -191,7 +192,7 @@ func TestExportAllIncludesBusinessDemo(t *testing.T) {
 		t.Fatalf("businessdemo.Schema: %v", err)
 	}
 	ds := schema.NewSchema()
-	schema.AddYgotSchemaWithVendor(ds, bs, "usmp")
+	ygotbridge.AddYgotSchemaWithVendor(ds, bs, "usmp")
 	fixtures, err := exportAll(ds)
 	if err != nil {
 		t.Fatalf("exportAll: %v", err)

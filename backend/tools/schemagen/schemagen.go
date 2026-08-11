@@ -15,6 +15,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/generated/business"
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
+	"github.com/leezesi/usmp/backend/tools/ygotbridge"
 )
 
 // BuildIR 构建与运行期 yangschema.Load() 同构的 Schema 树并编码为 IR blob。
@@ -25,13 +26,17 @@ func BuildIR() ([]byte, error) {
 	if err != nil {
 		return nil, fmt.Errorf("schemagen: load huawei schema: %w", err)
 	}
-	schema.AddYgotSchemaWithVendor(ds, hs, "huawei")
+	if err := ygotbridge.AddYgotSchemaWithVendor(ds, hs, "huawei"); err != nil {
+		return nil, fmt.Errorf("schemagen: convert huawei schema: %w", err)
+	}
 
 	bs, err := business.Schema()
 	if err != nil {
 		return nil, fmt.Errorf("schemagen: load business schema: %w", err)
 	}
-	schema.AddYgotSchemaWithVendor(ds, bs, "usmp")
+	if err := ygotbridge.AddYgotSchemaWithVendor(ds, bs, "usmp"); err != nil {
+		return nil, fmt.Errorf("schemagen: convert business schema: %w", err)
+	}
 
 	if len(ds.Modules()) == 0 {
 		return nil, fmt.Errorf("schemagen: built schema has no modules")

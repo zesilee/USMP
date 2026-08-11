@@ -19,7 +19,7 @@ type Options struct {
 	// RateLimiter is the default rate limiter for controller queues
 	RateLimiter queue.RateLimiter
 	// Schema is a pre-built YANG schema to use.
-	// Typically built from generated ygot models via schema.AddYgotSchema.
+	// Typically loaded from the build-time schema IR blob (schema.DecodeIR).
 	Schema schema.Schema
 	// EnableDebug enables debug logging
 	EnableDebug bool

@@ -5,6 +5,7 @@ import (
 
 	"github.com/leezesi/usmp/backend/internal/generated/businessdemo"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
+	"github.com/leezesi/usmp/backend/tools/ygotbridge"
 )
 
 // C2Y-05 —— crd2yang 生成的示例模型（usmp-business-vlan-net）经既有 gen.conf
@@ -18,7 +19,9 @@ func TestBusinessDemoSchemaRegisters(t *testing.T) {
 		t.Fatalf("businessdemo.Schema: %v", err)
 	}
 	ds := schema.NewSchema()
-	schema.AddYgotSchemaWithVendor(ds, bs, "usmp")
+	if err := ygotbridge.AddYgotSchemaWithVendor(ds, bs, "usmp"); err != nil {
+		t.Fatalf("AddYgotSchemaWithVendor: %v", err)
+	}
 
 	var found bool
 	for _, mod := range ds.Modules() {

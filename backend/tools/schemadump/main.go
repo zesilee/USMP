@@ -10,6 +10,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/generated/businessdemo"
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
+	"github.com/leezesi/usmp/backend/tools/ygotbridge"
 )
 
 func main() {
@@ -35,7 +36,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("schemadump: load businessdemo schema: %v", err)
 	}
-	schema.AddYgotSchemaWithVendor(ds, bs, "usmp")
+	if err := ygotbridge.AddYgotSchemaWithVendor(ds, bs, "usmp"); err != nil {
+		log.Fatalf("schemadump: convert businessdemo schema: %v", err)
+	}
 
 	n, err := run(s, *output)
 	if err != nil {

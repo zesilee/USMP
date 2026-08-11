@@ -9,16 +9,12 @@ package yangschema
 import (
 	"sync"
 
-	"fmt"
-
-	"github.com/leezesi/usmp/backend/internal/generated/business"
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 // Load builds the framework schema tree. 数据源自阶段1.4（retire-ygot-runtime）
-// 起为构建期 IR blob（ir_load.go，运行期零 ygot/goyang）；旧 generated-schema
-// 链路（loadUncached）保留至阶段1.5 前，仅供 ir_parity_test.go 对拍。
+// 起为构建期 IR blob（ir_load.go，运行期零 ygot/goyang）；旧链路（generated
+// Schema()→ygotbridge 转换）仅存活于 ir_parity_test.go 对拍与 tools/schemagen。
 //
 // 结果记忆化（full-yang-onboarding）：生成闭包扩到 67 根容器后，单次 gzip
 // schema 解包成本显著；schema 构建是纯函数、产物只读（DefaultSchema 并发安全），
@@ -33,26 +29,6 @@ var (
 	loadedSchema schema.Schema
 	loadErr      error
 )
-
-func loadUncached() (schema.Schema, error) {
-	ds := schema.NewSchema()
-
-	hs, err := huawei.Schema()
-	if err != nil {
-		return nil, fmt.Errorf("load huawei schema: %w", err)
-	}
-	schema.AddYgotSchemaWithVendor(ds, hs, "huawei")
-
-	// 业务意图模型（business-network-config）：不注册 driver registry（不下设备），
-	// 但进 schema 树以驱动 /yang/modules、/yang/schema 与前端表单渲染（R05）。
-	bs, err := business.Schema()
-	if err != nil {
-		return nil, fmt.Errorf("load business schema: %w", err)
-	}
-	schema.AddYgotSchemaWithVendor(ds, bs, "usmp")
-
-	return ds, nil
-}
 
 // task-name 任务域映射（BR-01 category）：模块级扩展不存活于内嵌运行期 schema
 //（全树扫描实证=0，ygot 生成丢弃模块级语句），构建期从与 ygot 生成集同源同版本的

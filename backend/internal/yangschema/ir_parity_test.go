@@ -4,8 +4,33 @@ import (
 	"bytes"
 	"testing"
 
+	"github.com/leezesi/usmp/backend/internal/generated/business"
+	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
+	"github.com/leezesi/usmp/backend/tools/ygotbridge"
 )
+
+// loadUncached 重建旧链路树（generated Schema()→ygotbridge 转换；原 load.go
+// 同名函数，阶段1.5 迁入测试文件——运行时闭包自此零 generated/ygot 引用）。
+func loadUncached(t *testing.T) *schema.DefaultSchema {
+	t.Helper()
+	ds := schema.NewSchema()
+	hs, err := huawei.Schema()
+	if err != nil {
+		t.Fatalf("load huawei schema: %v", err)
+	}
+	if err := ygotbridge.AddYgotSchemaWithVendor(ds, hs, "huawei"); err != nil {
+		t.Fatalf("convert huawei schema: %v", err)
+	}
+	bs, err := business.Schema()
+	if err != nil {
+		t.Fatalf("load business schema: %v", err)
+	}
+	if err := ygotbridge.AddYgotSchemaWithVendor(ds, bs, "usmp"); err != nil {
+		t.Fatalf("convert business schema: %v", err)
+	}
+	return ds
+}
 
 // TestIRBlobMatchesLegacyChain 是阶段1（Schema IR 自立）的 schema 通道对拍
 // （YN-06）：入库 IR blob 必须与「旧链路在本机即时构建的树」的 IR 编码逐字节一致。
@@ -15,14 +40,7 @@ import (
 // schema 变更而未重跑 `go generate ./internal/yangschema` 时，本测试即红
 // （与 CG-03 regen-and-diff 同精神）。
 func TestIRBlobMatchesLegacyChain(t *testing.T) {
-	legacy, err := loadUncached()
-	if err != nil {
-		t.Fatalf("legacy chain load: %v", err)
-	}
-	ds, ok := legacy.(*schema.DefaultSchema)
-	if !ok {
-		t.Fatalf("legacy chain returned %T, want *schema.DefaultSchema", legacy)
-	}
+	ds := loadUncached(t)
 	want, err := schema.EncodeIR(ds)
 	if err != nil {
 		t.Fatalf("EncodeIR(legacy): %v", err)
@@ -38,10 +56,7 @@ func TestLoadFromIR(t *testing.T) {
 	if err != nil {
 		t.Fatalf("loadFromIR: %v", err)
 	}
-	legacy, err := loadUncached()
-	if err != nil {
-		t.Fatalf("legacy load: %v", err)
-	}
+	legacy := loadUncached(t)
 	lm, im := legacy.Modules(), s.Modules()
 	if len(im) == 0 || len(im) != len(lm) {
 		t.Fatalf("module count: ir=%d legacy=%d", len(im), len(lm))
