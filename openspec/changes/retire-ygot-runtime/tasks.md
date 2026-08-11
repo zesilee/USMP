@@ -6,11 +6,11 @@
 
 ## 1. Schema IR 自立（YN-03，先删 goyang 运行时大头）
 
-- [ ] 1.1 定义 Schema IR 自有序列化格式（含版本号字段、namespace/list-key 元数据），先写格式 round-trip + 版本不匹配快速失败测试（红）
-- [ ] 1.2 构建期工具 `tools/schemagen`：复用 `schema/entry.go` 转换逻辑（goyang Entry→内部 Node 模型）迁入工具，产出 IR 生成物入库；工具 B1 表格驱动测试
-- [ ] 1.3 运行期 IR 加载器（`pkg/yang-runtime/schema`），并行于旧 `AddYgotSchema` 链路；schema 通道 golden 对拍测试（`/yang/schema` 全模块新旧逐字节，复用 68 模块黄金口径）
-- [ ] 1.4 对拍绿后 `yangschema.Load()` 切换到 IR 数据源；前端派生黄金全量刷新核对（GD-01/SF-04）
-- [ ] 1.5 删除运行时旧链路：`schema/entry.go`、`schema/loader.go` 迁出运行时包（测试消费方改用 IR 或迁 tools）
+- [x] 1.1 定义 Schema IR 自有序列化格式（含版本号字段、namespace/list-key 元数据），先写格式 round-trip + 版本不匹配快速失败测试（红）
+- [x] 1.2 构建期工具 `tools/schemagen`：复用 `schema/entry.go` 转换逻辑（goyang Entry→内部 Node 模型）迁入工具，产出 IR 生成物入库；工具 B1 表格驱动测试
+- [x] 1.3 运行期 IR 加载器（`pkg/yang-runtime/schema`），并行于旧 `AddYgotSchema` 链路；schema 通道 golden 对拍测试（`/yang/schema` 全模块新旧逐字节，复用 68 模块黄金口径）
+- [x] 1.4 对拍绿后 `yangschema.Load()` 切换到 IR 数据源；前端派生黄金全量刷新核对（GD-01/SF-04）
+- [x] 1.5 删除运行时旧链路：`schema/entry.go`、`schema/loader.go` 迁出运行时包（测试消费方改用 IR 或迁 tools）
 
 ## 2. 自研生成器（CG-01 修订，YN-01 类型约定）
 

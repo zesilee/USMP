@@ -6,6 +6,7 @@ import (
 
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
+	"github.com/leezesi/usmp/backend/tools/ygotbridge"
 	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ytypes"
 )
@@ -96,7 +97,7 @@ func TestNestedSchemaCarriesListOperationExclude(t *testing.T) {
 	root := &yang.Entry{Name: "Device", Dir: map[string]*yang.Entry{"demo": mod}}
 
 	ds := schema.NewSchema()
-	schema.AddYgotSchema(ds, &ytypes.Schema{SchemaTree: map[string]*yang.Entry{"Device": root}})
+	ygotbridge.AddYgotSchema(ds, &ytypes.Schema{SchemaTree: map[string]*yang.Entry{"Device": root}})
 	m, ok := ds.Module("demo")
 	if !ok {
 		t.Fatal("demo module not loaded")

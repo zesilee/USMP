@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
+	"github.com/leezesi/usmp/backend/tools/ygotbridge"
 	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ytypes"
 )
@@ -26,7 +27,7 @@ func buildListQuerySchema(t *testing.T) schema.Schema {
 	demo := &yang.Entry{Name: "demo", Dir: map[string]*yang.Entry{"open": open, "global": global}}
 	root := &yang.Entry{Name: "Device", Dir: map[string]*yang.Entry{"demo": demo}}
 	ds := schema.NewSchema()
-	schema.AddYgotSchema(ds, &ytypes.Schema{SchemaTree: map[string]*yang.Entry{"Device": root}})
+	ygotbridge.AddYgotSchema(ds, &ytypes.Schema{SchemaTree: map[string]*yang.Entry{"Device": root}})
 	return ds
 }
 
