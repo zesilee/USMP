@@ -63,3 +63,18 @@
 - goyang 解析：等价 `-ignore_unsupported=true`；deviation 模块（usmp-deviations）列在 modules 里由 goyang 自动应用。
 - 确定性内建：模块/struct/enum/常量全排序；无机器路径头注释。
 - 延期模块勿加回：huawei-pic（跨模块 submodule typedef）。
+
+## 8. 生成式 RFC7951 JSON 方法（阶段3 设计，YN-02）
+
+每 struct 生成 `MarshalJSON`/`UnmarshalJSON`（`encoding/json` 驱动递归，零运行时 schema）：
+
+- **键名模块限定**：字段 JSON 键 = 若字段 belonging module ≠ 宿主 struct 的 module → `"<module>:<叶名>"`，否则裸叶名；Device 顶层恒带模块前缀（RFC7951 §4）。宿主 module 需入模型（Struct.Module 字段）。解码接受带/不带前缀两种形态。
+- **标量**：指针叶 nil 跳发；(u)int64 编码为**字符串**（§6.1），解码兼容数字/字符串双形态；其余整型/bool 原生 JSON；decimal64→number。
+- **empty**：`[null]`（§6.9）；true 才发。
+- **枚举**：值域名字符串（EnumMaps 查名，UNSET 跳发，无名报错）；解码反查（包级 name→value 反向索引 sync.Once 构建）。
+- **list map**：编码为**数组**、按 map key 排序保确定性；解码逐元素 UnmarshalJSON 后按 key 叶回填 map（缺 key 叶报错）。复合键同理（_Key struct 按字段构造）。OrderedMap 按插入序编码、按数组序 Append 解码。
+- **leaf-list**：数组；uint64 元素字符串化。
+- **union**：type switch 包装类型编码内值；解码按成员声明序试探（先精确类型如 uint16，后 string），全败报错命名叶。
+- **未知键**：报错命名字段（对齐现 driver Unmarshal 无宽容选项的行为口径）。
+- **输出确定性**：构造 `map[string]json.RawMessage` 后 json.Marshal（键字典序）——与 ygot EmitJSON 排序口径一致，JSON 通道 golden 逐字节对拍的前提。
+- **对拍脚手架**（YN-06）：ygot `ytypes.Unmarshal`+`EmitJSON(RFC7951,SkipValidation)` vs native 方法，喂全模块 fixture + 构造样本（union/64位/枚举/嵌套 list/负路径），解码→编码往返逐字节比对。

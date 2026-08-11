@@ -18,7 +18,7 @@ metadata:
 
 **Why**：商用交付自主可控 + 解除 ygot v0.29.20 天花板债（[[go-122-pin]]）。
 
-**阶段2 进行中**（2026-08-11）：任务2.1 object 运行库已交付（`pkg/yang-runtime/object`，契约测试拿 ygot 孪生对拍）；任务2.2 `tools/yanggen` 已交付 命名（复用 goyang CamelCase+冻结净化表）/gen.conf 解析/goyang 装载/model 层（Entry→生成模型，fixture 全形态测试绿），**剩 emit 层（源码渲染）+CLI**；生成约定权威=`openspec/changes/retire-ygot-runtime/codegen-conventions.md`（含零消费可不生成清单）。踩坑：goyang EnumType 的 Names()/Values() 各自独立排序不可 zip，NameMap() 才是权威；ygot 枚举净化 token 无尾下划线（a+b→a_PLUSb）。
+**阶段2 基本完成**（2026-08-11，任务2.1-2.4 ✓，剩 2.5 make 接线）：object 运行库 + `tools/yanggen` 全链交付；**native 包已入库并存**（`internal/generated/native/{huawei,business}`，9.3 万行、零 openconfig、两次生成字节一致）；**结构对拍三层全绿**（`tools/yanggen/parity_test.go`：类型集/逐字段 tag·形状/枚举值表 vs ygot 基准零差异）。生成约定权威=`openspec/changes/retire-ygot-runtime/codegen-conventions.md`。**对拍实证冻结的四条规则**（改生成器前必读）：①生成域=整个依赖闭包（未列出的被 import 模块顶层容器也入 Device）；②typedef 枚举按**使用方叶所属模块**命名（非定义模块——row-status 每模块一份）；③内联枚举按 AST 节点去重（grouping 复用单枚举首实例命名）；④union 同型折叠（全成员同 Go 型→裸类型，265 叶折叠后仅 6 接口）。踩坑：goyang EnumType Names()/Values() 各自排序不可 zip（NameMap 权威）；净化 token 无尾下划线；leafref 须按**数据树**语义解析（choice/case 不占层级，Entry.Find 会错位）；跨模块 leafref 需全闭包顶层容器索引。
 
 **How to apply**（后续阶段注意）：
 - 阶段2 自研生成器：结构约定必须字节级冻结（字段名/path+module tag/map-list/...Key），diff/xmlcodec/drivers 才免改；JSON 编解码走「构建期生成 per-type MarshalJSON/UnmarshalJSON」而非运行时反射引擎（风险局部化、逐类型 golden 可对拍）。
