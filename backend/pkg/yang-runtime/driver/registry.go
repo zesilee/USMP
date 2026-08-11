@@ -1,7 +1,7 @@
 // Package driver provides the compile-time device-driver descriptor registry
 // (DR-01, SND 声明式化第一步)：每个 (vendor, module) 一条描述符，收敛此前散落在
 // manager 路由与 config 编解码里的路径字符串硬编码。描述符经各接线包的 init()
-// 注册（纯 Go 编译期，无运行时插件加载）；本包零业务依赖（仅 ygot 类型），
+// 注册（纯 Go 编译期，无运行时插件加载）；本包零业务依赖（仅 object 接口），
 // 供 manager / api / 将来 client 消费而不成环。
 //
 // 本期描述符刻意最小（谓词 + 控制器名 token + 编解码闭包）；①声明式数据驱动
@@ -14,9 +14,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/openconfig/ygot/ygot"
-	"github.com/openconfig/ygot/ytypes"
-
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 )
 
@@ -36,14 +34,15 @@ type Descriptor struct {
 	MatchRoute      func(path string) bool
 	ControllerToken string
 
-	// MatchDecode + DecodeXML: NETCONF XML readback → ygot GoStruct (DR-03 读).
+	// MatchDecode + DecodeXML: NETCONF XML readback → object.Object (DR-03 读).
 	MatchDecode func(path string) bool
-	DecodeXML   func(raw []byte) (ygot.GoStruct, error)
+	DecodeXML   func(raw []byte) (object.Object, error)
 
-	// MatchEncode + NewStruct + Unmarshal: RFC7951 JSON → ygot GoStruct (DR-03 写).
+	// MatchEncode + NewStruct + Unmarshal: RFC7951 JSON → object.Object (DR-03 写；
+	// S3 起由 native 生成包的生成式 UnmarshalJSON 承载，ytypes 选项面退役).
 	MatchEncode func(path string) bool
-	NewStruct   func() ygot.GoStruct
-	Unmarshal   func([]byte, ygot.GoStruct, ...ytypes.UnmarshalOpt) error
+	NewStruct   func() object.Object
+	Unmarshal   func([]byte, object.Object) error
 
 	// EncodeAnchor 是 NewStruct 容器的规范配置路径（DR-05，如 "/vlan:vlan/vlan:vlans"）。
 	// config-api 写路径据此把「以请求 path 为根的 RFC7951 子树」机械包裹成锚点相对
@@ -60,13 +59,13 @@ type Descriptor struct {
 // GoStruct: containers pass through, inner list-map values (diff 引擎产出的
 // map[K]*Entry 形态) are wrapped into a fresh container. Values of any other
 // type are an explicit error (R08).
-func (d Descriptor) WrapXMLValue(v interface{}) (ygot.GoStruct, error) {
+func (d Descriptor) WrapXMLValue(v interface{}) (object.Object, error) {
 	if d.NewStruct == nil {
 		return nil, fmt.Errorf("driver: descriptor %s/%s has no NewStruct", d.Vendor, d.Module)
 	}
 	container := d.NewStruct()
 	if reflect.TypeOf(v) == reflect.TypeOf(container) {
-		return v.(ygot.GoStruct), nil
+		return v.(object.Object), nil
 	}
 	if err := xmlcodec.WrapListMap(container, v); err != nil {
 		return nil, fmt.Errorf("driver %s/%s: %w", d.Vendor, d.Module, err)

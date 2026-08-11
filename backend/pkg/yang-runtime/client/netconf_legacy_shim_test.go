@@ -3,7 +3,7 @@ package client
 import (
 	"fmt"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	yangdriver "github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 )

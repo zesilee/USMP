@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
-	"github.com/openconfig/ygot/ygot"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // DP-07：DeleteChange 编码——外层模型容器 + 条目元素带 NETCONF base 命名空间的
@@ -13,7 +13,7 @@ import (
 func TestMarshalDeleteChangeVlan(t *testing.T) {
 	vlans := &huawei.HuaweiVlan_Vlan_Vlans{
 		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
-			10: {Id: ygot.Uint16(10)},
+			10: {Id: object.Uint16(10)},
 		},
 	}
 	c := &NETCONFClient{}
@@ -57,7 +57,7 @@ func TestMarshalDeleteChangeVlanKeyFromMapKey(t *testing.T) {
 func TestMarshalDeleteChangeIfm(t *testing.T) {
 	ifaces := &huawei.HuaweiIfm_Ifm_Interfaces{
 		Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
-			"GigabitEthernet0/0/1": {Name: ygot.String("GigabitEthernet0/0/1")},
+			"GigabitEthernet0/0/1": {Name: object.String("GigabitEthernet0/0/1")},
 		},
 	}
 	c := &NETCONFClient{}

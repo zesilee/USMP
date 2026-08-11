@@ -23,7 +23,7 @@ func NewItemExponentialFailureRateLimiter(baseDelay, maxDelay time.Duration) Rat
 	return &ItemExponentialFailureRateLimiter{
 		baseDelay:    baseDelay,
 		maxDelay:     maxDelay,
-		failures:      make(map[interface{}]int),
+		failures:     make(map[interface{}]int),
 		rng:          rand.New(rand.NewSource(time.Now().UnixNano())),
 		jitterFactor: 0.2, // 20% jitter
 	}
@@ -116,11 +116,11 @@ func (rl *MaxOfRateLimiter) NumRequeues(item interface{}) int {
 
 // BucketRateLimiter implements token bucket rate limiting
 type BucketRateLimiter struct {
-	limit  float64 // tokens per second
-	tokens float64
-	last   time.Time
+	limit    float64 // tokens per second
+	tokens   float64
+	last     time.Time
 	capacity float64
-	mu      sync.Mutex
+	mu       sync.Mutex
 }
 
 // NewBucketRateLimiter creates a new BucketRateLimiter with the given QPS and capacity

@@ -3,7 +3,7 @@ package client
 import (
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

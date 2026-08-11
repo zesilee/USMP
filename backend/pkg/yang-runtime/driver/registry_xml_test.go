@@ -4,18 +4,18 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 )
 
-// fake ygot shapes（driver 包保持零业务依赖：不 import 生成物）。
+// fake object shapes（driver 包保持零业务依赖：不 import 生成物）。
 type fakeVlans struct {
 	Vlan map[uint16]*fakeVlan `path:"vlan"`
 }
 
-func (*fakeVlans) IsYANGGoStruct() {}
+func (*fakeVlans) IsYangObject() {}
 
 type fakeVlan struct {
 	Id *uint16 `path:"id"`
@@ -25,7 +25,7 @@ func (*fakeVlan) IsYANGGoStruct() {}
 
 type otherStruct struct{}
 
-func (*otherStruct) IsYANGGoStruct() {}
+func (*otherStruct) IsYangObject() {}
 
 // fakeVlansSchema 经 IR DTO 构造合成 schema（schema 包唯一公开树构建面）。
 func fakeVlansSchema() schema.Node {
@@ -46,7 +46,7 @@ func fakeVlansSchema() schema.Node {
 func xmlDescriptor() Descriptor {
 	return Descriptor{
 		Vendor: "huawei", Module: "vlan",
-		NewStruct: func() ygot.GoStruct { return &fakeVlans{} },
+		NewStruct: func() object.Object { return &fakeVlans{} },
 		XML: &xmlcodec.Spec{
 			Namespace: "urn:fake",
 			Schema:    fakeVlansSchema,
@@ -61,7 +61,7 @@ func TestRegistry_XMLEncoderForValue(t *testing.T) {
 	r.Register(xmlDescriptor())
 	// 无 XML 数据的描述符不得参与匹配。
 	r.Register(Descriptor{Vendor: "huawei", Module: "system",
-		NewStruct: func() ygot.GoStruct { return &otherStruct{} }})
+		NewStruct: func() object.Object { return &otherStruct{} }})
 
 	t.Run("container type match", func(t *testing.T) {
 		d, ok := r.XMLEncoderForValue(&fakeVlans{})
@@ -96,7 +96,7 @@ func TestDescriptor_WrapXMLValue(t *testing.T) {
 	t.Run("container passthrough", func(t *testing.T) {
 		v := &fakeVlans{}
 		got, err := d.WrapXMLValue(v)
-		if err != nil || got != ygot.GoStruct(v) {
+		if err != nil || got != object.Object(v) {
 			t.Fatalf("want passthrough, got %v err %v", got, err)
 		}
 	})

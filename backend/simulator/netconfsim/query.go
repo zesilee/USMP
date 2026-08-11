@@ -5,16 +5,15 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // enumInt resolves a YANG enumeration leaf's on-wire text to its ygot int value.
 // 真机/通用引擎 encode 发值域名（如 "up"），本模拟器读回后经 sample 枚举的 ΛMap 反查
 // 名→int（XC-08）。兼容历史整数形态（回退 Atoi）。sample 是该叶对应 ygot 枚举的零值，
 // 提供 ΛMap 与类型名。text 为空/未知返回 0（UNSET）。
-func enumInt(text string, sample ygot.GoEnum) int {
+func enumInt(text string, sample object.Enum) int {
 	text = strings.TrimSpace(text)
 	if text == "" {
 		return 0
@@ -22,10 +21,8 @@ func enumInt(text string, sample ygot.GoEnum) int {
 	if n, err := strconv.Atoi(text); err == nil {
 		return n
 	}
-	for v, def := range sample.ΛMap()[reflect.TypeOf(sample).Name()] {
-		if def.Name == text {
-			return int(v)
-		}
+	if v, ok := object.EnumValueByName(sample.EnumMaps(), reflect.TypeOf(sample).Name(), text); ok {
+		return int(v)
 	}
 	return 0
 }
