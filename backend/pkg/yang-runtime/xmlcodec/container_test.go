@@ -4,7 +4,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
@@ -19,7 +18,7 @@ const bgpNS = "urn:huawei:yang:huawei-bgp"
 func bgpSpec() *Spec {
 	return &Spec{
 		Namespace: bgpNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiBgp_Bgp"] },
+		Schema:    irTestNode("/bgp"),
 	}
 }
 

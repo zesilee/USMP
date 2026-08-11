@@ -105,33 +105,34 @@ func identityModule(id *yang.Identity) string {
 // 到同一 Go 类型时不生成接口，直接用该类型（string|string 的 ip 地址类 typedef
 // 全走此路径——huawei 闭包 265 处 union 叶折叠后仅剩 6 个真接口）；异型才生成
 // 接口 <宿主struct>_<CamelCase(叶名)>_Union + 包装类型。
-// 返回 (Go 类型, 是否指针标量)。
-func (b *builder) registerUnion(hostStruct string, e *yang.Entry, t *yang.YangType) (string, bool) {
+// 返回 (Go 类型, 是否指针标量, JSON 分类)。
+func (b *builder) registerUnion(hostStruct string, e *yang.Entry, t *yang.YangType) (string, bool, FieldKind) {
 	var members []string
 	seen := map[string]bool{}
 	memberPtr := false
+	memberKind := KScalar
 	for _, mt := range t.Type {
-		got, ptr, err := b.mapType(hostStruct, e, mt, true)
+		got, ptr, kind, err := b.mapType(hostStruct, e, mt, true)
 		if err != nil || got == "interface{}" {
 			continue // 不支持的成员跳过（-ignore_unsupported 同精神）
 		}
 		if !seen[got] {
 			seen[got] = true
 			members = append(members, got)
-			memberPtr = ptr
+			memberPtr, memberKind = ptr, kind
 		}
 	}
 	if len(members) == 0 {
-		return "interface{}", false
+		return "interface{}", false, KUnsupported
 	}
 	if len(members) == 1 {
-		return members[0], memberPtr // 同型折叠
+		return members[0], memberPtr, memberKind // 同型折叠
 	}
 	name := hostStruct + "_" + FieldName(e.Name) + "_Union"
 	if _, ok := b.m.unionIdx[name]; !ok {
 		b.m.unionIdx[name] = &Union{Name: name, Members: members}
 	}
-	return name, false
+	return name, false, KUnion
 }
 
 func bare(name string) string {

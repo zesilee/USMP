@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/openconfig/ygot/ygot"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 // EncodeLeafDelete builds a keyed edit-config fragment that deletes the given
@@ -18,7 +18,7 @@ import (
 //   - schema 可用时目标必须存在且为叶（leaf/leaf-list）；嵌套容器与嵌套 list 拒绝
 //   - list key 叶本身拒绝（删除定位键无意义且危险）
 //   - 条目 key 无法确定（无 ΛListKeyMap 且 schema 无单 key）→ 明确错误
-func EncodeLeafDelete(spec *Spec, v ygot.GoStruct, leaves []string) (string, error) {
+func EncodeLeafDelete(spec *Spec, v interface{}, leaves []string) (string, error) {
 	if len(leaves) == 0 {
 		return "", fmt.Errorf("xmlcodec leaf delete: empty leaf set")
 	}
@@ -46,13 +46,13 @@ func EncodeLeafDelete(spec *Spec, v ygot.GoStruct, leaves []string) (string, err
 		if keySet[leaf] {
 			return "", fmt.Errorf("xmlcodec leaf delete: %s is the list key of %s", leaf, elemTag)
 		}
-		if r.list != nil && len(r.list.Dir) > 0 {
-			child, ok := r.list.Dir[leaf]
-			if !ok {
+		if r.list != nil && nodeHasChildren(r.list) {
+			child := nodeChild(r.list, leaf)
+			if child == nil {
 				return "", fmt.Errorf("xmlcodec leaf delete: %s not in schema of %s", leaf, elemTag)
 			}
-			if !child.IsLeaf() && !child.IsLeafList() {
-				return "", fmt.Errorf("xmlcodec leaf delete: %s is not a leaf (kind %v)", leaf, child.Kind)
+			if child.Type() != schema.LeafNodeType {
+				return "", fmt.Errorf("xmlcodec leaf delete: %s is not a leaf (kind %v)", leaf, child.Type())
 			}
 		}
 	}

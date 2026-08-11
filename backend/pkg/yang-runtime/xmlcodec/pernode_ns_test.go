@@ -4,7 +4,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
@@ -20,7 +19,7 @@ const niBgpNS = "urn:huawei:yang:huawei-bgp"
 func niSpecWithNS() *Spec {
 	return &Spec{
 		Namespace: niNS, // urn:huawei:yang:huawei-network-instance（见 ni_roundtrip_test.go）
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiNetworkInstance_NetworkInstance"] },
+		Schema:    irTestNode("/network-instance"),
 		Namespaces: map[string]string{
 			"huawei-network-instance": niNS,
 			"huawei-bgp":              niBgpNS,
@@ -110,7 +109,7 @@ func TestXC06_SingleModuleTree_NoExtraXmlns(t *testing.T) {
 
 // 缺省 Namespaces（nil）等价现状：以 ni 根编码不带 bgp 子树时输出与无解析表一致。
 func TestXC06_NilNamespaces_LegacyBehavior(t *testing.T) {
-	specNil := &Spec{Namespace: niNS, Schema: func() *yang.Entry { return huawei.SchemaTree["HuaweiNetworkInstance_NetworkInstance"] }}
+	specNil := &Spec{Namespace: niNS, Schema: irTestNode("/network-instance")}
 	v := &huawei.HuaweiNetworkInstance_NetworkInstance{
 		Global: &huawei.HuaweiNetworkInstance_NetworkInstance_Global{CfgRouterId: ygot.String("9.9.9.9")},
 	}

@@ -6,7 +6,6 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
@@ -21,7 +20,7 @@ const aclNS = "urn:huawei:yang:huawei-acl"
 func aclSpec() *Spec {
 	return &Spec{
 		Namespace: aclNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiAcl_Acl"] },
+		Schema:    irTestNode("/acl"),
 	}
 }
 
@@ -32,11 +31,11 @@ const aclGroupScalarPtrLeaves = 4
 // TestAcl_Group_Shape：schema 驱动锁死 group 接入形状——直属 config-true 标量指针叶恰好 4，
 // 深层 rule-* 仍为推迟容器（防悄悄扩面）。枚举 type/match-order 由往返测试覆盖。
 func TestAcl_Group_Shape(t *testing.T) {
-	root := huawei.SchemaTree["HuaweiAcl_Acl"]
+	root := irTestNodeAt("/acl")
 	if root == nil {
 		t.Fatal("HuaweiAcl_Acl schema 未解析")
 	}
-	gEntry := root.Dir["groups"].Dir["group"]
+	gEntry := irTestNodeAt("/acl/groups/group")
 	if gEntry == nil {
 		t.Fatal("group schema 未解析")
 	}

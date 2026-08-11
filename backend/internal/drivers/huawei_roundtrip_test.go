@@ -3,11 +3,10 @@ package drivers
 import (
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/internal/testutil/yangsample"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 )
 
@@ -45,10 +44,9 @@ func TestFullOnboardingEncodeDecodeRoundtrip(t *testing.T) {
 	}
 }
 
-func specSchemaOf(t *testing.T, pm plainModule) func() *yang.Entry {
+func specSchemaOf(t *testing.T, pm plainModule) func() schema.Node {
 	t.Helper()
-	key := schemaKeyOf(pm.newFn)
-	return func() *yang.Entry { return huawei.SchemaTree[key] }
+	return irNode("/" + pm.module)
 }
 
 func ygotDiffEmpty(a, b ygot.GoStruct) (bool, error) {

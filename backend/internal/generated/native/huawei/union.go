@@ -65,6 +65,13 @@
 // 结构约定冻结见 openspec/changes/retire-ygot-runtime/codegen-conventions.md。
 package huawei
 
+import (
+	"encoding/json"
+	"fmt"
+
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
+)
+
 // HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union is a YANG union type.
 type HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union interface {
 	Is_HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union()
@@ -86,6 +93,35 @@ type HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union_Uin
 
 // Is_HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union marks HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union_Uint16 as a member of union HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union.
 func (*HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union_Uint16) Is_HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union() {
+}
+
+// marshalHuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union encodes a HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union union value（RFC7951）。
+func marshalHuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union(u HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union) (json.RawMessage, error) {
+	switch v := u.(type) {
+	case *HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union_String:
+		return object.RawJSON(v.String), nil
+	case *HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union_Uint16:
+		return object.RawJSON(v.Uint16), nil
+	default:
+		return nil, fmt.Errorf("unsupported HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union value %T", u)
+	}
+}
+
+// unmarshalHuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union decodes a HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union union value（按成员声明序试探）。
+func unmarshalHuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union(raw json.RawMessage) (HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union, error) {
+	{
+		var v string
+		if json.Unmarshal(raw, &v) == nil {
+			return &HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union_String{String: v}, nil
+		}
+	}
+	{
+		var v uint16
+		if json.Unmarshal(raw, &v) == nil {
+			return &HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union_Uint16{Uint16: v}, nil
+		}
+	}
+	return nil, fmt.Errorf("no HuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union member matches %s", raw)
 }
 
 // HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union is a YANG union type.
@@ -111,6 +147,35 @@ type HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNod
 func (*HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union_Uint32) Is_HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union() {
 }
 
+// marshalHuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union encodes a HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union union value（RFC7951）。
+func marshalHuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union(u HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union) (json.RawMessage, error) {
+	switch v := u.(type) {
+	case *HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union_String:
+		return object.RawJSON(v.String), nil
+	case *HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union_Uint32:
+		return object.RawJSON(v.Uint32), nil
+	default:
+		return nil, fmt.Errorf("unsupported HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union value %T", u)
+	}
+}
+
+// unmarshalHuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union decodes a HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union union value（按成员声明序试探）。
+func unmarshalHuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union(raw json.RawMessage) (HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union, error) {
+	{
+		var v string
+		if json.Unmarshal(raw, &v) == nil {
+			return &HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union_String{String: v}, nil
+		}
+	}
+	{
+		var v uint32
+		if json.Unmarshal(raw, &v) == nil {
+			return &HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union_Uint32{Uint32: v}, nil
+		}
+	}
+	return nil, fmt.Errorf("no HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_BasicNodes_BasicNode_CommunityMembers_CommunityMember_Value_Union member matches %s", raw)
+}
+
 // HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union is a YANG union type.
 type HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union interface {
 	Is_HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union()
@@ -132,6 +197,35 @@ type HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Uni
 
 // Is_HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union marks HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union_Uint16 as a member of union HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union.
 func (*HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union_Uint16) Is_HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union() {
+}
+
+// marshalHuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union encodes a HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union union value（RFC7951）。
+func marshalHuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union(u HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union) (json.RawMessage, error) {
+	switch v := u.(type) {
+	case *HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union_String:
+		return object.RawJSON(v.String), nil
+	case *HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union_Uint16:
+		return object.RawJSON(v.Uint16), nil
+	default:
+		return nil, fmt.Errorf("unsupported HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union value %T", u)
+	}
+}
+
+// unmarshalHuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union decodes a HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union union value（按成员声明序试探）。
+func unmarshalHuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union(raw json.RawMessage) (HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union, error) {
+	{
+		var v string
+		if json.Unmarshal(raw, &v) == nil {
+			return &HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union_String{String: v}, nil
+		}
+	}
+	{
+		var v uint16
+		if json.Unmarshal(raw, &v) == nil {
+			return &HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union_Uint16{Uint16: v}, nil
+		}
+	}
+	return nil, fmt.Errorf("no HuaweiRoutingPolicy_RoutingPolicy_CommunityFilters_CommunityFilter_Name_Union member matches %s", raw)
 }
 
 // HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union is a YANG union type.
@@ -157,6 +251,35 @@ type HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMem
 func (*HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union_Uint32) Is_HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union() {
 }
 
+// marshalHuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union encodes a HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union union value（RFC7951）。
+func marshalHuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union(u HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union) (json.RawMessage, error) {
+	switch v := u.(type) {
+	case *HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union_String:
+		return object.RawJSON(v.String), nil
+	case *HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union_Uint32:
+		return object.RawJSON(v.Uint32), nil
+	default:
+		return nil, fmt.Errorf("unsupported HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union value %T", u)
+	}
+}
+
+// unmarshalHuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union decodes a HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union union value（按成员声明序试探）。
+func unmarshalHuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union(raw json.RawMessage) (HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union, error) {
+	{
+		var v string
+		if json.Unmarshal(raw, &v) == nil {
+			return &HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union_String{String: v}, nil
+		}
+	}
+	{
+		var v uint32
+		if json.Unmarshal(raw, &v) == nil {
+			return &HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union_Uint32{Uint32: v}, nil
+		}
+	}
+	return nil, fmt.Errorf("no HuaweiRoutingPolicy_RoutingPolicy_CommunityLists_CommunityList_CommunityMember_Union member matches %s", raw)
+}
+
 // HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union is a YANG union type.
 type HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union interface {
 	Is_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union()
@@ -180,6 +303,35 @@ type HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Na
 func (*HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16) Is_HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union() {
 }
 
+// marshalHuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union encodes a HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union union value（RFC7951）。
+func marshalHuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union(u HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union) (json.RawMessage, error) {
+	switch v := u.(type) {
+	case *HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_String:
+		return object.RawJSON(v.String), nil
+	case *HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16:
+		return object.RawJSON(v.Uint16), nil
+	default:
+		return nil, fmt.Errorf("unsupported HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union value %T", u)
+	}
+}
+
+// unmarshalHuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union decodes a HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union union value（按成员声明序试探）。
+func unmarshalHuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union(raw json.RawMessage) (HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union, error) {
+	{
+		var v string
+		if json.Unmarshal(raw, &v) == nil {
+			return &HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_String{String: v}, nil
+		}
+	}
+	{
+		var v uint16
+		if json.Unmarshal(raw, &v) == nil {
+			return &HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union_Uint16{Uint16: v}, nil
+		}
+	}
+	return nil, fmt.Errorf("no HuaweiRoutingPolicy_RoutingPolicy_ExtCommunityFilters_ExtCommunityFilter_Name_Union member matches %s", raw)
+}
+
 // HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union is a YANG union type.
 type HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union interface {
 	Is_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union()
@@ -201,4 +353,33 @@ type HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_
 
 // Is_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union marks HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union_Uint32 as a member of union HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union.
 func (*HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union_Uint32) Is_HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union() {
+}
+
+// marshalHuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union encodes a HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union union value（RFC7951）。
+func marshalHuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union(u HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union) (json.RawMessage, error) {
+	switch v := u.(type) {
+	case *HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union_String:
+		return object.RawJSON(v.String), nil
+	case *HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union_Uint32:
+		return object.RawJSON(v.Uint32), nil
+	default:
+		return nil, fmt.Errorf("unsupported HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union value %T", u)
+	}
+}
+
+// unmarshalHuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union decodes a HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union union value（按成员声明序试探）。
+func unmarshalHuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union(raw json.RawMessage) (HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union, error) {
+	{
+		var v string
+		if json.Unmarshal(raw, &v) == nil {
+			return &HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union_String{String: v}, nil
+		}
+	}
+	{
+		var v uint32
+		if json.Unmarshal(raw, &v) == nil {
+			return &HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union_Uint32{Uint32: v}, nil
+		}
+	}
+	return nil, fmt.Errorf("no HuaweiRoutingPolicy_RoutingPolicy_PolicyDefinitions_PolicyDefinition_Nodes_Node_Actions_ApplyCommunity_Communities_Union member matches %s", raw)
 }

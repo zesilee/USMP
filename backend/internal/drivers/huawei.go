@@ -12,11 +12,12 @@ package drivers
 import (
 	"strings"
 
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 )
 
@@ -36,22 +37,35 @@ const (
 	HuaweiNetworkInstanceNS = "urn:huawei:yang:huawei-network-instance"
 )
 
+// irNode returns a lazy schema-IR node lookup for a data path（yangschema.Load
+// 结果记忆化，进程内共享；找不到返回 nil → xmlcodec resolve 显式报错，R08）。
+func irNode(path string) func() schema.Node {
+	return func() schema.Node {
+		s, err := yangschema.Load()
+		if err != nil {
+			return nil
+		}
+		n, _ := s.Path(path)
+		return n
+	}
+}
+
 func init() {
 	vlanXML := &xmlcodec.Spec{
 		Namespace: HuaweiVlanNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiVlan_Vlan_Vlans"] },
+		Schema:    irNode("/vlan/vlans"),
 	}
 	ifmXML := &xmlcodec.Spec{
 		Namespace: HuaweiIfmNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiIfm_Ifm_Interfaces"] },
+		Schema:    irNode("/ifm/interfaces"),
 	}
 	bgpXML := &xmlcodec.Spec{
 		Namespace: HuaweiBgpNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiBgp_Bgp"] },
+		Schema:    irNode("/bgp"),
 	}
 	niXML := &xmlcodec.Spec{
 		Namespace: HuaweiNetworkInstanceNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiNetworkInstance_NetworkInstance"] },
+		Schema:    irNode("/network-instance"),
 		// per-node namespace（XC-06）：network-instance 根下的 huawei-bgp augment
 		// 子树（peers/afs，2a）须带自身 namespace，真机才接受。单模块字段（ni 原生）
 		// 解析为根 namespace → 不另发 xmlns。加新 augment 模块（l3vpn 等）时在此登记。

@@ -4,9 +4,9 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 )
 
@@ -27,17 +27,29 @@ type otherStruct struct{}
 
 func (*otherStruct) IsYANGGoStruct() {}
 
+// fakeVlansSchema 经 IR DTO 构造合成 schema（schema 包唯一公开树构建面）。
+func fakeVlansSchema() schema.Node {
+	m, err := schema.ModuleFromIR(schema.IRModule{
+		Name: "vlans",
+		Root: &schema.IRNode{Kind: "container", Name: "vlans", Path: "/vlans", Children: []*schema.IRNode{
+			{Kind: "list", Name: "vlan", Path: "/vlans/vlan", Keys: []string{"id"}, Children: []*schema.IRNode{
+				{Kind: "leaf", Name: "id", Path: "/vlans/vlan/id", LeafType: "uint16", IsKey: true},
+			}},
+		}},
+	})
+	if err != nil {
+		panic(err)
+	}
+	return m.Root()
+}
+
 func xmlDescriptor() Descriptor {
 	return Descriptor{
 		Vendor: "huawei", Module: "vlan",
 		NewStruct: func() ygot.GoStruct { return &fakeVlans{} },
 		XML: &xmlcodec.Spec{
 			Namespace: "urn:fake",
-			Schema: func() *yang.Entry {
-				return &yang.Entry{Name: "vlans", Dir: map[string]*yang.Entry{
-					"vlan": {Name: "vlan", Key: "id", ListAttr: &yang.ListAttr{}},
-				}}
-			},
+			Schema:    fakeVlansSchema,
 		},
 	}
 }

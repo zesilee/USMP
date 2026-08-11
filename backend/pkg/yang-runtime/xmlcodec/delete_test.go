@@ -4,10 +4,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
-
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/internal/testutil/hwfix"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 	"github.com/openconfig/ygot/ygot"
 )
 
@@ -77,12 +76,7 @@ func TestEncodeDeleteErrors(t *testing.T) {
 		// fake schema 的 list child 在 EncodeDelete 场景下抹掉 Key，且 fakeEntry
 		// 不实现 ΛListKeyMap → 必须明确报错，绝不发送裸 delete（R08）。
 		s := fakeSpec()
-		base := s.Schema
-		s.Schema = func() *yang.Entry {
-			e := base()
-			e.Dir["entry"].Key = ""
-			return e
-		}
+		s.Schema = func() schema.Node { return fakeSchemaNode(false) }
 		name := "x"
 		v := &fakeRoot{Entry: map[string]*fakeEntry{"x": {Name: &name}}}
 		if _, err := EncodeDelete(s, v); err == nil {

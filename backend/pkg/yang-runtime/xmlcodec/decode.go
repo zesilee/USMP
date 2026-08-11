@@ -8,8 +8,6 @@ import (
 	"log"
 	"reflect"
 	"strconv"
-
-	"github.com/openconfig/ygot/ygot"
 )
 
 // Decode parses a NETCONF get-config reply (raw XML — wrapped in
@@ -21,7 +19,7 @@ import (
 // and inserts entries keyed via ΛListKeyMap, synthesizing a key when the key
 // leaf is absent（legacy 宽容语义）. Empty input yields an initialized empty
 // map; malformed XML or non-numeric enum text returns an explicit error (R08).
-func Decode(spec *Spec, raw []byte, dst ygot.GoStruct) error {
+func Decode(spec *Spec, raw []byte, dst interface{}) error {
 	cv, err := derefContainer(dst)
 	if err != nil {
 		return err
@@ -149,19 +147,16 @@ func decodeStruct(dec *xml.Decoder, start xml.StartElement, sv reflect.Value) er
 
 func decodeField(dec *xml.Decoder, start xml.StartElement, fv reflect.Value) error {
 	tag := start.Name.Local
-	if fv.Type().Implements(goEnumType) && fv.Kind() == reflect.Int64 {
+	if isEnumType(fv.Type()) {
 		text, err := collectText(dec, start)
 		if err != nil {
 			return err
 		}
 		// 值域名解码（XC-08）：真机/本引擎 encode 均发 YANG 名（如 "basic"），经 ΛMap
 		// 反查 名→int。兼容旧整数形态（回退 ParseInt）以不破坏历史报文。
-		enum := fv.Interface().(ygot.GoEnum)
-		for val, def := range enum.ΛMap()[fv.Type().Name()] {
-			if def.Name == text {
-				fv.SetInt(val)
-				return nil
-			}
+		if val, ok := enumValueByName(fv, text); ok {
+			fv.SetInt(val)
+			return nil
 		}
 		if n, perr := strconv.ParseInt(text, 10, 64); perr == nil {
 			fv.SetInt(n)
@@ -297,15 +292,13 @@ func entryKey(entry reflect.Value, keyType reflect.Type, elemTag string, idx int
 	if keyType.Kind() == reflect.Struct {
 		return structKey(entry, keyType, elemTag)
 	}
-	if kh, ok := entry.Interface().(ygot.KeyHelperGoStruct); ok {
-		if km, err := kh.ΛListKeyMap(); err == nil {
-			for _, kv := range km {
-				rv := reflect.ValueOf(kv)
-				if !rv.Type().ConvertibleTo(keyType) {
-					return reflect.Value{}, fmt.Errorf("list %s: key type %s not convertible to %s", elemTag, rv.Type(), keyType)
-				}
-				return rv.Convert(keyType), nil
+	if km, ok := listKeyMapOf(entry.Interface()); ok {
+		for _, kv := range km {
+			rv := reflect.ValueOf(kv)
+			if !rv.Type().ConvertibleTo(keyType) {
+				return reflect.Value{}, fmt.Errorf("list %s: key type %s not convertible to %s", elemTag, rv.Type(), keyType)
 			}
+			return rv.Convert(keyType), nil
 		}
 	}
 	// Key leaf missing: synthesize so the entry survives（对齐 legacy）.
@@ -331,10 +324,7 @@ func entryKey(entry reflect.Value, keyType reflect.Type, elemTag string, idx int
 // last one wins（仅畸形回读可达；不向键值注入合成占位污染前端展示真值）.
 func structKey(entry reflect.Value, keyType reflect.Type, elemTag string) (reflect.Value, error) {
 	key := reflect.New(keyType).Elem()
-	var km map[string]interface{}
-	if kh, ok := entry.Interface().(ygot.KeyHelperGoStruct); ok {
-		km, _ = kh.ΛListKeyMap() // nil on error → per-field fallback below
-	}
+	km, _ := listKeyMapOf(entry.Interface()) // ok=false → nil → per-field fallback below
 	ev := reflect.Indirect(entry)
 	for i := 0; i < keyType.NumField(); i++ {
 		f := keyType.Field(i)

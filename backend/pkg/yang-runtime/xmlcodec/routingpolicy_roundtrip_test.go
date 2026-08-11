@@ -6,8 +6,6 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
-
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 )
 
@@ -21,7 +19,7 @@ const rtpNS = "urn:huawei:yang:huawei-routing-policy"
 func rtpSpec() *Spec {
 	return &Spec{
 		Namespace: rtpNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiRoutingPolicy_RoutingPolicy"] },
+		Schema:    irTestNode("/routing-policy"),
 	}
 }
 
@@ -31,11 +29,11 @@ const rtpPolicyDefScalarLeaves = 1
 // TestRoutingPolicy_PolicyDef_Shape：schema 驱动锁死接入形状——policy-definition 直属
 // config-true 标量恰好 1（name，CE 基线 pd 级无其他标量叶），深层 nodes 仍为推迟容器（防悄悄扩面）。
 func TestRoutingPolicy_PolicyDef_Shape(t *testing.T) {
-	root := huawei.SchemaTree["HuaweiRoutingPolicy_RoutingPolicy"]
+	root := irTestNodeAt("/routing-policy")
 	if root == nil {
 		t.Fatal("HuaweiRoutingPolicy_RoutingPolicy schema 未解析")
 	}
-	pdEntry := root.Dir["policy-definitions"].Dir["policy-definition"]
+	pdEntry := irTestNodeAt("/routing-policy/policy-definitions/policy-definition")
 	if pdEntry == nil {
 		t.Fatal("policy-definition schema 未解析")
 	}

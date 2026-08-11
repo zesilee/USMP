@@ -1,10 +1,8 @@
 package drivers
 
 import (
-	"reflect"
 	"strings"
 
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
@@ -89,18 +87,13 @@ var plainModules = []plainModule{
 	{"xpl", "urn:huawei:yang:huawei-xpl", func() ygot.GoStruct { return &huawei.HuaweiXpl_Xpl{} }},
 }
 
-// schemaKeyOf 由构造子返回类型名派生 SchemaTree 键（生成物以 Go 类型名为键）。
-func schemaKeyOf(fn func() ygot.GoStruct) string {
-	return reflect.TypeOf(fn()).Elem().Name()
-}
-
 // registerPlain 按表行派生谓词/锚点/编解码数据并注册描述符。
 func registerPlain(pm plainModule) {
 	anchor := "/" + pm.module + ":" + pm.module
-	key := schemaKeyOf(pm.newFn)
 	spec := &xmlcodec.Spec{
 		Namespace: pm.ns,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree[key] },
+		// DR-06 口径：plain 模块的根容器名 = 模块名 = 数据路径首段。
+		Schema: irNode("/" + pm.module),
 	}
 	match := func(p string) bool { return strings.HasPrefix(p, anchor) }
 	newFn := pm.newFn

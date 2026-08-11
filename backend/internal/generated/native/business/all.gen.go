@@ -6,8 +6,10 @@
 package business
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
+	"sort"
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
@@ -28,6 +30,41 @@ type Device struct {
 // IsYangObject marks Device as a generated YANG object.
 func (*Device) IsYangObject() {}
 
+// MarshalJSON implements RFC7951 encoding for Device.
+func (t *Device) MarshalJSON() ([]byte, error) {
+	out := make(map[string]json.RawMessage)
+	if t.BusinessVlanService != nil {
+		bv, err := t.BusinessVlanService.MarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		if string(bv) != "{}" {
+			out["business-vlan-service"] = bv
+		}
+	}
+	return json.Marshal(out)
+}
+
+// UnmarshalJSON implements RFC7951 decoding for Device（未知键报错）。
+func (t *Device) UnmarshalJSON(data []byte) error {
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(data, &fields); err != nil {
+		return err
+	}
+	for k, raw := range fields {
+		switch object.StripModule(k) {
+		case "business-vlan-service":
+			t.BusinessVlanService = &UsmpBusinessVlan_BusinessVlanService{}
+			if err := t.BusinessVlanService.UnmarshalJSON(raw); err != nil {
+				return err
+			}
+		default:
+			return fmt.Errorf("Device: unknown field %q", k)
+		}
+	}
+	return nil
+}
+
 // UsmpBusinessVlan_BusinessVlanService represents the /usmp-business-vlan/business-vlan-service YANG schema element.
 type UsmpBusinessVlan_BusinessVlanService struct {
 	Devices map[string]*UsmpBusinessVlan_BusinessVlanService_Devices `path:"devices" module:"usmp-business-vlan"`
@@ -37,6 +74,77 @@ type UsmpBusinessVlan_BusinessVlanService struct {
 
 // IsYangObject marks UsmpBusinessVlan_BusinessVlanService as a generated YANG object.
 func (*UsmpBusinessVlan_BusinessVlanService) IsYangObject() {}
+
+// MarshalJSON implements RFC7951 encoding for UsmpBusinessVlan_BusinessVlanService.
+func (t *UsmpBusinessVlan_BusinessVlanService) MarshalJSON() ([]byte, error) {
+	out := make(map[string]json.RawMessage)
+	if len(t.Devices) > 0 {
+		keys := make([]string, 0, len(t.Devices))
+		for k := range t.Devices {
+			keys = append(keys, k)
+		}
+		sort.Slice(keys, func(i, j int) bool { return keys[i] < keys[j] })
+		parts := make([]json.RawMessage, 0, len(keys))
+		for _, k := range keys {
+			bv, err := t.Devices[k].MarshalJSON()
+			if err != nil {
+				return nil, err
+			}
+			parts = append(parts, bv)
+		}
+		out["devices"] = object.JSONArray(parts)
+	}
+	if t.Name != nil {
+		out["name"] = object.RawJSON(*t.Name)
+	}
+	if t.VlanId != nil {
+		out["vlan-id"] = object.RawJSON(*t.VlanId)
+	}
+	return json.Marshal(out)
+}
+
+// UnmarshalJSON implements RFC7951 decoding for UsmpBusinessVlan_BusinessVlanService（未知键报错）。
+func (t *UsmpBusinessVlan_BusinessVlanService) UnmarshalJSON(data []byte) error {
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(data, &fields); err != nil {
+		return err
+	}
+	for k, raw := range fields {
+		switch object.StripModule(k) {
+		case "devices":
+			var arr []json.RawMessage
+			if err := json.Unmarshal(raw, &arr); err != nil {
+				return fmt.Errorf("UsmpBusinessVlan_BusinessVlanService.devices: %w", err)
+			}
+			t.Devices = make(map[string]*UsmpBusinessVlan_BusinessVlanService_Devices, len(arr))
+			for _, er := range arr {
+				e := &UsmpBusinessVlan_BusinessVlanService_Devices{}
+				if err := e.UnmarshalJSON(er); err != nil {
+					return err
+				}
+				if e.Ip == nil {
+					return fmt.Errorf("UsmpBusinessVlan_BusinessVlanService.devices: entry missing key ip")
+				}
+				t.Devices[*e.Ip] = e
+			}
+		case "name":
+			var v string
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpBusinessVlan_BusinessVlanService.name: %w", err)
+			}
+			t.Name = &v
+		case "vlan-id":
+			var v uint16
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpBusinessVlan_BusinessVlanService.vlan-id: %w", err)
+			}
+			t.VlanId = &v
+		default:
+			return fmt.Errorf("UsmpBusinessVlan_BusinessVlanService: unknown field %q", k)
+		}
+	}
+	return nil
+}
 
 // UsmpBusinessVlan_BusinessVlanService_Devices represents the /usmp-business-vlan/business-vlan-service/devices YANG schema element.
 type UsmpBusinessVlan_BusinessVlanService_Devices struct {
@@ -54,6 +162,62 @@ func (t *UsmpBusinessVlan_BusinessVlanService_Devices) ListKeyMap() (map[string]
 		return nil, fmt.Errorf("nil value for key Ip")
 	}
 	return map[string]interface{}{"ip": *t.Ip}, nil
+}
+
+// MarshalJSON implements RFC7951 encoding for UsmpBusinessVlan_BusinessVlanService_Devices.
+func (t *UsmpBusinessVlan_BusinessVlanService_Devices) MarshalJSON() ([]byte, error) {
+	out := make(map[string]json.RawMessage)
+	if len(t.AccessPorts) > 0 {
+		parts := make([]json.RawMessage, 0, len(t.AccessPorts))
+		for _, v := range t.AccessPorts {
+			parts = append(parts, object.RawJSON(v))
+		}
+		out["access-ports"] = object.JSONArray(parts)
+	}
+	if t.Ip != nil {
+		out["ip"] = object.RawJSON(*t.Ip)
+	}
+	if len(t.TrunkPorts) > 0 {
+		parts := make([]json.RawMessage, 0, len(t.TrunkPorts))
+		for _, v := range t.TrunkPorts {
+			parts = append(parts, object.RawJSON(v))
+		}
+		out["trunk-ports"] = object.JSONArray(parts)
+	}
+	return json.Marshal(out)
+}
+
+// UnmarshalJSON implements RFC7951 decoding for UsmpBusinessVlan_BusinessVlanService_Devices（未知键报错）。
+func (t *UsmpBusinessVlan_BusinessVlanService_Devices) UnmarshalJSON(data []byte) error {
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(data, &fields); err != nil {
+		return err
+	}
+	for k, raw := range fields {
+		switch object.StripModule(k) {
+		case "access-ports":
+			var v []string
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpBusinessVlan_BusinessVlanService_Devices.access-ports: %w", err)
+			}
+			t.AccessPorts = v
+		case "ip":
+			var v string
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpBusinessVlan_BusinessVlanService_Devices.ip: %w", err)
+			}
+			t.Ip = &v
+		case "trunk-ports":
+			var v []string
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpBusinessVlan_BusinessVlanService_Devices.trunk-ports: %w", err)
+			}
+			t.TrunkPorts = v
+		default:
+			return fmt.Errorf("UsmpBusinessVlan_BusinessVlanService_Devices: unknown field %q", k)
+		}
+	}
+	return nil
 }
 
 // enumMaps 是全包枚举定义表（外层 key 带 E_ 前缀——消费方按
