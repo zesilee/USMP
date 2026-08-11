@@ -1,0 +1,67 @@
+module usmp-test {
+  namespace "urn:usmp:test";
+  prefix ut;
+
+  typedef enable-status {
+    type enumeration {
+      enum enable { value 1; }
+      enum disable { value 2; }
+    }
+  }
+
+  container box {
+    leaf host { type string { pattern "[a-z]+"; length "1..31"; } }
+    leaf mtu { type uint16 { range "64..9216"; } mandatory true; }
+    leaf on { type boolean; }
+    leaf ratio { type decimal64 { fraction-digits 2; } }
+    leaf big { type uint64; }
+    leaf mark { type empty; }
+    leaf status { type enable-status; }
+    leaf mode {
+      type enumeration {
+        enum access;
+        enum trunk;
+      }
+    }
+    leaf port {
+      type union {
+        type uint16;
+        type string;
+      }
+    }
+    leaf-list tags { type string; }
+    leaf-list levels { type uint32; }
+
+    container feature {
+      presence "enables feature";
+      leaf rate { type uint32; }
+    }
+
+    choice source {
+      case static {
+        leaf static-ip { type string; }
+      }
+      case dhcp {
+        leaf dhcp-pool { type string; }
+      }
+    }
+
+    container vlans {
+      list vlan {
+        key "id";
+        leaf id { type uint16; }
+        leaf name { type string; }
+        leaf admin-status { type enable-status; }
+      }
+    }
+
+    container routes {
+      list route {
+        key "vrf prefix";
+        leaf vrf { type string; }
+        leaf prefix { type string; }
+        leaf metric { type uint32; }
+      }
+    }
+  }
+}
