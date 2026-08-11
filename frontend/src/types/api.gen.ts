@@ -1231,7 +1231,7 @@ export interface components {
         "api.DeviceReconcileData": {
             device_id?: string;
             outcome?: string;
-            statuses?: components["schemas"]["github_com_leezesi_usmp_backend_pkg_yang-runtime_status.Status"][];
+            statuses?: components["schemas"]["status.Status"][];
         };
         "api.DeviceRollup": {
             device_id?: string;
@@ -1444,7 +1444,9 @@ export interface components {
             unsupported?: string[];
             vendor?: string;
         };
-        "github_com_leezesi_usmp_backend_pkg_yang-runtime_status.Status": {
+        /** @enum {string} */
+        "status.Outcome": "unknown" | "converged" | "drifted" | "reconciling" | "error";
+        "status.Status": {
             device_id?: string;
             diff_count?: number;
             last_error?: string;
@@ -1452,8 +1454,6 @@ export interface components {
             outcome?: components["schemas"]["status.Outcome"];
             path?: string;
         };
-        /** @enum {string} */
-        "status.Outcome": "unknown" | "converged" | "drifted" | "reconciling" | "error";
     };
     responses: never;
     parameters: never;
