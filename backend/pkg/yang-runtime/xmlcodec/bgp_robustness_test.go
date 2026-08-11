@@ -6,9 +6,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // 完备矩阵：并发(R09)、边界、负路径。补齐 yang-config-test-design 对容器根 BGP 的
@@ -20,8 +19,8 @@ func TestBgpCodec_Concurrent(t *testing.T) {
 	spec := bgpSpec()
 	src := &huawei.HuaweiBgp_Bgp{
 		BaseProcess: &huawei.HuaweiBgp_Bgp_BaseProcess{
-			Enable: ygot.Bool(true), As: ygot.String("65000"),
-			GracefulRestart: &huawei.HuaweiBgp_Bgp_BaseProcess_GracefulRestart{RestartTime: ygot.Uint16(300)},
+			Enable: object.Bool(true), As: object.String("65000"),
+			GracefulRestart: &huawei.HuaweiBgp_Bgp_BaseProcess_GracefulRestart{RestartTime: object.Uint16(300)},
 		},
 	}
 	want, err := Encode(spec, src)
@@ -56,9 +55,9 @@ func TestBgpCodec_BoundaryValues(t *testing.T) {
 	spec := bgpSpec()
 	src := &huawei.HuaweiBgp_Bgp{
 		BaseProcess: &huawei.HuaweiBgp_Bgp_BaseProcess{
-			LocalIfnetMtu: ygot.Uint16(65535),      // uint16 max
-			DelayTime:     ygot.Uint32(4294967295), // uint32 max
-			As:            ygot.String(`a<b&c">'`), // 特殊字符（测转义/反转义，非合法 AS，仅验编解码鲁棒）
+			LocalIfnetMtu: object.Uint16(65535),      // uint16 max
+			DelayTime:     object.Uint32(4294967295), // uint32 max
+			As:            object.String(`a<b&c">'`), // 特殊字符（测转义/反转义，非合法 AS，仅验编解码鲁棒）
 			Confederation: &huawei.HuaweiBgp_Bgp_BaseProcess_Confederation{
 				As: []string{"1", "65535", "4294967295"}, // leaf-list 多元素
 			},

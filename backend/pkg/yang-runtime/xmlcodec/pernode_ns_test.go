@@ -4,9 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // XC-06 per-node namespace：augment 跨模块树（huawei-bgp peers/afs augment 到
@@ -34,10 +33,10 @@ func niWithBgpAugment() *huawei.HuaweiNetworkInstance_NetworkInstance {
 		Instances: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances{
 			Instance: map[string]*huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance{
 				"_public_": {
-					Name: ygot.String("_public_"),
+					Name: object.String("_public_"),
 					Bgp: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp{
 						BaseProcess: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess{
-							RouterId: ygot.String("1.1.1.1"),
+							RouterId: object.String("1.1.1.1"),
 						},
 					},
 				},
@@ -93,7 +92,7 @@ func TestXC06_MixedNamespace_DecodeRoundtrip(t *testing.T) {
 func TestXC06_SingleModuleTree_NoExtraXmlns(t *testing.T) {
 	// bgpSpec() 无 Namespaces → 现状行为
 	out, err := Encode(bgpSpec(), &huawei.HuaweiBgp_Bgp{
-		BaseProcess: &huawei.HuaweiBgp_Bgp_BaseProcess{As: ygot.String("100")},
+		BaseProcess: &huawei.HuaweiBgp_Bgp_BaseProcess{As: object.String("100")},
 	})
 	if err != nil {
 		t.Fatalf("Encode: %v", err)
@@ -111,7 +110,7 @@ func TestXC06_SingleModuleTree_NoExtraXmlns(t *testing.T) {
 func TestXC06_NilNamespaces_LegacyBehavior(t *testing.T) {
 	specNil := &Spec{Namespace: niNS, Schema: irTestNode("/network-instance")}
 	v := &huawei.HuaweiNetworkInstance_NetworkInstance{
-		Global: &huawei.HuaweiNetworkInstance_NetworkInstance_Global{CfgRouterId: ygot.String("9.9.9.9")},
+		Global: &huawei.HuaweiNetworkInstance_NetworkInstance_Global{CfgRouterId: object.String("9.9.9.9")},
 	}
 	out, err := Encode(specNil, v)
 	if err != nil {

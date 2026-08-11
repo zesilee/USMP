@@ -4,16 +4,15 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 func vlanEntryOnlyKey(id uint16) *huawei.HuaweiVlan_Vlan_Vlans {
 	return &huawei.HuaweiVlan_Vlan_Vlans{
 		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
-			id: {Id: ygot.Uint16(id)},
+			id: {Id: object.Uint16(id)},
 		},
 	}
 }
@@ -46,8 +45,8 @@ func TestEncodeLeafDeleteShape(t *testing.T) {
 func TestEncodeLeafDeleteMultiEntry(t *testing.T) {
 	v := &huawei.HuaweiVlan_Vlan_Vlans{
 		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
-			5:  {Id: ygot.Uint16(5)},
-			10: {Id: ygot.Uint16(10)},
+			5:  {Id: object.Uint16(5)},
+			10: {Id: object.Uint16(10)},
 		},
 	}
 	out, err := EncodeLeafDelete(vlanSpec(), v, []string{"description"})
@@ -68,7 +67,7 @@ func TestEncodeLeafDeleteMultiEntry(t *testing.T) {
 func TestEncodeLeafDeleteIfmStringKey(t *testing.T) {
 	v := &huawei.HuaweiIfm_Ifm_Interfaces{
 		Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
-			"GE0/0/1": {Name: ygot.String("GE0/0/1")},
+			"GE0/0/1": {Name: object.String("GE0/0/1")},
 		},
 	}
 	out, err := EncodeLeafDelete(ifmSpec(), v, []string{"description"})

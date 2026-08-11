@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
-	"github.com/openconfig/ygot/ygot"
 )
 
 // Spec is the per-module codec data a driver descriptor carries (DR-01): the
@@ -345,13 +344,11 @@ func encodeList(b *strings.Builder, r *resolved, mapVal reflect.Value, elemTag s
 func encodeKeysFirst(b *strings.Builder, ev reflect.Value, mapKey reflect.Value, sn schema.Node, res nsResolver, parentNS string) (map[string]bool, error) {
 	names := nodeKeys(sn)
 	if names == nil {
-		if kh, ok := ev.Interface().(ygot.KeyHelperGoStruct); ok {
-			if km, err := kh.ΛListKeyMap(); err == nil {
-				for n := range km {
-					names = append(names, n)
-				}
-				sort.Strings(names)
+		if km, ok := listKeyMapOf(ev.Interface()); ok {
+			for n := range km {
+				names = append(names, n)
 			}
+			sort.Strings(names)
 		}
 	}
 	emitted := map[string]bool{}

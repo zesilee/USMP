@@ -6,7 +6,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 )
 
 // routing-policy（/rtp:routing-policy，容器根，同 /bgp:bgp 走 plain-container）的编解码矩阵。

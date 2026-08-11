@@ -4,9 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // container-mode（XC-01/02 plain-container 根，如 /bgp:bgp）：既有 list 模式
@@ -25,12 +24,12 @@ func bgpSpec() *Spec {
 func TestEncodeContainer_ScalarsAndNesting(t *testing.T) {
 	v := &huawei.HuaweiBgp_Bgp{
 		BaseProcess: &huawei.HuaweiBgp_Bgp_BaseProcess{
-			Enable:      ygot.Bool(true),
-			As:          ygot.String("100"),
-			AsPathLimit: ygot.Uint16(50),
+			Enable:      object.Bool(true),
+			As:          object.String("100"),
+			AsPathLimit: object.Uint16(50),
 			GracefulRestart: &huawei.HuaweiBgp_Bgp_BaseProcess_GracefulRestart{
-				Enable:      ygot.Bool(true),
-				RestartTime: ygot.Uint16(120),
+				Enable:      object.Bool(true),
+				RestartTime: object.Uint16(120),
 			},
 		},
 	}
@@ -68,11 +67,11 @@ func TestEncodeContainer_EmptySelfClosing(t *testing.T) {
 func TestDecodeContainer_Roundtrip(t *testing.T) {
 	in := &huawei.HuaweiBgp_Bgp{
 		BaseProcess: &huawei.HuaweiBgp_Bgp_BaseProcess{
-			Enable:       ygot.Bool(true),
-			As:           ygot.String("65000"),
-			CheckFirstAs: ygot.Bool(false),
+			Enable:       object.Bool(true),
+			As:           object.String("65000"),
+			CheckFirstAs: object.Bool(false),
 			GracefulRestart: &huawei.HuaweiBgp_Bgp_BaseProcess_GracefulRestart{
-				RestartTime: ygot.Uint16(300),
+				RestartTime: object.Uint16(300),
 			},
 		},
 	}
