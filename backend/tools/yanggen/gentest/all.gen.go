@@ -7,8 +7,11 @@
 package gentest
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
+	"sort"
+	"strconv"
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
@@ -34,6 +37,39 @@ type Device struct {
 // IsYangObject marks Device as a generated YANG object.
 func (*Device) IsYangObject() {}
 
+// MarshalJSON implements RFC7951 encoding for Device.
+func (t *Device) MarshalJSON() ([]byte, error) {
+	out := make(map[string]json.RawMessage)
+	if t.Box != nil {
+		bv, err := t.Box.MarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		out["usmp-test:box"] = bv
+	}
+	return json.Marshal(out)
+}
+
+// UnmarshalJSON implements RFC7951 decoding for Device（未知键报错）。
+func (t *Device) UnmarshalJSON(data []byte) error {
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(data, &fields); err != nil {
+		return err
+	}
+	for k, raw := range fields {
+		switch object.StripModule(k) {
+		case "box":
+			t.Box = &UsmpTest_Box{}
+			if err := t.Box.UnmarshalJSON(raw); err != nil {
+				return err
+			}
+		default:
+			return fmt.Errorf("Device: unknown field %q", k)
+		}
+	}
+	return nil
+}
+
 // UsmpTest_Box represents the /usmp-test/box YANG schema element.
 type UsmpTest_Box struct {
 	Big      *uint64                 `path:"big" module:"usmp-test"`
@@ -58,6 +94,219 @@ type UsmpTest_Box struct {
 // IsYangObject marks UsmpTest_Box as a generated YANG object.
 func (*UsmpTest_Box) IsYangObject() {}
 
+// MarshalJSON implements RFC7951 encoding for UsmpTest_Box.
+func (t *UsmpTest_Box) MarshalJSON() ([]byte, error) {
+	out := make(map[string]json.RawMessage)
+	if t.Big != nil {
+		out["big"] = json.RawMessage(strconv.Quote(strconv.FormatUint(uint64(*t.Big), 10)))
+	}
+	if t.DhcpPool != nil {
+		out["dhcp-pool"] = object.RawJSON(*t.DhcpPool)
+	}
+	if t.Extras != nil {
+		bv, err := t.Extras.MarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		out["usmp-test-ext:extras"] = bv
+	}
+	if t.Feature != nil {
+		bv, err := t.Feature.MarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		out["feature"] = bv
+	}
+	if t.Host != nil {
+		out["host"] = object.RawJSON(*t.Host)
+	}
+	if len(t.Levels) > 0 {
+		parts := make([]json.RawMessage, 0, len(t.Levels))
+		for _, v := range t.Levels {
+			parts = append(parts, object.RawJSON(v))
+		}
+		out["levels"] = object.JSONArray(parts)
+	}
+	if t.Mark {
+		out["mark"] = object.EmptyJSON
+	}
+	if t.Mode != 0 {
+		n, err := object.EnumName(t.Mode)
+		if err != nil {
+			return nil, fmt.Errorf("UsmpTest_Box.Mode: %w", err)
+		}
+		out["mode"] = object.RawJSON(n)
+	}
+	if t.Mtu != nil {
+		out["mtu"] = object.RawJSON(*t.Mtu)
+	}
+	if t.On != nil {
+		out["on"] = object.RawJSON(*t.On)
+	}
+	if t.Port != nil {
+		bv, err := marshalUsmpTest_Box_Port_Union(t.Port)
+		if err != nil {
+			return nil, fmt.Errorf("UsmpTest_Box.Port: %w", err)
+		}
+		out["port"] = bv
+	}
+	if t.Ratio != nil {
+		out["ratio"] = object.RawJSON(*t.Ratio)
+	}
+	if t.Routes != nil {
+		bv, err := t.Routes.MarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		out["routes"] = bv
+	}
+	if t.StaticIp != nil {
+		out["static-ip"] = object.RawJSON(*t.StaticIp)
+	}
+	if t.Status != 0 {
+		n, err := object.EnumName(t.Status)
+		if err != nil {
+			return nil, fmt.Errorf("UsmpTest_Box.Status: %w", err)
+		}
+		out["status"] = object.RawJSON(n)
+	}
+	if len(t.Tags) > 0 {
+		parts := make([]json.RawMessage, 0, len(t.Tags))
+		for _, v := range t.Tags {
+			parts = append(parts, object.RawJSON(v))
+		}
+		out["tags"] = object.JSONArray(parts)
+	}
+	if t.Vlans != nil {
+		bv, err := t.Vlans.MarshalJSON()
+		if err != nil {
+			return nil, err
+		}
+		out["vlans"] = bv
+	}
+	return json.Marshal(out)
+}
+
+// UnmarshalJSON implements RFC7951 decoding for UsmpTest_Box（未知键报错）。
+func (t *UsmpTest_Box) UnmarshalJSON(data []byte) error {
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(data, &fields); err != nil {
+		return err
+	}
+	for k, raw := range fields {
+		switch object.StripModule(k) {
+		case "big":
+			v, err := object.ParseUint64JSON(raw)
+			if err != nil {
+				return fmt.Errorf("UsmpTest_Box.big: %w", err)
+			}
+			t.Big = &v
+		case "dhcp-pool":
+			var v string
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box.dhcp-pool: %w", err)
+			}
+			t.DhcpPool = &v
+		case "extras":
+			t.Extras = &UsmpTest_Box_Extras{}
+			if err := t.Extras.UnmarshalJSON(raw); err != nil {
+				return err
+			}
+		case "feature":
+			t.Feature = &UsmpTest_Box_Feature{}
+			if err := t.Feature.UnmarshalJSON(raw); err != nil {
+				return err
+			}
+		case "host":
+			var v string
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box.host: %w", err)
+			}
+			t.Host = &v
+		case "levels":
+			var v []uint32
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box.levels: %w", err)
+			}
+			t.Levels = v
+		case "mark":
+			if !object.IsEmptyJSON(raw) {
+				return fmt.Errorf("UsmpTest_Box.mark: empty leaf expects [null], got %s", raw)
+			}
+			t.Mark = true
+		case "mode":
+			var n string
+			if err := json.Unmarshal(raw, &n); err != nil {
+				return fmt.Errorf("UsmpTest_Box.mode: %w", err)
+			}
+			ev, ok := object.EnumValueByName(EnumMaps, "E_UsmpTest_Box_Mode", n)
+			if !ok {
+				return fmt.Errorf("UsmpTest_Box.mode: unknown enum value %q", n)
+			}
+			t.Mode = E_UsmpTest_Box_Mode(ev)
+		case "mtu":
+			var v uint16
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box.mtu: %w", err)
+			}
+			t.Mtu = &v
+		case "on":
+			var v bool
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box.on: %w", err)
+			}
+			t.On = &v
+		case "port":
+			uv, err := unmarshalUsmpTest_Box_Port_Union(raw)
+			if err != nil {
+				return fmt.Errorf("UsmpTest_Box.port: %w", err)
+			}
+			t.Port = uv
+		case "ratio":
+			var v float64
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box.ratio: %w", err)
+			}
+			t.Ratio = &v
+		case "routes":
+			t.Routes = &UsmpTest_Box_Routes{}
+			if err := t.Routes.UnmarshalJSON(raw); err != nil {
+				return err
+			}
+		case "static-ip":
+			var v string
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box.static-ip: %w", err)
+			}
+			t.StaticIp = &v
+		case "status":
+			var n string
+			if err := json.Unmarshal(raw, &n); err != nil {
+				return fmt.Errorf("UsmpTest_Box.status: %w", err)
+			}
+			ev, ok := object.EnumValueByName(EnumMaps, "E_UsmpTest_EnableStatus", n)
+			if !ok {
+				return fmt.Errorf("UsmpTest_Box.status: unknown enum value %q", n)
+			}
+			t.Status = E_UsmpTest_EnableStatus(ev)
+		case "tags":
+			var v []string
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box.tags: %w", err)
+			}
+			t.Tags = v
+		case "vlans":
+			t.Vlans = &UsmpTest_Box_Vlans{}
+			if err := t.Vlans.UnmarshalJSON(raw); err != nil {
+				return err
+			}
+		default:
+			return fmt.Errorf("UsmpTest_Box: unknown field %q", k)
+		}
+	}
+	return nil
+}
+
 // UsmpTest_Box_Extras represents the /usmp-test/box/extras YANG schema element.
 type UsmpTest_Box_Extras struct {
 	Note *string `path:"note" module:"usmp-test-ext"`
@@ -65,6 +314,36 @@ type UsmpTest_Box_Extras struct {
 
 // IsYangObject marks UsmpTest_Box_Extras as a generated YANG object.
 func (*UsmpTest_Box_Extras) IsYangObject() {}
+
+// MarshalJSON implements RFC7951 encoding for UsmpTest_Box_Extras.
+func (t *UsmpTest_Box_Extras) MarshalJSON() ([]byte, error) {
+	out := make(map[string]json.RawMessage)
+	if t.Note != nil {
+		out["note"] = object.RawJSON(*t.Note)
+	}
+	return json.Marshal(out)
+}
+
+// UnmarshalJSON implements RFC7951 decoding for UsmpTest_Box_Extras（未知键报错）。
+func (t *UsmpTest_Box_Extras) UnmarshalJSON(data []byte) error {
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(data, &fields); err != nil {
+		return err
+	}
+	for k, raw := range fields {
+		switch object.StripModule(k) {
+		case "note":
+			var v string
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box_Extras.note: %w", err)
+			}
+			t.Note = &v
+		default:
+			return fmt.Errorf("UsmpTest_Box_Extras: unknown field %q", k)
+		}
+	}
+	return nil
+}
 
 // UsmpTest_Box_Feature represents the /usmp-test/box/feature YANG schema element.
 type UsmpTest_Box_Feature struct {
@@ -74,6 +353,36 @@ type UsmpTest_Box_Feature struct {
 // IsYangObject marks UsmpTest_Box_Feature as a generated YANG object.
 func (*UsmpTest_Box_Feature) IsYangObject() {}
 
+// MarshalJSON implements RFC7951 encoding for UsmpTest_Box_Feature.
+func (t *UsmpTest_Box_Feature) MarshalJSON() ([]byte, error) {
+	out := make(map[string]json.RawMessage)
+	if t.Rate != nil {
+		out["rate"] = object.RawJSON(*t.Rate)
+	}
+	return json.Marshal(out)
+}
+
+// UnmarshalJSON implements RFC7951 decoding for UsmpTest_Box_Feature（未知键报错）。
+func (t *UsmpTest_Box_Feature) UnmarshalJSON(data []byte) error {
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(data, &fields); err != nil {
+		return err
+	}
+	for k, raw := range fields {
+		switch object.StripModule(k) {
+		case "rate":
+			var v uint32
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box_Feature.rate: %w", err)
+			}
+			t.Rate = &v
+		default:
+			return fmt.Errorf("UsmpTest_Box_Feature: unknown field %q", k)
+		}
+	}
+	return nil
+}
+
 // UsmpTest_Box_Routes represents the /usmp-test/box/routes YANG schema element.
 type UsmpTest_Box_Routes struct {
 	Route map[UsmpTest_Box_Routes_Route_Key]*UsmpTest_Box_Routes_Route `path:"route" module:"usmp-test"`
@@ -81,6 +390,62 @@ type UsmpTest_Box_Routes struct {
 
 // IsYangObject marks UsmpTest_Box_Routes as a generated YANG object.
 func (*UsmpTest_Box_Routes) IsYangObject() {}
+
+// MarshalJSON implements RFC7951 encoding for UsmpTest_Box_Routes.
+func (t *UsmpTest_Box_Routes) MarshalJSON() ([]byte, error) {
+	out := make(map[string]json.RawMessage)
+	if len(t.Route) > 0 {
+		keys := make([]UsmpTest_Box_Routes_Route_Key, 0, len(t.Route))
+		for k := range t.Route {
+			keys = append(keys, k)
+		}
+		sort.Slice(keys, func(i, j int) bool { return fmt.Sprint(keys[i]) < fmt.Sprint(keys[j]) })
+		parts := make([]json.RawMessage, 0, len(keys))
+		for _, k := range keys {
+			bv, err := t.Route[k].MarshalJSON()
+			if err != nil {
+				return nil, err
+			}
+			parts = append(parts, bv)
+		}
+		out["route"] = object.JSONArray(parts)
+	}
+	return json.Marshal(out)
+}
+
+// UnmarshalJSON implements RFC7951 decoding for UsmpTest_Box_Routes（未知键报错）。
+func (t *UsmpTest_Box_Routes) UnmarshalJSON(data []byte) error {
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(data, &fields); err != nil {
+		return err
+	}
+	for k, raw := range fields {
+		switch object.StripModule(k) {
+		case "route":
+			var arr []json.RawMessage
+			if err := json.Unmarshal(raw, &arr); err != nil {
+				return fmt.Errorf("UsmpTest_Box_Routes.route: %w", err)
+			}
+			t.Route = make(map[UsmpTest_Box_Routes_Route_Key]*UsmpTest_Box_Routes_Route, len(arr))
+			for _, er := range arr {
+				e := &UsmpTest_Box_Routes_Route{}
+				if err := e.UnmarshalJSON(er); err != nil {
+					return err
+				}
+				if e.Vrf == nil {
+					return fmt.Errorf("UsmpTest_Box_Routes.route: entry missing key vrf")
+				}
+				if e.Prefix == nil {
+					return fmt.Errorf("UsmpTest_Box_Routes.route: entry missing key prefix")
+				}
+				t.Route[UsmpTest_Box_Routes_Route_Key{Vrf: *e.Vrf, Prefix: *e.Prefix}] = e
+			}
+		default:
+			return fmt.Errorf("UsmpTest_Box_Routes: unknown field %q", k)
+		}
+	}
+	return nil
+}
 
 // UsmpTest_Box_Routes_Route represents the /usmp-test/box/routes/route YANG schema element.
 type UsmpTest_Box_Routes_Route struct {
@@ -114,6 +479,54 @@ func (t UsmpTest_Box_Routes_Route_Key) ListKeyMap() (map[string]interface{}, err
 	return map[string]interface{}{"vrf": t.Vrf, "prefix": t.Prefix}, nil
 }
 
+// MarshalJSON implements RFC7951 encoding for UsmpTest_Box_Routes_Route.
+func (t *UsmpTest_Box_Routes_Route) MarshalJSON() ([]byte, error) {
+	out := make(map[string]json.RawMessage)
+	if t.Metric != nil {
+		out["metric"] = object.RawJSON(*t.Metric)
+	}
+	if t.Prefix != nil {
+		out["prefix"] = object.RawJSON(*t.Prefix)
+	}
+	if t.Vrf != nil {
+		out["vrf"] = object.RawJSON(*t.Vrf)
+	}
+	return json.Marshal(out)
+}
+
+// UnmarshalJSON implements RFC7951 decoding for UsmpTest_Box_Routes_Route（未知键报错）。
+func (t *UsmpTest_Box_Routes_Route) UnmarshalJSON(data []byte) error {
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(data, &fields); err != nil {
+		return err
+	}
+	for k, raw := range fields {
+		switch object.StripModule(k) {
+		case "metric":
+			var v uint32
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box_Routes_Route.metric: %w", err)
+			}
+			t.Metric = &v
+		case "prefix":
+			var v string
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box_Routes_Route.prefix: %w", err)
+			}
+			t.Prefix = &v
+		case "vrf":
+			var v string
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box_Routes_Route.vrf: %w", err)
+			}
+			t.Vrf = &v
+		default:
+			return fmt.Errorf("UsmpTest_Box_Routes_Route: unknown field %q", k)
+		}
+	}
+	return nil
+}
+
 // UsmpTest_Box_Vlans represents the /usmp-test/box/vlans YANG schema element.
 type UsmpTest_Box_Vlans struct {
 	Vlan map[uint16]*UsmpTest_Box_Vlans_Vlan `path:"vlan" module:"usmp-test"`
@@ -121,6 +534,59 @@ type UsmpTest_Box_Vlans struct {
 
 // IsYangObject marks UsmpTest_Box_Vlans as a generated YANG object.
 func (*UsmpTest_Box_Vlans) IsYangObject() {}
+
+// MarshalJSON implements RFC7951 encoding for UsmpTest_Box_Vlans.
+func (t *UsmpTest_Box_Vlans) MarshalJSON() ([]byte, error) {
+	out := make(map[string]json.RawMessage)
+	if len(t.Vlan) > 0 {
+		keys := make([]uint16, 0, len(t.Vlan))
+		for k := range t.Vlan {
+			keys = append(keys, k)
+		}
+		sort.Slice(keys, func(i, j int) bool { return keys[i] < keys[j] })
+		parts := make([]json.RawMessage, 0, len(keys))
+		for _, k := range keys {
+			bv, err := t.Vlan[k].MarshalJSON()
+			if err != nil {
+				return nil, err
+			}
+			parts = append(parts, bv)
+		}
+		out["vlan"] = object.JSONArray(parts)
+	}
+	return json.Marshal(out)
+}
+
+// UnmarshalJSON implements RFC7951 decoding for UsmpTest_Box_Vlans（未知键报错）。
+func (t *UsmpTest_Box_Vlans) UnmarshalJSON(data []byte) error {
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(data, &fields); err != nil {
+		return err
+	}
+	for k, raw := range fields {
+		switch object.StripModule(k) {
+		case "vlan":
+			var arr []json.RawMessage
+			if err := json.Unmarshal(raw, &arr); err != nil {
+				return fmt.Errorf("UsmpTest_Box_Vlans.vlan: %w", err)
+			}
+			t.Vlan = make(map[uint16]*UsmpTest_Box_Vlans_Vlan, len(arr))
+			for _, er := range arr {
+				e := &UsmpTest_Box_Vlans_Vlan{}
+				if err := e.UnmarshalJSON(er); err != nil {
+					return err
+				}
+				if e.Id == nil {
+					return fmt.Errorf("UsmpTest_Box_Vlans.vlan: entry missing key id")
+				}
+				t.Vlan[*e.Id] = e
+			}
+		default:
+			return fmt.Errorf("UsmpTest_Box_Vlans: unknown field %q", k)
+		}
+	}
+	return nil
+}
 
 // UsmpTest_Box_Vlans_Vlan represents the /usmp-test/box/vlans/vlan YANG schema element.
 type UsmpTest_Box_Vlans_Vlan struct {
@@ -138,6 +604,62 @@ func (t *UsmpTest_Box_Vlans_Vlan) ListKeyMap() (map[string]interface{}, error) {
 		return nil, fmt.Errorf("nil value for key Id")
 	}
 	return map[string]interface{}{"id": *t.Id}, nil
+}
+
+// MarshalJSON implements RFC7951 encoding for UsmpTest_Box_Vlans_Vlan.
+func (t *UsmpTest_Box_Vlans_Vlan) MarshalJSON() ([]byte, error) {
+	out := make(map[string]json.RawMessage)
+	if t.AdminStatus != 0 {
+		n, err := object.EnumName(t.AdminStatus)
+		if err != nil {
+			return nil, fmt.Errorf("UsmpTest_Box_Vlans_Vlan.AdminStatus: %w", err)
+		}
+		out["admin-status"] = object.RawJSON(n)
+	}
+	if t.Id != nil {
+		out["id"] = object.RawJSON(*t.Id)
+	}
+	if t.Name != nil {
+		out["name"] = object.RawJSON(*t.Name)
+	}
+	return json.Marshal(out)
+}
+
+// UnmarshalJSON implements RFC7951 decoding for UsmpTest_Box_Vlans_Vlan（未知键报错）。
+func (t *UsmpTest_Box_Vlans_Vlan) UnmarshalJSON(data []byte) error {
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(data, &fields); err != nil {
+		return err
+	}
+	for k, raw := range fields {
+		switch object.StripModule(k) {
+		case "admin-status":
+			var n string
+			if err := json.Unmarshal(raw, &n); err != nil {
+				return fmt.Errorf("UsmpTest_Box_Vlans_Vlan.admin-status: %w", err)
+			}
+			ev, ok := object.EnumValueByName(EnumMaps, "E_UsmpTest_EnableStatus", n)
+			if !ok {
+				return fmt.Errorf("UsmpTest_Box_Vlans_Vlan.admin-status: unknown enum value %q", n)
+			}
+			t.AdminStatus = E_UsmpTest_EnableStatus(ev)
+		case "id":
+			var v uint16
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box_Vlans_Vlan.id: %w", err)
+			}
+			t.Id = &v
+		case "name":
+			var v string
+			if err := json.Unmarshal(raw, &v); err != nil {
+				return fmt.Errorf("UsmpTest_Box_Vlans_Vlan.name: %w", err)
+			}
+			t.Name = &v
+		default:
+			return fmt.Errorf("UsmpTest_Box_Vlans_Vlan: unknown field %q", k)
+		}
+	}
+	return nil
 }
 
 // E_UsmpTest_Box_Mode is a YANG enumerated type.
@@ -221,3 +743,32 @@ type UsmpTest_Box_Port_Union_String struct {
 
 // Is_UsmpTest_Box_Port_Union marks UsmpTest_Box_Port_Union_String as a member of union UsmpTest_Box_Port_Union.
 func (*UsmpTest_Box_Port_Union_String) Is_UsmpTest_Box_Port_Union() {}
+
+// marshalUsmpTest_Box_Port_Union encodes a UsmpTest_Box_Port_Union union value（RFC7951）。
+func marshalUsmpTest_Box_Port_Union(u UsmpTest_Box_Port_Union) (json.RawMessage, error) {
+	switch v := u.(type) {
+	case *UsmpTest_Box_Port_Union_Uint16:
+		return object.RawJSON(v.Uint16), nil
+	case *UsmpTest_Box_Port_Union_String:
+		return object.RawJSON(v.String), nil
+	default:
+		return nil, fmt.Errorf("unsupported UsmpTest_Box_Port_Union value %T", u)
+	}
+}
+
+// unmarshalUsmpTest_Box_Port_Union decodes a UsmpTest_Box_Port_Union union value（按成员声明序试探）。
+func unmarshalUsmpTest_Box_Port_Union(raw json.RawMessage) (UsmpTest_Box_Port_Union, error) {
+	{
+		var v uint16
+		if json.Unmarshal(raw, &v) == nil {
+			return &UsmpTest_Box_Port_Union_Uint16{Uint16: v}, nil
+		}
+	}
+	{
+		var v string
+		if json.Unmarshal(raw, &v) == nil {
+			return &UsmpTest_Box_Port_Union_String{String: v}, nil
+		}
+	}
+	return nil, fmt.Errorf("no UsmpTest_Box_Port_Union member matches %s", raw)
+}
