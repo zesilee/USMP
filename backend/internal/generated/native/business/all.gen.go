@@ -22,6 +22,16 @@ var Types = map[string]reflect.Type{
 	"UsmpBusinessVlan_BusinessVlanService_Devices": reflect.TypeOf((*UsmpBusinessVlan_BusinessVlanService_Devices)(nil)).Elem(),
 }
 
+// Unmarshal decodes RFC7951 JSON into dest（分派到生成式 UnmarshalJSON；
+// 替代 ygot ytypes.Unmarshal 的包级入口，签名对齐 driver 描述符）。
+func Unmarshal(data []byte, dest object.Object) error {
+	um, ok := dest.(json.Unmarshaler)
+	if !ok {
+		return fmt.Errorf("business: %T has no generated UnmarshalJSON", dest)
+	}
+	return um.UnmarshalJSON(data)
+}
+
 // Device represents the /device YANG schema element.
 type Device struct {
 	BusinessVlanService *UsmpBusinessVlan_BusinessVlanService `path:"business-vlan-service" module:"usmp-business-vlan"`
@@ -74,6 +84,19 @@ type UsmpBusinessVlan_BusinessVlanService struct {
 
 // IsYangObject marks UsmpBusinessVlan_BusinessVlanService as a generated YANG object.
 func (*UsmpBusinessVlan_BusinessVlanService) IsYangObject() {}
+
+// NewDevices creates a new entry in the Devices list（重复 key 报错）。
+func (t *UsmpBusinessVlan_BusinessVlanService) NewDevices(Ip string) (*UsmpBusinessVlan_BusinessVlanService_Devices, error) {
+	if t.Devices == nil {
+		t.Devices = make(map[string]*UsmpBusinessVlan_BusinessVlanService_Devices)
+	}
+	key := Ip
+	if _, ok := t.Devices[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Devices", key)
+	}
+	t.Devices[key] = &UsmpBusinessVlan_BusinessVlanService_Devices{Ip: &Ip}
+	return t.Devices[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for UsmpBusinessVlan_BusinessVlanService.
 func (t *UsmpBusinessVlan_BusinessVlanService) MarshalJSON() ([]byte, error) {

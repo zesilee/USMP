@@ -82,6 +82,19 @@ type HuaweiDevm_Devm_PhysicalEntitys struct {
 // IsYangObject marks HuaweiDevm_Devm_PhysicalEntitys as a generated YANG object.
 func (*HuaweiDevm_Devm_PhysicalEntitys) IsYangObject() {}
 
+// NewPhysicalEntity creates a new entry in the PhysicalEntity list（重复 key 报错）。
+func (t *HuaweiDevm_Devm_PhysicalEntitys) NewPhysicalEntity(Class E_HuaweiDevm_EntityClassType, Position string, SerialNumber string) (*HuaweiDevm_Devm_PhysicalEntitys_PhysicalEntity, error) {
+	if t.PhysicalEntity == nil {
+		t.PhysicalEntity = make(map[HuaweiDevm_Devm_PhysicalEntitys_PhysicalEntity_Key]*HuaweiDevm_Devm_PhysicalEntitys_PhysicalEntity)
+	}
+	key := HuaweiDevm_Devm_PhysicalEntitys_PhysicalEntity_Key{Class: Class, Position: Position, SerialNumber: SerialNumber}
+	if _, ok := t.PhysicalEntity[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PhysicalEntity", key)
+	}
+	t.PhysicalEntity[key] = &HuaweiDevm_Devm_PhysicalEntitys_PhysicalEntity{Class: Class, Position: &Position, SerialNumber: &SerialNumber}
+	return t.PhysicalEntity[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiDevm_Devm_PhysicalEntitys.
 func (t *HuaweiDevm_Devm_PhysicalEntitys) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -449,6 +462,19 @@ type HuaweiDevm_Devm_Ports struct {
 // IsYangObject marks HuaweiDevm_Devm_Ports as a generated YANG object.
 func (*HuaweiDevm_Devm_Ports) IsYangObject() {}
 
+// NewPort creates a new entry in the Port list（重复 key 报错）。
+func (t *HuaweiDevm_Devm_Ports) NewPort(Position string) (*HuaweiDevm_Devm_Ports_Port, error) {
+	if t.Port == nil {
+		t.Port = make(map[string]*HuaweiDevm_Devm_Ports_Port)
+	}
+	key := Position
+	if _, ok := t.Port[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Port", key)
+	}
+	t.Port[key] = &HuaweiDevm_Devm_Ports_Port{Position: &Position}
+	return t.Port[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiDevm_Devm_Ports.
 func (t *HuaweiDevm_Devm_Ports) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -753,6 +779,19 @@ type HuaweiDevm_Devm_SfuBoards struct {
 
 // IsYangObject marks HuaweiDevm_Devm_SfuBoards as a generated YANG object.
 func (*HuaweiDevm_Devm_SfuBoards) IsYangObject() {}
+
+// NewSfuBoard creates a new entry in the SfuBoard list（重复 key 报错）。
+func (t *HuaweiDevm_Devm_SfuBoards) NewSfuBoard(Position string) (*HuaweiDevm_Devm_SfuBoards_SfuBoard, error) {
+	if t.SfuBoard == nil {
+		t.SfuBoard = make(map[string]*HuaweiDevm_Devm_SfuBoards_SfuBoard)
+	}
+	key := Position
+	if _, ok := t.SfuBoard[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list SfuBoard", key)
+	}
+	t.SfuBoard[key] = &HuaweiDevm_Devm_SfuBoards_SfuBoard{Position: &Position}
+	return t.SfuBoard[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDevm_Devm_SfuBoards.
 func (t *HuaweiDevm_Devm_SfuBoards) MarshalJSON() ([]byte, error) {
@@ -1304,6 +1343,19 @@ type HuaweiDriver_Driver_AreaEnergyinfos struct {
 // IsYangObject marks HuaweiDriver_Driver_AreaEnergyinfos as a generated YANG object.
 func (*HuaweiDriver_Driver_AreaEnergyinfos) IsYangObject() {}
 
+// NewAreaEnergyinfo creates a new entry in the AreaEnergyinfo list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_AreaEnergyinfos) NewAreaEnergyinfo(ChassisPosition string, AreaId uint32) (*HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo, error) {
+	if t.AreaEnergyinfo == nil {
+		t.AreaEnergyinfo = make(map[HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo_Key]*HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo)
+	}
+	key := HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo_Key{ChassisPosition: ChassisPosition, AreaId: AreaId}
+	if _, ok := t.AreaEnergyinfo[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list AreaEnergyinfo", key)
+	}
+	t.AreaEnergyinfo[key] = &HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo{ChassisPosition: &ChassisPosition, AreaId: &AreaId}
+	return t.AreaEnergyinfo[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_AreaEnergyinfos.
 func (t *HuaweiDriver_Driver_AreaEnergyinfos) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -1493,6 +1545,19 @@ type HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo_BoardEnergys struct {
 // IsYangObject marks HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo_BoardEnergys as a generated YANG object.
 func (*HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo_BoardEnergys) IsYangObject() {}
 
+// NewBoardEnergy creates a new entry in the BoardEnergy list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo_BoardEnergys) NewBoardEnergy(Position string) (*HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo_BoardEnergys_BoardEnergy, error) {
+	if t.BoardEnergy == nil {
+		t.BoardEnergy = make(map[string]*HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo_BoardEnergys_BoardEnergy)
+	}
+	key := Position
+	if _, ok := t.BoardEnergy[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list BoardEnergy", key)
+	}
+	t.BoardEnergy[key] = &HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo_BoardEnergys_BoardEnergy{Position: &Position}
+	return t.BoardEnergy[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo_BoardEnergys.
 func (t *HuaweiDriver_Driver_AreaEnergyinfos_AreaEnergyinfo_BoardEnergys) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -1679,6 +1744,19 @@ type HuaweiDriver_Driver_BoardPowers struct {
 
 // IsYangObject marks HuaweiDriver_Driver_BoardPowers as a generated YANG object.
 func (*HuaweiDriver_Driver_BoardPowers) IsYangObject() {}
+
+// NewBoardPower creates a new entry in the BoardPower list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_BoardPowers) NewBoardPower(Position string) (*HuaweiDriver_Driver_BoardPowers_BoardPower, error) {
+	if t.BoardPower == nil {
+		t.BoardPower = make(map[string]*HuaweiDriver_Driver_BoardPowers_BoardPower)
+	}
+	key := Position
+	if _, ok := t.BoardPower[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list BoardPower", key)
+	}
+	t.BoardPower[key] = &HuaweiDriver_Driver_BoardPowers_BoardPower{Position: &Position}
+	return t.BoardPower[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_BoardPowers.
 func (t *HuaweiDriver_Driver_BoardPowers) MarshalJSON() ([]byte, error) {
@@ -1867,6 +1945,19 @@ type HuaweiDriver_Driver_Bootinfos struct {
 // IsYangObject marks HuaweiDriver_Driver_Bootinfos as a generated YANG object.
 func (*HuaweiDriver_Driver_Bootinfos) IsYangObject() {}
 
+// NewBootinfo creates a new entry in the Bootinfo list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_Bootinfos) NewBootinfo(Position string) (*HuaweiDriver_Driver_Bootinfos_Bootinfo, error) {
+	if t.Bootinfo == nil {
+		t.Bootinfo = make(map[string]*HuaweiDriver_Driver_Bootinfos_Bootinfo)
+	}
+	key := Position
+	if _, ok := t.Bootinfo[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Bootinfo", key)
+	}
+	t.Bootinfo[key] = &HuaweiDriver_Driver_Bootinfos_Bootinfo{Position: &Position}
+	return t.Bootinfo[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_Bootinfos.
 func (t *HuaweiDriver_Driver_Bootinfos) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -1993,6 +2084,19 @@ type HuaweiDriver_Driver_ChassisRunModes struct {
 
 // IsYangObject marks HuaweiDriver_Driver_ChassisRunModes as a generated YANG object.
 func (*HuaweiDriver_Driver_ChassisRunModes) IsYangObject() {}
+
+// NewChassisRunMode creates a new entry in the ChassisRunMode list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_ChassisRunModes) NewChassisRunMode(ChassisId string) (*HuaweiDriver_Driver_ChassisRunModes_ChassisRunMode, error) {
+	if t.ChassisRunMode == nil {
+		t.ChassisRunMode = make(map[string]*HuaweiDriver_Driver_ChassisRunModes_ChassisRunMode)
+	}
+	key := ChassisId
+	if _, ok := t.ChassisRunMode[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ChassisRunMode", key)
+	}
+	t.ChassisRunMode[key] = &HuaweiDriver_Driver_ChassisRunModes_ChassisRunMode{ChassisId: &ChassisId}
+	return t.ChassisRunMode[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_ChassisRunModes.
 func (t *HuaweiDriver_Driver_ChassisRunModes) MarshalJSON() ([]byte, error) {
@@ -2156,6 +2260,19 @@ type HuaweiDriver_Driver_CheckRunningSoftwareSafes struct {
 
 // IsYangObject marks HuaweiDriver_Driver_CheckRunningSoftwareSafes as a generated YANG object.
 func (*HuaweiDriver_Driver_CheckRunningSoftwareSafes) IsYangObject() {}
+
+// NewCheckRunningSoftwareSafe creates a new entry in the CheckRunningSoftwareSafe list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_CheckRunningSoftwareSafes) NewCheckRunningSoftwareSafe(Position string, Item E_HuaweiDriver_DriverItemType) (*HuaweiDriver_Driver_CheckRunningSoftwareSafes_CheckRunningSoftwareSafe, error) {
+	if t.CheckRunningSoftwareSafe == nil {
+		t.CheckRunningSoftwareSafe = make(map[HuaweiDriver_Driver_CheckRunningSoftwareSafes_CheckRunningSoftwareSafe_Key]*HuaweiDriver_Driver_CheckRunningSoftwareSafes_CheckRunningSoftwareSafe)
+	}
+	key := HuaweiDriver_Driver_CheckRunningSoftwareSafes_CheckRunningSoftwareSafe_Key{Position: Position, Item: Item}
+	if _, ok := t.CheckRunningSoftwareSafe[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list CheckRunningSoftwareSafe", key)
+	}
+	t.CheckRunningSoftwareSafe[key] = &HuaweiDriver_Driver_CheckRunningSoftwareSafes_CheckRunningSoftwareSafe{Position: &Position, Item: Item}
+	return t.CheckRunningSoftwareSafe[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_CheckRunningSoftwareSafes.
 func (t *HuaweiDriver_Driver_CheckRunningSoftwareSafes) MarshalJSON() ([]byte, error) {
@@ -2340,6 +2457,19 @@ type HuaweiDriver_Driver_ElectricCurrentInfos struct {
 
 // IsYangObject marks HuaweiDriver_Driver_ElectricCurrentInfos as a generated YANG object.
 func (*HuaweiDriver_Driver_ElectricCurrentInfos) IsYangObject() {}
+
+// NewElectricCurrentInfo creates a new entry in the ElectricCurrentInfo list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_ElectricCurrentInfos) NewElectricCurrentInfo(Position string, I2C uint32, Address string, Channel uint32) (*HuaweiDriver_Driver_ElectricCurrentInfos_ElectricCurrentInfo, error) {
+	if t.ElectricCurrentInfo == nil {
+		t.ElectricCurrentInfo = make(map[HuaweiDriver_Driver_ElectricCurrentInfos_ElectricCurrentInfo_Key]*HuaweiDriver_Driver_ElectricCurrentInfos_ElectricCurrentInfo)
+	}
+	key := HuaweiDriver_Driver_ElectricCurrentInfos_ElectricCurrentInfo_Key{Position: Position, I2C: I2C, Address: Address, Channel: Channel}
+	if _, ok := t.ElectricCurrentInfo[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ElectricCurrentInfo", key)
+	}
+	t.ElectricCurrentInfo[key] = &HuaweiDriver_Driver_ElectricCurrentInfos_ElectricCurrentInfo{Position: &Position, I2C: &I2C, Address: &Address, Channel: &Channel}
+	return t.ElectricCurrentInfo[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_ElectricCurrentInfos.
 func (t *HuaweiDriver_Driver_ElectricCurrentInfos) MarshalJSON() ([]byte, error) {
@@ -2596,6 +2726,19 @@ type HuaweiDriver_Driver_ElectronicLabels struct {
 
 // IsYangObject marks HuaweiDriver_Driver_ElectronicLabels as a generated YANG object.
 func (*HuaweiDriver_Driver_ElectronicLabels) IsYangObject() {}
+
+// NewElectronicLabel creates a new entry in the ElectronicLabel list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_ElectronicLabels) NewElectronicLabel(EntityClass E_HuaweiDriver_HardwareEntityclassType, Position string, EntitySerialNumber uint32) (*HuaweiDriver_Driver_ElectronicLabels_ElectronicLabel, error) {
+	if t.ElectronicLabel == nil {
+		t.ElectronicLabel = make(map[HuaweiDriver_Driver_ElectronicLabels_ElectronicLabel_Key]*HuaweiDriver_Driver_ElectronicLabels_ElectronicLabel)
+	}
+	key := HuaweiDriver_Driver_ElectronicLabels_ElectronicLabel_Key{EntityClass: EntityClass, Position: Position, EntitySerialNumber: EntitySerialNumber}
+	if _, ok := t.ElectronicLabel[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ElectronicLabel", key)
+	}
+	t.ElectronicLabel[key] = &HuaweiDriver_Driver_ElectronicLabels_ElectronicLabel{EntityClass: EntityClass, Position: &Position, EntitySerialNumber: &EntitySerialNumber}
+	return t.ElectronicLabel[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_ElectronicLabels.
 func (t *HuaweiDriver_Driver_ElectronicLabels) MarshalJSON() ([]byte, error) {
@@ -3682,6 +3825,19 @@ type HuaweiDriver_Driver_InnerLinks struct {
 // IsYangObject marks HuaweiDriver_Driver_InnerLinks as a generated YANG object.
 func (*HuaweiDriver_Driver_InnerLinks) IsYangObject() {}
 
+// NewInnerLink creates a new entry in the InnerLink list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_InnerLinks) NewInnerLink(LinkType E_HuaweiDriver_DriverInnerLinkType, LeftChassisPosition string, RightChassisPosition string) (*HuaweiDriver_Driver_InnerLinks_InnerLink, error) {
+	if t.InnerLink == nil {
+		t.InnerLink = make(map[HuaweiDriver_Driver_InnerLinks_InnerLink_Key]*HuaweiDriver_Driver_InnerLinks_InnerLink)
+	}
+	key := HuaweiDriver_Driver_InnerLinks_InnerLink_Key{LinkType: LinkType, LeftChassisPosition: LeftChassisPosition, RightChassisPosition: RightChassisPosition}
+	if _, ok := t.InnerLink[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list InnerLink", key)
+	}
+	t.InnerLink[key] = &HuaweiDriver_Driver_InnerLinks_InnerLink{LinkType: LinkType, LeftChassisPosition: &LeftChassisPosition, RightChassisPosition: &RightChassisPosition}
+	return t.InnerLink[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_InnerLinks.
 func (t *HuaweiDriver_Driver_InnerLinks) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -3942,6 +4098,19 @@ type HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks struct {
 // IsYangObject marks HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks as a generated YANG object.
 func (*HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks) IsYangObject() {}
 
+// NewPhysicalInnerLink creates a new entry in the PhysicalInnerLink list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks) NewPhysicalInnerLink(PhysicalLinkName string) (*HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks_PhysicalInnerLink, error) {
+	if t.PhysicalInnerLink == nil {
+		t.PhysicalInnerLink = make(map[string]*HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks_PhysicalInnerLink)
+	}
+	key := PhysicalLinkName
+	if _, ok := t.PhysicalInnerLink[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PhysicalInnerLink", key)
+	}
+	t.PhysicalInnerLink[key] = &HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks_PhysicalInnerLink{PhysicalLinkName: &PhysicalLinkName}
+	return t.PhysicalInnerLink[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks.
 func (t *HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -4122,6 +4291,19 @@ type HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks_PhysicalInnerLi
 
 // IsYangObject marks HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks_PhysicalInnerLink_CheckPoints as a generated YANG object.
 func (*HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks_PhysicalInnerLink_CheckPoints) IsYangObject() {
+}
+
+// NewCheckPoint creates a new entry in the CheckPoint list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks_PhysicalInnerLink_CheckPoints) NewCheckPoint(Index uint32) (*HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks_PhysicalInnerLink_CheckPoints_CheckPoint, error) {
+	if t.CheckPoint == nil {
+		t.CheckPoint = make(map[uint32]*HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks_PhysicalInnerLink_CheckPoints_CheckPoint)
+	}
+	key := Index
+	if _, ok := t.CheckPoint[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list CheckPoint", key)
+	}
+	t.CheckPoint[key] = &HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks_PhysicalInnerLink_CheckPoints_CheckPoint{Index: &Index}
+	return t.CheckPoint[key], nil
 }
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_InnerLinks_InnerLink_PhysicalInnerLinks_PhysicalInnerLink_CheckPoints.
@@ -4318,6 +4500,19 @@ type HuaweiDriver_Driver_InterfaceMatchCheckStates struct {
 // IsYangObject marks HuaweiDriver_Driver_InterfaceMatchCheckStates as a generated YANG object.
 func (*HuaweiDriver_Driver_InterfaceMatchCheckStates) IsYangObject() {}
 
+// NewInterfaceMatchCheckState creates a new entry in the InterfaceMatchCheckState list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_InterfaceMatchCheckStates) NewInterfaceMatchCheckState(Position string) (*HuaweiDriver_Driver_InterfaceMatchCheckStates_InterfaceMatchCheckState, error) {
+	if t.InterfaceMatchCheckState == nil {
+		t.InterfaceMatchCheckState = make(map[string]*HuaweiDriver_Driver_InterfaceMatchCheckStates_InterfaceMatchCheckState)
+	}
+	key := Position
+	if _, ok := t.InterfaceMatchCheckState[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list InterfaceMatchCheckState", key)
+	}
+	t.InterfaceMatchCheckState[key] = &HuaweiDriver_Driver_InterfaceMatchCheckStates_InterfaceMatchCheckState{Position: &Position}
+	return t.InterfaceMatchCheckState[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_InterfaceMatchCheckStates.
 func (t *HuaweiDriver_Driver_InterfaceMatchCheckStates) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -4442,6 +4637,19 @@ type HuaweiDriver_Driver_IoInspectAttributes struct {
 
 // IsYangObject marks HuaweiDriver_Driver_IoInspectAttributes as a generated YANG object.
 func (*HuaweiDriver_Driver_IoInspectAttributes) IsYangObject() {}
+
+// NewIoInspectAttribute creates a new entry in the IoInspectAttribute list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_IoInspectAttributes) NewIoInspectAttribute(Position string, Index uint32) (*HuaweiDriver_Driver_IoInspectAttributes_IoInspectAttribute, error) {
+	if t.IoInspectAttribute == nil {
+		t.IoInspectAttribute = make(map[HuaweiDriver_Driver_IoInspectAttributes_IoInspectAttribute_Key]*HuaweiDriver_Driver_IoInspectAttributes_IoInspectAttribute)
+	}
+	key := HuaweiDriver_Driver_IoInspectAttributes_IoInspectAttribute_Key{Position: Position, Index: Index}
+	if _, ok := t.IoInspectAttribute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list IoInspectAttribute", key)
+	}
+	t.IoInspectAttribute[key] = &HuaweiDriver_Driver_IoInspectAttributes_IoInspectAttribute{Position: &Position, Index: &Index}
+	return t.IoInspectAttribute[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_IoInspectAttributes.
 func (t *HuaweiDriver_Driver_IoInspectAttributes) MarshalJSON() ([]byte, error) {
@@ -4604,6 +4812,19 @@ type HuaweiDriver_Driver_IoInspectStates struct {
 
 // IsYangObject marks HuaweiDriver_Driver_IoInspectStates as a generated YANG object.
 func (*HuaweiDriver_Driver_IoInspectStates) IsYangObject() {}
+
+// NewIoInspectState creates a new entry in the IoInspectState list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_IoInspectStates) NewIoInspectState(Position string, Index uint32) (*HuaweiDriver_Driver_IoInspectStates_IoInspectState, error) {
+	if t.IoInspectState == nil {
+		t.IoInspectState = make(map[HuaweiDriver_Driver_IoInspectStates_IoInspectState_Key]*HuaweiDriver_Driver_IoInspectStates_IoInspectState)
+	}
+	key := HuaweiDriver_Driver_IoInspectStates_IoInspectState_Key{Position: Position, Index: Index}
+	if _, ok := t.IoInspectState[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list IoInspectState", key)
+	}
+	t.IoInspectState[key] = &HuaweiDriver_Driver_IoInspectStates_IoInspectState{Position: &Position, Index: &Index}
+	return t.IoInspectState[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_IoInspectStates.
 func (t *HuaweiDriver_Driver_IoInspectStates) MarshalJSON() ([]byte, error) {
@@ -4803,6 +5024,19 @@ type HuaweiDriver_Driver_Mbusnodes struct {
 // IsYangObject marks HuaweiDriver_Driver_Mbusnodes as a generated YANG object.
 func (*HuaweiDriver_Driver_Mbusnodes) IsYangObject() {}
 
+// NewMbusnode creates a new entry in the Mbusnode list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_Mbusnodes) NewMbusnode(SlotId string) (*HuaweiDriver_Driver_Mbusnodes_Mbusnode, error) {
+	if t.Mbusnode == nil {
+		t.Mbusnode = make(map[string]*HuaweiDriver_Driver_Mbusnodes_Mbusnode)
+	}
+	key := SlotId
+	if _, ok := t.Mbusnode[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Mbusnode", key)
+	}
+	t.Mbusnode[key] = &HuaweiDriver_Driver_Mbusnodes_Mbusnode{SlotId: &SlotId}
+	return t.Mbusnode[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_Mbusnodes.
 func (t *HuaweiDriver_Driver_Mbusnodes) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -4959,6 +5193,19 @@ type HuaweiDriver_Driver_MultiChassisAttributes struct {
 
 // IsYangObject marks HuaweiDriver_Driver_MultiChassisAttributes as a generated YANG object.
 func (*HuaweiDriver_Driver_MultiChassisAttributes) IsYangObject() {}
+
+// NewMultiChassisAttribute creates a new entry in the MultiChassisAttribute list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_MultiChassisAttributes) NewMultiChassisAttribute(CurrentChassisId uint32) (*HuaweiDriver_Driver_MultiChassisAttributes_MultiChassisAttribute, error) {
+	if t.MultiChassisAttribute == nil {
+		t.MultiChassisAttribute = make(map[uint32]*HuaweiDriver_Driver_MultiChassisAttributes_MultiChassisAttribute)
+	}
+	key := CurrentChassisId
+	if _, ok := t.MultiChassisAttribute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list MultiChassisAttribute", key)
+	}
+	t.MultiChassisAttribute[key] = &HuaweiDriver_Driver_MultiChassisAttributes_MultiChassisAttribute{CurrentChassisId: &CurrentChassisId}
+	return t.MultiChassisAttribute[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_MultiChassisAttributes.
 func (t *HuaweiDriver_Driver_MultiChassisAttributes) MarshalJSON() ([]byte, error) {
@@ -5183,6 +5430,19 @@ type HuaweiDriver_Driver_SlaveDefaults struct {
 // IsYangObject marks HuaweiDriver_Driver_SlaveDefaults as a generated YANG object.
 func (*HuaweiDriver_Driver_SlaveDefaults) IsYangObject() {}
 
+// NewSlaveDefault creates a new entry in the SlaveDefault list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_SlaveDefaults) NewSlaveDefault(ChassisId string, SlotId string) (*HuaweiDriver_Driver_SlaveDefaults_SlaveDefault, error) {
+	if t.SlaveDefault == nil {
+		t.SlaveDefault = make(map[HuaweiDriver_Driver_SlaveDefaults_SlaveDefault_Key]*HuaweiDriver_Driver_SlaveDefaults_SlaveDefault)
+	}
+	key := HuaweiDriver_Driver_SlaveDefaults_SlaveDefault_Key{ChassisId: ChassisId, SlotId: SlotId}
+	if _, ok := t.SlaveDefault[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list SlaveDefault", key)
+	}
+	t.SlaveDefault[key] = &HuaweiDriver_Driver_SlaveDefaults_SlaveDefault{ChassisId: &ChassisId, SlotId: &SlotId}
+	return t.SlaveDefault[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_SlaveDefaults.
 func (t *HuaweiDriver_Driver_SlaveDefaults) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -5326,6 +5586,19 @@ type HuaweiDriver_Driver_SlotStatistics struct {
 
 // IsYangObject marks HuaweiDriver_Driver_SlotStatistics as a generated YANG object.
 func (*HuaweiDriver_Driver_SlotStatistics) IsYangObject() {}
+
+// NewSlotStatistic creates a new entry in the SlotStatistic list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_SlotStatistics) NewSlotStatistic(ChassisId string, SlotType E_HuaweiDriver_DriverSlotInfosType) (*HuaweiDriver_Driver_SlotStatistics_SlotStatistic, error) {
+	if t.SlotStatistic == nil {
+		t.SlotStatistic = make(map[HuaweiDriver_Driver_SlotStatistics_SlotStatistic_Key]*HuaweiDriver_Driver_SlotStatistics_SlotStatistic)
+	}
+	key := HuaweiDriver_Driver_SlotStatistics_SlotStatistic_Key{ChassisId: ChassisId, SlotType: SlotType}
+	if _, ok := t.SlotStatistic[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list SlotStatistic", key)
+	}
+	t.SlotStatistic[key] = &HuaweiDriver_Driver_SlotStatistics_SlotStatistic{ChassisId: &ChassisId, SlotType: SlotType}
+	return t.SlotStatistic[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_SlotStatistics.
 func (t *HuaweiDriver_Driver_SlotStatistics) MarshalJSON() ([]byte, error) {
@@ -5482,6 +5755,19 @@ type HuaweiDriver_Driver_Stratum_3Clocks struct {
 
 // IsYangObject marks HuaweiDriver_Driver_Stratum_3Clocks as a generated YANG object.
 func (*HuaweiDriver_Driver_Stratum_3Clocks) IsYangObject() {}
+
+// NewStratum_3Clock creates a new entry in the Stratum_3Clock list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_Stratum_3Clocks) NewStratum_3Clock(SlotId string) (*HuaweiDriver_Driver_Stratum_3Clocks_Stratum_3Clock, error) {
+	if t.Stratum_3Clock == nil {
+		t.Stratum_3Clock = make(map[string]*HuaweiDriver_Driver_Stratum_3Clocks_Stratum_3Clock)
+	}
+	key := SlotId
+	if _, ok := t.Stratum_3Clock[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Stratum_3Clock", key)
+	}
+	t.Stratum_3Clock[key] = &HuaweiDriver_Driver_Stratum_3Clocks_Stratum_3Clock{SlotId: &SlotId}
+	return t.Stratum_3Clock[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_Stratum_3Clocks.
 func (t *HuaweiDriver_Driver_Stratum_3Clocks) MarshalJSON() ([]byte, error) {
@@ -5653,6 +5939,19 @@ type HuaweiDriver_Driver_SystemSyncClocks struct {
 
 // IsYangObject marks HuaweiDriver_Driver_SystemSyncClocks as a generated YANG object.
 func (*HuaweiDriver_Driver_SystemSyncClocks) IsYangObject() {}
+
+// NewSystemSyncClock creates a new entry in the SystemSyncClock list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_SystemSyncClocks) NewSystemSyncClock(SlotId string) (*HuaweiDriver_Driver_SystemSyncClocks_SystemSyncClock, error) {
+	if t.SystemSyncClock == nil {
+		t.SystemSyncClock = make(map[string]*HuaweiDriver_Driver_SystemSyncClocks_SystemSyncClock)
+	}
+	key := SlotId
+	if _, ok := t.SystemSyncClock[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list SystemSyncClock", key)
+	}
+	t.SystemSyncClock[key] = &HuaweiDriver_Driver_SystemSyncClocks_SystemSyncClock{SlotId: &SlotId}
+	return t.SystemSyncClock[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_SystemSyncClocks.
 func (t *HuaweiDriver_Driver_SystemSyncClocks) MarshalJSON() ([]byte, error) {
@@ -5842,6 +6141,19 @@ type HuaweiDriver_Driver_Temperature2S struct {
 
 // IsYangObject marks HuaweiDriver_Driver_Temperature2S as a generated YANG object.
 func (*HuaweiDriver_Driver_Temperature2S) IsYangObject() {}
+
+// NewTemperature2 creates a new entry in the Temperature2 list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_Temperature2S) NewTemperature2(Position string, SensorId uint32) (*HuaweiDriver_Driver_Temperature2S_Temperature2, error) {
+	if t.Temperature2 == nil {
+		t.Temperature2 = make(map[HuaweiDriver_Driver_Temperature2S_Temperature2_Key]*HuaweiDriver_Driver_Temperature2S_Temperature2)
+	}
+	key := HuaweiDriver_Driver_Temperature2S_Temperature2_Key{Position: Position, SensorId: SensorId}
+	if _, ok := t.Temperature2[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Temperature2", key)
+	}
+	t.Temperature2[key] = &HuaweiDriver_Driver_Temperature2S_Temperature2{Position: &Position, SensorId: &SensorId}
+	return t.Temperature2[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_Temperature2S.
 func (t *HuaweiDriver_Driver_Temperature2S) MarshalJSON() ([]byte, error) {
@@ -6104,6 +6416,19 @@ type HuaweiDriver_Driver_Temperatures struct {
 
 // IsYangObject marks HuaweiDriver_Driver_Temperatures as a generated YANG object.
 func (*HuaweiDriver_Driver_Temperatures) IsYangObject() {}
+
+// NewTemperature creates a new entry in the Temperature list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_Temperatures) NewTemperature(Position string, I2C uint32, Address string, Channel uint32) (*HuaweiDriver_Driver_Temperatures_Temperature, error) {
+	if t.Temperature == nil {
+		t.Temperature = make(map[HuaweiDriver_Driver_Temperatures_Temperature_Key]*HuaweiDriver_Driver_Temperatures_Temperature)
+	}
+	key := HuaweiDriver_Driver_Temperatures_Temperature_Key{Position: Position, I2C: I2C, Address: Address, Channel: Channel}
+	if _, ok := t.Temperature[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Temperature", key)
+	}
+	t.Temperature[key] = &HuaweiDriver_Driver_Temperatures_Temperature{Position: &Position, I2C: &I2C, Address: &Address, Channel: &Channel}
+	return t.Temperature[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_Temperatures.
 func (t *HuaweiDriver_Driver_Temperatures) MarshalJSON() ([]byte, error) {
@@ -6421,6 +6746,19 @@ type HuaweiDriver_Driver_Voltageinfos struct {
 // IsYangObject marks HuaweiDriver_Driver_Voltageinfos as a generated YANG object.
 func (*HuaweiDriver_Driver_Voltageinfos) IsYangObject() {}
 
+// NewVoltageinfo creates a new entry in the Voltageinfo list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_Voltageinfos) NewVoltageinfo(Position string, I2C uint32, Address string, Channel uint32) (*HuaweiDriver_Driver_Voltageinfos_Voltageinfo, error) {
+	if t.Voltageinfo == nil {
+		t.Voltageinfo = make(map[HuaweiDriver_Driver_Voltageinfos_Voltageinfo_Key]*HuaweiDriver_Driver_Voltageinfos_Voltageinfo)
+	}
+	key := HuaweiDriver_Driver_Voltageinfos_Voltageinfo_Key{Position: Position, I2C: I2C, Address: Address, Channel: Channel}
+	if _, ok := t.Voltageinfo[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Voltageinfo", key)
+	}
+	t.Voltageinfo[key] = &HuaweiDriver_Driver_Voltageinfos_Voltageinfo{Position: &Position, I2C: &I2C, Address: &Address, Channel: &Channel}
+	return t.Voltageinfo[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_Voltageinfos.
 func (t *HuaweiDriver_Driver_Voltageinfos) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -6736,6 +7074,19 @@ type HuaweiDriver_Driver_Voltages struct {
 
 // IsYangObject marks HuaweiDriver_Driver_Voltages as a generated YANG object.
 func (*HuaweiDriver_Driver_Voltages) IsYangObject() {}
+
+// NewVoltage creates a new entry in the Voltage list（重复 key 报错）。
+func (t *HuaweiDriver_Driver_Voltages) NewVoltage(Position string, SensorId uint32) (*HuaweiDriver_Driver_Voltages_Voltage, error) {
+	if t.Voltage == nil {
+		t.Voltage = make(map[HuaweiDriver_Driver_Voltages_Voltage_Key]*HuaweiDriver_Driver_Voltages_Voltage)
+	}
+	key := HuaweiDriver_Driver_Voltages_Voltage_Key{Position: Position, SensorId: SensorId}
+	if _, ok := t.Voltage[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Voltage", key)
+	}
+	t.Voltage[key] = &HuaweiDriver_Driver_Voltages_Voltage{Position: &Position, SensorId: &SensorId}
+	return t.Voltage[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDriver_Driver_Voltages.
 func (t *HuaweiDriver_Driver_Voltages) MarshalJSON() ([]byte, error) {
@@ -7145,6 +7496,19 @@ type HuaweiDsa_Dsa_KeyPairs struct {
 // IsYangObject marks HuaweiDsa_Dsa_KeyPairs as a generated YANG object.
 func (*HuaweiDsa_Dsa_KeyPairs) IsYangObject() {}
 
+// NewKeyPair creates a new entry in the KeyPair list（重复 key 报错）。
+func (t *HuaweiDsa_Dsa_KeyPairs) NewKeyPair(KeyPairLabel string) (*HuaweiDsa_Dsa_KeyPairs_KeyPair, error) {
+	if t.KeyPair == nil {
+		t.KeyPair = make(map[string]*HuaweiDsa_Dsa_KeyPairs_KeyPair)
+	}
+	key := KeyPairLabel
+	if _, ok := t.KeyPair[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list KeyPair", key)
+	}
+	t.KeyPair[key] = &HuaweiDsa_Dsa_KeyPairs_KeyPair{KeyPairLabel: &KeyPairLabel}
+	return t.KeyPair[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiDsa_Dsa_KeyPairs.
 func (t *HuaweiDsa_Dsa_KeyPairs) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -7365,6 +7729,19 @@ type HuaweiDsa_Dsa_PeerKeys struct {
 
 // IsYangObject marks HuaweiDsa_Dsa_PeerKeys as a generated YANG object.
 func (*HuaweiDsa_Dsa_PeerKeys) IsYangObject() {}
+
+// NewPeerKey creates a new entry in the PeerKey list（重复 key 报错）。
+func (t *HuaweiDsa_Dsa_PeerKeys) NewPeerKey(KeyName string) (*HuaweiDsa_Dsa_PeerKeys_PeerKey, error) {
+	if t.PeerKey == nil {
+		t.PeerKey = make(map[string]*HuaweiDsa_Dsa_PeerKeys_PeerKey)
+	}
+	key := KeyName
+	if _, ok := t.PeerKey[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerKey", key)
+	}
+	t.PeerKey[key] = &HuaweiDsa_Dsa_PeerKeys_PeerKey{KeyName: &KeyName}
+	return t.PeerKey[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiDsa_Dsa_PeerKeys.
 func (t *HuaweiDsa_Dsa_PeerKeys) MarshalJSON() ([]byte, error) {
@@ -7627,6 +8004,19 @@ type HuaweiEcc_Ecc_KeyPairs struct {
 // IsYangObject marks HuaweiEcc_Ecc_KeyPairs as a generated YANG object.
 func (*HuaweiEcc_Ecc_KeyPairs) IsYangObject() {}
 
+// NewKeyPair creates a new entry in the KeyPair list（重复 key 报错）。
+func (t *HuaweiEcc_Ecc_KeyPairs) NewKeyPair(KeyPairLabel string) (*HuaweiEcc_Ecc_KeyPairs_KeyPair, error) {
+	if t.KeyPair == nil {
+		t.KeyPair = make(map[string]*HuaweiEcc_Ecc_KeyPairs_KeyPair)
+	}
+	key := KeyPairLabel
+	if _, ok := t.KeyPair[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list KeyPair", key)
+	}
+	t.KeyPair[key] = &HuaweiEcc_Ecc_KeyPairs_KeyPair{KeyPairLabel: &KeyPairLabel}
+	return t.KeyPair[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiEcc_Ecc_KeyPairs.
 func (t *HuaweiEcc_Ecc_KeyPairs) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -7838,6 +8228,19 @@ type HuaweiEcc_Ecc_PeerKeys struct {
 // IsYangObject marks HuaweiEcc_Ecc_PeerKeys as a generated YANG object.
 func (*HuaweiEcc_Ecc_PeerKeys) IsYangObject() {}
 
+// NewPeerKey creates a new entry in the PeerKey list（重复 key 报错）。
+func (t *HuaweiEcc_Ecc_PeerKeys) NewPeerKey(KeyName string) (*HuaweiEcc_Ecc_PeerKeys_PeerKey, error) {
+	if t.PeerKey == nil {
+		t.PeerKey = make(map[string]*HuaweiEcc_Ecc_PeerKeys_PeerKey)
+	}
+	key := KeyName
+	if _, ok := t.PeerKey[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PeerKey", key)
+	}
+	t.PeerKey[key] = &HuaweiEcc_Ecc_PeerKeys_PeerKey{KeyName: &KeyName}
+	return t.PeerKey[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiEcc_Ecc_PeerKeys.
 func (t *HuaweiEcc_Ecc_PeerKeys) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -7997,6 +8400,19 @@ type HuaweiEvpl_Evpl_Instances struct {
 
 // IsYangObject marks HuaweiEvpl_Evpl_Instances as a generated YANG object.
 func (*HuaweiEvpl_Evpl_Instances) IsYangObject() {}
+
+// NewInstance creates a new entry in the Instance list（重复 key 报错）。
+func (t *HuaweiEvpl_Evpl_Instances) NewInstance(Id uint32) (*HuaweiEvpl_Evpl_Instances_Instance, error) {
+	if t.Instance == nil {
+		t.Instance = make(map[uint32]*HuaweiEvpl_Evpl_Instances_Instance)
+	}
+	key := Id
+	if _, ok := t.Instance[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Instance", key)
+	}
+	t.Instance[key] = &HuaweiEvpl_Evpl_Instances_Instance{Id: &Id}
+	return t.Instance[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiEvpl_Evpl_Instances.
 func (t *HuaweiEvpl_Evpl_Instances) MarshalJSON() ([]byte, error) {
@@ -8694,6 +9110,19 @@ type HuaweiEvpl_Evpl_Instances_Instance_Interfaces struct {
 // IsYangObject marks HuaweiEvpl_Evpl_Instances_Instance_Interfaces as a generated YANG object.
 func (*HuaweiEvpl_Evpl_Instances_Instance_Interfaces) IsYangObject() {}
 
+// NewInterface creates a new entry in the Interface list（重复 key 报错）。
+func (t *HuaweiEvpl_Evpl_Instances_Instance_Interfaces) NewInterface(Name string) (*HuaweiEvpl_Evpl_Instances_Instance_Interfaces_Interface, error) {
+	if t.Interface == nil {
+		t.Interface = make(map[string]*HuaweiEvpl_Evpl_Instances_Instance_Interfaces_Interface)
+	}
+	key := Name
+	if _, ok := t.Interface[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Interface", key)
+	}
+	t.Interface[key] = &HuaweiEvpl_Evpl_Instances_Instance_Interfaces_Interface{Name: &Name}
+	return t.Interface[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiEvpl_Evpl_Instances_Instance_Interfaces.
 func (t *HuaweiEvpl_Evpl_Instances_Instance_Interfaces) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -8897,6 +9326,19 @@ type HuaweiEvpl_Evpl_Instances_Instance_Nvo3_VniLists struct {
 // IsYangObject marks HuaweiEvpl_Evpl_Instances_Instance_Nvo3_VniLists as a generated YANG object.
 func (*HuaweiEvpl_Evpl_Instances_Instance_Nvo3_VniLists) IsYangObject() {}
 
+// NewVniList creates a new entry in the VniList list（重复 key 报错）。
+func (t *HuaweiEvpl_Evpl_Instances_Instance_Nvo3_VniLists) NewVniList(Vni uint32) (*HuaweiEvpl_Evpl_Instances_Instance_Nvo3_VniLists_VniList, error) {
+	if t.VniList == nil {
+		t.VniList = make(map[uint32]*HuaweiEvpl_Evpl_Instances_Instance_Nvo3_VniLists_VniList)
+	}
+	key := Vni
+	if _, ok := t.VniList[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list VniList", key)
+	}
+	t.VniList[key] = &HuaweiEvpl_Evpl_Instances_Instance_Nvo3_VniLists_VniList{Vni: &Vni}
+	return t.VniList[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiEvpl_Evpl_Instances_Instance_Nvo3_VniLists.
 func (t *HuaweiEvpl_Evpl_Instances_Instance_Nvo3_VniLists) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -9003,6 +9445,19 @@ type HuaweiEvpl_Evpl_Instances_Instance_Peers struct {
 
 // IsYangObject marks HuaweiEvpl_Evpl_Instances_Instance_Peers as a generated YANG object.
 func (*HuaweiEvpl_Evpl_Instances_Instance_Peers) IsYangObject() {}
+
+// NewPeer creates a new entry in the Peer list（重复 key 报错）。
+func (t *HuaweiEvpl_Evpl_Instances_Instance_Peers) NewPeer(Name string, PeerIp string) (*HuaweiEvpl_Evpl_Instances_Instance_Peers_Peer, error) {
+	if t.Peer == nil {
+		t.Peer = make(map[HuaweiEvpl_Evpl_Instances_Instance_Peers_Peer_Key]*HuaweiEvpl_Evpl_Instances_Instance_Peers_Peer)
+	}
+	key := HuaweiEvpl_Evpl_Instances_Instance_Peers_Peer_Key{Name: Name, PeerIp: PeerIp}
+	if _, ok := t.Peer[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Peer", key)
+	}
+	t.Peer[key] = &HuaweiEvpl_Evpl_Instances_Instance_Peers_Peer{Name: &Name, PeerIp: &PeerIp}
+	return t.Peer[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiEvpl_Evpl_Instances_Instance_Peers.
 func (t *HuaweiEvpl_Evpl_Instances_Instance_Peers) MarshalJSON() ([]byte, error) {
@@ -9292,6 +9747,19 @@ type HuaweiEvpn_Evpn_Instances struct {
 // IsYangObject marks HuaweiEvpn_Evpn_Instances as a generated YANG object.
 func (*HuaweiEvpn_Evpn_Instances) IsYangObject() {}
 
+// NewInstance creates a new entry in the Instance list（重复 key 报错）。
+func (t *HuaweiEvpn_Evpn_Instances) NewInstance(Name string) (*HuaweiEvpn_Evpn_Instances_Instance, error) {
+	if t.Instance == nil {
+		t.Instance = make(map[string]*HuaweiEvpn_Evpn_Instances_Instance)
+	}
+	key := Name
+	if _, ok := t.Instance[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Instance", key)
+	}
+	t.Instance[key] = &HuaweiEvpn_Evpn_Instances_Instance{Name: &Name}
+	return t.Instance[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiEvpn_Evpn_Instances.
 func (t *HuaweiEvpn_Evpn_Instances) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -9574,6 +10042,19 @@ type HuaweiEvpn_Evpn_Instances_Instance_BEvpn_Rts struct {
 
 // IsYangObject marks HuaweiEvpn_Evpn_Instances_Instance_BEvpn_Rts as a generated YANG object.
 func (*HuaweiEvpn_Evpn_Instances_Instance_BEvpn_Rts) IsYangObject() {}
+
+// NewRt creates a new entry in the Rt list（重复 key 报错）。
+func (t *HuaweiEvpn_Evpn_Instances_Instance_BEvpn_Rts) NewRt(VrfRtType E_HuaweiEvpn_VrfRtType, VrfRtValue string) (*HuaweiEvpn_Evpn_Instances_Instance_BEvpn_Rts_Rt, error) {
+	if t.Rt == nil {
+		t.Rt = make(map[HuaweiEvpn_Evpn_Instances_Instance_BEvpn_Rts_Rt_Key]*HuaweiEvpn_Evpn_Instances_Instance_BEvpn_Rts_Rt)
+	}
+	key := HuaweiEvpn_Evpn_Instances_Instance_BEvpn_Rts_Rt_Key{VrfRtType: VrfRtType, VrfRtValue: VrfRtValue}
+	if _, ok := t.Rt[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Rt", key)
+	}
+	t.Rt[key] = &HuaweiEvpn_Evpn_Instances_Instance_BEvpn_Rts_Rt{VrfRtType: VrfRtType, VrfRtValue: &VrfRtValue}
+	return t.Rt[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiEvpn_Evpn_Instances_Instance_BEvpn_Rts.
 func (t *HuaweiEvpn_Evpn_Instances_Instance_BEvpn_Rts) MarshalJSON() ([]byte, error) {
@@ -10039,6 +10520,19 @@ type HuaweiEvpn_Evpn_Instances_Instance_BdEvpn_Rts struct {
 // IsYangObject marks HuaweiEvpn_Evpn_Instances_Instance_BdEvpn_Rts as a generated YANG object.
 func (*HuaweiEvpn_Evpn_Instances_Instance_BdEvpn_Rts) IsYangObject() {}
 
+// NewRt creates a new entry in the Rt list（重复 key 报错）。
+func (t *HuaweiEvpn_Evpn_Instances_Instance_BdEvpn_Rts) NewRt(VrfRtType E_HuaweiEvpn_VrfRtType, VrfRtValue string) (*HuaweiEvpn_Evpn_Instances_Instance_BdEvpn_Rts_Rt, error) {
+	if t.Rt == nil {
+		t.Rt = make(map[HuaweiEvpn_Evpn_Instances_Instance_BdEvpn_Rts_Rt_Key]*HuaweiEvpn_Evpn_Instances_Instance_BdEvpn_Rts_Rt)
+	}
+	key := HuaweiEvpn_Evpn_Instances_Instance_BdEvpn_Rts_Rt_Key{VrfRtType: VrfRtType, VrfRtValue: VrfRtValue}
+	if _, ok := t.Rt[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Rt", key)
+	}
+	t.Rt[key] = &HuaweiEvpn_Evpn_Instances_Instance_BdEvpn_Rts_Rt{VrfRtType: VrfRtType, VrfRtValue: &VrfRtValue}
+	return t.Rt[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiEvpn_Evpn_Instances_Instance_BdEvpn_Rts.
 func (t *HuaweiEvpn_Evpn_Instances_Instance_BdEvpn_Rts) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -10437,6 +10931,19 @@ type HuaweiEvpn_Evpn_Instances_Instance_NormalEvpn_Rts struct {
 // IsYangObject marks HuaweiEvpn_Evpn_Instances_Instance_NormalEvpn_Rts as a generated YANG object.
 func (*HuaweiEvpn_Evpn_Instances_Instance_NormalEvpn_Rts) IsYangObject() {}
 
+// NewRt creates a new entry in the Rt list（重复 key 报错）。
+func (t *HuaweiEvpn_Evpn_Instances_Instance_NormalEvpn_Rts) NewRt(VrfRtType E_HuaweiEvpn_VrfRtType, VrfRtValue string) (*HuaweiEvpn_Evpn_Instances_Instance_NormalEvpn_Rts_Rt, error) {
+	if t.Rt == nil {
+		t.Rt = make(map[HuaweiEvpn_Evpn_Instances_Instance_NormalEvpn_Rts_Rt_Key]*HuaweiEvpn_Evpn_Instances_Instance_NormalEvpn_Rts_Rt)
+	}
+	key := HuaweiEvpn_Evpn_Instances_Instance_NormalEvpn_Rts_Rt_Key{VrfRtType: VrfRtType, VrfRtValue: VrfRtValue}
+	if _, ok := t.Rt[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Rt", key)
+	}
+	t.Rt[key] = &HuaweiEvpn_Evpn_Instances_Instance_NormalEvpn_Rts_Rt{VrfRtType: VrfRtType, VrfRtValue: &VrfRtValue}
+	return t.Rt[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiEvpn_Evpn_Instances_Instance_NormalEvpn_Rts.
 func (t *HuaweiEvpn_Evpn_Instances_Instance_NormalEvpn_Rts) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -10572,6 +11079,19 @@ type HuaweiEvpn_Evpn_Instances_Instance_TunnelInfos struct {
 
 // IsYangObject marks HuaweiEvpn_Evpn_Instances_Instance_TunnelInfos as a generated YANG object.
 func (*HuaweiEvpn_Evpn_Instances_Instance_TunnelInfos) IsYangObject() {}
+
+// NewTunnelInfo creates a new entry in the TunnelInfo list（重复 key 报错）。
+func (t *HuaweiEvpn_Evpn_Instances_Instance_TunnelInfos) NewTunnelInfo(Type E_HuaweiEvpn_TunnelType, PeerIp string, Id uint32) (*HuaweiEvpn_Evpn_Instances_Instance_TunnelInfos_TunnelInfo, error) {
+	if t.TunnelInfo == nil {
+		t.TunnelInfo = make(map[HuaweiEvpn_Evpn_Instances_Instance_TunnelInfos_TunnelInfo_Key]*HuaweiEvpn_Evpn_Instances_Instance_TunnelInfos_TunnelInfo)
+	}
+	key := HuaweiEvpn_Evpn_Instances_Instance_TunnelInfos_TunnelInfo_Key{Type: Type, PeerIp: PeerIp, Id: Id}
+	if _, ok := t.TunnelInfo[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list TunnelInfo", key)
+	}
+	t.TunnelInfo[key] = &HuaweiEvpn_Evpn_Instances_Instance_TunnelInfos_TunnelInfo{Type: Type, PeerIp: &PeerIp, Id: &Id}
+	return t.TunnelInfo[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiEvpn_Evpn_Instances_Instance_TunnelInfos.
 func (t *HuaweiEvpn_Evpn_Instances_Instance_TunnelInfos) MarshalJSON() ([]byte, error) {
@@ -10943,6 +11463,19 @@ type HuaweiEvpn_Evpn_Instances_Instance_VpwsEvpn_Rts struct {
 // IsYangObject marks HuaweiEvpn_Evpn_Instances_Instance_VpwsEvpn_Rts as a generated YANG object.
 func (*HuaweiEvpn_Evpn_Instances_Instance_VpwsEvpn_Rts) IsYangObject() {}
 
+// NewRt creates a new entry in the Rt list（重复 key 报错）。
+func (t *HuaweiEvpn_Evpn_Instances_Instance_VpwsEvpn_Rts) NewRt(VrfRtType E_HuaweiEvpn_VrfRtType, VrfRtValue string) (*HuaweiEvpn_Evpn_Instances_Instance_VpwsEvpn_Rts_Rt, error) {
+	if t.Rt == nil {
+		t.Rt = make(map[HuaweiEvpn_Evpn_Instances_Instance_VpwsEvpn_Rts_Rt_Key]*HuaweiEvpn_Evpn_Instances_Instance_VpwsEvpn_Rts_Rt)
+	}
+	key := HuaweiEvpn_Evpn_Instances_Instance_VpwsEvpn_Rts_Rt_Key{VrfRtType: VrfRtType, VrfRtValue: VrfRtValue}
+	if _, ok := t.Rt[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Rt", key)
+	}
+	t.Rt[key] = &HuaweiEvpn_Evpn_Instances_Instance_VpwsEvpn_Rts_Rt{VrfRtType: VrfRtType, VrfRtValue: &VrfRtValue}
+	return t.Rt[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiEvpn_Evpn_Instances_Instance_VpwsEvpn_Rts.
 func (t *HuaweiEvpn_Evpn_Instances_Instance_VpwsEvpn_Rts) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -11078,6 +11611,19 @@ type HuaweiEvpn_Evpn_RemoteSids struct {
 
 // IsYangObject marks HuaweiEvpn_Evpn_RemoteSids as a generated YANG object.
 func (*HuaweiEvpn_Evpn_RemoteSids) IsYangObject() {}
+
+// NewRemoteSid creates a new entry in the RemoteSid list（重复 key 报错）。
+func (t *HuaweiEvpn_Evpn_RemoteSids) NewRemoteSid(RemoteSid string) (*HuaweiEvpn_Evpn_RemoteSids_RemoteSid, error) {
+	if t.RemoteSid == nil {
+		t.RemoteSid = make(map[string]*HuaweiEvpn_Evpn_RemoteSids_RemoteSid)
+	}
+	key := RemoteSid
+	if _, ok := t.RemoteSid[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list RemoteSid", key)
+	}
+	t.RemoteSid[key] = &HuaweiEvpn_Evpn_RemoteSids_RemoteSid{RemoteSid: &RemoteSid}
+	return t.RemoteSid[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiEvpn_Evpn_RemoteSids.
 func (t *HuaweiEvpn_Evpn_RemoteSids) MarshalJSON() ([]byte, error) {
@@ -11531,6 +12077,19 @@ type HuaweiEvpn_Evpn_Site_DynamicEsis struct {
 // IsYangObject marks HuaweiEvpn_Evpn_Site_DynamicEsis as a generated YANG object.
 func (*HuaweiEvpn_Evpn_Site_DynamicEsis) IsYangObject() {}
 
+// NewDynamicEsi creates a new entry in the DynamicEsi list（重复 key 报错）。
+func (t *HuaweiEvpn_Evpn_Site_DynamicEsis) NewDynamicEsi(EsiName string) (*HuaweiEvpn_Evpn_Site_DynamicEsis_DynamicEsi, error) {
+	if t.DynamicEsi == nil {
+		t.DynamicEsi = make(map[string]*HuaweiEvpn_Evpn_Site_DynamicEsis_DynamicEsi)
+	}
+	key := EsiName
+	if _, ok := t.DynamicEsi[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list DynamicEsi", key)
+	}
+	t.DynamicEsi[key] = &HuaweiEvpn_Evpn_Site_DynamicEsis_DynamicEsi{EsiName: &EsiName}
+	return t.DynamicEsi[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiEvpn_Evpn_Site_DynamicEsis.
 func (t *HuaweiEvpn_Evpn_Site_DynamicEsis) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -11751,6 +12310,19 @@ type HuaweiEvpn_Evpn_Site_StaticEsis struct {
 
 // IsYangObject marks HuaweiEvpn_Evpn_Site_StaticEsis as a generated YANG object.
 func (*HuaweiEvpn_Evpn_Site_StaticEsis) IsYangObject() {}
+
+// NewStaticEsi creates a new entry in the StaticEsi list（重复 key 报错）。
+func (t *HuaweiEvpn_Evpn_Site_StaticEsis) NewStaticEsi(Esi string) (*HuaweiEvpn_Evpn_Site_StaticEsis_StaticEsi, error) {
+	if t.StaticEsi == nil {
+		t.StaticEsi = make(map[string]*HuaweiEvpn_Evpn_Site_StaticEsis_StaticEsi)
+	}
+	key := Esi
+	if _, ok := t.StaticEsi[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list StaticEsi", key)
+	}
+	t.StaticEsi[key] = &HuaweiEvpn_Evpn_Site_StaticEsis_StaticEsi{Esi: &Esi}
+	return t.StaticEsi[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiEvpn_Evpn_Site_StaticEsis.
 func (t *HuaweiEvpn_Evpn_Site_StaticEsis) MarshalJSON() ([]byte, error) {
@@ -12061,6 +12633,19 @@ type HuaweiFib_Fib_RouteStatistics_IpRouteEntryCounts struct {
 // IsYangObject marks HuaweiFib_Fib_RouteStatistics_IpRouteEntryCounts as a generated YANG object.
 func (*HuaweiFib_Fib_RouteStatistics_IpRouteEntryCounts) IsYangObject() {}
 
+// NewIpRouteEntryCount creates a new entry in the IpRouteEntryCount list（重复 key 报错）。
+func (t *HuaweiFib_Fib_RouteStatistics_IpRouteEntryCounts) NewIpRouteEntryCount(Slot string, VpnName string) (*HuaweiFib_Fib_RouteStatistics_IpRouteEntryCounts_IpRouteEntryCount, error) {
+	if t.IpRouteEntryCount == nil {
+		t.IpRouteEntryCount = make(map[HuaweiFib_Fib_RouteStatistics_IpRouteEntryCounts_IpRouteEntryCount_Key]*HuaweiFib_Fib_RouteStatistics_IpRouteEntryCounts_IpRouteEntryCount)
+	}
+	key := HuaweiFib_Fib_RouteStatistics_IpRouteEntryCounts_IpRouteEntryCount_Key{Slot: Slot, VpnName: VpnName}
+	if _, ok := t.IpRouteEntryCount[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list IpRouteEntryCount", key)
+	}
+	t.IpRouteEntryCount[key] = &HuaweiFib_Fib_RouteStatistics_IpRouteEntryCounts_IpRouteEntryCount{Slot: &Slot, VpnName: &VpnName}
+	return t.IpRouteEntryCount[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiFib_Fib_RouteStatistics_IpRouteEntryCounts.
 func (t *HuaweiFib_Fib_RouteStatistics_IpRouteEntryCounts) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -12205,6 +12790,19 @@ type HuaweiFib_Fib_RouteStatistics_IpRouteResources struct {
 // IsYangObject marks HuaweiFib_Fib_RouteStatistics_IpRouteResources as a generated YANG object.
 func (*HuaweiFib_Fib_RouteStatistics_IpRouteResources) IsYangObject() {}
 
+// NewIpRouteResource creates a new entry in the IpRouteResource list（重复 key 报错）。
+func (t *HuaweiFib_Fib_RouteStatistics_IpRouteResources) NewIpRouteResource(Slot string) (*HuaweiFib_Fib_RouteStatistics_IpRouteResources_IpRouteResource, error) {
+	if t.IpRouteResource == nil {
+		t.IpRouteResource = make(map[string]*HuaweiFib_Fib_RouteStatistics_IpRouteResources_IpRouteResource)
+	}
+	key := Slot
+	if _, ok := t.IpRouteResource[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list IpRouteResource", key)
+	}
+	t.IpRouteResource[key] = &HuaweiFib_Fib_RouteStatistics_IpRouteResources_IpRouteResource{Slot: &Slot}
+	return t.IpRouteResource[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiFib_Fib_RouteStatistics_IpRouteResources.
 func (t *HuaweiFib_Fib_RouteStatistics_IpRouteResources) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -12331,6 +12929,19 @@ type HuaweiFib_Fib_RouteStatistics_Ipv6RouteEntryCounts struct {
 
 // IsYangObject marks HuaweiFib_Fib_RouteStatistics_Ipv6RouteEntryCounts as a generated YANG object.
 func (*HuaweiFib_Fib_RouteStatistics_Ipv6RouteEntryCounts) IsYangObject() {}
+
+// NewIpv6RouteEntryCount creates a new entry in the Ipv6RouteEntryCount list（重复 key 报错）。
+func (t *HuaweiFib_Fib_RouteStatistics_Ipv6RouteEntryCounts) NewIpv6RouteEntryCount(Slot string, VpnName string) (*HuaweiFib_Fib_RouteStatistics_Ipv6RouteEntryCounts_Ipv6RouteEntryCount, error) {
+	if t.Ipv6RouteEntryCount == nil {
+		t.Ipv6RouteEntryCount = make(map[HuaweiFib_Fib_RouteStatistics_Ipv6RouteEntryCounts_Ipv6RouteEntryCount_Key]*HuaweiFib_Fib_RouteStatistics_Ipv6RouteEntryCounts_Ipv6RouteEntryCount)
+	}
+	key := HuaweiFib_Fib_RouteStatistics_Ipv6RouteEntryCounts_Ipv6RouteEntryCount_Key{Slot: Slot, VpnName: VpnName}
+	if _, ok := t.Ipv6RouteEntryCount[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Ipv6RouteEntryCount", key)
+	}
+	t.Ipv6RouteEntryCount[key] = &HuaweiFib_Fib_RouteStatistics_Ipv6RouteEntryCounts_Ipv6RouteEntryCount{Slot: &Slot, VpnName: &VpnName}
+	return t.Ipv6RouteEntryCount[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiFib_Fib_RouteStatistics_Ipv6RouteEntryCounts.
 func (t *HuaweiFib_Fib_RouteStatistics_Ipv6RouteEntryCounts) MarshalJSON() ([]byte, error) {
@@ -12476,6 +13087,19 @@ type HuaweiFib_Fib_RouteStatistics_Ipv6RouteResources struct {
 // IsYangObject marks HuaweiFib_Fib_RouteStatistics_Ipv6RouteResources as a generated YANG object.
 func (*HuaweiFib_Fib_RouteStatistics_Ipv6RouteResources) IsYangObject() {}
 
+// NewIpv6RouteResource creates a new entry in the Ipv6RouteResource list（重复 key 报错）。
+func (t *HuaweiFib_Fib_RouteStatistics_Ipv6RouteResources) NewIpv6RouteResource(Slot string) (*HuaweiFib_Fib_RouteStatistics_Ipv6RouteResources_Ipv6RouteResource, error) {
+	if t.Ipv6RouteResource == nil {
+		t.Ipv6RouteResource = make(map[string]*HuaweiFib_Fib_RouteStatistics_Ipv6RouteResources_Ipv6RouteResource)
+	}
+	key := Slot
+	if _, ok := t.Ipv6RouteResource[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Ipv6RouteResource", key)
+	}
+	t.Ipv6RouteResource[key] = &HuaweiFib_Fib_RouteStatistics_Ipv6RouteResources_Ipv6RouteResource{Slot: &Slot}
+	return t.Ipv6RouteResource[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiFib_Fib_RouteStatistics_Ipv6RouteResources.
 func (t *HuaweiFib_Fib_RouteStatistics_Ipv6RouteResources) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -12602,6 +13226,19 @@ type HuaweiFib_Fib_UnicastAfs struct {
 
 // IsYangObject marks HuaweiFib_Fib_UnicastAfs as a generated YANG object.
 func (*HuaweiFib_Fib_UnicastAfs) IsYangObject() {}
+
+// NewUnicastAf creates a new entry in the UnicastAf list（重复 key 报错）。
+func (t *HuaweiFib_Fib_UnicastAfs) NewUnicastAf(VrfName string, AfType E_HuaweiFib_AfType, Position string) (*HuaweiFib_Fib_UnicastAfs_UnicastAf, error) {
+	if t.UnicastAf == nil {
+		t.UnicastAf = make(map[HuaweiFib_Fib_UnicastAfs_UnicastAf_Key]*HuaweiFib_Fib_UnicastAfs_UnicastAf)
+	}
+	key := HuaweiFib_Fib_UnicastAfs_UnicastAf_Key{VrfName: VrfName, AfType: AfType, Position: Position}
+	if _, ok := t.UnicastAf[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list UnicastAf", key)
+	}
+	t.UnicastAf[key] = &HuaweiFib_Fib_UnicastAfs_UnicastAf{VrfName: &VrfName, AfType: AfType, Position: &Position}
+	return t.UnicastAf[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiFib_Fib_UnicastAfs.
 func (t *HuaweiFib_Fib_UnicastAfs) MarshalJSON() ([]byte, error) {
@@ -12785,6 +13422,19 @@ type HuaweiFib_Fib_UnicastAfs_UnicastAf_Routes struct {
 
 // IsYangObject marks HuaweiFib_Fib_UnicastAfs_UnicastAf_Routes as a generated YANG object.
 func (*HuaweiFib_Fib_UnicastAfs_UnicastAf_Routes) IsYangObject() {}
+
+// NewRoute creates a new entry in the Route list（重复 key 报错）。
+func (t *HuaweiFib_Fib_UnicastAfs_UnicastAf_Routes) NewRoute(Destination string, Mask uint32, Nexthop string, IfName string, TunnelId string) (*HuaweiFib_Fib_UnicastAfs_UnicastAf_Routes_Route, error) {
+	if t.Route == nil {
+		t.Route = make(map[HuaweiFib_Fib_UnicastAfs_UnicastAf_Routes_Route_Key]*HuaweiFib_Fib_UnicastAfs_UnicastAf_Routes_Route)
+	}
+	key := HuaweiFib_Fib_UnicastAfs_UnicastAf_Routes_Route_Key{Destination: Destination, Mask: Mask, Nexthop: Nexthop, IfName: IfName, TunnelId: TunnelId}
+	if _, ok := t.Route[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Route", key)
+	}
+	t.Route[key] = &HuaweiFib_Fib_UnicastAfs_UnicastAf_Routes_Route{Destination: &Destination, Mask: &Mask, Nexthop: &Nexthop, IfName: &IfName, TunnelId: &TunnelId}
+	return t.Route[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiFib_Fib_UnicastAfs_UnicastAf_Routes.
 func (t *HuaweiFib_Fib_UnicastAfs_UnicastAf_Routes) MarshalJSON() ([]byte, error) {
@@ -13829,6 +14479,19 @@ type HuaweiHwtacacs_Hwtacacs_Templates struct {
 // IsYangObject marks HuaweiHwtacacs_Hwtacacs_Templates as a generated YANG object.
 func (*HuaweiHwtacacs_Hwtacacs_Templates) IsYangObject() {}
 
+// NewTemplate creates a new entry in the Template list（重复 key 报错）。
+func (t *HuaweiHwtacacs_Hwtacacs_Templates) NewTemplate(Name string) (*HuaweiHwtacacs_Hwtacacs_Templates_Template, error) {
+	if t.Template == nil {
+		t.Template = make(map[string]*HuaweiHwtacacs_Hwtacacs_Templates_Template)
+	}
+	key := Name
+	if _, ok := t.Template[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Template", key)
+	}
+	t.Template[key] = &HuaweiHwtacacs_Hwtacacs_Templates_Template{Name: &Name}
+	return t.Template[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiHwtacacs_Hwtacacs_Templates.
 func (t *HuaweiHwtacacs_Hwtacacs_Templates) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -14101,6 +14764,19 @@ type HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv4Servers struct {
 
 // IsYangObject marks HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv4Servers as a generated YANG object.
 func (*HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv4Servers) IsYangObject() {}
+
+// NewIpv4Server creates a new entry in the Ipv4Server list（重复 key 报错）。
+func (t *HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv4Servers) NewIpv4Server(ServerIpAddress string, ServerType E_HuaweiHwtacacs_HwtacacsServerType, IsSecondaryServer bool, VpnName string, IsPublicNet bool) (*HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv4Servers_Ipv4Server, error) {
+	if t.Ipv4Server == nil {
+		t.Ipv4Server = make(map[HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv4Servers_Ipv4Server_Key]*HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv4Servers_Ipv4Server)
+	}
+	key := HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv4Servers_Ipv4Server_Key{ServerIpAddress: ServerIpAddress, ServerType: ServerType, IsSecondaryServer: IsSecondaryServer, VpnName: VpnName, IsPublicNet: IsPublicNet}
+	if _, ok := t.Ipv4Server[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Ipv4Server", key)
+	}
+	t.Ipv4Server[key] = &HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv4Servers_Ipv4Server{ServerIpAddress: &ServerIpAddress, ServerType: ServerType, IsSecondaryServer: &IsSecondaryServer, VpnName: &VpnName, IsPublicNet: &IsPublicNet}
+	return t.Ipv4Server[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv4Servers.
 func (t *HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv4Servers) MarshalJSON() ([]byte, error) {
@@ -14467,6 +15143,19 @@ type HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv6Servers struct {
 // IsYangObject marks HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv6Servers as a generated YANG object.
 func (*HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv6Servers) IsYangObject() {}
 
+// NewIpv6Server creates a new entry in the Ipv6Server list（重复 key 报错）。
+func (t *HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv6Servers) NewIpv6Server(ServerIpAddress string, ServerType E_HuaweiHwtacacs_HwtacacsServerType, IsSecondaryServer bool, VpnName string) (*HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv6Servers_Ipv6Server, error) {
+	if t.Ipv6Server == nil {
+		t.Ipv6Server = make(map[HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv6Servers_Ipv6Server_Key]*HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv6Servers_Ipv6Server)
+	}
+	key := HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv6Servers_Ipv6Server_Key{ServerIpAddress: ServerIpAddress, ServerType: ServerType, IsSecondaryServer: IsSecondaryServer, VpnName: VpnName}
+	if _, ok := t.Ipv6Server[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Ipv6Server", key)
+	}
+	t.Ipv6Server[key] = &HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv6Servers_Ipv6Server{ServerIpAddress: &ServerIpAddress, ServerType: ServerType, IsSecondaryServer: &IsSecondaryServer, VpnName: &VpnName}
+	return t.Ipv6Server[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv6Servers.
 func (t *HuaweiHwtacacs_Hwtacacs_Templates_Template_Ipv6Servers) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -14666,6 +15355,19 @@ type HuaweiHwtacacs_Hwtacacs_Templates_Template_Servers struct {
 
 // IsYangObject marks HuaweiHwtacacs_Hwtacacs_Templates_Template_Servers as a generated YANG object.
 func (*HuaweiHwtacacs_Hwtacacs_Templates_Template_Servers) IsYangObject() {}
+
+// NewServer creates a new entry in the Server list（重复 key 报错）。
+func (t *HuaweiHwtacacs_Hwtacacs_Templates_Template_Servers) NewServer(IpAddress string, Type E_HuaweiHwtacacs_HwtacacsServerType, NiName string) (*HuaweiHwtacacs_Hwtacacs_Templates_Template_Servers_Server, error) {
+	if t.Server == nil {
+		t.Server = make(map[HuaweiHwtacacs_Hwtacacs_Templates_Template_Servers_Server_Key]*HuaweiHwtacacs_Hwtacacs_Templates_Template_Servers_Server)
+	}
+	key := HuaweiHwtacacs_Hwtacacs_Templates_Template_Servers_Server_Key{IpAddress: IpAddress, Type: Type, NiName: NiName}
+	if _, ok := t.Server[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Server", key)
+	}
+	t.Server[key] = &HuaweiHwtacacs_Hwtacacs_Templates_Template_Servers_Server{IpAddress: &IpAddress, Type: Type, NiName: &NiName}
+	return t.Server[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiHwtacacs_Hwtacacs_Templates_Template_Servers.
 func (t *HuaweiHwtacacs_Hwtacacs_Templates_Template_Servers) MarshalJSON() ([]byte, error) {
@@ -16001,6 +16703,19 @@ type HuaweiIfm_Ifm_AutoRecoveryTimes struct {
 // IsYangObject marks HuaweiIfm_Ifm_AutoRecoveryTimes as a generated YANG object.
 func (*HuaweiIfm_Ifm_AutoRecoveryTimes) IsYangObject() {}
 
+// NewAutoRecoveryTime creates a new entry in the AutoRecoveryTime list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_AutoRecoveryTimes) NewAutoRecoveryTime(ErrorDownType E_HuaweiIfm_ErrorDownType) (*HuaweiIfm_Ifm_AutoRecoveryTimes_AutoRecoveryTime, error) {
+	if t.AutoRecoveryTime == nil {
+		t.AutoRecoveryTime = make(map[E_HuaweiIfm_ErrorDownType]*HuaweiIfm_Ifm_AutoRecoveryTimes_AutoRecoveryTime)
+	}
+	key := ErrorDownType
+	if _, ok := t.AutoRecoveryTime[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list AutoRecoveryTime", key)
+	}
+	t.AutoRecoveryTime[key] = &HuaweiIfm_Ifm_AutoRecoveryTimes_AutoRecoveryTime{ErrorDownType: ErrorDownType}
+	return t.AutoRecoveryTime[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_AutoRecoveryTimes.
 func (t *HuaweiIfm_Ifm_AutoRecoveryTimes) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -16455,6 +17170,19 @@ type HuaweiIfm_Ifm_Interfaces struct {
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces) IsYangObject() {}
+
+// NewInterface creates a new entry in the Interface list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces) NewInterface(Name string) (*HuaweiIfm_Ifm_Interfaces_Interface, error) {
+	if t.Interface == nil {
+		t.Interface = make(map[string]*HuaweiIfm_Ifm_Interfaces_Interface)
+	}
+	key := Name
+	if _, ok := t.Interface[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Interface", key)
+	}
+	t.Interface[key] = &HuaweiIfm_Ifm_Interfaces_Interface{Name: &Name}
+	return t.Interface[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces.
 func (t *HuaweiIfm_Ifm_Interfaces) MarshalJSON() ([]byte, error) {
@@ -18084,6 +18812,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_ArpLimits struct {
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_ArpLimits as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_ArpLimits) IsYangObject() {}
+
+// NewArpLimit creates a new entry in the ArpLimit list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_ArpLimits) NewArpLimit(VlanId uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_ArpLimits_ArpLimit, error) {
+	if t.ArpLimit == nil {
+		t.ArpLimit = make(map[uint16]*HuaweiIfm_Ifm_Interfaces_Interface_ArpLimits_ArpLimit)
+	}
+	key := VlanId
+	if _, ok := t.ArpLimit[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ArpLimit", key)
+	}
+	t.ArpLimit[key] = &HuaweiIfm_Ifm_Interfaces_Interface_ArpLimits_ArpLimit{VlanId: &VlanId}
+	return t.ArpLimit[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_ArpLimits.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_ArpLimits) MarshalJSON() ([]byte, error) {
@@ -20053,6 +20794,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Dot1Q_PolicyVlan
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Dot1Q_PolicyVlans as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Dot1Q_PolicyVlans) IsYangObject() {}
 
+// NewPolicyVlan creates a new entry in the PolicyVlan list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Dot1Q_PolicyVlans) NewPolicyVlan(VlanIdBegin uint16, VlanIdEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Dot1Q_PolicyVlans_PolicyVlan, error) {
+	if t.PolicyVlan == nil {
+		t.PolicyVlan = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Dot1Q_PolicyVlans_PolicyVlan_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Dot1Q_PolicyVlans_PolicyVlan)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Dot1Q_PolicyVlans_PolicyVlan_Key{VlanIdBegin: VlanIdBegin, VlanIdEnd: VlanIdEnd}
+	if _, ok := t.PolicyVlan[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PolicyVlan", key)
+	}
+	t.PolicyVlan[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Dot1Q_PolicyVlans_PolicyVlan{VlanIdBegin: &VlanIdBegin, VlanIdEnd: &VlanIdEnd}
+	return t.PolicyVlan[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Dot1Q_PolicyVlans.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Dot1Q_PolicyVlans) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -20483,6 +21237,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqVids s
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqVids as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqVids) IsYangObject() {}
 
+// NewQinqVid creates a new entry in the QinqVid list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqVids) NewQinqVid(PeVlanId uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqVids_QinqVid, error) {
+	if t.QinqVid == nil {
+		t.QinqVid = make(map[uint16]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqVids_QinqVid)
+	}
+	key := PeVlanId
+	if _, ok := t.QinqVid[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list QinqVid", key)
+	}
+	t.QinqVid[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqVids_QinqVid{PeVlanId: &PeVlanId}
+	return t.QinqVid[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqVids.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqVids) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -20600,6 +21367,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqWithPe
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqWithPeSegments as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqWithPeSegments) IsYangObject() {
+}
+
+// NewQinqWithPeSegment creates a new entry in the QinqWithPeSegment list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqWithPeSegments) NewQinqWithPeSegment(PeVlanBegin uint16, PeVlanEnd uint16, CeVlanBegin uint16, CeVlanEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqWithPeSegments_QinqWithPeSegment, error) {
+	if t.QinqWithPeSegment == nil {
+		t.QinqWithPeSegment = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqWithPeSegments_QinqWithPeSegment_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqWithPeSegments_QinqWithPeSegment)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqWithPeSegments_QinqWithPeSegment_Key{PeVlanBegin: PeVlanBegin, PeVlanEnd: PeVlanEnd, CeVlanBegin: CeVlanBegin, CeVlanEnd: CeVlanEnd}
+	if _, ok := t.QinqWithPeSegment[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list QinqWithPeSegment", key)
+	}
+	t.QinqWithPeSegment[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqWithPeSegments_QinqWithPeSegment{PeVlanBegin: &PeVlanBegin, PeVlanEnd: &PeVlanEnd, CeVlanBegin: &CeVlanBegin, CeVlanEnd: &CeVlanEnd}
+	return t.QinqWithPeSegment[key], nil
 }
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L2SubInterface_Qinqs_QinqWithPeSegments.
@@ -21252,6 +22032,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlanGroups) IsYangObject() {
 }
 
+// NewPolicyVlanGroup creates a new entry in the PolicyVlanGroup list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlanGroups) NewPolicyVlanGroup(PolicyType E_HuaweiEthernet_PolicyType, GroupId uint8, VlanIdBegin uint16, VlanIdEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlanGroups_PolicyVlanGroup, error) {
+	if t.PolicyVlanGroup == nil {
+		t.PolicyVlanGroup = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlanGroups_PolicyVlanGroup_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlanGroups_PolicyVlanGroup)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlanGroups_PolicyVlanGroup_Key{PolicyType: PolicyType, GroupId: GroupId, VlanIdBegin: VlanIdBegin, VlanIdEnd: VlanIdEnd}
+	if _, ok := t.PolicyVlanGroup[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PolicyVlanGroup", key)
+	}
+	t.PolicyVlanGroup[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlanGroups_PolicyVlanGroup{PolicyType: PolicyType, GroupId: &GroupId, VlanIdBegin: &VlanIdBegin, VlanIdEnd: &VlanIdEnd}
+	return t.PolicyVlanGroup[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlanGroups.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlanGroups) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -21444,6 +22237,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlans) IsYangObject() {
 }
 
+// NewPolicyVlan creates a new entry in the PolicyVlan list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlans) NewPolicyVlan(PolicyType E_HuaweiEthernet_PolicyType, VlanIdBegin uint16, VlanIdEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlans_PolicyVlan, error) {
+	if t.PolicyVlan == nil {
+		t.PolicyVlan = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlans_PolicyVlan_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlans_PolicyVlan)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlans_PolicyVlan_Key{PolicyType: PolicyType, VlanIdBegin: VlanIdBegin, VlanIdEnd: VlanIdEnd}
+	if _, ok := t.PolicyVlan[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PolicyVlan", key)
+	}
+	t.PolicyVlan[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlans_PolicyVlan{PolicyType: PolicyType, VlanIdBegin: &VlanIdBegin, VlanIdEnd: &VlanIdEnd}
+	return t.PolicyVlan[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlans.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Dot1QVlans_PolicyVlans) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -21619,6 +22425,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Vrrps) IsYangObject() {
 }
 
+// NewVrrp creates a new entry in the Vrrp list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Vrrps) NewVrrp(VlanId uint32) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Vrrps_Vrrp, error) {
+	if t.Vrrp == nil {
+		t.Vrrp = make(map[uint32]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Vrrps_Vrrp)
+	}
+	key := VlanId
+	if _, ok := t.Vrrp[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Vrrp", key)
+	}
+	t.Vrrp[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Vrrps_Vrrp{VlanId: &VlanId}
+	return t.Vrrp[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Vrrps.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTerminationPolicys_Vrrps) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -21727,6 +22546,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Dot1QVlans as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Dot1QVlans) IsYangObject() {
+}
+
+// NewDot1QVlansGroup creates a new entry in the Dot1QVlansGroup list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Dot1QVlans) NewDot1QVlansGroup(GroupId uint8) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Dot1QVlans_Dot1QVlansGroup, error) {
+	if t.Dot1QVlansGroup == nil {
+		t.Dot1QVlansGroup = make(map[uint8]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Dot1QVlans_Dot1QVlansGroup)
+	}
+	key := GroupId
+	if _, ok := t.Dot1QVlansGroup[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Dot1QVlansGroup", key)
+	}
+	t.Dot1QVlansGroup[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Dot1QVlans_Dot1QVlansGroup{GroupId: &GroupId}
+	return t.Dot1QVlansGroup[key], nil
 }
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Dot1QVlans.
@@ -21986,6 +22818,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Vrrps) IsYangObject() {
 }
 
+// NewVrrp creates a new entry in the Vrrp list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Vrrps) NewVrrp(VlanId uint32) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Vrrps_Vrrp, error) {
+	if t.Vrrp == nil {
+		t.Vrrp = make(map[uint32]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Vrrps_Vrrp)
+	}
+	key := VlanId
+	if _, ok := t.Vrrp[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Vrrp", key)
+	}
+	t.Vrrp[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Vrrps_Vrrp{VlanId: &VlanId}
+	return t.Vrrp[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Vrrps.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_Dot1QTermination_Vrrps) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -22151,6 +22996,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqMapping_Mapp
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqMapping_MappingVids as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqMapping_MappingVids) IsYangObject() {
+}
+
+// NewMappingVid creates a new entry in the MappingVid list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqMapping_MappingVids) NewMappingVid(VlanId uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqMapping_MappingVids_MappingVid, error) {
+	if t.MappingVid == nil {
+		t.MappingVid = make(map[uint16]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqMapping_MappingVids_MappingVid)
+	}
+	key := VlanId
+	if _, ok := t.MappingVid[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list MappingVid", key)
+	}
+	t.MappingVid[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqMapping_MappingVids_MappingVid{VlanId: &VlanId}
+	return t.MappingVid[key], nil
 }
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqMapping_MappingVids.
@@ -22366,6 +23224,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqStacking str
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqStacking as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqStacking) IsYangObject() {}
+
+// NewStackingVid creates a new entry in the StackingVid list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqStacking) NewStackingVid(VlanIdBegin uint16, VlanIdEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqStacking_StackingVid, error) {
+	if t.StackingVid == nil {
+		t.StackingVid = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqStacking_StackingVid_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqStacking_StackingVid)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqStacking_StackingVid_Key{VlanIdBegin: VlanIdBegin, VlanIdEnd: VlanIdEnd}
+	if _, ok := t.StackingVid[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list StackingVid", key)
+	}
+	t.StackingVid[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqStacking_StackingVid{VlanIdBegin: &VlanIdBegin, VlanIdEnd: &VlanIdEnd}
+	return t.StackingVid[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqStacking.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqStacking) MarshalJSON() ([]byte, error) {
@@ -22891,6 +23762,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_QinqVids) IsYangObject() {
 }
 
+// NewQinqVid creates a new entry in the QinqVid list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_QinqVids) NewQinqVid(PeVlanBegin uint16, PeVlanEnd uint16, CeVlanBegin uint16, CeVlanEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_QinqVids_QinqVid, error) {
+	if t.QinqVid == nil {
+		t.QinqVid = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_QinqVids_QinqVid_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_QinqVids_QinqVid)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_QinqVids_QinqVid_Key{PeVlanBegin: PeVlanBegin, PeVlanEnd: PeVlanEnd, CeVlanBegin: CeVlanBegin, CeVlanEnd: CeVlanEnd}
+	if _, ok := t.QinqVid[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list QinqVid", key)
+	}
+	t.QinqVid[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_QinqVids_QinqVid{PeVlanBegin: &PeVlanBegin, PeVlanEnd: &PeVlanEnd, CeVlanBegin: &CeVlanBegin, CeVlanEnd: &CeVlanEnd}
+	return t.QinqVid[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_QinqVids.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_QinqVids) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -23193,6 +24077,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_Vrrps) IsYangObject() {
 }
 
+// NewVrrp creates a new entry in the Vrrp list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_Vrrps) NewVrrp(PeVlanId uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_Vrrps_Vrrp, error) {
+	if t.Vrrp == nil {
+		t.Vrrp = make(map[uint16]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_Vrrps_Vrrp)
+	}
+	key := PeVlanId
+	if _, ok := t.Vrrp[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Vrrp", key)
+	}
+	t.Vrrp[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_Vrrps_Vrrp{PeVlanId: &PeVlanId}
+	return t.Vrrp[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_Vrrps.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_QinqTermination_Vrrps) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -23368,6 +24265,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_P
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlanGroups as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlanGroups) IsYangObject() {
+}
+
+// NewPolicyVlanGroup creates a new entry in the PolicyVlanGroup list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlanGroups) NewPolicyVlanGroup(PolicyType E_HuaweiEthernet_PolicyType, GroupId uint8, VlanIdBegin uint16, VlanIdEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlanGroups_PolicyVlanGroup, error) {
+	if t.PolicyVlanGroup == nil {
+		t.PolicyVlanGroup = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlanGroups_PolicyVlanGroup_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlanGroups_PolicyVlanGroup)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlanGroups_PolicyVlanGroup_Key{PolicyType: PolicyType, GroupId: GroupId, VlanIdBegin: VlanIdBegin, VlanIdEnd: VlanIdEnd}
+	if _, ok := t.PolicyVlanGroup[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PolicyVlanGroup", key)
+	}
+	t.PolicyVlanGroup[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlanGroups_PolicyVlanGroup{PolicyType: PolicyType, GroupId: &GroupId, VlanIdBegin: &VlanIdBegin, VlanIdEnd: &VlanIdEnd}
+	return t.PolicyVlanGroup[key], nil
 }
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlanGroups.
@@ -23560,6 +24470,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_P
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlans as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlans) IsYangObject() {
+}
+
+// NewPolicyVlan creates a new entry in the PolicyVlan list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlans) NewPolicyVlan(PolicyType E_HuaweiEthernet_PolicyType, VlanIdBegin uint16, VlanIdEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlans_PolicyVlan, error) {
+	if t.PolicyVlan == nil {
+		t.PolicyVlan = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlans_PolicyVlan_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlans_PolicyVlan)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlans_PolicyVlan_Key{PolicyType: PolicyType, VlanIdBegin: VlanIdBegin, VlanIdEnd: VlanIdEnd}
+	if _, ok := t.PolicyVlan[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PolicyVlan", key)
+	}
+	t.PolicyVlan[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlans_PolicyVlan{PolicyType: PolicyType, VlanIdBegin: &VlanIdBegin, VlanIdEnd: &VlanIdEnd}
+	return t.PolicyVlan[key], nil
 }
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_StackingPolicy_PolicyVlans.
@@ -23922,6 +24845,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_U
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanDot1Q_Descriptions) IsYangObject() {
 }
 
+// NewDescription creates a new entry in the Description list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanDot1Q_Descriptions) NewDescription(VlanId uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanDot1Q_Descriptions_Description, error) {
+	if t.Description == nil {
+		t.Description = make(map[uint16]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanDot1Q_Descriptions_Description)
+	}
+	key := VlanId
+	if _, ok := t.Description[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Description", key)
+	}
+	t.Description[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanDot1Q_Descriptions_Description{VlanId: &VlanId}
+	return t.Description[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanDot1Q_Descriptions.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanDot1Q_Descriptions) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -24042,6 +24978,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_U
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs) IsYangObject() {
 }
 
+// NewUserVlanQinq creates a new entry in the UserVlanQinq list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs) NewUserVlanQinq(PeVlanBegin uint16, PeVlanEnd uint16, CeVlanBegin uint16, CeVlanEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_UserVlanQinq, error) {
+	if t.UserVlanQinq == nil {
+		t.UserVlanQinq = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_UserVlanQinq_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_UserVlanQinq)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_UserVlanQinq_Key{PeVlanBegin: PeVlanBegin, PeVlanEnd: PeVlanEnd, CeVlanBegin: CeVlanBegin, CeVlanEnd: CeVlanEnd}
+	if _, ok := t.UserVlanQinq[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list UserVlanQinq", key)
+	}
+	t.UserVlanQinq[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_UserVlanQinq{PeVlanBegin: &PeVlanBegin, PeVlanEnd: &PeVlanEnd, CeVlanBegin: &CeVlanBegin, CeVlanEnd: &CeVlanEnd}
+	return t.UserVlanQinq[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -24125,6 +25074,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_U
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_Descriptions as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_Descriptions) IsYangObject() {
+}
+
+// NewDescription creates a new entry in the Description list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_Descriptions) NewDescription(PeVlanId uint16, CeVlanId uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_Descriptions_Description, error) {
+	if t.Description == nil {
+		t.Description = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_Descriptions_Description_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_Descriptions_Description)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_Descriptions_Description_Key{PeVlanId: PeVlanId, CeVlanId: CeVlanId}
+	if _, ok := t.Description[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Description", key)
+	}
+	t.Description[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_Descriptions_Description{PeVlanId: &PeVlanId, CeVlanId: &CeVlanId}
+	return t.Description[key], nil
 }
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_UserVlanCommon_UserVlanQinqs_Descriptions.
@@ -24371,6 +25333,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanGroups struc
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanGroups as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanGroups) IsYangObject() {}
 
+// NewVlanGroup creates a new entry in the VlanGroup list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanGroups) NewVlanGroup(Id uint8) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanGroups_VlanGroup, error) {
+	if t.VlanGroup == nil {
+		t.VlanGroup = make(map[uint8]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanGroups_VlanGroup)
+	}
+	key := Id
+	if _, ok := t.VlanGroup[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list VlanGroup", key)
+	}
+	t.VlanGroup[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanGroups_VlanGroup{Id: &Id}
+	return t.VlanGroup[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanGroups.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanGroups) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -24597,6 +25572,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanTypePolicy_P
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanTypePolicy_PolicyVlans as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanTypePolicy_PolicyVlans) IsYangObject() {
+}
+
+// NewPolicyVlan creates a new entry in the PolicyVlan list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanTypePolicy_PolicyVlans) NewPolicyVlan(PolicyType E_HuaweiEthernet_PolicyType, VlanIdBegin uint16, VlanIdEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanTypePolicy_PolicyVlans_PolicyVlan, error) {
+	if t.PolicyVlan == nil {
+		t.PolicyVlan = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanTypePolicy_PolicyVlans_PolicyVlan_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanTypePolicy_PolicyVlans_PolicyVlan)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanTypePolicy_PolicyVlans_PolicyVlan_Key{PolicyType: PolicyType, VlanIdBegin: VlanIdBegin, VlanIdEnd: VlanIdEnd}
+	if _, ok := t.PolicyVlan[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PolicyVlan", key)
+	}
+	t.PolicyVlan[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanTypePolicy_PolicyVlans_PolicyVlan{PolicyType: PolicyType, VlanIdBegin: &VlanIdBegin, VlanIdEnd: &VlanIdEnd}
+	return t.PolicyVlan[key], nil
 }
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_L3SubInterface_VlanTypePolicy_PolicyVlans.
@@ -25429,6 +26417,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_PortI
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_PortIsolateGroups) IsYangObject() {
 }
 
+// NewPortIsolateGroup creates a new entry in the PortIsolateGroup list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_PortIsolateGroups) NewPortIsolateGroup(GroupId int32) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_PortIsolateGroups_PortIsolateGroup, error) {
+	if t.PortIsolateGroup == nil {
+		t.PortIsolateGroup = make(map[int32]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_PortIsolateGroups_PortIsolateGroup)
+	}
+	key := GroupId
+	if _, ok := t.PortIsolateGroup[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PortIsolateGroup", key)
+	}
+	t.PortIsolateGroup[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_PortIsolateGroups_PortIsolateGroup{GroupId: &GroupId}
+	return t.PortIsolateGroup[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_PortIsolateGroups.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_PortIsolateGroups) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -25575,6 +26576,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanM
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappingRemarks as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappingRemarks) IsYangObject() {
+}
+
+// NewVlanMappingRemark creates a new entry in the VlanMappingRemark list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappingRemarks) NewVlanMappingRemark(VlanBegin uint16, VlanEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappingRemarks_VlanMappingRemark, error) {
+	if t.VlanMappingRemark == nil {
+		t.VlanMappingRemark = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappingRemarks_VlanMappingRemark_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappingRemarks_VlanMappingRemark)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappingRemarks_VlanMappingRemark_Key{VlanBegin: VlanBegin, VlanEnd: VlanEnd}
+	if _, ok := t.VlanMappingRemark[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list VlanMappingRemark", key)
+	}
+	t.VlanMappingRemark[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappingRemarks_VlanMappingRemark{VlanBegin: &VlanBegin, VlanEnd: &VlanEnd}
+	return t.VlanMappingRemark[key], nil
 }
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappingRemarks.
@@ -25733,6 +26747,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanM
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappings) IsYangObject() {
 }
 
+// NewVlanMapping creates a new entry in the VlanMapping list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappings) NewVlanMapping(MappingVlan uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappings_VlanMapping, error) {
+	if t.VlanMapping == nil {
+		t.VlanMapping = make(map[uint16]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappings_VlanMapping)
+	}
+	key := MappingVlan
+	if _, ok := t.VlanMapping[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list VlanMapping", key)
+	}
+	t.VlanMapping[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappings_VlanMapping{MappingVlan: &MappingVlan}
+	return t.VlanMapping[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappings.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanMappings) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -25850,6 +26877,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanS
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackingRemarks as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackingRemarks) IsYangObject() {
+}
+
+// NewVlanStackingRemark creates a new entry in the VlanStackingRemark list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackingRemarks) NewVlanStackingRemark(VlanBegin uint16, VlanEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackingRemarks_VlanStackingRemark, error) {
+	if t.VlanStackingRemark == nil {
+		t.VlanStackingRemark = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackingRemarks_VlanStackingRemark_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackingRemarks_VlanStackingRemark)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackingRemarks_VlanStackingRemark_Key{VlanBegin: VlanBegin, VlanEnd: VlanEnd}
+	if _, ok := t.VlanStackingRemark[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list VlanStackingRemark", key)
+	}
+	t.VlanStackingRemark[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackingRemarks_VlanStackingRemark{VlanBegin: &VlanBegin, VlanEnd: &VlanEnd}
+	return t.VlanStackingRemark[key], nil
 }
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackingRemarks.
@@ -26006,6 +27046,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanS
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackings as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackings) IsYangObject() {
+}
+
+// NewVlanStacking creates a new entry in the VlanStacking list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackings) NewVlanStacking(StackingVlan uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackings_VlanStacking, error) {
+	if t.VlanStacking == nil {
+		t.VlanStacking = make(map[uint16]*HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackings_VlanStacking)
+	}
+	key := StackingVlan
+	if _, ok := t.VlanStacking[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list VlanStacking", key)
+	}
+	t.VlanStacking[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackings_VlanStacking{StackingVlan: &StackingVlan}
+	return t.VlanStacking[key], nil
 }
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ethernet_MainInterface_L2Attribute_VlanStackings.
@@ -26400,6 +27453,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Evpn_TrackPeers struct {
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Evpn_TrackPeers as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Evpn_TrackPeers) IsYangObject() {}
 
+// NewTrackPeer creates a new entry in the TrackPeer list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Evpn_TrackPeers) NewTrackPeer(EsTrackAddress string) (*HuaweiIfm_Ifm_Interfaces_Interface_Evpn_TrackPeers_TrackPeer, error) {
+	if t.TrackPeer == nil {
+		t.TrackPeer = make(map[string]*HuaweiIfm_Ifm_Interfaces_Interface_Evpn_TrackPeers_TrackPeer)
+	}
+	key := EsTrackAddress
+	if _, ok := t.TrackPeer[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list TrackPeer", key)
+	}
+	t.TrackPeer[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Evpn_TrackPeers_TrackPeer{EsTrackAddress: &EsTrackAddress}
+	return t.TrackPeer[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Evpn_TrackPeers.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Evpn_TrackPeers) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -26739,6 +27805,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Addresses struct {
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Addresses as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Addresses) IsYangObject() {}
 
+// NewAddress creates a new entry in the Address list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Addresses) NewAddress(Ip string) (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Addresses_Address, error) {
+	if t.Address == nil {
+		t.Address = make(map[string]*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Addresses_Address)
+	}
+	key := Ip
+	if _, ok := t.Address[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Address", key)
+	}
+	t.Address[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Addresses_Address{Ip: &Ip}
+	return t.Address[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Addresses.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Addresses) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -26978,6 +28057,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Addresses struct {
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Addresses as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Addresses) IsYangObject() {}
 
+// NewAddress creates a new entry in the Address list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Addresses) NewAddress(Ip string) (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Addresses_Address, error) {
+	if t.Address == nil {
+		t.Address = make(map[string]*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Addresses_Address)
+	}
+	key := Ip
+	if _, ok := t.Address[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Address", key)
+	}
+	t.Address[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Addresses_Address{Ip: &Ip}
+	return t.Address[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Addresses.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Addresses) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -27123,6 +28215,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Gateways struct {
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Gateways as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Gateways) IsYangObject() {}
 
+// NewGateway creates a new entry in the Gateway list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Gateways) NewGateway(Gateway string) (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Gateways_Gateway, error) {
+	if t.Gateway == nil {
+		t.Gateway = make(map[string]*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Gateways_Gateway)
+	}
+	key := Gateway
+	if _, ok := t.Gateway[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Gateway", key)
+	}
+	t.Gateway[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Gateways_Gateway{Gateway: &Gateway}
+	return t.Gateway[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Gateways.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_State_Gateways) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -27229,6 +28334,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_StaticArps struct {
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_StaticArps as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_StaticArps) IsYangObject() {}
+
+// NewStaticArp creates a new entry in the StaticArp list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_StaticArps) NewStaticArp(IpAddr string) (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_StaticArps_StaticArp, error) {
+	if t.StaticArp == nil {
+		t.StaticArp = make(map[string]*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_StaticArps_StaticArp)
+	}
+	key := IpAddr
+	if _, ok := t.StaticArp[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list StaticArp", key)
+	}
+	t.StaticArp[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_StaticArps_StaticArp{IpAddr: &IpAddr}
+	return t.StaticArp[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_StaticArps.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_StaticArps) MarshalJSON() ([]byte, error) {
@@ -27447,6 +28565,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups struct {
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups) IsYangObject() {}
+
+// NewGroup creates a new entry in the Group list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups) NewGroup(Id uint8) (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group, error) {
+	if t.Group == nil {
+		t.Group = make(map[uint8]*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group)
+	}
+	key := Id
+	if _, ok := t.Group[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Group", key)
+	}
+	t.Group[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group{Id: &Id}
+	return t.Group[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups) MarshalJSON() ([]byte, error) {
@@ -27861,6 +28992,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackBfds struct 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackBfds as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackBfds) IsYangObject() {}
 
+// NewTrackBfd creates a new entry in the TrackBfd list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackBfds) NewTrackBfd(SessionName string, SessionType E_HuaweiVrrp_VrrpBfdType) (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackBfds_TrackBfd, error) {
+	if t.TrackBfd == nil {
+		t.TrackBfd = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackBfds_TrackBfd_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackBfds_TrackBfd)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackBfds_TrackBfd_Key{SessionName: SessionName, SessionType: SessionType}
+	if _, ok := t.TrackBfd[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list TrackBfd", key)
+	}
+	t.TrackBfd[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackBfds_TrackBfd{SessionName: &SessionName, SessionType: SessionType}
+	return t.TrackBfd[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackBfds.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackBfds) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -28053,6 +29197,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackIpRoutes str
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackIpRoutes as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackIpRoutes) IsYangObject() {}
 
+// NewTrackIpRoute creates a new entry in the TrackIpRoute list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackIpRoutes) NewTrackIpRoute(VpnName string, IpAddress string, MaskLength uint8) (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackIpRoutes_TrackIpRoute, error) {
+	if t.TrackIpRoute == nil {
+		t.TrackIpRoute = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackIpRoutes_TrackIpRoute_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackIpRoutes_TrackIpRoute)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackIpRoutes_TrackIpRoute_Key{VpnName: VpnName, IpAddress: IpAddress, MaskLength: MaskLength}
+	if _, ok := t.TrackIpRoute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list TrackIpRoute", key)
+	}
+	t.TrackIpRoute[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackIpRoutes_TrackIpRoute{VpnName: &VpnName, IpAddress: &IpAddress, MaskLength: &MaskLength}
+	return t.TrackIpRoute[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackIpRoutes.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackIpRoutes) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -28233,6 +29390,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackMtgrps struc
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackMtgrps as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackMtgrps) IsYangObject() {}
 
+// NewTrackMtgrp creates a new entry in the TrackMtgrp list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackMtgrps) NewTrackMtgrp(MonitorGroupName string) (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackMtgrps_TrackMtgrp, error) {
+	if t.TrackMtgrp == nil {
+		t.TrackMtgrp = make(map[string]*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackMtgrps_TrackMtgrp)
+	}
+	key := MonitorGroupName
+	if _, ok := t.TrackMtgrp[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list TrackMtgrp", key)
+	}
+	t.TrackMtgrp[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackMtgrps_TrackMtgrp{MonitorGroupName: &MonitorGroupName}
+	return t.TrackMtgrp[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackMtgrps.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_TrackMtgrps) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -28378,6 +29548,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_VirtualIps struct
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_VirtualIps as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_VirtualIps) IsYangObject() {}
+
+// NewVirtualIp creates a new entry in the VirtualIp list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_VirtualIps) NewVirtualIp(Address string) (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_VirtualIps_VirtualIp, error) {
+	if t.VirtualIp == nil {
+		t.VirtualIp = make(map[string]*HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_VirtualIps_VirtualIp)
+	}
+	key := Address
+	if _, ok := t.VirtualIp[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list VirtualIp", key)
+	}
+	t.VirtualIp[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_VirtualIps_VirtualIp{Address: &Address}
+	return t.VirtualIp[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_VirtualIps.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv4_Vrrp_Groups_Group_VirtualIps) MarshalJSON() ([]byte, error) {
@@ -28590,6 +29773,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_Addresses struct {
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_Addresses as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_Addresses) IsYangObject() {}
 
+// NewAddress creates a new entry in the Address list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_Addresses) NewAddress(Ip string) (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_Addresses_Address, error) {
+	if t.Address == nil {
+		t.Address = make(map[string]*HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_Addresses_Address)
+	}
+	key := Ip
+	if _, ok := t.Address[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Address", key)
+	}
+	t.Address[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_Addresses_Address{Ip: &Ip}
+	return t.Address[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_Addresses.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_Addresses) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -28742,6 +29938,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_NdPrefixs struct {
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_NdPrefixs as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_NdPrefixs) IsYangObject() {}
+
+// NewNdPrefix creates a new entry in the NdPrefix list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_NdPrefixs) NewNdPrefix(Prefix string) (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_NdPrefixs_NdPrefix, error) {
+	if t.NdPrefix == nil {
+		t.NdPrefix = make(map[string]*HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_NdPrefixs_NdPrefix)
+	}
+	key := Prefix
+	if _, ok := t.NdPrefix[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list NdPrefix", key)
+	}
+	t.NdPrefix[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_NdPrefixs_NdPrefix{Prefix: &Prefix}
+	return t.NdPrefix[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_NdPrefixs.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_NdPrefixs) MarshalJSON() ([]byte, error) {
@@ -28952,6 +30161,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_State_Addresses struct {
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_State_Addresses as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_State_Addresses) IsYangObject() {}
+
+// NewAddress creates a new entry in the Address list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_State_Addresses) NewAddress(Ip string) (*HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_State_Addresses_Address, error) {
+	if t.Address == nil {
+		t.Address = make(map[string]*HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_State_Addresses_Address)
+	}
+	key := Ip
+	if _, ok := t.Address[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Address", key)
+	}
+	t.Address[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_State_Addresses_Address{Ip: &Ip}
+	return t.Address[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_State_Addresses.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Ipv6_State_Addresses) MarshalJSON() ([]byte, error) {
@@ -29356,6 +30578,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors struct {
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors) IsYangObject() {}
+
+// NewNeighbor creates a new entry in the Neighbor list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors) NewNeighbor(Index uint32) (*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor, error) {
+	if t.Neighbor == nil {
+		t.Neighbor = make(map[uint32]*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor)
+	}
+	key := Index
+	if _, ok := t.Neighbor[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Neighbor", key)
+	}
+	t.Neighbor[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor{Index: &Index}
+	return t.Neighbor[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors) MarshalJSON() ([]byte, error) {
@@ -29943,6 +31178,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_Manageme
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ManagementAddresss) IsYangObject() {
 }
 
+// NewManagementAddress creates a new entry in the ManagementAddress list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ManagementAddresss) NewManagementAddress(Type E_HuaweiLldp_ManagementAddressType, Value string, Length int32) (*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ManagementAddresss_ManagementAddress, error) {
+	if t.ManagementAddress == nil {
+		t.ManagementAddress = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ManagementAddresss_ManagementAddress_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ManagementAddresss_ManagementAddress)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ManagementAddresss_ManagementAddress_Key{Type: Type, Value: Value, Length: Length}
+	if _, ok := t.ManagementAddress[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ManagementAddress", key)
+	}
+	t.ManagementAddress[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ManagementAddresss_ManagementAddress{Type: Type, Value: &Value, Length: &Length}
+	return t.ManagementAddress[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ManagementAddresss.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ManagementAddresss) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -30136,6 +31384,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_Protocol
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ProtocolVlans) IsYangObject() {
 }
 
+// NewProtocolVlan creates a new entry in the ProtocolVlan list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ProtocolVlans) NewProtocolVlan(Id int32) (*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ProtocolVlans_ProtocolVlan, error) {
+	if t.ProtocolVlan == nil {
+		t.ProtocolVlan = make(map[int32]*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ProtocolVlans_ProtocolVlan)
+	}
+	key := Id
+	if _, ok := t.ProtocolVlan[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ProtocolVlan", key)
+	}
+	t.ProtocolVlan[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ProtocolVlans_ProtocolVlan{Id: &Id}
+	return t.ProtocolVlan[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ProtocolVlans.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_ProtocolVlans) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -30279,6 +31540,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownO
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownOrganizationallyDefinedTlvs as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownOrganizationallyDefinedTlvs) IsYangObject() {
+}
+
+// NewUnknownOrganizationallyDefinedTlv creates a new entry in the UnknownOrganizationallyDefinedTlv list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownOrganizationallyDefinedTlvs) NewUnknownOrganizationallyDefinedTlv(Oui string, SubType int32, Index int32) (*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownOrganizationallyDefinedTlvs_UnknownOrganizationallyDefinedTlv, error) {
+	if t.UnknownOrganizationallyDefinedTlv == nil {
+		t.UnknownOrganizationallyDefinedTlv = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownOrganizationallyDefinedTlvs_UnknownOrganizationallyDefinedTlv_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownOrganizationallyDefinedTlvs_UnknownOrganizationallyDefinedTlv)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownOrganizationallyDefinedTlvs_UnknownOrganizationallyDefinedTlv_Key{Oui: Oui, SubType: SubType, Index: Index}
+	if _, ok := t.UnknownOrganizationallyDefinedTlv[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list UnknownOrganizationallyDefinedTlv", key)
+	}
+	t.UnknownOrganizationallyDefinedTlv[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownOrganizationallyDefinedTlvs_UnknownOrganizationallyDefinedTlv{Oui: &Oui, SubType: &SubType, Index: &Index}
+	return t.UnknownOrganizationallyDefinedTlv[key], nil
 }
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownOrganizationallyDefinedTlvs.
@@ -30444,6 +31718,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownT
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownTlvs) IsYangObject() {
 }
 
+// NewUnknownTlv creates a new entry in the UnknownTlv list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownTlvs) NewUnknownTlv(Type int32) (*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownTlvs_UnknownTlv, error) {
+	if t.UnknownTlv == nil {
+		t.UnknownTlv = make(map[int32]*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownTlvs_UnknownTlv)
+	}
+	key := Type
+	if _, ok := t.UnknownTlv[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list UnknownTlv", key)
+	}
+	t.UnknownTlv[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownTlvs_UnknownTlv{Type: &Type}
+	return t.UnknownTlv[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownTlvs.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_UnknownTlvs) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -30561,6 +31848,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_VlanName
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_VlanNames as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_VlanNames) IsYangObject() {}
+
+// NewVlanName creates a new entry in the VlanName list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_VlanNames) NewVlanName(Id int32) (*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_VlanNames_VlanName, error) {
+	if t.VlanName == nil {
+		t.VlanName = make(map[int32]*HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_VlanNames_VlanName)
+	}
+	key := Id
+	if _, ok := t.VlanName[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list VlanName", key)
+	}
+	t.VlanName[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_VlanNames_VlanName{Id: &Id}
+	return t.VlanName[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_VlanNames.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Lldp_Session_Neighbors_Neighbor_VlanNames) MarshalJSON() ([]byte, error) {
@@ -31059,6 +32359,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Loadbalance_UcmpWeight_Nexthops struct {
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Loadbalance_UcmpWeight_Nexthops as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Loadbalance_UcmpWeight_Nexthops) IsYangObject() {}
 
+// NewNexthop creates a new entry in the Nexthop list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Loadbalance_UcmpWeight_Nexthops) NewNexthop(Address string) (*HuaweiIfm_Ifm_Interfaces_Interface_Loadbalance_UcmpWeight_Nexthops_Nexthop, error) {
+	if t.Nexthop == nil {
+		t.Nexthop = make(map[string]*HuaweiIfm_Ifm_Interfaces_Interface_Loadbalance_UcmpWeight_Nexthops_Nexthop)
+	}
+	key := Address
+	if _, ok := t.Nexthop[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Nexthop", key)
+	}
+	t.Nexthop[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Loadbalance_UcmpWeight_Nexthops_Nexthop{Address: &Address}
+	return t.Nexthop[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Loadbalance_UcmpWeight_Nexthops.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Loadbalance_UcmpWeight_Nexthops) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -31309,6 +32622,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_MLag_DfsGroups struct {
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_MLag_DfsGroups as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_MLag_DfsGroups) IsYangObject() {}
+
+// NewDfsGroup creates a new entry in the DfsGroup list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_MLag_DfsGroups) NewDfsGroup(GroupId uint8) (*HuaweiIfm_Ifm_Interfaces_Interface_MLag_DfsGroups_DfsGroup, error) {
+	if t.DfsGroup == nil {
+		t.DfsGroup = make(map[uint8]*HuaweiIfm_Ifm_Interfaces_Interface_MLag_DfsGroups_DfsGroup)
+	}
+	key := GroupId
+	if _, ok := t.DfsGroup[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list DfsGroup", key)
+	}
+	t.DfsGroup[key] = &HuaweiIfm_Ifm_Interfaces_Interface_MLag_DfsGroups_DfsGroup{GroupId: &GroupId}
+	return t.DfsGroup[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_MLag_DfsGroups.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_MLag_DfsGroups) MarshalJSON() ([]byte, error) {
@@ -32887,6 +34213,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Mirror_BasPortMirrors struct {
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Mirror_BasPortMirrors as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_BasPortMirrors) IsYangObject() {}
 
+// NewBasPortMirror creates a new entry in the BasPortMirror list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_BasPortMirrors) NewBasPortMirror(Direction E_HuaweiMirror_DirectionType, PevlanBegin uint16, PevlanEnd uint16, CevlanBegin uint16, CevlanEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_BasPortMirrors_BasPortMirror, error) {
+	if t.BasPortMirror == nil {
+		t.BasPortMirror = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Mirror_BasPortMirrors_BasPortMirror_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_BasPortMirrors_BasPortMirror)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Mirror_BasPortMirrors_BasPortMirror_Key{Direction: Direction, PevlanBegin: PevlanBegin, PevlanEnd: PevlanEnd, CevlanBegin: CevlanBegin, CevlanEnd: CevlanEnd}
+	if _, ok := t.BasPortMirror[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list BasPortMirror", key)
+	}
+	t.BasPortMirror[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Mirror_BasPortMirrors_BasPortMirror{Direction: Direction, PevlanBegin: &PevlanBegin, PevlanEnd: &PevlanEnd, CevlanBegin: &CevlanBegin, CevlanEnd: &CevlanEnd}
+	return t.BasPortMirror[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Mirror_BasPortMirrors.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_BasPortMirrors) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -33147,6 +34486,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Dot1QTypes struc
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Dot1QTypes as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Dot1QTypes) IsYangObject() {}
 
+// NewDot1QType creates a new entry in the Dot1QType list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Dot1QTypes) NewDot1QType(Direction E_HuaweiMirror_DirectionType, VlanBegin uint16, VlanEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Dot1QTypes_Dot1QType, error) {
+	if t.Dot1QType == nil {
+		t.Dot1QType = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Dot1QTypes_Dot1QType_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Dot1QTypes_Dot1QType)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Dot1QTypes_Dot1QType_Key{Direction: Direction, VlanBegin: VlanBegin, VlanEnd: VlanEnd}
+	if _, ok := t.Dot1QType[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Dot1QType", key)
+	}
+	t.Dot1QType[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Dot1QTypes_Dot1QType{Direction: Direction, VlanBegin: &VlanBegin, VlanEnd: &VlanEnd}
+	return t.Dot1QType[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Dot1QTypes.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Dot1QTypes) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -33339,6 +34691,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Pubs struct {
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Pubs as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Pubs) IsYangObject() {}
 
+// NewPub creates a new entry in the Pub list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Pubs) NewPub(Direction E_HuaweiMirror_DirectionType) (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Pubs_Pub, error) {
+	if t.Pub == nil {
+		t.Pub = make(map[E_HuaweiMirror_DirectionType]*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Pubs_Pub)
+	}
+	key := Direction
+	if _, ok := t.Pub[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Pub", key)
+	}
+	t.Pub[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Pubs_Pub{Direction: Direction}
+	return t.Pub[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Pubs.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_Pubs) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -33467,6 +34832,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_QinqTypes struct
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_QinqTypes as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_QinqTypes) IsYangObject() {}
+
+// NewQinqType creates a new entry in the QinqType list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_QinqTypes) NewQinqType(Direction E_HuaweiMirror_DirectionType, Pevlan uint16, CevlanBegin uint16, CevlanEnd uint16) (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_QinqTypes_QinqType, error) {
+	if t.QinqType == nil {
+		t.QinqType = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_QinqTypes_QinqType_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_QinqTypes_QinqType)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_QinqTypes_QinqType_Key{Direction: Direction, Pevlan: Pevlan, CevlanBegin: CevlanBegin, CevlanEnd: CevlanEnd}
+	if _, ok := t.QinqType[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list QinqType", key)
+	}
+	t.QinqType[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_QinqTypes_QinqType{Direction: Direction, Pevlan: &Pevlan, CevlanBegin: &CevlanBegin, CevlanEnd: &CevlanEnd}
+	return t.QinqType[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_QinqTypes.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_EvcL2PortMirrors_QinqTypes) MarshalJSON() ([]byte, error) {
@@ -33677,6 +35055,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Mirror_Integrateds struct {
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Mirror_Integrateds as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_Integrateds) IsYangObject() {}
 
+// NewIntegrated creates a new entry in the Integrated list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_Integrateds) NewIntegrated(Direction E_HuaweiMirror_DirectionType, CpuPacket bool) (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_Integrateds_Integrated, error) {
+	if t.Integrated == nil {
+		t.Integrated = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Mirror_Integrateds_Integrated_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_Integrateds_Integrated)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Mirror_Integrateds_Integrated_Key{Direction: Direction, CpuPacket: CpuPacket}
+	if _, ok := t.Integrated[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Integrated", key)
+	}
+	t.Integrated[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Mirror_Integrateds_Integrated{Direction: Direction, CpuPacket: &CpuPacket}
+	return t.Integrated[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Mirror_Integrateds.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_Integrateds) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -33852,6 +35243,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObserveGroups struct {
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObserveGroups as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObserveGroups) IsYangObject() {}
 
+// NewObserveGroup creates a new entry in the ObserveGroup list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObserveGroups) NewObserveGroup(GroupId uint8, Direction E_HuaweiMirror_DirectionType) (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObserveGroups_ObserveGroup, error) {
+	if t.ObserveGroup == nil {
+		t.ObserveGroup = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObserveGroups_ObserveGroup_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObserveGroups_ObserveGroup)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObserveGroups_ObserveGroup_Key{GroupId: GroupId, Direction: Direction}
+	if _, ok := t.ObserveGroup[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ObserveGroup", key)
+	}
+	t.ObserveGroup[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObserveGroups_ObserveGroup{GroupId: &GroupId, Direction: Direction}
+	return t.ObserveGroup[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObserveGroups.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObserveGroups) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -33988,6 +35392,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObservePorts struct {
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObservePorts as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObservePorts) IsYangObject() {}
 
+// NewObservePort creates a new entry in the ObservePort list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObservePorts) NewObservePort(ObserveIndex uint8, Direction E_HuaweiMirror_DirectionType) (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObservePorts_ObservePort, error) {
+	if t.ObservePort == nil {
+		t.ObservePort = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObservePorts_ObservePort_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObservePorts_ObservePort)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObservePorts_ObservePort_Key{ObserveIndex: ObserveIndex, Direction: Direction}
+	if _, ok := t.ObservePort[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ObservePort", key)
+	}
+	t.ObservePort[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObservePorts_ObservePort{ObserveIndex: &ObserveIndex, Direction: Direction}
+	return t.ObservePort[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObservePorts.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_ObservePorts) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -34123,6 +35540,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortFragments struct {
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortFragments as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortFragments) IsYangObject() {}
+
+// NewPortFragment creates a new entry in the PortFragment list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortFragments) NewPortFragment(Direction E_HuaweiMirror_DirectionType) (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortFragments_PortFragment, error) {
+	if t.PortFragment == nil {
+		t.PortFragment = make(map[E_HuaweiMirror_DirectionType]*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortFragments_PortFragment)
+	}
+	key := Direction
+	if _, ok := t.PortFragment[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PortFragment", key)
+	}
+	t.PortFragment[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortFragments_PortFragment{Direction: Direction}
+	return t.PortFragment[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortFragments.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortFragments) MarshalJSON() ([]byte, error) {
@@ -34404,6 +35834,19 @@ type HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortMirrors struct {
 
 // IsYangObject marks HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortMirrors as a generated YANG object.
 func (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortMirrors) IsYangObject() {}
+
+// NewPortMirror creates a new entry in the PortMirror list（重复 key 报错）。
+func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortMirrors) NewPortMirror(Direction E_HuaweiMirror_DirectionType, CpuPacket bool) (*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortMirrors_PortMirror, error) {
+	if t.PortMirror == nil {
+		t.PortMirror = make(map[HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortMirrors_PortMirror_Key]*HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortMirrors_PortMirror)
+	}
+	key := HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortMirrors_PortMirror_Key{Direction: Direction, CpuPacket: CpuPacket}
+	if _, ok := t.PortMirror[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PortMirror", key)
+	}
+	t.PortMirror[key] = &HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortMirrors_PortMirror{Direction: Direction, CpuPacket: &CpuPacket}
+	return t.PortMirror[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortMirrors.
 func (t *HuaweiIfm_Ifm_Interfaces_Interface_Mirror_PortMirrors) MarshalJSON() ([]byte, error) {

@@ -8,6 +8,8 @@ package ygotbridge
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
 	"reflect"
 	"sort"
 	"strings"
@@ -204,10 +206,11 @@ func irList(e *yang.Entry, path string, inheritedRO bool) *schema.IRNode {
 	}
 	out := &schema.IRNode{
 		Kind: "list", Name: e.Name, Description: e.Description, Path: path,
-		ReadOnly:   ro,
-		When:       firstExtraExpr(e.Extra["when"]),
-		Must:       allExtraExprs(e.Extra["must"]),
-		OpExcludes: extOperationExcludes(e),
+		ReadOnly:    ro,
+		MinElements: listMinElements(e),
+		When:        firstExtraExpr(e.Extra["when"]),
+		Must:        allExtraExprs(e.Extra["must"]),
+		OpExcludes:  extOperationExcludes(e),
 	}
 	for _, child := range sortedDir(e) {
 		if child.IsChoice() {
@@ -279,4 +282,111 @@ func irLeaf(e *yang.Entry, path string, isKey bool, inheritedRO bool) *schema.IR
 		out.Units = e.Units
 	}
 	return out
+}
+
+// listMinElements 提取 YANG min-elements（无 ListAttr = 0）。
+func listMinElements(e *yang.Entry) uint64 {
+	if e.ListAttr == nil {
+		return 0
+	}
+	return e.ListAttr.MinElements
+}
+
+// LoadModuleEntries 构建期从 YANG 源目录装载模块闭包（AddPath 递归 + Read +
+// Process + ToEntry；与 tools/yanggen 装载语义一致）。schemagen 直读源用
+// （S4：不再经 generated 包 gzip schema）。
+func LoadModuleEntries(paths, modules []string) (map[string]*yang.Entry, error) {
+	ms := yang.NewModules()
+	for _, p := range paths {
+		if err := filepath.Walk(p, func(sub string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			if info.IsDir() {
+				ms.AddPath(sub)
+			}
+			return nil
+		}); err != nil {
+			return nil, fmt.Errorf("ygotbridge: 模型目录不可用 %s: %w", p, err)
+		}
+	}
+	for _, m := range modules {
+		found := false
+		for _, p := range paths {
+			fn := filepath.Join(p, m+".yang")
+			if _, err := os.Stat(fn); err == nil {
+				if err := ms.Read(fn); err != nil {
+					return nil, fmt.Errorf("ygotbridge: read %s: %w", m, err)
+				}
+				found = true
+				break
+			}
+		}
+		if !found {
+			if err := ms.Read(m + ".yang"); err != nil {
+				return nil, fmt.Errorf("ygotbridge: 模块 %s 未找到: %w", m, err)
+			}
+		}
+	}
+	if errs := ms.Process(); len(errs) > 0 {
+		for _, e := range errs {
+			fmt.Fprintf(os.Stderr, "ygotbridge: yang process warning: %v\n", e)
+		}
+	}
+	entries := make(map[string]*yang.Entry)
+	for name, mod := range ms.Modules {
+		if strings.Contains(name, "@") || mod == nil {
+			continue
+		}
+		if e := yang.ToEntry(mod); e != nil {
+			entries[name] = e
+		}
+	}
+	return entries, nil
+}
+
+// AddSourceModules 把直读源的模块闭包顶层容器转换入 ds（vendor 统一打标；
+// 模块名排序 + 容器 sortedDir 口径保确定性——与 AddYgotSchemaWithVendor 一致）。
+//
+// stripDescriptions=true 剥离全部 description：gzip 往返历史行为不含描述
+// （实测 5/5 抽样差异均为 desc、结构零差异），切换直读源时先冻结字节稳定；
+// 描述增益作为独立增强另行拍板（GD-01 联动前端黄金）。
+func AddSourceModules(ds *schema.DefaultSchema, entries map[string]*yang.Entry, vendor string, stripDescriptions bool) error {
+	names := make([]string, 0, len(entries))
+	for n := range entries {
+		names = append(names, n)
+	}
+	sort.Strings(names)
+	for _, mname := range names {
+		root := entries[mname]
+		for _, c := range sortedDir(root) {
+			if c.IsLeaf() || c.IsLeafList() || c.RPC != nil {
+				continue
+			}
+			im := irModule(c, vendor)
+			if stripDescriptions {
+				stripDesc(im.Root)
+			}
+			m, err := schema.ModuleFromIR(im)
+			if err != nil {
+				return fmt.Errorf("ygotbridge: %s: %w", mname, err)
+			}
+			ds.AddModule(m)
+		}
+	}
+	return nil
+}
+
+// stripDesc 递归清空 IR 节点描述（含 choice cases）。
+func stripDesc(n *schema.IRNode) {
+	if n == nil {
+		return
+	}
+	n.Description = ""
+	for _, c := range n.Children {
+		stripDesc(c)
+	}
+	for _, c := range n.Cases {
+		stripDesc(c)
+	}
 }

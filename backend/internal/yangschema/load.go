@@ -12,9 +12,8 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
-// Load builds the framework schema tree. 数据源自阶段1.4（retire-ygot-runtime）
-// 起为构建期 IR blob（ir_load.go，运行期零 ygot/goyang）；旧链路（generated
-// Schema()→ygotbridge 转换）仅存活于 ir_parity_test.go 对拍与 tools/schemagen。
+// Load builds the framework schema tree（构建期 IR blob，运行期零 ygot/goyang；
+// blob 由 tools/schemagen 直读 YANG 源生成，新鲜度门禁见其测试）。
 //
 // 结果记忆化（full-yang-onboarding）：生成闭包扩到 67 根容器后，单次 gzip
 // schema 解包成本显著；schema 构建是纯函数、产物只读（DefaultSchema 并发安全），

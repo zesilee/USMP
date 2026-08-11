@@ -144,6 +144,6 @@ if [ "$found" = 0 ]; then
     exit 1
 fi
 # schema IR blob 随生成物联动刷新（YN-03；ir_parity_test 兜底「忘刷新」）。
-(cd "$ROOT/backend" && go run ./tools/schemagen -output=internal/yangschema/schema.ir.gz)
+(cd "$ROOT/backend" && go run ./tools/schemagen -repo_root=.. -output=internal/yangschema/schema.ir.gz)
 
 echo "✅ gen-yang 完成（生成物勿手改，改 YANG/gen.conf 后重跑 make gen-yang）"

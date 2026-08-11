@@ -12,7 +12,7 @@ import (
 // TestBuildIRDecodable：产物必须可解码、非空、含既有关键模块（vlan/ifm 是最早
 // 交付的两个模块，任何丢模块的回归都会在此显形）。
 func TestBuildIRDecodable(t *testing.T) {
-	blob, err := BuildIR()
+	blob, err := BuildIR("../../..")
 	if err != nil {
 		t.Fatalf("BuildIR: %v", err)
 	}
@@ -36,11 +36,11 @@ func TestBuildIRDecodable(t *testing.T) {
 
 // TestBuildIRDeterministic：两次构建字节一致（CG-01 可复现契约在 IR 产物上的体现）。
 func TestBuildIRDeterministic(t *testing.T) {
-	a, err := BuildIR()
+	a, err := BuildIR("../../..")
 	if err != nil {
 		t.Fatal(err)
 	}
-	b, err := BuildIR()
+	b, err := BuildIR("../../..")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -51,7 +51,7 @@ func TestBuildIRDeterministic(t *testing.T) {
 
 func TestRunWritesFile(t *testing.T) {
 	out := filepath.Join(t.TempDir(), "schema.ir.gz")
-	if err := Run(out); err != nil {
+	if err := Run("../../..", out); err != nil {
 		t.Fatalf("Run: %v", err)
 	}
 	blob, err := os.ReadFile(out)
@@ -64,7 +64,7 @@ func TestRunWritesFile(t *testing.T) {
 }
 
 func TestRunBadPath(t *testing.T) {
-	if err := Run(filepath.Join(t.TempDir(), "no-such-dir", "x.gz")); err == nil {
+	if err := Run("../../..", filepath.Join(t.TempDir(), "no-such-dir", "x.gz")); err == nil {
 		t.Fatal("Run to non-existent dir should error")
 	}
 }

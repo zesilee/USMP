@@ -29,6 +29,16 @@ var Types = map[string]reflect.Type{
 	"UsmpTest_Box_Vlans_Vlan":   reflect.TypeOf((*UsmpTest_Box_Vlans_Vlan)(nil)).Elem(),
 }
 
+// Unmarshal decodes RFC7951 JSON into dest（分派到生成式 UnmarshalJSON；
+// 替代 ygot ytypes.Unmarshal 的包级入口，签名对齐 driver 描述符）。
+func Unmarshal(data []byte, dest object.Object) error {
+	um, ok := dest.(json.Unmarshaler)
+	if !ok {
+		return fmt.Errorf("gentest: %T has no generated UnmarshalJSON", dest)
+	}
+	return um.UnmarshalJSON(data)
+}
+
 // Device represents the /device YANG schema element.
 type Device struct {
 	Box *UsmpTest_Box `path:"box" module:"usmp-test"`
@@ -401,6 +411,19 @@ type UsmpTest_Box_Routes struct {
 // IsYangObject marks UsmpTest_Box_Routes as a generated YANG object.
 func (*UsmpTest_Box_Routes) IsYangObject() {}
 
+// NewRoute creates a new entry in the Route list（重复 key 报错）。
+func (t *UsmpTest_Box_Routes) NewRoute(Vrf string, Prefix string) (*UsmpTest_Box_Routes_Route, error) {
+	if t.Route == nil {
+		t.Route = make(map[UsmpTest_Box_Routes_Route_Key]*UsmpTest_Box_Routes_Route)
+	}
+	key := UsmpTest_Box_Routes_Route_Key{Vrf: Vrf, Prefix: Prefix}
+	if _, ok := t.Route[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Route", key)
+	}
+	t.Route[key] = &UsmpTest_Box_Routes_Route{Vrf: &Vrf, Prefix: &Prefix}
+	return t.Route[key], nil
+}
+
 // MarshalJSON implements RFC7951 encoding for UsmpTest_Box_Routes.
 func (t *UsmpTest_Box_Routes) MarshalJSON() ([]byte, error) {
 	out := make(map[string]json.RawMessage)
@@ -544,6 +567,19 @@ type UsmpTest_Box_Vlans struct {
 
 // IsYangObject marks UsmpTest_Box_Vlans as a generated YANG object.
 func (*UsmpTest_Box_Vlans) IsYangObject() {}
+
+// NewVlan creates a new entry in the Vlan list（重复 key 报错）。
+func (t *UsmpTest_Box_Vlans) NewVlan(Id uint16) (*UsmpTest_Box_Vlans_Vlan, error) {
+	if t.Vlan == nil {
+		t.Vlan = make(map[uint16]*UsmpTest_Box_Vlans_Vlan)
+	}
+	key := Id
+	if _, ok := t.Vlan[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Vlan", key)
+	}
+	t.Vlan[key] = &UsmpTest_Box_Vlans_Vlan{Id: &Id}
+	return t.Vlan[key], nil
+}
 
 // MarshalJSON implements RFC7951 encoding for UsmpTest_Box_Vlans.
 func (t *UsmpTest_Box_Vlans) MarshalJSON() ([]byte, error) {
