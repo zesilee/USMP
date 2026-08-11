@@ -194,16 +194,6 @@ func (m *DefaultManager) Start(ctx context.Context) error {
 
 	m.ctx, m.cancel = context.WithCancel(ctx)
 
-	// Load schemas from directory if provided and no pre-built schema was injected.
-	if m.options.Schema == nil && m.options.SchemeDir != "" {
-		loader := schema.NewLoader(m.options.SchemeDir)
-		loadedSchema, err := loader.Load()
-		if err != nil {
-			return err
-		}
-		m.schema = loadedSchema
-	}
-
 	// Start all controllers
 	for _, ctrl := range m.controllers {
 		if err := ctrl.Start(m.ctx); err != nil {

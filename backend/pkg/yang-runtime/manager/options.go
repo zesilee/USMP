@@ -18,9 +18,7 @@ type Options struct {
 	DefaultTimeout time.Duration
 	// RateLimiter is the default rate limiter for controller queues
 	RateLimiter queue.RateLimiter
-	// SchemeDir is the directory containing YANG schema files
-	SchemeDir string
-	// Schema is a pre-built YANG schema to use (takes precedence over SchemeDir).
+	// Schema is a pre-built YANG schema to use.
 	// Typically built from generated ygot models via schema.AddYgotSchema.
 	Schema schema.Schema
 	// EnableDebug enables debug logging
@@ -59,13 +57,6 @@ func WithRateLimiter(r queue.RateLimiter) Option {
 	}
 }
 
-// WithSchemeDir sets the directory containing YANG schema files
-func WithSchemeDir(dir string) Option {
-	return func(o *Options) {
-		o.SchemeDir = dir
-	}
-}
-
 // WithAuditFile 已退役（OA-05）：仅保留兼容，非空路径产生弃用警告。
 func WithAuditFile(path string) Option {
 	return func(o *Options) {
@@ -73,8 +64,8 @@ func WithAuditFile(path string) Option {
 	}
 }
 
-// WithSchema injects a pre-built YANG schema (e.g. built from generated ygot
-// models). Takes precedence over SchemeDir. Fixes the empty-schema-tree gap.
+// WithSchema injects a pre-built YANG schema (e.g. loaded from the build-time
+// schema IR blob). Fixes the empty-schema-tree gap.
 func WithSchema(s schema.Schema) Option {
 	return func(o *Options) {
 		o.Schema = s
