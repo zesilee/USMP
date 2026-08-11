@@ -10,8 +10,8 @@
 - **WHEN** 已注册 huawei/`vlan:` 描述符，`Lookup("huawei", "/vlan:vlans/...")`
 - **THEN** SHALL 返回该描述符，`ok=true`
 
-#### Scenario: 按 Object 类型查得编解码数据
-- **WHEN** 以已注册模块的 Object 类型（含其内层 list map 形态）查找编码描述符
+#### Scenario: 按 GoStruct 类型查得编解码数据
+- **WHEN** 以已注册模块的容器类型（自研 Object，原 ygot GoStruct；含其内层 list map 形态）查找编码描述符
 - **THEN** SHALL 返回携带 XML 编解码数据的描述符，`ok=true`
 
 #### Scenario: 未命中降级（负路径）
