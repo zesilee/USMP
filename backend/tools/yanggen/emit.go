@@ -95,8 +95,12 @@ func neededImports(chunk string) []string {
 	if strings.Contains(chunk, "reflect.") {
 		imps = append(imps, "reflect")
 	}
-	if strings.Contains(chunk, "object.") {
-		imps = append(imps, objectImport)
+	// 闭集匹配（生成器产出的 object 包引用只有这几种），避免注释文本误报。
+	for _, tok := range []string{"object.Empty", "object.Binary", "object.EnumDefinition", "object.EnumLogString"} {
+		if strings.Contains(chunk, tok) {
+			imps = append(imps, objectImport)
+			break
+		}
 	}
 	return imps
 }
@@ -151,7 +155,8 @@ func emitStruct(s *Struct) (string, error) {
 	}
 	b.WriteString("}\n\n")
 
-	fmt.Fprintf(&b, "// IsYangObject ensures that %s implements the object.Object interface.\n", s.Name)
+	// 注：勿在注释里写 "object." 字面量——structs 分片的 import 裁剪按词表匹配。
+	fmt.Fprintf(&b, "// IsYangObject marks %s as a generated YANG object.\n", s.Name)
 	fmt.Fprintf(&b, "func (*%s) IsYangObject() {}\n\n", s.Name)
 
 	if len(s.Keys) > 0 {
@@ -174,6 +179,18 @@ func emitStruct(s *Struct) (string, error) {
 			fmt.Fprintf(&b, "%q: %st.%s", k.YangName, deref, k.GoName)
 		}
 		b.WriteString("}, nil\n}\n\n")
+	}
+
+	if s.OrderedKey != "" {
+		om, k := s.Name+"_OrderedMap", s.OrderedKey
+		fmt.Fprintf(&b, "// %s is an ordered-by-user list container for %s（字段形状冻结自 ygot）。\n", om, s.Name)
+		fmt.Fprintf(&b, "type %s struct {\n\tkeys []%s\n\tvalueMap map[%s]*%s\n}\n\n", om, k, k, s.Name)
+		fmt.Fprintf(&b, "func (o *%s) init() {\n\tif o.valueMap == nil {\n\t\to.valueMap = map[%s]*%s{}\n\t}\n}\n\n", om, k, s.Name)
+		fmt.Fprintf(&b, "// Keys returns the list keys in insertion order.\nfunc (o *%s) Keys() []%s { return o.keys }\n\n", om, k)
+		fmt.Fprintf(&b, "// Values returns the entries in insertion order.\nfunc (o *%s) Values() []*%s {\n\tout := make([]*%s, 0, len(o.keys))\n\tfor _, k := range o.keys {\n\t\tout = append(out, o.valueMap[k])\n\t}\n\treturn out\n}\n\n", om, s.Name, s.Name)
+		fmt.Fprintf(&b, "// Len returns the entry count.\nfunc (o *%s) Len() int { return len(o.keys) }\n\n", om)
+		fmt.Fprintf(&b, "// Get returns the entry for key k, nil if absent.\nfunc (o *%s) Get(k %s) *%s { return o.valueMap[k] }\n\n", om, k, s.Name)
+		fmt.Fprintf(&b, "// Append adds an entry at the end（重复 key 报错）。\nfunc (o *%s) Append(k %s, v *%s) error {\n\to.init()\n\tif _, dup := o.valueMap[k]; dup {\n\t\treturn fmt.Errorf(\"duplicate key %%v\", k)\n\t}\n\to.keys = append(o.keys, k)\n\to.valueMap[k] = v\n\treturn nil\n}\n\n", om, k, s.Name)
 	}
 
 	if s.KeyName != "" {
@@ -225,7 +242,7 @@ func emitEnums(m *Model) string {
 		fmt.Fprintf(&b, "// IsYangEnum ensures that %s implements the object.Enum interface.\n", e.Name)
 		fmt.Fprintf(&b, "func (%s) IsYangEnum() {}\n\n", e.Name)
 		fmt.Fprintf(&b, "// EnumMaps returns the generation-wide enum definition map.\n")
-		fmt.Fprintf(&b, "func (e %s) EnumMaps() map[string]map[int64]object.EnumDefinition { return enumMaps }\n\n", e.Name)
+		fmt.Fprintf(&b, "func (e %s) EnumMaps() map[string]map[int64]object.EnumDefinition { return EnumMaps }\n\n", e.Name)
 		fmt.Fprintf(&b, "// String renders e as its YANG value name.\n")
 		fmt.Fprintf(&b, "func (e %s) String() string {\n\treturn object.EnumLogString(e, int64(e), %q)\n}\n\n", e.Name, e.Name)
 		b.WriteString("const (\n")
@@ -244,7 +261,7 @@ func emitEnumMaps(m *Model) string {
 	var b strings.Builder
 	b.WriteString("// enumMaps 是全包枚举定义表（外层 key 带 E_ 前缀——消费方按\n")
 	b.WriteString("// reflect Type().Name() 查表，失配即静默解码错，勿改口径）。\n")
-	b.WriteString("var enumMaps = map[string]map[int64]object.EnumDefinition{\n")
+	b.WriteString("var EnumMaps = map[string]map[int64]object.EnumDefinition{\n")
 	for _, e := range m.Enums {
 		fmt.Fprintf(&b, "\t%q: {\n", e.Name)
 		for _, v := range e.Values {

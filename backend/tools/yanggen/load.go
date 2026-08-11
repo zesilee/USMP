@@ -108,19 +108,27 @@ func LoadEntries(paths, modules []string) (map[string]*yang.Entry, map[string]*y
 			fmt.Fprintf(os.Stderr, "yanggen: yang process warning: %v\n", e)
 		}
 	}
-	entries := make(map[string]*yang.Entry, len(modules))
-	mods := make(map[string]*yang.Module, len(modules))
 	for _, m := range modules {
-		mod, ok := ms.Modules[m]
-		if !ok || mod == nil {
+		if _, ok := ms.Modules[m]; !ok {
 			return nil, nil, fmt.Errorf("yanggen: 模块 %s 解析后缺失", m)
+		}
+	}
+	// 生成域 = **整个依赖闭包**（显式列出的模块 + 被 import 拉入的全部模块）——
+	// ygot 行为冻结：acl/routing/tunnel-management 等未列出的依赖模块的顶层容器
+	// 同样入 Device（对拍实证缺 13 个顶层容器的根因）。Modules map 含
+	// "name@revision" 重复键，按裸名去重。
+	entries := make(map[string]*yang.Entry)
+	mods := make(map[string]*yang.Module)
+	for name, mod := range ms.Modules {
+		if strings.Contains(name, "@") || mod == nil {
+			continue
 		}
 		e := yang.ToEntry(mod)
 		if e == nil {
-			return nil, nil, fmt.Errorf("yanggen: 模块 %s 无法转换为 entry", m)
+			return nil, nil, fmt.Errorf("yanggen: 模块 %s 无法转换为 entry", name)
 		}
-		entries[m] = e
-		mods[m] = mod
+		entries[name] = e
+		mods[name] = mod
 	}
 	return entries, mods, nil
 }

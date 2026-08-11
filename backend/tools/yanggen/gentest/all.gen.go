@@ -31,7 +31,7 @@ type Device struct {
 	Box *UsmpTest_Box `path:"box" module:"usmp-test"`
 }
 
-// IsYangObject ensures that Device implements the object.Object interface.
+// IsYangObject marks Device as a generated YANG object.
 func (*Device) IsYangObject() {}
 
 // UsmpTest_Box represents the /usmp-test/box YANG schema element.
@@ -55,7 +55,7 @@ type UsmpTest_Box struct {
 	Vlans    *UsmpTest_Box_Vlans     `path:"vlans" module:"usmp-test"`
 }
 
-// IsYangObject ensures that UsmpTest_Box implements the object.Object interface.
+// IsYangObject marks UsmpTest_Box as a generated YANG object.
 func (*UsmpTest_Box) IsYangObject() {}
 
 // UsmpTest_Box_Extras represents the /usmp-test/box/extras YANG schema element.
@@ -63,7 +63,7 @@ type UsmpTest_Box_Extras struct {
 	Note *string `path:"note" module:"usmp-test-ext"`
 }
 
-// IsYangObject ensures that UsmpTest_Box_Extras implements the object.Object interface.
+// IsYangObject marks UsmpTest_Box_Extras as a generated YANG object.
 func (*UsmpTest_Box_Extras) IsYangObject() {}
 
 // UsmpTest_Box_Feature represents the /usmp-test/box/feature YANG schema element.
@@ -71,7 +71,7 @@ type UsmpTest_Box_Feature struct {
 	Rate *uint32 `path:"rate" module:"usmp-test"`
 }
 
-// IsYangObject ensures that UsmpTest_Box_Feature implements the object.Object interface.
+// IsYangObject marks UsmpTest_Box_Feature as a generated YANG object.
 func (*UsmpTest_Box_Feature) IsYangObject() {}
 
 // UsmpTest_Box_Routes represents the /usmp-test/box/routes YANG schema element.
@@ -79,7 +79,7 @@ type UsmpTest_Box_Routes struct {
 	Route map[UsmpTest_Box_Routes_Route_Key]*UsmpTest_Box_Routes_Route `path:"route" module:"usmp-test"`
 }
 
-// IsYangObject ensures that UsmpTest_Box_Routes implements the object.Object interface.
+// IsYangObject marks UsmpTest_Box_Routes as a generated YANG object.
 func (*UsmpTest_Box_Routes) IsYangObject() {}
 
 // UsmpTest_Box_Routes_Route represents the /usmp-test/box/routes/route YANG schema element.
@@ -89,7 +89,7 @@ type UsmpTest_Box_Routes_Route struct {
 	Vrf    *string `path:"vrf" module:"usmp-test"`
 }
 
-// IsYangObject ensures that UsmpTest_Box_Routes_Route implements the object.Object interface.
+// IsYangObject marks UsmpTest_Box_Routes_Route as a generated YANG object.
 func (*UsmpTest_Box_Routes_Route) IsYangObject() {}
 
 // ListKeyMap returns the list keys of UsmpTest_Box_Routes_Route（YANG 叶名 → 值）。
@@ -119,7 +119,7 @@ type UsmpTest_Box_Vlans struct {
 	Vlan map[uint16]*UsmpTest_Box_Vlans_Vlan `path:"vlan" module:"usmp-test"`
 }
 
-// IsYangObject ensures that UsmpTest_Box_Vlans implements the object.Object interface.
+// IsYangObject marks UsmpTest_Box_Vlans as a generated YANG object.
 func (*UsmpTest_Box_Vlans) IsYangObject() {}
 
 // UsmpTest_Box_Vlans_Vlan represents the /usmp-test/box/vlans/vlan YANG schema element.
@@ -129,7 +129,7 @@ type UsmpTest_Box_Vlans_Vlan struct {
 	Name        *string                 `path:"name" module:"usmp-test"`
 }
 
-// IsYangObject ensures that UsmpTest_Box_Vlans_Vlan implements the object.Object interface.
+// IsYangObject marks UsmpTest_Box_Vlans_Vlan as a generated YANG object.
 func (*UsmpTest_Box_Vlans_Vlan) IsYangObject() {}
 
 // ListKeyMap returns the list keys of UsmpTest_Box_Vlans_Vlan（YANG 叶名 → 值）。
@@ -147,7 +147,7 @@ type E_UsmpTest_Box_Mode int64
 func (E_UsmpTest_Box_Mode) IsYangEnum() {}
 
 // EnumMaps returns the generation-wide enum definition map.
-func (e E_UsmpTest_Box_Mode) EnumMaps() map[string]map[int64]object.EnumDefinition { return enumMaps }
+func (e E_UsmpTest_Box_Mode) EnumMaps() map[string]map[int64]object.EnumDefinition { return EnumMaps }
 
 // String renders e as its YANG value name.
 func (e E_UsmpTest_Box_Mode) String() string {
@@ -171,7 +171,7 @@ func (E_UsmpTest_EnableStatus) IsYangEnum() {}
 
 // EnumMaps returns the generation-wide enum definition map.
 func (e E_UsmpTest_EnableStatus) EnumMaps() map[string]map[int64]object.EnumDefinition {
-	return enumMaps
+	return EnumMaps
 }
 
 // String renders e as its YANG value name.
@@ -190,7 +190,7 @@ const (
 
 // enumMaps 是全包枚举定义表（外层 key 带 E_ 前缀——消费方按
 // reflect Type().Name() 查表，失配即静默解码错，勿改口径）。
-var enumMaps = map[string]map[int64]object.EnumDefinition{
+var EnumMaps = map[string]map[int64]object.EnumDefinition{
 	"E_UsmpTest_Box_Mode": {
 		1: {Name: "access"},
 		2: {Name: "trunk"},

@@ -9,18 +9,30 @@ import (
 )
 
 // registerEnum registers an enumeration type and returns its E_ type name.
-// typedef enum → E_<CamelCase(定义模块)>_<CamelCase(typedef名)>（union 内追加
-// _Enum）；内联 enumeration → E_<宿主struct>_<CamelCase(叶名)>。
+// typedef enum → E_<CamelCase(使用方叶所属模块)>_<CamelCase(typedef名)>（union
+// 内追加 _Enum）；内联 enumeration → E_<宿主struct>_<CamelCase(叶名)>。
 func (b *builder) registerEnum(hostStruct string, e *yang.Entry, t *yang.YangType, inUnion bool) string {
 	var name string
 	if t.Name != "" && t.Name != "enumeration" {
-		mod := b.typedefModule(e, t.Name)
-		name = "E_" + yang.CamelCase(mod) + "_" + yang.CamelCase(t.Name)
+		// 冻结规则（对拍实证）：typedef 枚举按**使用方叶的所属模块**命名，非
+		// typedef 定义模块——pub-type:row-status 被 acl/time-range 实例化为
+		// E_HuaweiAcl_RowStatus / E_HuaweiTimeRange_RowStatus 各一份。
+		name = "E_" + yang.CamelCase(belongingModule(e)) + "_" + yang.CamelCase(t.Name)
 		if inUnion {
 			name += "_Enum"
 		}
 	} else {
+		// 内联枚举：grouping 复用共享同一 AST → 单枚举类型、首次实例化命名
+		//（遍历序确定即命名确定）。
+		if e.Node != nil {
+			if existing, ok := b.enumByNode[e.Node]; ok {
+				return existing
+			}
+		}
 		name = "E_" + hostStruct + "_" + FieldName(e.Name)
+		if e.Node != nil {
+			b.enumByNode[e.Node] = name
+		}
 	}
 	if _, ok := b.m.enumIdx[name]; ok {
 		return name
@@ -88,78 +100,38 @@ func identityModule(id *yang.Identity) string {
 	return root.Name
 }
 
-// registerUnion registers a union interface for leaf e（e 已是定义 union 的叶：
-// leafref 在 mapType 先行解析到目标）。接口名 = <宿主struct>_<CamelCase(叶名)>_Union。
-func (b *builder) registerUnion(hostStruct string, e *yang.Entry, t *yang.YangType) string {
-	name := hostStruct + "_" + FieldName(e.Name) + "_Union"
-	if _, ok := b.m.unionIdx[name]; ok {
-		return name
-	}
-	u := &Union{Name: name}
-	b.m.unionIdx[name] = u // 先登记防递归（union 成员理论上可再嵌 union）
+// registerUnion resolves a union leaf's Go type（e 已是定义 union 的叶：leafref
+// 在 mapType 先行解析到目标）。**同型折叠**（冻结自 ygot 行为）：全部成员映射
+// 到同一 Go 类型时不生成接口，直接用该类型（string|string 的 ip 地址类 typedef
+// 全走此路径——huawei 闭包 265 处 union 叶折叠后仅剩 6 个真接口）；异型才生成
+// 接口 <宿主struct>_<CamelCase(叶名)>_Union + 包装类型。
+// 返回 (Go 类型, 是否指针标量)。
+func (b *builder) registerUnion(hostStruct string, e *yang.Entry, t *yang.YangType) (string, bool) {
+	var members []string
 	seen := map[string]bool{}
+	memberPtr := false
 	for _, mt := range t.Type {
-		got, _, err := b.mapType(hostStruct, e, mt, true)
+		got, ptr, err := b.mapType(hostStruct, e, mt, true)
 		if err != nil || got == "interface{}" {
 			continue // 不支持的成员跳过（-ignore_unsupported 同精神）
 		}
 		if !seen[got] {
 			seen[got] = true
-			u.Members = append(u.Members, got)
+			members = append(members, got)
+			memberPtr = ptr
 		}
 	}
-	return name
-}
-
-// typedefModule 判定 typedef 的定义模块：优先看叶 AST 声明的类型名前缀
-// （prefix 经 goyang 按定义方模块的 import 表解析——grouping 展开后 AST 仍属
-// 定义方模块，语义正确）；无前缀即 AST 根模块。
-func (b *builder) typedefModule(e *yang.Entry, typedefName string) string {
-	if e.Node != nil {
-		if astName := astTypeName(e.Node, typedefName); astName != "" {
-			if pfx, _, ok := strings.Cut(astName, ":"); ok {
-				if m := yang.FindModuleByPrefix(e.Node, pfx); m != nil {
-					if m.BelongsTo != nil {
-						return m.BelongsTo.Name
-					}
-					return m.Name
-				}
-			}
-		}
-		if root := yang.RootNode(e.Node); root != nil {
-			if root.BelongsTo != nil {
-				return root.BelongsTo.Name
-			}
-			return root.Name
-		}
+	if len(members) == 0 {
+		return "interface{}", false
 	}
-	return ""
-}
-
-// astTypeName 从叶/leaf-list 的 AST 取声明类型名（可能带前缀）。typedefName
-// 用于在 union AST 成员里匹配对应项。
-func astTypeName(n yang.Node, typedefName string) string {
-	var t *yang.Type
-	switch l := n.(type) {
-	case *yang.Leaf:
-		t = l.Type
-	case *yang.LeafList:
-		t = l.Type
-	default:
-		return ""
+	if len(members) == 1 {
+		return members[0], memberPtr // 同型折叠
 	}
-	if t == nil {
-		return ""
+	name := hostStruct + "_" + FieldName(e.Name) + "_Union"
+	if _, ok := b.m.unionIdx[name]; !ok {
+		b.m.unionIdx[name] = &Union{Name: name, Members: members}
 	}
-	if bare(t.Name) == typedefName {
-		return t.Name
-	}
-	for _, mt := range t.Type { // union AST 成员
-		if bare(mt.Name) == typedefName {
-			return mt.Name
-		}
-	}
-	return ""
+	return name, false
 }
 
 func bare(name string) string {

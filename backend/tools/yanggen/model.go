@@ -30,6 +30,9 @@ type Struct struct {
 	Fields  []*Field // 按 Go 字段名字典序
 	Keys    []*Field // list 成员的 key 字段，按 YANG key 语句顺序；nil=非 list 成员
 	KeyName string   // 复合键 struct 名（"<Name>_Key"），单键/非 list 为空
+	// OrderedKey 非空 = ordered-by user 列表成员：宿主字段为 *<Name>_OrderedMap，
+	// emit 层生成保序容器类型（keys 切片 + valueMap，冻结 ygot 字段形状）。
+	OrderedKey string
 }
 
 // Field is one generated struct field.
@@ -64,6 +67,12 @@ type Union struct {
 type builder struct {
 	m       *Model
 	modules map[string]*yang.Module
+	// rootDir：全闭包顶层容器索引（裸名→entry），跨模块 leafref 解析用
+	//（/ifm:ifm/... 指向别的模块树；顶层容器名在闭包内唯一）。
+	rootDir map[string]*yang.Entry
+	// enumByNode：内联枚举按 AST 节点去重（grouping 复用时 goyang 展开共享
+	// 同一 AST——ygot 只生成一个枚举类型、命名取首次实例化，对拍实证）。
+	enumByNode map[yang.Node]string
 }
 
 // BuildModel walks the loaded module entries into a generation model.
@@ -76,7 +85,16 @@ func BuildModel(pkg string, entries map[string]*yang.Entry, mods map[string]*yan
 			enumIdx:   map[string]*Enum{},
 			unionIdx:  map[string]*Union{},
 		},
-		modules: mods,
+		modules:    mods,
+		rootDir:    map[string]*yang.Entry{},
+		enumByNode: map[yang.Node]string{},
+	}
+	for _, mname := range sortedNames(entries) {
+		for cname, c := range entries[mname].Dir {
+			if !c.IsLeaf() && !c.IsLeafList() && c.RPC == nil {
+				b.rootDir[cname] = c
+			}
+		}
 	}
 
 	device := &Struct{Name: "Device", Path: "/device"}
@@ -190,6 +208,13 @@ func (b *builder) buildStruct(rootModule string, e *yang.Entry, segs []string) (
 				if len(strings.Fields(c.Key)) == 0 {
 					typ = "[]*" + child.Name // 无 key list（当前闭包 0 处）
 				}
+				if orderedByUser(c) {
+					if len(strings.Fields(c.Key)) != 1 {
+						return fmt.Errorf("yanggen: %s: ordered-by user 仅支持单键列表（约定冻结）", child.Name)
+					}
+					child.OrderedKey = keyType
+					typ = "*" + child.Name + "_OrderedMap"
+				}
 				st.Fields = append(st.Fields, &Field{
 					GoName: FieldName(c.Name), YangName: c.Name,
 					Module: belongingModule(c), Type: typ,
@@ -292,14 +317,15 @@ func (b *builder) mapType(hostStruct string, e *yang.Entry, t *yang.YangType, in
 	case yang.Yidentityref:
 		return b.registerIdentity(t), false, nil
 	case yang.Yleafref:
-		target := resolveLeafref(e, t)
+		target := b.resolveLeafref(e, t)
 		if target == nil {
 			warnUnsupported(e, "unresolved leafref "+t.Path)
 			return "interface{}", false, nil
 		}
 		return b.mapTypeAtTarget(target, inUnion)
 	case yang.Yunion:
-		return b.registerUnion(hostStruct, e, t), false, nil
+		typ, ptr := b.registerUnion(hostStruct, e, t)
+		return typ, ptr, nil
 	default:
 		// bits/instance-identifier/anyxml 等：-ignore_unsupported 语义 → interface{}。
 		warnUnsupported(e, t.Kind.String())
@@ -360,10 +386,72 @@ func entryStructName(e *yang.Entry) (string, error) {
 
 // resolveLeafref resolves a leafref path to its target entry（失败返回 nil，
 // 调用方降级 interface{}——与 -ignore_unsupported 同精神）。
-func resolveLeafref(e *yang.Entry, t *yang.YangType) *yang.Entry {
+//
+// 必须按**数据树**语义解析：YANG leafref 路径不含 choice/case 层级，而 goyang
+// Entry 树保留 choice/case——`../` 计数在含 choice 的子树上会错位（acl
+// source-pool-name 实证），故不用 Entry.Find。
+func (b *builder) resolveLeafref(e *yang.Entry, t *yang.YangType) *yang.Entry {
 	if t.Path == "" {
 		return nil
 	}
-	defer func() { _ = recover() }() // Entry.Find 对畸形路径可能 panic（R08 兜底）
-	return e.Find(t.Path)
+	segs := strings.Split(strings.Trim(t.Path, "/"), "/")
+	cur := e
+	if strings.HasPrefix(t.Path, "/") {
+		cur = nil // 绝对路径：首段直接查全闭包顶层容器索引
+	}
+	for _, seg := range segs {
+		if seg == ".." {
+			if cur == nil {
+				return nil
+			}
+			cur = dataParent(cur)
+			continue
+		}
+		name := bare(seg)
+		if cur == nil || cur.Parent == nil {
+			// 虚拟设备根（绝对路径首段，或相对路径爬出模块根后再下钻）：
+			// 顶层容器跨模块索引。
+			if c, ok := b.rootDir[name]; ok {
+				cur = c
+				continue
+			}
+			if cur == nil {
+				return nil
+			}
+		}
+		cur = dataChild(cur, name)
+	}
+	if cur == nil || !cur.IsLeaf() && !cur.IsLeafList() {
+		return nil
+	}
+	return cur
+}
+
+// orderedByUser reports whether a list entry is `ordered-by user`.
+func orderedByUser(e *yang.Entry) bool {
+	return e.ListAttr != nil && e.ListAttr.OrderedBy != nil && e.ListAttr.OrderedBy.Name == "user"
+}
+
+// dataParent 返回数据树父节点（跳过 choice/case 层）。
+func dataParent(e *yang.Entry) *yang.Entry {
+	p := e.Parent
+	for p != nil && (p.IsChoice() || p.IsCase()) {
+		p = p.Parent
+	}
+	return p
+}
+
+// dataChild 在数据树语义下取子节点（穿透 choice/case 层查找）。
+func dataChild(e *yang.Entry, name string) *yang.Entry {
+	if c, ok := e.Dir[name]; ok && !c.IsChoice() && !c.IsCase() {
+		return c
+	}
+	for _, c := range e.Dir {
+		if c.IsChoice() || c.IsCase() {
+			if r := dataChild(c, name); r != nil {
+				return r
+			}
+		}
+	}
+	return nil
 }
