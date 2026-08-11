@@ -9,12 +9,11 @@ import (
 	"strings"
 )
 
-// jsonKey 计算字段的 RFC7951 JSON 键：跨模块边界（含 Device 顶层，其 Module
-// 为空）带模块前缀。
+// jsonKey 计算字段的 JSON 键。**行为冻结自 ygot 现网配置**（对拍实证）：
+// EmitJSON 未开 AppendModuleName，输出**永不带模块前缀**（含 Device 顶层与
+// augment 边界）——前端与 peelToPath 消费的都是此形状；解码侧 StripModule
+// 保持带前缀输入的兼容（RFC7951 严格形态照收）。
 func jsonKey(s *Struct, f *Field) string {
-	if f.Module != s.Module {
-		return f.Module + ":" + f.YangName
-	}
 	return f.YangName
 }
 

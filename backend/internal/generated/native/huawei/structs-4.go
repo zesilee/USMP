@@ -636,7 +636,7 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-bgp-evpn:evpn"] = bv
+		out["evpn"] = bv
 	}
 	if t.ExportFilterPolicys != nil {
 		bv, err := t.ExportFilterPolicys.MarshalJSON()
@@ -5112,7 +5112,7 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-bgp-evpn:l2vpn-evpn"] = bv
+		out["l2vpn-evpn"] = bv
 	}
 	if t.Type != 0 {
 		n, err := object.EnumName(t.Type)
@@ -10510,7 +10510,7 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-bgp-evpn:l2vpn-evpn"] = bv
+		out["l2vpn-evpn"] = bv
 	}
 	if t.State != nil {
 		bv, err := t.State.MarshalJSON()

@@ -38,7 +38,7 @@ func (t *Device) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["usmp-business-vlan:business-vlan-service"] = bv
+		out["business-vlan-service"] = bv
 	}
 	return json.Marshal(out)
 }

@@ -13617,7 +13617,7 @@ func (t *HuaweiIfm_Ifm_Interfaces_Interface_Trunk) MarshalJSON() ([]byte, error)
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-lacp:lacp"] = bv
+		out["lacp"] = bv
 	}
 	if t.MaxBandwidth != nil {
 		out["max-bandwidth"] = json.RawMessage(strconv.Quote(strconv.FormatUint(uint64(*t.MaxBandwidth), 10)))
@@ -14503,7 +14503,7 @@ func (t *HuaweiIfm_Ifm_Interfaces_Interface_Trunk_Members_Member) MarshalJSON() 
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-lacp:lacp"] = bv
+		out["lacp"] = bv
 	}
 	if t.LacpNegotiationMode != 0 {
 		n, err := object.EnumName(t.LacpNegotiationMode)
@@ -15193,21 +15193,21 @@ func (t *HuaweiIfm_Ifm_Interfaces_Interface_TunnelProtocol) MarshalJSON() ([]byt
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-gre:gre6-tunnel"] = bv
+		out["gre6-tunnel"] = bv
 	}
 	if t.GreTunnel != nil {
 		bv, err := t.GreTunnel.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-gre:gre-tunnel"] = bv
+		out["gre-tunnel"] = bv
 	}
 	if t.MgreTunnel != nil {
 		bv, err := t.MgreTunnel.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-gre:mgre-tunnel"] = bv
+		out["mgre-tunnel"] = bv
 	}
 	return json.Marshal(out)
 }
@@ -27150,7 +27150,7 @@ func (t *HuaweiL2Vpn_L2Vpn_Instances_Instance_Vpls_LdpSignaling_Pws_Pw) MarshalJ
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-mstp:mstp-attribute"] = bv
+		out["mstp-attribute"] = bv
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)

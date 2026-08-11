@@ -45,7 +45,7 @@ func (t *Device) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["usmp-test:box"] = bv
+		out["box"] = bv
 	}
 	return json.Marshal(out)
 }
@@ -108,7 +108,7 @@ func (t *UsmpTest_Box) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["usmp-test-ext:extras"] = bv
+		out["extras"] = bv
 	}
 	if t.Feature != nil {
 		bv, err := t.Feature.MarshalJSON()

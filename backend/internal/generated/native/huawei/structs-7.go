@@ -20598,42 +20598,42 @@ func (t *HuaweiVlan_Vlan_Vlans_Vlan) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-arp:arp-ip-pool"] = bv
+		out["arp-ip-pool"] = bv
 	}
 	if t.ArpL2Proxys != nil {
 		bv, err := t.ArpL2Proxys.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-arp:arp-l2proxys"] = bv
+		out["arp-l2proxys"] = bv
 	}
 	if t.ArpMff != nil {
 		bv, err := t.ArpMff.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-arp:arp-mff"] = bv
+		out["arp-mff"] = bv
 	}
 	if t.ArpRateLimit != nil {
 		bv, err := t.ArpRateLimit.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-arp:arp-rate-limit"] = bv
+		out["arp-rate-limit"] = bv
 	}
 	if t.ArpSecurity != nil {
 		bv, err := t.ArpSecurity.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-arp:arp-security"] = bv
+		out["arp-security"] = bv
 	}
 	if t.ArpStatisticss != nil {
 		bv, err := t.ArpStatisticss.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-arp:arp-statisticss"] = bv
+		out["arp-statisticss"] = bv
 	}
 	if t.BroadcastDiscard != 0 {
 		n, err := object.EnumName(t.BroadcastDiscard)
@@ -20677,7 +20677,7 @@ func (t *HuaweiVlan_Vlan_Vlans_Vlan) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-mirror:mirror"] = bv
+		out["mirror"] = bv
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -20718,7 +20718,7 @@ func (t *HuaweiVlan_Vlan_Vlans_Vlan) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-qos:traffic-policy-applys"] = bv
+		out["traffic-policy-applys"] = bv
 	}
 	if t.Type != 0 {
 		n, err := object.EnumName(t.Type)

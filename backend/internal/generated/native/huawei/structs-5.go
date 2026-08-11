@@ -17383,7 +17383,7 @@ func (t *HuaweiNvo3_Nvo3_VniLabels_VniLabel) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-nvo3-statistics:statistics"] = bv
+		out["statistics"] = bv
 	}
 	if t.Vni != nil {
 		out["vni"] = object.RawJSON(*t.Vni)
@@ -21834,7 +21834,7 @@ func (t *HuaweiQos_Qos_ClassifierTemplate_TrafficBehaviors_TrafficBehavior) Mars
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-anyflow:anyflow"] = bv
+		out["anyflow"] = bv
 	}
 	if t.CarActions != nil {
 		bv, err := t.CarActions.MarshalJSON()
@@ -21914,7 +21914,7 @@ func (t *HuaweiQos_Qos_ClassifierTemplate_TrafficBehaviors_TrafficBehavior) Mars
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-mirror:mirror"] = bv
+		out["mirror"] = bv
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -31252,7 +31252,7 @@ func (t *HuaweiQos_Qos_GlobalConfig) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-mirror:mirror"] = bv
+		out["mirror"] = bv
 	}
 	if t.PacketBlockThresholdAll != nil {
 		bv, err := t.PacketBlockThresholdAll.MarshalJSON()

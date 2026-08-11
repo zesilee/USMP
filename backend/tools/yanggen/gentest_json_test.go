@@ -54,7 +54,7 @@ func TestJSONMarshalShapes(t *testing.T) {
 		`"big":"18446744073709551615"`, // uint64 字符串化（§6.1）
 		`"mark":[null]`,                // empty（§6.9）
 		`"status":"enable"`,            // 枚举值域名
-		`"usmp-test-ext:extras"`,       // augment 跨模块键限定
+		`"extras":{`,                   // augment 键不带模块前缀（冻结 ygot 现网 AppendModuleName=false 行为）
 		`"port":8080`,                  // union uint16 成员
 		`"vlan":[{`,                    // list → 数组
 		`"tags":["a","b"]`,             // leaf-list

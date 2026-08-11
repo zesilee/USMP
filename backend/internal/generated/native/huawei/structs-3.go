@@ -2585,63 +2585,63 @@ func (t *HuaweiLicense_License_LicenseItems_LicenseItem) MarshalJSON() ([]byte, 
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-aggregations"] = bv
+		out["port-aggregations"] = bv
 	}
 	if t.PortCoreAggregations != nil {
 		bv, err := t.PortCoreAggregations.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-core-aggregations"] = bv
+		out["port-core-aggregations"] = bv
 	}
 	if t.PortHqoss != nil {
 		bv, err := t.PortHqoss.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-qos:port-hqoss"] = bv
+		out["port-hqoss"] = bv
 	}
 	if t.PortL3VpnEvpns != nil {
 		bv, err := t.PortL3VpnEvpns.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-l3vpn-evpns"] = bv
+		out["port-l3vpn-evpns"] = bv
 	}
 	if t.PortL3Vpns != nil {
 		bv, err := t.PortL3Vpns.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-l3vpns"] = bv
+		out["port-l3vpns"] = bv
 	}
 	if t.PortMacsecs != nil {
 		bv, err := t.PortMacsecs.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-macsec:port-macsecs"] = bv
+		out["port-macsecs"] = bv
 	}
 	if t.PortPeerings != nil {
 		bv, err := t.PortPeerings.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-peerings"] = bv
+		out["port-peerings"] = bv
 	}
 	if t.PortServiceEnhances != nil {
 		bv, err := t.PortServiceEnhances.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-service-enhances"] = bv
+		out["port-service-enhances"] = bv
 	}
 	if t.PortSrv6S != nil {
 		bv, err := t.PortSrv6S.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-srv6s"] = bv
+		out["port-srv6s"] = bv
 	}
 	if t.Status != 0 {
 		n, err := object.EnumName(t.Status)
@@ -4501,49 +4501,49 @@ func (t *HuaweiLicense_License_ResourceUsages_ResourceUsage) MarshalJSON() ([]by
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-aggregations"] = bv
+		out["port-aggregations"] = bv
 	}
 	if t.PortCoreAggregations != nil {
 		bv, err := t.PortCoreAggregations.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-core-aggregations"] = bv
+		out["port-core-aggregations"] = bv
 	}
 	if t.PortL3VpnEvpns != nil {
 		bv, err := t.PortL3VpnEvpns.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-l3vpn-evpns"] = bv
+		out["port-l3vpn-evpns"] = bv
 	}
 	if t.PortL3Vpns != nil {
 		bv, err := t.PortL3Vpns.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-l3vpns"] = bv
+		out["port-l3vpns"] = bv
 	}
 	if t.PortPeerings != nil {
 		bv, err := t.PortPeerings.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-peerings"] = bv
+		out["port-peerings"] = bv
 	}
 	if t.PortServiceEnhances != nil {
 		bv, err := t.PortServiceEnhances.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-service-enhances"] = bv
+		out["port-service-enhances"] = bv
 	}
 	if t.PortSrv6S != nil {
 		bv, err := t.PortSrv6S.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-unicast-forward:port-srv6s"] = bv
+		out["port-srv6s"] = bv
 	}
 	if t.Usage != nil {
 		out["usage"] = object.RawJSON(*t.Usage)
@@ -20758,14 +20758,14 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance) MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-l3vpn:afs"] = bv
+		out["afs"] = bv
 	}
 	if t.Bgp != nil {
 		bv, err := t.Bgp.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-bgp:bgp"] = bv
+		out["bgp"] = bv
 	}
 	if t.Description != nil {
 		out["description"] = object.RawJSON(*t.Description)
@@ -20775,21 +20775,21 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance) MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-gre:gre"] = bv
+		out["gre"] = bv
 	}
 	if t.Mpls != nil {
 		bv, err := t.Mpls.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-mpls:mpls"] = bv
+		out["mpls"] = bv
 	}
 	if t.Multicast != nil {
 		bv, err := t.Multicast.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-l3-multicast:multicast"] = bv
+		out["multicast"] = bv
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -20799,34 +20799,34 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance) MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-nvo3:nvo3"] = bv
+		out["nvo3"] = bv
 	}
 	if t.Ospfv2 != nil {
 		bv, err := t.Ospfv2.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-ospfv2:ospfv2"] = bv
+		out["ospfv2"] = bv
 	}
 	if t.Ospfv3 != nil {
 		bv, err := t.Ospfv3.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-ospfv3:ospfv3"] = bv
+		out["ospfv3"] = bv
 	}
 	if t.Qos != nil {
 		bv, err := t.Qos.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-qos:qos"] = bv
+		out["qos"] = bv
 	}
 	if t.SysRouterId != nil {
 		out["sys-router-id"] = object.RawJSON(*t.SysRouterId)
 	}
 	if t.TrafficStatisticEnable != nil {
-		out["huawei-l3vpn:traffic-statistic-enable"] = object.RawJSON(*t.TrafficStatisticEnable)
+		out["traffic-statistic-enable"] = object.RawJSON(*t.TrafficStatisticEnable)
 	}
 	if t.VrfId != nil {
 		out["vrf-id"] = object.RawJSON(*t.VrfId)
@@ -21027,7 +21027,7 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Afs_Af) Marsha
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-evpn:evpn"] = bv
+		out["evpn"] = bv
 	}
 	if t.ExportPolicy != nil {
 		out["export-policy"] = object.RawJSON(*t.ExportPolicy)
@@ -21057,14 +21057,14 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Afs_Af) Marsha
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-mvpn:mvpn"] = bv
+		out["mvpn"] = bv
 	}
 	if t.OspfImportRts != nil {
 		bv, err := t.OspfImportRts.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-ospfv2:ospf-import-rts"] = bv
+		out["ospf-import-rts"] = bv
 	}
 	if t.RouteDistinguisher != nil {
 		out["route-distinguisher"] = object.RawJSON(*t.RouteDistinguisher)
@@ -21074,7 +21074,7 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Afs_Af) Marsha
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-routing:routing"] = bv
+		out["routing"] = bv
 	}
 	if t.State != nil {
 		bv, err := t.State.MarshalJSON()
@@ -27096,7 +27096,7 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-bgp-evpn:l2vpn-evpn"] = bv
+		out["l2vpn-evpn"] = bv
 	}
 	if t.Type != 0 {
 		n, err := object.EnumName(t.Type)
@@ -30105,7 +30105,7 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["huawei-bgp-evpn:evpn"] = bv
+		out["evpn"] = bv
 	}
 	if t.ExportFilterPolicys != nil {
 		bv, err := t.ExportFilterPolicys.MarshalJSON()
