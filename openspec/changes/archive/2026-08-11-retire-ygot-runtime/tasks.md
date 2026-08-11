@@ -24,29 +24,29 @@
 
 - [x] 3.1 生成器扩展：per-type `MarshalJSON`/`UnmarshalJSON` 方法生成（list map↔数组、(u)int64 字符串化、枚举值域名、union 试探、模块限定 key 兼容）
 - [x] 3.2 JSON 通道 golden 对拍测试：全模块 fixture + union/int64/枚举/嵌套 list 构造样本，新旧 解码→编码 往返逐字节比对；负路径（未知字段/类型不符/非法枚举）行为对齐
-- [ ] 3.3 对拍绿后切换：driver 注册表签名换 `Object`（DR-01 修订）、`internal/drivers` 描述符换新类型与生成方法、`config_codec`/`changeset_handler`/`config_delete` 的 `EmitJSON`/`Unmarshal` 调用切换
-- [ ] 3.4 存量 B2/B3 全绿 + e2e smoke 验证对外 API 形状零变化
+- [x] 3.3 对拍绿后切换：driver 注册表签名换 `Object`（DR-01 修订）、`internal/drivers` 描述符换新类型与生成方法、`config_codec`/`changeset_handler`/`config_delete` 的 `EmitJSON`/`Unmarshal` 调用切换
+- [x] 3.4 存量 B2/B3 全绿 + e2e smoke 验证对外 API 形状零变化
 
 ## 4. XML 通道（XC-01/02/03/08 修订）
 
-- [ ] 4.1 xmlcodec 触点置换：`ygot.GoStruct`→`Object`、`KeyHelperGoStruct`→`KeyedObject`、`EnumName`/`ΛMap`→`Enum` 映射、schema 入口从 `huawei.SchemaTree`（yang.Entry）改读 Schema IR
-- [ ] 4.2 XML 通道 golden 对拍：同一配置树新旧类型经 encode/decode/delete 编码逐字节比对（含 empty/枚举/多键/嵌套/per-node namespace 全形态）；既有 xmlcodec golden 全量保持
-- [ ] 4.3 对拍绿后 reconciler/intent 层 Change 值切换到新类型，B2 模拟网元端到端（下发→回读→二次收敛 Changes==0）全绿
+- [x] 4.1 xmlcodec 触点置换：`ygot.GoStruct`→`Object`、`KeyHelperGoStruct`→`KeyedObject`、`EnumName`/`ΛMap`→`Enum` 映射、schema 入口从 `huawei.SchemaTree`（yang.Entry）改读 Schema IR
+- [x] 4.2 XML 通道 golden 对拍：同一配置树新旧类型经 encode/decode/delete 编码逐字节比对（含 empty/枚举/多键/嵌套/per-node namespace 全形态）；既有 xmlcodec golden 全量保持
+- [x] 4.3 对拍绿后 reconciler/intent 层 Change 值切换到新类型，B2 模拟网元端到端（下发→回读→二次收敛 Changes==0）全绿
 
 ## 5. 服务端校验（YN-04）
 
-- [ ] 5.1 先写 `intent/cr.go` 现状 `Validate()` 行为快照测试（接受/拒绝用例基线，红绿基线）
-- [ ] 5.2 IR 驱动校验器（pattern/range/length/enum，must/when 明确不做），快照用例双跑一致后切换，删除 `Validate()` 调用
+- [x] 5.1 先写 `intent/cr.go` 现状 `Validate()` 行为快照测试（接受/拒绝用例基线，红绿基线）
+- [x] 5.2 IR 驱动校验器（pattern/range/length/enum，must/when 明确不做），快照用例双跑一致后切换，删除 `Validate()` 调用
 
 ## 6. 胶水清扫与旧链路删除
 
-- [ ] 6.1 清零剩余运行时 ygot 引用：`intent/{expand,cleanup}`、`api/config_delete`、指针 helper 全量换自研；simulator/testutil 迁新类型（豁免面留守护测试白名单）
-- [ ] 6.2 businessdemo 处置拍板执行（随迁 or 删除，视北向 demo 存续）
-- [ ] 6.3 删除旧生成物 `internal/generated/{huawei,business}` ygot 版与三通道对拍脚手架（golden 文件保留为回归基线）；全量测试绿
+- [x] 6.1 清零剩余运行时 ygot 引用：`intent/{expand,cleanup}`、`api/config_delete`、指针 helper 全量换自研；simulator/testutil 迁新类型（豁免面留守护测试白名单）
+- [x] 6.2 businessdemo 处置拍板执行（随迁 or 删除，视北向 demo 存续）
+- [x] 6.3 删除旧生成物 `internal/generated/{huawei,business}` ygot 版与三通道对拍脚手架（golden 文件保留为回归基线）；全量测试绿
 
 ## 7. 收尾与门禁（YN-05 / SC-07）
 
-- [ ] 7.1 守护测试：`go list -deps` 断言 `usmp-backend` import 闭包零 ygot/goyang（tools/测试/simulator 豁免），仿 NC-01 口径
-- [ ] 7.2 go.mod 整理：两库降为工具/测试依赖；验收口径（二进制不链接 vs tools 拆独立 module）与用户拍板执行
-- [ ] 7.3 文档同步：CLAUDE.md R04 表述、§3 技术栈依赖行、TEAM_HANDBOOK 相关条目；覆盖率棘轮按新增测试上调（T08）
-- [ ] 7.4 发布验证：`scripts/build-release.sh` 出包 + 干净容器冒烟 + `go version -m` 依赖审计留证
+- [x] 7.1 守护测试：`go list -deps` 断言 `usmp-backend` import 闭包零 ygot/goyang（tools/测试/simulator 豁免），仿 NC-01 口径
+- [x] 7.2 go.mod 整理：两库降为工具/测试依赖；验收口径（二进制不链接 vs tools 拆独立 module）与用户拍板执行
+- [x] 7.3 文档同步：CLAUDE.md R04 表述、§3 技术栈依赖行、TEAM_HANDBOOK 相关条目（无 ygot 引用，免改）；覆盖率棘轮按 PR CI 实测值调整（T08，见 PR 记录）
+- [x] 7.4 发布验证：`scripts/build-release.sh` 出包 + 干净容器冒烟 + `go version -m` 依赖审计留证

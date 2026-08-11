@@ -163,7 +163,7 @@ apply tasks.md ──→ 写测试(红) ──→ 写代码(绿) ──→ 重�
 |------|--------|--------|
 | 正确性 | 逻辑正确、边界条件、错误处理 | 人工 |
 | 架构合规 | §4 分层正确、C3 Reconciler 无状态 | 人工 + go-code-review-check |
-| 类型安全 | 无滥用 interface{}、ygot 结构体合规（R04） | CI: generated 目录保护 |
+| 类型安全 | 无滥用 interface{}、yanggen 生成结构体合规（R04） | CI: generated 目录保护 |
 | 并发安全 | 无数据竞态、锁使用正确（R09） | CI: go test -race |
 | 测试覆盖 | 按 [CLAUDE.md §5.6](CLAUDE.md) 改动类型选层补齐（缺层=未完成，T06）、覆盖率未下降 | CI: 后端 baseline + 前端 vitest thresholds 守门；本地 pre-commit（前后端单测）+ pre-push（-race + e2e） |
 | 规范合规 | commit 格式、代码风格 | CI: commit-lint + gofmt |
