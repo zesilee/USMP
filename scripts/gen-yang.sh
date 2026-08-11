@@ -1,14 +1,12 @@
 #!/usr/bin/env sh
-# gen-yang.sh — ygot YANG→Go 生成管线（厂商 manifest 驱动，CG-01）
+# gen-yang.sh — YANG→Go 生成管线（厂商 manifest 驱动，CG-01 修订版）
 #
-# 扫描 backend/internal/generated/*/gen.conf，对每个厂商包执行：
-#   ygot generator（版本由 backend/go.mod 锁定）→ genfix 后处理（跨平台，CG-02）
-#   → 格式化收尾：单文件模式 gofmt；拆分模式 go run goimports（ygot -output_dir
-#     给每个文件写同一份 import 块，须剪未用 import 才能编译，版本同由 go.mod 锁定）
-# 输出双模式（gen.conf 可选键 split_count 控制）：
-#   未设置 → 单文件 all.gen.go（向后兼容，小厂商包零迁移）
-#   split_count=N → -output_dir 拆分为 structs-*.go/enum*.go/union.go/schema.go，
-#                   structs 按 N 分桶（blob 独占 schema.go，struct/blob diff 分离）
+# 扫描 backend/internal/generated/*/gen.conf：
+#   常规包（huawei/business）→ 自研 yanggen 生成 internal/generated/native/<pkg>
+#     （结构约定冻结自 ygot，确定性内建，零 genfix/goimports 后处理）
+#   businessdemo（北向 demo 隔离锚点）→ 保留 ygot generator 单文件路径
+#     （随 demo 生命周期退役，见 retire-ygot-runtime 任务6.2 拍板）
+# 末尾联动重生成 schema IR blob（schemagen 直读 YANG 源）。
 # package 名 = 目录名。新增厂商 = 新增目录 + gen.conf，本脚本与 Makefile 零改动。
 #
 # 用法: scripts/gen-yang.sh [<pkg>]   缺省全量；<pkg> 为 backend/internal/generated/ 下目录名
@@ -61,38 +59,10 @@ for conf in "$GEN_DIR"/*/gen.conf; do
         fi
     done
 
-    if [ -n "$split_count" ]; then
-        case "$split_count" in
-        *[!0-9]* | 0*)
-            echo "gen-yang: $conf 的 split_count 须为正整数: $split_count" >&2
-            exit 1
-            ;;
-        esac
-        echo "gen-yang: 生成 $pkg（modules: $modules，split_count=$split_count）"
-        # 拆分模式：生成前清理新旧两种布局的产物（幂等，防 N 缩小残留旧分片），
-        # 仅删生成物文件名，不动 doc.go/gen.conf。
-        # $modules 依赖空格分词展开为多个模块参数，勿加引号
-        (
-            cd "$ROOT/backend" &&
-                rm -f "internal/generated/$pkg/all.gen.go" \
-                    "internal/generated/$pkg"/structs-*.go \
-                    "internal/generated/$pkg"/enum*.go \
-                    "internal/generated/$pkg/union.go" \
-                    "internal/generated/$pkg/schema.go" &&
-                go run github.com/openconfig/ygot/generator \
-                    -path="$(echo "$yang_path" | awk -F, '{ for (i=1;i<=NF;i++) printf "%s../%s", (i>1?",":""), $i }')" \
-                    -output_dir="internal/generated/$pkg" \
-                    -structs_split_files_count="$split_count" \
-                    -package_name="$pkg" \
-                    -generate_fakeroot="$generate_fakeroot" \
-                    -compress_paths="$compress_paths" \
-                    -ignore_unsupported=true \
-                    $modules &&
-                go run ./tools/genfix "internal/generated/$pkg"/*.go &&
-                go run golang.org/x/tools/cmd/goimports -w "internal/generated/$pkg"
-        )
-    else
-        echo "gen-yang: 生成 $pkg（modules: $modules）"
+    if [ "$pkg" = "businessdemo" ]; then
+        # businessdemo：北向 demo 隔离锚点，保留 ygot 单文件路径（任务6.2 拍板：
+        # 随 demo 生命周期退役，不迁 native）。
+        echo "gen-yang: 生成 $pkg（ygot demo 路径，modules: $modules）"
         # $modules 依赖空格分词展开为多个模块参数，勿加引号
         (
             cd "$ROOT/backend" &&
@@ -106,13 +76,7 @@ for conf in "$GEN_DIR"/*/gen.conf; do
                 go run ./tools/genfix "internal/generated/$pkg/all.gen.go" &&
                 gofmt -w "internal/generated/$pkg/all.gen.go"
         )
-    fi
-
-    # native 生成物（retire-ygot-runtime 阶段2）：同一 manifest 驱动自研 yanggen，
-    # 输出 internal/generated/native/<pkg>（与 ygot 包并存至切换完成，届时本脚本
-    # 的 ygot 分支整体退役）。businessdemo 为北向 demo 隔离锚点，不生成 native
-    #（阶段6.2 拍板去留）。确定性由 yanggen 内建（无需 genfix/goimports）。
-    if [ "$pkg" != "businessdemo" ]; then
+    else
         native_split=""
         if [ -n "$split_count" ]; then
             native_split="-structs_split_files_count=$split_count"
