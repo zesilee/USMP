@@ -8,11 +8,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/openconfig/ygot/ygot"
-
 	"github.com/leezesi/usmp/backend/internal/drivers"
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 )
 
@@ -121,7 +120,7 @@ func cleanupChanges(claims []Claim) ([]client.Change, error) {
 				Path: VlanPath,
 				OldValue: &huawei.HuaweiVlan_Vlan_Vlans{
 					Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
-						uint16(id): {Id: ygot.Uint16(uint16(id))},
+						uint16(id): {Id: object.Uint16(uint16(id))},
 					},
 				},
 			})
