@@ -5,6 +5,8 @@ import (
 	"strings"
 
 	"github.com/openconfig/ygot/ygot"
+
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 // EncodeLeafDelete builds a keyed edit-config fragment that deletes the given
@@ -46,13 +48,13 @@ func EncodeLeafDelete(spec *Spec, v ygot.GoStruct, leaves []string) (string, err
 		if keySet[leaf] {
 			return "", fmt.Errorf("xmlcodec leaf delete: %s is the list key of %s", leaf, elemTag)
 		}
-		if r.list != nil && len(r.list.Dir) > 0 {
-			child, ok := r.list.Dir[leaf]
-			if !ok {
+		if r.list != nil && nodeHasChildren(r.list) {
+			child := nodeChild(r.list, leaf)
+			if child == nil {
 				return "", fmt.Errorf("xmlcodec leaf delete: %s not in schema of %s", leaf, elemTag)
 			}
-			if !child.IsLeaf() && !child.IsLeafList() {
-				return "", fmt.Errorf("xmlcodec leaf delete: %s is not a leaf (kind %v)", leaf, child.Kind)
+			if child.Type() != schema.LeafNodeType {
+				return "", fmt.Errorf("xmlcodec leaf delete: %s is not a leaf (kind %v)", leaf, child.Type())
 			}
 		}
 	}

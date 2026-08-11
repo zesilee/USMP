@@ -4,10 +4,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
-
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
 	"github.com/leezesi/usmp/backend/internal/testutil/hwfix"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 	"github.com/openconfig/ygot/ygot"
 )
 
@@ -19,14 +18,14 @@ const (
 func vlanSpec() *Spec {
 	return &Spec{
 		Namespace: vlanNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiVlan_Vlan_Vlans"] },
+		Schema:    irTestNode("/vlan/vlans"),
 	}
 }
 
 func ifmSpec() *Spec {
 	return &Spec{
 		Namespace: ifmNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiIfm_Ifm_Interfaces"] },
+		Schema:    irTestNode("/ifm/interfaces"),
 	}
 }
 
@@ -155,15 +154,29 @@ func (*fakeEntry) IsYANGGoStruct() {}
 func fakeSpec() *Spec {
 	return &Spec{
 		Namespace: "urn:fake",
-		Schema: func() *yang.Entry {
-			return &yang.Entry{
-				Name: "fakes",
-				Dir: map[string]*yang.Entry{
-					"entry": {Name: "entry", Key: "name", ListAttr: &yang.ListAttr{}},
-				},
-			}
-		},
+		Schema:    func() schema.Node { return fakeSchemaNode(true) },
 	}
+}
+
+// fakeSchemaNode 经 IR DTO 构造合成 schema（IR 是 schema 包唯一公开树构建面）：
+// fakes 容器 + entry list；withKey=false 抹掉 key（无 key 信息负路径用）。
+func fakeSchemaNode(withKey bool) schema.Node {
+	var keys []string
+	if withKey {
+		keys = []string{"name"}
+	}
+	m, err := schema.ModuleFromIR(schema.IRModule{
+		Name: "fakes",
+		Root: &schema.IRNode{Kind: "container", Name: "fakes", Path: "/fakes", Children: []*schema.IRNode{
+			{Kind: "list", Name: "entry", Path: "/fakes/entry", Keys: keys, Children: []*schema.IRNode{
+				{Kind: "leaf", Name: "name", Path: "/fakes/entry/name", LeafType: "string", IsKey: withKey},
+			}},
+		}},
+	})
+	if err != nil {
+		panic(err)
+	}
+	return m.Root()
 }
 
 func TestEncodeErrors(t *testing.T) {
@@ -180,13 +193,13 @@ func TestEncodeErrors(t *testing.T) {
 		}
 	})
 	t.Run("nil spec schema", func(t *testing.T) {
-		s := &Spec{Namespace: "urn:x", Schema: func() *yang.Entry { return nil }}
+		s := &Spec{Namespace: "urn:x", Schema: func() schema.Node { return nil }}
 		if _, err := Encode(s, hwfix.VlanMinimal()); err == nil {
 			t.Error("want error for nil schema entry")
 		}
 	})
 	t.Run("missing namespace", func(t *testing.T) {
-		s := &Spec{Schema: func() *yang.Entry { return huawei.SchemaTree["HuaweiVlan_Vlan_Vlans"] }}
+		s := &Spec{Schema: irTestNode("/vlan/vlans")}
 		if _, err := Encode(s, hwfix.VlanMinimal()); err == nil {
 			t.Error("want error for missing namespace")
 		}

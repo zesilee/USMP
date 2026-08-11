@@ -108,7 +108,7 @@ func TestFullOnboardingDescriptors(t *testing.T) {
 			if enc.XML.Schema == nil || enc.XML.Schema() == nil {
 				t.Fatalf("SchemaTree 入口缺失（构造子类型未在生成闭包中）")
 			}
-			if got := enc.XML.Schema().Name; got != root {
+			if got := enc.XML.Schema().Name(); got != root {
 				t.Fatalf("SchemaTree 入口名=%q, want 根容器 %q", got, root)
 			}
 		})

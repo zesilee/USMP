@@ -6,9 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
-
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 // 反射 + schema 驱动的完备性测试：对 /bgp:bgp 下**每一个** config-true 标量 leaf
@@ -30,7 +29,7 @@ var bgpConfigFalseContainers = []string{
 // populateConfigTrue 按 schema config 继承，给 sv 下每个 config-true 标量 leaf 赋唯一值；
 // config-false 子树与 list 跳过；只含 list 的 config-true 容器赋值后为空则回收为 nil
 // （不产生空容器污染）。返回赋值的 leaf 数。
-func populateConfigTrue(t *testing.T, sv reflect.Value, e *yang.Entry, parentCfg bool, n *int) {
+func populateConfigTrue(t *testing.T, sv reflect.Value, e schema.Node, parentCfg bool, n *int) {
 	t.Helper()
 	st := sv.Type()
 	for i := 0; i < st.NumField(); i++ {
@@ -38,18 +37,11 @@ func populateConfigTrue(t *testing.T, sv reflect.Value, e *yang.Entry, parentCfg
 		if tag == "" {
 			continue
 		}
-		var child *yang.Entry
-		if e != nil {
-			child = e.Dir[tag]
-		}
+		child := nodeChild(e, tag)
 		cfg := parentCfg
 		if child != nil {
-			switch child.Config {
-			case yang.TSTrue:
-				cfg = true
-			case yang.TSFalse:
-				cfg = false
-			}
+			// IR 的 ReadOnly 已含 config 继承解析（BR-09）。
+			cfg = !child.ReadOnly()
 		}
 		fv := sv.Field(i)
 		switch {
@@ -111,7 +103,7 @@ func setBareScalar(v reflect.Value, n int) {
 }
 
 func TestBgpAllConfigTrueLeaves_Roundtrip(t *testing.T) {
-	e := huawei.SchemaTree["HuaweiBgp_Bgp"]
+	e := irTestNodeAt("/bgp")
 	if e == nil {
 		t.Fatal("HuaweiBgp_Bgp schema 未解析")
 	}
@@ -139,7 +131,7 @@ func TestBgpAllConfigTrueLeaves_Roundtrip(t *testing.T) {
 }
 
 func TestBgpConfigFalse_NotInEditConfig(t *testing.T) {
-	e := huawei.SchemaTree["HuaweiBgp_Bgp"]
+	e := irTestNodeAt("/bgp")
 	orig := &huawei.HuaweiBgp_Bgp{}
 	n := 0
 	populateConfigTrue(t, reflect.ValueOf(orig).Elem(), e, true, &n)

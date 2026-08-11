@@ -5,10 +5,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 // BN-01/02/03：公网 BGP 基础邻居（instance[_public_]/bgp/base-process/peers/peer）
@@ -26,11 +26,10 @@ var peerScopeContainers = map[string]bool{
 
 type peerAlias = huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer
 
-// peerSchema 定位 peer 的 schema entry。
-func peerSchema(t *testing.T) *yang.Entry {
+// peerSchema 定位 peer 的 schema 节点（IR 路径直查）。
+func peerSchema(t *testing.T) schema.Node {
 	t.Helper()
-	root := huawei.SchemaTree["HuaweiNetworkInstance_NetworkInstance"]
-	e := root.Dir["instances"].Dir["instance"].Dir["bgp"].Dir["base-process"].Dir["peers"].Dir["peer"]
+	e := irTestNodeAt("/network-instance/instances/instance/bgp/base-process/peers/peer")
 	if e == nil {
 		t.Fatal("peer schema 未解析")
 	}
@@ -40,7 +39,7 @@ func peerSchema(t *testing.T) *yang.Entry {
 // populatePeerConfigTrue 给 peer 直属 config-true 标量 + 2a 基础子容器
 // (timer/graceful-restart/bfd-parameter) 的 config-true 标量赋唯一值；afs/其他子容器/
 // config-false 跳过。返回赋值 leaf 数。
-func populatePeerConfigTrue(t *testing.T, sv reflect.Value, e *yang.Entry, n *int) {
+func populatePeerConfigTrue(t *testing.T, sv reflect.Value, e schema.Node, n *int) {
 	t.Helper()
 	st := sv.Type()
 	for i := 0; i < st.NumField(); i++ {
@@ -49,11 +48,8 @@ func populatePeerConfigTrue(t *testing.T, sv reflect.Value, e *yang.Entry, n *in
 		if tag == "" {
 			continue
 		}
-		var child *yang.Entry
-		if e != nil {
-			child = e.Dir[tag]
-		}
-		cfg := child == nil || child.Config != yang.TSFalse
+		child := nodeChild(e, tag)
+		cfg := child == nil || !child.ReadOnly()
 		fv := sv.Field(i)
 		switch {
 		case fv.Kind() == reflect.Ptr && fv.Type().Elem().Kind() == reflect.Struct:

@@ -6,7 +6,6 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
@@ -21,7 +20,7 @@ const xplNS = "urn:huawei:yang:huawei-xpl"
 func xplSpec() *Spec {
 	return &Spec{
 		Namespace: xplNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiXpl_Xpl"] },
+		Schema:    irTestNode("/xpl"),
 	}
 }
 
@@ -31,11 +30,11 @@ const xplRouteFilterScalarLeaves = 2
 // TestXpl_RouteFilter_Shape：schema 驱动锁死 route-filter 接入形状——直属 config-true
 // 标量恰好 2（name+content），无深层子容器（防悄悄扩面）。
 func TestXpl_RouteFilter_Shape(t *testing.T) {
-	root := huawei.SchemaTree["HuaweiXpl_Xpl"]
+	root := irTestNodeAt("/xpl")
 	if root == nil {
 		t.Fatal("HuaweiXpl_Xpl schema 未解析")
 	}
-	rfEntry := root.Dir["route-filters"].Dir["route-filter"]
+	rfEntry := irTestNodeAt("/xpl/route-filters/route-filter")
 	if rfEntry == nil {
 		t.Fatal("route-filter schema 未解析")
 	}

@@ -5,10 +5,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 // network-instance（/ni:network-instance）是**容器根 + 嵌套 list**：root 无直属标量，
@@ -23,7 +23,7 @@ const niNS = "urn:huawei:yang:huawei-network-instance"
 func niSpec() *Spec {
 	return &Spec{
 		Namespace: niNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiNetworkInstance_NetworkInstance"] },
+		Schema:    irTestNode("/network-instance"),
 	}
 }
 
@@ -38,7 +38,7 @@ const niModule = "huawei-network-instance"
 // populateNativeConfigTrue 按 schema config 继承 + module tag 过滤，给 sv 下每个
 // **原生（module=huawei-network-instance）config-true 标量 leaf** 赋唯一值；augment
 // 字段（他模块）、config-false、list（Map，另路径覆盖）跳过。返回赋值 leaf 数。
-func populateNativeConfigTrue(t *testing.T, sv reflect.Value, e *yang.Entry, parentCfg bool, n *int) {
+func populateNativeConfigTrue(t *testing.T, sv reflect.Value, e schema.Node, parentCfg bool, n *int) {
 	t.Helper()
 	st := sv.Type()
 	for i := 0; i < st.NumField(); i++ {
@@ -50,18 +50,10 @@ func populateNativeConfigTrue(t *testing.T, sv reflect.Value, e *yang.Entry, par
 		if m := moduleTag(f); m != "" && m != niModule {
 			continue // augment 字段（huawei-bgp / huawei-l3vpn）：不属本期原生面
 		}
-		var child *yang.Entry
-		if e != nil {
-			child = e.Dir[tag]
-		}
+		child := nodeChild(e, tag)
 		cfg := parentCfg
 		if child != nil {
-			switch child.Config {
-			case yang.TSTrue:
-				cfg = true
-			case yang.TSFalse:
-				cfg = false
-			}
+			cfg = !child.ReadOnly()
 		}
 		fv := sv.Field(i)
 		switch {
@@ -106,7 +98,7 @@ func populateNativeConfigTrue(t *testing.T, sv reflect.Value, e *yang.Entry, par
 // list 条目，覆盖全部原生 config-true 标量（global 3 + instance name/description 2），
 // 编码→解码→整体 DeepEqual，并断言原生标量计数恰 5。
 func TestNiAllNativeConfigTrueLeaves_Roundtrip(t *testing.T) {
-	root := huawei.SchemaTree["HuaweiNetworkInstance_NetworkInstance"]
+	root := irTestNodeAt("/network-instance")
 	if root == nil {
 		t.Fatal("HuaweiNetworkInstance_NetworkInstance schema 未解析")
 	}
@@ -116,13 +108,13 @@ func TestNiAllNativeConfigTrueLeaves_Roundtrip(t *testing.T) {
 	orig := &huawei.HuaweiNetworkInstance_NetworkInstance{}
 	gv := reflect.ValueOf(orig).Elem().FieldByName("Global")
 	gv.Set(reflect.New(gv.Type().Elem()))
-	populateNativeConfigTrue(t, gv.Elem(), root.Dir["global"], true, &n)
+	populateNativeConfigTrue(t, gv.Elem(), irTestNodeAt("/network-instance/global"), true, &n)
 	if n != 3 {
 		t.Fatalf("global 原生 config-true 标量 = %d，期望 3（模型变更？须复审）", n)
 	}
 
 	// instance：枚举原生 config-true 标量（期望 name + description = 2）
-	instEntry := root.Dir["instances"].Dir["instance"]
+	instEntry := irTestNodeAt("/network-instance/instances/instance")
 	inst := &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance{}
 	beforeInst := n
 	populateNativeConfigTrue(t, reflect.ValueOf(inst).Elem(), instEntry, true, &n)

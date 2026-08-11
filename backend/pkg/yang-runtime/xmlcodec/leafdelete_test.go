@@ -4,10 +4,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 func vlanEntryOnlyKey(id uint16) *huawei.HuaweiVlan_Vlan_Vlans {
@@ -138,12 +138,7 @@ func TestEncodeLeafDeleteErrors(t *testing.T) {
 	})
 	t.Run("no key information", func(t *testing.T) {
 		s := fakeSpec()
-		base := s.Schema
-		s.Schema = func() *yang.Entry {
-			e := base()
-			e.Dir["entry"].Key = ""
-			return e
-		}
+		s.Schema = func() schema.Node { return fakeSchemaNode(false) }
 		name := "x"
 		v := &fakeRoot{Entry: map[string]*fakeEntry{"x": {Name: &name}}}
 		if _, err := EncodeLeafDelete(s, v, []string{"name"}); err == nil {

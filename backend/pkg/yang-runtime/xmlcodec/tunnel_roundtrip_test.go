@@ -6,10 +6,10 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 // tunnel-management（/tnlm:tunnel-management，容器根，同 /bgp:bgp 走 plain-container）
@@ -22,7 +22,7 @@ const tnlmNS = "urn:huawei:yang:huawei-tunnel-management"
 func tnlmSpec() *Spec {
 	return &Spec{
 		Namespace: tnlmNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiTunnelManagement_TunnelManagement"] },
+		Schema:    irTestNode("/tunnel-management"),
 	}
 }
 
@@ -36,7 +36,7 @@ var tnlmDeferredPolicyContainers = []string{"ipv4-set", "ipv6-set"}
 
 // countDirectConfigTrueScalars 统计 sv 结构体直属（不递归）的 config-true 标量指针叶数，
 // 并返回遇到的 config-true 子容器名集合。用于锁死「标量边界 + 推迟容器」的精确形状。
-func countDirectConfigTrueScalars(t *testing.T, sv reflect.Value, e *yang.Entry) (scalars int, containers []string) {
+func countDirectConfigTrueScalars(t *testing.T, sv reflect.Value, e schema.Node) (scalars int, containers []string) {
 	t.Helper()
 	st := sv.Type()
 	for i := 0; i < st.NumField(); i++ {
@@ -44,8 +44,8 @@ func countDirectConfigTrueScalars(t *testing.T, sv reflect.Value, e *yang.Entry)
 		if tag == "" || e == nil {
 			continue
 		}
-		child := e.Dir[tag]
-		if child == nil || child.Config == yang.TSFalse {
+		child := nodeChild(e, tag)
+		if child == nil || child.ReadOnly() {
 			continue
 		}
 		switch fv := sv.Field(i); {
@@ -62,11 +62,11 @@ func countDirectConfigTrueScalars(t *testing.T, sv reflect.Value, e *yang.Entry)
 // tunnel-policy 直属 config-true 标量恰好 2（name+description），深层 ipv4/ipv6-set
 // 仍为推迟容器；根直属 config-true 标量在 list 之外仅 tunnel-down-switch 子容器。
 func TestTunnelManagement_ScalarBoundary_Shape(t *testing.T) {
-	root := huawei.SchemaTree["HuaweiTunnelManagement_TunnelManagement"]
+	root := irTestNodeAt("/tunnel-management")
 	if root == nil {
 		t.Fatal("HuaweiTunnelManagement_TunnelManagement schema 未解析")
 	}
-	polEntry := root.Dir["tunnel-policys"].Dir["tunnel-policy"]
+	polEntry := irTestNodeAt("/tunnel-management/tunnel-policys/tunnel-policy")
 	if polEntry == nil {
 		t.Fatal("tunnel-policy schema 未解析")
 	}

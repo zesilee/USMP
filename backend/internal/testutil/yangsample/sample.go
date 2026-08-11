@@ -6,18 +6,17 @@ package yangsample
 
 import (
 	"reflect"
-	"strings"
 
-	"github.com/openconfig/goyang/pkg/yang"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 	"github.com/openconfig/ygot/ygot"
 )
 
 // Populate 在容器根下寻找首个可赋值节点并赋样例值，返回是否成功。
-func Populate(v ygot.GoStruct, e *yang.Entry) bool {
+func Populate(v ygot.GoStruct, e schema.Node) bool {
 	return populate(reflect.ValueOf(v), e, 0)
 }
 
-func populate(sv reflect.Value, e *yang.Entry, depth int) bool {
+func populate(sv reflect.Value, e schema.Node, depth int) bool {
 	if depth > 4 || e == nil || sv.Kind() != reflect.Ptr || sv.IsNil() {
 		return false
 	}
@@ -25,7 +24,7 @@ func populate(sv reflect.Value, e *yang.Entry, depth int) bool {
 	st := el.Type()
 	for i := 0; i < st.NumField(); i++ {
 		child := childEntry(e, pathOf(st.Field(i)))
-		if child == nil || !child.IsLeaf() || child.Config == yang.TSFalse {
+		if child == nil || child.Type() != schema.LeafNodeType || child.ReadOnly() {
 			continue
 		}
 		f := el.Field(i)
@@ -52,7 +51,7 @@ func populate(sv reflect.Value, e *yang.Entry, depth int) bool {
 	}
 	for i := 0; i < st.NumField(); i++ {
 		child := childEntry(e, pathOf(st.Field(i)))
-		if child == nil || !child.IsList() || child.Config == yang.TSFalse {
+		if child == nil || child.Type() != schema.ListNodeType || child.ReadOnly() {
 			continue
 		}
 		f := el.Field(i)
@@ -65,7 +64,7 @@ func populate(sv reflect.Value, e *yang.Entry, depth int) bool {
 	}
 	for i := 0; i < st.NumField(); i++ {
 		child := childEntry(e, pathOf(st.Field(i)))
-		if child == nil || child.IsLeaf() || child.IsList() || child.Config == yang.TSFalse {
+		if child == nil || child.Type() == schema.LeafNodeType || child.Type() == schema.ListNodeType || child.ReadOnly() {
 			continue
 		}
 		f := el.Field(i)
@@ -81,12 +80,12 @@ func populate(sv reflect.Value, e *yang.Entry, depth int) bool {
 	return false
 }
 
-func populateListRow(f reflect.Value, list *yang.Entry) bool {
-	keys := strings.Fields(list.Key)
-	if len(keys) != 1 {
+func populateListRow(f reflect.Value, list schema.Node) bool {
+	ln, ok := list.(schema.ListNode)
+	if !ok || len(ln.Keys()) != 1 {
 		return false
 	}
-	keyName := keys[0]
+	keyName := ln.Keys()[0].Name()
 	keyType := f.Type().Key()
 	elemType := f.Type().Elem()
 	if elemType.Kind() != reflect.Ptr || elemType.Elem().Kind() != reflect.Struct {
@@ -131,15 +130,37 @@ func pathOf(f reflect.StructField) string { return f.Tag.Get("path") }
 
 // childEntry 按名查子节点，穿透 choice/case（ygot 结构体拍平 choice/case，
 // schema 树保留层级）。
-func childEntry(e *yang.Entry, name string) *yang.Entry {
-	if name == "" || e == nil || e.Dir == nil {
+func childEntry(e schema.Node, name string) schema.Node {
+	if name == "" || e == nil {
 		return nil
 	}
-	if c, ok := e.Dir[name]; ok {
-		return c
+	var kids []schema.Node
+	switch t := e.(type) {
+	case schema.ChoiceNode:
+		for _, cs := range t.Cases() {
+			if got := childEntry(cs, name); got != nil {
+				return got
+			}
+		}
+		return nil
+	case schema.ListNode:
+		if c, ok := t.Child(name); ok {
+			return c
+		}
+		kids = t.Children()
+	case schema.ContainerNode:
+		if c, ok := t.Child(name); ok {
+			return c
+		}
+		kids = t.Children()
+	case schema.CaseNode:
+		if c, ok := t.Child(name); ok {
+			return c
+		}
+		kids = t.Children()
 	}
-	for _, c := range e.Dir {
-		if c.IsChoice() || c.IsCase() {
+	for _, c := range kids {
+		if c.Type() == schema.ChoiceNodeType || c.Type() == schema.CaseNodeType {
 			if got := childEntry(c, name); got != nil {
 				return got
 			}

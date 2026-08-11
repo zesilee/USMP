@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/openconfig/goyang/pkg/yang"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 	"github.com/openconfig/ygot/ygot"
 )
 
@@ -17,12 +17,12 @@ import (
 type Spec struct {
 	// Namespace is the module's XML namespace, declared on the root element.
 	Namespace string
-	// Schema returns the yang.Entry of the module's root container — either a
-	// list container (e.g. "vlans", whose Dir carries the keyed list child) or
-	// a plain container (e.g. "bgp", holding only scalars/sub-containers). Its
-	// Name is the root element name; the engine picks list- or container-mode
-	// by whether the GoStruct has a root YANG-list map field.
-	Schema func() *yang.Entry
+	// Schema returns the framework schema node of the module's root container —
+	// either a list container (e.g. "vlans", whose children carry the keyed list
+	// child) or a plain container (e.g. "bgp"). Its Name is the root element
+	// name; the engine picks list- or container-mode by whether the GoStruct has
+	// a root YANG-list map field.（S1：数据源自 Schema IR，goyang Entry 退役。）
+	Schema func() schema.Node
 	// Namespaces optionally maps module name (the generated struct field's
 	// `module:"…"` tag) to its XML namespace URI, enabling per-node namespace
 	// for augment 跨模块 trees (XC-06): a node whose module resolves to a
@@ -63,8 +63,8 @@ var goEnumType = reflect.TypeOf((*ygot.GoEnum)(nil)).Elem()
 type resolved struct {
 	ns     string
 	root   string
-	schema *yang.Entry // container entry; may carry list child in Dir
-	list   *yang.Entry // list child entry (nil if schema lacks it)
+	schema schema.Node // container node; may carry list child
+	list   schema.Node // list child node (nil if schema lacks it)
 }
 
 func (s *Spec) resolve(listName string) (*resolved, error) {
@@ -76,10 +76,10 @@ func (s *Spec) resolve(listName string) (*resolved, error) {
 		return nil, fmt.Errorf("xmlcodec: spec schema entry is nil")
 	}
 	if s.Namespace == "" {
-		return nil, fmt.Errorf("xmlcodec: spec namespace is empty for %s", e.Name)
+		return nil, fmt.Errorf("xmlcodec: spec namespace is empty for %s", e.Name())
 	}
-	r := &resolved{ns: s.Namespace, root: e.Name, schema: e}
-	if c, ok := e.Dir[listName]; ok {
+	r := &resolved{ns: s.Namespace, root: e.Name(), schema: e}
+	if c := nodeChild(e, listName); c != nil {
 		r.list = c
 	}
 	return r, nil
@@ -94,8 +94,9 @@ func (s *Spec) resolve(listName string) (*resolved, error) {
 // （无模块容器可包，退回扁平根 + 自带 xmlns，R08 降级）。
 func (r *resolved) wrappers() []string {
 	var names []string
-	for p := r.schema.Parent; p != nil && p.Parent != nil; p = p.Parent {
-		names = append(names, p.Name)
+	// IR 树无合成 fake root：模块顶层容器的 Parent 即 nil，直接爬到头。
+	for p := r.schema.Parent(); p != nil; p = p.Parent() {
+		names = append(names, p.Name())
 	}
 	for i, j := 0, len(names)-1; i < j; i, j = i+1, j-1 {
 		names[i], names[j] = names[j], names[i]
@@ -129,10 +130,55 @@ func closeWrappers(b *strings.Builder, r *resolved) {
 
 // keyNames returns the list key leaf names in YANG order, or nil if unknown.
 func (r *resolved) keyNames() []string {
-	if r.list == nil || r.list.Key == "" {
+	return nodeKeys(r.list)
+}
+
+// nodeChild 在容器/list 节点下按名取子节点（choice/case 不穿透——与 Entry.Dir
+// 行为等价：choice 内叶在 Entry 树同样不在 Dir 直查面）。
+func nodeChild(n schema.Node, name string) schema.Node {
+	if n == nil || name == "" {
 		return nil
 	}
-	return strings.Fields(r.list.Key)
+	switch t := n.(type) {
+	case schema.ListNode:
+		if c, ok := t.Child(name); ok {
+			return c
+		}
+	case schema.ContainerNode:
+		if c, ok := t.Child(name); ok {
+			return c
+		}
+	}
+	return nil
+}
+
+// nodeKeys returns a list node's key leaf names in key-statement order.
+func nodeKeys(n schema.Node) []string {
+	l, ok := n.(schema.ListNode)
+	if !ok {
+		return nil
+	}
+	ks := l.Keys()
+	if len(ks) == 0 {
+		return nil
+	}
+	names := make([]string, 0, len(ks))
+	for _, k := range ks {
+		names = append(names, k.Name())
+	}
+	return names
+}
+
+// nodeHasChildren reports whether n exposes any child（leafdelete 的 schema
+// 存在性守卫）。
+func nodeHasChildren(n schema.Node) bool {
+	switch t := n.(type) {
+	case schema.ListNode:
+		return len(t.Children()) > 0
+	case schema.ContainerNode:
+		return len(t.Children()) > 0
+	}
+	return false
 }
 
 // findContainerMap locates the container's unique YANG-list map field.
@@ -268,9 +314,9 @@ func encodeContainer(spec *Spec, cv reflect.Value) (string, error) {
 // entryMod is the list field's module tag; when it resolves (via res) to a
 // namespace differing from parentNS, each entry element declares that xmlns
 // and its children inherit it (XC-06). entryMod "" ⇒ no per-node xmlns.
-func encodeList(b *strings.Builder, r *resolved, mapVal reflect.Value, elemTag string, schema *yang.Entry, res nsResolver, parentNS, entryMod string) error {
-	if schema == nil {
-		schema = r.list
+func encodeList(b *strings.Builder, r *resolved, mapVal reflect.Value, elemTag string, sn schema.Node, res nsResolver, parentNS, entryMod string) error {
+	if sn == nil {
+		sn = r.list
 	}
 	entryNS := res.at(entryMod, parentNS)
 	effNS := parentNS
@@ -283,11 +329,11 @@ func encodeList(b *strings.Builder, r *resolved, mapVal reflect.Value, elemTag s
 			continue
 		}
 		openTag(b, elemTag, entryNS)
-		emitted, err := encodeKeysFirst(b, ev, mk, schema, res, effNS)
+		emitted, err := encodeKeysFirst(b, ev, mk, sn, res, effNS)
 		if err != nil {
 			return fmt.Errorf("list %s: %w", elemTag, err)
 		}
-		if err := encodeFields(b, ev.Elem(), schema, emitted, res, effNS); err != nil {
+		if err := encodeFields(b, ev.Elem(), sn, emitted, res, effNS); err != nil {
 			return fmt.Errorf("list %s: %w", elemTag, err)
 		}
 		b.WriteString("</" + elemTag + ">")
@@ -298,16 +344,16 @@ func encodeList(b *strings.Builder, r *resolved, mapVal reflect.Value, elemTag s
 // encodeKeysFirst writes the entry's key leaves before any other field,
 // falling back to the map key value when the key leaf is nil（legacy 语义）.
 // Key names come from the schema Key statement, else from ΛListKeyMap.
-func encodeKeysFirst(b *strings.Builder, ev reflect.Value, mapKey reflect.Value, schema *yang.Entry, res nsResolver, parentNS string) (map[string]bool, error) {
-	var names []string
-	if schema != nil && schema.Key != "" {
-		names = strings.Fields(schema.Key)
-	} else if kh, ok := ev.Interface().(ygot.KeyHelperGoStruct); ok {
-		if km, err := kh.ΛListKeyMap(); err == nil {
-			for n := range km {
-				names = append(names, n)
+func encodeKeysFirst(b *strings.Builder, ev reflect.Value, mapKey reflect.Value, sn schema.Node, res nsResolver, parentNS string) (map[string]bool, error) {
+	names := nodeKeys(sn)
+	if names == nil {
+		if kh, ok := ev.Interface().(ygot.KeyHelperGoStruct); ok {
+			if km, err := kh.ΛListKeyMap(); err == nil {
+				for n := range km {
+					names = append(names, n)
+				}
+				sort.Strings(names)
 			}
-			sort.Strings(names)
 		}
 	}
 	emitted := map[string]bool{}
@@ -336,7 +382,7 @@ func encodeKeysFirst(b *strings.Builder, ev reflect.Value, mapKey reflect.Value,
 // encodeFields serializes the remaining struct fields in declaration order.
 // parentNS is the enclosing element's effective namespace; each field may open
 // a module boundary (XC-06) resolved from its `module` tag.
-func encodeFields(b *strings.Builder, sv reflect.Value, schema *yang.Entry, skip map[string]bool, res nsResolver, parentNS string) error {
+func encodeFields(b *strings.Builder, sv reflect.Value, sn schema.Node, skip map[string]bool, res nsResolver, parentNS string) error {
 	t := sv.Type()
 	for i := 0; i < t.NumField(); i++ {
 		f := t.Field(i)
@@ -345,10 +391,7 @@ func encodeFields(b *strings.Builder, sv reflect.Value, schema *yang.Entry, skip
 			continue
 		}
 		fv := sv.Field(i)
-		var child *yang.Entry
-		if schema != nil {
-			child = schema.Dir[tag]
-		}
+		child := nodeChild(sn, tag)
 		if err := encodeField(b, tag, fv, child, res, parentNS, moduleTag(f)); err != nil {
 			return fmt.Errorf("field %s: %w", tag, err)
 		}
@@ -356,7 +399,7 @@ func encodeFields(b *strings.Builder, sv reflect.Value, schema *yang.Entry, skip
 	return nil
 }
 
-func encodeField(b *strings.Builder, tag string, fv reflect.Value, schema *yang.Entry, res nsResolver, parentNS, mod string) error {
+func encodeField(b *strings.Builder, tag string, fv reflect.Value, sn schema.Node, res nsResolver, parentNS, mod string) error {
 	ns := res.at(mod, parentNS) // module boundary xmlns ("" ⇒ inherit parent)
 	effNS := parentNS
 	if ns != "" {
@@ -376,7 +419,7 @@ func encodeField(b *strings.Builder, tag string, fv reflect.Value, schema *yang.
 		}
 		if fv.Elem().Kind() == reflect.Struct {
 			openTag(b, tag, ns)
-			if err := encodeFields(b, fv.Elem(), schema, nil, res, effNS); err != nil {
+			if err := encodeFields(b, fv.Elem(), sn, nil, res, effNS); err != nil {
 				return err
 			}
 			b.WriteString("</" + tag + ">")
@@ -387,8 +430,8 @@ func encodeField(b *strings.Builder, tag string, fv reflect.Value, schema *yang.
 		if fv.IsNil() || fv.Len() == 0 {
 			return nil
 		}
-		r := &resolved{list: schema}
-		return encodeList(b, r, fv, tag, schema, res, parentNS, mod)
+		r := &resolved{list: sn}
+		return encodeList(b, r, fv, tag, sn, res, parentNS, mod)
 	case reflect.Slice: // leaf-list of scalars
 		if fv.Type().Elem().Kind() == reflect.Uint8 {
 			return fmt.Errorf("binary leaf unsupported")

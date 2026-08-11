@@ -6,7 +6,6 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/generated/huawei"
@@ -17,14 +16,14 @@ const devmNS = "urn:huawei:yang:huawei-devm"
 func devmSpec() *Spec {
 	return &Spec{
 		Namespace: devmNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiDevm_Devm"] },
+		Schema:    irTestNode("/devm"),
 	}
 }
 
 func devmEntitysSpec() *Spec {
 	return &Spec{
 		Namespace: devmNS,
-		Schema:    func() *yang.Entry { return huawei.SchemaTree["HuaweiDevm_Devm_PhysicalEntitys"] },
+		Schema:    irTestNode("/devm/physical-entitys"),
 	}
 }
 
