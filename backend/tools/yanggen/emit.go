@@ -33,7 +33,7 @@ func EmitPackage(m *Model, modules []string, splitCount int) (map[string][]byte,
 func emitPackageRaw(m *Model, modules []string, splitCount int) (map[string][]byte, error) {
 	structSrc := make([]string, 0, len(m.Structs))
 	for _, s := range m.Structs {
-		src, err := emitStruct(s)
+		src, err := emitStruct(m, s)
 		if err != nil {
 			return nil, err
 		}
@@ -42,16 +42,18 @@ func emitPackageRaw(m *Model, modules []string, splitCount int) (map[string][]by
 
 	out := map[string][]byte{}
 	if splitCount <= 0 {
+		var body strings.Builder
+		body.WriteString(emitRegistry(m))
+		for _, s := range structSrc {
+			body.WriteString(s)
+		}
+		body.WriteString(emitEnums(m))
+		body.WriteString(emitEnumMaps(m))
+		body.WriteString(emitUnions(m))
 		var b strings.Builder
 		b.WriteString(fileHeader(m.Package, modules))
-		b.WriteString(importBlock("fmt", "reflect", objectImport))
-		b.WriteString(emitRegistry(m))
-		for _, s := range structSrc {
-			b.WriteString(s)
-		}
-		b.WriteString(emitEnums(m))
-		b.WriteString(emitEnumMaps(m))
-		b.WriteString(emitUnions(m))
+		b.WriteString(importBlock(neededImports(body.String())...))
+		b.WriteString(body.String())
 		out["all.gen.go"] = []byte(b.String())
 		return out, nil
 	}
@@ -80,7 +82,8 @@ func emitPackageRaw(m *Model, modules []string, splitCount int) (map[string][]by
 		out["enum_map.go"] = []byte(fileHeader(m.Package, modules) + importBlock(objectImport) + emitEnumMaps(m))
 	}
 	if len(m.Unions) > 0 {
-		out["union.go"] = []byte(fileHeader(m.Package, modules) + emitUnions(m))
+		ub := emitUnions(m)
+		out["union.go"] = []byte(fileHeader(m.Package, modules) + importBlock(neededImports(ub)...) + ub)
 	}
 	return out, nil
 }
@@ -95,8 +98,19 @@ func neededImports(chunk string) []string {
 	if strings.Contains(chunk, "reflect.") {
 		imps = append(imps, "reflect")
 	}
+	if strings.Contains(chunk, "json.") {
+		imps = append(imps, "encoding/json")
+	}
+	if strings.Contains(chunk, "sort.") {
+		imps = append(imps, "sort")
+	}
+	if strings.Contains(chunk, "strconv.") {
+		imps = append(imps, "strconv")
+	}
 	// 闭集匹配（生成器产出的 object 包引用只有这几种），避免注释文本误报。
-	for _, tok := range []string{"object.Empty", "object.Binary", "object.EnumDefinition", "object.EnumLogString"} {
+	for _, tok := range []string{"object.Empty", "object.Binary", "object.EnumDefinition", "object.EnumLogString",
+		"object.RawJSON", "object.JSONArray", "object.StripModule", "object.Parse", "object.EnumValueByName",
+		"object.EnumName", "object.EmptyJSON", "object.IsEmptyJSON"} {
 		if strings.Contains(chunk, tok) {
 			imps = append(imps, objectImport)
 			break
@@ -146,7 +160,7 @@ func importBlock(imps ...string) string {
 	return b.String()
 }
 
-func emitStruct(s *Struct) (string, error) {
+func emitStruct(m *Model, s *Struct) (string, error) {
 	var b strings.Builder
 	fmt.Fprintf(&b, "// %s represents the %s YANG schema element.\n", s.Name, s.Path)
 	fmt.Fprintf(&b, "type %s struct {\n", s.Name)
@@ -211,6 +225,8 @@ func emitStruct(s *Struct) (string, error) {
 		}
 		b.WriteString("}, nil\n}\n\n")
 	}
+
+	b.WriteString(emitJSONMethods(m, s))
 	return b.String(), nil
 }
 
@@ -290,6 +306,7 @@ func emitUnions(m *Model) string {
 			fmt.Fprintf(&b, "// Is_%s marks %s as a member of union %s.\n", u.Name, wrap, u.Name)
 			fmt.Fprintf(&b, "func (*%s) Is_%s() {}\n\n", wrap, u.Name)
 		}
+		b.WriteString(emitUnionJSONHelpers(u))
 	}
 	return b.String()
 }
