@@ -9,7 +9,7 @@ metadata:
 
 **目标**：`usmp-backend` 发布二进制 import 闭包零 openconfig/ygot、零 goyang（商用自主可控），参考 K8s runtime.Object/Scheme 范式（极小标记接口 + Scheme 注册 + 构建期生成样板；**不**引入 apimachinery 承载 YANG 类型）。change: `openspec/changes/retire-ygot-runtime`（7 阶段 26 任务）。
 
-**阶段1 已交付**（worktree-retire-ygot-runtime，2026-08-11）：
+**阶段1 已交付并合入 main**（PR#307 提案三件套 + PR#308 代码，2026-08-11）：
 - Schema IR 自有格式 v1：`schema.EncodeIR/DecodeIR`（gzip JSON、版本快速失败、确定性、key/parent 指针同一性重建）。IR blob 223KB `internal/yangschema/schema.ir.gz`（go:embed），`yangschema.Load()` 已切换。
 - `tools/schemagen`：一期刻意复用旧链路（generated Schema()→ygotbridge）保证零漂移；二期自研生成器落地后切直读 YANG 源。
 - `tools/ygotbridge`：原 `schema/entry.go` goyang→内部模型转换整体迁出（8 个 entry 测试随迁，alias_test.go 别名保正文零改动）；`schema/loader.go`+manager SchemeDir 是死代码已删。
@@ -17,6 +17,8 @@ metadata:
 - 实证：`go list -deps ./pkg/yang-runtime/schema` 零 openconfig；main 闭包还剩 6 个 openconfig 包（阶段2-6 清零）。
 
 **Why**：商用交付自主可控 + 解除 ygot v0.29.20 天花板债（[[go-122-pin]]）。
+
+**阶段2 基本完成**（2026-08-11，任务2.1-2.4 ✓，剩 2.5 make 接线）：object 运行库 + `tools/yanggen` 全链交付；**native 包已入库并存**（`internal/generated/native/{huawei,business}`，9.3 万行、零 openconfig、两次生成字节一致）；**结构对拍三层全绿**（`tools/yanggen/parity_test.go`：类型集/逐字段 tag·形状/枚举值表 vs ygot 基准零差异）。生成约定权威=`openspec/changes/retire-ygot-runtime/codegen-conventions.md`。**对拍实证冻结的四条规则**（改生成器前必读）：①生成域=整个依赖闭包（未列出的被 import 模块顶层容器也入 Device）；②typedef 枚举按**使用方叶所属模块**命名（非定义模块——row-status 每模块一份）；③内联枚举按 AST 节点去重（grouping 复用单枚举首实例命名）；④union 同型折叠（全成员同 Go 型→裸类型，265 叶折叠后仅 6 接口）。踩坑：goyang EnumType Names()/Values() 各自排序不可 zip（NameMap 权威）；净化 token 无尾下划线；leafref 须按**数据树**语义解析（choice/case 不占层级，Entry.Find 会错位）；跨模块 leafref 需全闭包顶层容器索引。
 
 **How to apply**（后续阶段注意）：
 - 阶段2 自研生成器：结构约定必须字节级冻结（字段名/path+module tag/map-list/...Key），diff/xmlcodec/drivers 才免改；JSON 编解码走「构建期生成 per-type MarshalJSON/UnmarshalJSON」而非运行时反射引擎（风险局部化、逐类型 golden 可对拍）。

@@ -107,6 +107,32 @@ for conf in "$GEN_DIR"/*/gen.conf; do
                 gofmt -w "internal/generated/$pkg/all.gen.go"
         )
     fi
+
+    # native 生成物（retire-ygot-runtime 阶段2）：同一 manifest 驱动自研 yanggen，
+    # 输出 internal/generated/native/<pkg>（与 ygot 包并存至切换完成，届时本脚本
+    # 的 ygot 分支整体退役）。businessdemo 为北向 demo 隔离锚点，不生成 native
+    #（阶段6.2 拍板去留）。确定性由 yanggen 内建（无需 genfix/goimports）。
+    if [ "$pkg" != "businessdemo" ]; then
+        native_split=""
+        if [ -n "$split_count" ]; then
+            native_split="-structs_split_files_count=$split_count"
+        fi
+        echo "gen-yang: 生成 native/$pkg（yanggen）"
+        (
+            cd "$ROOT/backend" &&
+                rm -f "internal/generated/native/$pkg/all.gen.go" \
+                    "internal/generated/native/$pkg"/structs-*.go \
+                    "internal/generated/native/$pkg"/enum*.go \
+                    "internal/generated/native/$pkg/union.go" \
+                    "internal/generated/native/$pkg/registry.go" &&
+                go run ./tools/yanggen \
+                    -path="$(echo "$yang_path" | awk -F, '{ for (i=1;i<=NF;i++) printf "%s../%s", (i>1?",":""), $i }')" \
+                    -output_dir="internal/generated/native/$pkg" \
+                    -package_name="$pkg" \
+                    $native_split \
+                    $modules
+        )
+    fi
 done
 
 if [ "$found" = 0 ]; then
@@ -117,4 +143,7 @@ if [ "$found" = 0 ]; then
     fi
     exit 1
 fi
+# schema IR blob 随生成物联动刷新（YN-03；ir_parity_test 兜底「忘刷新」）。
+(cd "$ROOT/backend" && go run ./tools/schemagen -output=internal/yangschema/schema.ir.gz)
+
 echo "✅ gen-yang 完成（生成物勿手改，改 YANG/gen.conf 后重跑 make gen-yang）"

@@ -1,0 +1,12 @@
+module usmp-test-ext {
+  namespace "urn:usmp:test-ext";
+  prefix ute;
+
+  import usmp-test { prefix ut; }
+
+  augment "/ut:box" {
+    container extras {
+      leaf note { type string; }
+    }
+  }
+}

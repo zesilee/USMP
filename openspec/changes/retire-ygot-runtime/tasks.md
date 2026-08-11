@@ -14,11 +14,11 @@
 
 ## 2. 自研生成器（CG-01 修订，YN-01 类型约定）
 
-- [ ] 2.1 `Object`/`KeyedObject`/`Enum` 接口族 + 指针 helper 运行库包（先写接口契约测试：key 元数据/枚举映射与 ygot 等价，红绿）
-- [ ] 2.2 生成器 `tools/yanggen` 骨架：gen.conf 解析、结构体/枚举/union 生成（命名、`path`+`module` tag、map-list、`...Key`、枚举标识符合法化内建），B1 表格驱动测试覆盖命名/tag/union 分支
-- [ ] 2.3 确定性保证（无序集合稳定排序内建）+ split_count 拆分布局；连续两次生成字节一致测试
-- [ ] 2.4 全模块生成 `internal/generated/native/*`（与旧生成物并存），结构约定 diff 对拍：字段名/tag/类型集合与 ygot 生成物逐一比对的守护测试
-- [ ] 2.5 `make gen-yang` 接入自研生成器（VENDOR= 口径保持），CG-03 regen-and-diff 门禁覆盖新生成物；存量 deviation 集合沿用验证（CG-04 修订）
+- [x] 2.1 `Object`/`KeyedObject`/`Enum` 接口族 + 指针 helper 运行库包（先写接口契约测试：key 元数据/枚举映射与 ygot 等价，红绿）
+- [x] 2.2 生成器 `tools/yanggen` 骨架：gen.conf 解析、结构体/枚举/union 生成（命名、`path`+`module` tag、map-list、`...Key`、枚举标识符合法化内建），B1 表格驱动测试覆盖命名/tag/union 分支
+- [x] 2.3 确定性保证（无序集合稳定排序内建）+ split_count 拆分布局；连续两次生成字节一致测试
+- [x] 2.4 全模块生成 `internal/generated/native/*`（与旧生成物并存），结构约定 diff 对拍：字段名/tag/类型集合与 ygot 生成物逐一比对的守护测试
+- [x] 2.5 `make gen-yang` 接入自研生成器（VENDOR= 口径保持），CG-03 regen-and-diff 门禁覆盖新生成物；存量 deviation 集合沿用验证（CG-04 修订）
 
 ## 3. RFC7951 JSON 通道（YN-02）
 
