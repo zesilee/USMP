@@ -8,9 +8,9 @@ import (
 	"testing"
 
 	"github.com/leezesi/usmp/backend/internal/api"
-	"github.com/leezesi/usmp/backend/internal/generated/businessdemo"
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
+	"github.com/leezesi/usmp/backend/tools/businessdemo"
 	"github.com/leezesi/usmp/backend/tools/ygotbridge"
 )
 
