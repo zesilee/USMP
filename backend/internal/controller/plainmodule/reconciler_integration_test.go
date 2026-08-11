@@ -2,11 +2,11 @@ package plainmodule
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"testing"
 	"time"
 
-	"github.com/openconfig/ygot/ygot"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/leezesi/usmp/backend/internal/cache"
@@ -99,11 +99,15 @@ func TestPlainModule_Integration_ConvergeAndReadback(t *testing.T) {
 			if err != nil {
 				t.Fatalf("readback: %v", err)
 			}
-			n, err := ygot.Diff(got.(ygot.GoStruct), desired.(ygot.GoStruct))
+			gotJSON, err := got.(json.Marshaler).MarshalJSON()
 			if err != nil {
-				t.Fatalf("diff: %v", err)
+				t.Fatalf("marshal got: %v", err)
 			}
-			assert.Empty(t, n.GetUpdate(), "回读应与 desired 无差")
+			wantJSON, err := desired.(json.Marshaler).MarshalJSON()
+			if err != nil {
+				t.Fatalf("marshal desired: %v", err)
+			}
+			assert.Equal(t, string(wantJSON), string(gotJSON), "回读应与 desired 无差（生成式 JSON 确定性使字节可比）")
 
 			second := r.Reconcile(ctx, req)
 			if second.Error != nil {

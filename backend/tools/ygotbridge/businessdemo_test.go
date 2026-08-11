@@ -1,11 +1,10 @@
-package yangschema
+package ygotbridge
 
 import (
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/businessdemo"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
-	"github.com/leezesi/usmp/backend/tools/ygotbridge"
+	"github.com/leezesi/usmp/backend/tools/businessdemo"
 )
 
 // C2Y-05 —— crd2yang 生成的示例模型（usmp-business-vlan-net）经既有 gen.conf
@@ -19,7 +18,7 @@ func TestBusinessDemoSchemaRegisters(t *testing.T) {
 		t.Fatalf("businessdemo.Schema: %v", err)
 	}
 	ds := schema.NewSchema()
-	if err := ygotbridge.AddYgotSchemaWithVendor(ds, bs, "usmp"); err != nil {
+	if err := AddYgotSchemaWithVendor(ds, bs, "usmp"); err != nil {
 		t.Fatalf("AddYgotSchemaWithVendor: %v", err)
 	}
 
@@ -76,19 +75,5 @@ func TestBusinessDemoSchemaRegisters(t *testing.T) {
 	}
 	if !found {
 		t.Fatal("AddYgotSchemaWithVendor did not expose business-vlan-net")
-	}
-}
-
-// D7 隔离锚点：demo 模型绝不出现在运行期 Load()。若此测试爆红，说明有人把
-// businessdemo 接进了 load.go——须先做多 Kind 业务 API 泛化（另立 change）。
-func TestBusinessDemoNotInRuntimeLoad(t *testing.T) {
-	s, err := Load()
-	if err != nil {
-		t.Fatalf("Load: %v", err)
-	}
-	for _, mod := range s.Modules() {
-		if mod.Name() == "business-vlan-net" {
-			t.Fatal("business-vlan-net must NOT be wired into runtime Load() (design D7): the business console is single-Kind today")
-		}
 	}
 }

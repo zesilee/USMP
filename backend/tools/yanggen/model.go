@@ -459,7 +459,11 @@ func (b *builder) resolveLeafref(e *yang.Entry, t *yang.YangType) *yang.Entry {
 
 // orderedByUser reports whether a list entry is `ordered-by user`.
 func orderedByUser(e *yang.Entry) bool {
-	return e.ListAttr != nil && e.ListAttr.OrderedBy != nil && e.ListAttr.OrderedBy.Name == "user"
+	if e.ListAttr == nil {
+		return false
+	}
+	// OrderedBy 已弃用但华为闭包两路都填；双口径判定防 goyang 升级漂移。
+	return e.ListAttr.OrderedByUser || (e.ListAttr.OrderedBy != nil && e.ListAttr.OrderedBy.Name == "user")
 }
 
 // dataParent 返回数据树父节点（跳过 choice/case 层）。

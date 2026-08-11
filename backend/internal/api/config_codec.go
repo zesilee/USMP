@@ -6,12 +6,11 @@ import (
 	"log"
 	"strings"
 
-	"github.com/openconfig/ygot/ygot"
-
 	// 空白导入触发 huawei 驱动描述符注册（DR-01）：本包编解码与 manager 路由
 	// 均从 driver 注册表查表。
 	_ "github.com/leezesi/usmp/backend/internal/drivers"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // decodeRunningConfig turns a raw NETCONF XML readback into an RFC7951-shaped
@@ -27,7 +26,7 @@ func decodeRunningConfig(path string, data interface{}) interface{} {
 	}
 
 	// 解码器按驱动描述符注册表查表（DR-03）——不再散落路径字符串匹配。
-	var parsed ygot.GoStruct
+	var parsed object.Object
 	var anchor string
 	if d, ok := driver.DecoderFor(path); ok {
 		p, err := d.DecodeXML(raw)
@@ -46,14 +45,19 @@ func decodeRunningConfig(path string, data interface{}) interface{} {
 		return data
 	}
 
-	// SkipValidation：回读是「展示设备真值」，设备侧值不合本地 pattern（如子接口
-	// number 带小数点）不应让整个回读降级成不透明 XML（R08）；写路径校验不受影响。
-	js, err := ygot.EmitJSON(parsed, &ygot.EmitJSONConfig{Format: ygot.RFC7951, SkipValidation: true})
+	// 生成式 MarshalJSON（S3，替 ygot.EmitJSON）：native 生成物无校验面，
+	// 天然等价旧 SkipValidation 语义——回读是「展示设备真值」，设备侧值不合
+	// 本地 pattern 也不降级（R08）；写路径校验不受影响。
+	jm, ok := parsed.(json.Marshaler)
+	if !ok {
+		return data
+	}
+	js, err := jm.MarshalJSON()
 	if err != nil {
 		return data
 	}
 	var out map[string]interface{}
-	if err := json.Unmarshal([]byte(js), &out); err != nil {
+	if err := json.Unmarshal(js, &out); err != nil {
 		return data
 	}
 	return peelToPath(out, anchor, path)

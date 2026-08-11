@@ -8,9 +8,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
-	"github.com/openconfig/ygot/ygot"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -48,7 +48,7 @@ func TestDeleteConfig_Success(t *testing.T) {
 
 	// 预置 desired（两条）与运行缓存
 	seed := &huawei.HuaweiVlan_Vlan_Vlans{Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
-		10: {Id: ygot.Uint16(10)}, 20: {Id: ygot.Uint16(20)},
+		10: {Id: object.Uint16(10)}, 20: {Id: object.Uint16(20)},
 	}}
 	assert.NoError(t, mgr.GetConfigStore().Set("10.0.0.1", "/vlan:vlan/vlan:vlans", seed))
 	mgr.GetRunningCache().Set(runKey("10.0.0.1", "/vlan:vlan/vlan:vlans"), "cached")

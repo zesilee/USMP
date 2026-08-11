@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
-	"github.com/openconfig/ygot/ygot"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // Regression（内置接口删不掉 bug）：edit-config 报文必须把 list 容器包进其 YANG 模块
@@ -16,7 +16,7 @@ func TestEncodeWrapsInModuleContainer(t *testing.T) {
 	t.Run("ifm nests under <ifm>", func(t *testing.T) {
 		out, err := Encode(ifmSpec(), &huawei.HuaweiIfm_Ifm_Interfaces{
 			Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
-				"GE0/0/9": {Name: ygot.String("GE0/0/9")},
+				"GE0/0/9": {Name: object.String("GE0/0/9")},
 			},
 		})
 		if err != nil {
@@ -31,7 +31,7 @@ func TestEncodeWrapsInModuleContainer(t *testing.T) {
 	t.Run("vlan nests under <vlan>", func(t *testing.T) {
 		out, err := Encode(vlanSpec(), &huawei.HuaweiVlan_Vlan_Vlans{
 			Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
-				30: {Id: ygot.Uint16(30)},
+				30: {Id: object.Uint16(30)},
 			},
 		})
 		if err != nil {
@@ -58,7 +58,7 @@ func TestEncodeWrapsInModuleContainer(t *testing.T) {
 func TestEncodeDeleteWrapsInModuleContainer(t *testing.T) {
 	out, err := EncodeDelete(ifmSpec(), &huawei.HuaweiIfm_Ifm_Interfaces{
 		Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
-			"200GE0/1/2": {Name: ygot.String("200GE0/1/2")},
+			"200GE0/1/2": {Name: object.String("200GE0/1/2")},
 		},
 	})
 	if err != nil {

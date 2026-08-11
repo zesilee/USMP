@@ -265,6 +265,7 @@ type defaultList struct {
 	children      []Node
 	childrenMap   map[string]Node
 	isUserOrdered bool
+	minElements   uint64
 	whenExpr      string
 	mustExprs     []string
 	opExcludes    []string
@@ -289,6 +290,11 @@ func (l *defaultList) Child(name string) (Node, bool) {
 // IsUserOrdered implements ListNode interface
 func (l *defaultList) IsUserOrdered() bool {
 	return l.isUserOrdered
+}
+
+// MinElements implements ListNode interface
+func (l *defaultList) MinElements() uint64 {
+	return l.minElements
 }
 
 // NewList creates a new list node

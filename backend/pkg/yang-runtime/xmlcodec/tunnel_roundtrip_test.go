@@ -6,9 +6,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
@@ -94,13 +93,13 @@ func TestTunnelManagement_ScalarBoundary_Shape(t *testing.T) {
 func TestTunnelManagement_ScalarBoundary_Roundtrip(t *testing.T) {
 	orig := &huawei.HuaweiTunnelManagement_TunnelManagement{
 		TunnelPolicys:    &huawei.HuaweiTunnelManagement_TunnelManagement_TunnelPolicys{},
-		TunnelDownSwitch: &huawei.HuaweiTunnelManagement_TunnelManagement_TunnelDownSwitch{Enable: ygot.Bool(true)},
+		TunnelDownSwitch: &huawei.HuaweiTunnelManagement_TunnelManagement_TunnelDownSwitch{Enable: object.Bool(true)},
 	}
 	p, err := orig.TunnelPolicys.NewTunnelPolicy("policy-a")
 	if err != nil {
 		t.Fatalf("NewTunnelPolicy: %v", err)
 	}
-	p.Description = ygot.String("bind te tunnels")
+	p.Description = object.String("bind te tunnels")
 
 	xml, err := Encode(tnlmSpec(), orig)
 	if err != nil {
@@ -130,7 +129,7 @@ func TestTunnelManagement_Boundary_LengthEdges(t *testing.T) {
 			TunnelPolicys: &huawei.HuaweiTunnelManagement_TunnelManagement_TunnelPolicys{},
 		}
 		p, _ := orig.TunnelPolicys.NewTunnelPolicy(tc.name)
-		p.Description = ygot.String(tc.desc)
+		p.Description = object.String(tc.desc)
 		xml, err := Encode(tnlmSpec(), orig)
 		if err != nil {
 			t.Fatalf("Encode(name=%d,desc=%d): %v", len(tc.name), len(tc.desc), err)
@@ -150,7 +149,7 @@ func TestTunnelManagement_Boundary_LengthEdges(t *testing.T) {
 // 下发报文（tunnel-infos/subscribe-tunnel-policys）。
 func TestTunnelManagement_ConfigFalse_NotInEditConfig(t *testing.T) {
 	orig := &huawei.HuaweiTunnelManagement_TunnelManagement{
-		TunnelDownSwitch: &huawei.HuaweiTunnelManagement_TunnelManagement_TunnelDownSwitch{Enable: ygot.Bool(true)},
+		TunnelDownSwitch: &huawei.HuaweiTunnelManagement_TunnelManagement_TunnelDownSwitch{Enable: object.Bool(true)},
 	}
 	xml, err := Encode(tnlmSpec(), orig)
 	if err != nil {
@@ -175,10 +174,10 @@ func TestTunnelManagement_NegativePath_NoPanic(t *testing.T) {
 func TestTunnelManagement_Concurrent_EncodeDecode(t *testing.T) {
 	orig := &huawei.HuaweiTunnelManagement_TunnelManagement{
 		TunnelPolicys:    &huawei.HuaweiTunnelManagement_TunnelManagement_TunnelPolicys{},
-		TunnelDownSwitch: &huawei.HuaweiTunnelManagement_TunnelManagement_TunnelDownSwitch{Enable: ygot.Bool(true)},
+		TunnelDownSwitch: &huawei.HuaweiTunnelManagement_TunnelManagement_TunnelDownSwitch{Enable: object.Bool(true)},
 	}
 	p, _ := orig.TunnelPolicys.NewTunnelPolicy("policy-a")
-	p.Description = ygot.String("d")
+	p.Description = object.String("d")
 
 	var wg sync.WaitGroup
 	for i := 0; i < 16; i++ {

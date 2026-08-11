@@ -7,10 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	yangdriver "github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // DP-09 NETCONF <get> 状态读：WithStateData 置位发 <get>（携由 path 构造的
@@ -159,7 +158,7 @@ func TestNETCONFClient_GetWithStateData_DecodesIntoYgot(t *testing.T) {
 	if entry.Mtu == nil || *entry.Mtu != 1500 {
 		t.Fatalf("config leaf mtu lost: %v", entry.Mtu)
 	}
-	_ = ygot.GoStruct(ifaces)
+	_ = object.Object(ifaces)
 }
 
 // <get> 路径断线自愈：死连接 → 标记失效 → 重连重试一次（DP-05 语义对齐）。

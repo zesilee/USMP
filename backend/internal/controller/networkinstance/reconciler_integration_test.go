@@ -7,14 +7,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/openconfig/ygot/ygot"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/leezesi/usmp/backend/internal/cache"
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
 )
@@ -30,7 +30,7 @@ func simStore(sim *netsim.Simulator) (device.Store, string) {
 
 func inst(name, desc string) *huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance {
 	return &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance{
-		Name: ygot.String(name), Description: ygot.String(desc),
+		Name: object.String(name), Description: object.String(desc),
 	}
 }
 
@@ -42,8 +42,8 @@ func niDesired(instances ...*huawei.HuaweiNetworkInstance_NetworkInstance_Instan
 	}
 	return &huawei.HuaweiNetworkInstance_NetworkInstance{
 		Global: &huawei.HuaweiNetworkInstance_NetworkInstance_Global{
-			CfgRouterId:     ygot.String("1.1.1.1"),
-			AsNotationPlain: ygot.Bool(true),
+			CfgRouterId:     object.String("1.1.1.1"),
+			AsNotationPlain: object.Bool(true),
 		},
 		Instances: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances{Instance: m},
 	}

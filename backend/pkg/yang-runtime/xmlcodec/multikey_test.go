@@ -6,9 +6,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 )
 
 const devmNS = "urn:huawei:yang:huawei-devm"
@@ -148,14 +146,11 @@ type badEntry struct {
 	B *string `path:"b"`
 }
 
-func (*badEntry) IsYANGGoStruct() {}
-func (e *badEntry) ΛListKeyMap() (map[string]interface{}, error) {
+func (*badEntry) IsYangObject() {}
+func (e *badEntry) ListKeyMap() (map[string]interface{}, error) {
 	// "b" 返回与 key struct 字段（string）不可转换的类型
 	return map[string]interface{}{"a": "x", "b": struct{ X int }{1}}, nil
 }
-func (*badEntry) ΛValidate(...ygot.ValidationOption) error { return nil }
-func (*badEntry) ΛEnumTypeMap() map[string][]reflect.Type  { return nil }
-func (*badEntry) ΛBelongingModule() string                 { return "" }
 
 // TestEntryKeyMultiKeyNotConvertible：不可转换 SHALL 返回命名该 list 的明确错误
 // （R08，不 panic、不静默错键）。

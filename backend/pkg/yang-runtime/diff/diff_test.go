@@ -259,14 +259,14 @@ func TestDiffMultipleChanges(t *testing.T) {
 
 	desired := &TestVLAN{
 		VLAN: []TestVLANEntry{
-			{ID: 100, Name: "vlan-100"},    // modified
+			{ID: 100, Name: "vlan-100"},     // modified
 			{ID: 200, Name: "new-vlan-200"}, // added
 		},
 	}
 	actual := &TestVLAN{
 		VLAN: []TestVLANEntry{
 			{ID: 100, Name: "old-100"},  // modified
-			{ID: 300, Name: "vlan-300"},  // deleted
+			{ID: 300, Name: "vlan-300"}, // deleted
 		},
 	}
 

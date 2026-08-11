@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
-	"github.com/openconfig/ygot/ygot"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // recordingTxClient 记录 prepare 发出的 Set 调用（CS-04 Fragment Op 映射防线）。
@@ -51,10 +51,10 @@ func (r *recordingTxClient) CommitConfirmed(ctx context.Context, d time.Duration
 // 透传 AddChange；全部 WithCommit(false)（candidate 两阶段前置）。
 func TestPrepareFragmentOpMapping(t *testing.T) {
 	mergeCfg := &huawei.HuaweiVlan_Vlan_Vlans{
-		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{10: {Id: ygot.Uint16(10)}},
+		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{10: {Id: object.Uint16(10)}},
 	}
 	delCfg := &huawei.HuaweiVlan_Vlan_Vlans{
-		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{20: {Id: ygot.Uint16(20)}},
+		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{20: {Id: object.Uint16(20)}},
 	}
 	rec := &recordingTxClient{}
 	tc := NewTxCoordinator(nil, nil, time.Second)

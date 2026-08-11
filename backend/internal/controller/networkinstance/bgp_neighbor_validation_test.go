@@ -6,9 +6,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
-
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
@@ -31,7 +30,7 @@ func TestBN_PeerBoundary_Description(t *testing.T) {
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
 			ni := niWithPublicPeers(peer("10.0.0.1", "100", tc.desc))
-			err := ni.ΛValidate()
+			err := irValidateNI(ni)
 			if tc.wantErr && err == nil {
 				t.Fatalf("期望校验失败：desc len=%d", len(tc.desc))
 			}
@@ -44,8 +43,8 @@ func TestBN_PeerBoundary_Description(t *testing.T) {
 
 // remote-as 缺失：ygot ΛValidate 不强制（事实锁定，非本模块可修——需设备/API 层兜底）。
 func TestBN_PeerRemoteAsNotYgotEnforced(t *testing.T) {
-	ni := niWithPublicPeers(&peerT{Address: ygot.String("10.0.0.1")})
-	if err := ni.ΛValidate(); err != nil {
+	ni := niWithPublicPeers(&peerT{Address: object.String("10.0.0.1")})
+	if err := irValidateNI(ni); err != nil {
 		t.Fatalf("记录事实：ygot ΛValidate 当前不强制 remote-as mandatory，若某版本开始强制则更新此断言: %v", err)
 	}
 }

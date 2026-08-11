@@ -66,7 +66,11 @@
 package huawei
 
 import (
+	"encoding/json"
+	"fmt"
 	"reflect"
+
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // Types 是本包全部生成类型的注册表（类型名 → reflect.Type），
@@ -3140,4 +3144,14 @@ var Types = map[string]reflect.Type{
 	"OpenconfigTelemetry_TelemetrySystem_Subscriptions_Persistent_Subscription_SensorProfiles_SensorProfile_Config":       reflect.TypeOf((*OpenconfigTelemetry_TelemetrySystem_Subscriptions_Persistent_Subscription_SensorProfiles_SensorProfile_Config)(nil)).Elem(),
 	"OpenconfigTelemetry_TelemetrySystem_Subscriptions_Persistent_Subscription_SensorProfiles_SensorProfile_State":        reflect.TypeOf((*OpenconfigTelemetry_TelemetrySystem_Subscriptions_Persistent_Subscription_SensorProfiles_SensorProfile_State)(nil)).Elem(),
 	"OpenconfigTelemetry_TelemetrySystem_Subscriptions_Persistent_Subscription_State":                                     reflect.TypeOf((*OpenconfigTelemetry_TelemetrySystem_Subscriptions_Persistent_Subscription_State)(nil)).Elem(),
+}
+
+// Unmarshal decodes RFC7951 JSON into dest（分派到生成式 UnmarshalJSON；
+// 替代 ygot ytypes.Unmarshal 的包级入口，签名对齐 driver 描述符）。
+func Unmarshal(data []byte, dest object.Object) error {
+	um, ok := dest.(json.Unmarshaler)
+	if !ok {
+		return fmt.Errorf("huawei: %T has no generated UnmarshalJSON", dest)
+	}
+	return um.UnmarshalJSON(data)
 }

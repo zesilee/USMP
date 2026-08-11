@@ -9,7 +9,7 @@ using the following YANG input files:
   - usmp-business-vlan-net
 
 Imported modules were sourced from:
-  - ../backend/internal/yang/models/...
+  - ../../backend/internal/yang/models/...
 */
 package businessdemo
 

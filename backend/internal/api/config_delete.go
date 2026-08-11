@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
-	"github.com/openconfig/ygot/ygot"
 )
 
 // parseDeleteTarget 按 path 路由模型分支，把行主键解析成「仅含 key 叶的单条目模型
@@ -24,7 +24,7 @@ func parseDeleteTarget(path, key string) (interface{}, error) {
 	case strings.Contains(path, "ifm:ifm") && strings.Contains(path, "interfaces"):
 		return &huawei.HuaweiIfm_Ifm_Interfaces{
 			Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
-				key: {Name: ygot.String(key)},
+				key: {Name: object.String(key)},
 			},
 		}, nil
 	case strings.Contains(path, "vlan:") && strings.Contains(path, "vlan"):
@@ -38,7 +38,7 @@ func parseDeleteTarget(path, key string) (interface{}, error) {
 		}
 		return &huawei.HuaweiVlan_Vlan_Vlans{
 			Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
-				uint16(id): {Id: ygot.Uint16(uint16(id))},
+				uint16(id): {Id: object.Uint16(uint16(id))},
 			},
 		}, nil
 	}

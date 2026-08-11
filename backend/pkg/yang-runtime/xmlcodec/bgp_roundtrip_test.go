@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
@@ -61,7 +61,7 @@ func populateConfigTrue(t *testing.T, sv reflect.Value, e schema.Node, parentCfg
 			}
 			setScalarLeaf(fv, *n)
 			*n++
-		case fv.Kind() == reflect.Int64 && fv.Type().Implements(goEnumType): // 枚举叶
+		case isEnumType(fv.Type()): // 枚举叶
 			if !cfg {
 				continue
 			}

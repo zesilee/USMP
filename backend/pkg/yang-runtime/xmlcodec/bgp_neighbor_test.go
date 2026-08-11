@@ -5,9 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
@@ -64,7 +63,7 @@ func populatePeerConfigTrue(t *testing.T, sv reflect.Value, e schema.Node, n *in
 			}
 			setScalarLeaf(fv, *n)
 			*n++
-		case fv.Kind() == reflect.Int64 && fv.Type().Implements(goEnumType):
+		case isEnumType(fv.Type()):
 			if !cfg {
 				continue
 			}
@@ -80,7 +79,7 @@ func wrapPeer(addr string, p *peerAlias) *huawei.HuaweiNetworkInstance_NetworkIn
 		Instances: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances{
 			Instance: map[string]*huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance{
 				"_public_": {
-					Name: ygot.String("_public_"),
+					Name: object.String("_public_"),
 					Bgp: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp{
 						BaseProcess: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess{
 							Peers: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers{
@@ -138,10 +137,10 @@ func TestBN01_PeerAllConfigTrue_RoundtripAndNamespace(t *testing.T) {
 // 首个走此路径的驱动字段（vlan/ifm/bgp/ni 无 empty 类型）。
 func TestXC07_EmptyType_PresenceOnly(t *testing.T) {
 	withEmpty := &peerAlias{
-		Address:  ygot.String("10.0.0.9"),
-		RemoteAs: ygot.String("100"),
+		Address:  object.String("10.0.0.9"),
+		RemoteAs: object.String("100"),
 		BfdParameter: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter{
-			Compatible: huawei.YANGEmpty(true),
+			Compatible: object.Empty(true),
 		},
 	}
 	xml, err := Encode(niSpecWithNS(), wrapPeer("10.0.0.9", withEmpty))
@@ -156,15 +155,15 @@ func TestXC07_EmptyType_PresenceOnly(t *testing.T) {
 		t.Fatalf("Decode: %v", err)
 	}
 	gp := got.Instances.Instance["_public_"].Bgp.BaseProcess.Peers.Peer["10.0.0.9"]
-	if gp.BfdParameter == nil || gp.BfdParameter.Compatible != huawei.YANGEmpty(true) {
+	if gp.BfdParameter == nil || gp.BfdParameter.Compatible != object.Empty(true) {
 		t.Fatalf("empty 类型未解码为 present/true: %#v", gp.BfdParameter)
 	}
 
 	// false（缺省）：不发
 	noEmpty := &peerAlias{
-		Address:      ygot.String("10.0.0.10"),
-		RemoteAs:     ygot.String("100"),
-		BfdParameter: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter{Compatible: huawei.YANGEmpty(false)},
+		Address:      object.String("10.0.0.10"),
+		RemoteAs:     object.String("100"),
+		BfdParameter: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_BfdParameter{Compatible: object.Empty(false)},
 	}
 	xml2, err := Encode(niSpecWithNS(), wrapPeer("10.0.0.10", noEmpty))
 	if err != nil {
@@ -179,8 +178,8 @@ func TestXC07_EmptyType_PresenceOnly(t *testing.T) {
 func TestBN02_AfTypeEnumKey_Roundtrip(t *testing.T) {
 	afType := huawei.E_HuaweiBgp_AfType(1) // 非 UNSET 的某地址族
 	p := &peerAlias{
-		Address:  ygot.String("10.0.0.1"),
-		RemoteAs: ygot.String("100"),
+		Address:  object.String("10.0.0.1"),
+		RemoteAs: object.String("100"),
 		Afs: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_Afs{
 			Af: map[huawei.E_HuaweiBgp_AfType]*huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers_Peer_Afs_Af{
 				afType: {Type: afType},

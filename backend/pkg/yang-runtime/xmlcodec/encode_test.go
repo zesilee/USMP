@@ -4,10 +4,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/internal/testutil/hwfix"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
-	"github.com/openconfig/ygot/ygot"
 )
 
 const (
@@ -34,7 +34,7 @@ func TestEncodeMatchesGolden(t *testing.T) {
 	tests := []struct {
 		golden string
 		spec   *Spec
-		value  ygot.GoStruct
+		value  object.Object
 	}{
 		{"vlan_full", vlanSpec(), hwfix.VlanFull()},
 		{"vlan_minimal", vlanSpec(), hwfix.VlanMinimal()},

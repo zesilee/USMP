@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	_ "github.com/leezesi/usmp/backend/internal/drivers" // 注册 huawei 描述符：使本测试二进制真实走注册表分发（XC-04）
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/internal/testutil/hwfix"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 )

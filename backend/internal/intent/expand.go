@@ -11,9 +11,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/leezesi/usmp/backend/internal/generated/business"
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
-	"github.com/openconfig/ygot/ygot"
+	"github.com/leezesi/usmp/backend/internal/generated/native/business"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // Native desired paths — identical to the vlan/ifm controllers and config-api
@@ -42,7 +42,7 @@ type Fragment struct {
 	Device string        // device IP (DeviceStore / ConfigStore key)
 	Module string        // native module root name ("vlan" / "ifm")
 	Path   string        // native desired path
-	Config ygot.GoStruct // typed native config (huawei generated, R04)
+	Config object.Object // typed native config (huawei generated, R04)
 	// Op 是下发语义（CS-04 攒批扩展）；零值 merge 保持既有意图链路行为。
 	Op FragmentOp
 	// RawXML 非空时为预编码 edit-config 片段（如叶级删除，CS-05），prepare

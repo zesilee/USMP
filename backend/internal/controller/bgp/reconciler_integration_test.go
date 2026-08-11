@@ -6,14 +6,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/openconfig/ygot/ygot"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/leezesi/usmp/backend/internal/cache"
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
 )
@@ -29,19 +29,19 @@ func simStore(sim *netsim.Simulator) (device.Store, string) {
 
 func bgpDesired() *huawei.HuaweiBgp_Bgp {
 	return &huawei.HuaweiBgp_Bgp{
-		Global: &huawei.HuaweiBgp_Bgp_Global{YangEnable: ygot.Bool(true)},
+		Global: &huawei.HuaweiBgp_Bgp_Global{YangEnable: object.Bool(true)},
 		BaseProcess: &huawei.HuaweiBgp_Bgp_BaseProcess{
-			Enable:       ygot.Bool(true),
-			As:           ygot.String("100"),
-			CheckFirstAs: ygot.Bool(true),
-			AsPathLimit:  ygot.Uint16(50),
+			Enable:       object.Bool(true),
+			As:           object.String("100"),
+			CheckFirstAs: object.Bool(true),
+			AsPathLimit:  object.Uint16(50),
 			GracefulRestart: &huawei.HuaweiBgp_Bgp_BaseProcess_GracefulRestart{
-				Enable:      ygot.Bool(true),
-				RestartTime: ygot.Uint16(120),
+				Enable:      object.Bool(true),
+				RestartTime: object.Uint16(120),
 			},
 			Timer: &huawei.HuaweiBgp_Bgp_BaseProcess_Timer{
-				HoldTime:      ygot.Uint32(180),
-				KeepAliveTime: ygot.Uint32(60),
+				HoldTime:      object.Uint32(180),
+				KeepAliveTime: object.Uint32(60),
 			},
 		},
 	}

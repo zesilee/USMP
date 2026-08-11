@@ -6,9 +6,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // xpl（/xpl:xpl，容器根，同 /bgp:bgp 走 plain-container）的编解码矩阵。本波次接入 BGP
@@ -55,7 +54,7 @@ func TestXpl_RouteFilter_Roundtrip(t *testing.T) {
 	if err != nil {
 		t.Fatalf("NewRouteFilter: %v", err)
 	}
-	rf.Content = ygot.String("if-match protocol bgp")
+	rf.Content = object.String("if-match protocol bgp")
 
 	xml, err := Encode(xplSpec(), orig)
 	if err != nil {
@@ -78,7 +77,7 @@ func TestXpl_Boundary_ContentLengthEdges(t *testing.T) {
 	for _, content := range []string{"x", strings.Repeat("c", 16380)} {
 		orig := &huawei.HuaweiXpl_Xpl{RouteFilters: &huawei.HuaweiXpl_Xpl_RouteFilters{}}
 		rf, _ := orig.RouteFilters.NewRouteFilter("RF1")
-		rf.Content = ygot.String(content)
+		rf.Content = object.String(content)
 		xml, err := Encode(xplSpec(), orig)
 		if err != nil {
 			t.Fatalf("Encode(content=%d): %v", len(content), err)
@@ -106,7 +105,7 @@ func TestXpl_NegativePath_NoPanic(t *testing.T) {
 func TestXpl_Concurrent_EncodeDecode(t *testing.T) {
 	orig := &huawei.HuaweiXpl_Xpl{RouteFilters: &huawei.HuaweiXpl_Xpl_RouteFilters{}}
 	rf, _ := orig.RouteFilters.NewRouteFilter("RF1")
-	rf.Content = ygot.String("if-match protocol bgp")
+	rf.Content = object.String("if-match protocol bgp")
 
 	var wg sync.WaitGroup
 	for i := 0; i < 16; i++ {

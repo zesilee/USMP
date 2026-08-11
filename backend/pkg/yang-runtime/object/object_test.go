@@ -3,8 +3,6 @@ package object
 import (
 	"strings"
 	"testing"
-
-	"github.com/openconfig/ygot/ygot"
 )
 
 // ---- 生成器将产出的形状（手写样本，冻结生成约定）----
@@ -25,24 +23,6 @@ func (e E_Sample_AdminStatus) EnumMaps() map[string]map[int64]EnumDefinition {
 }
 func (e E_Sample_AdminStatus) String() string {
 	return EnumLogString(e, int64(e), "E_Sample_AdminStatus")
-}
-
-// ygot 参照物：同一映射的 ygot.GoEnum 孪生，契约测试与其对拍。
-var ygotTwinMaps = map[string]map[int64]ygot.EnumDefinition{
-	"E_YgotTwin_AdminStatus": {
-		1: {Name: "down"},
-		2: {Name: "up"},
-	},
-}
-
-type E_YgotTwin_AdminStatus int64
-
-func (E_YgotTwin_AdminStatus) IsYANGGoEnum() {}
-func (e E_YgotTwin_AdminStatus) ΛMap() map[string]map[int64]ygot.EnumDefinition {
-	return ygotTwinMaps
-}
-func (e E_YgotTwin_AdminStatus) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_YgotTwin_AdminStatus")
 }
 
 // sampleEntry 模拟生成的 list 条目（KeyedObject 形状）。
@@ -67,48 +47,44 @@ func (e *missingKeyError) Error() string { return "nil value for key " + e.field
 
 // ---- 契约测试 ----
 
-// TestEnumNameEquivalence：EnumName 与 ygot.EnumName 在合法值/unset/越界三形态
-// 上行为一致（YN-01 枚举映射等价契约）。
-func TestEnumNameEquivalence(t *testing.T) {
+// TestEnumNameContract：EnumName 三形态契约（字面期望冻结自 ygot.EnumName
+// 孪生对拍，2026-08-11 迁移期逐形态实证一致后孪生随 ygot 退役）。
+func TestEnumNameContract(t *testing.T) {
 	cases := []struct {
-		name string
-		val  int64
+		name     string
+		val      int64
+		wantName string
+		wantErr  bool
 	}{
-		{"valid down", 1},
-		{"valid up", 2},
-		{"unset", 0},
-		{"out-of-range", 99},
+		{"valid down", 1, "down", false},
+		{"valid up", 2, "up", false},
+		{"unset", 0, "", false},
+		{"out-of-range", 99, "", true},
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
 			gotName, gotErr := EnumName(E_Sample_AdminStatus(tc.val))
-			wantName, wantErr := ygot.EnumName(E_YgotTwin_AdminStatus(tc.val))
-			if gotName != wantName {
-				t.Fatalf("EnumName(%d) = %q, ygot twin = %q", tc.val, gotName, wantName)
+			if gotName != tc.wantName {
+				t.Fatalf("EnumName(%d) = %q, want %q", tc.val, gotName, tc.wantName)
 			}
-			if (gotErr == nil) != (wantErr == nil) {
-				t.Fatalf("EnumName(%d) err = %v, ygot twin err = %v", tc.val, gotErr, wantErr)
+			if (gotErr != nil) != tc.wantErr {
+				t.Fatalf("EnumName(%d) err = %v, wantErr=%v", tc.val, gotErr, tc.wantErr)
 			}
 		})
 	}
 }
 
-// TestEnumStringEquivalence：String()（EnumLogString 路径）与 ygot 一致，
-// 含越界的 out-of-range 文案形状。
-func TestEnumStringEquivalence(t *testing.T) {
-	for _, v := range []int64{1, 2, 99} {
-		got := E_Sample_AdminStatus(v).String()
-		want := ygot.EnumLogString(E_YgotTwin_AdminStatus(v), v, "E_YgotTwin_AdminStatus")
-		// 越界文案含类型名（必然不同），只比形状：前缀与值。
-		if v == 99 {
-			if !strings.HasPrefix(got, "out-of-range ") || !strings.HasSuffix(got, ": 99") {
-				t.Fatalf("String(99) = %q, want out-of-range shape like %q", got, want)
-			}
-			continue
-		}
-		if got != want {
-			t.Fatalf("String(%d) = %q, ygot twin = %q", v, got, want)
-		}
+// TestEnumStringContract：String()（EnumLogString 路径）三形态契约
+// （文案形状冻结自 ygot.EnumLogString 对拍）。
+func TestEnumStringContract(t *testing.T) {
+	if got := E_Sample_AdminStatus(1).String(); got != "down" {
+		t.Fatalf("String(1) = %q", got)
+	}
+	if got := E_Sample_AdminStatus(2).String(); got != "up" {
+		t.Fatalf("String(2) = %q", got)
+	}
+	if got := E_Sample_AdminStatus(99).String(); !strings.HasPrefix(got, "out-of-range ") || !strings.HasSuffix(got, ": 99") {
+		t.Fatalf("String(99) = %q, want out-of-range shape", got)
 	}
 }
 

@@ -110,19 +110,19 @@ gen-yang: ## 重新生成 ygot YANG→Go 生成物（VENDOR=<pkg> 单包，缺�
 
 gen-crd: ## 重新生成业务意图 CRD manifest（YANG→CRD，BIC-01；CI 以 regen-and-diff 验证零漂移）
 	@mkdir -p deploy/crds
-	@cd backend && go run ./tools/crdgen -path=internal/yang/models -module=usmp-business-vlan \
+	@cd backend/tools && go run ./crdgen -path=../internal/yang/models -module=usmp-business-vlan \
 		-kind=BusinessVlanService -plural=businessvlanservices \
-		-output=../deploy/crds/businessvlanservices.biz.usmp.io.yaml
+		-output=../../deploy/crds/businessvlanservices.biz.usmp.io.yaml
 	@echo "✅ gen-crd 完成（生成物勿手改，改意图 YANG 后重跑 make gen-crd）"
 
 gen-crd2yang: ## 重新生成北向 CRD 反向派生的 YANG 模型（CRD→YANG，C2Y-06；CI 以 regen-and-diff 验证零漂移）
-	@cd backend && go run ./tools/crd2yang \
-		-input=tools/crd2yang/testdata/businessvlannets.crd.yaml \
-		-output=internal/yang/models/usmp-business-vlan-net.yang
+	@cd backend/tools && go run ./crd2yang \
+		-input=crd2yang/testdata/businessvlannets.crd.yaml \
+		-output=../internal/yang/models/usmp-business-vlan-net.yang
 	@echo "✅ gen-crd2yang 完成（生成物勿手改，改北向 CRD/工具后重跑 make gen-crd2yang，下游依次 make gen-yang VENDOR=businessdemo、make gen-schema-fixtures）"
 
 gen-schema-fixtures: ## 重新生成全模块 schema fixture（前端派生黄金/设备一致性矩阵的共享输入；CI 以 regen-and-diff 验证零漂移）
-	@cd backend && go run ./tools/schemadump -output=testdata/schema-fixtures
+	@cd backend/tools && go run ./schemadump -output=../testdata/schema-fixtures
 	@echo "✅ gen-schema-fixtures 完成（生成物勿手改，改后端 schema 后重跑 make gen-schema-fixtures）"
 
 gen-rpc: ## 重新生成 YANG rpc 定义生成物（RPC-01；构建期 goyang 提取，CI 以 regen-and-diff 验证零漂移）

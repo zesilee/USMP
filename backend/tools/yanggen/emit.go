@@ -75,8 +75,8 @@ func emitPackageRaw(m *Model, modules []string, splitCount int) (map[string][]by
 		b.WriteString(chunk)
 		out[fmt.Sprintf("structs-%d.go", i)] = []byte(b.String())
 	}
-	reg := fileHeader(m.Package, modules) + importBlock("reflect") + emitRegistry(m)
-	out["registry.go"] = []byte(reg)
+	regBody := emitRegistry(m)
+	out["registry.go"] = []byte(fileHeader(m.Package, modules) + importBlock(neededImports(regBody)...) + regBody)
 	if len(m.Enums) > 0 {
 		out["enum.go"] = []byte(fileHeader(m.Package, modules) + importBlock(objectImport) + emitEnums(m))
 		out["enum_map.go"] = []byte(fileHeader(m.Package, modules) + importBlock(objectImport) + emitEnumMaps(m))
@@ -110,7 +110,7 @@ func neededImports(chunk string) []string {
 	// 闭集匹配（生成器产出的 object 包引用只有这几种），避免注释文本误报。
 	for _, tok := range []string{"object.Empty", "object.Binary", "object.EnumDefinition", "object.EnumLogString",
 		"object.RawJSON", "object.JSONArray", "object.StripModule", "object.Parse", "object.EnumValueByName",
-		"object.EnumName", "object.EmptyJSON", "object.IsEmptyJSON"} {
+		"object.EnumName", "object.EmptyJSON", "object.IsEmptyJSON", "object.Object"} {
 		if strings.Contains(chunk, tok) {
 			imps = append(imps, objectImport)
 			break
@@ -226,8 +226,54 @@ func emitStruct(m *Model, s *Struct) (string, error) {
 		b.WriteString("}, nil\n}\n\n")
 	}
 
+	b.WriteString(emitNewConstructors(m, s))
 	b.WriteString(emitJSONMethods(m, s))
 	return b.String(), nil
+}
+
+// emitNewConstructors renders New<List> helpers（形状冻结自 ygot：懒初始化 map、
+// 重复 key 报 "duplicate key %v for list %s"、回填 key 叶）。测试面有真实消费
+// （roundtrip 构造），故保留生成；ordered 列表不生成（走 Append）。
+func emitNewConstructors(m *Model, s *Struct) string {
+	var b strings.Builder
+	for _, f := range s.Fields {
+		if f.Kind != KList || f.Ordered {
+			continue
+		}
+		child := m.structIdx[f.Elem]
+		if child == nil || len(child.Keys) == 0 {
+			continue
+		}
+		params := make([]string, 0, len(child.Keys))
+		for _, k := range child.Keys {
+			params = append(params, k.GoName+" "+strings.TrimPrefix(k.Type, "*"))
+		}
+		fmt.Fprintf(&b, "// New%s creates a new entry in the %s list（重复 key 报错）。\n", f.GoName, f.GoName)
+		fmt.Fprintf(&b, "func (t *%s) New%s(%s) (*%s, error) {\n", s.Name, f.GoName, strings.Join(params, ", "), f.Elem)
+		fmt.Fprintf(&b, "\tif t.%s == nil {\n\t\tt.%s = make(map[%s]*%s)\n\t}\n", f.GoName, f.GoName, f.KeyType, f.Elem)
+		var keyExpr string
+		if len(child.Keys) == 1 {
+			keyExpr = child.Keys[0].GoName
+		} else {
+			parts := make([]string, 0, len(child.Keys))
+			for _, k := range child.Keys {
+				parts = append(parts, k.GoName+": "+k.GoName)
+			}
+			keyExpr = child.KeyName + "{" + strings.Join(parts, ", ") + "}"
+		}
+		fmt.Fprintf(&b, "\tkey := %s\n", keyExpr)
+		fmt.Fprintf(&b, "\tif _, ok := t.%s[key]; ok {\n\t\treturn nil, fmt.Errorf(\"duplicate key %%v for list %s\", key)\n\t}\n", f.GoName, f.GoName)
+		assigns := make([]string, 0, len(child.Keys))
+		for _, k := range child.Keys {
+			if k.Ptr {
+				assigns = append(assigns, k.GoName+": &"+k.GoName)
+			} else {
+				assigns = append(assigns, k.GoName+": "+k.GoName)
+			}
+		}
+		fmt.Fprintf(&b, "\tt.%s[key] = &%s{%s}\n\treturn t.%s[key], nil\n}\n\n", f.GoName, f.Elem, strings.Join(assigns, ", "), f.GoName)
+	}
+	return b.String()
 }
 
 func parentPath(p string) string {
@@ -246,6 +292,12 @@ func emitRegistry(m *Model) string {
 		fmt.Fprintf(&b, "\t%q: reflect.TypeOf((*%s)(nil)).Elem(),\n", s.Name, s.Name)
 	}
 	b.WriteString("}\n\n")
+	b.WriteString("// Unmarshal decodes RFC7951 JSON into dest（分派到生成式 UnmarshalJSON；\n")
+	b.WriteString("// 替代 ygot ytypes.Unmarshal 的包级入口，签名对齐 driver 描述符）。\n")
+	fmt.Fprintf(&b, "func Unmarshal(data []byte, dest object.Object) error {\n")
+	b.WriteString("\tum, ok := dest.(json.Unmarshaler)\n\tif !ok {\n")
+	fmt.Fprintf(&b, "\t\treturn fmt.Errorf(%q, dest)\n", m.Package+": %T has no generated UnmarshalJSON")
+	b.WriteString("\t}\n\treturn um.UnmarshalJSON(data)\n}\n\n")
 	return b.String()
 }
 

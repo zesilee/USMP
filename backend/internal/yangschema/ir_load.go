@@ -11,11 +11,10 @@ import (
 //
 //	go generate ./internal/yangschema  （或 make gen-yang，阶段2.5 接线）
 //
-// 与旧链路（generated 包 gzip schema → goyang Entry → AddYgotSchema 转换）的
-// 等价性由 ir_parity_test.go 逐字节对拍保证；对拍同时兼作 blob 新鲜度门禁
-// （generated schema 变更而未重跑 schemagen 时测试即红）。
+// 新鲜度门禁在 tools/schemagen 的 TestSourceVsBlobCompare（blob 与直读源
+// 重建逐字节比对；S4 起 schemagen 直读 YANG 源，旧 gzip 链路已退役）。
 //
-//go:generate go run ../../tools/schemagen -output=./schema.ir.gz
+//go:generate go -C ../../tools run ./schemagen -repo_root=../.. -output=../internal/yangschema/schema.ir.gz
 //go:embed schema.ir.gz
 var schemaIRBlob []byte
 

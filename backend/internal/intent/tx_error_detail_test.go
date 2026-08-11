@@ -7,10 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // rejectingTxClient 模拟真机拒绝 edit-config：Set 返回 per-change rpc-error 细节
@@ -59,7 +58,7 @@ func TestPrepareTransportErrorPassthrough(t *testing.T) {
 	tc := NewTxCoordinator(nil, nil, time.Second)
 	err := tc.prepare(context.Background(), transport, []Fragment{
 		{Device: "d", Module: "vlan", Path: VlanPath, Config: &huawei.HuaweiVlan_Vlan_Vlans{
-			Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{10: {Id: ygot.Uint16(10)}},
+			Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{10: {Id: object.Uint16(10)}},
 		}},
 	})
 	if err == nil || !strings.Contains(err.Error(), "connection reset by peer") {

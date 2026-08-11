@@ -5,9 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
@@ -73,7 +72,7 @@ func populateNativeConfigTrue(t *testing.T, sv reflect.Value, e schema.Node, par
 			}
 			setScalarLeaf(fv, *n)
 			*n++
-		case fv.Kind() == reflect.Int64 && fv.Type().Implements(goEnumType):
+		case isEnumType(fv.Type()):
 			if !cfg {
 				continue
 			}
@@ -151,13 +150,13 @@ func TestNiAllNativeConfigTrueLeaves_Roundtrip(t *testing.T) {
 func TestNiEncode_NestedListShape(t *testing.T) {
 	v := &huawei.HuaweiNetworkInstance_NetworkInstance{
 		Global: &huawei.HuaweiNetworkInstance_NetworkInstance_Global{
-			CfgRouterId:     ygot.String("1.1.1.1"),
-			AsNotationPlain: ygot.Bool(true),
+			CfgRouterId:     object.String("1.1.1.1"),
+			AsNotationPlain: object.Bool(true),
 		},
 		Instances: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances{
 			Instance: map[string]*huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance{
-				"vpn-a": {Name: ygot.String("vpn-a"), Description: ygot.String("first")},
-				"vpn-b": {Name: ygot.String("vpn-b"), Description: ygot.String("second")},
+				"vpn-a": {Name: object.String("vpn-a"), Description: object.String("first")},
+				"vpn-b": {Name: object.String("vpn-b"), Description: object.String("second")},
 			},
 		},
 	}
@@ -181,10 +180,10 @@ func TestNiEncode_NestedListShape(t *testing.T) {
 // 子树都不得出现在下发报文（design D2/D5b、NI-03 负路径、NI-06）。
 func TestNiConfigFalseAndAugment_NotInEditConfig(t *testing.T) {
 	v := &huawei.HuaweiNetworkInstance_NetworkInstance{
-		Global: &huawei.HuaweiNetworkInstance_NetworkInstance_Global{CfgRouterId: ygot.String("2.2.2.2")},
+		Global: &huawei.HuaweiNetworkInstance_NetworkInstance_Global{CfgRouterId: object.String("2.2.2.2")},
 		Instances: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances{
 			Instance: map[string]*huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance{
-				"vrf1": {Name: ygot.String("vrf1"), Description: ygot.String("d")},
+				"vrf1": {Name: object.String("vrf1"), Description: object.String("d")},
 			},
 		},
 	}

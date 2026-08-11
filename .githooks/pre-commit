@@ -67,7 +67,7 @@ fi
 GO_FILES=$(echo "$STAGED_FILES" | grep -E '\.go$' || true)
 if [ -n "$GO_FILES" ]; then
   echo -e "${YELLOW}[pre-commit] 运行 go vet...${NC}"
-  if ! (cd backend && go vet ./... 2>&1); then
+  if ! (cd backend && go vet ./... 2>&1) || ! (cd backend/tools && go vet ./... 2>&1); then
     echo -e "${RED}[pre-commit] go vet 发现问题${NC}"
     FAILED=1
   fi
@@ -99,13 +99,24 @@ if [ -n "$GO_FILES" ]; then
     for pkg in $CHANGED_PKGS; do
       # STAGED_FILES 路径相对仓库根(如 backend/xxx)；测试在 backend 模块内执行，
       # 需剥离 backend/ 前缀，否则会构造出不存在的 ./backend/backend/... 路径。
+      # tools 独立 module（retire-ygot-runtime 7.2）：其包在 tools 模块内测试
       case "$pkg" in
+        backend/tools/*)
+          trel="${pkg#backend/tools/}"
+          if (cd backend/tools && go list "./${trel}/..." 2>/dev/null | grep -q .); then
+            if ! (cd backend/tools && go test "./${trel}/..." -count=1 -timeout=120s 2>&1); then
+              echo -e "${RED}[R15] 拒绝: 测试未通过 (${pkg})${NC}"
+              FAILED=1
+            fi
+          fi
+          continue ;;
         backend/*) rel="${pkg#backend/}" ;;
         backend)   rel="." ;;
         *) continue ;;  # backend 模块外的目录不在此测试
       esac
       # 包目录已删除或不再含 Go 文件（包退役提交）时跳过，避免 no-packages 误判
-      if [ "$rel" != "." ] && ! ls backend/"${rel}"/*.go >/dev/null 2>&1; then
+      # 包目录已删除、无 Go 文件或全被构建标签排除（如 toolpins）时跳过
+      if [ "$rel" != "." ] && ! (cd backend && go list "./${rel}/..." 2>/dev/null | grep -q .); then
         continue
       fi
       if ! (cd backend && go test "./${rel}/..." -count=1 -timeout=120s 2>&1); then

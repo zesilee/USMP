@@ -4,10 +4,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/internal/testutil/hwfix"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
-	"github.com/openconfig/ygot/ygot"
 )
 
 // TestEncodeDeleteMatchesGolden 对拍任务 1.3 冻结的 legacy marshalDeleteChange
@@ -16,7 +16,7 @@ func TestEncodeDeleteMatchesGolden(t *testing.T) {
 	tests := []struct {
 		golden string
 		spec   *Spec
-		value  ygot.GoStruct
+		value  object.Object
 	}{
 		{"delete_vlan", vlanSpec(), hwfix.VlanDeleteSet()},
 		{"delete_ifm", ifmSpec(), hwfix.IfmDeleteSet()},

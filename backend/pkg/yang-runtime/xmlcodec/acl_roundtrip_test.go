@@ -6,9 +6,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 // acl（/acl:acl，容器根，同 /bgp:bgp 走 plain-container）的编解码矩阵。本波次接入 BGP
@@ -62,15 +61,14 @@ func TestAcl_Group_Roundtrip(t *testing.T) {
 		Groups:  &huawei.HuaweiAcl_Acl_Groups{},
 		Group6S: &huawei.HuaweiAcl_Acl_Group6S{},
 	}
-	g, err := orig.Groups.NewGroup("G1")
-	if err != nil {
-		t.Fatalf("NewGroup: %v", err)
-	}
+	g := &huawei.HuaweiAcl_Acl_Groups_Group{Identity: object.String("G1")}
+	orig.Groups.Group = map[string]*huawei.HuaweiAcl_Acl_Groups_Group{"G1": g}
 	g.Type = huawei.HuaweiAcl_Group4Type_advance
 	g.MatchOrder = huawei.HuaweiAcl_MatchOrder_config
-	g.Description = ygot.String("g1 desc")
-	g.Number = ygot.Uint32(3001)
-	g6, _ := orig.Group6S.NewGroup6("G6")
+	g.Description = object.String("g1 desc")
+	g.Number = object.Uint32(3001)
+	g6 := &huawei.HuaweiAcl_Acl_Group6S_Group6{Identity: object.String("G6")}
+	orig.Group6S.Group6 = map[string]*huawei.HuaweiAcl_Acl_Group6S_Group6{"G6": g6}
 	g6.Type = huawei.HuaweiAcl_Group6Type_basic
 
 	xml, err := Encode(aclSpec(), orig)
@@ -106,7 +104,8 @@ func TestAcl_NegativePath_NoPanic(t *testing.T) {
 // TestAcl_Concurrent_EncodeDecode：并发 Encode/Decode 无数据竞态（R09，-race）。
 func TestAcl_Concurrent_EncodeDecode(t *testing.T) {
 	orig := &huawei.HuaweiAcl_Acl{Groups: &huawei.HuaweiAcl_Acl_Groups{}}
-	g, _ := orig.Groups.NewGroup("G1")
+	g := &huawei.HuaweiAcl_Acl_Groups_Group{Identity: object.String("G1")}
+	orig.Groups.Group = map[string]*huawei.HuaweiAcl_Acl_Groups_Group{"G1": g}
 	g.Type = huawei.HuaweiAcl_Group4Type_basic
 
 	var wg sync.WaitGroup

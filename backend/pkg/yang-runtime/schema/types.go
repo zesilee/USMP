@@ -132,6 +132,9 @@ type ListNode interface {
 	Child(name string) (Node, bool)
 	// IsUserOrdered returns whether the list is user-ordered
 	IsUserOrdered() bool
+	// MinElements returns the YANG `min-elements` lower bound (0 = unset).
+	// 校验语义冻结（ygot 快照实证）：仅对**存在的空 list** 生效，list 缺失不触发。
+	MinElements() uint64
 	// OperationExcludes returns the operations excluded for this list by the
 	// vendor `operation-exclude` extension (normalized lower-case), empty if none.
 	OperationExcludes() []string

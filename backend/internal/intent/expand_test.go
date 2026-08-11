@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/business"
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/business"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 )
 
 // BIO-02/BVS-02（矩阵 C）—— expand 纯函数：意图 spec → N×(设备,模块,路径,片段)

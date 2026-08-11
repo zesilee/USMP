@@ -11,9 +11,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
-	"github.com/openconfig/ygot/ygot"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 const vlanAnchor = "/vlan:vlan/vlan:vlans"
@@ -55,7 +55,7 @@ func decodePreview(t *testing.T, w *httptest.ResponseRecorder) ChangesetPreviewD
 func seedDesiredVlan(mgr manager.Manager, ip string, desc string) {
 	_ = mgr.GetConfigStore().Set(ip, vlanAnchor, &huawei.HuaweiVlan_Vlan_Vlans{
 		Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
-			10: {Id: ygot.Uint16(10), Name: ygot.String("mgmt"), Description: ygot.String(desc)},
+			10: {Id: object.Uint16(10), Name: object.String("mgmt"), Description: object.String(desc)},
 		},
 	})
 }

@@ -54,6 +54,7 @@ type IRNode struct {
 	// list
 	Keys        []string `json:"keys,omitempty"` // key leaf names, resolved against Children on decode
 	UserOrdered bool     `json:"userOrdered,omitempty"`
+	MinElements uint64   `json:"minElements,omitempty"`
 
 	// choice
 	DefaultCase string    `json:"defaultCase,omitempty"`
@@ -138,6 +139,7 @@ func encodeNode(n Node) (*IRNode, error) {
 	case ListNode:
 		out.Kind = "list"
 		out.UserOrdered = t.IsUserOrdered()
+		out.MinElements = t.MinElements()
 		for _, k := range t.Keys() {
 			out.Keys = append(out.Keys, k.Name())
 		}
@@ -316,6 +318,7 @@ func decodeNode(in *IRNode, parent Node) (Node, error) {
 		return c, nil
 	case "list":
 		l := NewList(in.Name, in.Description, in.Path, parent, nil, in.UserOrdered).(*defaultList)
+		l.minElements = in.MinElements
 		l.readOnly = in.ReadOnly
 		l.whenExpr = in.When
 		l.mustExprs = in.Must
