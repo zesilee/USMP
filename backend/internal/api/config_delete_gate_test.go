@@ -4,9 +4,6 @@ import (
 	"testing"
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
-	"github.com/leezesi/usmp/backend/tools/ygotbridge"
-	"github.com/openconfig/goyang/pkg/yang"
-	"github.com/openconfig/ygot/ytypes"
 )
 
 // buildGateSchema：demo 模块——
@@ -16,33 +13,32 @@ import (
 //	open/entry     普通可删 list（放行）
 func buildGateSchema(t *testing.T) schema.Schema {
 	t.Helper()
-	str := func() *yang.YangType { return &yang.YangType{Kind: yang.Ystring} }
-	ext := func(kw, arg string) *yang.Statement {
-		return &yang.Statement{Keyword: kw, HasArgument: arg != "", Argument: arg}
+	m, err := schema.ModuleFromIR(schema.IRModule{
+		Name: "demo",
+		Root: &schema.IRNode{Kind: "container", Name: "demo", Path: "/demo", Children: []*schema.IRNode{
+			{Kind: "container", Name: "locked", Path: "/demo/locked", Children: []*schema.IRNode{
+				{Kind: "list", Name: "entry", Path: "/demo/locked/entry", Keys: []string{"id"},
+					OpExcludes: []string{"create", "delete"}, Children: []*schema.IRNode{
+						{Kind: "leaf", Name: "id", Path: "/demo/locked/entry/id", LeafType: "string", IsKey: true},
+					}},
+			}},
+			{Kind: "container", Name: "open", Path: "/demo/open", Children: []*schema.IRNode{
+				{Kind: "list", Name: "entry", Path: "/demo/open/entry", Keys: []string{"id"}, Children: []*schema.IRNode{
+					{Kind: "leaf", Name: "id", Path: "/demo/open/entry/id", LeafType: "string", IsKey: true},
+				}},
+			}},
+			{Kind: "container", Name: "stats", Path: "/demo/stats", ReadOnly: true, Children: []*schema.IRNode{
+				{Kind: "list", Name: "row", Path: "/demo/stats/row", ReadOnly: true, Keys: []string{"id"}, Children: []*schema.IRNode{
+					{Kind: "leaf", Name: "id", Path: "/demo/stats/row/id", LeafType: "string", IsKey: true, ReadOnly: true},
+				}},
+			}},
+		}},
+	})
+	if err != nil {
+		t.Fatal(err)
 	}
-	lockedEntry := &yang.Entry{
-		Name: "entry", Key: "id", ListAttr: &yang.ListAttr{},
-		Dir:  map[string]*yang.Entry{"id": {Name: "id", Type: str()}},
-		Exts: []*yang.Statement{ext("ext:operation-exclude", "create|delete")},
-	}
-	locked := &yang.Entry{Name: "locked", Dir: map[string]*yang.Entry{"entry": lockedEntry}}
-
-	statsEntry := &yang.Entry{
-		Name: "row", Key: "id", ListAttr: &yang.ListAttr{},
-		Dir: map[string]*yang.Entry{"id": {Name: "id", Type: str()}},
-	}
-	stats := &yang.Entry{Name: "stats", Config: yang.TSFalse, Dir: map[string]*yang.Entry{"row": statsEntry}}
-
-	openEntry := &yang.Entry{
-		Name: "entry", Key: "id", ListAttr: &yang.ListAttr{},
-		Dir: map[string]*yang.Entry{"id": {Name: "id", Type: str()}},
-	}
-	open := &yang.Entry{Name: "open", Dir: map[string]*yang.Entry{"entry": openEntry}}
-
-	demo := &yang.Entry{Name: "demo", Dir: map[string]*yang.Entry{"locked": locked, "stats": stats, "open": open}}
-	root := &yang.Entry{Name: "Device", Dir: map[string]*yang.Entry{"demo": demo}}
 	ds := schema.NewSchema()
-	ygotbridge.AddYgotSchema(ds, &ytypes.Schema{SchemaTree: map[string]*yang.Entry{"Device": root}})
+	ds.AddModule(m)
 	return ds
 }
 

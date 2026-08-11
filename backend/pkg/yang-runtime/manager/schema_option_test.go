@@ -3,23 +3,23 @@ package manager
 import (
 	"testing"
 
-	"github.com/openconfig/goyang/pkg/yang"
-	"github.com/openconfig/ygot/ytypes"
-
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
-	"github.com/leezesi/usmp/backend/tools/ygotbridge"
 )
 
 // TestManagerWithSchema verifies an injected pre-built schema is mounted and
 // takes precedence over the empty default (fixes D4 at the manager level).
 func TestManagerWithSchema(t *testing.T) {
 	ds := schema.NewSchema()
-	root := &yang.Entry{Name: "Device", Dir: map[string]*yang.Entry{
-		"sys": {Name: "sys", Dir: map[string]*yang.Entry{
-			"host": {Name: "host", Type: &yang.YangType{Kind: yang.Ystring}},
+	sysMod, err := schema.ModuleFromIR(schema.IRModule{
+		Name: "sys",
+		Root: &schema.IRNode{Kind: "container", Name: "sys", Path: "/sys", Children: []*schema.IRNode{
+			{Kind: "leaf", Name: "host", Path: "/sys/host", LeafType: "string"},
 		}},
-	}}
-	ygotbridge.AddYgotSchema(ds, &ytypes.Schema{SchemaTree: map[string]*yang.Entry{"Device": root}})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	ds.AddModule(sysMod)
 
 	m := New(WithSchema(ds))
 	got := m.GetSchema()

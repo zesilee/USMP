@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
 )
@@ -24,7 +24,7 @@ func niWithPublicPeers(peers ...*peerT) *huawei.HuaweiNetworkInstance_NetworkIns
 		Instances: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances{
 			Instance: map[string]*huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance{
 				"_public_": {
-					Name: ygot.String("_public_"),
+					Name: object.String("_public_"),
 					Bgp: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp{
 						BaseProcess: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess{
 							Peers: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Peers{Peer: m},
@@ -37,7 +37,7 @@ func niWithPublicPeers(peers ...*peerT) *huawei.HuaweiNetworkInstance_NetworkIns
 }
 
 func peer(addr, remoteAs, desc string) *peerT {
-	return &peerT{Address: ygot.String(addr), RemoteAs: ygot.String(remoteAs), Description: ygot.String(desc)}
+	return &peerT{Address: object.String(addr), RemoteAs: object.String(remoteAs), Description: object.String(desc)}
 }
 
 // TestReconciler_Integration_BgpNeighborConverges：公网 BGP 基础邻居（peers under

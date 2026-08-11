@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"
 )
@@ -19,7 +19,7 @@ func niWithPublicAfPolicy() *huawei.HuaweiNetworkInstance_NetworkInstance {
 		Instances: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances{
 			Instance: map[string]*huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance{
 				"_public_": {
-					Name: ygot.String("_public_"),
+					Name: object.String("_public_"),
 					Bgp: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp{
 						BaseProcess: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess{
 							Afs: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs{},
@@ -30,11 +30,12 @@ func niWithPublicAfPolicy() *huawei.HuaweiNetworkInstance_NetworkInstance {
 		},
 	}
 	afs := ni.Instances.Instance["_public_"].Bgp.BaseProcess.Afs
-	af, _ := afs.NewAf(huawei.HuaweiBgp_AfTypeDeviations_ipv4uni)
+	af := &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af{Type: huawei.HuaweiBgp_AfTypeDeviations_ipv4uni}
+	afs.Af = map[huawei.E_HuaweiBgp_AfTypeDeviations]*huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af{huawei.HuaweiBgp_AfTypeDeviations_ipv4uni: af}
 	af.Ipv4Unicast = &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast{
 		ImportFilterPolicy: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProcess_Afs_Af_Ipv4Unicast_ImportFilterPolicy{
-			AclNameOrNum:     ygot.String("G1"),
-			Ipv4PrefixFilter: ygot.String("PF1"),
+			AclNameOrNum:     object.String("G1"),
+			Ipv4PrefixFilter: object.String("PF1"),
 		},
 	}
 	return ni

@@ -8,26 +8,30 @@ import (
 	"time"
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
-	"github.com/leezesi/usmp/backend/tools/ygotbridge"
-	"github.com/openconfig/goyang/pkg/yang"
-	"github.com/openconfig/ygot/ytypes"
 )
 
 // buildListQuerySchema：demo 模块——open/entry 为普通 list（BR-13 schema 判定用），
 // global 为 container（非 list 负路径用）。
 func buildListQuerySchema(t *testing.T) schema.Schema {
 	t.Helper()
-	str := func() *yang.YangType { return &yang.YangType{Kind: yang.Ystring} }
-	openEntry := &yang.Entry{
-		Name: "entry", Key: "id", ListAttr: &yang.ListAttr{},
-		Dir: map[string]*yang.Entry{"id": {Name: "id", Type: str()}},
+	m, err := schema.ModuleFromIR(schema.IRModule{
+		Name: "demo",
+		Root: &schema.IRNode{Kind: "container", Name: "demo", Path: "/demo", Children: []*schema.IRNode{
+			{Kind: "container", Name: "global", Path: "/demo/global", Children: []*schema.IRNode{
+				{Kind: "leaf", Name: "x", Path: "/demo/global/x", LeafType: "string"},
+			}},
+			{Kind: "container", Name: "open", Path: "/demo/open", Children: []*schema.IRNode{
+				{Kind: "list", Name: "entry", Path: "/demo/open/entry", Keys: []string{"id"}, Children: []*schema.IRNode{
+					{Kind: "leaf", Name: "id", Path: "/demo/open/entry/id", LeafType: "string", IsKey: true},
+				}},
+			}},
+		}},
+	})
+	if err != nil {
+		t.Fatal(err)
 	}
-	open := &yang.Entry{Name: "open", Dir: map[string]*yang.Entry{"entry": openEntry}}
-	global := &yang.Entry{Name: "global", Dir: map[string]*yang.Entry{"x": {Name: "x", Type: str()}}}
-	demo := &yang.Entry{Name: "demo", Dir: map[string]*yang.Entry{"open": open, "global": global}}
-	root := &yang.Entry{Name: "Device", Dir: map[string]*yang.Entry{"demo": demo}}
 	ds := schema.NewSchema()
-	ygotbridge.AddYgotSchema(ds, &ytypes.Schema{SchemaTree: map[string]*yang.Entry{"Device": root}})
+	ds.AddModule(m)
 	return ds
 }
 

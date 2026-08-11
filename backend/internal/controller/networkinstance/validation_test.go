@@ -1,12 +1,14 @@
 package networkinstance
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
+	"github.com/leezesi/usmp/backend/internal/yangschema"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/validate"
 )
 
 // 边界/负路径（NI-05）：ygot ΛValidate 按 schema 强制 name/description 的 length 与
@@ -16,7 +18,7 @@ func niWith(name, desc string) *huawei.HuaweiNetworkInstance_NetworkInstance {
 	return &huawei.HuaweiNetworkInstance_NetworkInstance{
 		Instances: &huawei.HuaweiNetworkInstance_NetworkInstance_Instances{
 			Instance: map[string]*huawei.HuaweiNetworkInstance_NetworkInstance_Instances_Instance{
-				name: {Name: ygot.String(name), Description: ygot.String(desc)},
+				name: {Name: object.String(name), Description: object.String(desc)},
 			},
 		},
 	}
@@ -40,7 +42,7 @@ func TestNiValidate_Boundary(t *testing.T) {
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			err := niWith(tc.instNm, tc.desc).ΛValidate()
+			err := irValidateNI(niWith(tc.instNm, tc.desc))
 			if tc.wantErr && err == nil {
 				t.Fatalf("期望校验失败（越界/非法），实际通过：name=%q desc len=%d", tc.instNm, len(tc.desc))
 			}
@@ -56,12 +58,26 @@ func TestNiValidate_Boundary(t *testing.T) {
 func TestNiValidate_GlobalIPv4(t *testing.T) {
 	ni := &huawei.HuaweiNetworkInstance_NetworkInstance{
 		Global: &huawei.HuaweiNetworkInstance_NetworkInstance_Global{
-			CfgRouterId:              ygot.String("10.0.0.1"),
-			RouteDistinguisherAutoIp: ygot.String("10.0.0.2"),
-			AsNotationPlain:          ygot.Bool(true),
+			CfgRouterId:              object.String("10.0.0.1"),
+			RouteDistinguisherAutoIp: object.String("10.0.0.2"),
+			AsNotationPlain:          object.Bool(true),
 		},
 	}
-	if err := ni.ΛValidate(); err != nil {
+	if err := irValidateNI(ni); err != nil {
 		t.Fatalf("合法 global 应通过校验: %v", err)
 	}
+}
+
+// irValidateNI 以 IR 校验器替代已退役的 ygot ΛValidate（pattern/length/range
+// 同为其覆盖面；retire-ygot-runtime S3 切换）。
+func irValidateNI(ni *huawei.HuaweiNetworkInstance_NetworkInstance) error {
+	s, err := yangschema.Load()
+	if err != nil {
+		return err
+	}
+	n, ok := s.Path("/network-instance")
+	if !ok {
+		return fmt.Errorf("network-instance schema node missing")
+	}
+	return validate.Object(n, ni)
 }

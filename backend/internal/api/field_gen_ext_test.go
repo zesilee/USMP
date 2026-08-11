@@ -6,9 +6,6 @@ import (
 
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
-	"github.com/leezesi/usmp/backend/tools/ygotbridge"
-	"github.com/openconfig/goyang/pkg/yang"
-	"github.com/openconfig/ygot/ytypes"
 )
 
 // TestNestedSchemaCarriesExtensionsFromRealIFM verifies the schema endpoint
@@ -86,18 +83,20 @@ func TestNestedSchemaCarriesPresenceAndContainerMustFromRealIFM(t *testing.T) {
 // `operation-exclude` lands on the list FieldDef (real IFM has none on the
 // interface list, so a synthetic tree exercises this path).
 func TestNestedSchemaCarriesListOperationExclude(t *testing.T) {
-	item := &yang.Entry{
-		Name: "item", Key: "id", ListAttr: &yang.ListAttr{},
-		Dir: map[string]*yang.Entry{
-			"id": {Name: "id", Type: &yang.YangType{Kind: yang.Ystring}},
-		},
-		Exts: []*yang.Statement{{Keyword: "ext:operation-exclude", HasArgument: true, Argument: "update|delete"}},
+	demoMod, err := schema.ModuleFromIR(schema.IRModule{
+		Name: "demo",
+		Root: &schema.IRNode{Kind: "container", Name: "demo", Path: "/demo", Children: []*schema.IRNode{
+			{Kind: "list", Name: "item", Path: "/demo/item", Keys: []string{"id"},
+				OpExcludes: []string{"update", "delete"}, Children: []*schema.IRNode{
+					{Kind: "leaf", Name: "id", Path: "/demo/item/id", LeafType: "string", IsKey: true},
+				}},
+		}},
+	})
+	if err != nil {
+		t.Fatal(err)
 	}
-	mod := &yang.Entry{Name: "demo", Dir: map[string]*yang.Entry{"item": item}}
-	root := &yang.Entry{Name: "Device", Dir: map[string]*yang.Entry{"demo": mod}}
-
 	ds := schema.NewSchema()
-	ygotbridge.AddYgotSchema(ds, &ytypes.Schema{SchemaTree: map[string]*yang.Entry{"Device": root}})
+	ds.AddModule(demoMod)
 	m, ok := ds.Module("demo")
 	if !ok {
 		t.Fatal("demo module not loaded")
