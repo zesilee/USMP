@@ -16,14 +16,15 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
-// Load builds a Schema containing the huawei and usmp business intent modules
-// from their generated ygot schemas.
+// Load builds the framework schema tree. 数据源自阶段1.4（retire-ygot-runtime）
+// 起为构建期 IR blob（ir_load.go，运行期零 ygot/goyang）；旧 generated-schema
+// 链路（loadUncached）保留至阶段1.5 前，仅供 ir_parity_test.go 对拍。
 //
 // 结果记忆化（full-yang-onboarding）：生成闭包扩到 67 根容器后，单次 gzip
 // schema 解包成本显著；schema 构建是纯函数、产物只读（DefaultSchema 并发安全），
 // 进程内共享一份。生产启动本就单次调用，收益主要在测试面（每包数十次 Load）。
 func Load() (schema.Schema, error) {
-	loadOnce.Do(func() { loadedSchema, loadErr = loadUncached() })
+	loadOnce.Do(func() { loadedSchema, loadErr = loadFromIR() })
 	return loadedSchema, loadErr
 }
 
