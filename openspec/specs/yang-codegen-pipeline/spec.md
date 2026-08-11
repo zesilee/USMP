@@ -1,14 +1,19 @@
-# yang-codegen-pipeline — ygot 生成管线
+# yang-codegen-pipeline — 自研 yanggen 生成管线
 
 ## Purpose
 
-ygot YANG→Go 生成管线（R04 的可执行形态）：厂商 manifest（`backend/internal/generated/*/gen.conf`）驱动的可复现生成入口 `make gen-yang` + 跨平台后处理（`backend/tools/genfix`）+ 生成物漂移 CI/本地门禁（regen-and-diff，取代无条件冻结）。新增厂商 = 新增目录 + gen.conf，是异构多设备 SND（P5）加厂商路径的构建期一环（运行期对应 device-driver-registry）。
+自研 YANG→Go 生成管线（R04 的可执行形态，retire-ygot-runtime 后 ygot generator 仅存
+businessdemo demo 路径）：厂商 manifest（`backend/internal/generated/*/gen.conf`）驱动的
+可复现生成入口 `make gen-yang`（`backend/tools/yanggen`，tools 为独立 go module）+ 生成物
+漂移 CI/本地门禁（regen-and-diff，取代无条件冻结）+ schema IR blob 联动刷新。新增厂商 =
+新增目录 + gen.conf，是异构多设备 SND（P5）加厂商路径的构建期一环（运行期对应
+device-driver-registry）。
 
 ## Requirements
 
 ### Requirement: CG-01 厂商 manifest 驱动的可复现生成
 
-系统 SHALL 提供 `make gen-yang` 生成入口：扫描 `backend/internal/generated/*/gen.conf`（每厂商包一份声明式生成配置：YANG 模型路径、模块列表、fakeroot/compress 选项，及**可选 `split_count`**），对每包执行 ygot generator（版本由 go.mod 锁定）→ 跨平台后处理 → 格式化收尾（单文件模式 gofmt；拆分模式 goimports——`-output_dir` 给每个文件写同一份 import 块，须剪除未用 import 方可编译，goimports 版本同由 go.mod `tool` 指令锁定），输出该包生成物。华为包的 `yang_path` SHALL 以入库目录 `snd/ce6866p-yang` 为首目录（SP-01，无 submodule 依赖），并 MAY 以逗号追加仓库本地 deviation 目录（CG-04）。生成物布局由 `split_count` 决定：**未设置**时输出单文件 `all.gen.go`；**设置为 N** 时输出 `-output_dir` 拆分文件集（`structs-0..(N-1).go` + `enum.go`/`enum_map.go`/`union.go`/`schema.go`），使**单文件规模可控**（避免单包生成物随模型集成无限膨胀）。文件命名 SHALL 由 generator 确定性给定。`make gen-yang VENDOR=<pkg>` SHALL 仅重生成指定包。新增厂商 SHALL 只需新增目录 + `gen.conf`，零脚本/Makefile 改动。管线 SHALL 可复现且机器无关：同一仓库状态下重复执行输出字节一致（拆分模式下每个生成文件的内容与 struct→文件分配均确定），生成物 SHALL NOT 包含生成机器特定内容（如生成器绝对路径头部注释——由后处理规范化）。拆分 SHALL 语义等价于单文件：同包类型集合、导出符号（`Schema()`/`UnzipSchema()`/`SchemaTree`/`Unmarshal` 等）、schema 内容不变，下游 import 路径与消费无改动。
+系统 SHALL 提供 `make gen-yang` 生成入口：扫描 `backend/internal/generated/*/gen.conf`（每厂商包一份声明式生成配置：YANG 模型路径、模块列表、fakeroot/compress 选项，及**可选 `split_count`**），对每包执行**自研生成器**（`backend/tools/yanggen`，命名以实现为准；构建期以 goyang 解析 YANG 源，版本由 go.mod 锁定）→ 格式化收尾（gofmt/goimports，版本由 go.mod `tool` 指令锁定），输出该包生成物。华为包的 `yang_path` SHALL 以入库目录 `snd/ce6866p-yang` 为首目录（SP-01，无 submodule 依赖），并 MAY 以逗号追加仓库本地 deviation 目录（CG-04）。生成物 SHALL 包含：结构体/枚举/union（结构约定按 yang-native-runtime YN-01 冻结，实现 `Object` 接口族，SHALL NOT import ygot/goyang）、per-type RFC7951 JSON 方法（YN-02）、Schema IR 产物（YN-03）。生成物布局由 `split_count` 决定：**未设置**时输出单文件 `all.gen.go`；**设置为 N** 时输出拆分文件集（`structs-0..(N-1).go` + `enum.go`/`enum_map.go`/`union.go`/`schema.go`），使**单文件规模可控**（避免单包生成物随模型集成无限膨胀）。文件命名 SHALL 由生成器确定性给定。`make gen-yang VENDOR=<pkg>` SHALL 仅重生成指定包。新增厂商 SHALL 只需新增目录 + `gen.conf`，零脚本/Makefile 改动。管线 SHALL 可复现且机器无关：同一仓库状态下重复执行输出字节一致（拆分模式下每个生成文件的内容与 struct→文件分配均确定；无序集合的确定性排序 SHALL 内建于生成器，不依赖后处理），生成物 SHALL NOT 包含生成机器特定内容（如生成器绝对路径头部注释）。拆分 SHALL 语义等价于单文件：同包类型集合、导出符号、Schema IR 内容不变，下游 import 路径与消费无改动。
 
 #### Scenario: 全量重生成零漂移
 - **WHEN** 在干净工作区执行 `make gen-yang`
@@ -24,40 +29,20 @@ ygot YANG→Go 生成管线（R04 的可执行形态）：厂商 manifest（`bac
 
 #### Scenario: 拆分语义等价
 - **WHEN** 将某包从单文件切换为 `split_count=N` 重生成
-- **THEN** 拆分后包 SHALL `go build` 通过、`Schema()` round-trip 成功、类型集合与 `SchemaTree` 键集合与拆分前一致，下游消费方零改动
+- **THEN** 拆分后包 SHALL `go build` 通过、Schema IR round-trip 成功、类型集合与 IR 模块键集合与拆分前一致，下游消费方零改动
 
 #### Scenario: 模型源目录缺失时可操作报错
 - **WHEN** `gen.conf` 的 `yang_path` 目录不存在或为空时执行 `make gen-yang`
 - **THEN** SHALL 以非零码退出并输出指明缺失目录的修复指引（入库目录应随仓库存在，请检查 checkout 完整性），SHALL NOT 产生半成品输出，SHALL NOT 提示任何 submodule 操作
 
-### Requirement: CG-02 跨平台后处理（枚举标识符 + 确定性 schema 规范化）
+#### Scenario: 生成物零 ygot/goyang import
+- **WHEN** 审计任一包生成物的 import 块
+- **THEN** SHALL NOT 含 `openconfig/ygot`/`openconfig/goyang`，仅依赖标准库与自研运行库（YN-05 守护测试同口径拦截）
 
-生成管线 SHALL 使用 Go 实现的后处理器（`backend/tools/genfix`）对 ygot 生成物做两类幂等、机器无关的后处理，以满足 CG-01「同一仓库状态下重复执行输出字节一致」。后处理器 SHALL 接受**一个或多个**文件路径，对生成文件集逐一处理——单文件模式作用于 `all.gen.go`，拆分模式作用于目录下全部生成 `*.go`；对不含相应构造的文件 SHALL 为 no-op（无 `ySchema` blob 的文件不做 schema 规范化、无非法枚举标识符的文件不做枚举修复）：
+#### Scenario: 非法字符枚举标识符内建合法化（承接原 CG-02）
+- **WHEN** YANG 值域含 Go 非法标识符字符（如 `50|100GE`）
+- **THEN** 生成器 SHALL 直接产出合法标识符（`..._50_OR_100GE`），YANG 原值字符串映射 SHALL 保持原样，Linux/macOS 行为一致
 
-1. **枚举标识符修复**：修复含非法字符 `|` 的枚举标识符（如 `PortType_50|100GE` → `PortType_50_OR_100GE`），SHALL 在 Linux 与 macOS 上行为一致（不依赖平台 sed 方言）；SHALL NOT 改动枚举标识符之外的内容（含 YANG 原值字符串映射）。拆分模式下该修复作用于承载枚举定义的文件（`enum.go`）。
-2. **确定性 schema 规范化**：ygot 内嵌的 gzip schema blob（`var ySchema = []byte{…}`）序列化了 `yang.Entry` 的**无序集合数组**（首要为各节点的 `Augmented`——同一目标被多模块 augment 时，goyang 以非确定 map 迭代序应用，致数组元素顺序逐次不同、gzip 字节漂移）。后处理器 SHALL 在承载该 blob 的文件（拆分模式下为 `schema.go`）中解压 blob、以稳定规则对**语义无序**的数组（`Augmented` 等，按元素规范化内容排序）与对象键做确定性重排、以固定参数（无时间戳、固定压缩级别）重新压缩并回填，使 blob 字节在重复生成间稳定。规范化 SHALL 保持 schema 语义等价：`ygot.GzipToSchema` 解出的 schema 与规范化前**结构与内容一致**（键集合、节点、类型、约束不变），SHALL NOT 重排语义有序的构造，SHALL NOT 改动数字/字符串字面量的值。
-
-两类后处理 SHALL 幂等：对已处理或无匹配的输入（含文件集中任一文件）执行为 no-op。
-
-#### Scenario: 非法字符修复
-- **WHEN** 生成物包含标识符 `HuaweiIfm_PortType_50|100GE`
-- **THEN** 后处理后 SHALL 为 `HuaweiIfm_PortType_50_OR_100GE`，且对应 YANG 原值映射字符串（如 `"50|100GE"`）SHALL 保持原样
-
-#### Scenario: 文件集中无 blob 文件的 no-op
-- **WHEN** 后处理器处理拆分文件集中不含 `var ySchema` 的文件（如 `structs-3.go`/`union.go`）
-- **THEN** 该文件的 schema 规范化步骤 SHALL 为 no-op（内容不变）
-
-#### Scenario: 多-augment 闭包 schema 确定性
-- **WHEN** 生成集含多模块 augment 同一目标节点的闭包（如 huawei-bgp 拉入 network-instance/ifm 被 tunnel-management/ethernet/bfd 等多方 augment），连续两次 `make gen-yang`
-- **THEN** 两次生成物（含承载 `ySchema` blob 的文件）SHALL 字节一致（满足 CG-01 / CG-03 regen-and-diff）
-
-#### Scenario: schema 规范化语义等价
-- **WHEN** 对规范化前后的 `ySchema` 分别 `ygot.GzipToSchema`
-- **THEN** 两者解出的 schema SHALL 结构与内容一致（节点键集合、类型、约束不变），仅无序集合数组的元素顺序被规整为稳定序
-
-#### Scenario: 幂等 no-op
-- **WHEN** 对同一文件集执行后处理两次
-- **THEN** 第二次执行 SHALL 不产生任何变更
 
 ### Requirement: CG-03 生成物漂移 CI 门禁（R04 可验证形态）
 
@@ -83,11 +68,13 @@ CI SHALL 以 regen-and-diff 验证生成物：当 PR 变更触及 `backend/inter
 
 生成闭包 SHALL 支持纳入仓库本地 deviation 模块（`backend/internal/yang/deviations/`）：
 `gen.conf` 的 `yang_path` SHALL 支持逗号分隔多目录，deviation 模块与厂商模型同闭包
-生成。deviation SHALL 仅用于豁免 ygot 生成器不支持的个别节点（如 bits 类型默认值、
+生成。deviation SHALL 仅用于豁免**生成器**不支持的个别节点（如 bits 类型默认值、
 anydata、binary key list、穿 choice/case augment 的 leafref），每条 SHALL 注明豁免
-原因与影响面；SHALL NOT 修改 snd 子模块内的模型本体（只读源）。生成器 SHALL 开启
-`-ignore_unsupported`（解析期跳过不支持语句）。无法经 deviation 豁免的模块（解析期
-致命错误，如跨模块 submodule typedef 引用）SHALL 显式记录为延期项而非静默缺失。
+原因与影响面；SHALL NOT 修改 snd 子模块内的模型本体（只读源）。生成器 SHALL 支持
+解析期跳过不支持语句（等价 `-ignore_unsupported` 语义）。自研生成器 SHALL 沿用既有
+deviation 集合启动（存量豁免不因换生成器而失效）；新生成器原生支持的节点 MAY 逐条
+摘除对应 deviation（每条摘除随 regen-and-diff 显形）。无法经 deviation 豁免的模块
+（解析期致命错误，如跨模块 submodule typedef 引用）SHALL 显式记录为延期项而非静默缺失。
 
 #### Scenario: deviation 豁免后模块可生成
 
