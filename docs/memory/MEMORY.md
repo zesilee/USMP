@@ -1,6 +1,6 @@
 # 项目记忆索引
 
-- [retire-ygot-runtime去依赖](retire-ygot-runtime.md) — 发布二进制去ygot/goyang七阶段计划：阶段1(Schema IR自立)已交付、对拍即新鲜度门禁、阶段2起约定字节级冻结+生成式JSON方法；碰schema加载/生成管线前必读
+- [retire-ygot-runtime去依赖](retire-ygot-runtime.md) — **已全量交付归档(2026-08-11,PR#307-#312)**：发布二进制+主go.mod双零openconfig、守护测试拦回引、tools拆独立module(toolchain指令坑)、生成约定六条冻结、大分支拆PR方法论(乱序重放/契约短名漂移/后台push被杀)；碰yanggen/schemagen/生成管线/拆大PR前必读
 - [大list服务端分页](list-server-pagination.md) — 做大表/分页/状态读/堆叠PR前必读：BR-13/BR-14已交付(快照出口分页+阈值200双模式+状态快照TTL可调)、谓词下钻=取数截断+键值索引双动作、sim勿包config壳、堆叠PR删分支连坐下游CLOSE、时序护栏按-race弱机×5估上界、两follow-up已闭环(占位默认值段交付/危险标记拍板不做)、MODIFIED delta须整块带存量Scenario
 - [回读子树剥层契约](readback-subtree-peel.md) — 改回读形状/decodeRunningConfig/加消费方前必读：响应契约=以请求路径为根的子树(PR#281 peelToPath)、谓词段停剥返回父容器、批量接入模块解码根=模块根曾致devm「一行且位置=port」、症状速查=主键列显示list名、多键列表解码已支持(PR#290)删除通道多键刻意不支持
 
