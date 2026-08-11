@@ -156,469 +156,603 @@ func (t *Device) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["acl"] = bv
+		if string(bv) != "{}" {
+			out["acl"] = bv
+		}
 	}
 	if t.AnalysisCollector != nil {
 		bv, err := t.AnalysisCollector.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["analysis-collector"] = bv
+		if string(bv) != "{}" {
+			out["analysis-collector"] = bv
+		}
 	}
 	if t.Anyflow != nil {
 		bv, err := t.Anyflow.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["anyflow"] = bv
+		if string(bv) != "{}" {
+			out["anyflow"] = bv
+		}
 	}
 	if t.Arp != nil {
 		bv, err := t.Arp.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["arp"] = bv
+		if string(bv) != "{}" {
+			out["arp"] = bv
+		}
 	}
 	if t.Bd != nil {
 		bv, err := t.Bd.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bd"] = bv
+		if string(bv) != "{}" {
+			out["bd"] = bv
+		}
 	}
 	if t.Bfd != nil {
 		bv, err := t.Bfd.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bfd"] = bv
+		if string(bv) != "{}" {
+			out["bfd"] = bv
+		}
 	}
 	if t.Bgp != nil {
 		bv, err := t.Bgp.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bgp"] = bv
+		if string(bv) != "{}" {
+			out["bgp"] = bv
+		}
 	}
 	if t.Cfg != nil {
 		bv, err := t.Cfg.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["cfg"] = bv
+		if string(bv) != "{}" {
+			out["cfg"] = bv
+		}
 	}
 	if t.Devm != nil {
 		bv, err := t.Devm.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["devm"] = bv
+		if string(bv) != "{}" {
+			out["devm"] = bv
+		}
 	}
 	if t.Driver != nil {
 		bv, err := t.Driver.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["driver"] = bv
+		if string(bv) != "{}" {
+			out["driver"] = bv
+		}
 	}
 	if t.Dsa != nil {
 		bv, err := t.Dsa.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["dsa"] = bv
+		if string(bv) != "{}" {
+			out["dsa"] = bv
+		}
 	}
 	if t.Ecc != nil {
 		bv, err := t.Ecc.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ecc"] = bv
+		if string(bv) != "{}" {
+			out["ecc"] = bv
+		}
 	}
 	if t.Evpl != nil {
 		bv, err := t.Evpl.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["evpl"] = bv
+		if string(bv) != "{}" {
+			out["evpl"] = bv
+		}
 	}
 	if t.Evpn != nil {
 		bv, err := t.Evpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["evpn"] = bv
+		if string(bv) != "{}" {
+			out["evpn"] = bv
+		}
 	}
 	if t.Fib != nil {
 		bv, err := t.Fib.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["fib"] = bv
+		if string(bv) != "{}" {
+			out["fib"] = bv
+		}
 	}
 	if t.Ftpc != nil {
 		bv, err := t.Ftpc.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ftpc"] = bv
+		if string(bv) != "{}" {
+			out["ftpc"] = bv
+		}
 	}
 	if t.Grpc != nil {
 		bv, err := t.Grpc.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["grpc"] = bv
+		if string(bv) != "{}" {
+			out["grpc"] = bv
+		}
 	}
 	if t.Hwtacacs != nil {
 		bv, err := t.Hwtacacs.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["hwtacacs"] = bv
+		if string(bv) != "{}" {
+			out["hwtacacs"] = bv
+		}
 	}
 	if t.Ifm != nil {
 		bv, err := t.Ifm.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ifm"] = bv
+		if string(bv) != "{}" {
+			out["ifm"] = bv
+		}
 	}
 	if t.IfmTrunk != nil {
 		bv, err := t.IfmTrunk.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ifm-trunk"] = bv
+		if string(bv) != "{}" {
+			out["ifm-trunk"] = bv
+		}
 	}
 	if t.L2Vpn != nil {
 		bv, err := t.L2Vpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["l2vpn"] = bv
+		if string(bv) != "{}" {
+			out["l2vpn"] = bv
+		}
 	}
 	if t.L3Multicast != nil {
 		bv, err := t.L3Multicast.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["l3-multicast"] = bv
+		if string(bv) != "{}" {
+			out["l3-multicast"] = bv
+		}
 	}
 	if t.L3Vpn != nil {
 		bv, err := t.L3Vpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["l3vpn"] = bv
+		if string(bv) != "{}" {
+			out["l3vpn"] = bv
+		}
 	}
 	if t.Lacp != nil {
 		bv, err := t.Lacp.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["lacp"] = bv
+		if string(bv) != "{}" {
+			out["lacp"] = bv
+		}
 	}
 	if t.License != nil {
 		bv, err := t.License.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["license"] = bv
+		if string(bv) != "{}" {
+			out["license"] = bv
+		}
 	}
 	if t.Lldp != nil {
 		bv, err := t.Lldp.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["lldp"] = bv
+		if string(bv) != "{}" {
+			out["lldp"] = bv
+		}
 	}
 	if t.Loadbalance != nil {
 		bv, err := t.Loadbalance.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["loadbalance"] = bv
+		if string(bv) != "{}" {
+			out["loadbalance"] = bv
+		}
 	}
 	if t.MLag != nil {
 		bv, err := t.MLag.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["m-lag"] = bv
+		if string(bv) != "{}" {
+			out["m-lag"] = bv
+		}
 	}
 	if t.MacFlappingDetect != nil {
 		bv, err := t.MacFlappingDetect.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["mac-flapping-detect"] = bv
+		if string(bv) != "{}" {
+			out["mac-flapping-detect"] = bv
+		}
 	}
 	if t.Macsec != nil {
 		bv, err := t.Macsec.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["macsec"] = bv
+		if string(bv) != "{}" {
+			out["macsec"] = bv
+		}
 	}
 	if t.Microsegmentation != nil {
 		bv, err := t.Microsegmentation.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["microsegmentation"] = bv
+		if string(bv) != "{}" {
+			out["microsegmentation"] = bv
+		}
 	}
 	if t.Mirror != nil {
 		bv, err := t.Mirror.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["mirror"] = bv
+		if string(bv) != "{}" {
+			out["mirror"] = bv
+		}
 	}
 	if t.MonitorGroup != nil {
 		bv, err := t.MonitorGroup.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["monitor-group"] = bv
+		if string(bv) != "{}" {
+			out["monitor-group"] = bv
+		}
 	}
 	if t.MonitorLink != nil {
 		bv, err := t.MonitorLink.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["monitor-link"] = bv
+		if string(bv) != "{}" {
+			out["monitor-link"] = bv
+		}
 	}
 	if t.Mpls != nil {
 		bv, err := t.Mpls.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["mpls"] = bv
+		if string(bv) != "{}" {
+			out["mpls"] = bv
+		}
 	}
 	if t.Mstp != nil {
 		bv, err := t.Mstp.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["mstp"] = bv
+		if string(bv) != "{}" {
+			out["mstp"] = bv
+		}
 	}
 	if t.Multicast != nil {
 		bv, err := t.Multicast.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["multicast"] = bv
+		if string(bv) != "{}" {
+			out["multicast"] = bv
+		}
 	}
 	if t.Mvpn != nil {
 		bv, err := t.Mvpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["mvpn"] = bv
+		if string(bv) != "{}" {
+			out["mvpn"] = bv
+		}
 	}
 	if t.NetworkInstance != nil {
 		bv, err := t.NetworkInstance.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["network-instance"] = bv
+		if string(bv) != "{}" {
+			out["network-instance"] = bv
+		}
 	}
 	if t.Nqa != nil {
 		bv, err := t.Nqa.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["nqa"] = bv
+		if string(bv) != "{}" {
+			out["nqa"] = bv
+		}
 	}
 	if t.Ntp != nil {
 		bv, err := t.Ntp.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ntp"] = bv
+		if string(bv) != "{}" {
+			out["ntp"] = bv
+		}
 	}
 	if t.Nvo3 != nil {
 		bv, err := t.Nvo3.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["nvo3"] = bv
+		if string(bv) != "{}" {
+			out["nvo3"] = bv
+		}
 	}
 	if t.OpenflowAgent != nil {
 		bv, err := t.OpenflowAgent.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["openflow-agent"] = bv
+		if string(bv) != "{}" {
+			out["openflow-agent"] = bv
+		}
 	}
 	if t.Ospfv2 != nil {
 		bv, err := t.Ospfv2.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ospfv2"] = bv
+		if string(bv) != "{}" {
+			out["ospfv2"] = bv
+		}
 	}
 	if t.Ospfv3 != nil {
 		bv, err := t.Ospfv3.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ospfv3"] = bv
+		if string(bv) != "{}" {
+			out["ospfv3"] = bv
+		}
 	}
 	if t.Packetevent != nil {
 		bv, err := t.Packetevent.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["packetevent"] = bv
+		if string(bv) != "{}" {
+			out["packetevent"] = bv
+		}
 	}
 	if t.Qos != nil {
 		bv, err := t.Qos.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["qos"] = bv
+		if string(bv) != "{}" {
+			out["qos"] = bv
+		}
 	}
 	if t.Routing != nil {
 		bv, err := t.Routing.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["routing"] = bv
+		if string(bv) != "{}" {
+			out["routing"] = bv
+		}
 	}
 	if t.RoutingPolicy != nil {
 		bv, err := t.RoutingPolicy.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["routing-policy"] = bv
+		if string(bv) != "{}" {
+			out["routing-policy"] = bv
+		}
 	}
 	if t.Rsa != nil {
 		bv, err := t.Rsa.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["rsa"] = bv
+		if string(bv) != "{}" {
+			out["rsa"] = bv
+		}
 	}
 	if t.Sflow != nil {
 		bv, err := t.Sflow.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["sflow"] = bv
+		if string(bv) != "{}" {
+			out["sflow"] = bv
+		}
 	}
 	if t.Sm2 != nil {
 		bv, err := t.Sm2.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["sm2"] = bv
+		if string(bv) != "{}" {
+			out["sm2"] = bv
+		}
 	}
 	if t.Snmp != nil {
 		bv, err := t.Snmp.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["snmp"] = bv
+		if string(bv) != "{}" {
+			out["snmp"] = bv
+		}
 	}
 	if t.Ssl != nil {
 		bv, err := t.Ssl.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ssl"] = bv
+		if string(bv) != "{}" {
+			out["ssl"] = bv
+		}
 	}
 	if t.Syslog != nil {
 		bv, err := t.Syslog.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["syslog"] = bv
+		if string(bv) != "{}" {
+			out["syslog"] = bv
+		}
 	}
 	if t.System != nil {
 		bv, err := t.System.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["system"] = bv
+		if string(bv) != "{}" {
+			out["system"] = bv
+		}
 	}
 	if t.SystemResourcesUsage != nil {
 		bv, err := t.SystemResourcesUsage.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["system-resources-usage"] = bv
+		if string(bv) != "{}" {
+			out["system-resources-usage"] = bv
+		}
 	}
 	if t.TelemetrySystem != nil {
 		bv, err := t.TelemetrySystem.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["telemetry-system"] = bv
+		if string(bv) != "{}" {
+			out["telemetry-system"] = bv
+		}
 	}
 	if t.TimeRange != nil {
 		bv, err := t.TimeRange.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["time-range"] = bv
+		if string(bv) != "{}" {
+			out["time-range"] = bv
+		}
 	}
 	if t.TunnelManagement != nil {
 		bv, err := t.TunnelManagement.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["tunnel-management"] = bv
+		if string(bv) != "{}" {
+			out["tunnel-management"] = bv
+		}
 	}
 	if t.UnicastForward != nil {
 		bv, err := t.UnicastForward.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["unicast-forward"] = bv
+		if string(bv) != "{}" {
+			out["unicast-forward"] = bv
+		}
 	}
 	if t.Vlan != nil {
 		bv, err := t.Vlan.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["vlan"] = bv
+		if string(bv) != "{}" {
+			out["vlan"] = bv
+		}
 	}
 	if t.Vrrp != nil {
 		bv, err := t.Vrrp.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["vrrp"] = bv
+		if string(bv) != "{}" {
+			out["vrrp"] = bv
+		}
 	}
 	if t.Vty != nil {
 		bv, err := t.Vty.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["vty"] = bv
+		if string(bv) != "{}" {
+			out["vty"] = bv
+		}
 	}
 	if t.VxlanExt != nil {
 		bv, err := t.VxlanExt.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["vxlan-ext"] = bv
+		if string(bv) != "{}" {
+			out["vxlan-ext"] = bv
+		}
 	}
 	if t.VxlanPathDetect != nil {
 		bv, err := t.VxlanPathDetect.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["vxlan-path-detect"] = bv
+		if string(bv) != "{}" {
+			out["vxlan-path-detect"] = bv
+		}
 	}
 	if t.Xpl != nil {
 		bv, err := t.Xpl.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["xpl"] = bv
+		if string(bv) != "{}" {
+			out["xpl"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -993,35 +1127,45 @@ func (t *HuaweiAcl_Acl) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["group6s"] = bv
+		if string(bv) != "{}" {
+			out["group6s"] = bv
+		}
 	}
 	if t.Groups != nil {
 		bv, err := t.Groups.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["groups"] = bv
+		if string(bv) != "{}" {
+			out["groups"] = bv
+		}
 	}
 	if t.IpPool6S != nil {
 		bv, err := t.IpPool6S.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ip-pool6s"] = bv
+		if string(bv) != "{}" {
+			out["ip-pool6s"] = bv
+		}
 	}
 	if t.IpPools != nil {
 		bv, err := t.IpPools.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ip-pools"] = bv
+		if string(bv) != "{}" {
+			out["ip-pools"] = bv
+		}
 	}
 	if t.PortPools != nil {
 		bv, err := t.PortPools.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["port-pools"] = bv
+		if string(bv) != "{}" {
+			out["port-pools"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -1171,21 +1315,27 @@ func (t *HuaweiAcl_Acl_Group6S_Group6) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["rule-advances"] = bv
+		if string(bv) != "{}" {
+			out["rule-advances"] = bv
+		}
 	}
 	if t.RuleBasics != nil {
 		bv, err := t.RuleBasics.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["rule-basics"] = bv
+		if string(bv) != "{}" {
+			out["rule-basics"] = bv
+		}
 	}
 	if t.RuleInterfaces != nil {
 		bv, err := t.RuleInterfaces.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["rule-interfaces"] = bv
+		if string(bv) != "{}" {
+			out["rule-interfaces"] = bv
+		}
 	}
 	if t.Step != nil {
 		out["step"] = object.RawJSON(*t.Step)
@@ -1455,7 +1605,9 @@ func (t *HuaweiAcl_Acl_Group6S_Group6_RuleAdvances_RuleAdvance) MarshalJSON() ([
 		if err != nil {
 			return nil, err
 		}
-		out["match-statistics"] = bv
+		if string(bv) != "{}" {
+			out["match-statistics"] = bv
+		}
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -1921,7 +2073,9 @@ func (t *HuaweiAcl_Acl_Group6S_Group6_RuleBasics_RuleBasic) MarshalJSON() ([]byt
 		if err != nil {
 			return nil, err
 		}
-		out["match-statistics"] = bv
+		if string(bv) != "{}" {
+			out["match-statistics"] = bv
+		}
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -2207,7 +2361,9 @@ func (t *HuaweiAcl_Acl_Group6S_Group6_RuleInterfaces_RuleInterface) MarshalJSON(
 		if err != nil {
 			return nil, err
 		}
-		out["match-statistics"] = bv
+		if string(bv) != "{}" {
+			out["match-statistics"] = bv
+		}
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -2445,49 +2601,63 @@ func (t *HuaweiAcl_Acl_Groups_Group) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["rule-advances"] = bv
+		if string(bv) != "{}" {
+			out["rule-advances"] = bv
+		}
 	}
 	if t.RuleArps != nil {
 		bv, err := t.RuleArps.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["rule-arps"] = bv
+		if string(bv) != "{}" {
+			out["rule-arps"] = bv
+		}
 	}
 	if t.RuleBasics != nil {
 		bv, err := t.RuleBasics.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["rule-basics"] = bv
+		if string(bv) != "{}" {
+			out["rule-basics"] = bv
+		}
 	}
 	if t.RuleEthernets != nil {
 		bv, err := t.RuleEthernets.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["rule-ethernets"] = bv
+		if string(bv) != "{}" {
+			out["rule-ethernets"] = bv
+		}
 	}
 	if t.RuleInterfaces != nil {
 		bv, err := t.RuleInterfaces.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["rule-interfaces"] = bv
+		if string(bv) != "{}" {
+			out["rule-interfaces"] = bv
+		}
 	}
 	if t.RuleMplss != nil {
 		bv, err := t.RuleMplss.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["rule-mplss"] = bv
+		if string(bv) != "{}" {
+			out["rule-mplss"] = bv
+		}
 	}
 	if t.RuleUsers != nil {
 		bv, err := t.RuleUsers.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["rule-users"] = bv
+		if string(bv) != "{}" {
+			out["rule-users"] = bv
+		}
 	}
 	if t.Step != nil {
 		out["step"] = object.RawJSON(*t.Step)
@@ -2795,7 +2965,9 @@ func (t *HuaweiAcl_Acl_Groups_Group_RuleAdvances_RuleAdvance) MarshalJSON() ([]b
 		if err != nil {
 			return nil, err
 		}
-		out["match-statistics"] = bv
+		if string(bv) != "{}" {
+			out["match-statistics"] = bv
+		}
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -3347,7 +3519,9 @@ func (t *HuaweiAcl_Acl_Groups_Group_RuleArps_RuleArp) MarshalJSON() ([]byte, err
 		if err != nil {
 			return nil, err
 		}
-		out["match-statistics"] = bv
+		if string(bv) != "{}" {
+			out["match-statistics"] = bv
+		}
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -3665,7 +3839,9 @@ func (t *HuaweiAcl_Acl_Groups_Group_RuleBasics_RuleBasic) MarshalJSON() ([]byte,
 		if err != nil {
 			return nil, err
 		}
-		out["match-statistics"] = bv
+		if string(bv) != "{}" {
+			out["match-statistics"] = bv
+		}
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -3995,7 +4171,9 @@ func (t *HuaweiAcl_Acl_Groups_Group_RuleEthernets_RuleEthernet) MarshalJSON() ([
 		if err != nil {
 			return nil, err
 		}
-		out["match-statistics"] = bv
+		if string(bv) != "{}" {
+			out["match-statistics"] = bv
+		}
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -4339,7 +4517,9 @@ func (t *HuaweiAcl_Acl_Groups_Group_RuleInterfaces_RuleInterface) MarshalJSON() 
 		if err != nil {
 			return nil, err
 		}
-		out["match-statistics"] = bv
+		if string(bv) != "{}" {
+			out["match-statistics"] = bv
+		}
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -4567,14 +4747,18 @@ func (t *HuaweiAcl_Acl_Groups_Group_RuleMplss_RuleMpls) MarshalJSON() ([]byte, e
 		if err != nil {
 			return nil, err
 		}
-		out["lables"] = bv
+		if string(bv) != "{}" {
+			out["lables"] = bv
+		}
 	}
 	if t.MatchStatistics != nil {
 		bv, err := t.MatchStatistics.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["match-statistics"] = bv
+		if string(bv) != "{}" {
+			out["match-statistics"] = bv
+		}
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -4965,7 +5149,9 @@ func (t *HuaweiAcl_Acl_Groups_Group_RuleUsers_RuleUser) MarshalJSON() ([]byte, e
 		if err != nil {
 			return nil, err
 		}
-		out["match-statistics"] = bv
+		if string(bv) != "{}" {
+			out["match-statistics"] = bv
+		}
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -5558,7 +5744,9 @@ func (t *HuaweiAcl_Acl_IpPools_IpPool) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["ipaddrs"] = bv
+		if string(bv) != "{}" {
+			out["ipaddrs"] = bv
+		}
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -5837,7 +6025,9 @@ func (t *HuaweiAcl_Acl_PortPools_PortPool) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["ports"] = bv
+		if string(bv) != "{}" {
+			out["ports"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -6037,7 +6227,9 @@ func (t *HuaweiAnalysisCollector_AnalysisCollector) MarshalJSON() ([]byte, error
 		if err != nil {
 			return nil, err
 		}
-		out["collectors"] = bv
+		if string(bv) != "{}" {
+			out["collectors"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -6225,7 +6417,9 @@ func (t *HuaweiAnyflow_Anyflow) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["global"] = bv
+		if string(bv) != "{}" {
+			out["global"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -6413,112 +6607,144 @@ func (t *HuaweiArp_Arp) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["anti-attack-records"] = bv
+		if string(bv) != "{}" {
+			out["anti-attack-records"] = bv
+		}
 	}
 	if t.BdTracks != nil {
 		bv, err := t.BdTracks.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bd-tracks"] = bv
+		if string(bv) != "{}" {
+			out["bd-tracks"] = bv
+		}
 	}
 	if t.CachedStatistics != nil {
 		bv, err := t.CachedStatistics.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["cached-statistics"] = bv
+		if string(bv) != "{}" {
+			out["cached-statistics"] = bv
+		}
 	}
 	if t.CurrentSpeedLimits != nil {
 		bv, err := t.CurrentSpeedLimits.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["current-speed-limits"] = bv
+		if string(bv) != "{}" {
+			out["current-speed-limits"] = bv
+		}
 	}
 	if t.DuplicateItems != nil {
 		bv, err := t.DuplicateItems.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["duplicate-items"] = bv
+		if string(bv) != "{}" {
+			out["duplicate-items"] = bv
+		}
 	}
 	if t.EntryStatistics != nil {
 		bv, err := t.EntryStatistics.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["entry-statistics"] = bv
+		if string(bv) != "{}" {
+			out["entry-statistics"] = bv
+		}
 	}
 	if t.ErrorPackets != nil {
 		bv, err := t.ErrorPackets.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["error-packets"] = bv
+		if string(bv) != "{}" {
+			out["error-packets"] = bv
+		}
 	}
 	if t.Global != nil {
 		bv, err := t.Global.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["global"] = bv
+		if string(bv) != "{}" {
+			out["global"] = bv
+		}
 	}
 	if t.GlobalSpeedLimits != nil {
 		bv, err := t.GlobalSpeedLimits.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["global-speed-limits"] = bv
+		if string(bv) != "{}" {
+			out["global-speed-limits"] = bv
+		}
 	}
 	if t.IpConflicts != nil {
 		bv, err := t.IpConflicts.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ip-conflicts"] = bv
+		if string(bv) != "{}" {
+			out["ip-conflicts"] = bv
+		}
 	}
 	if t.OpenflowTbls != nil {
 		bv, err := t.OpenflowTbls.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["openflow-tbls"] = bv
+		if string(bv) != "{}" {
+			out["openflow-tbls"] = bv
+		}
 	}
 	if t.QueryEntries != nil {
 		bv, err := t.QueryEntries.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["query-entries"] = bv
+		if string(bv) != "{}" {
+			out["query-entries"] = bv
+		}
 	}
 	if t.SpeedLimits != nil {
 		bv, err := t.SpeedLimits.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["speed-limits"] = bv
+		if string(bv) != "{}" {
+			out["speed-limits"] = bv
+		}
 	}
 	if t.StaticArps != nil {
 		bv, err := t.StaticArps.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["static-arps"] = bv
+		if string(bv) != "{}" {
+			out["static-arps"] = bv
+		}
 	}
 	if t.Statisticss != nil {
 		bv, err := t.Statisticss.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["statisticss"] = bv
+		if string(bv) != "{}" {
+			out["statisticss"] = bv
+		}
 	}
 	if t.TrackStatistics != nil {
 		bv, err := t.TrackStatistics.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["track-statistics"] = bv
+		if string(bv) != "{}" {
+			out["track-statistics"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -7961,7 +8187,9 @@ func (t *HuaweiArp_Arp_Global) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["evncfg"] = bv
+		if string(bv) != "{}" {
+			out["evncfg"] = bv
+		}
 	}
 	if t.ExpireTime != nil {
 		out["expire-time"] = object.RawJSON(*t.ExpireTime)
@@ -9944,7 +10172,9 @@ func (t *HuaweiBd_Bd) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["instances"] = bv
+		if string(bv) != "{}" {
+			out["instances"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -10084,35 +10314,45 @@ func (t *HuaweiBd_Bd_Instances_Instance) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["arp-list"] = bv
+		if string(bv) != "{}" {
+			out["arp-list"] = bv
+		}
 	}
 	if t.ArpStatistics != nil {
 		bv, err := t.ArpStatistics.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["arp-statistics"] = bv
+		if string(bv) != "{}" {
+			out["arp-statistics"] = bv
+		}
 	}
 	if t.ArpUserEntry != nil {
 		bv, err := t.ArpUserEntry.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["arp-user-entry"] = bv
+		if string(bv) != "{}" {
+			out["arp-user-entry"] = bv
+		}
 	}
 	if t.BindService != nil {
 		bv, err := t.BindService.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bind-service"] = bv
+		if string(bv) != "{}" {
+			out["bind-service"] = bv
+		}
 	}
 	if t.BindVlan != nil {
 		bv, err := t.BindVlan.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bind-vlan"] = bv
+		if string(bv) != "{}" {
+			out["bind-vlan"] = bv
+		}
 	}
 	if t.BroadcastDiscard != 0 {
 		n, err := object.EnumName(t.BroadcastDiscard)
@@ -10136,7 +10376,9 @@ func (t *HuaweiBd_Bd_Instances_Instance) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["evpn"] = bv
+		if string(bv) != "{}" {
+			out["evpn"] = bv
+		}
 	}
 	if t.Id != nil {
 		out["id"] = object.RawJSON(*t.Id)
@@ -10146,7 +10388,9 @@ func (t *HuaweiBd_Bd_Instances_Instance) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["m-lag-reserved"] = bv
+		if string(bv) != "{}" {
+			out["m-lag-reserved"] = bv
+		}
 	}
 	if t.MacAgingTime != nil {
 		out["mac-aging-time"] = object.RawJSON(*t.MacAgingTime)
@@ -10163,21 +10407,27 @@ func (t *HuaweiBd_Bd_Instances_Instance) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["mirror"] = bv
+		if string(bv) != "{}" {
+			out["mirror"] = bv
+		}
 	}
 	if t.Nvo3 != nil {
 		bv, err := t.Nvo3.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["nvo3"] = bv
+		if string(bv) != "{}" {
+			out["nvo3"] = bv
+		}
 	}
 	if t.ServicePoints != nil {
 		bv, err := t.ServicePoints.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["service-points"] = bv
+		if string(bv) != "{}" {
+			out["service-points"] = bv
+		}
 	}
 	if t.SplitHorizon != 0 {
 		n, err := object.EnumName(t.SplitHorizon)
@@ -10205,7 +10455,9 @@ func (t *HuaweiBd_Bd_Instances_Instance) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["statistics"] = bv
+		if string(bv) != "{}" {
+			out["statistics"] = bv
+		}
 	}
 	if t.Status != 0 {
 		n, err := object.EnumName(t.Status)
@@ -10449,7 +10701,9 @@ func (t *HuaweiBd_Bd_Instances_Instance_ArpList) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["check-item"] = bv
+		if string(bv) != "{}" {
+			out["check-item"] = bv
+		}
 	}
 	if t.CollectHostEnable != nil {
 		out["collect-host-enable"] = object.RawJSON(*t.CollectHostEnable)
@@ -10940,7 +11194,9 @@ func (t *HuaweiBd_Bd_Instances_Instance_Evpn) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["interface-track-peers"] = bv
+		if string(bv) != "{}" {
+			out["interface-track-peers"] = bv
+		}
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -11150,7 +11406,9 @@ func (t *HuaweiBd_Bd_Instances_Instance_Mirror) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["bd-port-mirrors"] = bv
+		if string(bv) != "{}" {
+			out["bd-port-mirrors"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -11321,7 +11579,9 @@ func (t *HuaweiBd_Bd_Instances_Instance_Nvo3) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["map-vnis"] = bv
+		if string(bv) != "{}" {
+			out["map-vnis"] = bv
+		}
 	}
 	if len(t.VniList) > 0 {
 		keys := make([]uint32, 0, len(t.VniList))
@@ -11638,7 +11898,9 @@ func (t *HuaweiBd_Bd_Instances_Instance_ServicePoints_ServicePoint) MarshalJSON(
 		if err != nil {
 			return nil, err
 		}
-		out["evpn"] = bv
+		if string(bv) != "{}" {
+			out["evpn"] = bv
+		}
 	}
 	if t.InterfaceName != nil {
 		out["interface-name"] = object.RawJSON(*t.InterfaceName)
@@ -11954,98 +12216,126 @@ func (t *HuaweiBfd_Bfd) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["all-sessions"] = bv
+		if string(bv) != "{}" {
+			out["all-sessions"] = bv
+		}
 	}
 	if t.AuthenticationKeys != nil {
 		bv, err := t.AuthenticationKeys.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["authentication-keys"] = bv
+		if string(bv) != "{}" {
+			out["authentication-keys"] = bv
+		}
 	}
 	if t.BfdBundleSessions != nil {
 		bv, err := t.BfdBundleSessions.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bfd-bundle-sessions"] = bv
+		if string(bv) != "{}" {
+			out["bfd-bundle-sessions"] = bv
+		}
 	}
 	if t.BindInterfaces != nil {
 		bv, err := t.BindInterfaces.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bind-interfaces"] = bv
+		if string(bv) != "{}" {
+			out["bind-interfaces"] = bv
+		}
 	}
 	if t.CrcIpSessions != nil {
 		bv, err := t.CrcIpSessions.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["crc-ip-sessions"] = bv
+		if string(bv) != "{}" {
+			out["crc-ip-sessions"] = bv
+		}
 	}
 	if t.CrcLspSessions != nil {
 		bv, err := t.CrcLspSessions.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["crc-lsp-sessions"] = bv
+		if string(bv) != "{}" {
+			out["crc-lsp-sessions"] = bv
+		}
 	}
 	if t.CrcSecSessions != nil {
 		bv, err := t.CrcSecSessions.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["crc-sec-sessions"] = bv
+		if string(bv) != "{}" {
+			out["crc-sec-sessions"] = bv
+		}
 	}
 	if t.DiscriminatorUse != nil {
 		bv, err := t.DiscriminatorUse.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["discriminator-use"] = bv
+		if string(bv) != "{}" {
+			out["discriminator-use"] = bv
+		}
 	}
 	if t.Global != nil {
 		bv, err := t.Global.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["global"] = bv
+		if string(bv) != "{}" {
+			out["global"] = bv
+		}
 	}
 	if t.MulCastSessions != nil {
 		bv, err := t.MulCastSessions.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["mul-cast-sessions"] = bv
+		if string(bv) != "{}" {
+			out["mul-cast-sessions"] = bv
+		}
 	}
 	if t.PassiveSession != nil {
 		bv, err := t.PassiveSession.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["passive-session"] = bv
+		if string(bv) != "{}" {
+			out["passive-session"] = bv
+		}
 	}
 	if t.Sbfd != nil {
 		bv, err := t.Sbfd.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["sbfd"] = bv
+		if string(bv) != "{}" {
+			out["sbfd"] = bv
+		}
 	}
 	if t.Sessions != nil {
 		bv, err := t.Sessions.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["sessions"] = bv
+		if string(bv) != "{}" {
+			out["sessions"] = bv
+		}
 	}
 	if t.Statistics != nil {
 		bv, err := t.Statistics.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["statistics"] = bv
+		if string(bv) != "{}" {
+			out["statistics"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -12431,7 +12721,9 @@ func (t *HuaweiBfd_Bfd_AllSessions_AllSession) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["running"] = bv
+		if string(bv) != "{}" {
+			out["running"] = bv
+		}
 	}
 	if t.SegmentListId != nil {
 		out["segment-list-id"] = object.RawJSON(*t.SegmentListId)
@@ -12447,7 +12739,9 @@ func (t *HuaweiBfd_Bfd_AllSessions_AllSession) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["statistics"] = bv
+		if string(bv) != "{}" {
+			out["statistics"] = bv
+		}
 	}
 	if t.SwapVcLabel != nil {
 		out["swap-vc-label"] = object.RawJSON(*t.SwapVcLabel)
@@ -15509,7 +15803,9 @@ func (t *HuaweiBfd_Bfd_MulCastSessions_MulCastSession) MarshalJSON() ([]byte, er
 		if err != nil {
 			return nil, err
 		}
-		out["multi-cast-session-running"] = bv
+		if string(bv) != "{}" {
+			out["multi-cast-session-running"] = bv
+		}
 	}
 	if t.MulticastSessionType != 0 {
 		n, err := object.EnumName(t.MulticastSessionType)
@@ -16000,14 +16296,18 @@ func (t *HuaweiBfd_Bfd_PassiveSession) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["destination-udps"] = bv
+		if string(bv) != "{}" {
+			out["destination-udps"] = bv
+		}
 	}
 	if t.DetectMultipliers != nil {
 		bv, err := t.DetectMultipliers.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["detect-multipliers"] = bv
+		if string(bv) != "{}" {
+			out["detect-multipliers"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -16280,28 +16580,36 @@ func (t *HuaweiBfd_Bfd_Sbfd) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["discriminator-maps"] = bv
+		if string(bv) != "{}" {
+			out["discriminator-maps"] = bv
+		}
 	}
 	if t.ReflectorDiscriminatorIds != nil {
 		bv, err := t.ReflectorDiscriminatorIds.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["reflector-discriminator-ids"] = bv
+		if string(bv) != "{}" {
+			out["reflector-discriminator-ids"] = bv
+		}
 	}
 	if t.ReflectorDiscriminatorIps != nil {
 		bv, err := t.ReflectorDiscriminatorIps.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["reflector-discriminator-ips"] = bv
+		if string(bv) != "{}" {
+			out["reflector-discriminator-ips"] = bv
+		}
 	}
 	if t.ReflectorDiscriminators != nil {
 		bv, err := t.ReflectorDiscriminators.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["reflector-discriminators"] = bv
+		if string(bv) != "{}" {
+			out["reflector-discriminators"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -17068,7 +17376,9 @@ func (t *HuaweiBfd_Bfd_Sessions_Session) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["groups"] = bv
+		if string(bv) != "{}" {
+			out["groups"] = bv
+		}
 	}
 	if t.IsGroupStaticIpv6 != nil {
 		out["is-group-static-ipv6"] = object.RawJSON(*t.IsGroupStaticIpv6)
@@ -17240,7 +17550,9 @@ func (t *HuaweiBfd_Bfd_Sessions_Session) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["running"] = bv
+		if string(bv) != "{}" {
+			out["running"] = bv
+		}
 	}
 	if t.SelectBoardSlot2AutoIpv4 != nil {
 		out["select-board-slot2-auto-ipv4"] = object.RawJSON(*t.SelectBoardSlot2AutoIpv4)
@@ -18640,21 +18952,27 @@ func (t *HuaweiBgp_Bgp) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["base-process"] = bv
+		if string(bv) != "{}" {
+			out["base-process"] = bv
+		}
 	}
 	if t.Global != nil {
 		bv, err := t.Global.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["global"] = bv
+		if string(bv) != "{}" {
+			out["global"] = bv
+		}
 	}
 	if t.PafControls != nil {
 		bv, err := t.PafControls.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["paf-controls"] = bv
+		if string(bv) != "{}" {
+			out["paf-controls"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -18732,7 +19050,9 @@ func (t *HuaweiBgp_Bgp_BaseProcess) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["bgp-route"] = bv
+		if string(bv) != "{}" {
+			out["bgp-route"] = bv
+		}
 	}
 	if t.CheckFirstAs != nil {
 		out["check-first-as"] = object.RawJSON(*t.CheckFirstAs)
@@ -18742,7 +19062,9 @@ func (t *HuaweiBgp_Bgp_BaseProcess) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["confederation"] = bv
+		if string(bv) != "{}" {
+			out["confederation"] = bv
+		}
 	}
 	if t.DelayTime != nil {
 		out["delay-time"] = object.RawJSON(*t.DelayTime)
@@ -18758,21 +19080,27 @@ func (t *HuaweiBgp_Bgp_BaseProcess) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["error-discard-info"] = bv
+		if string(bv) != "{}" {
+			out["error-discard-info"] = bv
+		}
 	}
 	if t.GracefulRestart != nil {
 		bv, err := t.GracefulRestart.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["graceful-restart"] = bv
+		if string(bv) != "{}" {
+			out["graceful-restart"] = bv
+		}
 	}
 	if t.GracefulRestartStatus != nil {
 		bv, err := t.GracefulRestartStatus.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["graceful-restart-status"] = bv
+		if string(bv) != "{}" {
+			out["graceful-restart-status"] = bv
+		}
 	}
 	if t.KeepAllRoutes != nil {
 		out["keep-all-routes"] = object.RawJSON(*t.KeepAllRoutes)
@@ -18794,14 +19122,18 @@ func (t *HuaweiBgp_Bgp_BaseProcess) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["reference-period"] = bv
+		if string(bv) != "{}" {
+			out["reference-period"] = bv
+		}
 	}
 	if t.RemotePrefixSidStates != nil {
 		bv, err := t.RemotePrefixSidStates.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["remote-prefix-sid-states"] = bv
+		if string(bv) != "{}" {
+			out["remote-prefix-sid-states"] = bv
+		}
 	}
 	if t.RouterIdAutoSelect != nil {
 		out["router-id-auto-select"] = object.RawJSON(*t.RouterIdAutoSelect)
@@ -18814,14 +19146,18 @@ func (t *HuaweiBgp_Bgp_BaseProcess) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["timer"] = bv
+		if string(bv) != "{}" {
+			out["timer"] = bv
+		}
 	}
 	if t.VpnBriefInfos != nil {
 		bv, err := t.VpnBriefInfos.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["vpn-brief-infos"] = bv
+		if string(bv) != "{}" {
+			out["vpn-brief-infos"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -18986,49 +19322,63 @@ func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-labeluni"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-labeluni"] = bv
+		}
 	}
 	if t.Ipv4Multicast != nil {
 		bv, err := t.Ipv4Multicast.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-multicast"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-multicast"] = bv
+		}
 	}
 	if t.Ipv4Unicast != nil {
 		bv, err := t.Ipv4Unicast.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-unicast"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-unicast"] = bv
+		}
 	}
 	if t.Ipv4Vpn != nil {
 		bv, err := t.Ipv4Vpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-vpn"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-vpn"] = bv
+		}
 	}
 	if t.Ipv6Unicast != nil {
 		bv, err := t.Ipv6Unicast.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv6-unicast"] = bv
+		if string(bv) != "{}" {
+			out["ipv6-unicast"] = bv
+		}
 	}
 	if t.Ipv6Vpn != nil {
 		bv, err := t.Ipv6Vpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv6-vpn"] = bv
+		if string(bv) != "{}" {
+			out["ipv6-vpn"] = bv
+		}
 	}
 	if t.L2VpnEvpn != nil {
 		bv, err := t.L2VpnEvpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["l2vpn-evpn"] = bv
+		if string(bv) != "{}" {
+			out["l2vpn-evpn"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -19099,7 +19449,9 @@ func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Labeluni) MarshalJSON() ([]byte,
 		if err != nil {
 			return nil, err
 		}
-		out["statistics"] = bv
+		if string(bv) != "{}" {
+			out["statistics"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -19347,7 +19699,9 @@ func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Multicast) MarshalJSON() ([]byte
 		if err != nil {
 			return nil, err
 		}
-		out["routes"] = bv
+		if string(bv) != "{}" {
+			out["routes"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -19988,35 +20342,45 @@ func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Unicast) MarshalJSON() ([]byte, 
 		if err != nil {
 			return nil, err
 		}
-		out["peer-advertise-routes"] = bv
+		if string(bv) != "{}" {
+			out["peer-advertise-routes"] = bv
+		}
 	}
 	if t.PeerReceiveActiveRoutes != nil {
 		bv, err := t.PeerReceiveActiveRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["peer-receive-active-routes"] = bv
+		if string(bv) != "{}" {
+			out["peer-receive-active-routes"] = bv
+		}
 	}
 	if t.PeerReceiveRoutes != nil {
 		bv, err := t.PeerReceiveRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["peer-receive-routes"] = bv
+		if string(bv) != "{}" {
+			out["peer-receive-routes"] = bv
+		}
 	}
 	if t.Routes != nil {
 		bv, err := t.Routes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["routes"] = bv
+		if string(bv) != "{}" {
+			out["routes"] = bv
+		}
 	}
 	if t.Statistics != nil {
 		bv, err := t.Statistics.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["statistics"] = bv
+		if string(bv) != "{}" {
+			out["statistics"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -22756,35 +23120,45 @@ func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv4Vpn) MarshalJSON() ([]byte, erro
 		if err != nil {
 			return nil, err
 		}
-		out["peer-advertise-routes"] = bv
+		if string(bv) != "{}" {
+			out["peer-advertise-routes"] = bv
+		}
 	}
 	if t.PeerReceiveActiveRoutes != nil {
 		bv, err := t.PeerReceiveActiveRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["peer-receive-active-routes"] = bv
+		if string(bv) != "{}" {
+			out["peer-receive-active-routes"] = bv
+		}
 	}
 	if t.PeerReceiveRoutes != nil {
 		bv, err := t.PeerReceiveRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["peer-receive-routes"] = bv
+		if string(bv) != "{}" {
+			out["peer-receive-routes"] = bv
+		}
 	}
 	if t.Routes != nil {
 		bv, err := t.Routes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["routes"] = bv
+		if string(bv) != "{}" {
+			out["routes"] = bv
+		}
 	}
 	if t.Statistic != nil {
 		bv, err := t.Statistic.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["statistic"] = bv
+		if string(bv) != "{}" {
+			out["statistic"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -25405,35 +25779,45 @@ func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Unicast) MarshalJSON() ([]byte, 
 		if err != nil {
 			return nil, err
 		}
-		out["peer-advertise-routes"] = bv
+		if string(bv) != "{}" {
+			out["peer-advertise-routes"] = bv
+		}
 	}
 	if t.PeerReceiveActiveRoutes != nil {
 		bv, err := t.PeerReceiveActiveRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["peer-receive-active-routes"] = bv
+		if string(bv) != "{}" {
+			out["peer-receive-active-routes"] = bv
+		}
 	}
 	if t.PeerReceiveRoutes != nil {
 		bv, err := t.PeerReceiveRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["peer-receive-routes"] = bv
+		if string(bv) != "{}" {
+			out["peer-receive-routes"] = bv
+		}
 	}
 	if t.Routes != nil {
 		bv, err := t.Routes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["routes"] = bv
+		if string(bv) != "{}" {
+			out["routes"] = bv
+		}
 	}
 	if t.Statistics != nil {
 		bv, err := t.Statistics.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["statistics"] = bv
+		if string(bv) != "{}" {
+			out["statistics"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -28123,35 +28507,45 @@ func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_Ipv6Vpn) MarshalJSON() ([]byte, erro
 		if err != nil {
 			return nil, err
 		}
-		out["peer-advertise-routes"] = bv
+		if string(bv) != "{}" {
+			out["peer-advertise-routes"] = bv
+		}
 	}
 	if t.PeerReceiveActiveRoutes != nil {
 		bv, err := t.PeerReceiveActiveRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["peer-receive-active-routes"] = bv
+		if string(bv) != "{}" {
+			out["peer-receive-active-routes"] = bv
+		}
 	}
 	if t.PeerReceiveRoutes != nil {
 		bv, err := t.PeerReceiveRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["peer-receive-routes"] = bv
+		if string(bv) != "{}" {
+			out["peer-receive-routes"] = bv
+		}
 	}
 	if t.Routes != nil {
 		bv, err := t.Routes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["routes"] = bv
+		if string(bv) != "{}" {
+			out["routes"] = bv
+		}
 	}
 	if t.Statistic != nil {
 		bv, err := t.Statistic.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["statistic"] = bv
+		if string(bv) != "{}" {
+			out["statistic"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -30748,7 +31142,9 @@ func (t *HuaweiBgp_Bgp_BaseProcess_BgpRoute_L2VpnEvpn) MarshalJSON() ([]byte, er
 		if err != nil {
 			return nil, err
 		}
-		out["statistics"] = bv
+		if string(bv) != "{}" {
+			out["statistics"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -31060,7 +31456,9 @@ func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo) MarshalJSON() ([]byte, erro
 		if err != nil {
 			return nil, err
 		}
-		out["afs"] = bv
+		if string(bv) != "{}" {
+			out["afs"] = bv
+		}
 	}
 	if t.AsLoopCount != nil {
 		out["as-loop-count"] = object.RawJSON(*t.AsLoopCount)
@@ -31276,7 +31674,9 @@ func (t *HuaweiBgp_Bgp_BaseProcess_ErrorDiscardInfo_Afs_Af) MarshalJSON() ([]byt
 		if err != nil {
 			return nil, err
 		}
-		out["peers"] = bv
+		if string(bv) != "{}" {
+			out["peers"] = bv
+		}
 	}
 	if t.ReceiveAsOverLimitCount != nil {
 		out["receive-as-over-limit-count"] = object.RawJSON(*t.ReceiveAsOverLimitCount)
@@ -31632,7 +32032,9 @@ func (t *HuaweiBgp_Bgp_BaseProcess_GracefulRestartStatus) MarshalJSON() ([]byte,
 		if err != nil {
 			return nil, err
 		}
-		out["peers"] = bv
+		if string(bv) != "{}" {
+			out["peers"] = bv
+		}
 	}
 	if t.RestartTimer != nil {
 		out["restart-timer"] = object.RawJSON(*t.RestartTimer)
@@ -32521,161 +32923,207 @@ func (t *HuaweiCfg_Cfg) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["auto-backup"] = bv
+		if string(bv) != "{}" {
+			out["auto-backup"] = bv
+		}
 	}
 	if t.Autosave != nil {
 		bv, err := t.Autosave.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["autosave"] = bv
+		if string(bv) != "{}" {
+			out["autosave"] = bv
+		}
 	}
 	if t.AutosaveCheckpoint != nil {
 		bv, err := t.AutosaveCheckpoint.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["autosave-checkpoint"] = bv
+		if string(bv) != "{}" {
+			out["autosave-checkpoint"] = bv
+		}
 	}
 	if t.BackupAndRecoveryStates != nil {
 		bv, err := t.BackupAndRecoveryStates.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["backup-and-recovery-states"] = bv
+		if string(bv) != "{}" {
+			out["backup-and-recovery-states"] = bv
+		}
 	}
 	if t.BackupServers != nil {
 		bv, err := t.BackupServers.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["backup-servers"] = bv
+		if string(bv) != "{}" {
+			out["backup-servers"] = bv
+		}
 	}
 	if t.CfgFiles != nil {
 		bv, err := t.CfgFiles.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["cfg-files"] = bv
+		if string(bv) != "{}" {
+			out["cfg-files"] = bv
+		}
 	}
 	if t.Checkpoints != nil {
 		bv, err := t.Checkpoints.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["checkpoints"] = bv
+		if string(bv) != "{}" {
+			out["checkpoints"] = bv
+		}
 	}
 	if t.ClearInterfaceResults != nil {
 		bv, err := t.ClearInterfaceResults.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["clear-interface-results"] = bv
+		if string(bv) != "{}" {
+			out["clear-interface-results"] = bv
+		}
 	}
 	if t.ConfigAutoBackupFiles != nil {
 		bv, err := t.ConfigAutoBackupFiles.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["config-auto-backup-files"] = bv
+		if string(bv) != "{}" {
+			out["config-auto-backup-files"] = bv
+		}
 	}
 	if t.ConfigChangeFlowid != nil {
 		bv, err := t.ConfigChangeFlowid.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["config-change-flowid"] = bv
+		if string(bv) != "{}" {
+			out["config-change-flowid"] = bv
+		}
 	}
 	if t.ConfigRecoverResults != nil {
 		bv, err := t.ConfigRecoverResults.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["config-recover-results"] = bv
+		if string(bv) != "{}" {
+			out["config-recover-results"] = bv
+		}
 	}
 	if t.ConfigRollbackResult != nil {
 		bv, err := t.ConfigRollbackResult.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["config-rollback-result"] = bv
+		if string(bv) != "{}" {
+			out["config-rollback-result"] = bv
+		}
 	}
 	if t.ConfigSessions != nil {
 		bv, err := t.ConfigSessions.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["config-sessions"] = bv
+		if string(bv) != "{}" {
+			out["config-sessions"] = bv
+		}
 	}
 	if t.ConfigurationOperationCpuLimit != nil {
 		bv, err := t.ConfigurationOperationCpuLimit.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["configuration-operation-cpu-limit"] = bv
+		if string(bv) != "{}" {
+			out["configuration-operation-cpu-limit"] = bv
+		}
 	}
 	if t.GlobalSwitch != nil {
 		bv, err := t.GlobalSwitch.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["global-switch"] = bv
+		if string(bv) != "{}" {
+			out["global-switch"] = bv
+		}
 	}
 	if t.LastSaveInfo != nil {
 		bv, err := t.LastSaveInfo.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["last-save-info"] = bv
+		if string(bv) != "{}" {
+			out["last-save-info"] = bv
+		}
 	}
 	if t.LockByUsername != nil {
 		bv, err := t.LockByUsername.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["lock-by-username"] = bv
+		if string(bv) != "{}" {
+			out["lock-by-username"] = bv
+		}
 	}
 	if t.LockByUsers != nil {
 		bv, err := t.LockByUsers.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["lock-by-users"] = bv
+		if string(bv) != "{}" {
+			out["lock-by-users"] = bv
+		}
 	}
 	if t.SavedConfigurationTime != nil {
 		bv, err := t.SavedConfigurationTime.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["saved-configuration-time"] = bv
+		if string(bv) != "{}" {
+			out["saved-configuration-time"] = bv
+		}
 	}
 	if t.StartupInfos != nil {
 		bv, err := t.StartupInfos.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["startup-infos"] = bv
+		if string(bv) != "{}" {
+			out["startup-infos"] = bv
+		}
 	}
 	if t.StartupLock != nil {
 		bv, err := t.StartupLock.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["startup-lock"] = bv
+		if string(bv) != "{}" {
+			out["startup-lock"] = bv
+		}
 	}
 	if t.TrialStatus != nil {
 		bv, err := t.TrialStatus.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["trial-status"] = bv
+		if string(bv) != "{}" {
+			out["trial-status"] = bv
+		}
 	}
 	if t.UserLock != nil {
 		bv, err := t.UserLock.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["user-lock"] = bv
+		if string(bv) != "{}" {
+			out["user-lock"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -33438,7 +33886,9 @@ func (t *HuaweiCfg_Cfg_CfgFiles_CfgFile) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["file-current-changes"] = bv
+		if string(bv) != "{}" {
+			out["file-current-changes"] = bv
+		}
 	}
 	if t.Filename != nil {
 		out["filename"] = object.RawJSON(*t.Filename)
@@ -33707,7 +34157,9 @@ func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["current-point-changes"] = bv
+		if string(bv) != "{}" {
+			out["current-point-changes"] = bv
+		}
 	}
 	if t.Description != nil {
 		out["description"] = object.RawJSON(*t.Description)
@@ -33720,7 +34172,9 @@ func (t *HuaweiCfg_Cfg_Checkpoints_Checkpoint) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["since-point-changes"] = bv
+		if string(bv) != "{}" {
+			out["since-point-changes"] = bv
+		}
 	}
 	if t.Timestamp != nil {
 		out["timestamp"] = object.RawJSON(*t.Timestamp)
@@ -35580,119 +36034,153 @@ func (t *HuaweiDevm_Devm) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["cards"] = bv
+		if string(bv) != "{}" {
+			out["cards"] = bv
+		}
 	}
 	if t.CfCards != nil {
 		bv, err := t.CfCards.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["cf-cards"] = bv
+		if string(bv) != "{}" {
+			out["cf-cards"] = bv
+		}
 	}
 	if t.Chassiss != nil {
 		bv, err := t.Chassiss.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["chassiss"] = bv
+		if string(bv) != "{}" {
+			out["chassiss"] = bv
+		}
 	}
 	if t.Containers != nil {
 		bv, err := t.Containers.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["containers"] = bv
+		if string(bv) != "{}" {
+			out["containers"] = bv
+		}
 	}
 	if t.Driver != nil {
 		bv, err := t.Driver.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["driver"] = bv
+		if string(bv) != "{}" {
+			out["driver"] = bv
+		}
 	}
 	if t.EntityClasses != nil {
 		bv, err := t.EntityClasses.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["entity-classes"] = bv
+		if string(bv) != "{}" {
+			out["entity-classes"] = bv
+		}
 	}
 	if t.InconsistentEntitys != nil {
 		bv, err := t.InconsistentEntitys.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["inconsistent-entitys"] = bv
+		if string(bv) != "{}" {
+			out["inconsistent-entitys"] = bv
+		}
 	}
 	if t.LogicContainers != nil {
 		bv, err := t.LogicContainers.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["logic-containers"] = bv
+		if string(bv) != "{}" {
+			out["logic-containers"] = bv
+		}
 	}
 	if t.LogicEntitys != nil {
 		bv, err := t.LogicEntitys.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["logic-entitys"] = bv
+		if string(bv) != "{}" {
+			out["logic-entitys"] = bv
+		}
 	}
 	if t.LogicPorts != nil {
 		bv, err := t.LogicPorts.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["logic-ports"] = bv
+		if string(bv) != "{}" {
+			out["logic-ports"] = bv
+		}
 	}
 	if t.LpuBoards != nil {
 		bv, err := t.LpuBoards.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["lpu-boards"] = bv
+		if string(bv) != "{}" {
+			out["lpu-boards"] = bv
+		}
 	}
 	if t.MpuBoards != nil {
 		bv, err := t.MpuBoards.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["mpu-boards"] = bv
+		if string(bv) != "{}" {
+			out["mpu-boards"] = bv
+		}
 	}
 	if t.Offlines != nil {
 		bv, err := t.Offlines.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["offlines"] = bv
+		if string(bv) != "{}" {
+			out["offlines"] = bv
+		}
 	}
 	if t.PhysicalEntitys != nil {
 		bv, err := t.PhysicalEntitys.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["physical-entitys"] = bv
+		if string(bv) != "{}" {
+			out["physical-entitys"] = bv
+		}
 	}
 	if t.Ports != nil {
 		bv, err := t.Ports.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ports"] = bv
+		if string(bv) != "{}" {
+			out["ports"] = bv
+		}
 	}
 	if t.ScheduleReboot != nil {
 		bv, err := t.ScheduleReboot.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["schedule-reboot"] = bv
+		if string(bv) != "{}" {
+			out["schedule-reboot"] = bv
+		}
 	}
 	if t.SfuBoards != nil {
 		bv, err := t.SfuBoards.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["sfu-boards"] = bv
+		if string(bv) != "{}" {
+			out["sfu-boards"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -35919,7 +36407,9 @@ func (t *HuaweiDevm_Devm_Cards_Card) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["pic"] = bv
+		if string(bv) != "{}" {
+			out["pic"] = bv
+		}
 	}
 	if t.PortNum != nil {
 		out["port-num"] = object.RawJSON(*t.PortNum)
@@ -36376,7 +36866,9 @@ func (t *HuaweiDevm_Devm_Chassiss_Chassis) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["dustproof-attribute"] = bv
+		if string(bv) != "{}" {
+			out["dustproof-attribute"] = bv
+		}
 	}
 	if t.EntityLastChange != nil {
 		out["entity-last-change"] = object.RawJSON(*t.EntityLastChange)
@@ -36386,7 +36878,9 @@ func (t *HuaweiDevm_Devm_Chassiss_Chassis) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["fan-attribute"] = bv
+		if string(bv) != "{}" {
+			out["fan-attribute"] = bv
+		}
 	}
 	if t.FanNum != nil {
 		out["fan-num"] = object.RawJSON(*t.FanNum)
@@ -36402,7 +36896,9 @@ func (t *HuaweiDevm_Devm_Chassiss_Chassis) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["monitor-board-changes"] = bv
+		if string(bv) != "{}" {
+			out["monitor-board-changes"] = bv
+		}
 	}
 	if t.NextId != nil {
 		out["next-id"] = object.RawJSON(*t.NextId)
@@ -36425,7 +36921,9 @@ func (t *HuaweiDevm_Devm_Chassiss_Chassis) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["power-supply-attribute"] = bv
+		if string(bv) != "{}" {
+			out["power-supply-attribute"] = bv
+		}
 	}
 	if t.ServiceType != nil {
 		out["service-type"] = object.RawJSON(*t.ServiceType)
@@ -37114,7 +37612,9 @@ func (t *HuaweiDevm_Devm_Containers_Container) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["supported-entity-types"] = bv
+		if string(bv) != "{}" {
+			out["supported-entity-types"] = bv
+		}
 	}
 	if t.Type != nil {
 		out["type"] = object.RawJSON(*t.Type)
@@ -37302,91 +37802,117 @@ func (t *HuaweiDevm_Devm_Driver) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["ccus"] = bv
+		if string(bv) != "{}" {
+			out["ccus"] = bv
+		}
 	}
 	if t.Cmus != nil {
 		bv, err := t.Cmus.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["cmus"] = bv
+		if string(bv) != "{}" {
+			out["cmus"] = bv
+		}
 	}
 	if t.Dacss != nil {
 		bv, err := t.Dacss.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["dacss"] = bv
+		if string(bv) != "{}" {
+			out["dacss"] = bv
+		}
 	}
 	if t.Dmus != nil {
 		bv, err := t.Dmus.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["dmus"] = bv
+		if string(bv) != "{}" {
+			out["dmus"] = bv
+		}
 	}
 	if t.Ecus != nil {
 		bv, err := t.Ecus.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ecus"] = bv
+		if string(bv) != "{}" {
+			out["ecus"] = bv
+		}
 	}
 	if t.Fans != nil {
 		bv, err := t.Fans.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["fans"] = bv
+		if string(bv) != "{}" {
+			out["fans"] = bv
+		}
 	}
 	if t.Icus != nil {
 		bv, err := t.Icus.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["icus"] = bv
+		if string(bv) != "{}" {
+			out["icus"] = bv
+		}
 	}
 	if t.Lcds != nil {
 		bv, err := t.Lcds.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["lcds"] = bv
+		if string(bv) != "{}" {
+			out["lcds"] = bv
+		}
 	}
 	if t.Pdus != nil {
 		bv, err := t.Pdus.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["pdus"] = bv
+		if string(bv) != "{}" {
+			out["pdus"] = bv
+		}
 	}
 	if t.Pms != nil {
 		bv, err := t.Pms.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["pms"] = bv
+		if string(bv) != "{}" {
+			out["pms"] = bv
+		}
 	}
 	if t.Pmus != nil {
 		bv, err := t.Pmus.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["pmus"] = bv
+		if string(bv) != "{}" {
+			out["pmus"] = bv
+		}
 	}
 	if t.PowerSupplys != nil {
 		bv, err := t.PowerSupplys.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["power-supplys"] = bv
+		if string(bv) != "{}" {
+			out["power-supplys"] = bv
+		}
 	}
 	if t.Vsus != nil {
 		bv, err := t.Vsus.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["vsus"] = bv
+		if string(bv) != "{}" {
+			out["vsus"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -37487,7 +38013,9 @@ func (t *HuaweiDevm_Devm_Driver_Ccus) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["ccu"] = bv
+		if string(bv) != "{}" {
+			out["ccu"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -37652,28 +38180,36 @@ func (t *HuaweiDevm_Devm_Driver_Cmus_Cmu) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["cmu-alarms"] = bv
+		if string(bv) != "{}" {
+			out["cmu-alarms"] = bv
+		}
 	}
 	if t.CmuAnalogs != nil {
 		bv, err := t.CmuAnalogs.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["cmu-analogs"] = bv
+		if string(bv) != "{}" {
+			out["cmu-analogs"] = bv
+		}
 	}
 	if t.CmuRelays != nil {
 		bv, err := t.CmuRelays.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["cmu-relays"] = bv
+		if string(bv) != "{}" {
+			out["cmu-relays"] = bv
+		}
 	}
 	if t.CmuSwitchs != nil {
 		bv, err := t.CmuSwitchs.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["cmu-switchs"] = bv
+		if string(bv) != "{}" {
+			out["cmu-switchs"] = bv
+		}
 	}
 	if t.EntityIndex != nil {
 		out["entity-index"] = object.RawJSON(*t.EntityIndex)
@@ -40311,7 +40847,9 @@ func (t *HuaweiDevm_Devm_Driver_PowerSupplys_PowerSupply) MarshalJSON() ([]byte,
 		if err != nil {
 			return nil, err
 		}
-		out["power-environments"] = bv
+		if string(bv) != "{}" {
+			out["power-environments"] = bv
+		}
 	}
 	if t.PowerState != nil {
 		out["power-state"] = object.RawJSON(*t.PowerState)
@@ -41154,7 +41692,9 @@ func (t *HuaweiDevm_Devm_LogicContainers_LogicContainer) MarshalJSON() ([]byte, 
 		if err != nil {
 			return nil, err
 		}
-		out["supported-entity-types"] = bv
+		if string(bv) != "{}" {
+			out["supported-entity-types"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -41911,7 +42451,9 @@ func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["driver"] = bv
+		if string(bv) != "{}" {
+			out["driver"] = bv
+		}
 	}
 	if t.FlashSize != nil {
 		out["flash-size"] = object.RawJSON(*t.FlashSize)
@@ -41927,14 +42469,18 @@ func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["loadbalance"] = bv
+		if string(bv) != "{}" {
+			out["loadbalance"] = bv
+		}
 	}
 	if t.Mirror != nil {
 		bv, err := t.Mirror.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["mirror"] = bv
+		if string(bv) != "{}" {
+			out["mirror"] = bv
+		}
 	}
 	if t.NextServiceType != 0 {
 		n, err := object.EnumName(t.NextServiceType)
@@ -41973,7 +42519,9 @@ func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["sflow"] = bv
+		if string(bv) != "{}" {
+			out["sflow"] = bv
+		}
 	}
 	if t.SubSlotNum != nil {
 		out["sub-slot-num"] = object.RawJSON(*t.SubSlotNum)
@@ -41983,7 +42531,9 @@ func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["unicast-forward"] = bv
+		if string(bv) != "{}" {
+			out["unicast-forward"] = bv
+		}
 	}
 	if t.UpTime != nil {
 		out["up-time"] = object.RawJSON(*t.UpTime)
@@ -42151,7 +42701,9 @@ func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Driver) MarshalJSON() ([]byte, error
 		if err != nil {
 			return nil, err
 		}
-		out["l3-clocks"] = bv
+		if string(bv) != "{}" {
+			out["l3-clocks"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -42322,42 +42874,54 @@ func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Loadbalance) MarshalJSON() ([]byte, 
 		if err != nil {
 			return nil, err
 		}
-		out["dynamic-adjust"] = bv
+		if string(bv) != "{}" {
+			out["dynamic-adjust"] = bv
+		}
 	}
 	if t.HashArithmetic != nil {
 		bv, err := t.HashArithmetic.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["hash-arithmetic"] = bv
+		if string(bv) != "{}" {
+			out["hash-arithmetic"] = bv
+		}
 	}
 	if t.HashFields != nil {
 		bv, err := t.HashFields.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["hash-fields"] = bv
+		if string(bv) != "{}" {
+			out["hash-fields"] = bv
+		}
 	}
 	if t.HashMultipe != nil {
 		bv, err := t.HashMultipe.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["hash-multipe"] = bv
+		if string(bv) != "{}" {
+			out["hash-multipe"] = bv
+		}
 	}
 	if t.HashSeed != nil {
 		bv, err := t.HashSeed.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["hash-seed"] = bv
+		if string(bv) != "{}" {
+			out["hash-seed"] = bv
+		}
 	}
 	if t.Hashs != nil {
 		bv, err := t.Hashs.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["hashs"] = bv
+		if string(bv) != "{}" {
+			out["hashs"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -42954,21 +43518,27 @@ func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Mirror) MarshalJSON() ([]byte, error
 		if err != nil {
 			return nil, err
 		}
-		out["observe-filters"] = bv
+		if string(bv) != "{}" {
+			out["observe-filters"] = bv
+		}
 	}
 	if t.RateLimitPercent != nil {
 		bv, err := t.RateLimitPercent.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["rate-limit-percent"] = bv
+		if string(bv) != "{}" {
+			out["rate-limit-percent"] = bv
+		}
 	}
 	if t.SlotObserve != nil {
 		bv, err := t.SlotObserve.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["slot-observe"] = bv
+		if string(bv) != "{}" {
+			out["slot-observe"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -43332,7 +43902,9 @@ func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_Sflow) MarshalJSON() ([]byte, error)
 		if err != nil {
 			return nil, err
 		}
-		out["slot-sampling"] = bv
+		if string(bv) != "{}" {
+			out["slot-sampling"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -43416,42 +43988,54 @@ func (t *HuaweiDevm_Devm_LpuBoards_LpuBoard_UnicastForward) MarshalJSON() ([]byt
 		if err != nil {
 			return nil, err
 		}
-		out["arp-fast-reply"] = bv
+		if string(bv) != "{}" {
+			out["arp-fast-reply"] = bv
+		}
 	}
 	if t.GreTtlMode != nil {
 		bv, err := t.GreTtlMode.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["gre-ttl-mode"] = bv
+		if string(bv) != "{}" {
+			out["gre-ttl-mode"] = bv
+		}
 	}
 	if t.Ipv4Uc != nil {
 		bv, err := t.Ipv4Uc.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-uc"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-uc"] = bv
+		}
 	}
 	if t.L3LcsCapacitys != nil {
 		bv, err := t.L3LcsCapacitys.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["l3-lcs-capacitys"] = bv
+		if string(bv) != "{}" {
+			out["l3-lcs-capacitys"] = bv
+		}
 	}
 	if t.NdFastReply != nil {
 		bv, err := t.NdFastReply.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["nd-fast-reply"] = bv
+		if string(bv) != "{}" {
+			out["nd-fast-reply"] = bv
+		}
 	}
 	if t.VxlanRdrTrunks != nil {
 		bv, err := t.VxlanRdrTrunks.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["vxlan-rdr-trunks"] = bv
+		if string(bv) != "{}" {
+			out["vxlan-rdr-trunks"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -44047,7 +44631,9 @@ func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["loadbalance"] = bv
+		if string(bv) != "{}" {
+			out["loadbalance"] = bv
+		}
 	}
 	if t.LsRole != 0 {
 		n, err := object.EnumName(t.LsRole)
@@ -44061,7 +44647,9 @@ func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["mirror"] = bv
+		if string(bv) != "{}" {
+			out["mirror"] = bv
+		}
 	}
 	if t.NvramSize != nil {
 		out["nvram-size"] = object.RawJSON(*t.NvramSize)
@@ -44080,14 +44668,18 @@ func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["sflow"] = bv
+		if string(bv) != "{}" {
+			out["sflow"] = bv
+		}
 	}
 	if t.UnicastForward != nil {
 		bv, err := t.UnicastForward.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["unicast-forward"] = bv
+		if string(bv) != "{}" {
+			out["unicast-forward"] = bv
+		}
 	}
 	if t.UpTime != nil {
 		out["up-time"] = object.RawJSON(*t.UpTime)
@@ -44238,35 +44830,45 @@ func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Loadbalance) MarshalJSON() ([]byte, 
 		if err != nil {
 			return nil, err
 		}
-		out["dynamic-adjust"] = bv
+		if string(bv) != "{}" {
+			out["dynamic-adjust"] = bv
+		}
 	}
 	if t.HashArithmetic != nil {
 		bv, err := t.HashArithmetic.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["hash-arithmetic"] = bv
+		if string(bv) != "{}" {
+			out["hash-arithmetic"] = bv
+		}
 	}
 	if t.HashFields != nil {
 		bv, err := t.HashFields.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["hash-fields"] = bv
+		if string(bv) != "{}" {
+			out["hash-fields"] = bv
+		}
 	}
 	if t.HashMultipe != nil {
 		bv, err := t.HashMultipe.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["hash-multipe"] = bv
+		if string(bv) != "{}" {
+			out["hash-multipe"] = bv
+		}
 	}
 	if t.HashSeed != nil {
 		bv, err := t.HashSeed.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["hash-seed"] = bv
+		if string(bv) != "{}" {
+			out["hash-seed"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -44643,14 +45245,18 @@ func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Mirror) MarshalJSON() ([]byte, error
 		if err != nil {
 			return nil, err
 		}
-		out["observe-filters"] = bv
+		if string(bv) != "{}" {
+			out["observe-filters"] = bv
+		}
 	}
 	if t.SlotObserve != nil {
 		bv, err := t.SlotObserve.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["slot-observe"] = bv
+		if string(bv) != "{}" {
+			out["slot-observe"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -44971,7 +45577,9 @@ func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_Sflow) MarshalJSON() ([]byte, error)
 		if err != nil {
 			return nil, err
 		}
-		out["slot-sampling"] = bv
+		if string(bv) != "{}" {
+			out["slot-sampling"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -45053,28 +45661,36 @@ func (t *HuaweiDevm_Devm_MpuBoards_MpuBoard_UnicastForward) MarshalJSON() ([]byt
 		if err != nil {
 			return nil, err
 		}
-		out["arp-fast-reply"] = bv
+		if string(bv) != "{}" {
+			out["arp-fast-reply"] = bv
+		}
 	}
 	if t.GreTtlMode != nil {
 		bv, err := t.GreTtlMode.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["gre-ttl-mode"] = bv
+		if string(bv) != "{}" {
+			out["gre-ttl-mode"] = bv
+		}
 	}
 	if t.Ipv4Uc != nil {
 		bv, err := t.Ipv4Uc.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-uc"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-uc"] = bv
+		}
 	}
 	if t.NdFastReply != nil {
 		bv, err := t.NdFastReply.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["nd-fast-reply"] = bv
+		if string(bv) != "{}" {
+			out["nd-fast-reply"] = bv
+		}
 	}
 	return json.Marshal(out)
 }

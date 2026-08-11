@@ -38,7 +38,9 @@ func (t *Device) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["business-vlan-service"] = bv
+		if string(bv) != "{}" {
+			out["business-vlan-service"] = bv
+		}
 	}
 	return json.Marshal(out)
 }

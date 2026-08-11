@@ -45,7 +45,9 @@ func (t *Device) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["box"] = bv
+		if string(bv) != "{}" {
+			out["box"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -108,14 +110,18 @@ func (t *UsmpTest_Box) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["extras"] = bv
+		if string(bv) != "{}" {
+			out["extras"] = bv
+		}
 	}
 	if t.Feature != nil {
 		bv, err := t.Feature.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["feature"] = bv
+		if string(bv) != "{}" {
+			out["feature"] = bv
+		}
 	}
 	if t.Host != nil {
 		out["host"] = object.RawJSON(*t.Host)
@@ -158,7 +164,9 @@ func (t *UsmpTest_Box) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["routes"] = bv
+		if string(bv) != "{}" {
+			out["routes"] = bv
+		}
 	}
 	if t.StaticIp != nil {
 		out["static-ip"] = object.RawJSON(*t.StaticIp)
@@ -182,7 +190,9 @@ func (t *UsmpTest_Box) MarshalJSON() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		out["vlans"] = bv
+		if string(bv) != "{}" {
+			out["vlans"] = bv
+		}
 	}
 	return json.Marshal(out)
 }

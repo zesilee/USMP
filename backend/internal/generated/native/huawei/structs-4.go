@@ -292,21 +292,27 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["bit-error-detection"] = bv
+		if string(bv) != "{}" {
+			out["bit-error-detection"] = bv
+		}
 	}
 	if t.Common != nil {
 		bv, err := t.Common.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["common"] = bv
+		if string(bv) != "{}" {
+			out["common"] = bv
+		}
 	}
 	if t.Delay != nil {
 		bv, err := t.Delay.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["delay"] = bv
+		if string(bv) != "{}" {
+			out["delay"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -608,105 +614,135 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["advertise-route-to-evpns"] = bv
+		if string(bv) != "{}" {
+			out["advertise-route-to-evpns"] = bv
+		}
 	}
 	if t.AggregateRoutes != nil {
 		bv, err := t.AggregateRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["aggregate-routes"] = bv
+		if string(bv) != "{}" {
+			out["aggregate-routes"] = bv
+		}
 	}
 	if t.Common != nil {
 		bv, err := t.Common.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["common"] = bv
+		if string(bv) != "{}" {
+			out["common"] = bv
+		}
 	}
 	if t.DampeningRoutes != nil {
 		bv, err := t.DampeningRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["dampening-routes"] = bv
+		if string(bv) != "{}" {
+			out["dampening-routes"] = bv
+		}
 	}
 	if t.Evpn != nil {
 		bv, err := t.Evpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["evpn"] = bv
+		if string(bv) != "{}" {
+			out["evpn"] = bv
+		}
 	}
 	if t.ExportFilterPolicys != nil {
 		bv, err := t.ExportFilterPolicys.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["export-filter-policys"] = bv
+		if string(bv) != "{}" {
+			out["export-filter-policys"] = bv
+		}
 	}
 	if t.ImportFilterPolicy != nil {
 		bv, err := t.ImportFilterPolicy.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["import-filter-policy"] = bv
+		if string(bv) != "{}" {
+			out["import-filter-policy"] = bv
+		}
 	}
 	if t.ImportRibs != nil {
 		bv, err := t.ImportRibs.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["import-ribs"] = bv
+		if string(bv) != "{}" {
+			out["import-ribs"] = bv
+		}
 	}
 	if t.ImportRoutes != nil {
 		bv, err := t.ImportRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["import-routes"] = bv
+		if string(bv) != "{}" {
+			out["import-routes"] = bv
+		}
 	}
 	if t.NetworkRoutes != nil {
 		bv, err := t.NetworkRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["network-routes"] = bv
+		if string(bv) != "{}" {
+			out["network-routes"] = bv
+		}
 	}
 	if t.NexthopRecursiveLookup != nil {
 		bv, err := t.NexthopRecursiveLookup.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["nexthop-recursive-lookup"] = bv
+		if string(bv) != "{}" {
+			out["nexthop-recursive-lookup"] = bv
+		}
 	}
 	if t.Preference != nil {
 		bv, err := t.Preference.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["preference"] = bv
+		if string(bv) != "{}" {
+			out["preference"] = bv
+		}
 	}
 	if t.RoutingTableRibOnly != nil {
 		bv, err := t.RoutingTableRibOnly.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["routing-table-rib-only"] = bv
+		if string(bv) != "{}" {
+			out["routing-table-rib-only"] = bv
+		}
 	}
 	if t.SegmentRoutingIpv6 != nil {
 		bv, err := t.SegmentRoutingIpv6.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["segment-routing-ipv6"] = bv
+		if string(bv) != "{}" {
+			out["segment-routing-ipv6"] = bv
+		}
 	}
 	if t.SlowPeer != nil {
 		bv, err := t.SlowPeer.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["slow-peer"] = bv
+		if string(bv) != "{}" {
+			out["slow-peer"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -1890,28 +1926,36 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["common"] = bv
+		if string(bv) != "{}" {
+			out["common"] = bv
+		}
 	}
 	if t.IrbAsymmetric != nil {
 		bv, err := t.IrbAsymmetric.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["irb-asymmetric"] = bv
+		if string(bv) != "{}" {
+			out["irb-asymmetric"] = bv
+		}
 	}
 	if t.LocalCross != nil {
 		bv, err := t.LocalCross.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["local-cross"] = bv
+		if string(bv) != "{}" {
+			out["local-cross"] = bv
+		}
 	}
 	if t.Srv6 != nil {
 		bv, err := t.Srv6.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["srv6"] = bv
+		if string(bv) != "{}" {
+			out["srv6"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -2821,14 +2865,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["common"] = bv
+		if string(bv) != "{}" {
+			out["common"] = bv
+		}
 	}
 	if t.Delay != nil {
 		bv, err := t.Delay.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["delay"] = bv
+		if string(bv) != "{}" {
+			out["delay"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -3258,14 +3306,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["export-filter-policy"] = bv
+		if string(bv) != "{}" {
+			out["export-filter-policy"] = bv
+		}
 	}
 	if t.ImportFilterPolicy != nil {
 		bv, err := t.ImportFilterPolicy.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["import-filter-policy"] = bv
+		if string(bv) != "{}" {
+			out["import-filter-policy"] = bv
+		}
 	}
 	if t.LabelFreeDelay != nil {
 		out["label-free-delay"] = object.RawJSON(*t.LabelFreeDelay)
@@ -3275,7 +3327,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["nexthop-recursive-lookup"] = bv
+		if string(bv) != "{}" {
+			out["nexthop-recursive-lookup"] = bv
+		}
 	}
 	if t.NexthopSelectDependType != 0 {
 		n, err := object.EnumName(t.NexthopSelectDependType)
@@ -3307,7 +3361,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["slow-peer"] = bv
+		if string(bv) != "{}" {
+			out["slow-peer"] = bv
+		}
 	}
 	if t.TunnelSelectorName != nil {
 		out["tunnel-selector-name"] = object.RawJSON(*t.TunnelSelectorName)
@@ -3595,21 +3651,27 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["bit-error-detection"] = bv
+		if string(bv) != "{}" {
+			out["bit-error-detection"] = bv
+		}
 	}
 	if t.Common != nil {
 		bv, err := t.Common.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["common"] = bv
+		if string(bv) != "{}" {
+			out["common"] = bv
+		}
 	}
 	if t.Delay != nil {
 		bv, err := t.Delay.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["delay"] = bv
+		if string(bv) != "{}" {
+			out["delay"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -4623,14 +4685,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["afs"] = bv
+		if string(bv) != "{}" {
+			out["afs"] = bv
+		}
 	}
 	if t.BfdParameter != nil {
 		bv, err := t.BfdParameter.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bfd-parameter"] = bv
+		if string(bv) != "{}" {
+			out["bfd-parameter"] = bv
+		}
 	}
 	if t.CheckFirstAs != 0 {
 		n, err := object.EnumName(t.CheckFirstAs)
@@ -4660,7 +4726,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["fake-as-parameter"] = bv
+		if string(bv) != "{}" {
+			out["fake-as-parameter"] = bv
+		}
 	}
 	if t.FourByteAs != nil {
 		out["four-byte-as"] = object.RawJSON(*t.FourByteAs)
@@ -4698,7 +4766,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["members"] = bv
+		if string(bv) != "{}" {
+			out["members"] = bv
+		}
 	}
 	if t.MemoryPriority != 0 {
 		n, err := object.EnumName(t.MemoryPriority)
@@ -4741,7 +4811,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["timer"] = bv
+		if string(bv) != "{}" {
+			out["timer"] = bv
+		}
 	}
 	if t.TrackingDelayTime != nil {
 		out["tracking-delay-time"] = object.RawJSON(*t.TrackingDelayTime)
@@ -5070,49 +5142,63 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-labeluni"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-labeluni"] = bv
+		}
 	}
 	if t.Ipv4Multicast != nil {
 		bv, err := t.Ipv4Multicast.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-multicast"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-multicast"] = bv
+		}
 	}
 	if t.Ipv4Unicast != nil {
 		bv, err := t.Ipv4Unicast.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-unicast"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-unicast"] = bv
+		}
 	}
 	if t.Ipv4Vpn != nil {
 		bv, err := t.Ipv4Vpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-vpn"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-vpn"] = bv
+		}
 	}
 	if t.Ipv6Unicast != nil {
 		bv, err := t.Ipv6Unicast.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv6-unicast"] = bv
+		if string(bv) != "{}" {
+			out["ipv6-unicast"] = bv
+		}
 	}
 	if t.Ipv6Vpn != nil {
 		bv, err := t.Ipv6Vpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv6-vpn"] = bv
+		if string(bv) != "{}" {
+			out["ipv6-vpn"] = bv
+		}
 	}
 	if t.L2VpnEvpn != nil {
 		bv, err := t.L2VpnEvpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["l2vpn-evpn"] = bv
+		if string(bv) != "{}" {
+			out["l2vpn-evpn"] = bv
+		}
 	}
 	if t.Type != 0 {
 		n, err := object.EnumName(t.Type)
@@ -5262,7 +5348,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["entropy-label-parameter"] = bv
+		if string(bv) != "{}" {
+			out["entropy-label-parameter"] = bv
+		}
 	}
 	if t.ExportAsPathFilter != nil {
 		bv, err := marshalHuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union(t.ExportAsPathFilter)
@@ -5314,7 +5402,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["public-as-only"] = bv
+		if string(bv) != "{}" {
+			out["public-as-only"] = bv
+		}
 	}
 	if t.ReflectClient != nil {
 		out["reflect-client"] = object.RawJSON(*t.ReflectClient)
@@ -5324,7 +5414,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["route-limit"] = bv
+		if string(bv) != "{}" {
+			out["route-limit"] = bv
+		}
 	}
 	if t.RouteUpdateInterval != nil {
 		out["route-update-interval"] = object.RawJSON(*t.RouteUpdateInterval)
@@ -5861,7 +5953,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["public-as-only"] = bv
+		if string(bv) != "{}" {
+			out["public-as-only"] = bv
+		}
 	}
 	if t.ReflectClient != nil {
 		out["reflect-client"] = object.RawJSON(*t.ReflectClient)
@@ -5871,7 +5965,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["route-limit"] = bv
+		if string(bv) != "{}" {
+			out["route-limit"] = bv
+		}
 	}
 	if t.RouteUpdateInterval != nil {
 		out["route-update-interval"] = object.RawJSON(*t.RouteUpdateInterval)
@@ -6267,7 +6363,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["default-route-match-conditions"] = bv
+		if string(bv) != "{}" {
+			out["default-route-match-conditions"] = bv
+		}
 	}
 	if t.DefaultRouteMatchMode != 0 {
 		n, err := object.EnumName(t.DefaultRouteMatchMode)
@@ -6284,7 +6382,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["entropy-label-parameter"] = bv
+		if string(bv) != "{}" {
+			out["entropy-label-parameter"] = bv
+		}
 	}
 	if t.ExpMode != 0 {
 		n, err := object.EnumName(t.ExpMode)
@@ -6305,7 +6405,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["export-filter"] = bv
+		if string(bv) != "{}" {
+			out["export-filter"] = bv
+		}
 	}
 	if t.ExportIpPrefix != nil {
 		out["export-ip-prefix"] = object.RawJSON(*t.ExportIpPrefix)
@@ -6325,7 +6427,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["import-filter"] = bv
+		if string(bv) != "{}" {
+			out["import-filter"] = bv
+		}
 	}
 	if t.ImportIpPrefix != nil {
 		out["import-ip-prefix"] = object.RawJSON(*t.ImportIpPrefix)
@@ -6380,7 +6484,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["public-as-only"] = bv
+		if string(bv) != "{}" {
+			out["public-as-only"] = bv
+		}
 	}
 	if t.ReflectClient != nil {
 		out["reflect-client"] = object.RawJSON(*t.ReflectClient)
@@ -6390,7 +6496,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["route-limit"] = bv
+		if string(bv) != "{}" {
+			out["route-limit"] = bv
+		}
 	}
 	if t.RouteUpdateInterval != nil {
 		out["route-update-interval"] = object.RawJSON(*t.RouteUpdateInterval)
@@ -7223,7 +7331,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["default-route-originates"] = bv
+		if string(bv) != "{}" {
+			out["default-route-originates"] = bv
+		}
 	}
 	if t.ExportAsPathFilter != nil {
 		bv, err := marshalHuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union(t.ExportAsPathFilter)
@@ -7269,7 +7379,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["public-as-only"] = bv
+		if string(bv) != "{}" {
+			out["public-as-only"] = bv
+		}
 	}
 	if t.ReflectClient != nil {
 		out["reflect-client"] = object.RawJSON(*t.ReflectClient)
@@ -7291,7 +7403,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["route-limit"] = bv
+		if string(bv) != "{}" {
+			out["route-limit"] = bv
+		}
 	}
 	if t.RouteUpdateInterval != nil {
 		out["route-update-interval"] = object.RawJSON(*t.RouteUpdateInterval)
@@ -7824,7 +7938,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["default-route-match-conditions"] = bv
+		if string(bv) != "{}" {
+			out["default-route-match-conditions"] = bv
+		}
 	}
 	if t.DefaultRouteMatchMode != 0 {
 		n, err := object.EnumName(t.DefaultRouteMatchMode)
@@ -7895,7 +8011,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["public-as-only"] = bv
+		if string(bv) != "{}" {
+			out["public-as-only"] = bv
+		}
 	}
 	if t.ReflectClient != nil {
 		out["reflect-client"] = object.RawJSON(*t.ReflectClient)
@@ -7905,7 +8023,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["route-limit"] = bv
+		if string(bv) != "{}" {
+			out["route-limit"] = bv
+		}
 	}
 	if t.RouteUpdateInterval != nil {
 		out["route-update-interval"] = object.RawJSON(*t.RouteUpdateInterval)
@@ -8542,7 +8662,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["public-as-only"] = bv
+		if string(bv) != "{}" {
+			out["public-as-only"] = bv
+		}
 	}
 	if t.ReflectClient != nil {
 		out["reflect-client"] = object.RawJSON(*t.ReflectClient)
@@ -8561,7 +8683,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["route-limit"] = bv
+		if string(bv) != "{}" {
+			out["route-limit"] = bv
+		}
 	}
 	if t.RouteUpdateInterval != nil {
 		out["route-update-interval"] = object.RawJSON(*t.RouteUpdateInterval)
@@ -10027,14 +10151,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["afs"] = bv
+		if string(bv) != "{}" {
+			out["afs"] = bv
+		}
 	}
 	if t.BfdParameter != nil {
 		bv, err := t.BfdParameter.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bfd-parameter"] = bv
+		if string(bv) != "{}" {
+			out["bfd-parameter"] = bv
+		}
 	}
 	if t.CheckFirstAs != 0 {
 		n, err := object.EnumName(t.CheckFirstAs)
@@ -10071,14 +10199,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["egress-engineer-parameter"] = bv
+		if string(bv) != "{}" {
+			out["egress-engineer-parameter"] = bv
+		}
 	}
 	if t.FakeAsParameter != nil {
 		bv, err := t.FakeAsParameter.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["fake-as-parameter"] = bv
+		if string(bv) != "{}" {
+			out["fake-as-parameter"] = bv
+		}
 	}
 	if t.FourByteAs != nil {
 		out["four-byte-as"] = object.RawJSON(*t.FourByteAs)
@@ -10145,7 +10277,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["timer"] = bv
+		if string(bv) != "{}" {
+			out["timer"] = bv
+		}
 	}
 	if t.TrackingDelayTime != nil {
 		out["tracking-delay-time"] = object.RawJSON(*t.TrackingDelayTime)
@@ -10468,56 +10602,72 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-labeluni"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-labeluni"] = bv
+		}
 	}
 	if t.Ipv4Multicast != nil {
 		bv, err := t.Ipv4Multicast.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-multicast"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-multicast"] = bv
+		}
 	}
 	if t.Ipv4Unicast != nil {
 		bv, err := t.Ipv4Unicast.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-unicast"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-unicast"] = bv
+		}
 	}
 	if t.Ipv4Vpn != nil {
 		bv, err := t.Ipv4Vpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4-vpn"] = bv
+		if string(bv) != "{}" {
+			out["ipv4-vpn"] = bv
+		}
 	}
 	if t.Ipv6Unicast != nil {
 		bv, err := t.Ipv6Unicast.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv6-unicast"] = bv
+		if string(bv) != "{}" {
+			out["ipv6-unicast"] = bv
+		}
 	}
 	if t.Ipv6Vpn != nil {
 		bv, err := t.Ipv6Vpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv6-vpn"] = bv
+		if string(bv) != "{}" {
+			out["ipv6-vpn"] = bv
+		}
 	}
 	if t.L2VpnEvpn != nil {
 		bv, err := t.L2VpnEvpn.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["l2vpn-evpn"] = bv
+		if string(bv) != "{}" {
+			out["l2vpn-evpn"] = bv
+		}
 	}
 	if t.State != nil {
 		bv, err := t.State.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["state"] = bv
+		if string(bv) != "{}" {
+			out["state"] = bv
+		}
 	}
 	if t.Type != 0 {
 		n, err := object.EnumName(t.Type)
@@ -10682,7 +10832,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["entropy-label-parameter"] = bv
+		if string(bv) != "{}" {
+			out["entropy-label-parameter"] = bv
+		}
 	}
 	if t.ExportAsPathFilter != nil {
 		bv, err := marshalHuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union(t.ExportAsPathFilter)
@@ -10734,7 +10886,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["path-attribute-treats"] = bv
+		if string(bv) != "{}" {
+			out["path-attribute-treats"] = bv
+		}
 	}
 	if t.PreferredValue != nil {
 		out["preferred-value"] = object.RawJSON(*t.PreferredValue)
@@ -10744,7 +10898,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["public-as-only"] = bv
+		if string(bv) != "{}" {
+			out["public-as-only"] = bv
+		}
 	}
 	if t.ReflectClient != nil {
 		out["reflect-client"] = object.RawJSON(*t.ReflectClient)
@@ -10754,7 +10910,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["route-limit"] = bv
+		if string(bv) != "{}" {
+			out["route-limit"] = bv
+		}
 	}
 	if t.RouteUpdateInterval != nil {
 		out["route-update-interval"] = object.RawJSON(*t.RouteUpdateInterval)
@@ -11527,7 +11685,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["path-attribute-treats"] = bv
+		if string(bv) != "{}" {
+			out["path-attribute-treats"] = bv
+		}
 	}
 	if t.PreferredValue != nil {
 		out["preferred-value"] = object.RawJSON(*t.PreferredValue)
@@ -11537,7 +11697,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["public-as-only"] = bv
+		if string(bv) != "{}" {
+			out["public-as-only"] = bv
+		}
 	}
 	if t.ReflectClient != nil {
 		out["reflect-client"] = object.RawJSON(*t.ReflectClient)
@@ -11547,7 +11709,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["route-limit"] = bv
+		if string(bv) != "{}" {
+			out["route-limit"] = bv
+		}
 	}
 	if t.RouteUpdateInterval != nil {
 		out["route-update-interval"] = object.RawJSON(*t.RouteUpdateInterval)
@@ -12116,7 +12280,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["default-route-match-conditions"] = bv
+		if string(bv) != "{}" {
+			out["default-route-match-conditions"] = bv
+		}
 	}
 	if t.DefaultRouteMatchMode != 0 {
 		n, err := object.EnumName(t.DefaultRouteMatchMode)
@@ -12133,7 +12299,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["entropy-label-parameter"] = bv
+		if string(bv) != "{}" {
+			out["entropy-label-parameter"] = bv
+		}
 	}
 	if t.ExpMode != 0 {
 		n, err := object.EnumName(t.ExpMode)
@@ -12154,7 +12322,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["export-filter"] = bv
+		if string(bv) != "{}" {
+			out["export-filter"] = bv
+		}
 	}
 	if t.ExportIpPrefix != nil {
 		out["export-ip-prefix"] = object.RawJSON(*t.ExportIpPrefix)
@@ -12177,7 +12347,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["import-filter"] = bv
+		if string(bv) != "{}" {
+			out["import-filter"] = bv
+		}
 	}
 	if t.ImportIpPrefix != nil {
 		out["import-ip-prefix"] = object.RawJSON(*t.ImportIpPrefix)
@@ -12226,7 +12398,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["path-attribute-treats"] = bv
+		if string(bv) != "{}" {
+			out["path-attribute-treats"] = bv
+		}
 	}
 	if t.PreferredValue != nil {
 		out["preferred-value"] = object.RawJSON(*t.PreferredValue)
@@ -12246,7 +12420,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["public-as-only"] = bv
+		if string(bv) != "{}" {
+			out["public-as-only"] = bv
+		}
 	}
 	if t.ReflectClient != nil {
 		out["reflect-client"] = object.RawJSON(*t.ReflectClient)
@@ -12256,7 +12432,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["route-limit"] = bv
+		if string(bv) != "{}" {
+			out["route-limit"] = bv
+		}
 	}
 	if t.RouteUpdateInterval != nil {
 		out["route-update-interval"] = object.RawJSON(*t.RouteUpdateInterval)
@@ -13337,7 +13515,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["default-route-originates"] = bv
+		if string(bv) != "{}" {
+			out["default-route-originates"] = bv
+		}
 	}
 	if t.ExportAsPathFilter != nil {
 		bv, err := marshalHuaweiRoutingPolicy_RoutingPolicy_AsPathFilters_AsPathFilter_Name_Union(t.ExportAsPathFilter)
@@ -13390,7 +13570,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["path-attribute-treats"] = bv
+		if string(bv) != "{}" {
+			out["path-attribute-treats"] = bv
+		}
 	}
 	if t.PreferredValue != nil {
 		out["preferred-value"] = object.RawJSON(*t.PreferredValue)
@@ -13407,7 +13589,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["public-as-only"] = bv
+		if string(bv) != "{}" {
+			out["public-as-only"] = bv
+		}
 	}
 	if t.ReflectClient != nil {
 		out["reflect-client"] = object.RawJSON(*t.ReflectClient)
@@ -13429,7 +13613,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["route-limit"] = bv
+		if string(bv) != "{}" {
+			out["route-limit"] = bv
+		}
 	}
 	if t.RouteUpdateInterval != nil {
 		out["route-update-interval"] = object.RawJSON(*t.RouteUpdateInterval)
@@ -14156,7 +14342,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["default-route-match-conditions"] = bv
+		if string(bv) != "{}" {
+			out["default-route-match-conditions"] = bv
+		}
 	}
 	if t.DefaultRouteMatchMode != 0 {
 		n, err := object.EnumName(t.DefaultRouteMatchMode)
@@ -14224,7 +14412,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["path-attribute-treats"] = bv
+		if string(bv) != "{}" {
+			out["path-attribute-treats"] = bv
+		}
 	}
 	if t.PreferredValue != nil {
 		out["preferred-value"] = object.RawJSON(*t.PreferredValue)
@@ -14244,7 +14434,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["public-as-only"] = bv
+		if string(bv) != "{}" {
+			out["public-as-only"] = bv
+		}
 	}
 	if t.ReflectClient != nil {
 		out["reflect-client"] = object.RawJSON(*t.ReflectClient)
@@ -14254,7 +14446,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["route-limit"] = bv
+		if string(bv) != "{}" {
+			out["route-limit"] = bv
+		}
 	}
 	if t.RouteUpdateInterval != nil {
 		out["route-update-interval"] = object.RawJSON(*t.RouteUpdateInterval)
@@ -15082,7 +15276,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["path-attribute-treats"] = bv
+		if string(bv) != "{}" {
+			out["path-attribute-treats"] = bv
+		}
 	}
 	if t.PreferredValue != nil {
 		out["preferred-value"] = object.RawJSON(*t.PreferredValue)
@@ -15092,7 +15288,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["public-as-only"] = bv
+		if string(bv) != "{}" {
+			out["public-as-only"] = bv
+		}
 	}
 	if t.ReflectClient != nil {
 		out["reflect-client"] = object.RawJSON(*t.ReflectClient)
@@ -15111,7 +15309,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["route-limit"] = bv
+		if string(bv) != "{}" {
+			out["route-limit"] = bv
+		}
 	}
 	if t.RouteUpdateInterval != nil {
 		out["route-update-interval"] = object.RawJSON(*t.RouteUpdateInterval)
@@ -15737,7 +15937,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Bgp_BaseProces
 		if err != nil {
 			return nil, err
 		}
-		out["path-attribute-treats"] = bv
+		if string(bv) != "{}" {
+			out["path-attribute-treats"] = bv
+		}
 	}
 	if t.PreferredValue != nil {
 		out["preferred-value"] = object.RawJSON(*t.PreferredValue)
@@ -17226,7 +17428,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Mpls) MarshalJ
 		if err != nil {
 			return nil, err
 		}
-		out["common"] = bv
+		if string(bv) != "{}" {
+			out["common"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -17267,7 +17471,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Mpls_Common) M
 		if err != nil {
 			return nil, err
 		}
-		out["mpls-interfaces"] = bv
+		if string(bv) != "{}" {
+			out["mpls-interfaces"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -17396,7 +17602,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Mpls_Common_Mp
 		if err != nil {
 			return nil, err
 		}
-		out["statistics"] = bv
+		if string(bv) != "{}" {
+			out["statistics"] = bv
+		}
 	}
 	if t.TeEnable != nil {
 		out["te-enable"] = object.RawJSON(*t.TeEnable)
@@ -17510,14 +17718,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Multicast) Mar
 		if err != nil {
 			return nil, err
 		}
-		out["ipv4"] = bv
+		if string(bv) != "{}" {
+			out["ipv4"] = bv
+		}
 	}
 	if t.Ipv6 != nil {
 		bv, err := t.Ipv6.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ipv6"] = bv
+		if string(bv) != "{}" {
+			out["ipv6"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -17568,42 +17780,54 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Multicast_Ipv4
 		if err != nil {
 			return nil, err
 		}
-		out["global"] = bv
+		if string(bv) != "{}" {
+			out["global"] = bv
+		}
 	}
 	if t.InterfaceBoundarys != nil {
 		bv, err := t.InterfaceBoundarys.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["interface-boundarys"] = bv
+		if string(bv) != "{}" {
+			out["interface-boundarys"] = bv
+		}
 	}
 	if t.InterfaceMinTtls != nil {
 		bv, err := t.InterfaceMinTtls.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["interface-min-ttls"] = bv
+		if string(bv) != "{}" {
+			out["interface-min-ttls"] = bv
+		}
 	}
 	if t.InterfaceTrackVrrps != nil {
 		bv, err := t.InterfaceTrackVrrps.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["interface-track-vrrps"] = bv
+		if string(bv) != "{}" {
+			out["interface-track-vrrps"] = bv
+		}
 	}
 	if t.Limits != nil {
 		bv, err := t.Limits.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["limits"] = bv
+		if string(bv) != "{}" {
+			out["limits"] = bv
+		}
 	}
 	if t.RpfMultiTopology != nil {
 		bv, err := t.RpfMultiTopology.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["rpf-multi-topology"] = bv
+		if string(bv) != "{}" {
+			out["rpf-multi-topology"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -18309,7 +18533,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Multicast_Ipv4
 		if err != nil {
 			return nil, err
 		}
-		out["topology-rule-list"] = bv
+		if string(bv) != "{}" {
+			out["topology-rule-list"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -18398,42 +18624,54 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Multicast_Ipv6
 		if err != nil {
 			return nil, err
 		}
-		out["global"] = bv
+		if string(bv) != "{}" {
+			out["global"] = bv
+		}
 	}
 	if t.InterfaceBoundarys != nil {
 		bv, err := t.InterfaceBoundarys.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["interface-boundarys"] = bv
+		if string(bv) != "{}" {
+			out["interface-boundarys"] = bv
+		}
 	}
 	if t.InterfaceMinTtls != nil {
 		bv, err := t.InterfaceMinTtls.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["interface-min-ttls"] = bv
+		if string(bv) != "{}" {
+			out["interface-min-ttls"] = bv
+		}
 	}
 	if t.InterfaceTrackVrrps != nil {
 		bv, err := t.InterfaceTrackVrrps.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["interface-track-vrrps"] = bv
+		if string(bv) != "{}" {
+			out["interface-track-vrrps"] = bv
+		}
 	}
 	if t.Limits != nil {
 		bv, err := t.Limits.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["limits"] = bv
+		if string(bv) != "{}" {
+			out["limits"] = bv
+		}
 	}
 	if t.RpfMultiTopology != nil {
 		bv, err := t.RpfMultiTopology.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["rpf-multi-topology"] = bv
+		if string(bv) != "{}" {
+			out["rpf-multi-topology"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -19119,7 +19357,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Multicast_Ipv6
 		if err != nil {
 			return nil, err
 		}
-		out["topology-rule-list"] = bv
+		if string(bv) != "{}" {
+			out["topology-rule-list"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -19311,14 +19551,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2) Marsha
 		if err != nil {
 			return nil, err
 		}
-		out["gtsm"] = bv
+		if string(bv) != "{}" {
+			out["gtsm"] = bv
+		}
 	}
 	if t.Sites != nil {
 		bv, err := t.Sites.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["sites"] = bv
+		if string(bv) != "{}" {
+			out["sites"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -19549,7 +19793,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["abr-asbr-statistics"] = bv
+		if string(bv) != "{}" {
+			out["abr-asbr-statistics"] = bv
+		}
 	}
 	if t.AdvertiseMplsLsrId != nil {
 		out["advertise-mpls-lsr-id"] = object.RawJSON(*t.AdvertiseMplsLsrId)
@@ -19562,70 +19808,90 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["areas"] = bv
+		if string(bv) != "{}" {
+			out["areas"] = bv
+		}
 	}
 	if t.AsLsdbBrief != nil {
 		bv, err := t.AsLsdbBrief.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["as-lsdb-brief"] = bv
+		if string(bv) != "{}" {
+			out["as-lsdb-brief"] = bv
+		}
 	}
 	if t.AsbrSummaryPrefixs != nil {
 		bv, err := t.AsbrSummaryPrefixs.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["asbr-summary-prefixs"] = bv
+		if string(bv) != "{}" {
+			out["asbr-summary-prefixs"] = bv
+		}
 	}
 	if t.AvoidMicroLoop != nil {
 		bv, err := t.AvoidMicroLoop.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["avoid-micro-loop"] = bv
+		if string(bv) != "{}" {
+			out["avoid-micro-loop"] = bv
+		}
 	}
 	if t.Bandwidth != nil {
 		bv, err := t.Bandwidth.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bandwidth"] = bv
+		if string(bv) != "{}" {
+			out["bandwidth"] = bv
+		}
 	}
 	if t.Bfd != nil {
 		bv, err := t.Bfd.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bfd"] = bv
+		if string(bv) != "{}" {
+			out["bfd"] = bv
+		}
 	}
 	if t.BgpLs != nil {
 		bv, err := t.BgpLs.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bgp-ls"] = bv
+		if string(bv) != "{}" {
+			out["bgp-ls"] = bv
+		}
 	}
 	if t.Bier != nil {
 		bv, err := t.Bier.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bier"] = bv
+		if string(bv) != "{}" {
+			out["bier"] = bv
+		}
 	}
 	if t.CostBindings != nil {
 		bv, err := t.CostBindings.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["cost-bindings"] = bv
+		if string(bv) != "{}" {
+			out["cost-bindings"] = bv
+		}
 	}
 	if t.DefaultPara != nil {
 		bv, err := t.DefaultPara.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["default-para"] = bv
+		if string(bv) != "{}" {
+			out["default-para"] = bv
+		}
 	}
 	if t.Description != nil {
 		out["description"] = object.RawJSON(*t.Description)
@@ -19635,112 +19901,144 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["disp-data"] = bv
+		if string(bv) != "{}" {
+			out["disp-data"] = bv
+		}
 	}
 	if t.DispGracefulRestart != nil {
 		bv, err := t.DispGracefulRestart.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["disp-graceful-restart"] = bv
+		if string(bv) != "{}" {
+			out["disp-graceful-restart"] = bv
+		}
 	}
 	if t.DnBit != nil {
 		bv, err := t.DnBit.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["dn-bit"] = bv
+		if string(bv) != "{}" {
+			out["dn-bit"] = bv
+		}
 	}
 	if t.EcmpPrefer != nil {
 		bv, err := t.EcmpPrefer.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ecmp-prefer"] = bv
+		if string(bv) != "{}" {
+			out["ecmp-prefer"] = bv
+		}
 	}
 	if t.ErrorProcessData != nil {
 		bv, err := t.ErrorProcessData.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["error-process-data"] = bv
+		if string(bv) != "{}" {
+			out["error-process-data"] = bv
+		}
 	}
 	if t.FilterExports != nil {
 		bv, err := t.FilterExports.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["filter-exports"] = bv
+		if string(bv) != "{}" {
+			out["filter-exports"] = bv
+		}
 	}
 	if t.FilterImport != nil {
 		bv, err := t.FilterImport.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["filter-import"] = bv
+		if string(bv) != "{}" {
+			out["filter-import"] = bv
+		}
 	}
 	if t.FilterLsaOuts != nil {
 		bv, err := t.FilterLsaOuts.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["filter-lsa-outs"] = bv
+		if string(bv) != "{}" {
+			out["filter-lsa-outs"] = bv
+		}
 	}
 	if t.FloodControl != nil {
 		bv, err := t.FloodControl.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["flood-control"] = bv
+		if string(bv) != "{}" {
+			out["flood-control"] = bv
+		}
 	}
 	if t.Frr != nil {
 		bv, err := t.Frr.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["frr"] = bv
+		if string(bv) != "{}" {
+			out["frr"] = bv
+		}
 	}
 	if t.GrIETF != nil {
 		bv, err := t.GrIETF.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["gr-ietf"] = bv
+		if string(bv) != "{}" {
+			out["gr-ietf"] = bv
+		}
 	}
 	if t.GrNonIETF != nil {
 		bv, err := t.GrNonIETF.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["gr-non-ietf"] = bv
+		if string(bv) != "{}" {
+			out["gr-non-ietf"] = bv
+		}
 	}
 	if t.HostName != nil {
 		bv, err := t.HostName.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["host-name"] = bv
+		if string(bv) != "{}" {
+			out["host-name"] = bv
+		}
 	}
 	if t.ImportLimit != nil {
 		bv, err := t.ImportLimit.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["import-limit"] = bv
+		if string(bv) != "{}" {
+			out["import-limit"] = bv
+		}
 	}
 	if t.ImportRoutes != nil {
 		bv, err := t.ImportRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["import-routes"] = bv
+		if string(bv) != "{}" {
+			out["import-routes"] = bv
+		}
 	}
 	if t.LastDownNbrs != nil {
 		bv, err := t.LastDownNbrs.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["last-down-nbrs"] = bv
+		if string(bv) != "{}" {
+			out["last-down-nbrs"] = bv
+		}
 	}
 	if t.LocalMt != nil {
 		out["local-mt"] = object.RawJSON(*t.LocalMt)
@@ -19750,7 +20048,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["local-mt-filter"] = bv
+		if string(bv) != "{}" {
+			out["local-mt-filter"] = bv
+		}
 	}
 	if t.LsaRefresh != nil {
 		out["lsa-refresh"] = object.RawJSON(*t.LsaRefresh)
@@ -19760,7 +20060,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["lsdb-briefs"] = bv
+		if string(bv) != "{}" {
+			out["lsdb-briefs"] = bv
+		}
 	}
 	if t.LsdbOverflowLimit != nil {
 		out["lsdb-overflow-limit"] = object.RawJSON(*t.LsdbOverflowLimit)
@@ -19770,7 +20072,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["lsdb-statistics"] = bv
+		if string(bv) != "{}" {
+			out["lsdb-statistics"] = bv
+		}
 	}
 	if t.MaxLinkCost != nil {
 		out["max-link-cost"] = object.RawJSON(*t.MaxLinkCost)
@@ -19783,42 +20087,54 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["metric-delay"] = bv
+		if string(bv) != "{}" {
+			out["metric-delay"] = bv
+		}
 	}
 	if t.MigpRoutings != nil {
 		bv, err := t.MigpRoutings.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["migp-routings"] = bv
+		if string(bv) != "{}" {
+			out["migp-routings"] = bv
+		}
 	}
 	if t.Neighbors != nil {
 		bv, err := t.Neighbors.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["neighbors"] = bv
+		if string(bv) != "{}" {
+			out["neighbors"] = bv
+		}
 	}
 	if t.NexthopParas != nil {
 		bv, err := t.NexthopParas.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["nexthop-paras"] = bv
+		if string(bv) != "{}" {
+			out["nexthop-paras"] = bv
+		}
 	}
 	if t.NexthopWeights != nil {
 		bv, err := t.NexthopWeights.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["nexthop-weights"] = bv
+		if string(bv) != "{}" {
+			out["nexthop-weights"] = bv
+		}
 	}
 	if t.NoSummary != nil {
 		bv, err := t.NoSummary.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["no-summary"] = bv
+		if string(bv) != "{}" {
+			out["no-summary"] = bv
+		}
 	}
 	if t.Opaque != nil {
 		out["opaque"] = object.RawJSON(*t.Opaque)
@@ -19831,21 +20147,27 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["peers"] = bv
+		if string(bv) != "{}" {
+			out["peers"] = bv
+		}
 	}
 	if t.PrefixPrioritys != nil {
 		bv, err := t.PrefixPrioritys.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["prefix-prioritys"] = bv
+		if string(bv) != "{}" {
+			out["prefix-prioritys"] = bv
+		}
 	}
 	if t.PrivateNet != nil {
 		bv, err := t.PrivateNet.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["private-net"] = bv
+		if string(bv) != "{}" {
+			out["private-net"] = bv
+		}
 	}
 	if t.ProcessId != nil {
 		out["process-id"] = object.RawJSON(*t.ProcessId)
@@ -19864,7 +20186,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["route-preferences"] = bv
+		if string(bv) != "{}" {
+			out["route-preferences"] = bv
+		}
 	}
 	if t.RouterId != nil {
 		out["router-id"] = object.RawJSON(*t.RouterId)
@@ -19874,7 +20198,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["routings"] = bv
+		if string(bv) != "{}" {
+			out["routings"] = bv
+		}
 	}
 	if t.SafeSync != nil {
 		out["safe-sync"] = object.RawJSON(*t.SafeSync)
@@ -19893,28 +20219,36 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["silent-interfaces"] = bv
+		if string(bv) != "{}" {
+			out["silent-interfaces"] = bv
+		}
 	}
 	if t.SpfControl != nil {
 		bv, err := t.SpfControl.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["spf-control"] = bv
+		if string(bv) != "{}" {
+			out["spf-control"] = bv
+		}
 	}
 	if t.StubRouter != nil {
 		bv, err := t.StubRouter.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["stub-router"] = bv
+		if string(bv) != "{}" {
+			out["stub-router"] = bv
+		}
 	}
 	if t.Summary != nil {
 		bv, err := t.Summary.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["summary"] = bv
+		if string(bv) != "{}" {
+			out["summary"] = bv
+		}
 	}
 	if t.SuppressReachability != nil {
 		out["suppress-reachability"] = object.RawJSON(*t.SuppressReachability)
@@ -19924,7 +20258,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["timer"] = bv
+		if string(bv) != "{}" {
+			out["timer"] = bv
+		}
 	}
 	if t.TrafficAdj != nil {
 		out["traffic-adj"] = object.RawJSON(*t.TrafficAdj)
@@ -19937,7 +20273,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["undo-silent-interfaces"] = bv
+		if string(bv) != "{}" {
+			out["undo-silent-interfaces"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -20661,7 +20999,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["abr-summary-prefixs"] = bv
+		if string(bv) != "{}" {
+			out["abr-summary-prefixs"] = bv
+		}
 	}
 	if t.AreaId != nil {
 		out["area-id"] = object.RawJSON(*t.AreaId)
@@ -20678,7 +21018,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["authentication"] = bv
+		if string(bv) != "{}" {
+			out["authentication"] = bv
+		}
 	}
 	if t.Description != nil {
 		out["description"] = object.RawJSON(*t.Description)
@@ -20688,70 +21030,90 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["disp-data"] = bv
+		if string(bv) != "{}" {
+			out["disp-data"] = bv
+		}
 	}
 	if t.Filters != nil {
 		bv, err := t.Filters.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["filters"] = bv
+		if string(bv) != "{}" {
+			out["filters"] = bv
+		}
 	}
 	if t.Interfaces != nil {
 		bv, err := t.Interfaces.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["interfaces"] = bv
+		if string(bv) != "{}" {
+			out["interfaces"] = bv
+		}
 	}
 	if t.LdpSync != nil {
 		bv, err := t.LdpSync.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ldp-sync"] = bv
+		if string(bv) != "{}" {
+			out["ldp-sync"] = bv
+		}
 	}
 	if t.MplsTe != nil {
 		bv, err := t.MplsTe.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["mpls-te"] = bv
+		if string(bv) != "{}" {
+			out["mpls-te"] = bv
+		}
 	}
 	if t.Networks != nil {
 		bv, err := t.Networks.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["networks"] = bv
+		if string(bv) != "{}" {
+			out["networks"] = bv
+		}
 	}
 	if t.Nssa != nil {
 		bv, err := t.Nssa.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["nssa"] = bv
+		if string(bv) != "{}" {
+			out["nssa"] = bv
+		}
 	}
 	if t.ShamLinks != nil {
 		bv, err := t.ShamLinks.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["sham-links"] = bv
+		if string(bv) != "{}" {
+			out["sham-links"] = bv
+		}
 	}
 	if t.Stub != nil {
 		bv, err := t.Stub.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["stub"] = bv
+		if string(bv) != "{}" {
+			out["stub"] = bv
+		}
 	}
 	if t.VlinkPeers != nil {
 		bv, err := t.VlinkPeers.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["vlink-peers"] = bv
+		if string(bv) != "{}" {
+			out["vlink-peers"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -21555,14 +21917,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["authentication"] = bv
+		if string(bv) != "{}" {
+			out["authentication"] = bv
+		}
 	}
 	if t.Bfd != nil {
 		bv, err := t.Bfd.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bfd"] = bv
+		if string(bv) != "{}" {
+			out["bfd"] = bv
+		}
 	}
 	if t.Cost != nil {
 		out["cost"] = object.RawJSON(*t.Cost)
@@ -21575,7 +21941,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["disp-data"] = bv
+		if string(bv) != "{}" {
+			out["disp-data"] = bv
+		}
 	}
 	if t.DrPriority != nil {
 		out["dr-priority"] = object.RawJSON(*t.DrPriority)
@@ -21585,7 +21953,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["error-data"] = bv
+		if string(bv) != "{}" {
+			out["error-data"] = bv
+		}
 	}
 	if t.FallbackBw != nil {
 		out["fallback-bw"] = object.RawJSON(*t.FallbackBw)
@@ -21598,28 +21968,36 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["filter-lsa-out"] = bv
+		if string(bv) != "{}" {
+			out["filter-lsa-out"] = bv
+		}
 	}
 	if t.FlushSourceTrace != nil {
 		bv, err := t.FlushSourceTrace.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["flush-source-trace"] = bv
+		if string(bv) != "{}" {
+			out["flush-source-trace"] = bv
+		}
 	}
 	if t.Frr != nil {
 		bv, err := t.Frr.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["frr"] = bv
+		if string(bv) != "{}" {
+			out["frr"] = bv
+		}
 	}
 	if t.LdpSync != nil {
 		bv, err := t.LdpSync.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ldp-sync"] = bv
+		if string(bv) != "{}" {
+			out["ldp-sync"] = bv
+		}
 	}
 	if t.LdpSyncBlock != nil {
 		out["ldp-sync-block"] = object.RawJSON(*t.LdpSyncBlock)
@@ -21642,7 +22020,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["mpls-te-peers"] = bv
+		if string(bv) != "{}" {
+			out["mpls-te-peers"] = bv
+		}
 	}
 	if t.MtuEnable != nil {
 		out["mtu-enable"] = object.RawJSON(*t.MtuEnable)
@@ -21652,7 +22032,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["multi-areas"] = bv
+		if string(bv) != "{}" {
+			out["multi-areas"] = bv
+		}
 	}
 	if t.Name != nil {
 		out["name"] = object.RawJSON(*t.Name)
@@ -21662,7 +22044,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["nbr-statistics"] = bv
+		if string(bv) != "{}" {
+			out["nbr-statistics"] = bv
+		}
 	}
 	if t.NetworkType != 0 {
 		n, err := object.EnumName(t.NetworkType)
@@ -21695,7 +22079,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["suppress-flapping"] = bv
+		if string(bv) != "{}" {
+			out["suppress-flapping"] = bv
+		}
 	}
 	if t.SuppressReachability != 0 {
 		n, err := object.EnumName(t.SuppressReachability)
@@ -21709,7 +22095,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["timer"] = bv
+		if string(bv) != "{}" {
+			out["timer"] = bv
+		}
 	}
 	if t.TransmitDelay != nil {
 		out["transmit-delay"] = object.RawJSON(*t.TransmitDelay)
@@ -23101,7 +23489,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["ti-lfa"] = bv
+		if string(bv) != "{}" {
+			out["ti-lfa"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -23355,7 +23745,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["procs"] = bv
+		if string(bv) != "{}" {
+			out["procs"] = bv
+		}
 	}
 	if t.RouterId != nil {
 		out["router-id"] = object.RawJSON(*t.RouterId)
@@ -23652,14 +24044,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["authentication"] = bv
+		if string(bv) != "{}" {
+			out["authentication"] = bv
+		}
 	}
 	if t.Bfd != nil {
 		bv, err := t.Bfd.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bfd"] = bv
+		if string(bv) != "{}" {
+			out["bfd"] = bv
+		}
 	}
 	if t.Cost != nil {
 		out["cost"] = object.RawJSON(*t.Cost)
@@ -23675,21 +24071,27 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["filter-lsa-out"] = bv
+		if string(bv) != "{}" {
+			out["filter-lsa-out"] = bv
+		}
 	}
 	if t.Frr != nil {
 		bv, err := t.Frr.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["frr"] = bv
+		if string(bv) != "{}" {
+			out["frr"] = bv
+		}
 	}
 	if t.LdpSync != nil {
 		bv, err := t.LdpSync.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["ldp-sync"] = bv
+		if string(bv) != "{}" {
+			out["ldp-sync"] = bv
+		}
 	}
 	if t.LdpSyncBlock != nil {
 		out["ldp-sync-block"] = object.RawJSON(*t.LdpSyncBlock)
@@ -23708,14 +24110,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["suppress-flapping"] = bv
+		if string(bv) != "{}" {
+			out["suppress-flapping"] = bv
+		}
 	}
 	if t.Timer != nil {
 		bv, err := t.Timer.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["timer"] = bv
+		if string(bv) != "{}" {
+			out["timer"] = bv
+		}
 	}
 	if t.TransmitDelay != nil {
 		out["transmit-delay"] = object.RawJSON(*t.TransmitDelay)
@@ -24182,7 +24588,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["peer"] = bv
+		if string(bv) != "{}" {
+			out["peer"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -24692,7 +25100,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["peer"] = bv
+		if string(bv) != "{}" {
+			out["peer"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -25388,7 +25798,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["authentication"] = bv
+		if string(bv) != "{}" {
+			out["authentication"] = bv
+		}
 	}
 	if t.Cost != nil {
 		out["cost"] = object.RawJSON(*t.Cost)
@@ -25410,7 +25822,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["timer"] = bv
+		if string(bv) != "{}" {
+			out["timer"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -25766,7 +26180,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["authentication"] = bv
+		if string(bv) != "{}" {
+			out["authentication"] = bv
+		}
 	}
 	if t.RetransmitInterval != nil {
 		out["retransmit-interval"] = object.RawJSON(*t.RetransmitInterval)
@@ -25782,7 +26198,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["timer"] = bv
+		if string(bv) != "{}" {
+			out["timer"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -27071,7 +27489,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["summary-router-ids"] = bv
+		if string(bv) != "{}" {
+			out["summary-router-ids"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -28366,21 +28786,27 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["rlfa-tunnel"] = bv
+		if string(bv) != "{}" {
+			out["rlfa-tunnel"] = bv
+		}
 	}
 	if t.RoutePolicy != nil {
 		bv, err := t.RoutePolicy.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["route-policy"] = bv
+		if string(bv) != "{}" {
+			out["route-policy"] = bv
+		}
 	}
 	if t.Tiebreaker != nil {
 		bv, err := t.Tiebreaker.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["tiebreaker"] = bv
+		if string(bv) != "{}" {
+			out["tiebreaker"] = bv
+		}
 	}
 	if t.TilfaEnable != nil {
 		out["tilfa-enable"] = object.RawJSON(*t.TilfaEnable)
@@ -29700,7 +30126,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["lsabodys"] = bv
+		if string(bv) != "{}" {
+			out["lsabodys"] = bv
+		}
 	}
 	if t.NetworkMask != nil {
 		out["network-mask"] = object.RawJSON(*t.NetworkMask)
@@ -29724,7 +30152,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["rilsa"] = bv
+		if string(bv) != "{}" {
+			out["rilsa"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -30329,7 +30759,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["nexthop-datas"] = bv
+		if string(bv) != "{}" {
+			out["nexthop-datas"] = bv
+		}
 	}
 	if t.PathType != 0 {
 		n, err := object.EnumName(t.PathType)
@@ -30717,7 +31149,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["datas"] = bv
+		if string(bv) != "{}" {
+			out["datas"] = bv
+		}
 	}
 	if t.HostName != nil {
 		out["host-name"] = object.RawJSON(*t.HostName)
@@ -31744,14 +32178,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["domain-id"] = bv
+		if string(bv) != "{}" {
+			out["domain-id"] = bv
+		}
 	}
 	if t.DomainIdSecondarys != nil {
 		bv, err := t.DomainIdSecondarys.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["domain-id-secondarys"] = bv
+		if string(bv) != "{}" {
+			out["domain-id-secondarys"] = bv
+		}
 	}
 	if t.EcaRoute != nil {
 		out["eca-route"] = object.RawJSON(*t.EcaRoute)
@@ -32295,7 +32733,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["nexthop-datas"] = bv
+		if string(bv) != "{}" {
+			out["nexthop-datas"] = bv
+		}
 	}
 	if t.PathType != 0 {
 		n, err := object.EnumName(t.PathType)
@@ -32936,35 +33376,45 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv2_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["lsa-arr-supp-flap"] = bv
+		if string(bv) != "{}" {
+			out["lsa-arr-supp-flap"] = bv
+		}
 	}
 	if t.LsaArrival != nil {
 		bv, err := t.LsaArrival.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["lsa-arrival"] = bv
+		if string(bv) != "{}" {
+			out["lsa-arrival"] = bv
+		}
 	}
 	if t.LsaOrgSuppFlap != nil {
 		bv, err := t.LsaOrgSuppFlap.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["lsa-org-supp-flap"] = bv
+		if string(bv) != "{}" {
+			out["lsa-org-supp-flap"] = bv
+		}
 	}
 	if t.LsaOriginate != nil {
 		bv, err := t.LsaOriginate.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["lsa-originate"] = bv
+		if string(bv) != "{}" {
+			out["lsa-originate"] = bv
+		}
 	}
 	if t.SpfSchedule != nil {
 		bv, err := t.SpfSchedule.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["spf-schedule"] = bv
+		if string(bv) != "{}" {
+			out["spf-schedule"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -33460,14 +33910,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3) Marsha
 		if err != nil {
 			return nil, err
 		}
-		out["gtsm"] = bv
+		if string(bv) != "{}" {
+			out["gtsm"] = bv
+		}
 	}
 	if t.Sites != nil {
 		bv, err := t.Sites.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["sites"] = bv
+		if string(bv) != "{}" {
+			out["sites"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -33657,56 +34111,72 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["areas"] = bv
+		if string(bv) != "{}" {
+			out["areas"] = bv
+		}
 	}
 	if t.AsbrSummaryPrefixs != nil {
 		bv, err := t.AsbrSummaryPrefixs.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["asbr-summary-prefixs"] = bv
+		if string(bv) != "{}" {
+			out["asbr-summary-prefixs"] = bv
+		}
 	}
 	if t.Authentication != nil {
 		bv, err := t.Authentication.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["authentication"] = bv
+		if string(bv) != "{}" {
+			out["authentication"] = bv
+		}
 	}
 	if t.Bandwidth != nil {
 		bv, err := t.Bandwidth.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bandwidth"] = bv
+		if string(bv) != "{}" {
+			out["bandwidth"] = bv
+		}
 	}
 	if t.Bfd != nil {
 		bv, err := t.Bfd.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bfd"] = bv
+		if string(bv) != "{}" {
+			out["bfd"] = bv
+		}
 	}
 	if t.CostBindings != nil {
 		bv, err := t.CostBindings.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["cost-bindings"] = bv
+		if string(bv) != "{}" {
+			out["cost-bindings"] = bv
+		}
 	}
 	if t.DefaultPara != nil {
 		bv, err := t.DefaultPara.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["default-para"] = bv
+		if string(bv) != "{}" {
+			out["default-para"] = bv
+		}
 	}
 	if t.DefaultRoute != nil {
 		bv, err := t.DefaultRoute.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["default-route"] = bv
+		if string(bv) != "{}" {
+			out["default-route"] = bv
+		}
 	}
 	if t.Description != nil {
 		out["description"] = object.RawJSON(*t.Description)
@@ -33723,49 +34193,63 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["filter-exports"] = bv
+		if string(bv) != "{}" {
+			out["filter-exports"] = bv
+		}
 	}
 	if t.FilterImport != nil {
 		bv, err := t.FilterImport.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["filter-import"] = bv
+		if string(bv) != "{}" {
+			out["filter-import"] = bv
+		}
 	}
 	if t.Frr != nil {
 		bv, err := t.Frr.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["frr"] = bv
+		if string(bv) != "{}" {
+			out["frr"] = bv
+		}
 	}
 	if t.HelperRole != nil {
 		bv, err := t.HelperRole.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["helper-role"] = bv
+		if string(bv) != "{}" {
+			out["helper-role"] = bv
+		}
 	}
 	if t.HostName != nil {
 		bv, err := t.HostName.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["host-name"] = bv
+		if string(bv) != "{}" {
+			out["host-name"] = bv
+		}
 	}
 	if t.ImportLimit != nil {
 		bv, err := t.ImportLimit.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["import-limit"] = bv
+		if string(bv) != "{}" {
+			out["import-limit"] = bv
+		}
 	}
 	if t.ImportRoutes != nil {
 		bv, err := t.ImportRoutes.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["import-routes"] = bv
+		if string(bv) != "{}" {
+			out["import-routes"] = bv
+		}
 	}
 	if t.LsaRefresh != nil {
 		out["lsa-refresh"] = object.RawJSON(*t.LsaRefresh)
@@ -33781,7 +34265,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["nexthop-weights"] = bv
+		if string(bv) != "{}" {
+			out["nexthop-weights"] = bv
+		}
 	}
 	if t.PeerFlappingSuppress != nil {
 		out["peer-flapping-suppress"] = object.RawJSON(*t.PeerFlappingSuppress)
@@ -33791,14 +34277,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["prefix-prioritys"] = bv
+		if string(bv) != "{}" {
+			out["prefix-prioritys"] = bv
+		}
 	}
 	if t.PrivateNet != nil {
 		bv, err := t.PrivateNet.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["private-net"] = bv
+		if string(bv) != "{}" {
+			out["private-net"] = bv
+		}
 	}
 	if t.ProcessId != nil {
 		out["process-id"] = object.RawJSON(*t.ProcessId)
@@ -33820,7 +34310,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["route-preferences"] = bv
+		if string(bv) != "{}" {
+			out["route-preferences"] = bv
+		}
 	}
 	if t.RouterId != nil {
 		out["router-id"] = object.RawJSON(*t.RouterId)
@@ -33836,35 +34328,45 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["silent-interfaces"] = bv
+		if string(bv) != "{}" {
+			out["silent-interfaces"] = bv
+		}
 	}
 	if t.SpfControl != nil {
 		bv, err := t.SpfControl.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["spf-control"] = bv
+		if string(bv) != "{}" {
+			out["spf-control"] = bv
+		}
 	}
 	if t.StubRouter != nil {
 		bv, err := t.StubRouter.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["stub-router"] = bv
+		if string(bv) != "{}" {
+			out["stub-router"] = bv
+		}
 	}
 	if t.Timer != nil {
 		bv, err := t.Timer.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["timer"] = bv
+		if string(bv) != "{}" {
+			out["timer"] = bv
+		}
 	}
 	if t.UndoSilentInterfaces != nil {
 		bv, err := t.UndoSilentInterfaces.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["undo-silent-interfaces"] = bv
+		if string(bv) != "{}" {
+			out["undo-silent-interfaces"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -34187,7 +34689,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["abr-summary-prefixs"] = bv
+		if string(bv) != "{}" {
+			out["abr-summary-prefixs"] = bv
+		}
 	}
 	if t.AreaId != nil {
 		out["area-id"] = object.RawJSON(*t.AreaId)
@@ -34204,7 +34708,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["authentication"] = bv
+		if string(bv) != "{}" {
+			out["authentication"] = bv
+		}
 	}
 	if t.Description != nil {
 		out["description"] = object.RawJSON(*t.Description)
@@ -34214,28 +34720,36 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["filters"] = bv
+		if string(bv) != "{}" {
+			out["filters"] = bv
+		}
 	}
 	if t.Interfaces != nil {
 		bv, err := t.Interfaces.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["interfaces"] = bv
+		if string(bv) != "{}" {
+			out["interfaces"] = bv
+		}
 	}
 	if t.Nssa != nil {
 		bv, err := t.Nssa.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["nssa"] = bv
+		if string(bv) != "{}" {
+			out["nssa"] = bv
+		}
 	}
 	if t.Stub != nil {
 		bv, err := t.Stub.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["stub"] = bv
+		if string(bv) != "{}" {
+			out["stub"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -34811,14 +35325,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["authentication"] = bv
+		if string(bv) != "{}" {
+			out["authentication"] = bv
+		}
 	}
 	if t.Bfd != nil {
 		bv, err := t.Bfd.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["bfd"] = bv
+		if string(bv) != "{}" {
+			out["bfd"] = bv
+		}
 	}
 	if t.Cost != nil {
 		out["cost"] = object.RawJSON(*t.Cost)
@@ -34831,14 +35349,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["flush-source-trace"] = bv
+		if string(bv) != "{}" {
+			out["flush-source-trace"] = bv
+		}
 	}
 	if t.Frr != nil {
 		bv, err := t.Frr.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["frr"] = bv
+		if string(bv) != "{}" {
+			out["frr"] = bv
+		}
 	}
 	if t.InstanceId != nil {
 		out["instance-id"] = object.RawJSON(*t.InstanceId)
@@ -34857,7 +35379,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["neighbors"] = bv
+		if string(bv) != "{}" {
+			out["neighbors"] = bv
+		}
 	}
 	if t.NetworkType != 0 {
 		n, err := object.EnumName(t.NetworkType)
@@ -34874,21 +35398,27 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["peers"] = bv
+		if string(bv) != "{}" {
+			out["peers"] = bv
+		}
 	}
 	if t.SuppressFlapping != nil {
 		bv, err := t.SuppressFlapping.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["suppress-flapping"] = bv
+		if string(bv) != "{}" {
+			out["suppress-flapping"] = bv
+		}
 	}
 	if t.Timer != nil {
 		bv, err := t.Timer.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["timer"] = bv
+		if string(bv) != "{}" {
+			out["timer"] = bv
+		}
 	}
 	if t.TransmitDelay != nil {
 		out["transmit-delay"] = object.RawJSON(*t.TransmitDelay)
@@ -35639,7 +36169,9 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["peer"] = bv
+		if string(bv) != "{}" {
+			out["peer"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -36962,14 +37494,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["route-policy"] = bv
+		if string(bv) != "{}" {
+			out["route-policy"] = bv
+		}
 	}
 	if t.Tiebreaker != nil {
 		bv, err := t.Tiebreaker.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["tiebreaker"] = bv
+		if string(bv) != "{}" {
+			out["tiebreaker"] = bv
+		}
 	}
 	return json.Marshal(out)
 }
@@ -37796,14 +38332,18 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["domain-id"] = bv
+		if string(bv) != "{}" {
+			out["domain-id"] = bv
+		}
 	}
 	if t.DomainIdSecondarys != nil {
 		bv, err := t.DomainIdSecondarys.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["domain-id-secondarys"] = bv
+		if string(bv) != "{}" {
+			out["domain-id-secondarys"] = bv
+		}
 	}
 	if t.Value != nil {
 		out["value"] = object.RawJSON(*t.Value)
@@ -38490,35 +39030,45 @@ func (t *HuaweiNetworkInstance_NetworkInstance_Instances_Instance_Ospfv3_Sites_S
 		if err != nil {
 			return nil, err
 		}
-		out["lsa-arr-supp-flap"] = bv
+		if string(bv) != "{}" {
+			out["lsa-arr-supp-flap"] = bv
+		}
 	}
 	if t.LsaArrival != nil {
 		bv, err := t.LsaArrival.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["lsa-arrival"] = bv
+		if string(bv) != "{}" {
+			out["lsa-arrival"] = bv
+		}
 	}
 	if t.LsaOrgSuppFlap != nil {
 		bv, err := t.LsaOrgSuppFlap.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["lsa-org-supp-flap"] = bv
+		if string(bv) != "{}" {
+			out["lsa-org-supp-flap"] = bv
+		}
 	}
 	if t.LsaOriginate != nil {
 		bv, err := t.LsaOriginate.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["lsa-originate"] = bv
+		if string(bv) != "{}" {
+			out["lsa-originate"] = bv
+		}
 	}
 	if t.SpfSchedule != nil {
 		bv, err := t.SpfSchedule.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		out["spf-schedule"] = bv
+		if string(bv) != "{}" {
+			out["spf-schedule"] = bv
+		}
 	}
 	return json.Marshal(out)
 }

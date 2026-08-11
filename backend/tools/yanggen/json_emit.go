@@ -58,7 +58,9 @@ func emitMarshal(b *strings.Builder, m *Model, s *Struct) {
 			fmt.Fprintf(b, "\tif %s != nil {\n\t\tbv, err := json.Marshal(%s)\n\t\tif err != nil {\n\t\t\treturn nil, fmt.Errorf(\"%s.%s: %%w\", err)\n\t\t}\n\t\tout[%q] = bv\n\t}\n",
 				g, g, s.Name, f.GoName, key)
 		case KContainer:
-			fmt.Fprintf(b, "\tif %s != nil {\n\t\tbv, err := %s.MarshalJSON()\n\t\tif err != nil {\n\t\t\treturn nil, err\n\t\t}\n\t\tout[%q] = bv\n\t}\n", g, g, key)
+			// 空容器（{}）不发——冻结 ygot EmitJSON 行为（presence 容器的存在
+			// 语义随之丢失，与 ygot 一致；presence 债既有另案跟踪）。
+			fmt.Fprintf(b, "\tif %s != nil {\n\t\tbv, err := %s.MarshalJSON()\n\t\tif err != nil {\n\t\t\treturn nil, err\n\t\t}\n\t\tif string(bv) != \"{}\" {\n\t\t\tout[%q] = bv\n\t\t}\n\t}\n", g, g, key)
 		case KUnion:
 			fmt.Fprintf(b, "\tif %s != nil {\n\t\tbv, err := marshal%s(%s)\n\t\tif err != nil {\n\t\t\treturn nil, fmt.Errorf(\"%s.%s: %%w\", err)\n\t\t}\n\t\tout[%q] = bv\n\t}\n",
 				g, f.Elem, g, s.Name, f.GoName, key)
