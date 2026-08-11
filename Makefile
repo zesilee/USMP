@@ -118,7 +118,7 @@ gen-crd: ## 重新生成业务意图 CRD manifest（YANG→CRD，BIC-01；CI 以
 gen-crd2yang: ## 重新生成北向 CRD 反向派生的 YANG 模型（CRD→YANG，C2Y-06；CI 以 regen-and-diff 验证零漂移）
 	@cd backend/tools && go run ./crd2yang \
 		-input=crd2yang/testdata/businessvlannets.crd.yaml \
-		-output=internal/yang/models/usmp-business-vlan-net.yang
+		-output=../internal/yang/models/usmp-business-vlan-net.yang
 	@echo "✅ gen-crd2yang 完成（生成物勿手改，改北向 CRD/工具后重跑 make gen-crd2yang，下游依次 make gen-yang VENDOR=businessdemo、make gen-schema-fixtures）"
 
 gen-schema-fixtures: ## 重新生成全模块 schema fixture（前端派生黄金/设备一致性矩阵的共享输入；CI 以 regen-and-diff 验证零漂移）
