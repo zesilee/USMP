@@ -57,8 +57,6 @@ func moduleTag(f reflect.StructField) string { return f.Tag.Get("module") }
 // NetconfBaseNS carries the edit-config `operation` attribute (RFC 6241 §7.2).
 const NetconfBaseNS = "urn:ietf:params:xml:ns:netconf:base:1.0"
 
-var goEnumType = reflect.TypeOf((*ygot.GoEnum)(nil)).Elem()
-
 // resolved carries the per-call view of a Spec after validation.
 type resolved struct {
 	ns     string
@@ -232,7 +230,7 @@ func pathTag(f reflect.StructField) string {
 // omitted; an empty list yields a self-closing namespaced root. Fields are
 // emitted key leaves first (DP-07 惯例), then in struct declaration order. No
 // config-false filtering: populated means pushed (design D3b, 实测校准).
-func Encode(spec *Spec, v ygot.GoStruct) (string, error) {
+func Encode(spec *Spec, v interface{}) (string, error) {
 	cv, err := derefContainer(v)
 	if err != nil {
 		return "", err
@@ -405,7 +403,7 @@ func encodeField(b *strings.Builder, tag string, fv reflect.Value, sn schema.Nod
 	if ns != "" {
 		effNS = ns
 	}
-	if fv.Type().Implements(goEnumType) && fv.Kind() == reflect.Int64 {
+	if isEnumType(fv.Type()) {
 		if fv.Int() == 0 { // UNSET
 			return nil
 		}
@@ -478,8 +476,8 @@ func encodeLeaf(b *strings.Builder, tag string, v reflect.Value, ns string) erro
 	// SHALL NOT 发整数（XC-08）。经 ygot.EnumName 由 ΛMap 映射 int→名；UNSET(0) 跳发。
 	// 映射不到（ΛMap 无此值——仅合成/异常值会命中，真机有效枚举必在 ΛMap）时退回整数，
 	// 不报错（R08：不因单个异常枚举值中断整树编码）。
-	if v.Type().Implements(goEnumType) {
-		if name, err := ygot.EnumName(v.Interface().(ygot.GoEnum)); err == nil {
+	if isEnumType(v.Type()) {
+		if name, err := enumNameOf(v); err == nil {
 			if name == "" { // UNSET
 				return nil
 			}
@@ -507,7 +505,7 @@ func encodeLeaf(b *strings.Builder, tag string, v reflect.Value, ns string) erro
 	return nil
 }
 
-func derefContainer(v ygot.GoStruct) (reflect.Value, error) {
+func derefContainer(v interface{}) (reflect.Value, error) {
 	rv := reflect.ValueOf(v)
 	if !rv.IsValid() || rv.Kind() != reflect.Ptr || rv.IsNil() {
 		return reflect.Value{}, fmt.Errorf("xmlcodec: container must be a non-nil struct pointer, got %T", v)

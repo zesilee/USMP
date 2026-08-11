@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/openconfig/ygot/ygot"
-
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
@@ -20,7 +18,7 @@ import (
 //   - schema 可用时目标必须存在且为叶（leaf/leaf-list）；嵌套容器与嵌套 list 拒绝
 //   - list key 叶本身拒绝（删除定位键无意义且危险）
 //   - 条目 key 无法确定（无 ΛListKeyMap 且 schema 无单 key）→ 明确错误
-func EncodeLeafDelete(spec *Spec, v ygot.GoStruct, leaves []string) (string, error) {
+func EncodeLeafDelete(spec *Spec, v interface{}, leaves []string) (string, error) {
 	if len(leaves) == 0 {
 		return "", fmt.Errorf("xmlcodec leaf delete: empty leaf set")
 	}
