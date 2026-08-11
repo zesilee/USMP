@@ -12,11 +12,10 @@ package drivers
 import (
 	"strings"
 
-	"github.com/openconfig/ygot/ygot"
-
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 )
@@ -86,7 +85,7 @@ func init() {
 		// system 无 XML 回读解码（原 decodeRunningConfig 不含 system 分支），
 		// 亦无 XML 下发通道 → XML 数据缺省 nil，调用方走既有降级（XC-04）。
 		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/system:system") },
-		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiSystem_System{} },
+		NewStruct:    func() object.Object { return &huawei.HuaweiSystem_System{} },
 		EncodeAnchor: "/system:system",
 		Unmarshal:    huawei.Unmarshal,
 	})
@@ -97,7 +96,7 @@ func init() {
 		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/vlan:vlan") },
 		ControllerToken: "vlan",
 		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/vlan:vlan") },
-		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
+		DecodeXML: func(raw []byte) (object.Object, error) {
 			v := &huawei.HuaweiVlan_Vlan_Vlans{}
 			if err := xmlcodec.Decode(vlanXML, raw, v); err != nil {
 				return nil, err
@@ -105,7 +104,7 @@ func init() {
 			return v, nil
 		},
 		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/vlan:vlan") },
-		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiVlan_Vlan_Vlans{} },
+		NewStruct:    func() object.Object { return &huawei.HuaweiVlan_Vlan_Vlans{} },
 		EncodeAnchor: "/vlan:vlan/vlan:vlans",
 		Unmarshal:    huawei.Unmarshal,
 		XML:          vlanXML,
@@ -118,7 +117,7 @@ func init() {
 		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/ifm:ifm") },
 		ControllerToken: "ifm",
 		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/ifm:ifm") },
-		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
+		DecodeXML: func(raw []byte) (object.Object, error) {
 			v := &huawei.HuaweiIfm_Ifm_Interfaces{}
 			if err := xmlcodec.Decode(ifmXML, raw, v); err != nil {
 				return nil, err
@@ -126,7 +125,7 @@ func init() {
 			return v, nil
 		},
 		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/ifm:ifm") },
-		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiIfm_Ifm_Interfaces{} },
+		NewStruct:    func() object.Object { return &huawei.HuaweiIfm_Ifm_Interfaces{} },
 		EncodeAnchor: "/ifm:ifm/ifm:interfaces",
 		Unmarshal:    huawei.Unmarshal,
 		XML:          ifmXML,
@@ -139,7 +138,7 @@ func init() {
 		MatchRoute:      func(p string) bool { return strings.HasPrefix(p, "/bgp:bgp") },
 		ControllerToken: "bgp",
 		MatchDecode:     func(p string) bool { return strings.HasPrefix(p, "/bgp:bgp") },
-		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
+		DecodeXML: func(raw []byte) (object.Object, error) {
 			v := &huawei.HuaweiBgp_Bgp{}
 			if err := xmlcodec.Decode(bgpXML, raw, v); err != nil {
 				return nil, err
@@ -147,7 +146,7 @@ func init() {
 			return v, nil
 		},
 		MatchEncode:  func(p string) bool { return strings.HasPrefix(p, "/bgp:bgp") },
-		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiBgp_Bgp{} },
+		NewStruct:    func() object.Object { return &huawei.HuaweiBgp_Bgp{} },
 		EncodeAnchor: "/bgp:bgp",
 		Unmarshal:    huawei.Unmarshal,
 		XML:          bgpXML,
@@ -166,7 +165,7 @@ func init() {
 		MatchRoute:      niMatch,
 		ControllerToken: "network-instance",
 		MatchDecode:     niMatch,
-		DecodeXML: func(raw []byte) (ygot.GoStruct, error) {
+		DecodeXML: func(raw []byte) (object.Object, error) {
 			v := &huawei.HuaweiNetworkInstance_NetworkInstance{}
 			if err := xmlcodec.Decode(niXML, raw, v); err != nil {
 				return nil, err
@@ -174,7 +173,7 @@ func init() {
 			return v, nil
 		},
 		MatchEncode:  niMatch,
-		NewStruct:    func() ygot.GoStruct { return &huawei.HuaweiNetworkInstance_NetworkInstance{} },
+		NewStruct:    func() object.Object { return &huawei.HuaweiNetworkInstance_NetworkInstance{} },
 		EncodeAnchor: "/ni:network-instance",
 		Unmarshal:    huawei.Unmarshal,
 		XML:          niXML,

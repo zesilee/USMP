@@ -5,7 +5,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
 )
 
@@ -137,16 +137,16 @@ func TestRootNameConventionRegression(t *testing.T) {
 // TestFullOnboardingSchemaRoots 断言生成闭包把全部模块根容器纳入 fakeroot
 // （任务 1.5：schema 面基线）。
 func TestFullOnboardingSchemaRoots(t *testing.T) {
-	s, err := huawei.Schema()
-	if err != nil {
-		t.Fatalf("Schema(): %v", err)
-	}
-	root := s.SchemaTree["Device"]
-	if root == nil {
+	devType, ok := huawei.Types["Device"]
+	if !ok {
 		t.Fatal("fakeroot Device 缺失")
 	}
+	byTag := map[string]bool{}
+	for i := 0; i < devType.NumField(); i++ {
+		byTag[devType.Field(i).Tag.Get("path")] = true
+	}
 	for _, r := range fullOnboardRoots {
-		if root.Dir[r] == nil {
+		if !byTag[r] {
 			t.Fatalf("fakeroot 缺根容器 %q", r)
 		}
 	}

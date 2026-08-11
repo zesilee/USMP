@@ -2,13 +2,13 @@ package api
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"strings"
 	"time"
 
 	beecontext "github.com/beego/beego/v2/server/web/context"
-	"github.com/openconfig/ygot/ygot"
 
 	"github.com/leezesi/usmp/backend/internal/intent"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
@@ -16,6 +16,7 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/diff"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/driver"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 )
 
@@ -294,7 +295,7 @@ func (h *ChangesetHandler) convertBaseline(anchor string, raw interface{}) inter
 
 // encodePreviewXML 生成单条目的正向与回滚报文（CS-01/02/05）。
 func (h *ChangesetHandler) encodePreviewXML(pe previewEntry, baseSubset interface{}, baseCount int) (string, string, error) {
-	gs, ok := pe.target.(ygot.GoStruct)
+	gs, ok := pe.target.(object.Object)
 	if !ok {
 		return "", "", fmt.Errorf("目标类型 %T 不是 GoStruct", pe.target)
 	}
@@ -340,7 +341,7 @@ func (h *ChangesetHandler) encodePreviewXML(pe previewEntry, baseSubset interfac
 }
 
 // encodeClearedLeaves 经 xmlcodec 叶级删除通道生成清除叶报文（CS-05）。
-func encodeClearedLeaves(d driver.Descriptor, gs ygot.GoStruct, leaves []string) (string, error) {
+func encodeClearedLeaves(d driver.Descriptor, gs object.Object, leaves []string) (string, error) {
 	wrapped, err := d.WrapXMLValue(gs)
 	if err != nil {
 		return "", err
@@ -522,7 +523,7 @@ func (h *ChangesetHandler) Commit(c *beecontext.Context) {
 func changesetFragments(device string, entries []previewEntry) ([]intent.Fragment, error) {
 	frags := make([]intent.Fragment, 0, len(entries))
 	for _, pe := range entries {
-		gs, ok := pe.target.(ygot.GoStruct)
+		gs, ok := pe.target.(object.Object)
 		if !ok {
 			return nil, fmt.Errorf("条目 %s: 目标类型 %T 不是 GoStruct", pe.req.Path, pe.target)
 		}
@@ -657,9 +658,9 @@ func leafValueByTag(entry reflect.Value, tag string) (interface{}, bool) {
 // flattenForDTO 把 GoStruct 值降为 JSON 可序列化的摘要（RFC7951）；失败时
 // 返回类型名（诚实降级，不 panic）。
 func flattenForDTO(v interface{}) interface{} {
-	if gs, ok := v.(ygot.GoStruct); ok {
-		if js, err := ygot.EmitJSON(gs, &ygot.EmitJSONConfig{Format: ygot.RFC7951, SkipValidation: true}); err == nil {
-			return js
+	if jm, ok := v.(json.Marshaler); ok {
+		if js, err := jm.MarshalJSON(); err == nil {
+			return string(js)
 		}
 	}
 	return fmt.Sprintf("%T", v)

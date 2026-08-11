@@ -8,11 +8,10 @@ import (
 	"reflect"
 
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
-	"github.com/openconfig/ygot/ygot"
 )
 
 // Populate 在容器根下寻找首个可赋值节点并赋样例值，返回是否成功。
-func Populate(v ygot.GoStruct, e schema.Node) bool {
+func Populate(v interface{}, e schema.Node) bool {
 	return populate(reflect.ValueOf(v), e, 0)
 }
 

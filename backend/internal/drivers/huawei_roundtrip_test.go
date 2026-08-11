@@ -1,11 +1,12 @@
 package drivers
 
 import (
+	"encoding/json"
+	"fmt"
 	"testing"
 
-	"github.com/openconfig/ygot/ygot"
-
 	"github.com/leezesi/usmp/backend/internal/testutil/yangsample"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/xmlcodec"
 )
@@ -33,7 +34,7 @@ func TestFullOnboardingEncodeDecodeRoundtrip(t *testing.T) {
 			if err := xmlcodec.Decode(spec, []byte(xml), dst); err != nil {
 				t.Fatalf("Decode: %v", err)
 			}
-			eq, err := ygotDiffEmpty(src, dst)
+			eq, err := jsonEqual(src, dst)
 			if err != nil {
 				t.Fatalf("diff: %v", err)
 			}
@@ -49,10 +50,22 @@ func specSchemaOf(t *testing.T, pm plainModule) func() schema.Node {
 	return irNode("/" + pm.module)
 }
 
-func ygotDiffEmpty(a, b ygot.GoStruct) (bool, error) {
-	n, err := ygot.Diff(a, b)
+func jsonEqual(a, b object.Object) (bool, error) {
+	am, ok := a.(json.Marshaler)
+	if !ok {
+		return false, fmt.Errorf("%T lacks MarshalJSON", a)
+	}
+	bm, ok := b.(json.Marshaler)
+	if !ok {
+		return false, fmt.Errorf("%T lacks MarshalJSON", b)
+	}
+	ab, err := am.MarshalJSON()
 	if err != nil {
 		return false, err
 	}
-	return len(n.GetUpdate()) == 0 && len(n.GetDelete()) == 0, nil
+	bb, err := bm.MarshalJSON()
+	if err != nil {
+		return false, err
+	}
+	return string(ab) == string(bb), nil
 }

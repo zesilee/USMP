@@ -13,7 +13,7 @@ import (
 
 	beecontext "github.com/beego/beego/v2/server/web/context"
 	"github.com/leezesi/usmp/backend/internal/cache"
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/internal/intent"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/audit"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"

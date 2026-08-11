@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/leezesi/usmp/backend/internal/cache"
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
-	"github.com/openconfig/ygot/ygot"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
 const (
@@ -65,8 +65,8 @@ func newDeleteTestStore() *manager.InMemoryConfigStore {
 func TestStoreConfigDeletedVlan(t *testing.T) {
 	cs := newDeleteTestStore()
 	seed := &huawei.HuaweiVlan_Vlan_Vlans{Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
-		10: {Id: ygot.Uint16(10), Name: ygot.String("ten")},
-		20: {Id: ygot.Uint16(20)},
+		10: {Id: object.Uint16(10), Name: object.String("ten")},
+		20: {Id: object.Uint16(20)},
 	}}
 	if err := cs.Set("1.1.1.1", delVlanPath, seed); err != nil {
 		t.Fatal(err)
@@ -102,8 +102,8 @@ func TestStoreConfigDeletedVlan(t *testing.T) {
 func TestStoreConfigDeletedIfm(t *testing.T) {
 	cs := newDeleteTestStore()
 	seed := &huawei.HuaweiIfm_Ifm_Interfaces{Interface: map[string]*huawei.HuaweiIfm_Ifm_Interfaces_Interface{
-		"GE0/0/1": {Name: ygot.String("GE0/0/1")},
-		"GE0/0/2": {Name: ygot.String("GE0/0/2")},
+		"GE0/0/1": {Name: object.String("GE0/0/1")},
+		"GE0/0/2": {Name: object.String("GE0/0/2")},
 	}}
 	if err := cs.Set("1.1.1.1", delIfmPath, seed); err != nil {
 		t.Fatal(err)
@@ -135,14 +135,14 @@ func TestStoreConfigDeletedConcurrentWithMerge(t *testing.T) {
 		go func() {
 			defer wg.Done()
 			inc := &huawei.HuaweiVlan_Vlan_Vlans{Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
-				id: {Id: ygot.Uint16(id)},
+				id: {Id: object.Uint16(id)},
 			}}
 			_ = storeConfigMerged(cs, "1.1.1.1", delVlanPath, inc)
 		}()
 		go func() {
 			defer wg.Done()
 			target := &huawei.HuaweiVlan_Vlan_Vlans{Vlan: map[uint16]*huawei.HuaweiVlan_Vlan_Vlans_Vlan{
-				id + 100: {Id: ygot.Uint16(id + 100)},
+				id + 100: {Id: object.Uint16(id + 100)},
 			}}
 			_ = storeConfigDeleted(cs, "1.1.1.1", delVlanPath, target)
 		}()

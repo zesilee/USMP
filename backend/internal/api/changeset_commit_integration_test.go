@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/client"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	netsim "github.com/leezesi/usmp/backend/simulator/netconfsim"

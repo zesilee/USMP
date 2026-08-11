@@ -12,7 +12,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/leezesi/usmp/backend/internal/generated/huawei"
+	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 )
 
 // Update rewrites golden files instead of comparing when set:
