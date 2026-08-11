@@ -9,7 +9,7 @@ metadata:
 
 **目标**：`usmp-backend` 发布二进制 import 闭包零 openconfig/ygot、零 goyang（商用自主可控），参考 K8s runtime.Object/Scheme 范式（极小标记接口 + Scheme 注册 + 构建期生成样板；**不**引入 apimachinery 承载 YANG 类型）。change: `openspec/changes/retire-ygot-runtime`（7 阶段 26 任务）。
 
-**阶段1 已交付**（worktree-retire-ygot-runtime，2026-08-11）：
+**阶段1 已交付并合入 main**（PR#307 提案三件套 + PR#308 代码，2026-08-11）：
 - Schema IR 自有格式 v1：`schema.EncodeIR/DecodeIR`（gzip JSON、版本快速失败、确定性、key/parent 指针同一性重建）。IR blob 223KB `internal/yangschema/schema.ir.gz`（go:embed），`yangschema.Load()` 已切换。
 - `tools/schemagen`：一期刻意复用旧链路（generated Schema()→ygotbridge）保证零漂移；二期自研生成器落地后切直读 YANG 源。
 - `tools/ygotbridge`：原 `schema/entry.go` goyang→内部模型转换整体迁出（8 个 entry 测试随迁，alias_test.go 别名保正文零改动）；`schema/loader.go`+manager SchemeDir 是死代码已删。
