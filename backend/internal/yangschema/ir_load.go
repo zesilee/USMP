@@ -14,7 +14,7 @@ import (
 // 新鲜度门禁在 tools/schemagen 的 TestSourceVsBlobCompare（blob 与直读源
 // 重建逐字节比对；S4 起 schemagen 直读 YANG 源，旧 gzip 链路已退役）。
 //
-//go:generate go run ../../tools/schemagen -repo_root=../../.. -output=./schema.ir.gz
+//go:generate go -C ../../tools run ./schemagen -repo_root=../.. -output=../internal/yangschema/schema.ir.gz
 //go:embed schema.ir.gz
 var schemaIRBlob []byte
 

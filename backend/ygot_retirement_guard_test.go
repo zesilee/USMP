@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"os/exec"
 	"strings"
 	"testing"
@@ -30,5 +31,19 @@ func TestReleaseBinaryFreeOfYgotGoyang(t *testing.T) {
 		t.Fatalf("发布二进制闭包回引了 ygot/goyang（YN-05/SC-07 红线）：\n%s\n"+
 			"运行时禁止依赖外部 YANG 运行库——见本测试头注修复指引。",
 			strings.Join(offenders, "\n"))
+	}
+}
+
+// TestGoModFreeOfYgotGoyang：主模块 go.mod/go.sum 层面零 openconfig（7.2 拍板
+// 口径=tools 拆独立 module；构建期依赖只允许出现在 backend/tools/go.mod）。
+func TestGoModFreeOfYgotGoyang(t *testing.T) {
+	for _, f := range []string{"go.mod", "go.sum"} {
+		b, err := os.ReadFile(f)
+		if err != nil {
+			t.Fatalf("read %s: %v", f, err)
+		}
+		if strings.Contains(string(b), "openconfig") {
+			t.Fatalf("%s 含 openconfig 依赖——ygot/goyang 只允许在 backend/tools/go.mod（独立工具 module）", f)
+		}
 	}
 }

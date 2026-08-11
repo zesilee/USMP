@@ -38,6 +38,7 @@ jobs:
       - name: Run Tests with Race Detection
         run: |
           go test ./... -race -count=1 -coverprofile=coverage.out -timeout=300s 2>&1 | tee test-output.txt || true
+          (cd tools && go test ./... -count=1 -timeout=300s) || { echo "::error::tools module tests failed"; exit 1; }
           # Check if any test actually failed (ignore covdata warnings from packages with no tests)
           if grep -qE '^FAIL\s' test-output.txt; then
             echo "::error::Some tests failed"
