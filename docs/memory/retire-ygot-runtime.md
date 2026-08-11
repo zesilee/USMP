@@ -20,6 +20,8 @@ metadata:
 
 **阶段2 基本完成**（2026-08-11，任务2.1-2.4 ✓，剩 2.5 make 接线）：object 运行库 + `tools/yanggen` 全链交付；**native 包已入库并存**（`internal/generated/native/{huawei,business}`，9.3 万行、零 openconfig、两次生成字节一致）；**结构对拍三层全绿**（`tools/yanggen/parity_test.go`：类型集/逐字段 tag·形状/枚举值表 vs ygot 基准零差异）。生成约定权威=`openspec/changes/retire-ygot-runtime/codegen-conventions.md`。**对拍实证冻结的四条规则**（改生成器前必读）：①生成域=整个依赖闭包（未列出的被 import 模块顶层容器也入 Device）；②typedef 枚举按**使用方叶所属模块**命名（非定义模块——row-status 每模块一份）；③内联枚举按 AST 节点去重（grouping 复用单枚举首实例命名）；④union 同型折叠（全成员同 Go 型→裸类型，265 叶折叠后仅 6 接口）。踩坑：goyang EnumType Names()/Values() 各自排序不可 zip（NameMap 权威）；净化 token 无尾下划线；leafref 须按**数据树**语义解析（choice/case 不占层级，Entry.Find 会错位）；跨模块 leafref 需全闭包顶层容器索引。
 
+**阶段3 进行中**（2026-08-11）：3.1 生成式 JSON 方法已交付（json_emit.go：每 struct MarshalJSON/UnmarshalJSON + 每 union helper；object 包 json.go 原语）；3.2 首轮双路径对拍绿（json_parity_test：vlan/ifm/bgp/system 语义 DeepEqual + 拒绝性一致）。**关键行为冻结（对拍实证）：ygot 现网 EmitJSON 未开 AppendModuleName → JSON 键永不带模块前缀（含 Device 顶层与 augment 边界），解码双形态兼容**。剩：3.2 扩样本面、3.3 切 driver 注册表/api 调用点、3.4 e2e。踩坑：零字段容器 unused raw、bool 键列表排序、ygot 拒绝性=未知键报错口径一致。
+
 **How to apply**（后续阶段注意）：
 - 阶段2 自研生成器：结构约定必须字节级冻结（字段名/path+module tag/map-list/...Key），diff/xmlcodec/drivers 才免改；JSON 编解码走「构建期生成 per-type MarshalJSON/UnmarshalJSON」而非运行时反射引擎（风险局部化、逐类型 golden 可对拍）。
 - 每阶段"并行→对拍绿→切换→删旧"；旧 `Validate()` 仅 intent/cr.go 在用；xmlcodec 的 yang.Entry 依赖点=drivers/huawei.go 的 `huawei.SchemaTree[...]`（阶段4 改读 IR）。
