@@ -2,7 +2,7 @@
 // 构建期工具（tools/schemagen）把 goyang 解析出的模型树编码为本格式入库，运行期
 // 仅解码本格式——发布二进制由此不再依赖 ygot gzip schema 与 goyang Entry 类型。
 //
-// 线格式：gzip(JSON(irEnvelope))。确定性：模块按名排序、节点序即树序（children
+// 线格式：gzip(JSON(IREnvelope))。确定性：模块按名排序、节点序即树序（children
 // 有序切片）、gzip 固定参数无时间戳——同一树两次编码字节一致（CG-01 可复现契约）。
 // 版本号 irVersion 破坏性变更时递增，运行期版本不符快速失败（不半解析运行）。
 package schema
@@ -20,22 +20,22 @@ import (
 // rejects mismatches with an explicit regenerate hint.
 const irVersion = 1
 
-type irEnvelope struct {
+type IREnvelope struct {
 	Version int        `json:"version"`
-	Modules []irModule `json:"modules"`
+	Modules []IRModule `json:"modules"`
 }
 
-type irModule struct {
+type IRModule struct {
 	Name      string  `json:"name"`
 	Namespace string  `json:"namespace,omitempty"`
 	Revision  string  `json:"revision,omitempty"`
 	Vendor    string  `json:"vendor,omitempty"`
-	Root      *irNode `json:"root"`
+	Root      *IRNode `json:"root"`
 }
 
-// irNode is the serialized union of all node kinds. Kind selects which fields
+// IRNode is the serialized union of all node kinds. Kind selects which fields
 // are meaningful; zero values are omitted from JSON to keep the blob compact.
-type irNode struct {
+type IRNode struct {
 	Kind        string   `json:"kind"` // container|list|leaf|choice|case
 	Name        string   `json:"name"`
 	Description string   `json:"desc,omitempty"`
@@ -49,7 +49,7 @@ type irNode struct {
 	Presence bool `json:"presence,omitempty"`
 
 	// container/list/case
-	Children []*irNode `json:"children,omitempty"`
+	Children []*IRNode `json:"children,omitempty"`
 
 	// list
 	Keys        []string `json:"keys,omitempty"` // key leaf names, resolved against Children on decode
@@ -57,7 +57,7 @@ type irNode struct {
 
 	// choice
 	DefaultCase string    `json:"defaultCase,omitempty"`
-	Cases       []*irNode `json:"cases,omitempty"`
+	Cases       []*IRNode `json:"cases,omitempty"`
 
 	// leaf
 	LeafType       string   `json:"leafType,omitempty"`
@@ -99,7 +99,7 @@ func EncodeIR(s *DefaultSchema) ([]byte, error) {
 	if s == nil {
 		return nil, fmt.Errorf("schema ir: nil schema")
 	}
-	env := irEnvelope{Version: irVersion}
+	env := IREnvelope{Version: irVersion}
 	mods := s.Modules()
 	sort.Slice(mods, func(i, j int) bool { return mods[i].Name() < mods[j].Name() })
 	for _, m := range mods {
@@ -107,7 +107,7 @@ func EncodeIR(s *DefaultSchema) ([]byte, error) {
 		if err != nil {
 			return nil, fmt.Errorf("schema ir: module %s: %w", m.Name(), err)
 		}
-		env.Modules = append(env.Modules, irModule{
+		env.Modules = append(env.Modules, IRModule{
 			Name: m.Name(), Namespace: m.Namespace(), Revision: m.Revision(),
 			Vendor: m.Vendor(), Root: root,
 		})
@@ -127,11 +127,11 @@ func EncodeIR(s *DefaultSchema) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
-func encodeNode(n Node) (*irNode, error) {
+func encodeNode(n Node) (*IRNode, error) {
 	if n == nil {
 		return nil, fmt.Errorf("nil node")
 	}
-	out := &irNode{
+	out := &IRNode{
 		Name: n.Name(), Description: n.Description(), Path: n.Path(), ReadOnly: n.ReadOnly(),
 	}
 	switch t := n.(type) {
@@ -234,6 +234,33 @@ func encodeNode(n Node) (*irNode, error) {
 
 func intPtr(v int) *int { return &v }
 
+// IRLeafTypeName returns the stable IR wire name for a LeafType. 供构建期
+// 转换器（goyang→IR 桥接）使用，保证与解码侧共用同一张映射表（防漂移）。
+func IRLeafTypeName(lt LeafType) (string, bool) {
+	n, ok := leafTypeNames[lt]
+	return n, ok
+}
+
+// ModuleFromIR materializes one IRModule DTO into a fully-linked Module
+// (parent 指针/key 同一性同 DecodeIR)。供构建期桥接与工具把逐模块转换结果
+// 装入 DefaultSchema（ds.AddModule）而不经过字节序列化。
+func ModuleFromIR(im IRModule) (Module, error) {
+	if im.Root == nil {
+		return nil, fmt.Errorf("schema ir: module %s: missing root", im.Name)
+	}
+	rootNode, err := decodeNode(im.Root, nil)
+	if err != nil {
+		return nil, fmt.Errorf("schema ir: module %s: %w", im.Name, err)
+	}
+	root, ok := rootNode.(ContainerNode)
+	if !ok {
+		return nil, fmt.Errorf("schema ir: module %s: root is %s, want container", im.Name, im.Root.Kind)
+	}
+	m := NewModule(im.Name, im.Namespace, im.Revision, root).(*defaultModule)
+	m.vendor = im.Vendor
+	return m, nil
+}
+
 // DecodeIR parses the IR wire format into a fully-linked DefaultSchema
 // (parent pointers, list-key identity, path cache). Version mismatch and
 // malformed input fail fast with explicit errors (R08 — never a half schema).
@@ -250,7 +277,7 @@ func DecodeIR(blob []byte) (*DefaultSchema, error) {
 	if err != nil {
 		return nil, fmt.Errorf("schema ir: gzip read: %w", err)
 	}
-	var env irEnvelope
+	var env IREnvelope
 	if err := json.Unmarshal(raw, &env); err != nil {
 		return nil, fmt.Errorf("schema ir: parse: %w", err)
 	}
@@ -259,25 +286,16 @@ func DecodeIR(blob []byte) (*DefaultSchema, error) {
 	}
 	ds := NewSchema()
 	for _, im := range env.Modules {
-		if im.Root == nil {
-			return nil, fmt.Errorf("schema ir: module %s: missing root", im.Name)
-		}
-		rootNode, err := decodeNode(im.Root, nil)
+		m, err := ModuleFromIR(im)
 		if err != nil {
-			return nil, fmt.Errorf("schema ir: module %s: %w", im.Name, err)
+			return nil, err
 		}
-		root, ok := rootNode.(ContainerNode)
-		if !ok {
-			return nil, fmt.Errorf("schema ir: module %s: root is %s, want container", im.Name, im.Root.Kind)
-		}
-		m := NewModule(im.Name, im.Namespace, im.Revision, root).(*defaultModule)
-		m.vendor = im.Vendor
 		ds.AddModule(m)
 	}
 	return ds, nil
 }
 
-func decodeNode(in *irNode, parent Node) (Node, error) {
+func decodeNode(in *IRNode, parent Node) (Node, error) {
 	if in == nil {
 		return nil, fmt.Errorf("nil ir node")
 	}
