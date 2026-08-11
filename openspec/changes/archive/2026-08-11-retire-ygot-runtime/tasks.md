@@ -47,6 +47,6 @@
 ## 7. 收尾与门禁（YN-05 / SC-07）
 
 - [x] 7.1 守护测试：`go list -deps` 断言 `usmp-backend` import 闭包零 ygot/goyang（tools/测试/simulator 豁免），仿 NC-01 口径
-- [ ] 7.2 go.mod 整理：两库降为工具/测试依赖；验收口径（二进制不链接 vs tools 拆独立 module）与用户拍板执行
-- [ ] 7.3 文档同步：CLAUDE.md R04 表述、§3 技术栈依赖行、TEAM_HANDBOOK 相关条目；覆盖率棘轮按新增测试上调（T08）
+- [x] 7.2 go.mod 整理：两库降为工具/测试依赖；验收口径（二进制不链接 vs tools 拆独立 module）与用户拍板执行
+- [x] 7.3 文档同步：CLAUDE.md R04 表述、§3 技术栈依赖行、TEAM_HANDBOOK 相关条目（无 ygot 引用，免改）；覆盖率棘轮按 PR CI 实测值调整（T08，见 PR 记录）
 - [x] 7.4 发布验证：`scripts/build-release.sh` 出包 + 干净容器冒烟 + `go version -m` 依赖审计留证
