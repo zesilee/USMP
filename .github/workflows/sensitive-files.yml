@@ -34,3 +34,6 @@ jobs:
           fi
 
           echo "No sensitive files detected"
+
+      - name: Scan for Binary Files (R18)
+        run: ./scripts/check-binary-files.sh origin/main...HEAD

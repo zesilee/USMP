@@ -31,6 +31,9 @@ memory-check: ## 检查记忆归档链接是否健康（只读，不健康退出
 memory-test: ## 运行 link-memory.sh 行为测试
 	@./scripts/test/link-memory_test.sh
 
+binary-guard-test: ## 运行 R18 二进制拦截脚本行为测试
+	@./scripts/test/check-binary-files_test.sh
+
 # ──────────────────────────────────────────────
 # Git Hooks
 # ──────────────────────────────────────────────
