@@ -31,6 +31,9 @@ jobs:
       - name: Go Mod Download
         run: go mod download
 
+      - name: Generate Schema IR (构建期产物不入库 R18)
+        run: (cd tools && go run ./schemagen -repo_root=../.. -output=../internal/yangschema/schema.ir.gz)
+
       - name: Install envtest binaries (真 apiserver 集成测试，矩阵 A7/BIO-05)
         run: |
           echo "KUBEBUILDER_ASSETS=$(go run sigs.k8s.io/controller-runtime/tools/setup-envtest@release-0.19 use 1.31.0 -p path)" >> "$GITHUB_ENV"

@@ -2,8 +2,8 @@
 # 用法: make <target>
 
 .PHONY: setup bootstrap test lint compliance hook-install hook-verify help \
-	staging-up staging-down staging-logs staging-ps e2e-local gen-contract gen-yang gen-crd gen-crd2yang gen-schema-fixtures sync-snd-i18n dev \
-	memory-link memory-check memory-test
+	staging-up staging-down staging-logs staging-ps e2e-local gen-contract gen-yang gen-crd gen-crd2yang gen-schema-fixtures gen-schema-ir sync-snd-i18n dev \
+	memory-link memory-check memory-test binary-guard-test
 
 # 默认目标
 help: ## 显示所有可用目标
@@ -30,6 +30,9 @@ memory-check: ## 检查记忆归档链接是否健康（只读，不健康退出
 
 memory-test: ## 运行 link-memory.sh 行为测试
 	@./scripts/test/link-memory_test.sh
+
+binary-guard-test: ## 运行 R18 二进制拦截脚本行为测试
+	@./scripts/test/check-binary-files_test.sh
 
 # ──────────────────────────────────────────────
 # Git Hooks
@@ -76,7 +79,7 @@ compliance: lint test ## 完整合规检查 (lint + test)
 # 本地 Staging（docker-compose）—— 复现 e2e-staging 工作流
 # 详见 docs/CICD.md。需要 Docker（Mac 用 Docker Desktop）。
 # ──────────────────────────────────────────────
-staging-up: ## 构建并起本地 staging（simulator+backend+frontend，常驻）
+staging-up: gen-schema-ir ## 构建并起本地 staging（simulator+backend+frontend，常驻）
 	docker compose up -d --build --remove-orphans
 	@echo "✅ staging 已启动 → 前端 http://localhost:3002  后端 http://localhost:8080/api/v1"
 
@@ -107,6 +110,10 @@ gen-contract: ## 生成 API 契约类型：Go 注解 → OpenAPI → 前端 TS�
 
 gen-yang: ## 重新生成 ygot YANG→Go 生成物（VENDOR=<pkg> 单包，缺省全量；CI 以 regen-and-diff 验证零漂移）
 	@sh scripts/gen-yang.sh $(VENDOR)
+
+gen-schema-ir: ## 生成 schema IR blob（构建期二进制产物，不入库 R18；go:embed 编译前置，克隆后由 make setup 自动执行）
+	@cd backend/tools && go run ./schemagen -repo_root=../.. -output=../internal/yangschema/schema.ir.gz
+	@echo "✅ gen-schema-ir 完成（backend/internal/yangschema/schema.ir.gz，不入库）"
 
 gen-crd: ## 重新生成业务意图 CRD manifest（YANG→CRD，BIC-01；CI 以 regen-and-diff 验证零漂移）
 	@mkdir -p deploy/crds

@@ -42,6 +42,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+
+      # 0) schema.ir.gz 为构建期产物不入库（R18）：backend 镜像构建 COPY 需其存在于 checkout
+      - name: Generate Schema IR
+        run: make gen-schema-ir
+
       # 1) 构建三镜像（simulator / backend / frontend）
       #    前端强制 --no-cache：self-hosted runner 复用陈旧前端镜像层会让 staging 服务旧 SPA
       #    （曾导致 VLAN 页仍是 #69 前的老 VlanFormDrawer，下发按钮 disabled → 冒烟点击 30s 超时）。

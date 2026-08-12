@@ -17,6 +17,8 @@ if ! docker compose version >/dev/null 2>&1; then
 fi
 
 echo -e "${YELLOW}[e2e-smoke] 构建并起本地 staging...${NC}"
+# schema.ir.gz 为构建期产物不入库（R18）：backend 镜像构建 COPY 需其存在于工作区
+(cd backend/tools && go run ./schemagen -repo_root=../.. -output=../internal/yangschema/schema.ir.gz)
 docker compose up -d --build --remove-orphans
 
 # 端口自动发现（尊重 override 的重映射；失败回退默认）

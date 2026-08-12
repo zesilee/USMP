@@ -32,6 +32,7 @@
 | R15 | 禁止无测试提交 | pre-commit + CI 双重拦截 |
 | R16 | 禁止提交敏感文件 | `.env`/`.pem`/`.key`/`.p12` 等，pre-commit + CI 扫描 |
 | R17 | 禁止先代码后刷 spec | 契约变更 **spec-first**：先刷 spec/change delta 再启动开发，禁止先写代码后补 spec。spec 格式对齐 OpenSpec CLI 标准，详见 [openspec/SPEC_CONVENTIONS.md](openspec/SPEC_CONVENTIONS.md) |
+| R18 | 禁止提交二进制文件 | 构建产物（如 schema.ir.gz）构建期生成不入库（`make gen-schema-ir`）；唯一白名单为 docs/ 文档配图；pre-commit + CI（scripts/check-binary-files.sh）双层拦截 |
 
 ## §3 技术栈
 
