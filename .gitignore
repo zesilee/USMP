@@ -46,6 +46,10 @@ frontend/playwright-report/
 frontend/.vite/
 frontend/package-lock.json
 
+# 前端测试运行产物（覆盖率报告 / vitest 附件缓存），生成物不入库（R18）
+frontend/coverage/
+frontend/.vitest-attachments/
+
 # Logs
 *.log
 
