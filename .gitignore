@@ -62,3 +62,6 @@ frontend/test/browser/__screenshots__/
 # 一键编译打包产物（scripts/build-release.sh；仅根目录，勿误伤 scripts/release/）
 /release/
 backend/yanggen
+
+# 构建期生成的 schema IR blob（make gen-schema-ir；二进制不入库 R18）
+backend/internal/yangschema/schema.ir.gz

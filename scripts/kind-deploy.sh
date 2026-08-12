@@ -94,6 +94,8 @@ for v in HTTP_PROXY HTTPS_PROXY NO_PROXY http_proxy https_proxy no_proxy; do
   [ -n "${!v:-}" ] && build_args+=(--build-arg "$v=${!v}")
 done
 log "构建镜像（simulator / controller / frontend）"
+# schema.ir.gz 为构建期产物不入库（R18）：镜像构建上下文为 backend/，宿主侧先生成
+(cd "$ROOT/backend/tools" && go run ./schemagen -repo_root=../.. -output=../internal/yangschema/schema.ir.gz)
 docker build "${build_args[@]}" -t usmp-simulator:latest  -f "$ROOT/backend/Dockerfile.simulator" "$ROOT/backend"
 docker build "${build_args[@]}" -t usmp-controller:latest -f "$ROOT/backend/Dockerfile"           "$ROOT/backend"
 docker build "${build_args[@]}" -t usmp-frontend:latest   -f "$ROOT/frontend/Dockerfile"          "$ROOT/frontend"

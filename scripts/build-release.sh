@@ -41,6 +41,8 @@ step "1/5 编译后端（GOOS=$GOOS GOARCH=$GOARCH，静态编译）"
 # ──────────────────────────────────────────────
 (
     cd "$ROOT/backend"
+    # schema.ir.gz 为构建期产物不入库（R18）：go:embed 编译前置
+    (cd tools && go run ./schemagen -repo_root=../.. -output=../internal/yangschema/schema.ir.gz)
     CGO_ENABLED=0 GOOS="$GOOS" GOARCH="$GOARCH" \
         go build -trimpath -ldflags='-s -w' -o "$PKG/bin/usmp-backend" .
     CGO_ENABLED=0 GOOS="$GOOS" GOARCH="$GOARCH" \

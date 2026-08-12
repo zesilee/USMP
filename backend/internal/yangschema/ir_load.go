@@ -7,9 +7,10 @@ import (
 )
 
 // schema.ir.gz 是构建期 schemagen 产出的框架 Schema 树自有序列化（YN-03）：
-// 运行期零 ygot/goyang 依赖的加载数据源。重新生成：
+// 运行期零 ygot/goyang 依赖的加载数据源。二进制产物不入库（R18），克隆后
+// 由 make setup 自动生成；编译报 "no matching files found" 时运行：
 //
-//	go generate ./internal/yangschema  （或 make gen-yang，阶段2.5 接线）
+//	make gen-schema-ir  （或 go generate ./internal/yangschema / make gen-yang）
 //
 // 新鲜度门禁在 tools/schemagen 的 TestSourceVsBlobCompare（blob 与直读源
 // 重建逐字节比对；S4 起 schemagen 直读 YANG 源，旧 gzip 链路已退役）。

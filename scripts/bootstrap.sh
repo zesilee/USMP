@@ -55,6 +55,10 @@ fi
 # ──────────────────────────────────────────────
 echo -e "${YELLOW}[4/8] 运行基线测试...${NC}"
 if [ -d backend ]; then
+  # schema.ir.gz 为构建期产物不入库（R18）：go:embed 需其存在，测试/编译前先生成
+  (cd backend/tools && go run ./schemagen -repo_root=../.. -output=../internal/yangschema/schema.ir.gz) \
+    && echo -e "${GREEN}  ✅ schema IR 已生成${NC}" \
+    || echo -e "${RED}  ❌ schema IR 生成失败（make gen-schema-ir 重试）${NC}"
   if (cd backend && go test ./... -count=1 -timeout=120s 2>&1); then
     echo -e "${GREEN}  ✅ 基线测试全绿${NC}"
   else
