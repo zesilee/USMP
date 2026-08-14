@@ -84,6 +84,10 @@ export default function ModuleConsolePage() {
   }, [blocker])
 
   const rawRef = useRef<{ fields: Field[]; rpcs: RpcDef[] }>({ fields: [], rpcs: [] })
+  // schema 载入代际：loadSchema 重跑（如选设备后带 ?device= 重取预标记）会以原始
+  // fields 覆盖已本地化版本，而 rootName/locale/leftTree 均未变 → relabel effect
+  // 不会重跑（真机 E2E 回归：Tab 停在原始名）。代际计数强制 relabel 跟跑。
+  const [schemaEpoch, setSchemaEpoch] = useState(0)
 
   const loadSchema = useCallback(async () => {
     setSchemaError('')
@@ -102,6 +106,7 @@ export default function ModuleConsolePage() {
       setRpcs(rawRef.current.rpcs)
       const tabs0 = deriveTabs(data?.fields ?? [])
       setActiveTab(tabs0[0]?.name || '')
+      setSchemaEpoch((n) => n + 1)
     } catch (e: any) {
       // schema 拉取失败降级：页面不崩，明确报错（R08/§9）。
       setSchemaError(e?.response?.data?.message || e?.message || t('console.schemaLoadFailed'))
@@ -129,7 +134,7 @@ export default function ModuleConsolePage() {
     return () => {
       alive = false
     }
-  }, [rootName, locale, menuStore.leftTree])
+  }, [rootName, locale, menuStore.leftTree, schemaEpoch])
 
   // 软归属（FE-18）：查询失败静默降级为无徽标（R08）。
   const [ownershipIntents, setOwnershipIntents] = useState<string[]>([])

@@ -5,6 +5,7 @@ import {
   Checkbox,
   Empty,
   Popover,
+  Select,
   Table,
   Tag,
   confirm,
@@ -274,7 +275,7 @@ export default function ModuleListTab(props: ModuleListTabProps) {
         </span>
         {!tab.readonly && canUpdate && (
           <Button type="primary" size="small" icon={<icons.PlusIcon />} onClick={() => void openCreate()} data-test="add-row">
-            {t('console.addConfigItem')}
+            {t('common.create')}
           </Button>
         )}
         {searchFields.length > 0 && (
@@ -283,14 +284,26 @@ export default function ModuleListTab(props: ModuleListTabProps) {
             open={searchOpen}
             onOpenChange={setSearchOpen}
             content={
-              <div className="adv-search" data-test="adv-search-panel">
+              <div className="adv-search search-panel" data-test="adv-search-panel">
                 {searchFields.map((f) => (
                   <label key={f.path} className="adv-search-item">
                     <span>{f.label}</span>
-                    <input
-                      value={draft[leafName(f)] ?? ''}
-                      onChange={(e) => setDraft((prev) => ({ ...prev, [leafName(f)]: e.target.value }))}
-                    />
+                    {f.options?.length ? (
+                      // 枚举查询条件用下拉（与详情区控件同型，FE-11）。
+                      <Select
+                        size="small"
+                        allowClear
+                        style={{ minWidth: 160 }}
+                        options={f.options}
+                        value={draft[leafName(f)] || undefined}
+                        onChange={(v) => setDraft((prev) => ({ ...prev, [leafName(f)]: v ?? '' }))}
+                      />
+                    ) : (
+                      <input
+                        value={draft[leafName(f)] ?? ''}
+                        onChange={(e) => setDraft((prev) => ({ ...prev, [leafName(f)]: e.target.value }))}
+                      />
+                    )}
                   </label>
                 ))}
                 <div className="adv-search-actions">
@@ -305,7 +318,7 @@ export default function ModuleListTab(props: ModuleListTabProps) {
                       if (serverMode) void pageLoad(false, { page: 1, applied: { ...draft } })
                     }}
                   >
-                    {t('common.search')}
+                    {t('common.apply')}
                   </Button>
                   <Button
                     size="small"

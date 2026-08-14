@@ -10,9 +10,9 @@ import './Header.scss'
 const t = (k: string, p?: Record<string, unknown>) => i18n.global.t(k, p)
 
 // 语言自名走词表（两份同值——语言名不随界面语言翻译，UI-02 口径下仍归词表）。
-const LOCALES: { key: AppLocale; labelKey: string }[] = [
-  { key: 'zh-cn', labelKey: 'locale.zhCn' },
-  { key: 'en-us', labelKey: 'locale.enUs' },
+const LOCALES: { key: AppLocale; labelKey: string; testId: string }[] = [
+  { key: 'zh-cn', labelKey: 'locale.zhCn', testId: 'locale-zh' },
+  { key: 'en-us', labelKey: 'locale.enUs', testId: 'locale-en' },
 ]
 
 export default function Header() {
@@ -35,7 +35,7 @@ export default function Header() {
         trigger={['click']}
         menu={{
           selectedKeys: [locale],
-          items: LOCALES.map((l) => ({ key: l.key, label: t(l.labelKey) })),
+          items: LOCALES.map((l) => ({ key: l.key, label: <span data-test={l.testId}>{t(l.labelKey)}</span> })),
           onClick: ({ key }) => setLocale(key as AppLocale),
         }}
       >

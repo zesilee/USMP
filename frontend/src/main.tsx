@@ -6,7 +6,7 @@ import { router } from './router'
 import './styles/reset.scss'
 import './styles/theme.scss'
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById('app')!).render(
   <StrictMode>
     <UiProvider>
       <RouterProvider router={router} />
