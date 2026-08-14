@@ -5,7 +5,7 @@ metadata:
   type: project
 ---
 
-**change `frontend-react-antd-switch` 已全量交付归档**（2026-08-14，PR #316-#337，71/71 tasks；制品在 `openspec/changes/archive/`）：Vue3+Element Plus 整体退役，现栈 = **React 19 + antd 6.6 + Vite 8 + zustand + react-router 8 + 自研 i18n 薄层**（同形 `i18n.global.t` API，词表键名原样沿用）。E2E 对等以旧 staging-smoke 套件为验收标尺，chromium/firefox/webkit 63/63 全绿；覆盖率棘轮 94.5/83.3/94.5/96.1。
+**change `frontend-react-antd-switch` 已全量交付归档**（2026-08-14，PR #316-#337，71/71 tasks；制品在 `openspec/changes/archive/`）：Vue3+Element Plus 整体退役，现栈 = **React 19 + antd 6.6 + Vite 8 + zustand + react-router 8 + 自研 i18n 薄层**（同形 `i18n.global.t` API，词表键名原样沿用）。E2E 对等以旧 staging-smoke 套件为验收标尺，chromium/firefox/webkit 63/63 全绿；覆盖率棘轮 94.3/83.2/94.5/96.0（首钉踩了本地 staging 灌水+stories 进分母双坑，#336 CI 红后按干净值二钉——上调阈值前必 `make staging-down` 且核对分母口径）。
 
 **Why:** 重建方法论与 antd 特有坑是数十个 PR 反复踩出来的；换栈后的军规锚点（适配层/键存在性）不写下来会被后续开发无意破坏。
 

@@ -13,7 +13,7 @@ metadata:
 
 **覆盖率棘轮（只准升不准降，加用例后要同步上调）**：
 - 后端 `backend/.coverage-baseline` = **71.0**（compliance.yml 低于即 fail）。注意：CI -race 下覆盖有 ±0.1 抖动，**上调时留 0.1 余量**；且本地跑覆盖率**不含 envtest 集成测试**（无 KUBEBUILDER_ASSETS），绝对值与 CI 有差，别拿本地值直接上调。另：pr-size/commit-msg 有纯删除豁免（insertions≤50 上限 6000，2026-07-17 用户批准）。
-- 前端 `vitest.config.ts` thresholds = **statements 94.5 / branches 83.3 / functions 94.5 / lines 96.1**（React 重建 12.4 回填收口，2026-08-14；frontend-ci 跑 `npm run test:coverage`，完整轨迹见 config 注释）。
+- 前端 `vitest.config.ts` thresholds = **statements 94.3 / branches 83.2 / functions 94.5 / lines 96.0**（React 重建 12.4 回填收口，2026-08-14 二钉；frontend-ci 跑 `npm run test:coverage`，完整轨迹见 config 注释。二钉教训再验证下条灌水坑，且 stories/生成物须排除出分母）。
 - **⚠️ 前端本地覆盖率会被跑着的 staging 后端灌水**（2026-07-24 schema-harness 实测踩坑）：本机 :8080 有 staging 时，测试里 fetch localhost:8080 的**成功回调真的执行**，多覆盖数个函数——funcs 本地 78.18 vs CI 77.44（差 0.74）。据此把 funcs 提到 78 → CI 红 → 退回 77。**教训：上调前端阈值前先 `make staging-down`，或直接信 CI 数、留足 margin，别拿本地灌水值上调。**
 - 补测后**记得把基线/阈值上调**到新水平，否则棘轮不收紧。
 
