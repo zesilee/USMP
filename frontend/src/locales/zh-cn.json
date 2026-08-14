@@ -385,5 +385,9 @@
     "lengthBoth": "合法长度: [{min}..{max}]",
     "lengthMin": "合法长度: ≥ {min}",
     "lengthMax": "合法长度: ≤ {max}"
+  },
+  "app": {
+    "rebuildingTitle": "前端重建进行中",
+    "rebuildingDesc": "USMP 前端正在从 Vue 迁移至 React——模块控制台等页面将随重建逐步恢复。"
   }
 }

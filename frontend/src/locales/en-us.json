@@ -385,5 +385,9 @@
     "lengthBoth": "Valid length: [{min}..{max}]",
     "lengthMin": "Valid length: ≥ {min}",
     "lengthMax": "Valid length: ≤ {max}"
+  },
+  "app": {
+    "rebuildingTitle": "Frontend rebuild in progress",
+    "rebuildingDesc": "The USMP frontend is migrating from Vue to React. Pages such as the module console will come back as the rebuild proceeds."
   }
 }

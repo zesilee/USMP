@@ -1,7 +1,9 @@
 import { defineConfig } from 'vitest/config'
+import react from '@vitejs/plugin-react'
 import { fileURLToPath } from 'node:url'
 
 export default defineConfig({
+  plugins: [react()],
   test: {
     environment: 'happy-dom',
     setupFiles: ['./test/setup.ts'],
@@ -17,6 +19,8 @@ export default defineConfig({
       'test/composables/useFieldLabels.test.ts',
       // deriveOverview 纯函数面随占位保留（vue 外壳退役），套件持续在场。
       'test/composables/useFleetOverview.test.ts',
+      // UI 适配层（FA-01~04）：守护 + feedback F1。
+      'test/ui/**/*.{test,spec}.{ts,tsx}',
     ],
     exclude: ['**/node_modules/**', '**/dist/**'],
     coverage: {
@@ -24,14 +28,14 @@ export default defineConfig({
       reporter: ['text', 'json', 'html'],
       // 覆盖率口径随清场重算分母（先例：2026-07-13 legacy CRD 退役）：窗口期
       // 仅测纯逻辑层，口径收敛到其被测面；React 层重建时逐组扩回。
-      include: ['src/utils/**/*.ts', 'src/i18n/**/*.ts', 'src/composables/**/*.ts'],
+      include: ['src/utils/**/*.ts', 'src/i18n/**/*.ts', 'src/composables/**/*.ts', 'src/ui/**/*.{ts,tsx}'],
       exclude: ['src/**/*.d.ts'],
       // 覆盖率「不下降」棘轮（T08）：阈值 = 当前实测水平向下取整留余量。
       // 只准升不准降——低于阈值 CI 即 fail。补测后应把阈值同步上调，形成单向棘轮。
       // 历史轨迹（Vue 全量口径）：2026-07-06 66.55/66.57/56.67/66.88 →
       // 2026-07-24 起 86.5/79.8/81.0/87.5。窗口口径实测（2026-08-14，含
-      // composables 纯函数面）：95.14/85.87/95.16/96.39；React 层组件测试回归后
-      // 恢复全量口径并逐步爬回。
+      // composables 纯函数面与 src/ui 适配层）：95.48/85.87/96.21/96.73；
+      // React 层组件测试回归后恢复全量口径并逐步爬回。
       thresholds: {
         statements: 94.5,
         branches: 85.5,

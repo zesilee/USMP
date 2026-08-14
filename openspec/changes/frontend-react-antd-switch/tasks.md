@@ -1,6 +1,6 @@
 > **执行约定**：每个 `##` 任务组对应一个独立 PR（TM04 ≤1000 行，超出即再拆；纯删除 PR 走体积豁免）。每项按 §5.6「改动类型→必补层」补齐测试，缺层=未完成（T06）。测试先行（T05），Bug 先写回归（T07）。
 > **全新项目前提**：无双轨并行、无灰度切换、无回滚窗口（design D1）。唯一硬闸门为第 7 组的 R05 能力验证。
-> **窗口红灯声明**（清场 PR 评审确认）：`npm run build` 在窗口期为显式报错脚本 → `frontend/Dockerfile`、`scripts/e2e-smoke.sh`、`scripts/build-release.sh`、合并后 `e2e-staging` 工作流在脚手架恢复 build 前**预期红**；窗口期含 frontend 改动的推送使用 `USMP_SKIP_E2E=1` 一次性豁免（超出其"无 docker 机器"常规口径，依据即本声明与 design D1 空窗决策，脚手架恢复 build 后即停用）。
+> **窗口红灯声明**（清场 PR 评审确认）：`npm run build` 在窗口期为显式报错脚本 → `frontend/Dockerfile`、`scripts/e2e-smoke.sh`、`scripts/build-release.sh`、合并后 `e2e-staging` 工作流在脚手架恢复 build 前**预期红**；窗口期含 frontend 改动的推送使用 `USMP_SKIP_E2E=1` 一次性豁免（超出其"无 docker 机器"常规口径，依据即本声明与 design D1 空窗决策）。豁免分两段：build 断链段（4/6~6/6，Docker 构建即失败）；页面重建段（脚手架后 build 已恢复、但 staging-smoke 断言的页面尚未对等，豁免持续至 tasks 12.3 E2E 全绿即停用）。
 
 ## 1. 准备与隔离
 
@@ -18,13 +18,13 @@
 
 ## 3. 脚手架与 UI 适配层（PR-2）
 
-- [ ] 3.1 建 React 骨架：Vite + React 19 + TypeScript + antd 6.6；Node 引擎约束保持 `>=20.12.0`
-- [ ] 3.2 `src/ui/` 适配层：逐项显式声明导出面（覆盖 38 种在用控件的对应物），禁整包透传（FA-02）
-- [ ] 3.3 适配层 `feedback`：`toast()` 与 Promise 化 `confirm()`（FA-03，D7）— **F1**
-- [ ] 3.4 适配层图标与主题令牌收口：19 个在用图标映射 + 缺失图标规范占位（FA-04，R12）— **F1**
-- [ ] 3.5 门禁：ESLint 规则禁业务代码直接 import 组件库 + 守护测试（FA-01）— **守护测试**
-- [ ] 3.6 Vitest（happy-dom）+ `@testing-library/react` 配置就位；覆盖率阈值文件按 1.2 基线初始化
-- [ ] 3.7 `tsc --noEmit` typecheck 脚本就位；**前端 CI 作业恢复正常**（解除 2.4 降级）
+- [x] 3.1 建 React 骨架：Vite + React 19 + TypeScript + antd 6.6；Node 引擎约束保持 `>=20.12.0`
+- [x] 3.2 `src/ui/` 适配层：逐项显式声明导出面（覆盖 38 种在用控件的对应物），禁整包透传（FA-02）
+- [x] 3.3 适配层 `feedback`：`toast()` 与 Promise 化 `confirm()`（FA-03，D7）— **F1**
+- [x] 3.4 适配层图标与主题令牌收口：19 个在用图标映射 + 缺失图标规范占位（FA-04，R12）— **F1**
+- [x] 3.5 门禁：守护测试硬拦业务代码直接 import 组件库与整包透传（FA-01/FA-02，pre-commit+CI 双跑）；ESLint 规则部分推迟至 lint 体系引入（项目现无 ESLint，守护测试已是硬拦截）— **守护测试**
+- [x] 3.6 Vitest（happy-dom）+ `@testing-library/react` 配置就位；覆盖率阈值文件按 1.2 基线初始化
+- [x] 3.7 `tsc --noEmit` typecheck 脚本就位；**前端 CI 作业恢复正常**（解除 2.4 降级）
 
 ## 4. 纯逻辑层就位（PR-3）
 
