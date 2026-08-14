@@ -1,16 +1,17 @@
-import { ref } from 'vue'
-import { listDevices, getFleetReconcile } from '../api'
 import type { ReconcileOutcome } from '../types/api'
 import { i18n } from '../i18n'
 
-// 设备总览派生：把 /devices（在线态）与 /reconcile/status（对账四态聚合，PR-B1/B3 真数据）
-// 合成大盘所需的收敛率、四态分段、待对账台账、最近对账。
+// 设备总览派生（纯函数面，React 重建窗口保留）：把 /devices（在线态）与
+// /reconcile/status（对账四态聚合）合成大盘所需的收敛率、四态分段、待对账台账、
+// 最近对账。Vue 组合式外壳（ref/load）已随 Vue 栈退役——React hook 版（tasks
+// 10.2）在同路径重建外壳并复用本文件全部纯函数与类型；沿用套件
+// test/composables/useFleetOverview.test.ts 只测 deriveOverview，窗口期持续绿。
 //
 // 数据边界（诚实）：
 // - device_id 与 device.ip 同为设备 IP（reconcile.Request.DeviceID=ip），可直接 join。
 // - status 模型只有 path/outcome/diff_count/last_error，无 was→now 值级差异；台账因此
-//   展示「设备 + 结局 + 最近对账时刻」，值级 diff 属 PR-2 配置对账抽屉。
-// - summary 仅含「已对账」设备；从未对账(unknown) = 在线但无对账记录，本函数据设备表派生。
+//   展示「设备 + 结局 + 最近对账时刻」。
+// - summary 仅含「已对账」设备；从未对账(unknown) = 在线但无对账记录，据设备表派生。
 
 /** 设备在线态（取自 /devices）。 */
 export interface DeviceInput {
@@ -186,35 +187,4 @@ export function deriveOverview(devices: DeviceInput[], fleet: FleetInput): Overv
     ledger,
     recent,
   }
-}
-
-const EMPTY_OVERVIEW: Overview = deriveOverview([], {})
-
-/**
- * 组合式：拉取 /devices + /reconcile/status，派生概览；任一失败降级为错误态（R08 不崩）。
- */
-export function useFleetOverview() {
-  const overview = ref<Overview>(EMPTY_OVERVIEW)
-  const loading = ref(false)
-  const error = ref<string | null>(null)
-
-  async function load() {
-    loading.value = true
-    error.value = null
-    try {
-      const [devRes, fleetRes] = await Promise.all([listDevices(), getFleetReconcile()])
-      const devices: DeviceInput[] = (devRes.data?.data?.devices ?? []).map((d) => ({
-        ip: d.ip ?? '',
-        online: d.online ?? false,
-      }))
-      overview.value = deriveOverview(devices, fleetRes.data?.data ?? {})
-    } catch (e: any) {
-      error.value = e?.response?.data?.message || e?.message || i18n.global.t('common.loadFailed')
-      overview.value = EMPTY_OVERVIEW
-    } finally {
-      loading.value = false
-    }
-  }
-
-  return { overview, loading, error, load }
 }
