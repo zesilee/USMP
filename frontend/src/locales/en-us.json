@@ -384,7 +384,8 @@
     "pendingCreateRemoved": "Pending-create entry removed",
     "lengthBoth": "Valid length: [{min}..{max}]",
     "lengthMin": "Valid length: ≥ {min}",
-    "lengthMax": "Valid length: ≤ {max}"
+    "lengthMax": "Valid length: ≤ {max}",
+    "queryAt": "Queried at {time}"
   },
   "app": {
     "rebuildingTitle": "Frontend rebuild in progress",

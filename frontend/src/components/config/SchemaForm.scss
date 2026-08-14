@@ -1,0 +1,28 @@
+/* SchemaForm 三列栅格（FE-22 NCE 形态）：标量流式补位，容器/choice/list 整行。 */
+.schema-form--grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  column-gap: 24px;
+  row-gap: 4px;
+}
+
+.schema-form .fi-span-full {
+  grid-column: 1 / -1;
+}
+
+.schema-form .fi-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.schema-form .key-icon {
+  color: var(--text-tertiary);
+  font-size: 12px;
+}
+
+@media (max-width: 1280px) {
+  .schema-form--grid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}

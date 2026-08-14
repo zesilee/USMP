@@ -55,14 +55,14 @@
 ## 7. 垂直切片：模块控制台列表页（硬闸门，PR-6）
 
 - [x] 7.1 `FieldRenderer` 重建：递归渲染 + 类型→控件分派（8 种类型全覆盖），全部控件经适配层（FE-01）— **F2（含 add/edit/remove 与校验错误态）**
-- [ ] 7.2 列表 Tab 打通 **Table 运行时动态列**：列设置显隐、排序、enum/boolean 表头筛选、多选、自定义单元格（状态点/enum 标签/when 不可见占位）— **F2**
-- [ ] 7.3 表单打通 **运行时动态 rules**：pattern / range / required / must 由 YANG 元数据现场生成 — **F2**
-- [ ] 7.4 以 68 模块 schema fixture 驱动跑通 7.2/7.3（非玩具示例）— **F2**
-- [ ] 7.5 **闸门评审**：R05 能力确认通过方可继续；未通过则暂停重建、回到 design 重新评估（D3）
+- [x] 7.2 列表 Tab 打通 **Table 运行时动态列**：列设置显隐、排序、enum/boolean 表头筛选、多选、自定义单元格（状态点/enum 标签/when 不可见占位）— **F2**
+- [x] 7.3 表单打通 **运行时动态 rules**：pattern / range / required / must 由 YANG 元数据现场生成 — **F2**
+- [x] 7.4 以 68 模块 schema fixture 驱动跑通 7.2/7.3（非玩具示例）— **F2**
+- [x] 7.5 **闸门评审**：R05 能力确认通过方可继续；未通过则暂停重建、回到 design 重新评估（D3）
 
 ## 8. 控制台其余部分（PR-7、PR-8）
 
-- [ ] 8.1 `ItemDetailPane` 详情同屏编辑区 + 二级 Tab 派生（FE-21）— **F2**
+- [ ] 8.1 `ItemDetailPane` 详情同屏编辑区 + 二级 Tab 派生（FE-21）；顺带拍板 range 违例是否入 blocked 门禁（rangeViolations 已备，评审 #9）与行内 touched/违例计数 — **F2**
 - [ ] 8.2 `ModuleFormTab` 表单 Tab（FE-10）— **F2**
 - [ ] 8.3 `RpcExecuteTab` + 高危 rpc 二次确认（FE-19/FE-20）— **F2**
 - [ ] 8.4 只读 state 子树降级（FE-14）+ 节点不支持占位态 + 单行状态读合并 — **F2**
@@ -87,7 +87,7 @@
 
 - [ ] 11.1 变更集 store + 批量工具栏（FE-23）— **F2**
 - [ ] 11.2 `DiffPreview` / 提交对话框 / 试运行对话框 / 变更内容对话框（FE-03）— **F2**
-- [ ] 11.3 对账进度与新鲜度展示 — **F2**
+- [ ] 11.3 对账进度与新鲜度展示；**含读路径新鲜度埋点恢复**（getConfig 响应 cache_age/ttl/source → useFreshnessStore.record，评审 #6 提醒旧 requestRows 有此埋点）— **F2**
 
 ## 12. 测试补齐与门禁达标（PR-13）
 

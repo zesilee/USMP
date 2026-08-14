@@ -384,7 +384,8 @@
     "pendingCreateRemoved": "已移除该待创建条目",
     "lengthBoth": "合法长度: [{min}..{max}]",
     "lengthMin": "合法长度: ≥ {min}",
-    "lengthMax": "合法长度: ≤ {max}"
+    "lengthMax": "合法长度: ≤ {max}",
+    "queryAt": "查询时间：{time}"
   },
   "app": {
     "rebuildingTitle": "前端重建进行中",
