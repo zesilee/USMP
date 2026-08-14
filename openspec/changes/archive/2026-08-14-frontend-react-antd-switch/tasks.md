@@ -111,6 +111,6 @@
 - [x] 14.1 更新 `CLAUDE.md` §3 技术栈表（前端行）与 §7.2 前端技能表述（§1 语言行/§3 前端行含 src/ui 适配层约束/§5.6 前端层表/§7.2/§10 交付标准）
 - [x] 14.2 更新 `frontend/TESTING.md` 四层描述为新栈实现（@testing-library/react、antd Select、tsc、覆盖率轨迹补 React 段、目录口径对齐实际 test/ 结构）
 - [x] 14.3 `/opsx:sync`：delta spec 合并入主 spec（`frontend`、`ui-i18n`、新增 `frontend-ui-adapter`）（FE-01 MODIFIED/FE-27 ADDED/UI-01·02 MODIFIED/FA-01~04 新 spec；借机把主 spec Purpose 与 FE-08 的旧栈组件名改为栈中立；openspec validate --specs 39/39）
-- [ ] 14.4 `/opsx:archive`：归档本 change
-- [ ] 14.5 记忆归档（§13 MEM01/MEM04，单独 commit）：新增 React 栈记忆条目，更新受影响的既有条目（`frontend-contract-gen`、`nce-console-redesign`、`test-governance-military-rules` 等）
-- [ ] 14.6 follow-up 债登记：Storybook 故事重建、主题令牌对齐粒度、EviewUI 接入时机与 React 版本约束（design Open Questions 1–4）
+- [x] 14.4 `/opsx:archive`：归档本 change（openspec archive 移入 changes/archive/）
+- [x] 14.5 记忆归档（§13 MEM01/MEM04，单独 commit）：react-antd-rebuild 改写为交付归档态（含 antd E2E 三根因/F3 useId 坑/适配层军规），test-governance 棘轮值刷新+两待办闭环，contract-gen/nce-redesign 加栈迁移注
+- [x] 14.6 follow-up 债登记：Open Q1-Q3 + 评审低严重度四条 + loadSchema in-flight 守卫存量债，共五组登记于 react-antd-rebuild 记忆 follow-up 债节（Q4 清场 CI 处理已随窗口关闭消解）
