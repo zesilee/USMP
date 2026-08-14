@@ -35,8 +35,10 @@ jobs:
       - name: Install dependencies
         run: npm ci --prefer-offline --no-audit --fund=false
 
+      # React 重建窗口（frontend-react-antd-switch）：Storybook 随 Vue 栈退役、
+      # 待重建（tasks 13.6）。--if-present 令脚本缺失时静默跳过、恢复即自动生效。
       - name: Build Storybook
-        run: npm run build-storybook
+        run: npm run build-storybook --if-present
 
       - name: Upload Storybook static
         if: always()
