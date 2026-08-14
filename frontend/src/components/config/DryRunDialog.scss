@@ -1,0 +1,40 @@
+.dryrun-loading {
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.device-name {
+  font-weight: 600;
+  color: var(--color-primary, #0c5ea6);
+  margin-bottom: 8px;
+}
+
+.entry-block {
+  margin-bottom: 12px;
+}
+
+.xml-panes {
+  display: flex;
+  gap: 12px;
+}
+
+.xml-pane {
+  flex: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pane-title {
+  font-weight: 600;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-elevated);
+  font-size: 12.5px;
+}
+
+.hint {
+  margin-bottom: 10px;
+}

@@ -1,0 +1,27 @@
+.legend {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.legend-item::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  vertical-align: -1px;
+}
+
+.legend-item.added::before { background: var(--color-success, #10814a); }
+.legend-item.modified::before { background: var(--color-warning, #b26a00); }
+.legend-item.removed::before { background: var(--color-danger, #c7000b); }
+
+.cell-added { color: var(--color-success, #10814a); }
+.cell-modified { color: var(--color-warning, #b26a00); }
+.cell-removed {
+  color: var(--color-danger, #c7000b);
+  text-decoration: line-through;
+}

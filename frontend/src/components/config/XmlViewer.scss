@@ -1,0 +1,39 @@
+.xml-viewer {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  max-height: 320px;
+  overflow: auto;
+  background: var(--bg-card, #fff);
+}
+
+.xml-viewer.xml-empty {
+  padding: 12px;
+  color: var(--text-tertiary);
+}
+
+.xml-viewer .xml-lines {
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+}
+
+.xml-viewer .xml-line {
+  display: flex;
+}
+
+.xml-viewer .ln {
+  width: 34px;
+  flex: none;
+  text-align: right;
+  padding-right: 10px;
+  color: var(--text-tertiary);
+  user-select: none;
+}
+
+.xml-viewer .tk-punct { color: var(--text-tertiary); }
+.xml-viewer .tk-tag { color: var(--color-primary, #0c5ea6); }
+.xml-viewer .tk-attr-name { color: var(--color-warning, #b26a00); }
+.xml-viewer .tk-attr-value { color: var(--color-success, #10814a); }
+.xml-viewer .tk-text { color: var(--text-primary); }
+.xml-viewer .tk-comment { color: var(--text-tertiary); font-style: italic; }

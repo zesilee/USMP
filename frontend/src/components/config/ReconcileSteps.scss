@@ -1,0 +1,104 @@
+.reconcile-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.reconcile-steps .section-lbl {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.reconcile-steps .recon-steps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reconcile-steps .rstep-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.reconcile-steps .rstep {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reconcile-steps .rstep .ico {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--border-color);
+  color: var(--text-tertiary);
+  font-size: 11px;
+  flex: none;
+}
+
+.reconcile-steps .rstep.active .ico {
+  border-color: var(--color-primary, #0c5ea6);
+  color: var(--color-primary, #0c5ea6);
+}
+
+.reconcile-steps .rstep.done .ico {
+  background: var(--color-success, #10814a);
+  border-color: var(--color-success, #10814a);
+  color: #fff;
+}
+
+.reconcile-steps .rstep.error .ico {
+  background: var(--color-danger, #c7000b);
+  border-color: var(--color-danger, #c7000b);
+  color: #fff;
+}
+
+.reconcile-steps .rstep-txt b {
+  display: block;
+  font-size: 12.5px;
+  color: var(--text-primary);
+}
+
+.reconcile-steps .rstep-txt span {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.reconcile-steps .rline {
+  flex: 1;
+  height: 1.5px;
+  background: var(--border-color);
+  min-width: 18px;
+}
+
+.reconcile-steps .rline.done {
+  background: var(--color-success, #10814a);
+}
+
+.reconcile-steps .recon-result {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+.reconcile-steps .recon-result .glyph {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+}
+
+.reconcile-steps .recon-result.conv .glyph { background: var(--color-success, #10814a); }
+.reconcile-steps .recon-result.drift .glyph,
+.reconcile-steps .recon-result.error .glyph { background: var(--color-danger, #c7000b); }
+.reconcile-steps .recon-result.recon .glyph { background: var(--color-primary, #0c5ea6); }
