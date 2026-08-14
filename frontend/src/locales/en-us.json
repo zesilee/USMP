@@ -392,7 +392,9 @@
       "add": "Add",
       "modify": "Modify",
       "remove": "Clear"
-    }
+    },
+    "deleteTitle": "Confirm delete",
+    "totalCount": "{total} items"
   },
   "app": {
     "rebuildingTitle": "Frontend rebuild in progress",
