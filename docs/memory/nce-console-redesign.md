@@ -5,6 +5,8 @@ metadata:
   type: project
 ---
 
+> **栈迁移注**（2026-08-14）：前端已整体重建为 React 19 + antd 6（见 [[react-antd-rebuild]]）。本条中 Vue/@vue/vue-tsc/Element Plus 等实现细节为历史背景；契约生成/typecheck 门禁/交互设计结论仍有效，载体已换 React 对应物。
+
 # NCE 配置台改版（一期已交付 2026-07-31）
 
 **拍板**（用户确认）：一期只做界面对齐；「变更内容/试运行/重置/提交配置」**攒批提交是二期**（一期不渲染死按钮，右上区域预留）；设备入口保持顶部设备下拉；只动配置台。目标截图 7 张在 `~/ui/`，研究底稿 [[imaster-nce-ux-insights]]。
