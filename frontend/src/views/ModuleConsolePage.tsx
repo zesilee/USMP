@@ -1,17 +1,20 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router'
-import { Alert, Breadcrumb, Empty, Select, Tabs, Tag, Tooltip } from '../ui'
+import { useParams, useSearchParams, useBlocker } from 'react-router'
+import { Alert, Breadcrumb, Empty, Select, Tabs, Tag, Tooltip, confirm } from '../ui'
 import { i18n, getLocale, subscribeLocale } from '../i18n'
 import { useSyncExternalStore } from 'react'
 import { getYangSchema, getOwnership } from '../api'
 import { localizeFields, localizeRpcs } from '../composables/useFieldLabels'
 import { useMenuStore } from '../stores/menu'
+import { useChangesetStore } from '../stores/changeset'
 import { useDeviceStore } from '../stores/device'
 import type { Field } from '../utils/crdSchemaParser'
 import { deriveTabs, deriveRpcTabs, type ConsoleTab, type RpcDef } from '../utils/moduleConsole'
 import ModuleListTab from '../components/config/ModuleListTab'
 import ModuleFormTab from '../components/config/ModuleFormTab'
 import RpcExecuteTab from '../components/config/RpcExecuteTab'
+import BatchToolbar from '../components/config/BatchToolbar'
+import BatchCommitDialog from '../components/config/BatchCommitDialog'
 import './ModuleConsolePage.scss'
 
 // ModuleConsolePage（FE-10/18/19/24 宿主）：通用模块控制台——schema 拉取（?device=
@@ -53,8 +56,32 @@ export default function ModuleConsolePage() {
   const [rpcs, setRpcs] = useState<RpcDef[]>([])
   const [unsupportedTabs, setUnsupportedTabs] = useState<string[]>([])
   const [activeTab, setActiveTab] = useState('')
-  // 重置/提交成功 → 重挂 Tab 内容组件（tasks 11 组接线触发）。
-  const [consoleEpoch] = useState(0)
+  // 重置/提交成功 → 重挂 Tab 内容组件：表单回设备实际态、列表标记行还原。
+  const [consoleEpoch, setConsoleEpoch] = useState(0)
+  const [commitOpen, setCommitOpen] = useState(false)
+  const changeset = useChangesetStore()
+
+  // 提交编排（FE-03/FE-23）：确认 → 提交进度弹窗。
+  const onCommitRequest = useCallback(async () => {
+    const n = changeset.countFor(selectedDeviceIp)
+    if (!n) return
+    const ok = await confirm(t('console.batch.commitConfirm', { count: n }), {
+      title: t('console.batch.commit'),
+    })
+    if (ok) setCommitOpen(true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [changeset, selectedDeviceIp])
+
+  // 路由离开确认（FE-23 负路径）：存在未提交变更提示；取消停留、变更集保留。
+  const blocker = useBlocker(() => changeset.countFor(selectedDeviceIp) > 0)
+  useEffect(() => {
+    if (blocker.state !== 'blocked') return
+    void (async () => {
+      const ok = await confirm(t('console.batch.leaveConfirm'), { title: t('console.batch.changes') })
+      if (ok) blocker.proceed()
+      else blocker.reset()
+    })()
+  }, [blocker])
 
   const rawRef = useRef<{ fields: Field[]; rpcs: RpcDef[] }>({ fields: [], rpcs: [] })
 
@@ -161,6 +188,14 @@ export default function ModuleConsolePage() {
           ]}
         />
         <div className="header-actions">
+          {/* 攒批工具栏（FE-23）：变更内容/试运行/重置/提交配置。 */}
+          {selectedDeviceIp && (
+            <BatchToolbar
+              device={selectedDeviceIp}
+              onReset={() => setConsoleEpoch((n) => n + 1)}
+              onCommitRequest={() => void onCommitRequest()}
+            />
+          )}
           {ownershipIntents.length > 0 && (
             <Tooltip title={t('console.ownedTooltip', { intents: ownershipIntents.join('、') })}>
               <Tag color="orange" data-test="ownership-badge">
@@ -248,6 +283,13 @@ export default function ModuleConsolePage() {
       {!schemaError && selectedDeviceIp && !rpcMode && tabs.length === 0 && (
         <Empty description={t('console.schemaLoading')} />
       )}
+
+      <BatchCommitDialog
+        open={commitOpen}
+        device={selectedDeviceIp}
+        onClose={() => setCommitOpen(false)}
+        onCommitted={() => setConsoleEpoch((n) => n + 1)}
+      />
     </div>
   )
 }
