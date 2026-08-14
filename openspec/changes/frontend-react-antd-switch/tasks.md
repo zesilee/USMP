@@ -99,12 +99,12 @@
 
 ## 13. 工具链与基础设施收尾（PR-14）
 
-- [ ] 13.1 6 个 CI 工作流内部命令调整（路径不变）：`frontend-ci`、`frontend-browser-tests`、`frontend-storybook`、`contract-drift`、`e2e-staging`、`pr-size`
-- [ ] 13.2 3 个 git 钩子命令调整：`pre-commit`（前端单测）、`pre-push`（e2e smoke）、`commit-msg`/pr-size 排除清单两处同步
-- [ ] 13.3 `frontend/Dockerfile` 构建命令调整
-- [ ] 13.4 `scripts/build-release.sh` 静态站打包验证（产物形态不变）
-- [ ] 13.5 Makefile `gen-contract` / `sync-snd-i18n` / `staging-up` 验证
-- [ ] 13.6 Storybook 框架包切换，保证工作流不失效（故事内容不迁移，Non-Goal）
+- [x] 13.1 6 个 CI 工作流内部命令调整（路径不变）：`frontend-ci`、`frontend-browser-tests`、`frontend-storybook`、`contract-drift`、`e2e-staging`、`pr-size`（重建期已随波次自愈迁移并全绿运行；收尾仅清 vue-tsc 陈旧注释与 storybook 窗口注释）
+- [x] 13.2 3 个 git 钩子命令调整：`pre-commit`（前端单测）、`pre-push`（e2e smoke）、`commit-msg`/pr-size 排除清单两处同步（钩子重建期全程在岗；收尾清 pre-commit 匹配正则 .vue 残留；排除清单本就无栈耦合，无需改）
+- [x] 13.3 `frontend/Dockerfile` 构建命令调整（重建期已迁移，e2e-local 全栈反复构建验证，无 Vue 残留）
+- [x] 13.4 `scripts/build-release.sh` 静态站打包验证（产物形态不变；本地打包 21M zip 校验通过）
+- [x] 13.5 Makefile `gen-contract` / `sync-snd-i18n` / `staging-up` 验证（前两者重跑零漂移；staging-up 经 e2e-local 全栈验证）
+- [x] 13.6 Storybook 框架包切换，保证工作流不失效（故事内容不迁移，Non-Goal）（storybook@10.5.8 + @storybook/react-vite；Vite 8 需 ≥10.2.19；FieldRenderer 冒烟故事 ×2；本地 build 成功；vitest 族连带对齐 4.1.10）
 
 ## 14. 文档与归档（PR-15）
 
