@@ -2,11 +2,11 @@
 
 ## Purpose
 
-frontend 是 Vue3 + Element Plus 平台前端：由后端 YANG schema **自动渲染**表单/表格/分组（R05，禁止手写固定表单），编辑→校验→提交→联动后端下发，并展示设备/缓存/对账状态。下发链路唯一：**Stack B 直连**（`POST /api/v1/config/:ip/*path` + 轮询对账），动态表单由 `FieldRenderer` 直渲；legacy K8s CRD 链路（ConfigPage/useK8sCRD/DynamicForm）已随 native-config-reposition 退役删除。概念分层：**原生配置** = 直接基于 YANG 模型的设备配置管理（模块控制台 `/module/:name`，本 spec 的全部范围）；**业务网络配置**为未来扩展层（业务侧 YANG 模型定义网络自动化能力，USMP 编排为原生配置下发，方向见 openspec/tasks/business-network-config.md）。
+frontend 是 React + TypeScript 平台前端（控件经 `src/ui` UI 适配层收口，当前实现 Ant Design，见 frontend-ui-adapter spec）：由后端 YANG schema **自动渲染**表单/表格/分组（R05，禁止手写固定表单），编辑→校验→提交→联动后端下发，并展示设备/缓存/对账状态。下发链路唯一：**Stack B 直连**（`POST /api/v1/config/:ip/*path` + 轮询对账），动态表单由 `FieldRenderer` 直渲；legacy K8s CRD 链路（ConfigPage/useK8sCRD/DynamicForm）已随 native-config-reposition 退役删除。概念分层：**原生配置** = 直接基于 YANG 模型的设备配置管理（模块控制台 `/module/:name`，本 spec 的全部范围）；**业务网络配置**为未来扩展层（业务侧 YANG 模型定义网络自动化能力，USMP 编排为原生配置下发，方向见 openspec/tasks/business-network-config.md）。
 ## Requirements
 ### Requirement: FE-01 schema 驱动渲染
 
-前端 SHALL 将后端 YANG nested schema 经 `crdSchemaParser` 逐属性映射为 `Field[]`，类型映射为 boolean→「打开/关闭」radio 单选组（i18n 文案，值仍为 true/false；可选 boolean SHALL 支持不选=不入 payload）、number→input-number、object→group；enum SHALL 按选项数与必填性细分：**必填且选项 ≤3 → segmented 分段控件，其余（可选或 >3 选项）→ select 下拉**（可选枚举 SHALL 保留清空能力，清空即该键不入 payload）。映射经 `FieldRenderer` 渲染为 Element Plus 控件（R05）。SHALL NOT 手写固定表单。
+前端 SHALL 将后端 YANG nested schema 经 `crdSchemaParser` 逐属性映射为 `Field[]`，类型映射为 boolean→「打开/关闭」radio 单选组（i18n 文案，值仍为 true/false；可选 boolean SHALL 支持不选=不入 payload）、number→input-number、object→group；enum SHALL 按选项数与必填性细分：**必填且选项 ≤3 → segmented 分段控件，其余（可选或 >3 选项）→ select 下拉**（可选枚举 SHALL 保留清空能力，清空即该键不入 payload）。映射经 `FieldRenderer` 渲染为 **UI 适配层（`src/ui`）导出的控件**（R05），SHALL NOT 直接依赖具体组件库（见 `frontend-ui-adapter` FA-01）。SHALL NOT 手写固定表单。
 
 #### Scenario: 类型到控件的自动映射
 - **WHEN** `getYangSchema(module, 'nested')` 返回带类型的属性
@@ -27,6 +27,10 @@ frontend 是 Vue3 + Element Plus 平台前端：由后端 YANG schema **自动�
 #### Scenario: 无有效 schema
 - **WHEN** schema 拉取失败或为空
 - **THEN** SHALL NOT 崩溃（R08），页面继续可用，仅不渲染该模块字段
+
+#### Scenario: 控件映射结论与组件库实现无关（换库锚点）
+- **WHEN** 底层组件库实现发生替换
+- **THEN** 上述全部类型→控件映射结论 SHALL 保持不变，派生黄金（GD-01）SHALL 零漂移
 
 ### Requirement: FE-02 分组与校验
 
@@ -88,7 +92,7 @@ Field 带 group/pattern/min/max/required 时，前端渲染 SHALL 按分组组�
 - **THEN** SHALL 降级（可见 / 不阻断）并记录告警，页面 SHALL NOT 崩溃（R08）
 ### Requirement: FE-08 choice/case 渲染
 
-`FieldRenderer` SHALL 将 `type:"choice"` 的字段渲染为互斥切换控件（任一 case 含多字段→`el-tabs`，所有 case 均为单叶→`el-radio-group`），分支内子字段按 `cases[].fields` 递归渲染。切换到某 case 时 SHALL 清空其它非激活 case 的数据（YANG choice 互斥语义），提交 payload SHALL 只含激活 case 的字段且保持其扁平 path。
+`FieldRenderer` SHALL 将 `type:"choice"` 的字段渲染为互斥切换控件（任一 case 含多字段→Tabs，所有 case 均为单叶→Radio 组；控件经 UI 适配层），分支内子字段按 `cases[].fields` 递归渲染。切换到某 case 时 SHALL 清空其它非激活 case 的数据（YANG choice 互斥语义），提交 payload SHALL 只含激活 case 的字段且保持其扁平 path。
 
 #### Scenario: choice 渲染为切换控件
 - **WHEN** schema 含 `type:"choice"` 节点（如 IFM `bandwidth-type` 的 mbps/kbps 两 case）
@@ -568,3 +572,19 @@ SHALL 在输入控件展示单位后缀。
 - **THEN** 操作类型 SHALL 显示该段名而非通用占位
 - **WHEN** 审计路径为空
 - **THEN** 操作类型 SHALL 显示通用标签且渲染不失败
+
+### Requirement: FE-27 表单键存在性即节点存在性
+
+表单状态 SHALL 以「键是否存在」表达 YANG 节点是否存在：presence 容器关闭、choice 非激活分支成员、动态缺省叶留空、字段级清除等场景，对应键 SHALL 从表单数据中真正移除，SHALL NOT 仅置为空值（`undefined`/`null`）。下发 payload SHALL NOT 包含这些键。
+
+#### Scenario: presence 容器关闭后键消失
+- **WHEN** 用户关闭 presence 容器开关
+- **THEN** 表单数据中该容器键 SHALL 不存在（以「键枚举」判定，非「取值为空」判定），且 SHALL NOT 进入下发 payload
+
+#### Scenario: choice 切换分支清空非激活成员
+- **WHEN** 用户从 case A 切换到 case B
+- **THEN** case A 全部成员键 SHALL 从表单数据中移除，payload SHALL 只含 case B 成员
+
+#### Scenario: 动态缺省叶留空不下发（负路径）
+- **WHEN** 带 `dynamicDefault` 的叶被清空
+- **THEN** 该键 SHALL NOT 进入 payload，SHALL NOT 以空串或 null 形式下发覆盖设备缺省
