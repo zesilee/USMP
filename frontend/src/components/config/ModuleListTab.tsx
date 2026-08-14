@@ -1,39 +1,50 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Alert, Button, Empty, Popover, Checkbox, Table, Tag, icons, type TableColumnType } from '../../ui'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  Alert,
+  Button,
+  Checkbox,
+  Empty,
+  Popover,
+  Table,
+  Tag,
+  confirm,
+  icons,
+  type TableColumnType,
+} from '../../ui'
 import { i18n } from '../../i18n'
-import { getConfig } from '../../api'
+import { useChangesetStore } from '../../stores/changeset'
+import { useListQuery } from '../../hooks/useListQuery'
 import type { Field } from '../../utils/crdSchemaParser'
 import {
   deriveColumns,
   deriveAllColumns,
   deriveKeyField,
   configPathFor,
-  cellVisible,
-  statusTone,
   leafName,
+  filterableFields,
+  filterRows,
   type ConsoleTab,
 } from '../../utils/moduleConsole'
+import ItemDetailPane from './ItemDetailPane'
+import { buildDataColumns } from './listColumns'
 import './ModuleListTab.scss'
 
-// ModuleListTab（FE-11 切片形态，R05 命门验证件）：列表 Tab 的**运行时动态列**——
-// 列集合由 schema 派生纯函数现场算出（deriveColumns 分层启发式 + 列设置显隐 +
-// 可用列全集），antd Table 以 columns 配置数组承接：排序/enum·boolean 表头筛选/
-// 多选/自定义单元格（when 行级显隐、状态点、enum 色板轮转 Tag、boolean Tag）
-// 全部按列元数据生成，零 per-module 代码。取数走 /config/:ip/*path 回读子树契约
-// （normalizeRows 语义自旧版平移）。服务端分页双模式（FE-25）随 tasks 8.5 扩展。
-
+// ModuleListTab（FE-11/24/25 + FE-16/21 接线）：运行时动态列表格全功能形态——
+// 双模式分页（首读 limit=200 探测：total>阈值转服务端，翻页/搜索/排序下推 BR-13；
+// 否则纯客户端）、FE-24 节点不支持占位（预标记零请求/信封学习/重试逃生）、
+// 变更集标记合成视图（create 行叠加/update·delete 标记）、行删除入变更集
+// （待创建直接移除）、详情同屏（未提交草稿守卫）、新鲜度埋点。零 per-module 代码。
 const t = (k: string, p?: Record<string, unknown>) => i18n.global.t(k, p)
 
 export interface ModuleListTabProps {
   tab: ConsoleTab
   rootName: string
   device: string
-  /** 行点击（详情区随 tasks 8 组接线）。 */
-  onRowClick?: (row: Record<string, any>) => void
+  /** schema 预标记不支持（CN-05）。 */
+  unsupported?: boolean
+  onUnsupportedChange?: (unsupported: boolean) => void
 }
 
-// 回读子树 → 行数组（语义自旧版逐分支平移）：优先 list 名，回退 tab 名；
-// 值可为数组（RFC7951 list）或对象（容器键控形态，键并入 keyField 列）。
 export function normalizeRows(
   subtree: any,
   listField: Field,
@@ -59,121 +70,201 @@ export function normalizeRows(
   return { rows: [], key: candidates[0] }
 }
 
-// enum Tag 色板轮转（按枚举值序号取色，非语义映射，R05）。
-const TAG_TYPES = ['blue', 'green', 'orange', 'cyan', 'red'] as const
-function tagColor(col: Field, val: string): string {
-  const idx = (col.options || []).findIndex((o) => String(o.value) === val)
-  return TAG_TYPES[Math.max(idx, 0) % TAG_TYPES.length]
-}
-
-function rowVal(row: Record<string, any>, col: Field): string {
-  const v = row[leafName(col)]
-  return v == null ? '' : String(v)
-}
-
-export default function ModuleListTab({ tab, rootName, device, onRowClick }: ModuleListTabProps) {
+export default function ModuleListTab(props: ModuleListTabProps) {
+  const { tab, rootName, device, unsupported, onUnsupportedChange } = props
   const listField = tab.listField || tab.field
   const keyField = useMemo(() => deriveKeyField(listField), [listField])
   const defaultCols = useMemo(() => deriveColumns(listField), [listField])
   const allCols = useMemo(() => deriveAllColumns(listField), [listField])
+  const searchFields = useMemo(() => filterableFields(listField), [listField])
+  const configPath = useMemo(() => configPathFor(rootName, tab.field.path), [rootName, tab.field.path])
+  // 变更集条目路径（带前导斜杠，与 ItemDetailPane 同源）。
+  const entryPath = '/' + configPath
 
-  // 列设置显隐（FE-11）：默认集 = 派生默认列；用户勾选驱动展示子集。
+  const changeset = useChangesetStore()
+
   const [visibleCols, setVisibleCols] = useState<string[]>(() => defaultCols.map((c) => c.path))
   useEffect(() => setVisibleCols(defaultCols.map((c) => c.path)), [defaultCols])
-  const shownColumns = useMemo(
-    () => allCols.filter((c) => visibleCols.includes(c.path)),
-    [allCols, visibleCols],
+  const shownColumns = useMemo(() => allCols.filter((c) => visibleCols.includes(c.path)), [allCols, visibleCols])
+
+  const [selectedKeys, setSelectedKeys] = useState<React.Key[]>([])
+
+  // 取数编排（FE-24/25）：requestRows 收口 + 双模式全部收敛在 useListQuery。
+  const normalize = useCallback(
+    (subtree: any) => normalizeRows(subtree, listField, tab.field, keyField),
+    [listField, tab.field, keyField],
   )
+  const {
+    items,
+    postKey,
+    loading,
+    error,
+    queryAt,
+    nodeUnsupported,
+    serverMode,
+    serverTotal,
+    page,
+    setPage,
+    pageSize,
+    setPageSize,
+    setSortState,
+    applied,
+    setApplied,
+    load,
+    pageLoad,
+  } = useListQuery({
+    device,
+    configPath,
+    readonlyTab: !!tab.readonly,
+    listField,
+    searchFields,
+    normalize,
+    unsupported,
+  })
+  useEffect(() => onUnsupportedChange?.(nodeUnsupported), [nodeUnsupported, onUnsupportedChange])
+  useEffect(() => setSelectedKeys([]), [items])
 
-  const [rows, setRows] = useState<Record<string, any>[]>([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [queryAt, setQueryAt] = useState('')
-  const [selected, setSelected] = useState<React.Key[]>([])
+  // ===== 高级搜索（FE-11）=====
+  const [draft, setDraft] = useState<Record<string, any>>({})
+  const [searchOpen, setSearchOpen] = useState(false)
 
-  const configPath = useMemo(() => configPathFor(rootName, tab.field.path), [rootName, tab.field.path])
-
-  const load = useCallback(
-    async (force = false) => {
-      if (!device) {
-        setRows([]) // 设备上下文清空：不留陈旧行
-        setSelected([])
-        return
-      }
-      setLoading(true)
-      setError('')
-      try {
-        const res = await getConfig(device, configPath, force)
-        const body = res.data?.data?.data ?? res.data?.data
-        const { rows: r } = normalizeRows(body, listField, tab.field, keyField)
-        setRows(r)
-        setSelected([]) // 数据换代清选中（对齐旧 el-table 行为）
-        setQueryAt(new Date().toLocaleString())
-      } catch (e: any) {
-        setError(e?.response?.data?.message || e?.message || t('common.loadFailed'))
-        // §9：强制回读失败保留原列表（保留原配置）；常规取数失败清空。
-        if (!force) setRows([])
-      } finally {
-        setLoading(false)
-      }
-    },
-    [device, configPath, listField, tab.field, keyField],
-  )
+  // ===== 详情同屏（FE-21）=====
+  const [selectedRow, setSelectedRow] = useState<Record<string, any> | null>(null)
+  const [detailMode, setDetailMode] = useState<'edit' | 'create' | null>(null)
+  const dirtyRef = useRef(false) // ItemDetailPane 报告的未提交草稿态
 
   useEffect(() => {
+    setSortState(null)
+    setDetailMode(null)
+    setSelectedRow(null)
     void load()
-  }, [load])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [device, configPath])
 
-  // ===== 运行时动态列（R05 命门）：schema 元数据 → antd columns 配置 =====
-  const columns: TableColumnType<Record<string, any>>[] = shownColumns.map((col) => {
-    const key = leafName(col)
-    const c: TableColumnType<Record<string, any>> = {
-      title: col.label,
-      dataIndex: key,
-      key: col.path,
-      // 排序：字符串/数值通用比较器（客户端模式；服务端下推随 FE-25）。
-      sorter: (a, b) => {
-        const av = a[key]
-        const bv = b[key]
-        const an = Number(av)
-        const bn = Number(bv)
-        if (!Number.isNaN(an) && !Number.isNaN(bn)) return an - bn
-        return String(av ?? '').localeCompare(String(bv ?? ''))
-      },
+  // ===== 变更集标记合成视图（FE-11 二期）=====
+  const mergedItems = useMemo(() => {
+    const existing = new Set(items.map((r) => String(r[keyField])))
+    const pendingCreates = changeset
+      .entriesFor(device)
+      .filter((e) => e.path === entryPath && e.op === 'create' && !existing.has(String(e.keyValue)))
+      .map((e) => ({ ...(e.payload ?? {}) }))
+    return [...items, ...pendingCreates]
+  }, [items, changeset, device, entryPath, keyField])
+
+  const rowMark = useCallback(
+    (row: Record<string, any>): '' | 'create' | 'update' | 'delete' => {
+      const e = changeset.entryFor(device, entryPath, String(row[keyField]))
+      return (e?.op as any) ?? ''
+    },
+    [changeset, device, entryPath, keyField],
+  )
+
+  // 服务端模式过滤已在后端完成；客户端模式本地过滤（pending create 行仍叠加）。
+  const filteredRows = serverMode ? mergedItems : filterRows(mergedItems, applied, searchFields)
+  const totalCount = serverMode ? serverTotal : filteredRows.length
+  const pagedRows = serverMode ? filteredRows : filteredRows.slice((page - 1) * pageSize, page * pageSize)
+
+  // ===== 操作门禁（FE-11 list 级 operation-exclude）=====
+  const canUpdate = !tab.field.operationExclude?.includes('update') && !listField.operationExclude?.includes('update')
+  const canDelete = !tab.field.operationExclude?.includes('delete') && !listField.operationExclude?.includes('delete')
+
+  // 未提交草稿守卫（FE-21 负路径）：取消则停留原条目、草稿保留。
+  const ensureNoDraft = async (): Promise<boolean> => {
+    if (!detailMode || !dirtyRef.current) return true
+    return confirm(t('console.unsavedSwitch'), { title: t('console.unsavedTitle') })
+  }
+
+  const openEdit = async (row: Record<string, any>) => {
+    if (tab.readonly) return
+    const same = detailMode === 'edit' && selectedRow?.[keyField] === row[keyField]
+    if (same) return
+    if (!(await ensureNoDraft())) return
+    setSelectedRow(row)
+    setDetailMode('edit')
+  }
+
+  const openCreate = async () => {
+    if (!(await ensureNoDraft())) return
+    setSelectedRow(null)
+    setDetailMode('create')
+  }
+
+  // 行删除（FE-16）：确认 → 入变更集（待创建行直接移除，不产生删除报文）。
+  const onDelete = async (row: Record<string, any>) => {
+    const keyValue = String(row[keyField] ?? '')
+    const ok = await confirm(t('console.deleteConfirm', { key: keyValue }), {
+      title: t('console.deleteTitle'),
+      danger: true,
+    })
+    if (!ok) return
+    changeset.markDelete(device, {
+      path: entryPath,
+      listKey: postKey || leafName(listField),
+      keyValue,
+      label: `${tab.label} ${keyValue}`,
+    })
+  }
+
+  const onUndelete = (row: Record<string, any>) => {
+    changeset.unmarkDelete(device, entryPath, String(row[keyField] ?? ''))
+  }
+
+  // ===== 运行时动态列 =====
+  const columns: TableColumnType<Record<string, any>>[] = [
+    {
+      title: '',
+      key: '__mark__',
+      width: 72,
       render: (_: unknown, row: Record<string, any>) => {
-        // when 行级单元格（以行数据为上下文求值，失败降级可见 R08）。
-        if (!cellVisible(col, row)) return <span className="cell-na">-</span>
-        const tone = statusTone(row[key])
-        if (tone) {
-          return (
-            <span className={`status-cell ${tone}`}>
-              <span className="dot" aria-hidden="true" />
-              {row[key]}
-            </span>
-          )
-        }
-        if (col.type === 'enum' && rowVal(row, col) !== '') {
-          return <Tag color={tagColor(col, rowVal(row, col))}>{rowVal(row, col)}</Tag>
-        }
-        if (col.type === 'boolean') {
-          return <Tag color={row[key] ? 'green' : 'default'}>{row[key] ? 'true' : 'false'}</Tag>
-        }
-        return rowVal(row, col)
+        const m = rowMark(row)
+        if (m === 'create') return <Tag color="green" data-test="mark-create">{t('console.markCreate')}</Tag>
+        if (m === 'update') return <Tag color="orange" data-test="mark-update">{t('console.markUpdate')}</Tag>
+        if (m === 'delete') return <Tag color="red" data-test="mark-delete">{t('console.markDelete')}</Tag>
+        return null
       },
-    }
-    // 表头筛选（FE-11）：enum 用选项集、boolean 用 true/false。
-    if (col.type === 'enum' && col.options?.length) {
-      c.filters = col.options.map((o) => ({ text: String(o.label ?? o.value), value: String(o.value) }))
-      c.onFilter = (v, row) => String(row[key]) === String(v)
-    } else if (col.type === 'boolean') {
-      c.filters = [
-        { text: 'true', value: 'true' },
-        { text: 'false', value: 'false' },
-      ]
-      c.onFilter = (v, row) => String(row[key]) === String(v)
-    }
-    return c
-  })
+    },
+    ...buildDataColumns(shownColumns, serverMode),
+  ]
+
+  if (!tab.readonly && (canUpdate || canDelete)) {
+    columns.push({
+      title: t('common.actions'),
+      key: '__actions__',
+      width: 200,
+      fixed: 'right',
+      render: (_: unknown, row: Record<string, any>) => (
+        <span onClick={(e) => e.stopPropagation()}>
+          {canUpdate && (
+            <Button type="link" size="small" onClick={() => void openEdit(row)}>
+              {t('common.edit')}
+            </Button>
+          )}
+          {canDelete &&
+            (rowMark(row) === 'delete' ? (
+              <Button type="link" size="small" data-test="undelete-btn" onClick={() => onUndelete(row)}>
+                {t('console.undelete')}
+              </Button>
+            ) : (
+              <Button type="link" size="small" danger onClick={() => void onDelete(row)}>
+                {t('common.delete')}
+              </Button>
+            ))}
+        </span>
+      ),
+    })
+  }
+
+  if (nodeUnsupported) {
+    return (
+      <div className="module-list-tab" data-test="node-unsupported">
+        <Empty description={t('console.nodeUnsupported')}>
+          <Button size="small" icon={<icons.RefreshIcon />} onClick={() => void load(true)}>
+            {t('common.retry')}
+          </Button>
+        </Empty>
+      </div>
+    )
+  }
 
   return (
     <div className="module-list-tab" data-test="module-list-tab">
@@ -181,12 +272,63 @@ export default function ModuleListTab({ tab, rootName, device, onRowClick }: Mod
         <span className="query-at" data-test="query-at">
           {queryAt && t('console.queryAt', { time: queryAt })}
         </span>
-        <Button
-          size="small"
-          icon={<icons.RefreshIcon />}
-          onClick={() => void load(true)}
-          data-test="fetch-source"
-        >
+        {!tab.readonly && canUpdate && (
+          <Button type="primary" size="small" icon={<icons.PlusIcon />} onClick={() => void openCreate()} data-test="add-row">
+            {t('console.addConfigItem')}
+          </Button>
+        )}
+        {searchFields.length > 0 && (
+          <Popover
+            trigger="click"
+            open={searchOpen}
+            onOpenChange={setSearchOpen}
+            content={
+              <div className="adv-search" data-test="adv-search-panel">
+                {searchFields.map((f) => (
+                  <label key={f.path} className="adv-search-item">
+                    <span>{f.label}</span>
+                    <input
+                      value={draft[leafName(f)] ?? ''}
+                      onChange={(e) => setDraft((prev) => ({ ...prev, [leafName(f)]: e.target.value }))}
+                    />
+                  </label>
+                ))}
+                <div className="adv-search-actions">
+                  <Button
+                    size="small"
+                    type="primary"
+                    data-test="adv-search-apply"
+                    onClick={() => {
+                      setApplied({ ...draft })
+                      setPage(1)
+                      setSearchOpen(false)
+                      if (serverMode) void pageLoad(false, { page: 1, applied: { ...draft } })
+                    }}
+                  >
+                    {t('common.search')}
+                  </Button>
+                  <Button
+                    size="small"
+                    data-test="adv-search-reset"
+                    onClick={() => {
+                      setDraft({})
+                      setApplied({})
+                      setPage(1)
+                      if (serverMode) void pageLoad(false, { page: 1, applied: {} })
+                    }}
+                  >
+                    {t('common.reset')}
+                  </Button>
+                </div>
+              </div>
+            }
+          >
+            <Button size="small" icon={<icons.SearchIcon />} data-test="adv-search">
+              {t('console.advancedSearch')}
+            </Button>
+          </Popover>
+        )}
+        <Button size="small" icon={<icons.RefreshIcon />} onClick={() => void load(true)} data-test="fetch-source">
           {t('console.fetchSource')}
         </Button>
         <Popover
@@ -198,9 +340,7 @@ export default function ModuleListTab({ tab, rootName, device, onRowClick }: Mod
                   <Checkbox
                     checked={visibleCols.includes(c.path)}
                     onChange={(e) =>
-                      setVisibleCols((prev) =>
-                        e.target.checked ? [...prev, c.path] : prev.filter((p) => p !== c.path),
-                      )
+                      setVisibleCols((prev) => (e.target.checked ? [...prev, c.path] : prev.filter((p) => p !== c.path)))
                     }
                   />
                   <span>{c.label}</span>
@@ -219,17 +359,61 @@ export default function ModuleListTab({ tab, rootName, device, onRowClick }: Mod
         size="small"
         rowKey={(r) => String(r[keyField] ?? JSON.stringify(r))}
         columns={columns}
-        dataSource={rows}
+        dataSource={pagedRows}
         loading={loading}
-        rowSelection={{ selectedRowKeys: selected, onChange: (keys) => setSelected(keys) }}
-        onRow={(row) => ({ onClick: () => onRowClick?.(row) })}
-        locale={{
-          emptyText: (
-            <Empty description={device ? t('console.emptyNoConfig') : t('console.emptySelectDevice')} />
-          ),
+        rowClassName={(row) => {
+          const m = rowMark(row)
+          return m ? `row-${m}` : ''
         }}
-        pagination={{ defaultPageSize: 10, pageSizeOptions: [10, 20, 50], showSizeChanger: true }}
+        rowSelection={{ selectedRowKeys: selectedKeys, onChange: (keys) => setSelectedKeys(keys) }}
+        onRow={(row) => ({ onClick: () => void openEdit(row) })}
+        onChange={(pg, _filters, sorter: any) => {
+          const nextPage = pg.current ?? 1
+          const nextSize = pg.pageSize ?? pageSize
+          const nextSort = sorter?.order
+            ? { prop: String(sorter.field), desc: sorter.order === 'descend' }
+            : null
+          setPage(nextPage)
+          setPageSize(nextSize)
+          setSortState(nextSort)
+          if (serverMode) void pageLoad(false, { page: nextPage, pageSize: nextSize, sort: nextSort })
+        }}
+        locale={{
+          emptyText: <Empty description={device ? t('console.emptyNoConfig') : t('console.emptySelectDevice')} />,
+        }}
+        pagination={{
+          current: page,
+          pageSize,
+          total: totalCount,
+          pageSizeOptions: [10, 20, 50],
+          showSizeChanger: true,
+          showTotal: (tot) => t('console.totalCount', { total: tot }),
+        }}
       />
+
+      {detailMode && (
+        <ItemDetailPane
+          tab={tab}
+          rootName={rootName}
+          device={device}
+          mode={detailMode}
+          row={detailMode === 'edit' ? selectedRow : null}
+          postKey={postKey || leafName(listField)}
+          onDirtyChange={(d) => {
+            dirtyRef.current = d
+          }}
+          onClose={() => {
+            setDetailMode(null)
+            setSelectedRow(null)
+            dirtyRef.current = false
+          }}
+          onStaged={() => {
+            dirtyRef.current = false
+            setDetailMode(null)
+            setSelectedRow(null)
+          }}
+        />
+      )}
     </div>
   )
 }
