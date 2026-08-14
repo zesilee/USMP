@@ -85,9 +85,9 @@
 
 ## 11. 变更集与批量链路（PR-12）
 
-- [ ] 11.1 变更集 store + 批量工具栏（FE-23）— **F2**
-- [ ] 11.2 `DiffPreview` / 提交对话框 / 试运行对话框 / 变更内容对话框（FE-03）— **F2**
-- [ ] 11.3 对账进度与新鲜度展示；**含读路径新鲜度埋点恢复**（getConfig 响应 cache_age/ttl/source → useFreshnessStore.record，评审 #6 提醒旧 requestRows 有此埋点）— **F2**
+- [x] 11.1 变更集 store + 批量工具栏（FE-23）— **F2**
+- [x] 11.2 `DiffPreview` / 提交对话框 / 试运行对话框 / 变更内容对话框（FE-03）— **F2**
+- [x] 11.3 对账进度与新鲜度展示；**含读路径新鲜度埋点恢复**（getConfig 响应 cache_age/ttl/source → useFreshnessStore.record，评审 #6 提醒旧 requestRows 有此埋点）— **F2**
 
 ## 12. 测试补齐与门禁达标（PR-13）
 

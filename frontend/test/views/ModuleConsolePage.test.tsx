@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
-import { MemoryRouter, Routes, Route } from 'react-router'
+import { createMemoryRouter, RouterProvider } from 'react-router'
 import ModuleConsolePage from '../../src/views/ModuleConsolePage'
 import { UiProvider } from '../../src/ui'
 import { useDeviceStore } from '../../src/stores/device'
@@ -35,14 +35,17 @@ const schemaData = {
 }
 
 function mount(path = '/module/vlan') {
+  // useBlocker 需要 data router：createMemoryRouter（与生产 createBrowserRouter 同族）。
+  const router = createMemoryRouter(
+    [
+      { path: '/module/:module', element: <ModuleConsolePage /> },
+      { path: '/module/:module/rpc/:rpcName', element: <ModuleConsolePage /> },
+    ],
+    { initialEntries: [path] },
+  )
   return render(
     <UiProvider>
-      <MemoryRouter initialEntries={[path]}>
-        <Routes>
-          <Route path="/module/:module" element={<ModuleConsolePage />} />
-          <Route path="/module/:module/rpc/:rpcName" element={<ModuleConsolePage />} />
-        </Routes>
-      </MemoryRouter>
+      <RouterProvider router={router} />
     </UiProvider>,
   )
 }
