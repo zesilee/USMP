@@ -48,6 +48,8 @@ describe('device store · fetchDevices 信封兼容与归一化', () => {
   })
 })
 
+let connNotConnectedMsg = ''
+
 describe('device store · testConnection 探活三态', () => {
   beforeEach(() => {
     resetStores()
@@ -69,12 +71,15 @@ describe('device store · testConnection 探活三态', () => {
     } as any)
     const r = await S().testConnection('10.0.0.1')
     expect(r.success).toBe(false)
+    expect(r.message).not.toBe('')
+    connNotConnectedMsg = r.message
   })
 
   it('请求异常 → 失败不抛（R08）', async () => {
     vi.spyOn(apiModule, 'getDeviceStatus').mockRejectedValue(new Error('timeout'))
     const r = await S().testConnection('10.0.0.1')
     expect(r.success).toBe(false)
-    expect(r.message).toBeTruthy()
+    // 异常路径与「未连接」路径文案不同（connTestFailed vs connNotConnected）。
+    expect(r.message).not.toBe(connNotConnectedMsg)
   })
 })

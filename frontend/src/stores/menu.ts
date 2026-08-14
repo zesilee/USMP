@@ -46,10 +46,13 @@ interface MenuState {
   leftTreeLoaded: boolean
   loadLeftTree: () => Promise<void>
   loadNativeModules: () => Promise<void>
-  /** 业务菜单组（旧 Pinia computed → 方法形态）。 */
+  /** 业务菜单组（旧 Pinia computed → 方法形态）。
+   *  ⚠️ 每次调用返回新数组：勿直接放进 zustand selector（getSnapshot 不稳定会
+   *  无限重渲染）——组件里取 nativeModules 后自行 useMemo。 */
   businessModules: () => NativeModel[]
   /** 原生模块按任务域聚合（FE-13）：category 首现序，未标注归默认组('')排最后；
-   *  全部未标注 → 单一默认组，菜单退化为平铺（R08 渲染不失败）。 */
+   *  全部未标注 → 单一默认组，菜单退化为平铺（R08 渲染不失败）。
+   *  ⚠️ selector 警示同 businessModules。 */
   nativeGroups: () => NativeGroup[]
   toggleCollapse: () => void
 }
@@ -69,7 +72,7 @@ export const useMenuStore = create<MenuState>((set, get) => ({
       if (!tree.length) throw new Error('empty left tree')
       set({ leftTree: tree })
     } catch (e) {
-      console.warn('加载 SND 左树失败，回退任务域分组导航:', e)
+      console.warn('left-tree load failed, fallback to category groups:', e)
       set({ leftTree: [] })
     } finally {
       set({ leftTreeLoaded: true })
@@ -92,7 +95,7 @@ export const useMenuStore = create<MenuState>((set, get) => ({
       if (!mods.length) throw new Error('empty modules')
       set({ nativeModules: mods })
     } catch (e) {
-      console.warn('加载 YANG 模块列表失败，回退内置菜单:', e)
+      console.warn('yang modules load failed, fallback to built-in menu:', e)
       // 回退项（R08）：与后端注册的模块根名一致（GetSchema/{name} 可直接命中）。
       set({
         nativeModules: [
