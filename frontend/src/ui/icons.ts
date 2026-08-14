@@ -22,5 +22,7 @@ export {
   ShareAltOutlined as ShareIcon,
   ToolOutlined as ToolsIcon,
   ExclamationCircleFilled as WarningFilledIcon,
+  CheckOutlined as CheckIcon,
+  CloseOutlined as CloseIcon,
   QuestionCircleOutlined as PlaceholderIcon,
 } from '@ant-design/icons'
