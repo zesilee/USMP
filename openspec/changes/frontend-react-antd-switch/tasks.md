@@ -62,8 +62,8 @@
 
 ## 8. 控制台其余部分（PR-7、PR-8）
 
-- [ ] 8.1 `ItemDetailPane` 详情同屏编辑区 + 二级 Tab 派生（FE-21）；顺带拍板 range 违例是否入 blocked 门禁（rangeViolations 已备，评审 #9）与行内 touched/违例计数 — **F2**
-- [ ] 8.2 `ModuleFormTab` 表单 Tab（FE-10）— **F2**
+- [x] 8.1 `ItemDetailPane` 详情同屏编辑区 + 二级 Tab 派生（FE-21）；顺带拍板 range 违例是否入 blocked 门禁（rangeViolations 已备，评审 #9）与行内 touched/违例计数 — **F2**
+- [x] 8.2 `ModuleFormTab` 表单 Tab（FE-10）— **F2**
 - [ ] 8.3 `RpcExecuteTab` + 高危 rpc 二次确认（FE-19/FE-20）— **F2**
 - [ ] 8.4 只读 state 子树降级（FE-14）+ 节点不支持占位态 + 单行状态读合并 — **F2**
 - [ ] 8.5 列表双模式分页（阈值自适应服务端分页，FE-25）— **F2**

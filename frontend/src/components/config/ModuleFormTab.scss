@@ -1,0 +1,15 @@
+.module-form-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.module-form-tab .actions {
+  display: flex;
+  gap: 8px;
+}
+
+.module-form-tab .form-tip {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
