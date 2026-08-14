@@ -11,9 +11,16 @@ export default defineConfig({
     // NCE 改版后控制台组件树变重（el-table 排序/筛选 + 详情区），CI 慢跑道上
     // 单用例可超默认 5s（本地恒 <3s）；上限放宽而非削测试面。
     testTimeout: 15000,
-    include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}', 'test/**/*.{test,spec}.{js,ts,jsx,tsx}'],
-    // test/browser/** 属浏览器模式套件（vitest.browser.config.ts），不在 happy-dom 下跑
-    exclude: ['**/node_modules/**', '**/dist/**', 'test/browser/**'],
+    // React 重建窗口（5/6 起）：Vue 视图/状态层已退役，仅运行纯逻辑层套件；
+    // test/{stores,composables} 为沿用资产，被测源随重建逐组加回（tasks 5/6/10 组）。
+    include: [
+      'test/utils/**/*.{test,spec}.{js,ts,jsx,tsx}',
+      'test/golden/**/*.{test,spec}.{js,ts,jsx,tsx}',
+      'test/styles/**/*.{test,spec}.{js,ts,jsx,tsx}',
+      'test/composables/useFieldLabels.test.ts',
+      'test/composables/useFleetOverview.test.ts',
+    ],
+    exclude: ['**/node_modules/**', '**/dist/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
