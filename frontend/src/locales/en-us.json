@@ -128,7 +128,11 @@
     "addFailed": "Add failed: {reason}",
     "deleteConfirm": "Remove device {ip}? This only stops management; device config is untouched.",
     "deleteSuccess": "Device {ip} removed",
-    "deleteFailed": "Remove failed: {reason}"
+    "deleteFailed": "Remove failed: {reason}",
+    "filterStatus": "Status",
+    "filterVendor": "Vendor",
+    "online": "Online",
+    "offline": "Offline"
   },
   "logs": {
     "title": "Audit Logs",

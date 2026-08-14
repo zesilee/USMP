@@ -128,7 +128,11 @@
     "addFailed": "添加失败：{reason}",
     "deleteConfirm": "确认移除设备 {ip}？仅解除纳管，不改设备配置。",
     "deleteSuccess": "设备 {ip} 已移除",
-    "deleteFailed": "移除失败：{reason}"
+    "deleteFailed": "移除失败：{reason}",
+    "filterStatus": "状态",
+    "filterVendor": "厂商",
+    "online": "在线",
+    "offline": "离线"
   },
   "logs": {
     "title": "操作日志",
