@@ -94,7 +94,7 @@
 - [x] 12.1 F3 真浏览器测试建齐：select 弹层/teleport、嵌套 list 真实增删改 — **F3**（vitest.browser.config.ts React 化恢复 + FieldRenderer/choice 真 Chromium 9 用例；browser-tests 工作流随 test:browser 脚本恢复自愈）
 - [x] 12.2 `data-test` 属性逐项核对，确认 E2E 选择器零遗漏（左树 group/leaf/node/rpc、business-*、adv-search、detail-pane 全对齐；rebuild-notes 清单核销）
 - [x] 12.3 Playwright E2E 全绿（414 行沿用）— **F4**（chromium/firefox/webkit 63/63 全绿；el-*→ant-* 选择器迁移 + 三处行为修复：#app 挂载点、schemaEpoch 本地化时序、高级搜索枚举下拉）
-- [x] 12.4 覆盖率四项阈值达到或高于 1.2 记录的基线（T08），达标后同步上调阈值文件（实测 94.52/83.31/94.54/96.15 全面高于旧栈基线 86.5/79.8/81.0/87.5，阈值重钉 94.5/83.3/94.5/96.1）
+- [x] 12.4 覆盖率四项阈值达到或高于 1.2 记录的基线（T08），达标后同步上调阈值文件（实测 94.52/83.31/94.54/96.15 全面高于旧栈基线 86.5/79.8/81.0/87.5，阈值重钉 94.3/83.2/94.5/96.0——首钉 94.5/83.3/94.5/96.1 踩本地 staging 灌水+stories 进分母双坑被 #336 CI 拦下，按 staging-down 干净值二钉）
 - [x] 12.5 `make e2e-local` 全栈（docker 编排）冒烟全绿（chromium 21/21；e2e 豁免窗口按声明随 12.3 全绿停用）
 
 ## 13. 工具链与基础设施收尾（PR-14）

@@ -65,7 +65,7 @@ frontend/
 - `vitest.config.ts` 的 `coverage.thresholds`（statements/branches/functions/lines）为**只准升不准降**的棘轮，`frontend-ci.yml` 跑 `npm run test:coverage`，低于阈值即 fail。
 - 补测后**同步上调阈值**到新水平，形成单向棘轮。本地自查：`npm run test:coverage`。
 - Vue 栈历史轨迹：2026-07-06 基线 66.55/66.57/56.67/66.88 → 2026-07-24 派生黄金后 84/78/77/84。
-- React 重建后（2026-08-14，tasks 12.4 回填收口）：实测 94.52/83.31/94.54/96.15，阈值钉 **94.5/83.3/94.5/96.1**（完整轨迹见 `vitest.config.ts` 注释）。
+- React 重建后（2026-08-14，tasks 12.4 回填收口）：staging-down 干净实测 94.40/83.31/94.54/96.15（stories 已排除出分母），阈值钉 **94.3/83.2/94.5/96.0**（完整轨迹见 `vitest.config.ts` 注释）。
 
 ## 门禁（本地 + CI）
 
