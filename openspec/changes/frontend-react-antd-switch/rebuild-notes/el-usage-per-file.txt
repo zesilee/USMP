@@ -1,0 +1,24 @@
+App.vue: config-provider
+components/common/DetailDrawer.vue: button drawer
+components/config/BatchCommitDialog.vue: alert button dialog
+components/config/BatchToolbar.vue: alert badge button
+components/config/ChangesContentDialog.vue: dialog empty table table-column
+components/config/DryRunDialog.vue: alert dialog table table-column tab-pane tabs
+components/config/DynamicTable.vue: button table table-column tag
+components/config/FieldRenderer.vue: button input input-number option radio radio-group segmented select switch tab-pane tabs
+components/config/ItemDetailPane.vue: breadcrumb breadcrumb-item button empty form form-item icon tab-pane tabs tooltip
+components/config/ModuleFormTab.vue: alert button empty form form-item icon tab-pane tabs tooltip
+components/config/ModuleListTab.vue: alert button checkbox checkbox-group collapse-transition dropdown dropdown-item dropdown-menu empty form form-item icon input option pagination popover select table table-column tag
+components/config/RpcExecuteTab.vue: alert button form form-item tag
+components/DeviceTree.vue: button tree
+components/DynamicForm.vue: alert button empty form form-item input
+components/layout/DetailDrawer.vue: button drawer
+components/layout/Header.vue: badge button dropdown dropdown-item dropdown-menu icon input
+components/layout/LeftTreeMenu.vue: icon menu-item sub-menu
+components/layout/Sidebar.vue: icon input menu menu-item menu-item-group sub-menu
+components/YangNodeRenderer.vue: form-item input input-number option select switch
+views/BusinessConsolePage.vue: alert breadcrumb breadcrumb-item button drawer form form-item input table table-column tag
+views/Dashboard.vue: alert button
+views/Devices.vue: button dialog form form-item input option pagination select table table-column tag
+views/Logs.vue: button input option pagination select table table-column
+views/ModuleConsolePage.vue: alert breadcrumb breadcrumb-item empty option select tab-pane tabs tag tooltip
