@@ -94,23 +94,23 @@
 - [x] 12.1 F3 真浏览器测试建齐：select 弹层/teleport、嵌套 list 真实增删改 — **F3**（vitest.browser.config.ts React 化恢复 + FieldRenderer/choice 真 Chromium 9 用例；browser-tests 工作流随 test:browser 脚本恢复自愈）
 - [x] 12.2 `data-test` 属性逐项核对，确认 E2E 选择器零遗漏（左树 group/leaf/node/rpc、business-*、adv-search、detail-pane 全对齐；rebuild-notes 清单核销）
 - [x] 12.3 Playwright E2E 全绿（414 行沿用）— **F4**（chromium/firefox/webkit 63/63 全绿；el-*→ant-* 选择器迁移 + 三处行为修复：#app 挂载点、schemaEpoch 本地化时序、高级搜索枚举下拉）
-- [x] 12.4 覆盖率四项阈值达到或高于 1.2 记录的基线（T08），达标后同步上调阈值文件（实测 94.52/83.31/94.54/96.15 全面高于旧栈基线 86.5/79.8/81.0/87.5，阈值重钉 94.5/83.3/94.5/96.1）
+- [x] 12.4 覆盖率四项阈值达到或高于 1.2 记录的基线（T08），达标后同步上调阈值文件（实测 94.52/83.31/94.54/96.15 全面高于旧栈基线 86.5/79.8/81.0/87.5，阈值重钉 94.3/83.2/94.5/96.0——首钉 94.5/83.3/94.5/96.1 踩本地 staging 灌水+stories 进分母双坑被 #336 CI 拦下，按 staging-down 干净值二钉）
 - [x] 12.5 `make e2e-local` 全栈（docker 编排）冒烟全绿（chromium 21/21；e2e 豁免窗口按声明随 12.3 全绿停用）
 
 ## 13. 工具链与基础设施收尾（PR-14）
 
-- [ ] 13.1 6 个 CI 工作流内部命令调整（路径不变）：`frontend-ci`、`frontend-browser-tests`、`frontend-storybook`、`contract-drift`、`e2e-staging`、`pr-size`
-- [ ] 13.2 3 个 git 钩子命令调整：`pre-commit`（前端单测）、`pre-push`（e2e smoke）、`commit-msg`/pr-size 排除清单两处同步
-- [ ] 13.3 `frontend/Dockerfile` 构建命令调整
-- [ ] 13.4 `scripts/build-release.sh` 静态站打包验证（产物形态不变）
-- [ ] 13.5 Makefile `gen-contract` / `sync-snd-i18n` / `staging-up` 验证
-- [ ] 13.6 Storybook 框架包切换，保证工作流不失效（故事内容不迁移，Non-Goal）
+- [x] 13.1 6 个 CI 工作流内部命令调整（路径不变）：`frontend-ci`、`frontend-browser-tests`、`frontend-storybook`、`contract-drift`、`e2e-staging`、`pr-size`（重建期已随波次自愈迁移并全绿运行；收尾仅清 vue-tsc 陈旧注释与 storybook 窗口注释）
+- [x] 13.2 3 个 git 钩子命令调整：`pre-commit`（前端单测）、`pre-push`（e2e smoke）、`commit-msg`/pr-size 排除清单两处同步（钩子重建期全程在岗；收尾清 pre-commit 匹配正则 .vue 残留；排除清单本就无栈耦合，无需改）
+- [x] 13.3 `frontend/Dockerfile` 构建命令调整（重建期已迁移，e2e-local 全栈反复构建验证，无 Vue 残留）
+- [x] 13.4 `scripts/build-release.sh` 静态站打包验证（产物形态不变；本地打包 21M zip 校验通过）
+- [x] 13.5 Makefile `gen-contract` / `sync-snd-i18n` / `staging-up` 验证（前两者重跑零漂移；staging-up 经 e2e-local 全栈验证）
+- [x] 13.6 Storybook 框架包切换，保证工作流不失效（故事内容不迁移，Non-Goal）（storybook@10.5.8 + @storybook/react-vite；Vite 8 需 ≥10.2.19；FieldRenderer 冒烟故事 ×2；本地 build 成功；vitest 族连带对齐 4.1.10）
 
 ## 14. 文档与归档（PR-15）
 
-- [ ] 14.1 更新 `CLAUDE.md` §3 技术栈表（前端行）与 §7.2 前端技能表述
-- [ ] 14.2 更新 `frontend/TESTING.md` 四层描述为新栈实现
-- [ ] 14.3 `/opsx:sync`：delta spec 合并入主 spec（`frontend`、`ui-i18n`、新增 `frontend-ui-adapter`）
-- [ ] 14.4 `/opsx:archive`：归档本 change
-- [ ] 14.5 记忆归档（§13 MEM01/MEM04，单独 commit）：新增 React 栈记忆条目，更新受影响的既有条目（`frontend-contract-gen`、`nce-console-redesign`、`test-governance-military-rules` 等）
-- [ ] 14.6 follow-up 债登记：Storybook 故事重建、主题令牌对齐粒度、EviewUI 接入时机与 React 版本约束（design Open Questions 1–4）
+- [x] 14.1 更新 `CLAUDE.md` §3 技术栈表（前端行）与 §7.2 前端技能表述（§1 语言行/§3 前端行含 src/ui 适配层约束/§5.6 前端层表/§7.2/§10 交付标准）
+- [x] 14.2 更新 `frontend/TESTING.md` 四层描述为新栈实现（@testing-library/react、antd Select、tsc、覆盖率轨迹补 React 段、目录口径对齐实际 test/ 结构）
+- [x] 14.3 `/opsx:sync`：delta spec 合并入主 spec（`frontend`、`ui-i18n`、新增 `frontend-ui-adapter`）（FE-01 MODIFIED/FE-27 ADDED/UI-01·02 MODIFIED/FA-01~04 新 spec；借机把主 spec Purpose 与 FE-08 的旧栈组件名改为栈中立；openspec validate --specs 39/39）
+- [x] 14.4 `/opsx:archive`：归档本 change（openspec archive 移入 changes/archive/）
+- [x] 14.5 记忆归档（§13 MEM01/MEM04，单独 commit）：react-antd-rebuild 改写为交付归档态（含 antd E2E 三根因/F3 useId 坑/适配层军规），test-governance 棘轮值刷新+两待办闭环，contract-gen/nce-redesign 加栈迁移注
+- [x] 14.6 follow-up 债登记：Open Q1-Q3 + 评审低严重度四条 + loadSchema in-flight 守卫存量债，共五组登记于 react-antd-rebuild 记忆 follow-up 债节（Q4 清场 CI 处理已随窗口关闭消解）

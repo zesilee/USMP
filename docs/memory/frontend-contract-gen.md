@@ -7,6 +7,8 @@ metadata:
   originSessionId: e83cdcca-14a0-4971-8bbb-0da5ae835af1
 ---
 
+> **栈迁移注**（2026-08-14）：前端已整体重建为 React 19 + antd 6（见 [[react-antd-rebuild]]）。本条中 Vue/@vue/vue-tsc/Element Plus 等实现细节为历史背景；契约生成/typecheck 门禁/交互设计结论仍有效，载体已换 React 对应物。
+
 前端「测试能力提升」三层改造，起于「设备页恒空」复盘（虚构契约 bug，见 [[cicd-self-hosted]]）。根因两面：本地测试链路断 + 前端从无类型检查/契约漂移。
 
 **已完成**：

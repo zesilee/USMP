@@ -1,22 +1,22 @@
 ---
 name: react-antd-rebuild
-description: 前端 Vue→React+antd 原地重建（change frontend-react-antd-switch）进行中：进度/PR 轨迹/闸门结论/拆 PR 与门禁踩坑；续作或碰前端任何文件前必读
+description: 前端 Vue→React+antd 原地重建已全量交付归档(2026-08-14,PR#316-#337)：适配层军规/E2E 对等三根因/F3 惯例/拆 PR 门禁方法论/follow-up 债；碰前端任何文件前必读
 metadata:
   type: project
 ---
 
-**change `frontend-react-antd-switch`**（worktree 分支同名目录，2026-08-14 起）：Vue3+Element Plus 整体退役，React 19 + antd 6.6 + Vite 8 + zustand + react-router **原地重建**（全新项目拍板：无双轨/无灰度/无回滚窗口）。制品与 tasks 在 `openspec/changes/frontend-react-antd-switch/`（tasks.md 勾选即进度台账，rebuild-notes/ 有 data-test 80 条清单与旧组件用量表）。
+**change `frontend-react-antd-switch` 已全量交付归档**（2026-08-14，PR #316-#337，71/71 tasks；制品在 `openspec/changes/archive/`）：Vue3+Element Plus 整体退役，现栈 = **React 19 + antd 6.6 + Vite 8 + zustand + react-router 8 + 自研 i18n 薄层**（同形 `i18n.global.t` API，词表键名原样沿用）。E2E 对等以旧 staging-smoke 套件为验收标尺，chromium/firefox/webkit 63/63 全绿；覆盖率棘轮 94.3/83.2/94.5/96.0（首钉踩了本地 staging 灌水+stories 进分母双坑，#336 CI 红后按干净值二钉——上调阈值前必 `make staging-down` 且核对分母口径）。
 
-**已收官（PR #316-#331 全合入 main）**：组1 准备 / 组2 清场（6 分片：docs→删测→删源→铺路，i18n 薄层与占位使沿用 utils 字面零改动）/ 组3 脚手架+src/ui 适配层（FA-01~04 守护测试硬拦直接 import antd）/ 组4=纯逻辑层 / 组5 zustand+语言联动 / 组6 表单编排（纯函数核心 src/form + hook 壳 src/hooks，FE-27 红灯先行+伪删键守护）/ **组7 垂直切片闸门通过**（68 fixture 实测动态列+运行时校验，结论在 gate-conclusion.md；架构决定=不接 antd Form store，validateStatus/help 受控）/ 组8 详情区+表单Tab+rpc+列表全功能（useListQuery 双模式/占位/变更集标记/行删除）/ 组9 布局导航+ModuleConsolePage 宿主。
-
-**Why:** 重建横跨几十个 PR，门禁与拆分方法论是反复踩过的坑，丢了会重摔。
+**Why:** 重建方法论与 antd 特有坑是数十个 PR 反复踩出来的；换栈后的军规锚点（适配层/键存在性）不写下来会被后续开发无意破坏。
 
 **How to apply:**
-- **拆 PR/commit 门禁**：commit ≤500 行（纯删 ≤6000 且**新增 ≤50**）、PR ≤1000（>20 文件 3000/纯删 6000）——超限就抽 hook/组件分文件再分批 add（先例 useListQuery/listColumns）；lockfile/生成物不计数。同文件重写可 `git rm --cached` 先删后提保纯删口径。
-- **e2e 豁免**：窗口期含 frontend 推送用 `USMP_SKIP_E2E=1`，依据=tasks.md 红灯声明（两段口径），**至 tasks 12.3 E2E 全绿止**；e2e-staging 工作流页面对等前预期红。
-- **合入循环**：push（pre-push -race ~3min，别 tail 管道吞退出码、后台 push 会被杀须重推）→ `gh pr create` → 分支落后用 `gh api PUT .../update-branch`（gh pr update-branch 会因 Projects-classic 报错）→ required 六项绿即 merge（frontend-ci advisory）。
-- **覆盖率棘轮**：现值 95.0/84.5/94.5/96.5（vitest.config 注释有演变轨迹）；分母扩容（新组件层入 include）导致的回落按「分母重算先例」重钉并注明，加测不降标。
-- **测试惯例**：happy-dom 下 antd Modal 离场动画不结束→按「最新弹窗实例」定位勿等卸载；确认钮文案随 locale 用 within(modal)+正则「执\s*行|OK」；gate 套件 fake timers 收口 rc 定时器；`asyncUtilTimeout: 4000` 已全局设（CI 慢跑道）；组件测试跑全量 ~5min/次（pre-commit 每 commit 都跑，连续多 commit 命令要留 >10min 或分次跑）。
-- **UI-02 守护**（test/ui/no-hardcoded-chinese）连 JSX 文本中文都拦；语言自名/诊断字符串走词表或豁免清单（仅 xpathEval 文件级豁免）。
-- **待办**（tasks 10-14 组）：五个页面（Devices/Dashboard/Logs/Settings/Business，占位页在 src/views/PlaceholderPage）→ 11 组变更集批量（BatchToolbar/CommitDialog/路由离开守卫 useBlocker/consoleEpoch 接线已留口/新鲜度环 Header 挂载）→ 12 组 F3+E2E 对等（data-test 对照 rebuild-notes 清单）→ 13 组工具链（Storybook 框架包/Dockerfile 验证）→ 14 组文档+sync+archive。
-- 相关：[[frontend-contract-gen]]、[[nce-console-redesign]]、[[readback-subtree-peel]]（normalizeRows 契约已平移）、[[yang-rpc-execution]]（rpc 三铁律已平移）。
+- **适配层军规（FA-01~04，主 spec frontend-ui-adapter）**：业务代码禁直接 import antd——只从 `src/ui` 导入（守护测试硬拦，为换 EviewUI 留单点）；反馈用 `toast()`/`await confirm()`；图标/主题令牌经适配层收口。
+- **FE-27 键存在性=节点存在性**（主 spec frontend）：删键必解构，守护测试拦 `{...prev,[k]:undefined}` 伪删。
+- **antd E2E/测试三根因**（改 E2E 或组件测试前必读）：① 左树 data-test span 在 submenu title **内部**，选择器直接点 `[data-test=...]` 靠冒泡展开，别写 `[data-test] .ant-menu-submenu-title`；② 详情区 Tab 溢出折叠（接口 47 个）→ 目标 Tab 在「更多」下拉，走 `.ant-tabs-nav-more` + `.ant-tabs-dropdown-menu-item`，直点 nav 节点在视口外且不切换；③ antd 两字中文按钮自动插空格 →「确 定」「查 询」一律用 `/确\s*定/` 式正则。
+- **F3 真浏览器坑**：test 环境 antd useId 恒为 `test-id`，跨 Radio.Group 撞 name 致 DOM checked 互斥失真（生产无此问题）→ 断 `ant-radio-wrapper-checked` 受控 class 而非 toBeChecked。
+- **模块页本地化时序**：loadSchema 成功后 bump `schemaEpoch`，relabel effect 依赖它重跑——选设备后 schema 重拉会用原始 fields 覆盖已本地化版本（PR#335 根因）。
+- **拆 PR/commit 门禁**：commit ≤500 行（纯删 ≤6000 且新增 ≤50）、PR ≤1000（>20 文件 3000/纯删 6000）；lockfile/生成物不计。pre-commit 每 commit 跑全量前端测试 ~5min。
+- **Storybook**：`@storybook/react-vite` 需 ≥10.2.19 才 peer 兼容 Vite 8；storybook 的 vite-plus 可选 peer 会钉 vitest 族小版本（升 storybook 连带对齐 vitest）。npm 原地升级被旧树卡 ERESOLVE 时删 node_modules+lock 干净重算。
+- **测试惯例**：happy-dom 下 antd Modal 离场动画不结束→按最新弹窗实例定位；`asyncUtilTimeout: 4000` 已全局设；UI-02 守护连 JSX 文本中文都拦（story mock 也算，用英文）。
+- **follow-up 债**（登记于 2026-08-14，未闭环）：① design Open Q1 主题令牌对齐粒度待用户目视验收；② Q2 Storybook 故事内容重建（现仅框架冒烟 2 story）另开 change；③ Q3 EviewUI 接入时机与其 React 版本约束（若仅支持 React 18 有降级成本）待其 package.json/d.ts 到手评估；④ 评审低severity 四条：en 词表 `common.apply="Apply"` 与中文「查询」语义漂移、死 key `console.addConfigItem` 可清理、E2E 提交后未断言徽标清零、pickDevice 建议改用 `data-test="device-select"`；⑤ 存量债 loadSchema 无 in-flight 序号守卫（快速切模块/设备旧响应后到会覆盖，重建前已存在）。
+- 相关：[[frontend-contract-gen]]、[[nce-console-redesign]]、[[test-governance-military-rules]]、[[readback-subtree-peel]]、[[yang-rpc-execution]]。

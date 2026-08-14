@@ -1,15 +1,8 @@
-import type { Preview } from '@storybook/vue3'
-import { setup } from '@storybook/vue3'
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
-import { i18n } from '../src/i18n'
+import type { Preview } from '@storybook/react-vite'
+import '../src/styles/reset.scss'
+import '../src/styles/theme.scss'
 
-// 全局注册 Element Plus 与 i18n，使动态渲染组件在 story 中与真实应用一致地渲染。
-setup((app) => {
-  app.use(ElementPlus)
-  app.use(i18n)
-})
-
+// 全局样式与真实应用一致；antd 组件经 src/ui 适配层导入，无需全局注册。
 const preview: Preview = {
   parameters: {
     controls: {

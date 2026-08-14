@@ -141,7 +141,7 @@ fi
 #    暂存含 frontend/ 源码/测试时跑 npm run test（快，不含 Playwright/浏览器模式）。
 #    与后端变更包测试对称，杜绝前端裸提交。USMP_SKIP_FE_TEST=1 显式跳过。
 # ──────────────────────────────────────────────
-FE_FILES=$(echo "$STAGED_FILES" | grep -E '^frontend/.*\.(ts|tsx|js|vue)$' || true)
+FE_FILES=$(echo "$STAGED_FILES" | grep -E '^frontend/.*\.(ts|tsx|js)$' || true)
 if [ -n "$FE_FILES" ] && [ "${USMP_SKIP_FE_TEST:-0}" != 1 ]; then
   echo -e "${YELLOW}[pre-commit] 前端变更 → 运行 happy-dom 单测 (R15/T09)...${NC}"
   if ! (cd frontend && npm run test --silent 2>&1); then
