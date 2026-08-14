@@ -1,48 +1,42 @@
 import { defineConfig } from 'vitest/config'
-import vue from '@vitejs/plugin-vue'
 import { fileURLToPath } from 'node:url'
 
 export default defineConfig({
-  plugins: [vue()],
   test: {
     environment: 'happy-dom',
     setupFiles: ['./test/setup.ts'],
     globals: true,
-    // NCE 改版后控制台组件树变重（el-table 排序/筛选 + 详情区），CI 慢跑道上
-    // 单用例可超默认 5s（本地恒 <3s）；上限放宽而非削测试面。
     testTimeout: 15000,
-    // React 重建窗口（5/6 起）：Vue 视图/状态层已退役，仅运行纯逻辑层套件；
-    // test/{stores,composables} 为沿用资产，被测源随重建逐组加回（tasks 5/6/10 组）。
+    // React 重建期窗口：运行纯逻辑层套件（框架无关）。test/{stores,composables}
+    // 其余套件为沿用资产，被测源随重建逐组加回 include（tasks 5/6/10 组）；
+    // 浏览器模式套件随 tasks 12.1 重建配置。
     include: [
       'test/utils/**/*.{test,spec}.{js,ts,jsx,tsx}',
       'test/golden/**/*.{test,spec}.{js,ts,jsx,tsx}',
       'test/styles/**/*.{test,spec}.{js,ts,jsx,tsx}',
       'test/composables/useFieldLabels.test.ts',
+      // deriveOverview 纯函数面随占位保留（vue 外壳退役），套件持续在场。
       'test/composables/useFleetOverview.test.ts',
     ],
     exclude: ['**/node_modules/**', '**/dist/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      include: ['src/**/*.{vue,ts,tsx}'],
+      // 覆盖率口径随清场重算分母（先例：2026-07-13 legacy CRD 退役）：窗口期
+      // 仅测纯逻辑层，口径收敛到其被测面；React 层重建时逐组扩回。
+      include: ['src/utils/**/*.ts', 'src/i18n/**/*.ts', 'src/composables/**/*.ts'],
       exclude: ['src/**/*.d.ts'],
       // 覆盖率「不下降」棘轮（T08）：阈值 = 当前实测水平向下取整留余量。
       // 只准升不准降——低于阈值 CI 即 fail。补测后应把阈值同步上调，形成单向棘轮。
-      // 基线实测(2026-07-06)：Stmts 66.55 / Branch 66.57 / Funcs 56.67 / Lines 66.88。
-      // 2026-07-08 P3 choice 补测后实测：Stmts 71.25 / Branch 70.02 / Funcs 62.75 / Lines 71.47。
-      // 2026-07-13 legacy CRD 链路退役（低覆盖代码删除，分母重算）后实测：
-      // Stmts 79.53 / Branch 75.61 / Funcs 72.21 / Lines 80.08。
-      // 2026-07-24 派生黄金套件（GD-01，moduleConsole/schemaTree 100%）后 CI 实测：
-      // Stmts 84.x / Branch 78.x / Funcs 77.44 / Lines 85.x。黄金抬高了绝对覆盖率，
-      // 但阈值维持原值不上调——本地测量会被同机运行的 staging 后端灌水（fetch
-      // localhost:8080 成功回调真的执行，多覆盖数个函数，本地 funcs 78.18），CI 无
-      // 后端时是 ECONNREFUSED，真实 funcs 仅 77.44。阈值是地板不是目标，只锁 CI 可
-      // 复现的下界，不锁被本地环境灌水的值。
+      // 历史轨迹（Vue 全量口径）：2026-07-06 66.55/66.57/56.67/66.88 →
+      // 2026-07-24 起 86.5/79.8/81.0/87.5。窗口口径实测（2026-08-14，含
+      // composables 纯函数面）：95.14/85.87/95.16/96.39；React 层组件测试回归后
+      // 恢复全量口径并逐步爬回。
       thresholds: {
-        statements: 86.5,
-        branches: 79.8,
-        functions: 81.0,
-        lines: 87.5
+        statements: 94.5,
+        branches: 85.5,
+        functions: 94.5,
+        lines: 95.5
       }
     }
   },
