@@ -1,6 +1,6 @@
 > **执行约定**：每个 `##` 任务组对应一个独立 PR（TM04 ≤1000 行，超出即再拆；纯删除 PR 走体积豁免）。每项按 §5.6「改动类型→必补层」补齐测试，缺层=未完成（T06）。测试先行（T05），Bug 先写回归（T07）。
 > **全新项目前提**：无双轨并行、无灰度切换、无回滚窗口（design D1）。唯一硬闸门为第 7 组的 R05 能力验证。
-> **窗口红灯声明**（清场 PR 评审确认）：`npm run build` 在窗口期为显式报错脚本 → `frontend/Dockerfile`、`scripts/e2e-smoke.sh`、`scripts/build-release.sh`、合并后 `e2e-staging` 工作流在脚手架恢复 build 前**预期红**；窗口期含 frontend 改动的推送使用 `USMP_SKIP_E2E=1` 一次性豁免（超出其"无 docker 机器"常规口径，依据即本声明与 design D1 空窗决策，脚手架恢复 build 后即停用）。
+> **窗口红灯声明**（清场 PR 评审确认）：`npm run build` 在窗口期为显式报错脚本 → `frontend/Dockerfile`、`scripts/e2e-smoke.sh`、`scripts/build-release.sh`、合并后 `e2e-staging` 工作流在脚手架恢复 build 前**预期红**；窗口期含 frontend 改动的推送使用 `USMP_SKIP_E2E=1` 一次性豁免（超出其"无 docker 机器"常规口径，依据即本声明与 design D1 空窗决策）。豁免分两段：build 断链段（4/6~6/6，Docker 构建即失败）；页面重建段（脚手架后 build 已恢复、但 staging-smoke 断言的页面尚未对等，豁免持续至 tasks 12.3 E2E 全绿即停用）。
 
 ## 1. 准备与隔离
 
