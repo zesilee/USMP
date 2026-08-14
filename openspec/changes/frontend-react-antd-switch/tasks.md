@@ -77,8 +77,8 @@
 
 ## 10. 其余页面（PR-10、PR-11）
 
-- [ ] 10.1 设备页（列表、表单、离线态）— **F2**
-- [ ] 10.2 Dashboard（图表库届时再引入——echarts 已随清场移除死依赖）；**必须**在 `src/composables/useFleetOverview.ts` 同路径重建 hook 并恢复 `deriveOverview` 导出（沿用套件 `test/composables/useFleetOverview.test.ts` 复活，vitest include 同步加回）— **F1 + F2**
+- [x] 10.1 设备页（列表、表单、离线态）— **F2**
+- [x] 10.2 Dashboard（图表库届时再引入——echarts 已随清场移除死依赖）；**必须**在 `src/composables/useFleetOverview.ts` 同路径重建 hook 并恢复 `deriveOverview` 导出（沿用套件 `test/composables/useFleetOverview.test.ts` 复活，vitest include 同步加回）— **F1 + F2**
 - [ ] 10.3 日志页（操作类型模型驱动派生，FE-26）— **F2**
 - [ ] 10.4 设置页 — **F2**
 - [ ] 10.5 业务网络配置控制台页（FE-17）— **F2**

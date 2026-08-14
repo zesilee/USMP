@@ -1,0 +1,19 @@
+.spark {
+  width: 80px;
+  height: 26px;
+}
+
+.spark polyline {
+  fill: none;
+  stroke: var(--color-primary, #0c5ea6);
+  stroke-width: 1.5;
+}
+
+.spark .fillarea {
+  fill: var(--color-primary, #0c5ea6);
+  opacity: 0.12;
+}
+
+.spark-empty {
+  color: var(--text-tertiary);
+}
