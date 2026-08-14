@@ -52,7 +52,8 @@
       "unknown": "Not reconciled",
       "attention": "Needs attention"
     },
-    "create": "Create"
+    "create": "Create",
+    "retry": "Retry"
   },
   "header": {
     "fleet": "Home",
@@ -385,7 +386,13 @@
     "lengthBoth": "Valid length: [{min}..{max}]",
     "lengthMin": "Valid length: ≥ {min}",
     "lengthMax": "Valid length: ≤ {max}",
-    "queryAt": "Queried at {time}"
+    "queryAt": "Queried at {time}",
+    "diffTitle": "Pending changes",
+    "diffOp": {
+      "add": "Add",
+      "modify": "Modify",
+      "remove": "Clear"
+    }
   },
   "app": {
     "rebuildingTitle": "Frontend rebuild in progress",

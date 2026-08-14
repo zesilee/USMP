@@ -18,11 +18,13 @@ export interface SchemaFormProps {
   keyField?: string
   /** 编辑态禁用判定（isKey/operationExclude update 等，FE-11/22）。 */
   fieldDisabled?: (f: Field) => boolean
+  /** label 尾部扩展（字段级清除钮等，FE-22）。 */
+  labelExtra?: (f: Field) => React.ReactNode
 }
 
 const SCALAR = new Set(['string', 'number', 'boolean', 'enum'])
 
-export default function SchemaForm({ fields, form, keyField = '', fieldDisabled }: SchemaFormProps) {
+export default function SchemaForm({ fields, form, keyField = '', fieldDisabled, labelExtra }: SchemaFormProps) {
   const visible = new Set(form.visibleFields.map((f) => f.path))
   const shown = fields.filter((f) => visible.has(f.path))
   return (
@@ -41,6 +43,7 @@ export default function SchemaForm({ fields, form, keyField = '', fieldDisabled 
                 <span className="fi-label">
                   {field.isKey && <icons.KeyIcon className="key-icon" data-test="key-icon" />}
                   <span>{field.label}</span>
+                  {labelExtra?.(field)}
                 </span>
               }
               required={requiredMark}

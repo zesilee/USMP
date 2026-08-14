@@ -52,7 +52,8 @@
       "unknown": "未对账",
       "attention": "需处理"
     },
-    "create": "创建"
+    "create": "创建",
+    "retry": "重试"
   },
   "header": {
     "fleet": "首页",
@@ -385,7 +386,13 @@
     "lengthBoth": "合法长度: [{min}..{max}]",
     "lengthMin": "合法长度: ≥ {min}",
     "lengthMax": "合法长度: ≤ {max}",
-    "queryAt": "查询时间：{time}"
+    "queryAt": "查询时间：{time}",
+    "diffTitle": "本次改动",
+    "diffOp": {
+      "add": "新增",
+      "modify": "修改",
+      "remove": "清除"
+    }
   },
   "app": {
     "rebuildingTitle": "前端重建进行中",
