@@ -19,8 +19,14 @@ export default defineConfig({
       'test/composables/useFieldLabels.test.ts',
       // deriveOverview 纯函数面随占位保留（vue 外壳退役），套件持续在场。
       'test/composables/useFleetOverview.test.ts',
+      'test/composables/useConfigForm.payload.test.ts',
+      'test/composables/useConstraintEngine.test.ts',
+      'test/composables/useConstraintEngine.must.test.ts',
       // 状态层（zustand 重建，tasks 4 组）。
       'test/stores/**/*.{test,spec}.{ts,tsx}',
+      // 表单编排（tasks 6 组）：hooks + 纯函数核心。
+      'test/hooks/**/*.{test,spec}.{ts,tsx}',
+      'test/form/**/*.{test,spec}.{ts,tsx}',
       // UI 适配层（FA-01~04）：守护 + feedback F1。
       'test/ui/**/*.{test,spec}.{ts,tsx}',
     ],
@@ -36,13 +42,14 @@ export default defineConfig({
       // 只准升不准降——低于阈值 CI 即 fail。补测后应把阈值同步上调，形成单向棘轮。
       // 历史轨迹（Vue 全量口径）：2026-07-06 66.55/66.57/56.67/66.88 →
       // 2026-07-24 起 86.5/79.8/81.0/87.5。窗口口径实测（2026-08-14，含
-      // composables 纯函数面、src/ui 适配层与 src/stores）：95.55/86.76/95.31/96.78；
+      // composables 纯函数面、src/ui、src/stores 与 src/{form,hooks}）：
+      // 95.78/87.17/95.83/97.05；
       // React 层组件测试回归后恢复全量口径并逐步爬回。
       thresholds: {
         statements: 95.0,
-        branches: 86.0,
+        branches: 86.5,
         functions: 95.0,
-        lines: 96.0
+        lines: 96.5
       }
     }
   },
