@@ -1,10 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { setActivePinia, createPinia } from 'pinia'
 import { useMenuStore } from '../../src/stores/menu'
 import * as apiModule from '../../src/api'
+import { resetStores } from './reset'
 
 // FE-17（F1）——业务模块分桶：task-name=business-network 的模块进 businessModules、
 // 不进原生分组；无业务模块时业务组为空（Sidebar 整组隐藏）。
+
+const S = () => useMenuStore.getState()
 
 const modules = [
   { name: 'vlan', description: 'VLAN 配置', vendor: 'huawei', category: 'vlan' },
@@ -19,7 +21,7 @@ const modules = [
 
 describe('menu store — business modules split (FE-17)', () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
+    resetStores()
     vi.restoreAllMocks()
   })
 
@@ -27,13 +29,12 @@ describe('menu store — business modules split (FE-17)', () => {
     vi.spyOn(apiModule, 'listYangModules').mockResolvedValue({
       data: { data: modules },
     } as any)
-    const store = useMenuStore()
-    await store.loadNativeModules()
+    await S().loadNativeModules()
 
-    expect(store.businessModules.map((m) => m.name)).toEqual(['business-vlan-service'])
-    expect(store.businessModules[0].title).toBe('跨设备 VLAN 打通')
+    expect(S().businessModules().map((m) => m.name)).toEqual(['business-vlan-service'])
+    expect(S().businessModules()[0].title).toBe('跨设备 VLAN 打通')
 
-    const grouped = store.nativeGroups.flatMap((g) => g.modules.map((m) => m.name))
+    const grouped = S().nativeGroups().flatMap((g) => g.modules.map((m) => m.name))
     expect(grouped).toContain('vlan')
     expect(grouped).toContain('ifm')
     expect(grouped).not.toContain('business-vlan-service')
@@ -43,19 +44,17 @@ describe('menu store — business modules split (FE-17)', () => {
     vi.spyOn(apiModule, 'listYangModules').mockResolvedValue({
       data: { data: modules.filter((m) => m.category !== 'business-network') },
     } as any)
-    const store = useMenuStore()
-    await store.loadNativeModules()
+    await S().loadNativeModules()
 
-    expect(store.businessModules).toHaveLength(0)
-    expect(store.nativeGroups.length).toBeGreaterThan(0)
+    expect(S().businessModules()).toHaveLength(0)
+    expect(S().nativeGroups().length).toBeGreaterThan(0)
   })
 
   it('加载失败回退内置项（无业务模块），不抛错（R08）', async () => {
     vi.spyOn(apiModule, 'listYangModules').mockRejectedValue(new Error('boom'))
-    const store = useMenuStore()
-    await store.loadNativeModules()
+    await S().loadNativeModules()
 
-    expect(store.businessModules).toHaveLength(0)
-    expect(store.nativeModules.length).toBeGreaterThan(0)
+    expect(S().businessModules()).toHaveLength(0)
+    expect(S().nativeModules.length).toBeGreaterThan(0)
   })
 })
