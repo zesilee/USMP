@@ -111,7 +111,8 @@ describe('ModuleListTab · 运行时动态列（R05 闸门）', () => {
     await screen.findByText('z3')
     fireEvent.click(screen.getByRole('columnheader', { name: /id/ }))
     await waitFor(() => {
-      const cells = screen.getAllByRole('row').slice(1).map((r) => r.querySelector('td:nth-child(2)')?.textContent)
+      // 列序：selection(1) 标记列(2) id(3)——FE-11 二期标记列插位后 id 在第 3 列。
+      const cells = screen.getAllByRole('row').slice(1).map((r) => r.querySelector('td:nth-child(3)')?.textContent)
       expect(cells).toEqual(['3', '10', '20']) // 数值序：3<10<20（字典序会是 10,20,3）
     })
     // 字符串列排序路径
@@ -128,7 +129,10 @@ describe('ModuleListTab · 运行时动态列（R05 闸门）', () => {
 
     fireEvent.click(document.querySelector('[data-test="fetch-source"]')!)
     await waitFor(() =>
-      expect(vi.mocked(apiModule.getConfig)).toHaveBeenLastCalledWith('10.0.0.1', expect.any(String), true),
+      // 全功能形态带 includeState/query 参（FE-25 探测），force=true 为第 3 参。
+      expect(vi.mocked(apiModule.getConfig)).toHaveBeenLastCalledWith(
+        '10.0.0.1', expect.any(String), true, false, expect.anything(),
+      ),
     )
   })
 
