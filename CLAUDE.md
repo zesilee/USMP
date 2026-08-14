@@ -6,7 +6,7 @@
 |------|------|
 | 定位 | 无数据库、高并发、模型驱动的交换机设备管理平台 |
 | 架构 | yang-controller-runtime 声明式配置管理 **[R01: 禁止更换]** |
-| 语言 | Go 1.22（交付要求钉死，2026-08-03；依赖须兼容 1.22，禁止引入要求更高 Go 版本的依赖/语法） / Vue3 |
+| 语言 | Go 1.22（交付要求钉死，2026-08-03；依赖须兼容 1.22，禁止引入要求更高 Go 版本的依赖/语法） / React 19 + TypeScript |
 | 协议 | NETCONF (SSH 830)；gNMI (9339/9340) 为规划能力（空壳已删，工厂显式未实现错误） **[R02: 禁止旧协议]** |
 
 ## §2 架构红线
@@ -42,7 +42,7 @@
 | 模型 | YANG + 自研 yanggen | goyang（仅构建期；发布二进制零 openconfig，守护测试拦回引） | R04: 自动生成 |
 | 协议 | NETCONF (SSH 830) + gNMI | RFC6241, openconfig/gnmi | R02: 禁止旧协议 |
 | 缓存 | TTL+LRU 内存 | 协程安全 | R03: 无数据库, Key=IP+YANG路径, TTL 30s, 下发后失效 |
-| 前端 | Vue3 + Element Plus | Axios, Pinia | R05: YANG 自动渲染, 编辑→提交→下发联动后端, 展示设备/缓存/下发/异常状态 |
+| 前端 | React 19 + Ant Design 6（业务代码仅经 `src/ui` 适配层导入 antd，禁直接 import——为将来换 EviewUI 保留单点切换） | Axios, zustand, react-router | R05: YANG 自动渲染, 编辑→提交→下发联动后端, 展示设备/缓存/下发/异常状态 |
 
 ## §4 yang-controller-runtime 分层
 
@@ -149,9 +149,9 @@ explore → propose → apply → sync → archive
 
 | 层 | 配置/位置 | 职责 |
 |----|-----------|------|
-| F1 纯逻辑单测 | happy-dom，`test/{utils,composables,stores}` | 纯函数/composable/store |
-| F2 组件单测 | happy-dom，`test/{components,views}` + `@vue/test-utils` | 组件渲染·props·emit·分支（list/group 的 add/**edit/remove**、校验错误态） |
-| F3 真浏览器 | 真 Chromium，`vitest.browser.config.ts`，`test/browser/` | **仅** happy-dom 伪造不了的：el-select 弹层/teleport、嵌套 list 真实交互（add/edit/remove 全覆盖） |
+| F1 纯逻辑单测 | happy-dom，`test/{utils,composables,hooks,stores,ui}` | 纯函数/`src/form` 表单核心/hook/store/`src/ui` 适配层守护 |
+| F2 组件单测 | happy-dom，`test/{components,views}` + `@testing-library/react` | 组件渲染·props·回调·分支（list/group 的 add/**edit/remove**、校验错误态） |
+| F3 真浏览器 | 真 Chromium，`vitest.browser.config.ts`，`test/browser/` | **仅** happy-dom 伪造不了的：antd Select 弹层/teleport、嵌套 list 真实交互（add/edit/remove 全覆盖） |
 | F4 E2E | Playwright，`frontend/tests/staging-smoke.spec.ts` | 部署冒烟：路由·挂载·种子数据·YANG 表单渲染·校验拦截 |
 
 **改动类型 → 必须补的测试层**
@@ -163,9 +163,9 @@ explore → propose → apply → sync → archive
 | 新增 YANG 模型接入设备配置 | **`yang-config-test-design` 完备矩阵**（T02b） |
 | API handler/编解码 | B3（+B2 若涉下发） |
 | **Bug 修复** | **先写复现回归测试（红）再修**（T07） |
-| 前端 util/composable/store | F1 |
+| 前端 util/hook/store | F1 |
 | 前端组件/页面逻辑 | F2（含 add/**edit/remove**/校验态，非只 render） |
-| 前端 el-select/teleport/嵌套 list 增删改 | **F3 真浏览器** |
+| 前端 antd Select/teleport/嵌套 list 增删改 | **F3 真浏览器** |
 | 新页面/路由/端到端流 | F4 staging-smoke |
 | **改控制台派生逻辑**（deriveTabs/deriveColumns/deriveKeyField/filterableFields/deriveSchemaTree） | **派生黄金（全模块，GD-01）**——刷新后人工核对受影响模块，缺黄金/漂移即拦（SF-04） |
 
@@ -267,10 +267,10 @@ explore → propose → apply → sync → archive
 
 | 触发场景 | 技能 | 规则 |
 |----------|------|------|
-| 功能型（YANG 驱动表单/动态渲染） | `frontend-yang-dynamic-form` | YANG 类型自动映射：boolean→开关、enum→下拉、list→表格（R05） |
+| 功能型（YANG 驱动表单/动态渲染） | `frontend-yang-dynamic-form` | YANG 类型自动映射：boolean→开关、enum→下拉、list→表格（R05）；控件经 `src/ui` 适配层 |
 | 视觉型（美化/可视化/交互原型） | `web-design-engineer` | 先声明设计系统→v0 草案→≥2 变体 |
 | 纯逻辑/工程化/纯功能 | **不触发设计技能** | 状态管理/API/构建/校验/路由/权限 |
-| 前端测试 | 按 §5.6 选层：util/composable/store→F1、组件/页面→F2、el-select/嵌套 list 交互→F3 真浏览器、端到端流→F4 | 缺层禁止合并（T06）；详见 [frontend/TESTING.md](frontend/TESTING.md) |
+| 前端测试 | 按 §5.6 选层：util/hook/store→F1、组件/页面→F2、antd Select/嵌套 list 交互→F3 真浏览器、端到端流→F4 | 缺层禁止合并（T06）；详见 [frontend/TESTING.md](frontend/TESTING.md) |
 
 ### 7.3 Superpowers 技能
 
@@ -314,7 +314,7 @@ explore → propose → apply → sync → archive
 | 维度 | 标准 |
 |------|------|
 | 后端 | 可运行 Go 项目：Controller 系统 + API 接口 + NETCONF 对接 |
-| 前端 | 可运行 Vue3 项目：动态表单 + 树形菜单 + 配置下发 |
+| 前端 | 可运行 React 项目：动态表单 + 树形菜单 + 配置下发 |
 | 测试 | 单元 + 异常 + 并发 + NETCONF 模拟网元集成测试 |
 | 合规 | 满足 §2 全部红线，无违规代码 |
 

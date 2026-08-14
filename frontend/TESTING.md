@@ -7,17 +7,17 @@
 
 | 层 | 运行器 / 配置 | 位置 | 职责（测什么） | 跑法 |
 |----|--------------|------|----------------|------|
-| **F1 纯逻辑单测** | vitest（happy-dom）`vitest.config.ts` | `test/utils/`、`test/composables/`、`test/stores/` | 纯函数、composable、store：输入→输出、分支、异常/边界。无真 DOM，最快 | `npm run test` |
-| **F2 组件单测** | vitest（happy-dom）+ `@vue/test-utils` | `test/components/`、`test/views/` | 组件：渲染、props、**emit**、条件分支。list/group 的 **add/edit/remove** emit、校验错误态都要测（不能只测 render） | `npm run test` |
-| **F3 真浏览器** | vitest **browser mode**（真 Chromium）`vitest.browser.config.ts` | `test/browser/` | **仅**放 happy-dom 伪造不了的：Element Plus `el-select` 弹层/teleport、嵌套 list 真实交互、真实布局/测量。交互控件的 add/edit/remove 必须**全覆盖** | `npm run test:browser` |
+| **F1 纯逻辑单测** | vitest（happy-dom）`vitest.config.ts` | `test/utils/`、`test/composables/`、`test/hooks/`、`test/stores/`、`test/ui/` | 纯函数、`src/form` 表单核心、hook、store、`src/ui` 适配层守护：输入→输出、分支、异常/边界。无真 DOM，最快 | `npm run test` |
+| **F2 组件单测** | vitest（happy-dom）+ `@testing-library/react` | `test/components/`、`test/views/` | 组件：渲染、props、**onChange 回调**、条件分支。list/group 的 **add/edit/remove** 回调、校验错误态都要测（不能只测 render） | `npm run test` |
+| **F3 真浏览器** | vitest **browser mode**（真 Chromium）`vitest.browser.config.ts` | `test/browser/` | **仅**放 happy-dom 伪造不了的：antd `Select` 弹层/teleport、嵌套 list 真实交互、真实布局/测量。交互控件的 add/edit/remove 必须**全覆盖** | `npm run test:browser` |
 | **F4 E2E** | Playwright（起 docker 全栈）`playwright.config.ts` | `frontend/tests/staging-smoke.spec.ts` | 部署冒烟：路由、SPA 挂载、种子数据、YANG 表单动态渲染、校验拦截。跑在 nginx :3002 + 后端 :8080 真栈 | `npm run e2e` / `make e2e-local` |
-| 契约/类型 | `vue-tsc` + `openapi-typescript` | `src/**`、`src/types/api.gen.ts` | `src/` 零类型错；后端注解→契约不漂移 | `npm run typecheck` / `gen:api` |
-| Storybook | `.storybook/` | `*.stories.ts` | 构建门禁 | `npm run build-storybook` |
+| 契约/类型 | `tsc` + `openapi-typescript` | `src/**`、`src/types/api.gen.ts` | `src/` 零类型错；后端注解→契约不漂移 | `npm run typecheck` / `gen:api` |
+| Storybook | `.storybook/`（`@storybook/react-vite`） | `*.stories.tsx` | 构建门禁 | `npm run build-storybook` |
 
 ## 何时必须上 F3 真浏览器（vs F2 happy-dom）
 
 happy-dom 是近似实现，**测不准**这些 → 必须 F3：
-- Element Plus `el-select` / 下拉 / 弹层（teleport 到 body、popper 定位）；
+- antd `Select` / 下拉 / 弹层（teleport 到 body、popup 定位）；
 - 嵌套 list 子表单的真实增删改交互（点击「添加/删除」按钮后的真实 DOM 与事件）；
 - 依赖真实布局/尺寸/滚动/焦点的行为。
 
@@ -27,9 +27,9 @@ happy-dom 是近似实现，**测不准**这些 → 必须 F3：
 
 | 改动 | 必补 |
 |------|------|
-| util / composable / store | F1 |
+| util / hook / store / `src/form` 表单核心 / `src/ui` 适配层 | F1 |
 | 组件 / 页面逻辑 | F2（含 add/edit/remove/校验态） |
-| el-select / teleport / 嵌套 list 增删改 | **F3 真浏览器**（add/edit/remove 全覆盖） |
+| antd Select / teleport / 嵌套 list 增删改 | **F3 真浏览器**（add/edit/remove 全覆盖） |
 | 新页面 / 路由 / 端到端用户流 | F4 staging-smoke |
 | 改 API 类型 / 契约 | typecheck + 契约漂移门禁 |
 | **改控制台派生逻辑**（deriveTabs/deriveColumns/deriveKeyField/filterableFields/deriveSchemaTree） | **派生黄金（全模块）**——UPDATE_GOLDEN=1 刷新后人工核对受影响模块 |
@@ -50,7 +50,7 @@ happy-dom 是近似实现，**测不准**这些 → 必须 F3：
 ```
 frontend/
 ├── test/                     # vitest 套件（happy-dom + browser）
-│   ├── utils/ composables/ stores/   # F1
+│   ├── utils/ composables/ hooks/ stores/ ui/   # F1（composables 目录名沿用，装 src/form 纯函数与 hook 测试）
 │   ├── components/ views/            # F2
 │   ├── browser/                     # F3（真 Chromium，vitest.browser.config.ts）
 │   └── golden/                      # F1 派生黄金（__data__/<module>.json，读 backend fixture）
@@ -64,14 +64,14 @@ frontend/
 
 - `vitest.config.ts` 的 `coverage.thresholds`（statements/branches/functions/lines）为**只准升不准降**的棘轮，`frontend-ci.yml` 跑 `npm run test:coverage`，低于阈值即 fail。
 - 补测后**同步上调阈值**到新水平，形成单向棘轮。本地自查：`npm run test:coverage`。
-- 基线实测(2026-07-06)：Stmts 66.55 / Branch 66.57 / Funcs 56.67 / Lines 66.88。
-- 派生黄金后(2026-07-24)：CI 实测 Funcs 77.44、Lines 85.x（黄金把 moduleConsole/schemaTree 打到 100%）。阈值维持 84/78/77/84——本地测量会被同机 staging 后端灌水（fetch 成功回调多覆盖数个函数），只锁 CI 可复现下界。
+- Vue 栈历史轨迹：2026-07-06 基线 66.55/66.57/56.67/66.88 → 2026-07-24 派生黄金后 84/78/77/84。
+- React 重建后（2026-08-14，tasks 12.4 回填收口）：实测 94.52/83.31/94.54/96.15，阈值钉 **94.5/83.3/94.5/96.1**（完整轨迹见 `vitest.config.ts` 注释）。
 
 ## 门禁（本地 + CI）
 
 | 时机 | 拦截 |
 |------|------|
-| pre-commit | 暂存含 `frontend/*.{ts,vue,…}` → `npm run test`（F1/F2 happy-dom）。`USMP_SKIP_FE_TEST=1` 跳过 |
+| pre-commit | 暂存含 `frontend/*.{ts,tsx,js}` → `npm run test`（F1/F2 happy-dom）。`USMP_SKIP_FE_TEST=1` 跳过 |
 | pre-push | 前端变更 → `scripts/e2e-smoke.sh`（F4）。`USMP_SKIP_E2E=1` 跳过 |
 | CI `frontend-ci.yml` | typecheck + `npm run test:coverage`（F1/F2 + 覆盖率门禁） |
 | CI `frontend-browser-tests.yml` | `npm run test:browser`（F3） |

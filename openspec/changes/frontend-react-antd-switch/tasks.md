@@ -108,8 +108,8 @@
 
 ## 14. 文档与归档（PR-15）
 
-- [ ] 14.1 更新 `CLAUDE.md` §3 技术栈表（前端行）与 §7.2 前端技能表述
-- [ ] 14.2 更新 `frontend/TESTING.md` 四层描述为新栈实现
+- [x] 14.1 更新 `CLAUDE.md` §3 技术栈表（前端行）与 §7.2 前端技能表述（§1 语言行/§3 前端行含 src/ui 适配层约束/§5.6 前端层表/§7.2/§10 交付标准）
+- [x] 14.2 更新 `frontend/TESTING.md` 四层描述为新栈实现（@testing-library/react、antd Select、tsc、覆盖率轨迹补 React 段、目录口径对齐实际 test/ 结构）
 - [ ] 14.3 `/opsx:sync`：delta spec 合并入主 spec（`frontend`、`ui-i18n`、新增 `frontend-ui-adapter`）
 - [ ] 14.4 `/opsx:archive`：归档本 change
 - [ ] 14.5 记忆归档（§13 MEM01/MEM04，单独 commit）：新增 React 栈记忆条目，更新受影响的既有条目（`frontend-contract-gen`、`nce-console-redesign`、`test-governance-military-rules` 等）
