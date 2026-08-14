@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { setActivePinia, createPinia } from 'pinia'
 import { useMenuStore } from '../../src/stores/menu'
 import * as apiModule from '../../src/api'
+import { resetStores } from './reset'
 
 // FE-13：原生配置菜单由 /yang/modules 驱动；API 失败回退内置项（R08）。
 // 走 api 客户端（绝对 baseURL）——staging nginx 不代理 /api，裸相对 fetch 会
@@ -10,9 +10,11 @@ function mockModules(data: any[]) {
   return vi.spyOn(apiModule, 'listYangModules').mockResolvedValue({ data: { data } } as any)
 }
 
+const S = () => useMenuStore.getState()
+
 describe('menu store · loadNativeModules', () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
+    resetStores()
     vi.restoreAllMocks()
   })
 
@@ -21,21 +23,19 @@ describe('menu store · loadNativeModules', () => {
       { name: 'ifm', title: 'ifm', vendor: 'huawei', description: '接口管理' },
       { name: 'vlan', title: 'vlan', vendor: 'huawei', description: '' },
     ])
-    const store = useMenuStore()
-    await store.loadNativeModules()
-    expect(store.nativeModules).toEqual([
+    await S().loadNativeModules()
+    expect(S().nativeModules).toEqual([
       { name: 'ifm', title: '接口管理', vendor: 'huawei' },
       { name: 'vlan', title: 'vlan', vendor: 'huawei' },
     ])
-    expect(store.nativeLoaded).toBe(true)
+    expect(S().nativeLoaded).toBe(true)
   })
 
   it('失败：回退内置项（模块根名，可直接命中 GetSchema）', async () => {
     vi.spyOn(apiModule, 'listYangModules').mockRejectedValue(new Error('network down'))
-    const store = useMenuStore()
-    await store.loadNativeModules()
-    expect(store.nativeModules.map((m) => m.name)).toEqual(['ifm', 'vlan'])
-    expect(store.nativeLoaded).toBe(true)
+    await S().loadNativeModules()
+    expect(S().nativeModules.map((m) => m.name)).toEqual(['ifm', 'vlan'])
+    expect(S().nativeLoaded).toBe(true)
   })
 
   // 回归（T07）：走 api 客户端 = axios，非 JSON 响应（如 staging nginx SPA fallback
@@ -44,24 +44,21 @@ describe('menu store · loadNativeModules', () => {
     vi.spyOn(apiModule, 'listYangModules').mockRejectedValue(
       new SyntaxError("Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON")
     )
-    const store = useMenuStore()
-    await expect(store.loadNativeModules()).resolves.toBeUndefined()
-    expect(store.nativeModules.map((m) => m.name)).toEqual(['ifm', 'vlan'])
-    expect(store.nativeLoaded).toBe(true)
+    await expect(S().loadNativeModules()).resolves.toBeUndefined()
+    expect(S().nativeModules.map((m) => m.name)).toEqual(['ifm', 'vlan'])
+    expect(S().nativeLoaded).toBe(true)
   })
 
   it('空列表也走回退（避免空菜单）', async () => {
     mockModules([])
-    const store = useMenuStore()
-    await store.loadNativeModules()
-    expect(store.nativeModules.length).toBeGreaterThan(0)
+    await S().loadNativeModules()
+    expect(S().nativeModules.length).toBeGreaterThan(0)
   })
 
   it('幂等：已加载不再发请求', async () => {
     const f = mockModules([{ name: 'ifm' }])
-    const store = useMenuStore()
-    await store.loadNativeModules()
-    await store.loadNativeModules()
+    await S().loadNativeModules()
+    await S().loadNativeModules()
     expect(f).toHaveBeenCalledTimes(1)
   })
 })
@@ -69,7 +66,7 @@ describe('menu store · loadNativeModules', () => {
 // FE-13 扩展：模块携带 category（任务域）时按组聚合；无 category 归默认组，渲染不失败（R08）。
 describe('menu store · nativeGroups 任务域分组', () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
+    resetStores()
     vi.restoreAllMocks()
   })
 
@@ -79,9 +76,8 @@ describe('menu store · nativeGroups 任务域分组', () => {
       { name: 'vlan', title: 'vlan', vendor: 'huawei', description: 'VLAN', category: 'vlan' },
       { name: 'bgp', title: 'bgp', vendor: 'huawei', description: 'BGP' },
     ])
-    const store = useMenuStore()
-    await store.loadNativeModules()
-    const groups = store.nativeGroups
+    await S().loadNativeModules()
+    const groups = S().nativeGroups()
     expect(groups.map((g) => g.category)).toEqual(['interface-mgr', 'vlan', ''])
     expect(groups[0].modules.map((m) => m.name)).toEqual(['ifm'])
     expect(groups[2].modules.map((m) => m.name)).toEqual(['bgp'])
@@ -89,10 +85,9 @@ describe('menu store · nativeGroups 任务域分组', () => {
 
   it('全部无 category（含回退项）：单一默认组，等价平铺', async () => {
     vi.spyOn(apiModule, 'listYangModules').mockRejectedValue(new Error('down'))
-    const store = useMenuStore()
-    await store.loadNativeModules()
-    expect(store.nativeGroups).toHaveLength(1)
-    expect(store.nativeGroups[0].category).toBe('')
-    expect(store.nativeGroups[0].modules.length).toBeGreaterThan(0)
+    await S().loadNativeModules()
+    expect(S().nativeGroups()).toHaveLength(1)
+    expect(S().nativeGroups()[0].category).toBe('')
+    expect(S().nativeGroups()[0].modules.length).toBeGreaterThan(0)
   })
 })
