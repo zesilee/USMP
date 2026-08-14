@@ -15,7 +15,8 @@
     "treeSearchPlaceholder": "Search model node",
     "expandAll": "Expand All",
     "collapseAll": "Collapse All",
-    "searchNoMatch": "No matching nodes"
+    "searchNoMatch": "No matching nodes",
+    "toggleSidebar": "Toggle sidebar"
   },
   "common": {
     "language": "Language",
@@ -398,6 +399,11 @@
   },
   "app": {
     "rebuildingTitle": "Frontend rebuild in progress",
-    "rebuildingDesc": "The USMP frontend is migrating from Vue to React. Pages such as the module console will come back as the rebuild proceeds."
+    "rebuildingDesc": "The USMP frontend is migrating from Vue to React. Pages such as the module console will come back as the rebuild proceeds.",
+    "pageRebuilding": "{page} page is being rebuilt"
+  },
+  "locale": {
+    "zhCn": "中文",
+    "enUs": "English"
   }
 }

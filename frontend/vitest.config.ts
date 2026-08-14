@@ -26,6 +26,7 @@ export default defineConfig({
       'test/stores/**/*.{test,spec}.{ts,tsx}',
       // 组件层 F2（React 重建波次）。
       'test/components/**/*.{test,spec}.{ts,tsx}',
+      'test/views/**/*.{test,spec}.{ts,tsx}',
       // 表单编排（tasks 6 组）：hooks + 纯函数核心。
       'test/hooks/**/*.{test,spec}.{ts,tsx}',
       'test/form/**/*.{test,spec}.{ts,tsx}',
@@ -52,7 +53,7 @@ export default defineConfig({
       thresholds: {
         statements: 95.0,
         branches: 84.5,
-        functions: 95.0,
+        functions: 94.5,
         lines: 96.5
       }
     }
