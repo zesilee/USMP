@@ -54,7 +54,7 @@
 
 ## 7. 垂直切片：模块控制台列表页（硬闸门，PR-6）
 
-- [ ] 7.1 `FieldRenderer` 重建：递归渲染 + 类型→控件分派（8 种类型全覆盖），全部控件经适配层（FE-01）— **F2（含 add/edit/remove 与校验错误态）**
+- [x] 7.1 `FieldRenderer` 重建：递归渲染 + 类型→控件分派（8 种类型全覆盖），全部控件经适配层（FE-01）— **F2（含 add/edit/remove 与校验错误态）**
 - [ ] 7.2 列表 Tab 打通 **Table 运行时动态列**：列设置显隐、排序、enum/boolean 表头筛选、多选、自定义单元格（状态点/enum 标签/when 不可见占位）— **F2**
 - [ ] 7.3 表单打通 **运行时动态 rules**：pattern / range / required / must 由 YANG 元数据现场生成 — **F2**
 - [ ] 7.4 以 68 模块 schema fixture 驱动跑通 7.2/7.3（非玩具示例）— **F2**
