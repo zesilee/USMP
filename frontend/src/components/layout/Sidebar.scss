@@ -1,0 +1,65 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 240px;
+  background: var(--bg-card, #fff);
+  border-right: 1px solid var(--border-color);
+  transition: width 0.2s;
+}
+
+.sidebar.collapsed {
+  width: 64px;
+}
+
+.sidebar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+}
+
+.sidebar .brand-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: var(--color-primary, #0c5ea6);
+  flex: none;
+}
+
+.sidebar .brand-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.sidebar .brand-sub {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.sidebar .lt-toolbar {
+  padding: 4px 12px 8px;
+}
+
+.sidebar.collapsed .lt-toolbar,
+.sidebar.collapsed .brand-text {
+  display: none;
+}
+
+.sidebar .lt-empty {
+  padding: 6px 16px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.sidebar .nav {
+  flex: 1;
+  overflow: auto;
+  border-inline-end: none;
+}
+
+.sidebar .lt-rpc-highrisk .anticon {
+  color: var(--color-warning, #b26a00);
+  font-size: 12px;
+}

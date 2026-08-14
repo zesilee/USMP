@@ -1,0 +1,18 @@
+.main-layout {
+  display: flex;
+  height: 100%;
+}
+
+.main-layout .main-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-layout .main-content {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+  background: var(--bg-page, #eaeef3);
+}
