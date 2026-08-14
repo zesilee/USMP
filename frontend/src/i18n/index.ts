@@ -13,13 +13,26 @@ const messages: Record<string, Messages> = { 'zh-cn': zhCn, 'en-us': enUs }
 
 let locale = 'zh-cn'
 
-/** 当前语言（默认 zh-cn；未知语言忽略，R08）。 */
+// 语言变更订阅（external-store 形态）：React 侧（UiProvider/useT）经
+// useSyncExternalStore 接入，语言切换即时重渲染（UI-01）；非 React 消费方
+// （utils 的 t()）每次调用取当前值，无需订阅。
+const listeners = new Set<() => void>()
+
+/** 设置当前语言（默认 zh-cn；未知语言忽略，R08）并通知订阅方。 */
 export function setLocale(next: string): void {
-  if (messages[next]) locale = next
+  if (!messages[next] || next === locale) return
+  locale = next
+  listeners.forEach((l) => l())
 }
 
 export function getLocale(): string {
   return locale
+}
+
+/** 订阅语言变更（返回退订函数），供 useSyncExternalStore 使用。 */
+export function subscribeLocale(listener: () => void): () => void {
+  listeners.add(listener)
+  return () => listeners.delete(listener)
 }
 
 // 点分 key 逐层取值：'console.basicTab' → messages[locale].console.basicTab。
