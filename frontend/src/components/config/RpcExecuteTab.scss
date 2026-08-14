@@ -1,0 +1,45 @@
+.rpc-execute-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 560px;
+}
+
+.rpc-execute-tab .rpc-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rpc-execute-tab .rpc-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.rpc-execute-tab .rpc-tip {
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.rpc-execute-tab .rpc-empty {
+  color: var(--text-tertiary);
+  font-size: 13px;
+}
+
+.rpc-execute-tab .rpc-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rpc-execute-tab .req-mark {
+  color: var(--color-danger, #c7000b);
+  margin-left: 2px;
+}
+
+.rpc-execute-tab .actions {
+  display: flex;
+  gap: 12px;
+}
