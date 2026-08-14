@@ -92,8 +92,8 @@
 ## 12. 测试补齐与门禁达标（PR-13）
 
 - [ ] 12.1 F3 真浏览器测试建齐：select 弹层/teleport、嵌套 list 真实增删改 — **F3**
-- [ ] 12.2 `data-test` 属性逐项核对，确认 E2E 选择器零遗漏
-- [ ] 12.3 Playwright E2E 全绿（414 行沿用）— **F4**
+- [x] 12.2 `data-test` 属性逐项核对，确认 E2E 选择器零遗漏（左树 group/leaf/node/rpc、business-*、adv-search、detail-pane 全对齐；rebuild-notes 清单核销）
+- [x] 12.3 Playwright E2E 全绿（414 行沿用）— **F4**（chromium/firefox/webkit 63/63 全绿；el-*→ant-* 选择器迁移 + 三处行为修复：#app 挂载点、schemaEpoch 本地化时序、高级搜索枚举下拉）
 - [ ] 12.4 覆盖率四项阈值达到或高于 1.2 记录的基线（T08），达标后同步上调阈值文件
 - [ ] 12.5 `make e2e-local` 全栈（docker 编排）冒烟全绿
 

@@ -21,15 +21,23 @@ function nodeLabel(n: LeftTreeNode, locale: string): string {
 
 // 左树 → antd Menu items（LT-02/03）：分组递归子树；叶（sourceModule）带模块级
 // children（container/rpc 平铺）；available=false 禁用。
+// data-test 命名沿用旧 LeftTreeMenu 契约（E2E 选择器基准）：group=zh、
+// leaf=sourceModule、node=name（container）、rpc=<module>-<name>。
 function treeToItems(nodes: LeftTreeNode[], locale: string, prefix: string): MenuItem[] {
   return nodes.map((n, i) => {
     const key = `${prefix}-${i}`
     const label = nodeLabel(n, locale)
     if (n.children?.length && !n.sourceModule) {
-      return { key, label, children: treeToItems(n.children, locale, key) }
+      return {
+        key,
+        label: <span data-test={`lefttree-group-${n.zh}`}>{label}</span>,
+        children: treeToItems(n.children, locale, key),
+      }
     }
     if (n.sourceModule) {
-      if (!n.available) return { key, label, disabled: true }
+      if (!n.available) {
+        return { key, label: <span data-test={`lefttree-leaf-${n.sourceModule}`}>{label}</span>, disabled: true }
+      }
       const kids = (n.children ?? []).map((c) => ({
         key:
           c.kind === 'rpc'
@@ -37,16 +45,22 @@ function treeToItems(nodes: LeftTreeNode[], locale: string, prefix: string): Men
             : `/module/${c.name || n.module}`,
         // 高危 rpc 真实图标标记（R12 禁 emoji）。
         label:
-          c.kind === 'rpc' && c.highRisk ? (
-            <span className="lt-rpc-highrisk">
-              {nodeLabel(c, locale)} <icons.WarningFilledIcon />
+          c.kind === 'rpc' ? (
+            <span data-test={`lefttree-rpc-${n.module}-${c.name}`} className={c.highRisk ? 'lt-rpc-highrisk' : undefined}>
+              {nodeLabel(c, locale)} {c.highRisk && <icons.WarningFilledIcon />}
             </span>
           ) : (
-            nodeLabel(c, locale)
+            <span data-test={`lefttree-node-${c.name || n.module}`}>{nodeLabel(c, locale)}</span>
           ),
       }))
-      if (kids.length) return { key, label, children: kids }
-      return { key: `/module/${n.module}`, label }
+      if (kids.length) {
+        return {
+          key,
+          label: <span data-test={`lefttree-leaf-${n.sourceModule}`}>{label}</span>,
+          children: kids,
+        }
+      }
+      return { key: `/module/${n.module}`, label: <span data-test={`lefttree-leaf-${n.sourceModule}`}>{label}</span> }
     }
     return { key, label }
   })
@@ -101,8 +115,11 @@ export default function Sidebar() {
           {
             key: 'business-config',
             icon: <icons.ShareIcon />,
-            label: t('nav.businessConfig'),
-            children: businessModules.map((m) => ({ key: `/business/${m.name}`, label: m.title })),
+            label: <span data-test="business-group">{t('nav.businessConfig')}</span>,
+            children: businessModules.map((m) => ({
+              key: `/business/${m.name}`,
+              label: <span data-test={`business-item-${m.name}`}>{m.title}</span>,
+            })),
           } as MenuItem,
         ]
       : []),
