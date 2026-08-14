@@ -35,10 +35,12 @@ export interface ItemDetailPaneProps {
   postKey?: string
   onClose: () => void
   onStaged: (key: string) => void
+  /** 未提交草稿态上报（FE-21 切行守卫数据源）。 */
+  onDirtyChange?: (dirty: boolean) => void
 }
 
 export default function ItemDetailPane(props: ItemDetailPaneProps) {
-  const { tab, rootName, device, mode, row, onClose, onStaged } = props
+  const { tab, rootName, device, mode, row, onClose, onStaged, onDirtyChange } = props
   const listField = tab.listField || tab.field
   const keyField = useMemo(() => deriveKeyField(listField), [listField])
   const detailTabs = useMemo(() => deriveDetailTabs(listField), [listField])
@@ -62,6 +64,10 @@ export default function ItemDetailPane(props: ItemDetailPaneProps) {
   )
 
   const { resetForm, setOriginal, patchForm, removeField } = form
+
+  // 未提交草稿态上报（FE-21）：diff 非空即 dirty。
+  const dirty = form.diff.length > 0
+  useEffect(() => onDirtyChange?.(dirty), [dirty, onDirtyChange])
 
   // mode/row 变化即重置表单（切行/切建）。变更集已有该条目 → 以其最新值回填
   // 并保持首次 baseline（FE-21 合并语义）：payload 覆盖行数据、cleared 叶置空。
