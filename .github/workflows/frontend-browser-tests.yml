@@ -33,13 +33,30 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
+      # React 重建窗口（frontend-react-antd-switch）：浏览器模式套件随 Vue 栈退役、
+      # 待 React 层重建（tasks 12.1）。test:browser 脚本缺失时本作业自愈跳过，
+      # 脚本恢复即自动重新生效——无需二次改工作流。前置于依赖安装，跳过场景
+      # 不白装一遍 node_modules。
+      - name: Browser suite presence check
+        id: has_browser
+        run: |
+          if node -e "process.exit(require('./package.json').scripts['test:browser'] ? 0 : 1)"; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "test:browser 脚本不存在（React 重建窗口），跳过浏览器套件"
+          fi
+
       - name: Install dependencies
+        if: steps.has_browser.outputs.present == 'true'
         run: npm ci --prefer-offline --no-audit --fund=false
 
       # 直接用 vitest-browser 依赖的 playwright 包自身的 CLI 安装，避免与
       # @playwright/test 的版本歧义导致装错 chromium 修订版（headless-shell 缺失）。
       - name: Install Chromium（匹配 vitest browser provider 的 playwright 版本）
+        if: steps.has_browser.outputs.present == 'true'
         run: node node_modules/playwright/cli.js install --with-deps chromium
 
       - name: Browser component tests
+        if: steps.has_browser.outputs.present == 'true'
         run: npm run test:browser
