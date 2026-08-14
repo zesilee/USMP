@@ -28,29 +28,29 @@
 
 ## 4. 纯逻辑层就位（PR-3）
 
-- [ ] 4.1 `src/types` 与 `gen:api` 契约生成链路跑通（openapi-typescript 不变）
-- [ ] 4.2 `src/utils` 15 文件就位——**逐字节沿用，禁止顺手重构**（D4）
-- [ ] 4.3 `src/api` axios 层就位
-- [ ] 4.4 `test/utils` 18 文件跑通 — **F1**
-- [ ] 4.5 派生黄金与 schema fixture 在新栈运行并确认**零漂移**（GD-01，本组硬门槛）
+- [x] 4.1 `src/types` 与 `gen:api` 契约生成链路跑通（openapi-typescript 不变）
+- [x] 4.2 `src/utils` 15 文件就位——**逐字节沿用，禁止顺手重构**（D4）
+- [x] 4.3 `src/api` axios 层就位
+- [x] 4.4 `test/utils` 18 文件跑通 — **F1**
+- [x] 4.5 派生黄金与 schema fixture 在新栈运行并确认**零漂移**（GD-01，本组硬门槛）
 
 ## 5. 状态与 i18n（PR-4）
 
-- [ ] 5.1 zustand 重建 5 个 store（action/state 命名沿用，便于与既有测试对齐）
-- [ ] 5.2 `test/stores` 7 文件跑通 — **F1**
-- [ ] 5.3 i18n 薄层接 React 响应式（清场 PR 已建同形 API 基座）：locale 词表**键值原样沿用不重命名**（D4，UI-02）
-- [ ] 5.4 语言切换入口 + localStorage 持久化 + 适配层 locale 联动（UI-01）— **F1 + F2**
-- [ ] 5.5 中文硬编码扫描脚本跑通，确认零残留（UI-02 判据）
-- [ ] 5.6 `useFieldLabels`（snd res 懒加载，UI-03）就位；`make sync-snd-i18n` 目标验证 — **F1**
+- [x] 5.1 zustand 重建 5 个 store（action/state 命名沿用，便于与既有测试对齐）
+- [x] 5.2 `test/stores` 7 文件跑通 — **F1**
+- [x] 5.3 i18n 薄层接 React 响应式（清场 PR 已建同形 API 基座）：locale 词表**键值原样沿用不重命名**（D4，UI-02）
+- [x] 5.4 语言切换入口 + localStorage 持久化 + 适配层 locale 联动（UI-01）— **F1 + F2**
+- [x] 5.5 中文硬编码扫描脚本跑通，确认零残留（UI-02 判据）
+- [x] 5.6 `useFieldLabels`（snd res 懒加载，UI-03）就位；`make sync-snd-i18n` 目标验证 — **F1**
 
 ## 6. 表单编排 hooks（PR-5）
 
-- [ ] 6.1 **先写红灯测试**：FE-27 三场景（presence 关闭 / choice 切分支 / dynamicDefault 留空）断言键**真正消失**（键枚举判定，非取值判定）— **F1，T05 测试先行**
-- [ ] 6.2 `useConstraintEngine` 重建（when 显隐 / must 校验 / xpath 求值）— **F1**
-- [ ] 6.3 `useConfigForm` 重建为 hooks：不可变更新，删键一律解构（D6）— **F1**
-- [ ] 6.4 ESLint 规则拦截 `{...prev, [k]: undefined}` 伪删键写法（D6 护栏）— **守护测试**
-- [ ] 6.5 `test/composables` 8 文件跑通 — **F1**
-- [ ] 6.6 payload 口径（`visiblePayload` / `changedPayload` / `clearedKeys`）与既有语义逐项核对 — **F1**
+- [x] 6.1 **先写红灯测试**：FE-27 三场景（presence 关闭 / choice 切分支 / dynamicDefault 留空）断言键**真正消失**（键枚举判定，非取值判定）— **F1，T05 测试先行**
+- [x] 6.2 `useConstraintEngine` 重建（when 显隐 / must 校验 / xpath 求值）— **F1**
+- [x] 6.3 `useConfigForm` 重建为 hooks：不可变更新，删键一律解构（D6）— **F1**
+- [x] 6.4 ESLint 规则拦截 `{...prev, [k]: undefined}` 伪删键写法（D6 护栏）— **守护测试**
+- [x] 6.5 `test/composables` 8 文件跑通 — **F1**
+- [x] 6.6 payload 口径（`visiblePayload` / `changedPayload` / `clearedKeys`）与既有语义逐项核对 — **F1**
 
 ## 7. 垂直切片：模块控制台列表页（硬闸门，PR-6）
 
