@@ -15,7 +15,8 @@
     "treeSearchPlaceholder": "请输入模型节点名称",
     "expandAll": "展开全部",
     "collapseAll": "收起全部",
-    "searchNoMatch": "无匹配节点"
+    "searchNoMatch": "无匹配节点",
+    "toggleSidebar": "收起/展开侧栏"
   },
   "common": {
     "language": "语言",
@@ -398,6 +399,11 @@
   },
   "app": {
     "rebuildingTitle": "前端重建进行中",
-    "rebuildingDesc": "USMP 前端正在从 Vue 迁移至 React——模块控制台等页面将随重建逐步恢复。"
+    "rebuildingDesc": "USMP 前端正在从 Vue 迁移至 React——模块控制台等页面将随重建逐步恢复。",
+    "pageRebuilding": "{page}页面重建中——随重建波次恢复"
+  },
+  "locale": {
+    "zhCn": "中文",
+    "enUs": "English"
   }
 }

@@ -1,0 +1,22 @@
+.module-console {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.module-console .page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.module-console .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.module-console .tab-unsupported {
+  opacity: 0.45;
+}
