@@ -1,4 +1,6 @@
+import { useCallback, useState } from 'react'
 import type { ReconcileOutcome } from '../types/api'
+import { listDevices, getFleetReconcile } from '../api'
 import { i18n } from '../i18n'
 
 // 设备总览派生（纯函数面，React 重建窗口保留）：把 /devices（在线态）与
@@ -187,4 +189,34 @@ export function deriveOverview(devices: DeviceInput[], fleet: FleetInput): Overv
     ledger,
     recent,
   }
+}
+
+// ===== React hook 外壳（tasks 10.2）：拉取 /devices + /reconcile/status，派生
+// 概览；任一失败降级为错误态（R08 不崩）。 =====
+const EMPTY_OVERVIEW: Overview = deriveOverview([], {})
+
+export function useFleetOverview() {
+  const [overview, setOverview] = useState<Overview>(EMPTY_OVERVIEW)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const load = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const [devRes, fleetRes] = await Promise.all([listDevices(), getFleetReconcile()])
+      const devices: DeviceInput[] = ((devRes.data?.data as any)?.devices ?? []).map((d: any) => ({
+        ip: d.ip ?? '',
+        online: d.online ?? false,
+      }))
+      setOverview(deriveOverview(devices, (fleetRes.data?.data as any) ?? {}))
+    } catch (e: any) {
+      setError(e?.response?.data?.message || e?.message || i18n.global.t('common.loadFailed'))
+      setOverview(EMPTY_OVERVIEW)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  return { overview, loading, error, load }
 }
