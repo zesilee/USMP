@@ -1,0 +1,79 @@
+/* FieldRenderer 结构样式（语义自旧 Vue scoped 版平移；色值走全局 token，FA-04）。 */
+.field-renderer {
+  width: 100%;
+}
+
+.field-scalar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.field-scalar > :first-child {
+  flex: 1;
+}
+
+.field-units {
+  flex: none;
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.field-presence {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.field-group {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--bg-elevated);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.group-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sub-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.field-label {
+  min-width: 96px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.field-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.list-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background-color: var(--bg-elevated);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.list-row-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
