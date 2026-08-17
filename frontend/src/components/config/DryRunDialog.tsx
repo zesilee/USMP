@@ -11,6 +11,21 @@ import './DryRunDialog.scss'
 // Tab② 网元数据差异对比 = diff 树 + 基线来源标注。失败如实报错且不影响变更集。
 const t = (k: string, p?: Record<string, unknown>) => i18n.global.t(k, p)
 
+// diff 值展示（React error #31 回归）：子树级 diff 的 old/new 可能是对象/数组
+// （如 {101:{...}} 以 list key 为键），对象不是合法 React 子节点。对齐旧 Vue
+// 插值 toDisplayString 语义：对象/数组 JSON 化、null/undefined 空串、标量 String。
+const fmtDiffValue = (v: unknown): string => {
+  if (v === undefined || v === null) return ''
+  if (typeof v === 'object') {
+    try {
+      return JSON.stringify(v, null, 2)
+    } catch {
+      return String(v) // 循环引用等极端情况降级（R08 不崩）
+    }
+  }
+  return String(v)
+}
+
 export default function DryRunDialog({
   open,
   device,
@@ -123,16 +138,16 @@ export default function DryRunDialog({
                       {
                         title: t('console.batch.colBefore'),
                         render: (_, r: any) => (
-                          <span className={r.type === 'DELETE' ? 'cell-removed' : r.type === 'MODIFY' ? 'cell-modified' : ''}>
-                            {r.old}
+                          <span className={`diff-value ${r.type === 'DELETE' ? 'cell-removed' : r.type === 'MODIFY' ? 'cell-modified' : ''}`}>
+                            {fmtDiffValue(r.old)}
                           </span>
                         ),
                       },
                       {
                         title: t('console.batch.colAfter'),
                         render: (_, r: any) => (
-                          <span className={r.type === 'ADD' ? 'cell-added' : r.type === 'MODIFY' ? 'cell-modified' : ''}>
-                            {r.new}
+                          <span className={`diff-value ${r.type === 'ADD' ? 'cell-added' : r.type === 'MODIFY' ? 'cell-modified' : ''}`}>
+                            {fmtDiffValue(r.new)}
                           </span>
                         ),
                       },

@@ -62,6 +62,48 @@ describe('DryRunDialog（CS-01 纯计算不下发）', () => {
     expect(screen.getByText('vlan[10]/name')).toBeInTheDocument()
   })
 
+  it('回归：diff 值为对象/数组时不崩溃且 JSON 化展示（React #31）', async () => {
+    // 真机复现：子树级 diff 的 old/new 是以 list key 为键的对象（如 {101:{...}}），
+    // 直塞 JSX 触发 React error #31（对象不是合法子节点）；旧 Vue 插值会自动
+    // JSON 化，行为对等要求 React 侧显式格式化。
+    seed()
+    vi.mocked(apiModule.previewChangeset).mockResolvedValue({
+      data: {
+        success: true,
+        data: {
+          device: DEV,
+          entries: [
+            {
+              path: '/vlan:vlan/vlan:vlans',
+              forward_xml: '<vlan/>',
+              rollback_xml: '<vlan/>',
+              baseline_source: 'device',
+              diff: [
+                { path: 'vlan', type: 'ADD', old: undefined, new: { 101: { id: 101, name: 'v101' } } },
+                { path: 'vlan[10]/ports', type: 'MODIFY', old: ['GE0/0/1'], new: ['GE0/0/1', 'GE0/0/2'] },
+              ],
+            },
+          ],
+        },
+      },
+    } as any)
+    render(
+      <UiProvider>
+        <DryRunDialog open device={DEV} onClose={vi.fn()} />
+      </UiProvider>,
+    )
+    await waitFor(() => expect(document.querySelectorAll('[data-test="xml-viewer"]').length).toBe(2))
+    const { fireEvent } = await import('@testing-library/react')
+    fireEvent.click(screen.getByRole('tab', { name: /差异|Diff|对比/i }))
+    await waitFor(() => expect(document.querySelector('[data-test="dryrun-diff"]')).toBeTruthy())
+    // 对象值 JSON 化可读展示（含键 101 与字段值），数组值同理；绝不允许白屏崩溃
+    const diffTable = document.querySelector('[data-test="dryrun-diff"]')!
+    expect(diffTable.textContent).toContain('101')
+    expect(diffTable.textContent).toContain('v101')
+    expect(diffTable.textContent).toContain('GE0/0/2')
+    expect(diffTable.textContent).not.toContain('[object Object]')
+  })
+
   it('preview 失败：如实报错且不影响变更集（R08/§9）', async () => {
     seed()
     vi.mocked(apiModule.previewChangeset).mockResolvedValue({
