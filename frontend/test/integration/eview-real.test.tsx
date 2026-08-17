@@ -10,12 +10,19 @@ import { createElement, useState, type ReactElement } from 'react'
 // 隔离；失败输出 DOM 快照供外网远程修桥。
 const REAL = process.env.EVIEW_REAL === '1'
 const d = REAL ? describe : describe.skip
+if (REAL) vi.setConfig({ testTimeout: 10000, hookTimeout: 10000 })
 
 // eview 编译产物内部 require('react-intl')（Popup 链等）且组件 contextType
 // 读 intl 上下文——REAL 模式所有渲染统一包 IntlProvider（messages 用真包
 // 内置 zh 语言包，缺档静默）。外网 skip 模式不加载 react-intl/locales。
 let wrapIntl = (el: ReactElement): ReactElement => el
 if (REAL) {
+  // R3：EviewUI Dialog/Drawer 内部调用 React 19 已移除的 findDOMNode。
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { installFindDOMNodePolyfill } = require('../../src/runtime/finddomnode-polyfill') as {
+    installFindDOMNodePolyfill: () => void
+  }
+  installFindDOMNodePolyfill()
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { IntlProvider } = require('react-intl') as { IntlProvider: never }
   let messages: Record<string, string> = {}
@@ -99,13 +106,31 @@ d('真实校准 · 交互组', () => {
     }
     const { container } = render(<Host />)
     console.log('SWITCH-DOM:', snap(container, 600))
-    const clickable = container.querySelector('[class*="switch" i], [class*="toggle" i], [role="switch"]')
-    if (clickable) {
-      fireEvent.click(clickable)
-      await waitFor(() => expect(container.querySelector('[data-probe="state"]')!.textContent).toBe('true'))
-    } else {
-      console.log('SWITCH: 未找到可点元素——DOM 结构需校准')
+    // R3：点外层无效——container/thumb/track/keydown 逐个试，报告哪个生效。
+    const targets: Array<[string, Element | null]> = [
+      ['container', container.querySelector('.ev_toggle_container')],
+      ['thumb', container.querySelector('.ev_toggle_thumb')],
+      ['track', container.querySelector('.ev_toggle_track')],
+    ]
+    const state = () => container.querySelector('[data-probe="state"]')!.textContent
+    for (const [name, el] of targets) {
+      if (!el || state() === 'true') break
+      fireEvent.mouseDown(el)
+      fireEvent.mouseUp(el)
+      fireEvent.click(el)
+      await new Promise((r) => setTimeout(r, 60))
+      console.log(`SWITCH 点击 ${name} 后 state=${state()}`)
     }
+    if (state() !== 'true') {
+      const kb = container.querySelector('.ev_toggle_container')
+      if (kb) {
+        fireEvent.keyDown(kb, { key: 'Enter' })
+        fireEvent.keyDown(kb, { key: ' ' })
+        await new Promise((r) => setTimeout(r, 60))
+        console.log(`SWITCH keydown 后 state=${state()}`)
+      }
+    }
+    expect(state()).toBe('true')
   })
 
   it('Radio.Group 参数序实测（gate 未定案项）', async () => {
@@ -127,10 +152,29 @@ d('真实校准 · 交互组', () => {
 
   it('Checkbox 合成 e.target.checked', async () => {
     const calls: boolean[] = []
-    const { container } = render(<Checkbox checked={false} onChange={(e) => calls.push(e.target.checked)}>勾</Checkbox>)
-    const span = container.querySelector('[class*="checkbox_span"], [role="checkbox"]')
-    if (span) fireEvent.click(span)
-    console.log('CHECKBOX calls:', JSON.stringify(calls), 'DOM:', snap(container, 400))
+    const { container } = render(<Checkbox checked={false} onChange={(e) => calls.push(e.target.checked)}>勾选项</Checkbox>)
+    console.log('CHECKBOX DOM:', snap(container, 500))
+    const targets: Array<[string, Element | null]> = [
+      ['label', Array.from(container.querySelectorAll('label')).find((l) => l.textContent === '勾选项') ?? null],
+      ['span', container.querySelector('[class*="checkbox_span"]')],
+      ['div', container.querySelector('[role="checkbox"]')],
+    ]
+    for (const [name, el] of targets) {
+      if (!el || calls.length) break
+      fireEvent.mouseDown(el)
+      fireEvent.click(el)
+      await new Promise((r) => setTimeout(r, 40))
+      console.log(`CHECKBOX 点 ${name} 后 calls=${JSON.stringify(calls)}`)
+    }
+    if (!calls.length) {
+      const kb = container.querySelector('[role="checkbox"], .ev_checkbox')
+      if (kb) {
+        fireEvent.keyDown(kb, { key: 'Enter' })
+        fireEvent.keyDown(kb, { key: ' ' })
+        console.log(`CHECKBOX keydown 后 calls=${JSON.stringify(calls)}`)
+      }
+    }
+    expect(calls.length === 0 || calls[0] === true).toBe(true)
   })
 })
 
@@ -176,10 +220,15 @@ d('真实校准 · 表单输入组（半受控桥）', () => {
       />,
     )
     console.log('SELECT-DOM:', snap(container, 600))
+    const input = container.querySelector('input')
+    if (input) fireEvent.focus(input)
     const clear = container.querySelector('[class*="clear"]')
     if (clear) {
+      // R3：clear span 常态 invisible（hover/focus 显示），完整事件序列触发。
+      fireEvent.mouseDown(clear)
+      fireEvent.mouseUp(clear)
       fireEvent.click(clear)
-      console.log('SELECT 清空后 calls:', JSON.stringify(calls), '（应含 undefined/null——键不入 payload 链）')
+      console.log('SELECT 清空后 calls:', JSON.stringify(calls), 'clear 类=', clear.className, '（应含 undefined/null——键不入 payload 链）')
     }
   })
 

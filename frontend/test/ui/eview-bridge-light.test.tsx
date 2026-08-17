@@ -59,10 +59,11 @@ afterEach(() => {
 })
 
 describe('展示组桥', () => {
-  it('Tag：error→danger、processing→primary、round=false、锚点可命中', () => {
+  it('Tag：error→danger、processing→primary、round 跟默认、锚点可命中', () => {
     render(<Tag color="error" data-test="row-mark">x</Tag>)
     expect(recv.last.Tag.color).toBe('danger')
-    expect(recv.last.Tag.round).toBe(false)
+    // R3 实测 round 语义与 d.ts 推断相反——桥跟默认走（不传），目视验收定。
+    expect(recv.last.Tag.round).toBeUndefined()
     expect(document.querySelector(ANCHOR_SELECTOR('row-mark'))).toBeTruthy()
     render(<Tag color="processing">y</Tag>)
     expect(recv.last.Tag.color).toBe('primary')
