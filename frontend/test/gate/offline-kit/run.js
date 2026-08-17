@@ -124,10 +124,27 @@ function click(el) {
   });
 }
 function typeInto(input, val) {
+  // inula 给受控 input 的 value 装了 tracker，直接赋值会骗过变更检测导致
+  // onChange 不合成——必须用原型链原生 setter（React 生态同款姿势）。
+  const proto = win.HTMLTextAreaElement && input instanceof win.HTMLTextAreaElement
+    ? win.HTMLTextAreaElement.prototype : win.HTMLInputElement.prototype;
+  const setter = Object.getOwnPropertyDescriptor(proto, 'value').set;
   act(() => {
-    input.value = val;
+    setter.call(input, val);
     fire(input, 'input', 'Event');
     fire(input, 'change', 'Event');
+  });
+}
+// 记录回调参数：inula 合成事件在 happy-dom 下 e.target 为 null（e.currentTarget 有值），
+// 防御性序列化避免回调自身抛错被吞造成"未触发"假象。
+function safeArgs(args) {
+  return args.map((a) => {
+    if (a && typeof a === 'object') {
+      if ('currentTarget' in a || 'target' in a) return '<event>';
+      if (Array.isArray(a)) return JSON.stringify(a);
+      return '<obj>';
+    }
+    return a;
   });
 }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -226,7 +243,7 @@ async function main() {
     function Host() {
       const [v, s] = inula.useState('A');
       setV = s;
-      return h(TextField, { value: v, onChange: (...args) => changes.push(args.map((a) => (typeof a === 'object' ? '<obj>' : a))) });
+      return h(TextField, { value: v, onChange: (...args) => changes.push(safeArgs(args)) });
     }
     const m = mount(wrap(h(Host)));
     const input = m.container.querySelector('input');
@@ -239,7 +256,7 @@ async function main() {
     log(`父级改 'Z' 后 input.value=${J(input.value)}（cWRP 回写有效性）`);
     act(() => setV(''));
     log(`程序化清空后 input.value=${J(input.value)}`);
-    result('V1', `观察值如上——拒写后停留=${afterType === 'AB' ? '内部自改(半受控实锤)' : '已还原(受控表现)'}`);
+    result('V1', `观察值如上——拒写后停留=${afterType === 'AB' ? '内部自改(半受控实锤)' : '已还原(受控表现)'}；onChange 参数序=${J(changes[0] || [])}`);
     m.unmount();
   });
 
@@ -250,7 +267,7 @@ async function main() {
     const m = mount(wrap(h(InputSelect, {
       options: [{ text: 'alpha', value: 'a' }, { text: 'beta', value: 'b' }],
       value: 'a', enableClear: true, placeholder: 'sel',
-      onChange: (...args) => changes.push(args.map((a) => (typeof a === 'object' ? '<obj>' : a))),
+      onChange: (...args) => changes.push(safeArgs(args)),
       onClear: () => changes.push(['<onClear>']),
     })));
     log(`DOM: ${snap(m.container)}`);
@@ -282,22 +299,25 @@ async function main() {
     function Host() {
       const [keys, s] = inula.useState([]);
       setKeys = s;
-      return h(Tree, { data, expandedKeys: keys, onExpand: (...a) => expands.push(a.map((x) => (typeof x === 'object' ? '<obj>' : x))), onSelect: () => {} });
+      return h(Tree, { data, expandedKeys: keys, onExpand: (...a) => expands.push(safeArgs(a)), onSelect: () => {} });
     }
     const m = mount(wrap(h(Host)));
-    log(`初始(收起) 可见文本含L2=${bodyText().includes('L2')}`);
+    // 一轮报告教训：收起是 CSS 类（li.ev_tree_collapsed），textContent 恒在——改 class 口径判定。
+    const liState = () => Array.from(m.container.querySelectorAll('li')).map((li) => li.className.trim()).join(' | ');
+    log(`初始(expandedKeys=[]) li 类: ${liState()}`);
     act(() => setKeys(['1']));
-    log(`expandedKeys=['1'] 后 L2 可见=${bodyText().includes('L2')} L3 可见=${bodyText().includes('L3')}`);
+    log(`expandedKeys=['1'] 后 li 类: ${liState()}`);
     act(() => setKeys(['1', '2']));
-    log(`expandedKeys=['1','2'] 后 L3 可见=${bodyText().includes('L3')}`);
+    log(`expandedKeys=['1','2'] 后 li 类: ${liState()}`);
     act(() => setKeys([]));
-    log(`回收 [] 后 L2 可见=${bodyText().includes('L2')}（受控回收有效性）`);
-    log(`DOM 结构（供选择器设计）: ${snap(m.container, 1200)}`);
-    // 用户点击展开箭头：探测常见类名
-    act(() => setKeys([]));
-    const arrow = m.container.querySelector('[class*="expand"],[class*="switch"],[class*="arrow"],[class*="icon"]');
-    if (arrow) { click(arrow); await sleep(30); log(`点击疑似展开元素(class=${arrow.className}) onExpand=${J(expands)}  L2可见=${bodyText().includes('L2')}`); }
-    result('V3', 'INFO 观察值如上');
+    log(`回收 [] 后 li 类: ${liState()}（受控回收有效性）`);
+    // 用户点击展开箭头（一轮 DOM 快照确认元素=span.ev_tree_hit）
+    const hit = m.container.querySelector('.ev_tree_hit');
+    if (hit) {
+      click(hit); await sleep(30);
+      log(`点击 .ev_tree_hit 后 onExpand=${J(expands)}  li 类: ${liState()}`);
+    } else { log('未找到 .ev_tree_hit'); }
+    result('V3', 'INFO class 口径观察值如上（expanded/collapsed 类变化=受控生效）');
     m.unmount();
   });
 
@@ -308,15 +328,19 @@ async function main() {
     const m = mount(wrap(h(RadioGroup, {
       data: [{ value: 'a', text: 'A' }, { value: 'b', text: 'B' }],
       value: 'a', isControlled: true,
-      onChange: (...args) => calls.push(args.map((x) => (typeof x === 'object' ? '<obj>' : x))),
+      onChange: (...args) => calls.push(safeArgs(args)),
     })));
     log(`DOM: ${snap(m.container)}`);
-    const inputs = m.container.querySelectorAll('input');
-    log(`radio input 数=${inputs.length}`);
-    const target = Array.from(inputs).find((i) => i.value === 'b') || inputs[1];
-    if (target) { click(target); fire(target, 'change', 'Event'); }
+    // 一轮报告教训：EviewUI Radio 是 div[role=radio]+span，无原生 input——按 role 点击。
+    const radios = m.container.querySelectorAll('[role="radio"]');
+    log(`role=radio 数=${radios.length}`);
+    const before = Array.from(radios).map((r) => r.getAttribute('aria-checked')).join(',');
+    const target = radios[1];
+    if (target) { click(target); await sleep(20); }
+    const after = Array.from(m.container.querySelectorAll('[role="radio"]')).map((r) => r.getAttribute('aria-checked')).join(',');
+    log(`aria-checked: 点前=${before} 点后=${after}`);
     log(`点 B 后 onChange calls=${J(calls)}`);
-    result('V4', calls.length ? `参数序=${J(calls[0])}（判定哪个是新值）` : 'FAIL 未触发 onChange');
+    result('V4', calls.length ? `参数序=${J(calls[0])}（判定哪个是新值）` : `未触发 onChange（aria 变化=${before !== after}）`);
     m.unmount();
   });
 
@@ -336,7 +360,8 @@ async function main() {
     const m1 = mount(wrap(h(DivMessage, { text: 'msg-auto', type: 'default', disposeTimeOut: 80 })));
     log(`挂载即含文本=${bodyText().includes('msg-auto')}`);
     await sleep(400);
-    log(`400ms 后仍含文本=${bodyText().includes('msg-auto')}（默认自动消失验证）`);
+    const el1 = m1.container.firstElementChild;
+    log(`400ms 后仍含文本=${bodyText().includes('msg-auto')} 根元素class=${el1 ? el1.className : '<无>'} style=${el1 ? el1.getAttribute('style') : ''}`);
     m1.unmount();
     const m2 = mount(wrap(h(DivMessage, { text: 'msg-keep', type: 'default', disposeTimeOut: 80, enableDisposeTimeOut: false })));
     await sleep(400);
@@ -357,15 +382,17 @@ async function main() {
       ],
       dataset: [{ name: 'r1', val: 'x1' }, { name: 'r2', val: 'x2' }],
       enableCheckBox: true, checkedRows: [],
-      onRowCheck: (...args) => checks.push(args.map((a) => (typeof a === 'object' ? '<obj>' : Array.isArray(a) ? J(a) : a))),
+      onRowCheck: (...args) => checks.push(safeArgs(args)),
       enablePagination: false, rowKey: 'name',
     })));
     const txt = m.container.textContent || '';
     log(`行文本 r1=${txt.includes('r1')} 自定义render R_x1=${txt.includes('R_x1')}`);
-    const boxes = m.container.querySelectorAll('input[type="checkbox"]');
-    log(`checkbox 数=${boxes.length}`);
-    if (boxes.length > 1) { click(boxes[1]); fire(boxes[1], 'change', 'Event'); }
-    log(`勾第一行后 onRowCheck=${J(checks)}`);
+    // 一轮报告教训：EviewUI checkbox 是 div[role=checkbox]，无原生 input——按 role 点击。
+    const boxes = m.container.querySelectorAll('[role="checkbox"]');
+    log(`role=checkbox 数=${boxes.length}`);
+    const rowBox = boxes[1] || boxes[0];
+    if (rowBox) { click(rowBox); await sleep(20); }
+    log(`勾第一行后 onRowCheck=${J(checks)}  aria=${Array.from(m.container.querySelectorAll('[role="checkbox"]')).map((b) => b.getAttribute('aria-checked')).join(',')}`);
     log(`DOM(截断): ${snap(m.container, 1200)}`);
     result('V7', txt.includes('R_x1') ? 'PASS 动态列 render 通' : 'FAIL 自定义 render 未出现');
     m.unmount();
