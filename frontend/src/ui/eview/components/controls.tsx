@@ -139,12 +139,13 @@ export function Checkbox(
     {
       id: anchorId(props['data-test']),
       checked: !!props.checked,
+      // R3 侦察：真组件消费 label 出可点文本（children 不渲染）。
+      label: typeof props.children === 'string' ? props.children : undefined,
       // eview onChange 第 2 参才是 checked（matrix 定案）。
       onChange: (_v: unknown, check: boolean) => props.onChange?.({ target: { checked: !!check } }),
       disabled: props.disabled,
       className: props.className,
     },
-    props.children,
   )
 }
 

@@ -40,7 +40,8 @@ export function Tag(props: CommonProps & { color?: string; children?: ReactNode 
     {
       id: anchorId(props['data-test']),
       color: color ? (TAG_COLOR[color] ?? color) : 'default',
-      round: false, // antd 观感为微圆角，eview 默认全圆
+      // round 语义与 d.ts 推断相反（R3 实测 round:false 仍出 ev_tag_round 类）
+      // ——跟组件默认走，圆角观感留组 5 目视验收定夺。
       className: props.className,
       style: props.style,
     },
