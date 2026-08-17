@@ -51,7 +51,10 @@ export default defineConfig({
       // 仅测纯逻辑层，口径收敛到其被测面；React 层重建时逐组扩回。
       include: ['src/utils/**/*.ts', 'src/i18n/**/*.ts', 'src/composables/**/*.ts', 'src/ui/**/*.{ts,tsx}', 'src/stores/**/*.ts', 'src/components/**/*.{ts,tsx}'],
       // stories 是 Storybook 展示物非产品代码，单测不执行，排除出分母。
-      exclude: ['src/**/*.d.ts', 'src/**/*.stories.tsx'],
+      // src/ui/eview = 未接线的 EviewUI 后端并行代码（组 4 窗口期，§5.3 新旧
+      // 并行）：F2 替身测试在场但分支面随批次持续扩容，接线（组 5）时统一
+      // 纳入分母并按干净口径重钉阈值——窗口期先排除，避免每批桥都重钉。
+      exclude: ['src/**/*.d.ts', 'src/**/*.stories.tsx', 'src/ui/eview/**', 'src/runtime/**'],
       // 覆盖率「不下降」棘轮（T08）：阈值 = 当前实测水平向下取整留余量。
       // 只准升不准降——低于阈值 CI 即 fail。补测后应把阈值同步上调，形成单向棘轮。
       // 历史轨迹（Vue 全量口径）：2026-07-06 66.55/66.57/56.67/66.88 →
