@@ -6,17 +6,14 @@
 // DivMessage type 无 'info'（映 'default'）、其"消失"是 display:none 不卸载
 // （toast 由本模块自管卸载）；MessageDialog buttons 仅 ok/cancel、type 含 risk。
 import { createRoot } from 'react-dom/client'
+import { pickDefault } from '../bridge'
 import { flushSync } from 'react-dom'
 import { createElement, type ReactElement } from 'react'
 import DivMessageMod from '@nce/eview-react/DivMessage'
 import MessageDialogMod from '@nce/eview-react/MessageDialog'
 
-// EviewUI 编译产物为 babel esModule interop（.default 承载组件）。
-function pick(mod: unknown): never {
-  return ((mod as { default?: unknown }).default ?? mod) as never
-}
-const DivMessage = pick(DivMessageMod)
-const MessageDialog = pick(MessageDialogMod)
+const DivMessage = pickDefault(DivMessageMod)
+const MessageDialog = pickDefault(MessageDialogMod)
 
 type ToastKind = 'success' | 'error' | 'warning' | 'info'
 const KIND_MAP: Record<ToastKind, string> = { success: 'success', error: 'error', warning: 'warn', info: 'default' }

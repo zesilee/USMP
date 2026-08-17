@@ -4,16 +4,13 @@ import { Children, createElement, isValidElement, type ReactNode, type CSSProper
 import * as TabNS from '@nce/eview-react/Tab'
 import TreeMod from '@nce/eview-react/Tree'
 import TableMod from '@nce/eview-react/Table'
-import { anchorId } from '../../bridge'
+import { anchorId, pickDefault } from '../../bridge'
 
-function pick(mod: unknown): never {
-  return ((mod as { default?: unknown }).default ?? mod) as never
-}
-const EvTab = pick(TabNS)
+const EvTab = pickDefault(TabNS)
 // TabItem 挂在模块具名导出（default 导入拿不到——须命名空间导入；实录坑）。
-const EvTabItem = pick((TabNS as { TabItem?: unknown }).TabItem ?? (pick(TabNS) as { TabItem?: unknown }).TabItem ?? TabNS)
-const EvTree = pick(TreeMod)
-const EvTable = pick(TableMod)
+const EvTabItem = pickDefault((TabNS as { TabItem?: unknown }).TabItem ?? (pickDefault(TabNS) as { TabItem?: unknown }).TabItem ?? TabNS)
+const EvTree = pickDefault(TreeMod)
+const EvTable = pickDefault(TableMod)
 
 interface CommonProps {
   'data-test'?: string

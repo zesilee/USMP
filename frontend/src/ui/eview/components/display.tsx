@@ -9,17 +9,14 @@ import CrumbsMod from '@nce/eview-react/Crumbs'
 import EmptyMod from '@nce/eview-react/Empty'
 import DrawerMod from '@nce/eview-react/Drawer'
 import DialogMod from '@nce/eview-react/Dialog'
-import { anchorId } from '../../bridge'
+import { anchorId, pickDefault } from '../../bridge'
 
-function pick(mod: unknown): never {
-  return ((mod as { default?: unknown }).default ?? mod) as never
-}
-const EvTag = pick(TagMod)
-const EvBadge = pick(BadgeMod)
-const EvCrumbs = pick(CrumbsMod)
-const EvEmpty = pick(EmptyMod)
-const EvDrawer = pick(DrawerMod)
-const EvDialog = pick(DialogMod)
+const EvTag = pickDefault(TagMod)
+const EvBadge = pickDefault(BadgeMod)
+const EvCrumbs = pickDefault(CrumbsMod)
+const EvEmpty = pickDefault(EmptyMod)
+const EvDrawer = pickDefault(DrawerMod)
+const EvDialog = pickDefault(DialogMod)
 
 interface CommonProps {
   'data-test'?: string
