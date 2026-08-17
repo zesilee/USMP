@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useParams, useSearchParams, useBlocker } from 'react-router'
 import { Alert, Breadcrumb, Empty, Select, Tabs, Tag, Tooltip, confirm } from '../ui'
-import { i18n, getLocale, subscribeLocale } from '../i18n'
-import { useSyncExternalStore } from 'react'
+import { i18n, useLocale } from '../i18n'
 import { getYangSchema, getOwnership } from '../api'
 import { localizeFields, localizeRpcs } from '../composables/useFieldLabels'
 import { useMenuStore } from '../stores/menu'
@@ -31,7 +30,7 @@ export default function ModuleConsolePage() {
   const rpcName = String(params.rpcName || '')
   const rpcMode = !!rpcName
 
-  const locale = useSyncExternalStore(subscribeLocale, getLocale)
+  const locale = useLocale()
   const menuStore = useMenuStore()
   const devices = useDeviceStore((s) => s.devices)
   const selectedDeviceIp = useDeviceStore((s) => s.selectedDeviceIp)

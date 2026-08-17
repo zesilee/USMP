@@ -2,11 +2,11 @@
 // 命令式反馈实例挂载，三件收口于此。应用入口与测试装配都用它包根。
 // locale 联动（UI-01）：订阅 i18n 薄层（useSyncExternalStore）——语言切换即时
 // 重渲染整树，组件库文案随之切换；适配层只依赖 i18n 薄层，不反向依赖业务 store。
-import { useEffect, useSyncExternalStore, type ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { App as AntApp, ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import enUS from 'antd/locale/en_US'
-import { getLocale, subscribeLocale } from '../i18n'
+import { useLocale } from '../i18n'
 import { antdTheme } from './tokens'
 import { __bindFeedback } from './feedback'
 
@@ -24,7 +24,7 @@ function FeedbackBinder({ children }: { children: ReactNode }) {
 }
 
 export function UiProvider({ children }: { children: ReactNode }) {
-  const current = useSyncExternalStore(subscribeLocale, getLocale)
+  const current = useLocale()
   const locale = current === 'en-us' ? enUS : zhCN
   return (
     <ConfigProvider locale={locale} theme={antdTheme}>
