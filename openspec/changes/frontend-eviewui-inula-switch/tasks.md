@@ -8,11 +8,11 @@
 
 ## 1. 垂直切片闸门（PR-1，worktree 隔离，先于一切）
 
-- [ ] 1.1 依赖引入与构建链（**部分**：openinula+inula 四件套已装、gate 独立配置已含 alias 全套；EviewUI 三内网包待离线机实现包材料，Vite 主配置 alias/less/tsconfig 随 1.3 接入）
+- [x] 1.1 依赖引入与构建链（openinula+inula 四件套已装、gate 独立配置含 alias 全套；EviewUI 三内网包按方案 B 不入本机 node_modules——构建接入随组 2 开工做 Vite 主配置 alias/less/tsconfig；离线部署形态在组 8 工具链阶段定）
 - [x] 1.2 **测试基建验证**：✅ 红线项通过——vitest+happy-dom+openinula 可用（探针 5/5：render/state/effect/事件/卸载/rerender/data-test 落 DOM）。**关键发现**：@testing-library/react 直接 alias 不可用（其 CJS 子模块 pure/act-compat 在 vitest inline 转换外原生 require 真 react-dom，与 inula 元素互不相认）；可用路径=自写 render 薄层（openinula createRoot+act，20 行）+ @testing-library/dom 查询事件（test/gate/inula-testing.tsx），全面迁移时 alias @testing-library/react→薄层可令存量测试零改动（需补齐 renderHook 等 API 面）
-- [ ] 1.3 切片验证（**方案 B：离线摆渡**，用户拍板实现包不出网）：eview-gate-kit.tgz 已交付（自带 openinula/inula-intl/happy-dom + CJS 别名钩子 + V0~V7 八场景，selftest 与 mock 工程演练全绿），待离线机 gate-report.txt 回传 — **F2**
-- [ ] 1.4 六项运行时行为逐项验证并记录（载体=工具包 V1~V7 场景，输出含 DOM 快照供远程迭代；报告回传后判读落档）
-- [ ] 1.5 `gate-conclusion.md` 落档闸门结论（含每控件兜底档位选定）；**闸门评审通过才准进组 2**
+- [x] 1.3 切片验证（方案 B 离线摆渡，两轮完成）：工具包 v1/v2 交付、gate-report{,2}.txt 回传判读——EviewUI×openInula 真实可运行（V0）、R05 动态列通（V7）、Tree 受控桥全要素成立（V3）
+- [x] 1.4 六项运行时行为逐项验证并记录（五项定案通过+两项定性为测试环境限制并给出免实测兜底设计；详见 gate-conclusion.md 与 gate-round1-findings.md）
+- [x] 1.5 `gate-conclusion.md` 落档：**闸门通过，准入组 2**（半受控档位=受控回写②+key 重挂③；附 F2/F3 复核三项：合成事件 target 修法验证/叶子元素点击约定/Radio 参数序补实测）
 
 ## 2. 基建四件套（PR-2~3，依赖由浅入深）
 
