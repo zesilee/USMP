@@ -16,7 +16,8 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "openinula": ["./node_modules/openinula/@types/index.d.ts"]
     },
     "types": ["node"]
   },
