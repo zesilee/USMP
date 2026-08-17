@@ -35,10 +35,10 @@
 
 ## 3. 适配层核心（PR-4~6）
 
-- [ ] 3.1 运行时禁用 API 守护测试（**RT-02 守护已随先行波落地**，src/runtime 垫片豁免）+ 适配层桥接工具（`useRemountKey`/受控回写助手） — **F1**
-- [ ] 3.2 FA-05 锚点约定实现 + 守护测试（透传白名单/wrapper/id 三路，拦静默失效） — **F1**
-- [ ] 3.3 主题：tokens.ts 产出 design-token CSS 变量覆盖段（#0C5EA6 十档色阶+功能色+密度）；UiProvider 换 ConfigProvider(locale+messages) 装配 — **F1/F2**
-- [ ] 3.4 图标：23 语义名映射 icon-plus（21 直接+2 近似）；R12 守护沿用 — **F1**
+- [x] 3.1 运行时禁用 API 守护（先行波落地）+ 桥接工具（useRemountKey 半受控③档兜底，F1 钉住 dep 变化重挂/稳定不重挂）；**vendor types 机制落地**：@nce/eview-react 在用组件 d.ts 入库 vendor/eview-types（92 文件 640K 纯文本），tsconfig paths 映射——外网 typecheck 可过、实现仅内网（混合协作模式地基，types-probe 实证）
+- [ ] 3.2 FA-05 锚点约定：工具已落（anchorId/ANCHOR_SELECTOR，F1）；守护测试（逐桥断言锚点可命中）随组 4 各桥落地
+- [x] 3.3 主题（部分）：src/ui/eview/theme.ts——十档色阶生成（50=主色+单调性 F1 钉住）+ 四族（brand/mint/yellow/red）覆盖 CSS 产出 + 幂等注入；UiProvider 装配随组 5 接线时切 — **F1**
+- [x] 3.4 图标映射表：ICON_MAP（22 语义名→IcPublic/IcIct，2 近似已标注、实心走 type=filled）；F1 守护=与 icons.ts 语义名集合严格一致（不缺不多）；桥组件随组 4 落 — **F1**
 - [ ] 3.5 feedback 自养挂载点：toast（DivMessage，info→default、常驻横幅关自动消失）/ confirm（MessageDialog Promise 化）；FA-03 测试沿用 — **F2**
 - [ ] 3.6 FormItemShell（FA-06）：LabelField+错误态受控渲染+守护测试（拦 validator 下传） — **F2**
 
