@@ -5,14 +5,11 @@ import { createElement, type ReactNode, type CSSProperties } from 'react'
 import TextFieldMod from '@nce/eview-react/TextField'
 import SpinnerMod from '@nce/eview-react/Spinner'
 import InputSelectMod from '@nce/eview-react/InputSelect'
-import { anchorId, useSemiControlledBridge } from '../../bridge'
+import { anchorId, useSemiControlledBridge, pickDefault } from '../../bridge'
 
-function pick(mod: unknown): never {
-  return ((mod as { default?: unknown }).default ?? mod) as never
-}
-const EvTextField = pick(TextFieldMod)
-const EvSpinner = pick(SpinnerMod)
-const EvInputSelect = pick(InputSelectMod)
+const EvTextField = pickDefault(TextFieldMod)
+const EvSpinner = pickDefault(SpinnerMod)
+const EvInputSelect = pickDefault(InputSelectMod)
 
 interface CommonProps {
   'data-test'?: string

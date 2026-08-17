@@ -6,16 +6,13 @@ import LoadingMod from '@nce/eview-react/Loading'
 import TipBoxMod from '@nce/eview-react/TipBox'
 import DivMessageMod from '@nce/eview-react/DivMessage'
 import PageMessageMod from '@nce/eview-react/PageMessage'
-import { anchorId } from '../../bridge'
+import { anchorId, pickDefault } from '../../bridge'
 
-function pick(mod: unknown): never {
-  return ((mod as { default?: unknown }).default ?? mod) as never
-}
-const EvButton = pick(ButtonMod)
-const EvLoading = pick(LoadingMod)
-const EvTipBox = pick(TipBoxMod)
-const EvDivMessage = pick(DivMessageMod)
-const EvPageMessage = pick(PageMessageMod)
+const EvButton = pickDefault(ButtonMod)
+const EvLoading = pickDefault(LoadingMod)
+const EvTipBox = pickDefault(TipBoxMod)
+const EvDivMessage = pickDefault(DivMessageMod)
+const EvPageMessage = pickDefault(PageMessageMod)
 
 interface CommonProps {
   'data-test'?: string

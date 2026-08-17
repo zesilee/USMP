@@ -33,6 +33,8 @@ export default defineConfig({
       'test/form/**/*.{test,spec}.{ts,tsx}',
       // UI 适配层（FA-01~04）：守护 + feedback F1。
       'test/ui/**/*.{test,spec}.{ts,tsx}',
+      // 内网真实校准套件（默认 skip，EVIEW_REAL=1 启用）。
+      'test/integration/**/*.{test,spec}.{ts,tsx}',
     ],
     exclude: ['**/node_modules/**', '**/dist/**'],
     // 混合协作模式（route-decision）：EviewUI 实现仅内网。alias 把 @nce 系
@@ -41,8 +43,14 @@ export default defineConfig({
     alias: [
       // 按子路径映射独立 stub 文件——catch-all 单文件会让多组件的 vi.mock
       // 工厂共享模块身份互相覆盖（实录坑）。新增桥组件须同步建 stub 文件。
-      { find: /^@nce\/eview-react\/([^/]+)$/, replacement: fileURLToPath(new URL('./test/stubs/eview/$1.ts', import.meta.url)) },
-      { find: /^@nce\/icon-plus(\/.*)?$/, replacement: fileURLToPath(new URL('./test/stubs/eview-empty.ts', import.meta.url)) },
+      // 内网真实校准：EVIEW_REAL=1 关闭 stub alias（解析真 @nce 实现），
+      // 并启用 test/integration/eview-real 套件——无需手改本文件。
+      ...(process.env.EVIEW_REAL === '1'
+        ? []
+        : [
+            { find: /^@nce\/eview-react\/([^/]+)$/, replacement: fileURLToPath(new URL('./test/stubs/eview/$1.ts', import.meta.url)) },
+            { find: /^@nce\/icon-plus(\/.*)?$/, replacement: fileURLToPath(new URL('./test/stubs/eview-empty.ts', import.meta.url)) },
+          ]),
     ],
     coverage: {
       provider: 'v8',

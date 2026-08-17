@@ -70,3 +70,12 @@ export function useSemiControlledBridge(value: unknown): {
     },
   }
 }
+
+/**
+ * EviewUI 编译产物为 babel esModule interop（.default 承载组件）；stub/缺失
+ * 场景（外网 skip 模式）安全返回 undefined，渲染前不崩（收集期防线）。
+ */
+export function pickDefault(mod: unknown): never {
+  if (mod == null) return undefined as never
+  return ((mod as { default?: unknown }).default ?? mod) as never
+}

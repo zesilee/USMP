@@ -8,16 +8,13 @@ import SegmentedMod from '@nce/eview-react/Segmented'
 import RadioGroupMod from '@nce/eview-react/RadioGroup'
 import CheckboxMod from '@nce/eview-react/Checkbox'
 import SwitchMod from '@nce/eview-react/Switch'
-import { anchorId } from '../../bridge'
+import { anchorId, pickDefault } from '../../bridge'
 
-function pick(mod: unknown): never {
-  return ((mod as { default?: unknown }).default ?? mod) as never
-}
-const EvDropDown = pick(DropDownMod)
-const EvSegmented = pick(SegmentedMod)
-const EvRadioGroup = pick(RadioGroupMod)
-const EvCheckbox = pick(CheckboxMod)
-const EvSwitch = pick(SwitchMod)
+const EvDropDown = pickDefault(DropDownMod)
+const EvSegmented = pickDefault(SegmentedMod)
+const EvRadioGroup = pickDefault(RadioGroupMod)
+const EvCheckbox = pickDefault(CheckboxMod)
+const EvSwitch = pickDefault(SwitchMod)
 
 interface CommonProps {
   'data-test'?: string
