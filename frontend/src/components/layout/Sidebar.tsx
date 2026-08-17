@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 import { Input, Menu, icons } from '../../ui'
-import { i18n, getLocale, subscribeLocale } from '../../i18n'
-import { useSyncExternalStore } from 'react'
+import { i18n, useLocale } from '../../i18n'
 import { useMenuStore, type LeftTreeNode } from '../../stores/menu'
 import { filterLeftTree } from '../../utils/leftTreeFilter'
 import './Sidebar.scss'
@@ -69,7 +68,7 @@ function treeToItems(nodes: LeftTreeNode[], locale: string, prefix: string): Men
 export default function Sidebar() {
   const navigate = useNavigate()
   const location = useLocation()
-  const locale = useSyncExternalStore(subscribeLocale, getLocale)
+  const locale = useLocale()
   const isCollapsed = useMenuStore((s) => s.isCollapsed)
   const leftTree = useMenuStore((s) => s.leftTree)
   const nativeModules = useMenuStore((s) => s.nativeModules)

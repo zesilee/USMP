@@ -1,6 +1,5 @@
-import { useSyncExternalStore } from 'react'
 import { Button, Dropdown, icons } from '../../ui'
-import { i18n, getLocale, subscribeLocale } from '../../i18n'
+import { i18n, useLocale } from '../../i18n'
 import { useLocaleStore, type AppLocale } from '../../stores/locale'
 import { useMenuStore } from '../../stores/menu'
 import './Header.scss'
@@ -16,7 +15,7 @@ const LOCALES: { key: AppLocale; labelKey: string; testId: string }[] = [
 ]
 
 export default function Header() {
-  const locale = useSyncExternalStore(subscribeLocale, getLocale)
+  const locale = useLocale()
   const setLocale = useLocaleStore((s) => s.setLocale)
   const toggleCollapse = useMenuStore((s) => s.toggleCollapse)
   const isCollapsed = useMenuStore((s) => s.isCollapsed)

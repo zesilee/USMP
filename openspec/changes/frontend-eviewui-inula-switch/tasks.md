@@ -14,10 +14,17 @@
 - [x] 1.4 六项运行时行为逐项验证并记录（五项定案通过+两项定性为测试环境限制并给出免实测兜底设计；详见 gate-conclusion.md 与 gate-round1-findings.md）
 - [x] 1.5 `gate-conclusion.md` 落档：**闸门通过，准入组 2**（半受控档位=受控回写②+key 重挂③；附 F2/F3 复核三项：合成事件 target 修法验证/叶子元素点击约定/Radio 参数序补实测）
 
-## 2. 基建四件套（PR-2~3，依赖由浅入深）
+## 2. 基建四件套（PR-2~3）
 
-- [ ] 2.1 i18n 内核换 inula-intl：薄层 API 面（`i18n.global.t`/`subscribeLocale`）不变、内核换 VueI18n 适配器、`on('change')` 接订阅；4 处 useSyncExternalStore 调用点改薄层 hook — **F1**（词表键名快照回归）
-- [ ] 2.2 请求换 inula-request：`ir.create` 单实例、28 个封装函数改 import；`filter` 重复参数序列化回归 — **F1/B3 契约测试沿用**
+> **顺序重排说明（2026-08-17 开工时发现）**：inula-intl/inula-router/inula-X 只能跑在
+> openinula 运行时上，无法在 React 下逐个双路径并行——组 2 拆为**先行波**
+> （React 下零风险：uSES 清除 + 请求库，即 2.1a/2.2）与**翻转波**（Vite alias +
+> i18n 内核 + store + 路由一次性原子切换，靠全量测试+E2E 验证；§5.3 的"旧代码
+> 保留"以 git 可回退 + 窗口期双依赖体现）。
+
+- [x] 2.1a （先行波）薄层 hook 化：新增 `useLocale()`（useState+useEffect 运行时无关实现），4 处 useSyncExternalStore 调用点清零；RT-02 守护测试落地（拦 React 18+ API 调用/导入）— **F1**
+- [ ] 2.1b （翻转波）i18n 内核换 inula-intl：薄层 API 面不变、内核换 VueI18n 适配器、`on('change')` 接订阅 — **F1**（词表键名快照回归）
+- [x] 2.2 （先行波）请求换 inula-request：ir.create 单实例（axios 同形零调用点改动）；filter 承载改直接拼 URL（inula-request params 不收 URLSearchParams），F1 请求形状测试跟随新契约更新（filter 不带[]/offset=0 省略/sort_dir 缺省/30s 超时验证点全保）；inula 四件套转正运行时依赖，axios 窗口期保留可回退 — 全量 577/577 绿
 - [ ] 2.3 store 换 inula-X：5 个 zustand store → `createStore({state,actions,computed})` 三段式；组件外订阅点接 `$subscribe`；**FE-27 回归**：changeset payload 经响应式 Proxy 后序列化/解构删键语义不变（红灯先行） — **F1**
 - [ ] 2.4 路由 v5 化：Switch/Route JSX 树 + MainLayout children 组合；`src/router/compat.ts`（useNavigate/useSearchParams 薄包装）；离开守卫 Prompt+getUserConfirmation 桥（FE-23 Scenario 回归钉住）；测试 MemoryRouter 迁移 — **F1/F2**
 

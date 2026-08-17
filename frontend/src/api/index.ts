@@ -1,4 +1,7 @@
-import axios from 'axios'
+// 请求内核 = inula-request（change frontend-eviewui-inula-switch 组 2 先行波，
+// axios 同形：ir.create/get/post/delete + params + 泛型）。窗口期 axios 依赖
+// 保留可回退，翻转波收尾统一移除。
+import ir from 'inula-request'
 import type { ApiResponse } from '../types/yang'
 import type {
   ApiEnvelope,
@@ -12,7 +15,7 @@ import type {
 // API 基础配置
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1'
 
-const api = axios.create({
+const api = ir.create({
   baseURL: API_BASE,
   timeout: 15000,
 })
@@ -90,8 +93,8 @@ export const getConfig = (
       ...(includeState ? { timeout: 30000 } : {}),
     })
   }
-  // filter 可重复：axios 对数组默认序列化成 filter[]=，后端只认 filter=——
-  // 用 URLSearchParams 显式控制。
+  // filter 可重复且后端只认 filter=（不认 filter[]=）；inula-request 的 params
+  // 类型不收 URLSearchParams——直接把查询串拼进 URL，序列化行为零悬念。
   const params = new URLSearchParams()
   if (forceRefresh) params.set('force_refresh', 'true')
   if (includeState) params.set('include_state', 'true')
@@ -102,8 +105,7 @@ export const getConfig = (
     params.set('sort', query.sort)
     params.set('sort_dir', query.sortDir ?? 'asc')
   }
-  return api.get<ApiResponse<any>>(`/config/${ip}/${cleanPath}`, {
-    params,
+  return api.get<ApiResponse<any>>(`/config/${ip}/${cleanPath}?${params.toString()}`, {
     ...(includeState ? { timeout: 30000 } : {}),
   })
 }

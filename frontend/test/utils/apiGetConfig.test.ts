@@ -4,7 +4,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 // 状态读超时（对齐后端设备侧 30s，默认 15s 会在真机大状态子树上先超时）。
 const mocks = vi.hoisted(() => ({ get: vi.fn() }))
 
-vi.mock('axios', () => ({
+vi.mock('inula-request', () => ({
   default: {
     create: vi.fn(() => ({
       get: mocks.get,

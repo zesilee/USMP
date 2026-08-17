@@ -59,3 +59,19 @@ function t(key: string, params?: Record<string, unknown>): string {
 }
 
 export const i18n = { global: { t } }
+
+// ===== React hook 面（RT-02 铺路，change frontend-eviewui-inula-switch）=====
+// openInula 无 useSyncExternalStore——语言订阅统一收口为本 hook（useState+
+// useEffect 实现，运行时无关），组件侧禁止直接使用 useSyncExternalStore。
+import { useEffect, useState } from 'react'
+
+/** 当前语言的响应式 hook：语言切换即触发重渲染（UI-01）。 */
+export function useLocale(): string {
+  const [current, setCurrent] = useState(getLocale)
+  useEffect(() => {
+    // 订阅前补一次同步：挂载与订阅之间的切换不丢（并发时序护栏）。
+    setCurrent(getLocale())
+    return subscribeLocale(() => setCurrent(getLocale()))
+  }, [])
+  return current
+}
