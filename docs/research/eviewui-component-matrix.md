@@ -10,7 +10,7 @@
 2. **Form/FormItem 必须弃用**。FormItem 的 `name` 必填且会收编子控件 value/onChange 进其内部 store，`validateStatus/help` 受控错误态**无对应**——与「校验权威在自研引擎」直接冲突。方案：自写 FormItemShell（LabelField 出 label+必填星 + 自绘错误 div + error class 红框）。这与我们「不接组件库表单 store」的既有架构决定一致。
 3. **data-test 全库基本不透传**。仅 Tab/TabItem（index signature）、SearchInput（restProps）、LabelField（extends LabelHTMLAttributes）例外；其余全是闭合 type。**E2E/测试锚点策略整体换**：统一走各组件都有的 `id` prop 或适配层外包 wrapper div。80 条 data-test 契约的落点要重新设计。
 4. **命令式反馈不存在**。全库唯一静态方法是 `MessageDialog.success()`。适配层的 `toast()`/`await confirm()` 要**自养挂载点**（body 下挂 div + createRoot 渲 DivMessage/MessageDialog，回调 resolve 后卸载），约 100 行。
-5. **主题令牌注入通道目前不存在**。ThemeProvider 只收主题名（`default`/`evening` 两态整套切换）；`@hui/design-token` 采到的是空壳包（只有 package.json）。**10 个令牌（主色 #0C5EA6 等）无可验证注入路径**——须向对方要 design-token 完整包，否则只剩全局 CSS 变量覆盖的野路子。
+5. **主题令牌注入通道已找到 ✅（2026-08-17 补采后闭环）**。首采"空壳"是提取脚本只保留 .d.ts/.md/json 误伤——整包补采后确认 `@hui/design-token` 实体是 **less 产出的 CSS 变量体系**（hdesign 1.1）：基础色板 `:root{--brand-05..90}`（默认华为蓝 #0067D1）+ 语义层 `--color-brand: var(--brand-50)` 引用；功能色同构（`--red/--yellow/--mint` 色阶 + `--color-warning: var(--yellow-50)` 等映射）；圆角/字号/间距同为变量（`--radius-*`/`--font-size-*`/`--space-*`）。**注入方案：由 #0C5EA6 生成 10 档 brand 色阶，在 design-token 之后加载一段 `:root` 覆盖样式即可——纯 CSS、零 less 重编译、零组件侵入**，10 个令牌全部有落点，适配层 tokens.ts 改为产出这段覆盖样式。版本口径：离线机 frontend 装的是 0.0.21、根目录 0.0.24（eview peer 要求 ^0.0.23，**以 0.0.24 为基准**——frontend 那份其实不满足 peer 声明，对方环境自身存在版本错配，接入时留意）。
 
 ## 1. 逐组件映射总表
 
@@ -85,8 +85,10 @@ antd 时代适配层=223 行薄转发；切 EviewUI 后为**真适配层，预�
 
 ## 4. 向 EviewUI 团队追问清单（更新）
 
-1. `@hui/design-token` 完整包（当前空壳，主色注入无法验证）——**优先级最高**。
-2. 任一组件编译产物 JS（判 alias 方向）。
+1. ~~`@hui/design-token` 完整包~~ **已闭环**（2026-08-17 离线机整包补采，CSS 变量覆盖方案确定，见系统性结论 5）。
+2. ~~任一组件编译产物 JS~~ → 降级为**一行 grep 答案**（源码无需出网）：在离线机跑
+   `grep -o "require(['\"]react['\"])\|require(['\"]@cloudsop/horizon['\"])" frontend/node_modules/@nce/eview-react/Button/Button.js | sort -u`
+   回传输出的那一行即可判 alias 方向。
 3. 侧边内联导航（类 antd Menu inline）是否有未随包发布的组件（Accordion 之外）。
 4. 半受控控件在新版本里是否有受控化改造计划。
 5. 纯铃铛/纯显示器图标的内部补充包。
