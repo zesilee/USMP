@@ -44,7 +44,7 @@
 
 ## 4. 适配层控件桥（PR-7~9，按矩阵逐个，每个含 F2 对等测试）
 
-- [ ] 4.1 轻组（改名转换）：Tag/Badge/Crumbs/Empty/Drawer/Dialog/DropDown/Segmented/Radio/Switch/Checkbox
+- [x] 4.1 轻组桥 11 件（对外 antd 形态零调用点改动）：Tag(色名映射+round=false)/Badge/Breadcrumb(seprator 拼写)/Empty/Drawer(open→visible、%宽折算)/Modal→Dialog(onOk→buttons、footer=null、confirmLoading 吞 onOk、movable=false)/Dropdown(key↔value)/Segmented(disable 拼写)/Radio.Group(children→data、isControlled、**参数序自适应免疫两种顺序**)/Checkbox(合成 e.target.checked)/Switch(isControlToggled+data 两态)；F2 替身 10 用例+FA-05 锚点断言 — **待内网集成点校准**
 - [ ] 4.2 表单组：TextField（clear/prefix 自绘）/Spinner（min-max 显式+双回调合并）/InputSelect（半受控兜底按闸门档位）
 - [ ] 4.3 结构组：Tab（key↔index 桥+溢出折叠）/Tree 左树桥（data 转换+受控回写+搜索接线）/Table 受控壳（矩阵全项）
 - [ ] 4.4 Button（status 映射+loading/ghost 补齐）/Loading/TipBox（Popover+Tooltip 双语义）/Alert（DivMessage/PageMessage 分派）
