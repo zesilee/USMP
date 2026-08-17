@@ -39,8 +39,8 @@
 - [ ] 3.2 FA-05 锚点约定：工具已落（anchorId/ANCHOR_SELECTOR，F1）；守护测试（逐桥断言锚点可命中）随组 4 各桥落地
 - [x] 3.3 主题（部分）：src/ui/eview/theme.ts——十档色阶生成（50=主色+单调性 F1 钉住）+ 四族（brand/mint/yellow/red）覆盖 CSS 产出 + 幂等注入；UiProvider 装配随组 5 接线时切 — **F1**
 - [x] 3.4 图标映射表：ICON_MAP（22 语义名→IcPublic/IcIct，2 近似已标注、实心走 type=filled）；F1 守护=与 icons.ts 语义名集合严格一致（不缺不多）；桥组件随组 4 落 — **F1**
-- [ ] 3.5 feedback 自养挂载点：toast（DivMessage，info→default、常驻横幅关自动消失）/ confirm（MessageDialog Promise 化）；FA-03 测试沿用 — **F2**
-- [ ] 3.6 FormItemShell（FA-06）：LabelField+错误态受控渲染+守护测试（拦 validator 下传） — **F2**
+- [x] 3.5 feedback 自养挂载点（eview 后端并行版，不接线）：toast（DivMessage 替身，info→default、自管卸载不依赖其 display:none 式消失、flushSync 立即可见）/ confirm（MessageDialog Promise 化，danger→type=risk，ok/cancel/关闭三路 resolve）；F2 七用例 — **F2**
+- [x] 3.6 FormItemShell（FA-06）：适配层自绘（label/必填星/受控 error/role=alert/data-test wrapper 锚点），不依赖 EviewUI 表单容器；"拦 validator 下传"守护随组 4 各桥落 — **F2**
 
 ## 4. 适配层控件桥（PR-7~9，按矩阵逐个，每个含 F2 对等测试）
 
