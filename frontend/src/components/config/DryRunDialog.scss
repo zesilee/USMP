@@ -38,3 +38,11 @@
 .hint {
   margin-bottom: 10px;
 }
+
+// 子树级 diff 值可能是 JSON 化的对象/数组（多行），保留换行与缩进可读展示。
+.diff-value {
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+}
