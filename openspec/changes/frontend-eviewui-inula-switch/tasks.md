@@ -8,10 +8,10 @@
 
 ## 1. 垂直切片闸门（PR-1，worktree 隔离，先于一切）
 
-- [ ] 1.1 依赖引入与构建链：openinula/inula 四件套/eview-react 3.10.28/design-token 0.0.24/icon-plus 进 package.json；Vite alias（react/react-dom→openinula、react-intl→inula-intl）+ less 支持；tsconfig types 加 node、@types/react 退位
-- [ ] 1.2 **测试基建验证**：vitest + @testing-library/react + happy-dom 在 openinula 下跑通最小用例（红线项：不通即停）
-- [ ] 1.3 切片页打通：openinula 挂载 → EviewUI Tree（三层数据+受控展开桥）→ Table（动态列 render+受控勾选+分页）→ TextField/InputSelect 编辑回显 — **F2**
-- [ ] 1.4 六项运行时行为逐项验证并记录：半受控三板斧实测（TextField/InputSelect 父级拒写/程序化清空）、Tree expandedKeys 回写时序、Radio onChange 参数序、InputSelect 弹层挂载位置、Loading iconUrl 缺省表现、DivMessage 自动消失开关
+- [ ] 1.1 依赖引入与构建链（**部分**：openinula+inula 四件套已装、gate 独立配置已含 alias 全套；EviewUI 三内网包待离线机实现包材料，Vite 主配置 alias/less/tsconfig 随 1.3 接入）
+- [x] 1.2 **测试基建验证**：✅ 红线项通过——vitest+happy-dom+openinula 可用（探针 5/5：render/state/effect/事件/卸载/rerender/data-test 落 DOM）。**关键发现**：@testing-library/react 直接 alias 不可用（其 CJS 子模块 pure/act-compat 在 vitest inline 转换外原生 require 真 react-dom，与 inula 元素互不相认）；可用路径=自写 render 薄层（openinula createRoot+act，20 行）+ @testing-library/dom 查询事件（test/gate/inula-testing.tsx），全面迁移时 alias @testing-library/react→薄层可令存量测试零改动（需补齐 renderHook 等 API 面）
+- [ ] 1.3 切片验证（**方案 B：离线摆渡**，用户拍板实现包不出网）：eview-gate-kit.tgz 已交付（自带 openinula/inula-intl/happy-dom + CJS 别名钩子 + V0~V7 八场景，selftest 与 mock 工程演练全绿），待离线机 gate-report.txt 回传 — **F2**
+- [ ] 1.4 六项运行时行为逐项验证并记录（载体=工具包 V1~V7 场景，输出含 DOM 快照供远程迭代；报告回传后判读落档）
 - [ ] 1.5 `gate-conclusion.md` 落档闸门结论（含每控件兜底档位选定）；**闸门评审通过才准进组 2**
 
 ## 2. 基建四件套（PR-2~3，依赖由浅入深）
