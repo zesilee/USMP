@@ -1,0 +1,123 @@
+import React, { Component } from 'react';
+export interface TreeNodeProps {
+    id?: string;
+    text?: string;
+    tip?: string;
+    eventKey?: string;
+    selected?: boolean;
+    expanded?: boolean;
+    checked?: boolean;
+    checkedKeys?: any[];
+    enableCheckbox?: boolean;
+    enableRadio?: boolean;
+    halfChecked?: boolean;
+    isLeaf?: boolean;
+    disabled?: boolean;
+    iconLeaf?: string;
+    iconLeafArr?: any[];
+    icon?: any[];
+    iconExpanded?: string;
+    iconCollapsed?: string;
+    iconLeafClass?: string;
+    iconExpandedClass?: string;
+    iconCollapsedClass?: string;
+    onSelect?: (node: any, event: React.MouseEvent<HTMLAnchorElement>) => void;
+    onCheck?: (node: any) => void;
+    onExpand?: (node: any) => void;
+    onClickRightIcon?: (node: any, event: React.MouseEvent<HTMLAnchorElement>) => void;
+    onDoubleClick?: (node: any, event: React.MouseEvent<HTMLAnchorElement>) => void;
+    onRadioChange?: (node: any) => void;
+    onRightClick?: (node: any, event: React.MouseEvent<HTMLElement>) => void;
+    enableScroll?: boolean;
+    showRightIcon?: string | React.ReactElement;
+    fontColor?: string;
+    hideRootCheckbox?: boolean;
+    treeNodeSuffix?: any;
+    treeNodePrefix?: any;
+    lazyLoad?: boolean;
+    nodePath?: any[];
+    draggable?: boolean;
+    onDragStart?: (event: React.DragEvent<HTMLAnchorElement>, node?: any, dragKey?: number) => void;
+    onDragEnd?: (event: React.DragEvent<HTMLAnchorElement>, node?: any, dragKey?: number) => void;
+    onDragEnter?: (event: React.DragEvent<HTMLAnchorElement>, node?: any, dragKey?: number) => void;
+    onDragLeave?: (event: React.DragEvent<HTMLAnchorElement>, node?: any, dragKey?: number) => void;
+    onDragOver?: (event: React.DragEvent<HTMLAnchorElement>, node?: any, dragKey?: number) => void;
+    onDrop?: (event: React.DragEvent<HTMLAnchorElement>, node?: any, dragType?: string) => void;
+    isFocused?: boolean;
+    isKeyBoardSelect?: boolean;
+    treeNodeStyle?: React.CSSProperties;
+    nodeLevel?: number;
+    orientation?: boolean;
+    nodeSuffixTrigger?: 'default' | 'hover';
+    showRightIconArr?: string[] | React.ReactElement[];
+    iconLeafArrClassName?: string[];
+    showRightIconArrClassName?: string[];
+    selectedAlwaysShow?: boolean;
+    treeTextStyle?: React.CSSProperties;
+    connectLine?: boolean;
+    isLastChildNode?: boolean;
+    loadData?: (itemData: any, callback: any) => void;
+    data?: any;
+    origin?: any;
+    suffixShowWhenLeave?: boolean;
+    allNodeArr: Array<TreeNode>;
+    firstNodePadding: boolean;
+}
+export interface TreeNodeState {
+    loadDataShowLoading?: boolean;
+    rightIconDisplay?: string;
+    halfChecked?: boolean;
+    selected?: boolean;
+    expanded?: boolean;
+    checked?: boolean;
+}
+export default class TreeNode extends Component<TreeNodeProps, TreeNodeState> {
+    static NODE_PADDING: number;
+    static NODE_HEIGHT: number;
+    timeOut: any;
+    aRef: React.RefObject<HTMLAnchorElement>;
+    dragType: 'top' | 'inner' | 'bottom';
+    static defaultProps: {
+        selected: boolean;
+        expanded: boolean;
+        checked: boolean;
+        isLeaf: boolean;
+        disabled: boolean;
+        enableCheckbox: boolean;
+        enableScroll: boolean;
+        hideRootCheckbox: boolean;
+        lazyLoad: boolean;
+        nodeSuffixTrigger: string;
+        firstNodePadding: boolean;
+    };
+    constructor(props: any);
+    /**
+     * 滚动目标节点至父元素中央视口
+     * @param props
+     */
+    scrollIntoView(props: any): void;
+    componentWillReceiveProps(props: any): void;
+    componentDidMount(): void;
+    componentDidUpdate(prevProps: any): void;
+    shouldComponentUpdate(nextProps: any, nextState: any): boolean;
+    isChildrenPropsMatched(nextProps: any): boolean;
+    handleSelect: React.MouseEventHandler<HTMLAnchorElement>;
+    handleCheck: (event: any) => void;
+    onRadioChange: React.ChangeEventHandler<HTMLElement>;
+    handleKeyDown: React.KeyboardEventHandler<HTMLDivElement>;
+    handleExpand: React.MouseEventHandler<HTMLSpanElement>;
+    handleDoubleClick: React.MouseEventHandler<HTMLAnchorElement>;
+    handleRightClick: React.MouseEventHandler<HTMLLIElement>;
+    onDragStart: React.DragEventHandler<HTMLAnchorElement>;
+    onDragEnd: React.DragEventHandler<HTMLAnchorElement>;
+    onDragEnter: React.DragEventHandler<HTMLAnchorElement>;
+    onDragLeave: React.DragEventHandler<HTMLAnchorElement>;
+    onDragOver: React.DragEventHandler<HTMLAnchorElement>;
+    onDrop: React.DragEventHandler<HTMLAnchorElement>;
+    handleDragState: (e: any) => void;
+    mouseEnter: (e: any) => void;
+    mouseLeave: () => void;
+    render(): React.JSX.Element;
+    renderFrontIcon: () => React.JSX.Element | "";
+    renderRightIcon: () => React.JSX.Element;
+}
