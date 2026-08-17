@@ -28,9 +28,14 @@
 - [ ] 2.3 store 换 inula-X：5 个 zustand store → `createStore({state,actions,computed})` 三段式；组件外订阅点接 `$subscribe`；**FE-27 回归**：changeset payload 经响应式 Proxy 后序列化/解构删键语义不变（红灯先行） — **F1**
 - [ ] 2.4 路由 v5 化：Switch/Route JSX 树 + MainLayout children 组合；`src/router/compat.ts`（useNavigate/useSearchParams 薄包装）；离开守卫 Prompt+getUserConfirmation 桥（FE-23 Scenario 回归钉住）；测试 MemoryRouter 迁移 — **F1/F2**
 
+> **路线乙重排（2026-08-17，route-decision.md）**：组 3~5 提前为主线（on React 19，
+> cWRP 已实证）；组 2 剩余 2.1b/2.3/2.4 连同运行时 alias 全部改挂**终局波 C**
+> （终态组合=闸门实测组合）。协作模式=混合：外网开发（EviewUI 用 d.ts 行为替身
+> 做 F2），每完成一组组件桥内网集成点摆渡一轮真实 E2E。
+
 ## 3. 适配层核心（PR-4~6）
 
-- [ ] 3.1 运行时禁用 API 守护测试（RT-02：useSyncExternalStore/useTransition/useDeferredValue/useId 拦截）+ 适配层桥接工具（`useRemountKey`/受控回写助手） — **F1**
+- [ ] 3.1 运行时禁用 API 守护测试（**RT-02 守护已随先行波落地**，src/runtime 垫片豁免）+ 适配层桥接工具（`useRemountKey`/受控回写助手） — **F1**
 - [ ] 3.2 FA-05 锚点约定实现 + 守护测试（透传白名单/wrapper/id 三路，拦静默失效） — **F1**
 - [ ] 3.3 主题：tokens.ts 产出 design-token CSS 变量覆盖段（#0C5EA6 十档色阶+功能色+密度）；UiProvider 换 ConfigProvider(locale+messages) 装配 — **F1/F2**
 - [ ] 3.4 图标：23 语义名映射 icon-plus（21 直接+2 近似）；R12 守护沿用 — **F1**

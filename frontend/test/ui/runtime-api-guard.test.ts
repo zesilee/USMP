@@ -13,7 +13,8 @@ const IMPORT = new RegExp(`import[^\\n]*\\{[^}]*\\b(${BANNED.join('|')})\\b[^}]*
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
     const p = join(dir, name)
-    if (statSync(p).isDirectory()) return p === join(SRC, 'assets') ? [] : walk(p)
+    // src/runtime = 18 级 API 垫片本体（波 C 备用），是这些 API 的唯一合法实现处。
+    if (statSync(p).isDirectory()) return p === join(SRC, 'assets') || p === join(SRC, 'runtime') ? [] : walk(p)
     return /\.(ts|tsx)$/.test(name) && !name.endsWith('.d.ts') ? [p] : []
   })
 }
