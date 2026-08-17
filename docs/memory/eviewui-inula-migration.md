@@ -1,6 +1,6 @@
 ---
 name: eviewui-inula-migration
-description: EviewUI/openInula 切换调研已定案(2026-08-17)：全家桶选型拍板、四件套实测结论、Table 矩阵、垂直切片顺序；做 EviewUI/换库/运行时相关工作前必读
+description: EviewUI/openInula 切换调研已定案(2026-08-17)：全家桶拍板、四件套实测、全量24组件矩阵(半受控地基风险/Menu无对应/令牌无通道)、垂直切片顺序；做 EviewUI/换库/运行时相关工作前必读
 metadata:
   type: project
 ---
@@ -12,6 +12,7 @@ metadata:
 - **三个惊喜**：① inula-intl 两头通吃——react-intl 同形满足 EviewUI 上下文 + 内置 VueI18n 适配器（$t/changeLanguage/on('change')）与我们 i18n 薄层同构，**t() 调用点零改动**，且 4 处 useSyncExternalStore 随之消失；② inula-request 是 axios 平替（半天）；③ EviewUI Table 受控通道齐全（checkedRows/currentPage/onColumnSort+disableEviewSort），服务端排序是一等公民，"命令式非受控"担忧被 props 实测推翻。
 - **最大改造**：inula-router 是 **react-router v5 API**（Switch/Prompt/useHistory，无 Outlet/useNavigate/useBlocker）——路由层重写 2~3 天，离开守卫用 Prompt+getUserConfirmation 桥接。
 - **风险**：单向门（四件套类型互 import openinula，整体决策）；测试基建 vitest+testing-library 在 openinula 下**未验证**（垂直切片首日必验，159 个测试文件存续依赖它）；EviewUI 是 Less+@hui/design-token 体系。
-- **未验项**：inula-X store API 细节；EviewUI 编译产物 import 谁；其余 23 组件 d.ts。
+- **全量 24 组件矩阵已完成**（同日二期，全文 [docs/research/eviewui-component-matrix.md](../research/eviewui-component-matrix.md)）五个系统性结论：① **半受控是全库地基风险**——真受控开关只有 Radio(isControlled)/Switch(isControlToggled)，其余控件全是 props+内部state+cWRP 老写法（兜底：InputSelect.shouldRender/Checkbox.onPreChange/key 重挂）；② Form/FormItem 必弃用（name 必填收编 onChange、无 validateStatus 注入）自写 FormItemShell+LabelField；③ **data-test 全库不透传**（仅 Tab/SearchInput/LabelField 例外）→锚点整体换 id/wrapper 方案；④ 无命令式反馈，toast/confirm 自养挂载点；⑤ 主题令牌注入无通道（ThemeProvider 只有 default/evening 两态、design-token 采到空壳）。组件级：**Menu 无合格对应**（悬停级联非内联，Accordion 两层+展开不可控，左树要自研包装=最重工作量）；Tab 按下标寻址+溢出折叠内建；Dialog 受控好但无 confirmLoading/maskClosable；Alert=DivMessage 有默认 10 秒自动消失陷阱；图标 21/23 直接对应（缺纯铃铛/显示器）；Button 无 ghost/loading。适配层从 223 行薄转发重估为 **1500~2500 行真适配层**。
+- **未验项**：inula-X store API 细节；任一组件编译产物 JS（根 index.js 是转发壳判不了 alias）；design-token 完整包（空壳，令牌注入无法验证，追料优先级最高）。
 - **方法论**：评估组件库/框架一律 npm pack 拆包看 @types 与运行时 js，不信文档转述；对照面=我们的「实际使用面」清单（每组件真正用到的 props），不是对方全量 API。
 - 相关：[[react-antd-rebuild]]（适配层军规 FA-01~04 是本次切换的承接点）、[[view-ui-insights]]。

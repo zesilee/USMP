@@ -123,8 +123,14 @@ axios 同形：`ir.create({baseURL, timeout})`、拦截器、泛型 `ir<T>`、`p
 
 ## 6. 开工前还缺的材料
 
+> 2026-08-17 更新：离线机全量 d.ts（eview-bundle.tgz）已到手，原第 2/4 项闭环——
+> **全量 24 组件差异矩阵见 [eviewui-component-matrix.md](eviewui-component-matrix.md)**
+> （五个系统性结论：半受控地基风险🔴 / Form 弃用 / data-test 不透传 / 无命令式反馈 / 令牌注入无通道；
+> 适配层重估 1500~2500 行）。
+
+仍缺：
+
 1. inula-X 的 store API 文档或 d.ts（唯一未实测项）。
-2. EviewUI 其余组件 d.ts（按使用面清单：Menu/Tabs/Modal/Select/Form/Radio/…）。
-3. EviewUI **编译产物**（index.js）内部 import 的是 `'react'` 还是 `'@cloudsop/horizon'`（决定 alias 方向）。
-4. `@hui/design-token` 与 `@nce/icon-plus` 的包或文档（主题对接 + 23 个语义图标找对应）。
-5. 向 EviewUI 团队确认是否有比 3.10.28 更新的版本。
+2. EviewUI 任一组件的**编译产物 JS**（如 Button/Button.js，看内部 require 谁——根 index.js 只是转发壳判不了 alias 方向）。
+3. `@hui/design-token` **完整包**（采到的是空壳，仅 package.json；主色 #0C5EA6 等 10 令牌注入无法验证——优先级最高）。
+4. 向 EviewUI 团队确认是否有比 3.10.28 更新的版本（顺带问：半受控控件是否有受控化改造、有无内联侧边导航组件）。
