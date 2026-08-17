@@ -45,7 +45,7 @@
 ## 4. 适配层控件桥（PR-7~9，按矩阵逐个，每个含 F2 对等测试）
 
 - [x] 4.1 轻组桥 11 件（对外 antd 形态零调用点改动）：Tag(色名映射+round=false)/Badge/Breadcrumb(seprator 拼写)/Empty/Drawer(open→visible、%宽折算)/Modal→Dialog(onOk→buttons、footer=null、confirmLoading 吞 onOk、movable=false)/Dropdown(key↔value)/Segmented(disable 拼写)/Radio.Group(children→data、isControlled、**参数序自适应免疫两种顺序**)/Checkbox(合成 e.target.checked)/Switch(isControlToggled+data 两态)；F2 替身 10 用例+FA-05 锚点断言 — **待内网集成点校准**
-- [ ] 4.2 表单组：TextField（clear/prefix 自绘）/Spinner（min-max 显式+双回调合并）/InputSelect（半受控兜底按闸门档位）
+- [x] 4.2 表单组桥 3 件：Input→TextField（clear 自绘 suffix/prefix 叠放/password/validator 绝不下传守护）、InputNumber→Spinner（min-max 缺省显式无界防 0/100 陷阱、无效输入不上抛）、Select→InputSelect（label→text、gate 参数序、清空=onChange(undefined) 键不入 payload、showSearch↔onlySelect）；**useSemiControlledBridge 通用机制**（②受控回写+③拒写检测重挂，F1 三路径钉住；实录坑：拒写时父不重渲染须 onEmit 主动触发检测）— **待内网集成点校准**
 - [ ] 4.3 结构组：Tab（key↔index 桥+溢出折叠）/Tree 左树桥（data 转换+受控回写+搜索接线）/Table 受控壳（矩阵全项）
 - [ ] 4.4 Button（status 映射+loading/ghost 补齐）/Loading/TipBox（Popover+Tooltip 双语义）/Alert（DivMessage/PageMessage 分派）
 
