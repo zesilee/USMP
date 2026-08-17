@@ -3,6 +3,7 @@
 > 姊妹篇：[eviewui-inula-migration.md](eviewui-inula-migration.md)（运行时与全家桶调研）。
 > 材料：离线机采集的 eview-react 3.10.28 **全组件 d.ts**（`eview-bundle.tgz`，types-only，组件 JS 不在包内——凡标"需实测"的行为判定须在真包/垂直切片上冒烟确认）。
 > 方法：四组并行 agent 逐 d.ts 精读，对照面 = 我们的「实际使用面」清单（每组件真正用到的 props），非 antd 全量 API。
+> **同类产品实证（2026-08-17）**：iMaster NCE-Fabric「设备特性编程」页截图确认——其左树（Tree）+ Tab + 特性表格（列筛选/排序/勾选/分页/行内编辑删除）+ 攒批工具栏（变更内容/试运行/重置/提交配置）与 USMP 模块控制台功能一比一同构，且就是 EviewUI 实现的。切换可行性从"接口推断"升级为"同类产品已验证"。
 
 ## 0. 五个系统性结论（比单组件差异更重要）
 
@@ -33,7 +34,7 @@
 
 | 我们在用 | EviewUI 对应 | 关键映射与缺口 |
 |----------|--------------|----------------|
-| Menu（左树） | **无合格对应 🔴**。Menu=悬停级联菜单（非内联）；最近似 Accordion | 🔴 Accordion 类型仅两层嵌套（左树三层）、**无 openKeys 受控展开、无展开回调**（仅 data 内嵌 isExpand 非受控）；选中可受控（`selectedValue`+`isControlSelectedValue`）；整面板收展 `expanded` **语义反转**（false=展开）。方案：适配层重建 data.isExpand 模拟展开受控（有漂移风险）或左树自研包装（最重工作量） |
+| Menu（左树） | **Tree ✅（2026-08-17 翻案）** | 首判"无合格对应"是候选清单漏了 Tree（只对照了 Menu/Accordion），**NCE 真实产品截图证实其设备左树就是 EviewUI Tree 搭的**。Tree.d.ts 验证：`data` 任意深度嵌套 children；`expandedKeys`+`onExpand(全量keys,node)`、`selectedKeys`+`onSelect` 受控要素齐全（cWRP 同步，半受控形态但回调给全量 keys 可回写）；**内置搜索** `findLevelNodes(词)` 返回命中+父链并高亮（覆盖我们左树搜索自动展开场景）；`treeNodePrefix/Suffix` 节点级 ReactElement、图标体系、虚拟滚动、`focusNode` 滚动定位。适配动作：items→data 转换（label→text、双语=重建 data 与现状同构）+ expandedKeys/selectedKeys 桥 ~100 行 |
 | Tabs | **Tab** | 🔧 JSX 子组件式非 items 配置（循环渲 TabItem）；**按下标寻址非 key**（key↔index 映射表，注意增删漂移）；⚠️ 半受控（点击先内切再回调，不可拦截）；✅ 溢出折叠内建（自动收纳弹层，几十个 Tab 可行）；✅ 有 index signature，data-test 可透传 |
 | Breadcrumb | **Crumbs** | 🔧 `items→data`、title 仅 string；分隔符拼写 **`seprator`**（少个 a）；附赠 countLimit 超长折叠 |
 | Dropdown | **DropDown**（嵌套子菜单/右键用 PopUpMenu） | 🔧 `{items,onClick}→{data,onItemClick}`、key→value；⚠️ 开合非受控（`onDropDown` 仅通知）；无嵌套子菜单 |
@@ -57,19 +58,19 @@
 
 | 我们在用 | EviewUI 对应 | 关键映射与缺口 |
 |----------|--------------|----------------|
-| ConfigProvider(locale+theme) | **ConfigProvider**（locale+messages，内含 I18nProvider 能力） | ✅ locale 切换形态兼容（内置 24 语言包，键为 `ev_*`）；🔴 theme 令牌注入无通道（系统性结论 5） |
+| ConfigProvider(locale+theme) | **ConfigProvider**（locale+messages，内含 I18nProvider 能力） | ✅ locale 切换形态兼容（内置 24 语言包，键为 `ev_*`）；✅ theme 走 design-token CSS 变量覆盖（系统性结论 5，已闭环） |
 | App/message/modal 上下文 | 无对应 | 自养挂载点方案覆盖 |
 | icons（23 语义名） | **@nce/icon-plus 1.0.87**（2609 个具名组件，`IconPlusIcPublic*` 家族） | ✅ 21/23 直接对应（实心变体走 `type="filled"`、`spin` 可做加载旋转）；🔴 缺纯铃铛、纯显示器（用 IcPublicNotice/IcPublicScreenWifi 近似）；✅ props extends HTMLAttributes 可透传 data-test |
 | Button | **Button**（TextButton 极简、IconButton 图标钮） | 🔧 `type→status`（primary/text/risk）；🔴 **无 ghost、无 loading**（loading=塞 spin 图标+手动 disabled）、primary+danger 组合表达不了；onClick 双参签名 |
 
 ## 2. 适配层工作量重估
 
-antd 时代适配层=223 行薄转发；切 EviewUI 后为**真适配层，预估 1500~2500 行**：
+antd 时代适配层=223 行薄转发；切 EviewUI 后为**真适配层，预估 1300~2200 行**（2026-08-17 Tree 翻案后下调）：
 
 | 层级 | 内容 | 预估 |
 |------|------|------|
-| 重 | Table 受控壳（150~250）、左树 Menu 自研包装（200~400）、feedback 自养挂载点（~100）、FormItemShell（~80） | ~800 行 |
-| 中 | TextField（clear/prefix 自绘）、Spinner、InputSelect、Tab（key↔index）、Button（loading/ghost 补）、Loading、TipBox、Alert 双组件分派 | ~500 行 |
+| 重 | Table 受控壳（150~250）、feedback 自养挂载点（~100）、FormItemShell（~80） | ~450 行 |
+| 中 | 左树 Tree 适配（data 转换+受控桥，~100，2026-08-17 由"自研包装 200~400"下调——Tree 翻案）、TextField（clear/prefix 自绘）、Spinner、InputSelect、Tab（key↔index）、Button（loading/ghost 补）、Loading、TipBox、Alert 双组件分派 | ~600 行 |
 | 轻 | Tag/Badge/Crumbs/Empty/Drawer/Dialog/DropDown/Segmented/Radio/Switch/Checkbox 改名转换 | ~300 行 |
 | 系统 | 半受控兜底工具（key 重挂）、data-test wrapper 约定、密度 CSS 覆盖 | ~200 行+样式 |
 
@@ -77,11 +78,11 @@ antd 时代适配层=223 行薄转发；切 EviewUI 后为**真适配层，预�
 
 1. **半受控实测**：TextField/InputSelect 在「父级拒绝回写」「程序化清空」场景下的实际表现（决定兜底策略成本）。
 2. 测试基建：vitest + @testing-library/react + happy-dom 在 openInula 下跑通。
-3. 左树原型：Accordion 三层嵌套实测 + 展开模拟方案，或判定自研。
+3. 左树原型：**Tree** 受控展开桥实测（expandedKeys 经 cWRP 同步的回写时序）+ findLevelNodes 搜索接线。
 4. Radio onChange 新旧值顺序、Checkbox onPreChange 拦截语义。
 5. InputSelect 弹层是否真的不 teleport（影响 F3/E2E 选择器）。
 6. Loading 不传 iconUrl 的表现；DivMessage 自动消失关闭开关。
-7. alias 方向终判：**还差任一组件的编译产物 JS 一个文件**（如 `frontend/node_modules/@nce/eview-react/Button/Button.js`，看内部 require 的是 'react' 还是 '@cloudsop/horizon'）。
+7. ~~alias 方向终判~~ **已闭环**（2026-08-17 离线机实测 Button.js = `require("react")`：构建期 alias react→openinula 即可，路线 A 直跑真 React 的前提同时成立）。
 
 ## 4. 向 EviewUI 团队追问清单（更新）
 
@@ -89,6 +90,6 @@ antd 时代适配层=223 行薄转发；切 EviewUI 后为**真适配层，预�
 2. ~~任一组件编译产物 JS~~ → 降级为**一行 grep 答案**（源码无需出网）：在离线机跑
    `grep -o "require(['\"]react['\"])\|require(['\"]@cloudsop/horizon['\"])" frontend/node_modules/@nce/eview-react/Button/Button.js | sort -u`
    回传输出的那一行即可判 alias 方向。
-3. 侧边内联导航（类 antd Menu inline）是否有未随包发布的组件（Accordion 之外）。
+3. ~~侧边内联导航~~ **已闭环**——Tree 即对应物（NCE 产品截图实证 + Tree.d.ts 验证）。
 4. 半受控控件在新版本里是否有受控化改造计划。
 5. 纯铃铛/纯显示器图标的内部补充包。

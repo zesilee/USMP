@@ -64,9 +64,17 @@ axios 同形：`ir.create({baseURL, timeout})`、拦截器、泛型 `ir<T>`、`p
 
 估 2~3 天含测试改造（createMemoryRouter → v5 MemoryRouter）。URL 形态不变，**E2E 冒烟不受影响**。
 
-### 2.4 inula-X —— 内置 openinula 核心，唯一未验到细节的项 🟡
+### 2.4 inula-X —— API 已从 openinula@1.0.0 自带 d.ts 验明 ✅（2026-08-17 闭环）
 
-`createStore/useStore/useSelector/useDispatch` 导出确认存在；store 定义形态（state/actions/computed 结构）**待拿文档或 d.ts 确认**。我们 5 个 zustand store（485 行，computed 已是方法形态）预估 1~2 天。
+Store 定义是 **state/actions/computed 三段式**（`createStore({id?, state, actions, computed})` 返回 hook）：
+
+- actions 首参是 state、**直接可变修改**（响应式代理），调用时首参自动省略；
+- computed 是真计算属性（`(state) => 派生值`，自动缓存）；
+- 组件内 `const store = useMyStore()` 后 `store.字段/store.动作()/store.计算值` 直取（响应式自动追踪依赖，**无需 selector**）；
+- 组件外有 `$subscribe/$unsubscribe/$s/$a/$queue`（异步队列化 actions）——zustand 的 `subscribe/getState` 场景可覆盖；
+- 另带 Redux 适配器（不用）。
+
+对照我们 5 个 zustand store（485 行，computed 已是方法形态）：**三段式同构，机械转换**，调用点从 selector 形式改直取。估时维持 1~2 天。新增一个垂直切片验证项：**响应式代理与 FE-27 不可变语义的边界**（存进 store 的 changeset payload 取出时是 Proxy，下发序列化与解构删键行为需实测无副作用）。
 
 ## 3. 系统性风险（如实）
 
@@ -128,9 +136,11 @@ axios 同形：`ir.create({baseURL, timeout})`、拦截器、泛型 `ir<T>`、`p
 > （五个系统性结论：半受控地基风险🔴 / Form 弃用 / data-test 不透传 / 无命令式反馈 / 令牌注入无通道；
 > 适配层重估 1500~2500 行）。
 
-仍缺：
+**2026-08-17 终态：缺料清单全部闭环** ✅
 
-1. inula-X 的 store API 文档或 d.ts（唯一未实测项）。
-2. EviewUI 任一组件的**编译产物 JS**（如 Button/Button.js，看内部 require 谁——根 index.js 只是转发壳判不了 alias 方向）。
-3. ~~`@hui/design-token` 完整包~~ **已闭环**（2026-08-17 整包补采：CSS 变量体系，主色注入=覆盖 --brand-* 色阶，零编译；详见 component-matrix 系统性结论 5）。
-4. 向 EviewUI 团队确认是否有比 3.10.28 更新的版本（顺带问：半受控控件是否有受控化改造、有无内联侧边导航组件）。
+1. ~~inula-X store API~~ **已闭环**——openinula@1.0.0 自带 d.ts 即权威（见 2.4）。
+2. ~~alias 方向~~ **已闭环**——离线机实测 Button.js 内部为 `require("react")`：EviewUI 编译产物直接引 react，构建期 alias `react → openinula` 即可（此结论同时让"路线 A：标准 React 直跑 EviewUI"的技术前提成立，作为备选保留）。
+3. ~~`@hui/design-token` 完整包~~ **已闭环**（整包补采：CSS 变量体系，主色注入=覆盖 --brand-* 色阶，零编译；详见 component-matrix 系统性结论 5）。
+4. 向 EviewUI 团队确认是否有比 3.10.28 更新的版本（顺带问：半受控控件是否有受控化改造、有无内联侧边导航组件）——**非阻塞**，属锦上添花。
+
+调研至此完备，可直接作为 `/opsx:explore` 输入进入正式切换流程。
