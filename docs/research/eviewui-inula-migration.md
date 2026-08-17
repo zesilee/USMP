@@ -132,5 +132,5 @@ axios 同形：`ir.create({baseURL, timeout})`、拦截器、泛型 `ir<T>`、`p
 
 1. inula-X 的 store API 文档或 d.ts（唯一未实测项）。
 2. EviewUI 任一组件的**编译产物 JS**（如 Button/Button.js，看内部 require 谁——根 index.js 只是转发壳判不了 alias 方向）。
-3. `@hui/design-token` **完整包**（采到的是空壳，仅 package.json；主色 #0C5EA6 等 10 令牌注入无法验证——优先级最高）。
+3. ~~`@hui/design-token` 完整包~~ **已闭环**（2026-08-17 整包补采：CSS 变量体系，主色注入=覆盖 --brand-* 色阶，零编译；详见 component-matrix 系统性结论 5）。
 4. 向 EviewUI 团队确认是否有比 3.10.28 更新的版本（顺带问：半受控控件是否有受控化改造、有无内联侧边导航组件）。
