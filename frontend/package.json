@@ -51,6 +51,7 @@
     "happy-dom": "^20.9.0",
     "openapi-typescript": "^7.13.0",
     "playwright": "^1.61.1",
+    "react-intl": "^7.1.14",
     "sass": "^1.99.0",
     "storybook": "^10.5.8",
     "typescript": "^5.9.3",

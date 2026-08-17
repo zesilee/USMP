@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
-import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react'
-import { useState } from 'react'
+import { render as rtlRender, screen, fireEvent, waitFor, cleanup } from '@testing-library/react'
+import { createElement, useState, type ReactElement } from 'react'
 
 // ============ 内网真实校准套件（集成点专用，混合协作模式） ============
 // 外网默认 skip（@nce 实现不存在）；内网运行：
@@ -10,6 +10,26 @@ import { useState } from 'react'
 // 隔离；失败输出 DOM 快照供外网远程修桥。
 const REAL = process.env.EVIEW_REAL === '1'
 const d = REAL ? describe : describe.skip
+
+// eview 编译产物内部 require('react-intl')（Popup 链等）且组件 contextType
+// 读 intl 上下文——REAL 模式所有渲染统一包 IntlProvider（messages 用真包
+// 内置 zh 语言包，缺档静默）。外网 skip 模式不加载 react-intl/locales。
+let wrapIntl = (el: ReactElement): ReactElement => el
+if (REAL) {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { IntlProvider } = require('react-intl') as { IntlProvider: never }
+  let messages: Record<string, string> = {}
+  for (const cand of ['zh', 'zh-cn', 'zh_CN']) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const m = require(`@nce/eview-react/locales/${cand}`)
+      messages = (m && (m.default ?? m)) as Record<string, string>
+      break
+    } catch { /* 下一个候选 */ }
+  }
+  wrapIntl = (el) => createElement(IntlProvider, { locale: 'zh', messages, onError: () => undefined } as never, el)
+}
+const render = (el: ReactElement) => rtlRender(wrapIntl(el))
 
 // 哨兵：外网（skip 模式）下保证文件非空（vitest 对空文件按失败处理）。
 it(`eview-real 套件模式=${REAL ? 'REAL（内网真实校准）' : 'SKIP（外网，EVIEW_REAL=1 启用）'}`, () => {
