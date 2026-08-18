@@ -13,7 +13,7 @@ import { installFindDOMNodePolyfill } from '../../src/runtime/finddomnode-polyfi
 const REAL = process.env.EVIEW_REAL === '1'
 // 版本指纹：每轮修桥递增，报告第一行即可判内网跑的是否新代码（R8 教训：
 // 合入到报告间隔过短无法排除旧代码，指纹终结猜疑）。
-const CAL_VERSION = 'CAL-R15'
+const CAL_VERSION = 'CAL-R16'
 const d = REAL ? describe : describe.skip
 if (REAL) {
   vi.setConfig({ testTimeout: 10000, hookTimeout: 10000 })
@@ -261,10 +261,12 @@ d('真实校准 · 表单输入组（半受控桥）', () => {
 
 
 d('真实校准 · 图标（组 5.3 icon-plus 实名侦察）', () => {
+  // R15 实测：全量 import icon-plus 超 10s 超时（图标全家桶包大，vitest
+  // 首次转换编译慢）——单用例放宽 60s，并打点定位挂在 import 还是之后。
   it('icon-plus 命名空间形态 + 语义图标解析命中率', async () => {
-    // eview/icons.tsx 按候选名（IconPlus 前缀/裸名）自适应——本用例验证真包
-    // 具名导出形态并打印未命中项（外网无 icon-plus d.ts，实名只能内网实证）。
+    console.log('ICONS: 开始 import @nce/icon-plus（大包转换可能数十秒）')
     const mod = (await import('@nce/icon-plus')) as Record<string, unknown>
+    console.log('ICONS: import 完成')
     const ns = ((mod as { default?: unknown }).default ?? mod) as Record<string, unknown>
     const keys = Object.keys(ns)
     console.log('ICONS 命名空间 keys 数=', keys.length, '样例=', JSON.stringify(keys.slice(0, 12)))
@@ -274,7 +276,7 @@ d('真实校准 · 图标（组 5.3 icon-plus 实名侦察）', () => {
       .map(([sem, v]) => `${sem}→${v.name}`)
     console.log('ICONS 未命中（应为空）:', JSON.stringify(misses))
     expect(misses).toEqual([])
-  })
+  }, 60000)
 })
 
 d('真实校准 · 收尾组与外壳', () => {
