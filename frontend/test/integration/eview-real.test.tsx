@@ -13,7 +13,7 @@ import { installFindDOMNodePolyfill } from '../../src/runtime/finddomnode-polyfi
 const REAL = process.env.EVIEW_REAL === '1'
 // 版本指纹：每轮修桥递增，报告第一行即可判内网跑的是否新代码（R8 教训：
 // 合入到报告间隔过短无法排除旧代码，指纹终结猜疑）。
-const CAL_VERSION = 'CAL-R14'
+const CAL_VERSION = 'CAL-R15'
 const d = REAL ? describe : describe.skip
 if (REAL) {
   vi.setConfig({ testTimeout: 10000, hookTimeout: 10000 })
@@ -259,6 +259,23 @@ d('真实校准 · 表单输入组（半受控桥）', () => {
   })
 })
 
+
+d('真实校准 · 图标（组 5.3 icon-plus 实名侦察）', () => {
+  it('icon-plus 命名空间形态 + 语义图标解析命中率', async () => {
+    // eview/icons.tsx 按候选名（IconPlus 前缀/裸名）自适应——本用例验证真包
+    // 具名导出形态并打印未命中项（外网无 icon-plus d.ts，实名只能内网实证）。
+    const mod = (await import('@nce/icon-plus')) as Record<string, unknown>
+    const ns = ((mod as { default?: unknown }).default ?? mod) as Record<string, unknown>
+    const keys = Object.keys(ns)
+    console.log('ICONS 命名空间 keys 数=', keys.length, '样例=', JSON.stringify(keys.slice(0, 12)))
+    const { ICON_MAP } = await import('@bridge/iconMap')
+    const misses = Object.entries(ICON_MAP)
+      .filter(([, v]) => ns[`IconPlus${v.name}`] == null && ns[v.name] == null)
+      .map(([sem, v]) => `${sem}→${v.name}`)
+    console.log('ICONS 未命中（应为空）:', JSON.stringify(misses))
+    expect(misses).toEqual([])
+  })
+})
 
 d('真实校准 · 收尾组与外壳', () => {
   it('Button 状态映射 + 点击；Spin/Tooltip/Alert 挂载', () => {

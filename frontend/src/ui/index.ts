@@ -41,7 +41,7 @@ export type { ConfirmOptions } from '@ui-backend/feedback'
 export { UiProvider } from '@ui-backend/provider'
 
 // ===== 图标（语义名，R12）=====
-export * as icons from './icons'
+export * as icons from '@ui-backend/icons'
 
 // ===== 主题令牌（FA-04：业务禁硬编码色值）=====
 export {

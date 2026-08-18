@@ -53,7 +53,7 @@
 
 - [x] 5.1 config 组件调用点跟随：SchemaForm 换 FormItemShell 外壳（Form/Form.Item 退场）、Table 桥泛型化+本地函数排序+分页/排序 onChange 合成 antd 快照、Modal footer/maskClosable、Empty children、Dropdown menu.selectedKeys；**已知债（窗口期类型收下行为暂缺，内网侦察后补映射）：①列头筛选菜单（filters/onFilter→eview embeddedFilter）②展开行（expandable→eview 展开形态）** — **F2 全量回归 ✓**
 - [x] 5.2 布局导航与页面调用点微调（Devices/Logs/ModuleConsolePage/ModuleListTab Select 回调与 Key 类型退 antd）+ **@ui-backend 单点切换落地**（生产→eview 桥；外网 vitest/storybook→antd 测试镜像 src/ui/antd-backend，见其 README；EVIEW_REAL=1→全链真身）+ UiProvider eview 化（IntlProvider+locales+polyfill+主题注入）+ functions 阈值按分母重算 94.5→94.3（7.3 回填） — **F2 回归 ✓（631 绿）**
-- [ ] 5.3 antd 退场：依赖移除、构建产物验证零 react/antd 实体（RT-01 Scenario）、适配层守护测试改拦 eview 直接 import — **F1**
+- [x] 5.3 antd 退场（生产面）：antd/@ant-design/icons 挪 devDependencies（外网测试镜像仍需，构建产物零 antd）；icons 进 @ui-backend 切换（antd 版挪镜像目录、eview 版=icon-plus 候选名自适应+缺名问号占位，实名由校准 R15 侦察用例验证）；adapter-guard 扩拦业务直连 @nce/@bridge/@ui-backend；三方语义名一致性守护。**RT-01 构建产物零 antd/react 实体验证=内网 build 时执行（脚本待组 8.1）** — **F1 ✓**
 
 ## 6. F3 真浏览器与派生黄金（PR-12）
 

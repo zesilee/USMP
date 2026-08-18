@@ -64,11 +64,17 @@ describe('主题色阶（FA-04 / design-token CSS 变量覆盖）', () => {
 })
 
 describe('图标映射一致性（FA-04）', () => {
-  it('ICON_MAP 键集合 = icons.ts 导出的语义名集合（不缺不多）', () => {
-    const src = readFileSync(resolve(process.cwd(), 'src/ui/icons.ts'), 'utf8')
-    const semantic = Array.from(src.matchAll(/as (\w+Icon)\b/g)).map((m) => m[1])
-    expect(semantic.length).toBeGreaterThan(0)
-    expect(Object.keys(ICON_MAP).sort()).toEqual([...new Set(semantic)].sort())
+  it('ICON_MAP 键集合 = 两后端 icons 导出的语义名集合（不缺不多）', () => {
+    // 组 5.3：icons 也进 @ui-backend 切换——antd 版挪 antd-backend/icons.ts
+    // （as 别名重导出），eview 版 src/ui/eview/icons.tsx（makeIcon 逐名导出）。
+    // 三方（ICON_MAP / antd 版 / eview 版）语义名集合须严格一致。
+    const antdSrc = readFileSync(resolve(process.cwd(), 'src/ui/antd-backend/icons.ts'), 'utf8')
+    const antdNames = Array.from(antdSrc.matchAll(/as (\w+Icon)\b/g)).map((m) => m[1])
+    const evSrc = readFileSync(resolve(process.cwd(), 'src/ui/eview/icons.tsx'), 'utf8')
+    const evNames = Array.from(evSrc.matchAll(/export const (\w+Icon)\b/g)).map((m) => m[1])
+    expect(antdNames.length).toBeGreaterThan(0)
+    expect(Object.keys(ICON_MAP).sort()).toEqual([...new Set(antdNames)].sort())
+    expect(Object.keys(ICON_MAP).sort()).toEqual([...new Set(evNames)].sort())
   })
 
   it('映射目标全部为 IcPublic/IcIct 家族且近似项已标注', () => {
