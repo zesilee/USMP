@@ -23,6 +23,19 @@ const d = REAL ? describe : describe.skip
 
 if (REAL) {
   installFindDOMNodePolyfill()
+  // 报告减脂（F3-R2：回传文件过大）：真浏览器把 React/eview 的弃用与
+  // 渲染警告全量转发进报告——同类消息（按前 60 字符归组）只放行前 2 条，
+  // 其余吞掉计数；F3- 打点不受影响（走 console.log 原样）。
+  const seen = new Map<string, number>()
+  const throttle = (orig: (...a: unknown[]) => void) => (...args: unknown[]) => {
+    const key = String(args[0]).slice(0, 60)
+    const n = (seen.get(key) ?? 0) + 1
+    seen.set(key, n)
+    if (n <= 2) orig(...args)
+    else if (n === 3) orig(`[节流] 同类消息继续出现，后续吞掉: ${key}…`)
+  }
+  console.warn = throttle(console.warn.bind(console))
+  console.error = throttle(console.error.bind(console))
 }
 
 // eview 组件 contextType 读 intl——真浏览器同样需要 IntlProvider 包根。
