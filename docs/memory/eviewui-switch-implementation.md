@@ -27,6 +27,13 @@ metadata:
 
 **组 5 已全量交付**（2026-08-18，PR#368-#370）：@ui-backend 裸别名单点切换（生产→eview 桥/外网测试与 storybook→src/ui/antd-backend antd 镜像/EVIEW_REAL=1→全链真身；Vite alias 不作用于相对导入是首版翻车根因）；SchemaForm 换 FormItemShell；antd 家族挪 devDeps；icons 切 icon-plus（**R16 实证：2608 图标、命名=IconPlus 前缀、22 语义名全命中**）；修真 flaky=eview provider 无 antd feedback 绑定时静态 message 3s 定时器 teardown 后炸（provider 对称入切换根治）；已知债=列头筛选菜单/展开行映射（tasks 5.1）。**校准终态 CAL-R16=17 passed/1 skip 全绿。**
 
+**组 6.1 F3 真浏览器校准已收敛**（2026-08-18，十轮 F3-R1~R10 终态 4/4 全绿）。四大定案（改 Tab/Tree 桥前必读）：
+- findDOMNode polyfill 须**静态 import react-dom default**（真浏览器 ESM 无 require——F3-R1）；REAL 开关在 browser 配置须 define 注入（无 process）。
+- **cWRP 更新路径同步死循环**（happy-dom 与真浏览器均实证，真实布局救不了）→ Tab（selectedIndex 变化）/Tree（openKeys/selectedKeys 变化）一律 **key 重挂**恒走首渲路径（首渲两环境实证正常）；受控数据 props 喂回语义无损，代价=无过渡动画（波 C 退役）。
+- **Tree 节点选中=window capture 委托+名称区锚拦截**：eview 选中监听在节点容器、点容器触发内部 setState 踩同一死循环；委托拦截边界=<a id=ev_tree_node_id{key}>（箭头天然在锚外自然放行走受控展开链）。**血泪坑：旧「箭头放行」规则 [class*="expand"] 被祖先 ev_tree_expanded 状态类误伤——R6-R9 四轮零回调+挂死的真凶，事件层级假设（React 合成层/document 层）皆误诊；全景探针（三层监听+桥打点）一轮破案**。同击双发（真浏览器实测）→桥 50ms 同锚去重。
+- 真浏览器 interop：pickDefault 须**多层剥 default**（vite optimizer CJS 双层包装，happy-dom 单层即中）；具名导出（TabItem）用候选链逐层找。
+配套：Chromium 离线包摆渡（ms-playwright tgz→~/.cache）；F3 报告减脂=套件 console 节流+grep 过滤命令。
+
 **原「下一步」记录（组 5 前）**：**组 5 接线**（index.ts 切 eview 后端+调用点微调+antd 退场+覆盖率分母回收重钉+findDOMNode polyfill 生产安装）→组 6 F3（含 Tabs/Tree 校准移交项）/派生黄金→组 7 E2E→组 8 收尾→波 C 运行时翻转（openinula+intl 内核+router v5 化+inula-X，制品在 tasks.md 组 2 挂起项）。
 
 相关：[[eviewui-inula-migration]]（调研与矩阵）、[[react-antd-rebuild]]（适配层军规与上次迁移方法论）。

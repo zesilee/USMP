@@ -58,7 +58,7 @@
 ## 6. F3 真浏览器与派生黄金（PR-12）
 
 - [x] 6.1a F3 REAL 化（校准移交项载体）：vitest.browser.config 接 EVIEW_REAL 开关（define 注入——真浏览器无 process/require 实录坑）+@nce stub 同口径；新增 test/browser/eview-real-browser.test.tsx（Tabs 受控 rerender/真实点击、Tree 首渲+展开+选中，全程打点）；内网跑法=Chromium 离线包摆渡（ms-playwright-chromium-1234.tgz）+ EVIEW_REAL=1 --config vitest.browser.config.ts — **F3 外网 10 绿 3 skip**
-- [ ] 6.1b F3 移交项内网实跑收敛（bridge-report-f3 判读）＋存量 F3 切片口径复核（弹层挂载/嵌套 list 增删改/choice 切换在 eview 后端的对等）— **F3**
+- [x] 6.1b F3 移交项内网实跑收敛（2026-08-18，十轮 F3-R1~R10 全绿 4/4）：Tabs 受控+点击、Tree 首渲+受控展开+叶子/父节点选中回调全通。关键定案：①findDOMNode polyfill 需静态 import（浏览器无 require）②cWRP 更新路径同步死循环→key 重挂（Tab/Tree props 路径）③节点选中→window capture 委托+名称区锚拦截（旧箭头放行规则被 ev_tree_expanded 状态类误伤=R6-R9 真凶）④同击双发→桥 50ms 去重。**存量 F3 切片口径复核（弹层/嵌套 list/choice 在 eview 后端对等）挂组 7 前置**— **F3 ✓**
 - [x] 6.2 派生黄金全量重跑零漂移确认（GD-01）：组 5 接线后 test/golden 全量持续绿（631 全绿含黄金套件）——schema→控制台派生与组件库无关的铁证成立 — **F1 ✓**
 
 ## 7. E2E 对等（PR-13）
