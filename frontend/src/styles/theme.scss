@@ -174,8 +174,9 @@
   --el-font-size-base: #{$font-size-base};
 }
 
-// 加载 IBM Plex Sans/Mono（去 Inter/Roboto 陈词滥调 R11；失败则回退系统/中文字体）
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+// IBM Plex Sans/Mono 不再外链加载（E2E 实录：离线环境 googleapis 必失败
+// ERR_CERT_AUTHORITY_INVALID）——本机装了即用，否则走 variables.scss 的
+// 中文/系统回退栈（观感一致性由回退链保证）。
 
 // ==================== 全局样式 ====================
 html, body {
@@ -645,4 +646,68 @@ html, body {
 // 宽度工具类
 .w-full {
   width: 100% !important;
+}
+
+/* ===== 左树（Menu 桥自绘，组 7 E2E 定案）=====
+   eview Tree 的 TreeNode.cWRP 无条件 setState——60+ 节点单轮嵌套更新超
+   React 19 的 50 上限（#185）→恢复循环压崩页面，props 层无解——桥自绘。
+   复用 ev_* 类名承接 eview 全量 CSS 观感，此处仅补自绘专有部分。 */
+.ub-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ub-menu .ev_tree_node_cont {
+  display: flex;
+  align-items: center;
+}
+.ub-menu .ub-tree-switcher {
+  display: inline-block;
+  width: 16px;
+  flex: none;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  color: $text-tertiary;
+}
+.ub-menu .ub-tree-switcher::before {
+  content: '\25B8'; /* ▸ */
+}
+.ub-menu .ub-tree-switcher.is-open::before {
+  content: '\25BE'; /* ▾ */
+}
+.ub-menu .ub-tree-switcher-noop {
+  cursor: default;
+}
+.ub-menu .ub-tree-switcher-noop::before {
+  content: '';
+}
+.ub-menu .ev_tree_name {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+  padding: 6px 8px;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.ub-menu .ev_tree_name:hover {
+  background: $bg-elevated;
+}
+.ub-menu .ub-tree-selected,
+.ub-menu .ub-tree-selected:hover {
+  color: $color-primary;
+  background: rgba(12, 94, 166, 0.08);
+}
+.ub-menu .ev_tree_name.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+.ub-menu .ev_tree_text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

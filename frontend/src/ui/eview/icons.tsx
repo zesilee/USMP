@@ -3,8 +3,8 @@
 // （icon-plus 无 vendor d.ts）——运行时按候选名自适应（IconPlus 前缀 / 裸名），
 // 缺名回落问号占位（R12 规范占位，SHALL NOT 空白）；实名由内网校准侦察用例
 // 验证（RENDER 同款方法论）。实心变体经 type="filled"（矩阵定案）。
-import { createElement, type ComponentType } from 'react'
-import IconPlusAll from '@nce/icon-plus'
+import { createElement, Component, type ComponentType, type ReactNode } from 'react'
+import * as IconPlusNS from '@nce/icon-plus'
 import { ICON_MAP } from './iconMap'
 
 // 语义图标对外 props（antd 版对等面：className/onClick/data-test 透传）。
@@ -12,7 +12,9 @@ type IconProps = {
   className?: string
   onClick?: (e: { stopPropagation: () => void }) => void
 } & Record<string, unknown>
-const NS = (((IconPlusAll as { default?: unknown })?.default ?? IconPlusAll) ?? {}) as Record<
+// E2E 实证：icon-plus=纯具名导出 ESM（无 default），rolldown 生产构建严格
+// 拦默认导入——命名空间导入取用。
+const NS = (((IconPlusNS as { default?: unknown })?.default ?? IconPlusNS) ?? {}) as unknown as Record<
   string,
   ComponentType<IconProps>
 >
@@ -21,11 +23,29 @@ function resolveIcon(name: string): ComponentType<IconProps> | undefined {
   return NS[`IconPlus${name}`] ?? NS[name]
 }
 
+// 图标级错误边界（R08）：icon-plus 组件 ref 阶段抛错走 React 不捕获的恢复
+// 循环路径直至页面崩溃（E2E 实录）——单图标失败降级占位 span，不炸树不循环。
+class IconBoundary extends Component<{ semantic: string; children?: ReactNode }, { failed: boolean }> {
+  state = { failed: false }
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
+  render() {
+    if (this.state.failed) return createElement('span', { 'data-icon-error': this.props.semantic })
+    return this.props.children
+  }
+}
+
 function makeIcon(semantic: string): ComponentType<IconProps> {
   const meta = ICON_MAP[semantic]
   return function EvIcon(props: IconProps) {
     const C = meta ? resolveIcon(meta.name) : undefined
-    if (C) return createElement(C, meta!.filled ? { ...props, type: 'filled' } : props)
+    if (C)
+      return createElement(
+        IconBoundary,
+        { semantic },
+        createElement(C, meta!.filled ? { ...props, type: 'filled' } : props),
+      )
     const Q = resolveIcon('IcPublicQuestionmarkCircle')
     if (Q) return createElement(Q, { ...props, 'data-icon-missing': semantic })
     return createElement('span', { ...props, 'data-icon-missing': semantic })

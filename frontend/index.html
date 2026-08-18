@@ -4,6 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>USMP 交换机设备管理平台</title>
+    <script>
+      /* attachShadow 幂等守卫（组7 E2E 定案）：icon-plus 图标对同一宿主二次
+         attachShadow 抛错且走 React 不捕获的路径→错误循环压崩页面。内联于此
+         =先于一切 bundle 执行、不受构建优化影响（install-guards 双保险）。
+         波 C 后复评。 */
+      ;(function () {
+        if (Element.prototype.__ubShadowGuard) return
+        Element.prototype.__ubShadowGuard = true
+        var roots = new WeakMap()
+        var orig = Element.prototype.attachShadow
+        Element.prototype.attachShadow = function (init) {
+          var prev = roots.get(this) || this.shadowRoot
+          if (prev) return prev
+          var root = orig.call(this, init)
+          roots.set(this, root)
+          return root
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="app"></div>

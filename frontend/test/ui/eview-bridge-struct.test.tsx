@@ -75,23 +75,33 @@ describe('Menu→Tree 桥（左树受控）', () => {
       children: [{ key: 'a-1', label: 'VLAN', children: [{ key: 'leaf', label: 'vlan 模块' }] }],
     },
   ]
-  it('items 嵌套→data（label JSX 文本化）、openKeys→expandedKeys 受控', () => {
-    render(<Menu items={items} openKeys={['a']} selectedKeys={['leaf']} onOpenChange={() => {}} onClick={() => {}} />)
-    const p = recv.last.Tree
-    expect(p.data[0]).toMatchObject({ id: 'a', text: '以太网交换' })
-    expect(p.data[0].children[0].children[0]).toMatchObject({ id: 'leaf', isLeaf: true })
-    expect(p.expandedKeys).toEqual(['a'])
-    expect(p.selectedKeys).toEqual(['leaf'])
-    expect(p.enableCheckbox).toBe(false)
+  // 组 7 定案：左树桥自绘（eview TreeNode cWRP 无条件 setState 在 React 19
+  // 60+ 节点必超嵌套上限 #185 循环压崩页面）——断言改真实 DOM。
+  it('自绘树：嵌套渲染 + openKeys 受控展开 + 选中态 + id/data-test 锚', () => {
+    const { container } = render(
+      <Menu items={items} openKeys={['a']} selectedKeys={['leaf']} onOpenChange={() => {}} onClick={() => {}} />,
+    )
+    // 一层展开（a 展开→a-1 可见；a-1 未展开→leaf 不可见）
+    expect(container.querySelector('#ev_tree_node_ida')).toBeTruthy()
+    expect(container.querySelector('#ev_tree_node_ida-1')).toBeTruthy()
+    expect(container.querySelector('#ev_tree_node_idleaf')).toBeNull()
+    // label JSX 原样渲染（data-test 锚保留——比 eview 文本化更完整）
+    expect(container.querySelector('[data-test="lefttree-group-以太网交换"]')).toBeTruthy()
   })
-  it('onExpand 全量 keys 回写、onSelect→onClick({key})', () => {
+  it('自绘树：箭头/名称点击展开回写、叶子点击 onClick({key})', () => {
     const onOpenChange = vi.fn()
     const onClick = vi.fn()
-    render(<Menu items={items} openKeys={[]} onOpenChange={onOpenChange} onClick={onClick} />)
-    fireEvent.click(screen.getByText('expand'))
-    expect(onOpenChange).toHaveBeenCalledWith(['a', 'a-1'])
-    fireEvent.click(screen.getByText('select-leaf'))
+    const { container, rerender } = render(
+      <Menu items={items} openKeys={[]} onOpenChange={onOpenChange} onClick={onClick} />,
+    )
+    fireEvent.click(container.querySelector('#ev_tree_node_ida')!)
+    expect(onOpenChange).toHaveBeenCalledWith(['a'])
+    rerender(<Menu items={items} openKeys={['a', 'a-1']} onOpenChange={onOpenChange} onClick={onClick} />)
+    fireEvent.click(container.querySelector('#ev_tree_node_idleaf')!)
     expect(onClick).toHaveBeenCalledWith({ key: 'leaf' })
+    // 展开态收起回写（去除 a-1）
+    fireEvent.click(container.querySelector('.ub-tree-switcher.is-open')!)
+    expect(onOpenChange).toHaveBeenLastCalledWith(['a-1'])
   })
   it('inlineCollapsed 收起时不渲染树体', () => {
     const { container } = render(<Menu items={items} inlineCollapsed />)

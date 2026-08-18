@@ -1,8 +1,7 @@
 // EviewUI 桥 · 结构组（组 4.3）：Tabs/Menu(左树→Tree)/Table。
 // 对外 props = antd 形态；映射依据 = component-matrix + gate R1/R2（勿凭空改）。
-import { Children, createElement, isValidElement, useEffect, useRef, useState, type ReactNode, type CSSProperties } from 'react'
+import { Children, createElement, isValidElement, useState, type ReactNode, type CSSProperties } from 'react'
 import * as TabNS from '@nce/eview-react/Tab'
-import TreeMod from '@nce/eview-react/Tree'
 import TableMod from '@nce/eview-react/Table'
 import { anchorId, pickDefault } from '../../bridge'
 
@@ -16,7 +15,6 @@ const EvTabItem = pickDefault(
     (EvTab as unknown as { TabItem?: unknown }).TabItem,
   ].find((x) => x != null) ?? TabNS,
 )
-const EvTree = pickDefault(TreeMod)
 const EvTable = pickDefault(TableMod)
 
 interface CommonProps {
@@ -84,18 +82,6 @@ export interface MenuLikeItem {
   icon?: ReactNode
 }
 
-function toTreeData(items: MenuLikeItem[]): Array<Record<string, unknown>> {
-  return items.map((i) => ({
-    id: i.key,
-    text: textOf(i.label),
-    // label 里的 data-test 锚点（现左树形态）挖出 → Tree 节点 DOM id 为
-    // ev_tree_node_id<id>，E2E 以 id 锚（FA-05 三路之 id 路）。
-    disabled: i.disabled,
-    show: true,
-    children: i.children?.length ? toTreeData(i.children) : undefined,
-    isLeaf: !i.children?.length,
-  }))
-}
 
 export function Menu(
   props: CommonProps & {
@@ -108,67 +94,73 @@ export function Menu(
     inlineCollapsed?: boolean
   },
 ) {
-  // inlineCollapsed（整面板收起）由宿主容器样式处理（Sidebar 既有 collapsed 类），
-  // 桥仅在收起时隐藏树体。
-  // 节点选中事件委托（F3-R5/R7 定案）：eview Tree 的选中监听在节点容器
-  // （<a id=ev_tree_node_id<key>>），点它踩内部 cWRP 同步死循环；React 合成
-  // onClickCapture 在此链路不触发（R7 实证：祖先链有 id 却零回调、对照点
-  // g1 仍挂死——eview 产物事件体系绕开合成层）。降级为原生 DOM 捕获监听：
-  // 事件下行最前面，物理先于 eview 任何监听。展开箭头类目标放行（展开链路
-  // F3-R3 实证安全）；命中节点即合成 onClick 并 stopPropagation 拆雷。
-  const wrapRef = useRef<HTMLDivElement | null>(null)
-  const onClickRef = useRef(props.onClick)
-  onClickRef.current = props.onClick
-  useEffect(() => {
-    // F3-R10 终态（十轮收敛实录）：window capture=事件下行绝对第一站；
-    // 拦截边界=名称区锚 <a id=ev_tree_node_id…>（箭头天然在其外→点箭头
-    // closest 不达锚自然放行，走 eview 受控展开链 onExpand→回写→重挂）。
-    // 历史坑：旧「箭头放行」规则 [class*="expand"] 被祖先 ev_tree_expanded
-    // 状态类误伤——R6-R9 零回调+点节点挂死的真凶（React 合成层/document 层
-    // 假设皆误诊）。50ms 同锚去重：真浏览器实测同一次点击 handler 双触发。
-    let lastKey = ''
-    let lastTs = 0
-    const handler = (e: MouseEvent) => {
-      const root = wrapRef.current
-      const t = e.target as HTMLElement | null
-      if (!root || !t || typeof t.closest !== 'function' || !root.contains(t)) return
-      const node = t.closest('[id^="ev_tree_node_id"]') as HTMLElement | null
-      if (!node) return
-      const key = node.id.replace(/^ev_tree_node_id/, '')
-      if (!key) return
-      e.stopPropagation()
-      if (key === lastKey && e.timeStamp - lastTs < 50) return
-      lastKey = key
-      lastTs = e.timeStamp
-      onClickRef.current?.({ key })
-    }
-    window.addEventListener('click', handler, true)
-    return () => window.removeEventListener('click', handler, true)
-  }, [])
-  // inlineCollapsed（整面板收起）早退必须位于全部 hooks 之后（hooks 数量恒定）。
+  // ===== 左树自绘（组 7 E2E 定案，替代 eview Tree）=====
+  // eview TreeNode.componentWillReceiveProps 无条件 setState（编译产物实证）
+  // ——生产左树 60+ 节点单轮嵌套更新超 React 19 的 50 上限（#185）→ #520
+  // 恢复重渲 → 再超限 → 无限循环压崩页面；props/开关层无解（tip/滚动开关/
+  // 引用稳定四轮实测均不中）。桥自绘：ul/li 递归 + 受控 openKeys/
+  // selectedKeys，复用 ev_* 类名承接 eview CSS 观感；id 锚
+  // ev_tree_node_id{key}（gate 定案，E2E 同锚）与 label 内 data-test 契约
+  // 原样保留（label JSX 直接渲染——比 eview 文本化更完整）。零 TreeNode、
+  // 零内部状态、零循环。波 C 切 openinula 后可复评回退真 Tree。
+  const open = props.openKeys ?? []
+  const selected = props.selectedKeys ?? []
   if (props.inlineCollapsed) return createElement('div', { className: 'ub-menu-collapsed' })
+  const toggle = (key: string) => {
+    const next = open.includes(key) ? open.filter((k) => k !== key) : [...open, key]
+    props.onOpenChange?.(next)
+  }
+  const renderItems = (items: MenuLikeItem[], level: number): ReactNode =>
+    createElement(
+      'ul',
+      { className: level === 0 ? 'ev_tree ub-tree' : 'ev_tree_sub', key: `lv${level}` },
+      ...items.map((i) => {
+        const hasChildren = !!i.children?.length
+        const isOpen = open.includes(i.key)
+        const isSel = selected.includes(i.key)
+        return createElement(
+          'li',
+          {
+            key: i.key,
+            className: hasChildren ? (isOpen ? 'ev_tree_expanded' : 'ev_tree_collapsed') : 'ev_tree_leaf',
+          },
+          createElement(
+            'div',
+            { className: 'ev_tree_node_cont', style: { paddingLeft: 8 + level * 14 } },
+            createElement('span', {
+              className: hasChildren
+                ? `ub-tree-switcher${isOpen ? ' is-open' : ''}`
+                : 'ub-tree-switcher ub-tree-switcher-noop',
+              onClick: hasChildren ? () => toggle(i.key) : undefined,
+              'aria-expanded': hasChildren ? isOpen : undefined,
+            }),
+            createElement(
+              'a',
+              {
+                id: `ev_tree_node_id${i.key}`,
+                className: `ev_tree_name${isSel ? ' ub-tree-selected' : ''}${i.disabled ? ' is-disabled' : ''}`,
+                onClick: () => {
+                  if (i.disabled) return
+                  if (hasChildren) toggle(i.key)
+                  else props.onClick?.({ key: i.key })
+                },
+              },
+              createElement(
+                'span',
+                { className: 'ev_tree_text', title: textOf(i.label) },
+                i.icon ?? null,
+                i.label ?? i.key,
+              ),
+            ),
+          ),
+          hasChildren && isOpen ? renderItems(i.children!, level + 1) : null,
+        )
+      }),
+    )
   return createElement(
     'div',
-    { className: 'ub-menu', ref: wrapRef },
-    createElement(EvTree, {
-      // 更新路径绕行（F3-R2 实证：真浏览器下受控展开更新同样挂死，同 Tab
-      // cWRP 循环类）——openKeys/selectedKeys 变化即重挂，恒走首渲路径。
-      key: `ub-tree-${(props.openKeys ?? []).join('|')}-${(props.selectedKeys ?? []).join('|')}`,
-      id: anchorId(props['data-test']),
-      data: toTreeData(props.items ?? []),
-      nodeKey: 'id',
-      expandedKeys: props.openKeys ?? [],
-      selectedKeys: props.selectedKeys ?? [],
-      enableCheckbox: false,
-      enableMultiExpand: true,
-      // gate 定案：onExpand 回传全量 expandedKeys 数组 → 直接回写。
-      onExpand: (keys: string[]) => props.onOpenChange?.(keys ?? []),
-      // onSelect 保留兜底（委托未命中 id 结构时 eview 正常回调仍接得住）。
-      onSelect: (_keys: string[], node: { id?: string }) => {
-        if (node?.id != null) props.onClick?.({ key: String(node.id) })
-      },
-      className: props.className,
-    }),
+    { className: ['ub-menu', props.className].filter(Boolean).join(' '), 'data-test': props['data-test'] },
+    renderItems(props.items ?? [], 0),
   )
 }
 
