@@ -44,10 +44,10 @@
 
 ## 4. 适配层控件桥（PR-7~9，按矩阵逐个，每个含 F2 对等测试）
 
-- [x] 4.1 轻组桥 11 件（对外 antd 形态零调用点改动）：Tag(色名映射+round=false)/Badge/Breadcrumb(seprator 拼写)/Empty/Drawer(open→visible、%宽折算)/Modal→Dialog(onOk→buttons、footer=null、confirmLoading 吞 onOk、movable=false)/Dropdown(key↔value)/Segmented(disable 拼写)/Radio.Group(children→data、isControlled、**参数序自适应免疫两种顺序**)/Checkbox(合成 e.target.checked)/Switch(isControlToggled+data 两态)；F2 替身 10 用例+FA-05 锚点断言 — **待内网集成点校准**
-- [x] 4.2 表单组桥 3 件：Input→TextField（clear 自绘 suffix/prefix 叠放/password/validator 绝不下传守护）、InputNumber→Spinner（min-max 缺省显式无界防 0/100 陷阱、无效输入不上抛）、Select→InputSelect（label→text、gate 参数序、清空=onChange(undefined) 键不入 payload、showSearch↔onlySelect）；**useSemiControlledBridge 通用机制**（②受控回写+③拒写检测重挂，F1 三路径钉住；实录坑：拒写时父不重渲染须 onEmit 主动触发检测）— **待内网集成点校准**
-- [x] 4.3 结构组桥 3 件：Tabs→Tab（key↔index 桥、标签栏 eview 渲染+**内容区桥自渲**绕开 TabContent 形态不确定性、observerWidthChange 溢出折叠）/Menu→Tree 左树桥（items 嵌套→data、label JSX 文本化、openKeys↔expandedKeys+onExpand 全量回写、inlineCollapsed 宿主处理）/Table 受控壳（矩阵全项：render 参数序换位、rowKey 函数→__ubkey 预计算、checkedRows 受控+强刷、rowClickDelay:0、disableEviewSort+antd sorter 合成、分页拆平、rowClassName→classStyleMap→customStyleRows）；F2 替身 10 用例；实录坑：TabItem 挂具名导出须命名空间导入 — **待内网集成点校准（本批价值最高）**
-- [x] 4.4 收尾组桥 5 件：Button（type/danger→status、danger 优先 risk、loading=自绘 spinner+禁点、ghost=样式类、双参吞单参）/Spin→Loading(type=local)/Tooltip→TipBox(hover,title→content)/Popover→TipBox(click，display 尽力受控——matrix 已知限制集成点重点校准)/Alert（closable→DivMessage 强制关自动消失、否则 PageMessage 保 info 型）；F2 替身 7 用例。**组 4 全组收口（24 桥）** — 待内网集成点校准
+- [x] 4.1 轻组桥 11 件（对外 antd 形态零调用点改动）：Tag(色名映射+round=false)/Badge/Breadcrumb(seprator 拼写)/Empty/Drawer(open→visible、%宽折算)/Modal→Dialog(onOk→buttons、footer=null、confirmLoading 吞 onOk、movable=false)/Dropdown(key↔value)/Segmented(disable 拼写)/Radio.Group(children→data、isControlled、**参数序自适应免疫两种顺序**)/Checkbox(合成 e.target.checked)/Switch(isControlToggled+data 两态)；F2 替身 10 用例+FA-05 锚点断言 — **✅ 内网校准收敛（CAL-R14）**
+- [x] 4.2 表单组桥 3 件：Input→TextField（clear 自绘 suffix/prefix 叠放/password/validator 绝不下传守护）、InputNumber→Spinner（min-max 缺省显式无界防 0/100 陷阱、无效输入不上抛）、Select→InputSelect（label→text、gate 参数序、清空=onChange(undefined) 键不入 payload、showSearch↔onlySelect）；**useSemiControlledBridge 通用机制**（②受控回写+③拒写检测重挂，F1 三路径钉住；实录坑：拒写时父不重渲染须 onEmit 主动触发检测）— **✅ 内网校准收敛（CAL-R14）**
+- [x] 4.3 结构组桥 3 件：Tabs→Tab（key↔index 桥、标签栏 eview 渲染+**内容区桥自渲**绕开 TabContent 形态不确定性、observerWidthChange 溢出折叠）/Menu→Tree 左树桥（items 嵌套→data、label JSX 文本化、openKeys↔expandedKeys+onExpand 全量回写、inlineCollapsed 宿主处理）/Table 受控壳（矩阵全项：render 参数序换位、rowKey 函数→__ubkey 预计算、checkedRows 受控+强刷、rowClickDelay:0、disableEviewSort+antd sorter 合成、分页拆平、rowClassName→classStyleMap→customStyleRows）；F2 替身 10 用例；实录坑：TabItem 挂具名导出须命名空间导入 — **✅ 内网校准收敛（CAL-R14；Table 三修=renderType 运行时枚举+行序号↔rowKey 双向映射+render 行数据在第4参上下文 rawData；Tabs/Tree 交互 happy-dom 同步死循环，移交 6.1 F3）**
+- [x] 4.4 收尾组桥 5 件：Button（type/danger→status、danger 优先 risk、loading=自绘 spinner+禁点、ghost=样式类、双参吞单参）/Spin→Loading(type=local)/Tooltip→TipBox(hover,title→content)/Popover→TipBox(click，display 尽力受控——matrix 已知限制集成点重点校准)/Alert（closable→DivMessage 强制关自动消失、否则 PageMessage 保 info 型）；F2 替身 7 用例。**组 4 全组收口（24 桥）** — **✅ 内网校准收敛（2026-08-18 CAL-R14：16 passed/1 skip，14 轮摆渡 PR#358-#367；判读见 docs/memory/eviewui-switch-implementation.md）**
 
 ## 5. 组件调用点跟随（PR-10~11）
 
@@ -57,7 +57,7 @@
 
 ## 6. F3 真浏览器与派生黄金（PR-12）
 
-- [ ] 6.1 F3 套件按切片实测口径改写（弹层挂载/嵌套 list 增删改/choice 切换） — **F3**
+- [ ] 6.1 F3 套件按切片实测口径改写（弹层挂载/嵌套 list 增删改/choice 切换）＋**校准移交项：Tabs 受控/点击切换、Tree 全交互（eview 内部布局循环依赖真实宽度，happy-dom 恒 0 同步死循环——真 Chromium 校准）** — **F3**
 - [ ] 6.2 派生黄金全量重跑零漂移确认（GD-01：schema→控制台形态与组件库无关的铁证） — **F1**
 
 ## 7. E2E 对等（PR-13）
