@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, afterEach } from 'vitest'
+import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest'
 import { render as rtlRender, screen, fireEvent, waitFor, cleanup } from '@testing-library/react'
 import { createElement, useState, type ReactElement } from 'react'
 // 顶层静态 import（REAL 分支内 require 相对 TS 路径不经 vitest 转换——R4 实录坑）
@@ -11,8 +11,20 @@ import { installFindDOMNodePolyfill } from '../../src/runtime/finddomnode-polyfi
 // 断言基于 gate R1/R2 报告的真实 DOM 特征（ev_* 类名体系）；每用例独立 try 影响
 // 隔离；失败输出 DOM 快照供外网远程修桥。
 const REAL = process.env.EVIEW_REAL === '1'
+// 版本指纹：每轮修桥递增，报告第一行即可判内网跑的是否新代码（R8 教训：
+// 合入到报告间隔过短无法排除旧代码，指纹终结猜疑）。
+const CAL_VERSION = 'CAL-R9'
 const d = REAL ? describe : describe.skip
-if (REAL) vi.setConfig({ testTimeout: 10000, hookTimeout: 10000 })
+if (REAL) {
+  vi.setConfig({ testTimeout: 10000, hookTimeout: 10000 })
+  // eslint-disable-next-line no-console
+  console.log(`${CAL_VERSION} 校准套件启动`)
+  // 入口标记：挂死轮次报告可精确显示死在哪个用例内（R8 挂点只能靠推断）。
+  beforeEach(() => {
+    // eslint-disable-next-line no-console
+    console.log(`${CAL_VERSION} ENTER: ${expect.getState().currentTestName ?? '?'}`)
+  })
+}
 
 // eview 编译产物内部 require('react-intl')（Popup 链等）且组件 contextType
 // 读 intl 上下文——REAL 模式所有渲染统一包 IntlProvider（messages 用真包
@@ -285,7 +297,35 @@ d('真实校准 · 收尾组与外壳', () => {
   })
 })
 
-d('真实校准 · 结构组（Tree/Table 在前；Tabs 交互移交 F3——见末注）', () => {
+d('真实校准 · 结构组（Table→Tree→Tabs 静态；Tree 首渲有 R8 挂死嫌疑故居中）', () => {
+  it('Table：动态列 render + 受控勾选回调', async () => {
+    const checks: unknown[] = []
+    const { container } = render(
+      <Table
+        data-test="cal-table"
+        columns={[
+          { title: '名称', dataIndex: 'name', width: 100 },
+          { title: '值', dataIndex: 'val', width: 100, render: (v, r) => `R_${v}_${r.name}` },
+        ]}
+        dataSource={[{ name: 'r1', val: 'x' }, { name: 'r2', val: 'y' }]}
+        rowKey="name"
+        rowSelection={{ selectedRowKeys: [], onChange: (keys) => checks.push(keys) }}
+        pagination={false}
+      />,
+    )
+    console.log('TABLE-DOM:', snap(container, 1500))
+    expect(container.textContent).toContain('r1')
+    console.log('TABLE 自定义render R_x_r1 出现=', container.textContent?.includes('R_x_r1'))
+    // gate 教训：checkbox 监听在叶子 span。
+    const box = container.querySelectorAll('[class*="checkbox_span"], [role="checkbox"]')[1]
+    if (box) {
+      console.log('TABLE: 即将派发勾选点击')
+      fireEvent.click(box)
+      await new Promise((r) => setTimeout(r, 60))
+      console.log('TABLE 勾选回调 keys:', JSON.stringify(checks), '（应含 ["r1"] 形态）')
+    }
+  })
+
   it('Menu→Tree：受控展开 + 节点选中回调', async () => {
     const clicks: string[] = []
     function Host() {
@@ -316,34 +356,6 @@ d('真实校准 · 结构组（Tree/Table 在前；Tabs 交互移交 F3——见
       console.log('TREE: 即将派发叶子点击')
       fireEvent.click(leaf)
       console.log('TREE 点叶子 onClick keys:', JSON.stringify(clicks), '（应含 leaf1）')
-    }
-  })
-
-  it('Table：动态列 render + 受控勾选回调', async () => {
-    const checks: unknown[] = []
-    const { container } = render(
-      <Table
-        data-test="cal-table"
-        columns={[
-          { title: '名称', dataIndex: 'name', width: 100 },
-          { title: '值', dataIndex: 'val', width: 100, render: (v, r) => `R_${v}_${r.name}` },
-        ]}
-        dataSource={[{ name: 'r1', val: 'x' }, { name: 'r2', val: 'y' }]}
-        rowKey="name"
-        rowSelection={{ selectedRowKeys: [], onChange: (keys) => checks.push(keys) }}
-        pagination={false}
-      />,
-    )
-    console.log('TABLE-DOM:', snap(container, 1500))
-    expect(container.textContent).toContain('r1')
-    console.log('TABLE 自定义render R_x_r1 出现=', container.textContent?.includes('R_x_r1'))
-    // gate 教训：checkbox 监听在叶子 span。
-    const box = container.querySelectorAll('[class*="checkbox_span"], [role="checkbox"]')[1]
-    if (box) {
-      console.log('TABLE: 即将派发勾选点击')
-      fireEvent.click(box)
-      await new Promise((r) => setTimeout(r, 60))
-      console.log('TABLE 勾选回调 keys:', JSON.stringify(checks), '（应含 ["r1"] 形态）')
     }
   })
 
