@@ -63,7 +63,8 @@
 
 ## 7. E2E 对等（PR-13）
 
-- [ ] 7.1 staging-smoke 选择器迁移（ant-* → EviewUI 结构 + FA-05 锚点落点）；data-test 契约 80 条逐条核销
+- [x] 7.1a staging-smoke 选择器迁移（外网部分）：25 处 ant-* 清零→SEL 常量收口（类名依据校准报告实证 DOM：ev_inputSelect/ev_Dialog_closeIcon/ev_table_content tr/ev_tab_title/ev_badge_content/form-item-shell/fis-label/ub-menu）；两处 TODO-E2E 待内网首跑实证（下拉弹层选项、Tab 溢出折叠形态）；**内网构建链解锁**=Dockerfile.prebuilt+docker-compose.prebuilt.yml（宿主 build dist 直装镜像，绕开容器内 @nce 安装死路）
+- [ ] 7.1b E2E 内网首跑：TODO-E2E 两处按真实 DOM 校准 + data-test 契约 80 条逐条核销
 - [ ] 7.2 三浏览器全绿；`make e2e-local` 全栈冒烟全绿；**豁免窗口停用**
 - [ ] 7.3 覆盖率棘轮重钉（staging-down 干净口径 + 分母重算注明，不低于既有阈值语义）
 

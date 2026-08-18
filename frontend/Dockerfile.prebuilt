@@ -1,0 +1,17 @@
+# frontend/Dockerfile.prebuilt —— 预构建产物直装（内网 E2E 专用，组 7）
+#
+# 背景：标准 Dockerfile 在容器内 npm install + vite build——EviewUI 真包
+# （@nce/*）不在任何 npm 源（方案 B 不出内网），容器内装依赖必挂。内网跑
+# E2E 全栈时改用本文件：宿主上先 `npm run build`（本地 node_modules 含真包，
+# vite 别名 @ui-backend→eview 真身），dist 直接进镜像。
+# 用法（配 docker-compose.prebuilt.yml 叠加文件，仓库根）：
+#   cd frontend && npm run build && cd ..
+#   docker compose -f docker-compose.yml -f docker-compose.prebuilt.yml up -d --build
+FROM nginx:alpine
+
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,0 +1,7 @@
+# 叠加文件：前端改用预构建产物镜像（内网 E2E，组 7）。
+# 背景与用法见 frontend/Dockerfile.prebuilt 头注。
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prebuilt
