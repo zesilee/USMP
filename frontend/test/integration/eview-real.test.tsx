@@ -13,7 +13,7 @@ import { installFindDOMNodePolyfill } from '../../src/runtime/finddomnode-polyfi
 const REAL = process.env.EVIEW_REAL === '1'
 // 版本指纹：每轮修桥递增，报告第一行即可判内网跑的是否新代码（R8 教训：
 // 合入到报告间隔过短无法排除旧代码，指纹终结猜疑）。
-const CAL_VERSION = 'CAL-R12'
+const CAL_VERSION = 'CAL-R13'
 const d = REAL ? describe : describe.skip
 if (REAL) {
   vi.setConfig({ testTimeout: 10000, hookTimeout: 10000 })
@@ -335,6 +335,42 @@ d('真实校准 · 结构组（Table→Tree→Tabs 静态；Tree 首渲有 R8 �
     }
     console.log('TABLE 自定义render R_x_r1 出现=', container.textContent?.includes('R_x_r1'))
     expect(container.textContent).toContain('R_x_r1')
+  })
+
+  it('Table render 原始实参侦察（绕过桥直连真组件）', () => {
+    // R12 定案前置：R_x_undefined 三形态自适应仍未命中——放探针拿实参真面目。
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const mod = require('@nce/eview-react/Table') as { default?: unknown }
+    const RealTable = (mod.default ?? mod) as never
+    const shape = (a: unknown): string =>
+      Array.isArray(a)
+        ? `Array(${a.length})=${JSON.stringify(a, (_k, v) => (typeof v === 'function' ? '[fn]' : v)).slice(0, 100)}`
+        : a && typeof a === 'object'
+          ? `Obj{${Object.keys(a).slice(0, 10).join(',')}}`
+          : `${typeof a}:${String(a).slice(0, 50)}`
+    let logged = false
+    render(
+      createElement(RealTable, {
+        id: 'probe-table',
+        columns: [
+          {
+            key: 'name',
+            title: '侦察',
+            renderType: 'custom',
+            render: (...args: unknown[]) => {
+              if (!logged) {
+                logged = true
+                console.log('RENDER-ARGS:', JSON.stringify(args.map(shape)))
+              }
+              return 'P'
+            },
+          },
+        ],
+        dataset: [{ name: 'r1', val: 'x' }],
+        rowKey: 'name',
+      } as never),
+    )
+    expect(logged).toBe(true)
   })
 
   // R9 定案：eview Tree 首次渲染即同步死循环（CAL-R9 ENTER 打出后
