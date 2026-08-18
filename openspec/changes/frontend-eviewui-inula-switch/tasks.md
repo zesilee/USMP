@@ -57,8 +57,9 @@
 
 ## 6. F3 真浏览器与派生黄金（PR-12）
 
-- [ ] 6.1 F3 套件按切片实测口径改写（弹层挂载/嵌套 list 增删改/choice 切换）＋**校准移交项：Tabs 受控/点击切换、Tree 全交互（eview 内部布局循环依赖真实宽度，happy-dom 恒 0 同步死循环——真 Chromium 校准）** — **F3**
-- [ ] 6.2 派生黄金全量重跑零漂移确认（GD-01：schema→控制台形态与组件库无关的铁证） — **F1**
+- [x] 6.1a F3 REAL 化（校准移交项载体）：vitest.browser.config 接 EVIEW_REAL 开关（define 注入——真浏览器无 process/require 实录坑）+@nce stub 同口径；新增 test/browser/eview-real-browser.test.tsx（Tabs 受控 rerender/真实点击、Tree 首渲+展开+选中，全程打点）；内网跑法=Chromium 离线包摆渡（ms-playwright-chromium-1234.tgz）+ EVIEW_REAL=1 --config vitest.browser.config.ts — **F3 外网 10 绿 3 skip**
+- [ ] 6.1b F3 移交项内网实跑收敛（bridge-report-f3 判读）＋存量 F3 切片口径复核（弹层挂载/嵌套 list 增删改/choice 切换在 eview 后端的对等）— **F3**
+- [x] 6.2 派生黄金全量重跑零漂移确认（GD-01）：组 5 接线后 test/golden 全量持续绿（631 全绿含黄金套件）——schema→控制台派生与组件库无关的铁证成立 — **F1 ✓**
 
 ## 7. E2E 对等（PR-13）
 

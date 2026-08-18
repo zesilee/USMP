@@ -1,7 +1,7 @@
 # 项目记忆索引
 
 - [React+antd 重建](react-antd-rebuild.md) — **已全量交付归档(2026-08-14,PR#316-#337)**：现栈React19+antd6+自研i18n薄层、适配层军规FA-01~04禁直接import antd、FE-27删键必解构、antd E2E三根因(左树data-test冒泡/Tab溢出走更多下拉/两字按钮插空格)、F3 useId撞name坑、follow-up债五条；碰前端任何文件前必读
-- [EviewUI切换实施台账](eviewui-switch-implementation.md) — **校准收敛(2026-08-18,PR#342-#367)**：闸门通过、路线乙(组件库先换on React19,运行时+全家桶推波C)、组4全24桥+14轮内网校准全绿(CAL-R14)、Table三定案(renderType枚举/行序号↔rowKey/render行数据在第4参rawData)、Tabs/Tree交互移交F3(happy-dom同步死循环)、探针方法论；**下一步=组5接线**；续作前必读
+- [EviewUI切换实施台账](eviewui-switch-implementation.md) — **校准收敛(2026-08-18,PR#342-#367)**：闸门通过、路线乙(组件库先换on React19,运行时+全家桶推波C)、组4全24桥+14轮内网校准全绿(CAL-R14)、Table三定案(renderType枚举/行序号↔rowKey/render行数据在第4参rawData)、Tabs/Tree交互移交F3(happy-dom同步死循环)、探针方法论；**组5已交付(PR#368-#370,@ui-backend单点切换+antd镜像分流+icons全命中,终态CAL-R16全绿)**；**下一步=组6 F3(Tabs/Tree移交项)**；续作前必读
 - [EviewUI/openInula迁移调研](eviewui-inula-migration.md) — **已定案且缺料全闭环(2026-08-17,含全量24组件矩阵)**：全家桶拍板、alias实测=require("react")构建期别名即可、inula-X三段式同构zustand、EviewUI peer是horizon非react、inula-intl两头通吃t()零改动、inula-router是v5 API、**半受控是全库地基风险**(真受控仅Radio/Switch)、左树=Tree(NCE截图实证翻案)、data-test全库不透传、令牌注入已通(CSS变量覆盖--brand-*零编译,勿用过滤脚本采非类型包)、适配层重估1300~2200行；做EviewUI/换库/运行时工作前必读，全文 docs/research/{eviewui-inula-migration,eviewui-component-matrix}.md
 - [retire-ygot-runtime去依赖](retire-ygot-runtime.md) — **已全量交付归档(2026-08-11,PR#307-#312)**：发布二进制+主go.mod双零openconfig、守护测试拦回引、tools拆独立module(toolchain指令坑)、生成约定六条冻结、大分支拆PR方法论(乱序重放/契约短名漂移/后台push被杀)；碰yanggen/schemagen/生成管线/拆大PR前必读
 - [大list服务端分页](list-server-pagination.md) — 做大表/分页/状态读/堆叠PR前必读：BR-13/BR-14已交付(快照出口分页+阈值200双模式+状态快照TTL可调)、谓词下钻=取数截断+键值索引双动作、sim勿包config壳、堆叠PR删分支连坐下游CLOSE、时序护栏按-race弱机×5估上界、两follow-up已闭环(占位默认值段交付/危险标记拍板不做)、MODIFIED delta须整块带存量Scenario
