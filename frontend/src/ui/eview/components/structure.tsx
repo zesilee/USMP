@@ -111,24 +111,46 @@ export function Menu(
   // inlineCollapsed（整面板收起）由宿主容器样式处理（Sidebar 既有 collapsed 类），
   // 桥仅在收起时隐藏树体。
   if (props.inlineCollapsed) return createElement('div', { className: 'ub-menu-collapsed' })
-  return createElement(EvTree, {
-    // 更新路径绕行（F3-R2 实证：真浏览器下受控展开更新同样挂死，同 Tab
-    // cWRP 循环类）——openKeys/selectedKeys 变化即重挂，恒走首渲路径。
-    key: `ub-tree-${(props.openKeys ?? []).join('|')}-${(props.selectedKeys ?? []).join('|')}`,
-    id: anchorId(props['data-test']),
-    data: toTreeData(props.items ?? []),
-    nodeKey: 'id',
-    expandedKeys: props.openKeys ?? [],
-    selectedKeys: props.selectedKeys ?? [],
-    enableCheckbox: false,
-    enableMultiExpand: true,
-    // gate 定案：onExpand 回传全量 expandedKeys 数组 → 直接回写。
-    onExpand: (keys: string[]) => props.onOpenChange?.(keys ?? []),
-    onSelect: (_keys: string[], node: { id?: string }) => {
-      if (node?.id != null) props.onClick?.({ key: String(node.id) })
-    },
-    className: props.className,
-  })
+  // 节点选中事件委托（F3-R5 定案）：eview Tree 的选中监听在节点容器，而点击
+  // 容器会触发其内部 setState 踩 cWRP 同步死循环（key 重挂只护受控 props
+  // 路径）——桥在外层捕获阶段拦截：展开箭头类目标放行（展开链路 F3-R3 实证
+  // 安全：onExpand 受控回调→回写→重挂）；其余节点区点击提取 ev_tree_node_id
+  // 前缀节点 id 合成 onClick 并 stopPropagation 阻断 eview 内部处理。
+  const onClickCapture = (e: { target: unknown; stopPropagation: () => void }) => {
+    const t = e.target as HTMLElement | null
+    if (!t || typeof t.closest !== 'function') return
+    if (t.closest('[class*="switch" i], [class*="expand" i], [class*="arrow" i]')) return
+    const node = t.closest('[id^="ev_tree_node_id"]') as HTMLElement | null
+    if (!node) return
+    const key = node.id.replace(/^ev_tree_node_id/, '')
+    if (key) {
+      e.stopPropagation()
+      props.onClick?.({ key })
+    }
+  }
+  return createElement(
+    'div',
+    { className: 'ub-menu', onClickCapture },
+    createElement(EvTree, {
+      // 更新路径绕行（F3-R2 实证：真浏览器下受控展开更新同样挂死，同 Tab
+      // cWRP 循环类）——openKeys/selectedKeys 变化即重挂，恒走首渲路径。
+      key: `ub-tree-${(props.openKeys ?? []).join('|')}-${(props.selectedKeys ?? []).join('|')}`,
+      id: anchorId(props['data-test']),
+      data: toTreeData(props.items ?? []),
+      nodeKey: 'id',
+      expandedKeys: props.openKeys ?? [],
+      selectedKeys: props.selectedKeys ?? [],
+      enableCheckbox: false,
+      enableMultiExpand: true,
+      // gate 定案：onExpand 回传全量 expandedKeys 数组 → 直接回写。
+      onExpand: (keys: string[]) => props.onOpenChange?.(keys ?? []),
+      // onSelect 保留兜底（委托未命中 id 结构时 eview 正常回调仍接得住）。
+      onSelect: (_keys: string[], node: { id?: string }) => {
+        if (node?.id != null) props.onClick?.({ key: String(node.id) })
+      },
+      className: props.className,
+    }),
+  )
 }
 
 // ===== Table（矩阵全项映射）=====
