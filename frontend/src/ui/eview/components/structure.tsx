@@ -1,6 +1,6 @@
 // EviewUI 桥 · 结构组（组 4.3）：Tabs/Menu(左树→Tree)/Table。
 // 对外 props = antd 形态；映射依据 = component-matrix + gate R1/R2（勿凭空改）。
-import { Children, createElement, isValidElement, useState, type ReactNode, type CSSProperties } from 'react'
+import { Children, createElement, isValidElement, useEffect, useRef, useState, type ReactNode, type CSSProperties } from 'react'
 import * as TabNS from '@nce/eview-react/Tab'
 import TreeMod from '@nce/eview-react/Tree'
 import TableMod from '@nce/eview-react/Table'
@@ -110,27 +110,39 @@ export function Menu(
 ) {
   // inlineCollapsed（整面板收起）由宿主容器样式处理（Sidebar 既有 collapsed 类），
   // 桥仅在收起时隐藏树体。
-  if (props.inlineCollapsed) return createElement('div', { className: 'ub-menu-collapsed' })
-  // 节点选中事件委托（F3-R5 定案）：eview Tree 的选中监听在节点容器，而点击
-  // 容器会触发其内部 setState 踩 cWRP 同步死循环（key 重挂只护受控 props
-  // 路径）——桥在外层捕获阶段拦截：展开箭头类目标放行（展开链路 F3-R3 实证
-  // 安全：onExpand 受控回调→回写→重挂）；其余节点区点击提取 ev_tree_node_id
-  // 前缀节点 id 合成 onClick 并 stopPropagation 阻断 eview 内部处理。
-  const onClickCapture = (e: { target: unknown; stopPropagation: () => void }) => {
-    const t = e.target as HTMLElement | null
-    if (!t || typeof t.closest !== 'function') return
-    if (t.closest('[class*="switch" i], [class*="expand" i], [class*="arrow" i]')) return
-    const node = t.closest('[id^="ev_tree_node_id"]') as HTMLElement | null
-    if (!node) return
-    const key = node.id.replace(/^ev_tree_node_id/, '')
-    if (key) {
-      e.stopPropagation()
-      props.onClick?.({ key })
+  // 节点选中事件委托（F3-R5/R7 定案）：eview Tree 的选中监听在节点容器
+  // （<a id=ev_tree_node_id<key>>），点它踩内部 cWRP 同步死循环；React 合成
+  // onClickCapture 在此链路不触发（R7 实证：祖先链有 id 却零回调、对照点
+  // g1 仍挂死——eview 产物事件体系绕开合成层）。降级为原生 DOM 捕获监听：
+  // 事件下行最前面，物理先于 eview 任何监听。展开箭头类目标放行（展开链路
+  // F3-R3 实证安全）；命中节点即合成 onClick 并 stopPropagation 拆雷。
+  const wrapRef = useRef<HTMLDivElement | null>(null)
+  const onClickRef = useRef(props.onClick)
+  onClickRef.current = props.onClick
+  useEffect(() => {
+    const el = wrapRef.current
+    if (!el) return
+    const handler = (e: MouseEvent) => {
+      const t = e.target as HTMLElement | null
+      if (!t || typeof t.closest !== 'function') return
+      if (t.closest('[class*="switch" i], [class*="expand" i], [class*="arrow" i]')) return
+      const node = t.closest('[id^="ev_tree_node_id"]') as HTMLElement | null
+      if (!node) return
+      const key = node.id.replace(/^ev_tree_node_id/, '')
+      if (key) {
+        e.stopPropagation()
+        onClickRef.current?.({ key })
+      }
     }
-  }
+    el.addEventListener('click', handler, true)
+    return () => el.removeEventListener('click', handler, true)
+    // inlineCollapsed 切换会卸载树体（下方早退）——effect 依赖它重挂监听。
+  }, [props.inlineCollapsed])
+  // inlineCollapsed（整面板收起）早退必须位于全部 hooks 之后（hooks 数量恒定）。
+  if (props.inlineCollapsed) return createElement('div', { className: 'ub-menu-collapsed' })
   return createElement(
     'div',
-    { className: 'ub-menu', onClickCapture },
+    { className: 'ub-menu', ref: wrapRef },
     createElement(EvTree, {
       // 更新路径绕行（F3-R2 实证：真浏览器下受控展开更新同样挂死，同 Tab
       // cWRP 循环类）——openKeys/selectedKeys 变化即重挂，恒走首渲路径。
