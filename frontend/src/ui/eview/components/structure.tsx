@@ -180,17 +180,21 @@ export function Table(
       renderType: c.render
         ? ((EvTable as { ColumnRenderType?: { CUSTOM?: string } }).ColumnRenderType?.CUSTOM ?? 'custom')
         : undefined,
-      // R11 实测：render 已被调用但第 4 参非行对象（渲染出 R_x_undefined）；
-      // d.ts 第 2 参名 rowData 类型却标 Array——参数位不可信，自适应挑
-      // 「像行对象」的参（对象非数组优先 a2→a4；a2 为数组且 a4 为行号则取
-      // a2[a4]），行号取数字参。
+      // R13 探针定案：实参=(cellValue, [cellValue], options, {id,data,rawData},
+      // {isEdit}, …)——行数据在第 4 参上下文对象的 rawData/data 字段内，
+      // 不是参数本身（R11/R12 渲染 R_x_undefined 的根因）。rawData 优先
+      // （原始 dataset 行，含 __ubkey）；第 4 参直接为行对象时兜底兼容
+      // （F2 stub 形态）。index 由 __ubkey 反查 dataset。
       render: c.render
         ? (cv: unknown, a2: unknown, _a3: unknown, a4: unknown) => {
-            const idx = typeof a4 === 'number' ? a4 : typeof a2 === 'number' ? a2 : 0
             const isRec = (x: unknown): x is Record<string, unknown> =>
               !!x && typeof x === 'object' && !Array.isArray(x)
-            const rec = isRec(a2) ? a2 : isRec(a4) ? a4 : Array.isArray(a2) && isRec(a2[idx]) ? a2[idx] : {}
-            return c.render!(cv, rec, idx)
+            const ctx = isRec(a4) ? (a4 as { data?: unknown; rawData?: unknown }) : undefined
+            const rec = [ctx?.rawData, ctx?.data, a4, a2].find(isRec) ?? {}
+            const idx = dataset.findIndex(
+              (r) => r === rec || (rec.__ubkey != null && r.__ubkey === rec.__ubkey),
+            )
+            return c.render!(cv, rec, idx >= 0 ? idx : 0)
           }
         : undefined,
     })),
