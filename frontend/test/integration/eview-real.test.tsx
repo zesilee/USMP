@@ -21,6 +21,16 @@ let wrapIntl = (el: ReactElement): ReactElement => el
 if (REAL) {
   // R3：EviewUI Dialog/Drawer 内部调用 React 19 已移除的 findDOMNode。
   installFindDOMNodePolyfill()
+  // R5：happy-dom 的 requestAnimationFrame 同步立即执行——eview Tab 的
+  // ink bar 动画（raf 递归）变同步死循环挂死整轮（超时中断不了同步循环）。
+  // 异步化为宏任务，动画循环即可被 vitest 超时正常中断。
+  const raf = (cb: FrameRequestCallback): number =>
+    setTimeout(() => cb(performance.now()), 16) as unknown as number
+  window.requestAnimationFrame = raf
+  globalThis.requestAnimationFrame = raf
+  const caf = (id: number): void => clearTimeout(id as unknown as ReturnType<typeof setTimeout>)
+  window.cancelAnimationFrame = caf
+  globalThis.cancelAnimationFrame = caf
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { IntlProvider } = require('react-intl') as { IntlProvider: never }
   let messages: Record<string, string> = {}
