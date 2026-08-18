@@ -29,8 +29,8 @@ vi.mock('@nce/eview-react/Tree', H.makeStub('Tree', (p, h) =>
 ))
 vi.mock('@nce/eview-react/Table', H.makeStub('Table', (p, h) =>
   h('div', null,
-    h('button', { onClick: () => p.onRowCheck?.({ __ubkey: 'r1' }, ['r1']) }, 'check-r1'),
-    h('button', { onClick: () => p.onHeaderCheck?.(['r1', 'r2'], true, []) }, 'check-all'),
+    h('button', { onClick: () => p.onRowCheck?.({ __ubkey: 'r1' }, [0]) }, 'check-r1'), // R9 实测：回传行序号
+    h('button', { onClick: () => p.onHeaderCheck?.([0, 1], true, []) }, 'check-all'), // R9 实测：回传行序号
     h('button', { onClick: () => p.onRowClick?.(p.dataset?.[0]) }, 'row1'),
     h('button', { onClick: () => p.onColumnSort?.({ key: 'mtu' }, 'desc') }, 'sort-desc'),
     h('button', { onClick: () => p.onPageChange?.(3) }, 'page3'),
@@ -129,7 +129,7 @@ describe('Table 桥（矩阵全项）', () => {
     const onChange = vi.fn()
     render(<Table {...base} rowSelection={{ selectedRowKeys: ['r1'], onChange }} />)
     expect(recv.last.Table.enableCheckBox).toBe(true)
-    expect(recv.last.Table.checkedRows).toEqual(['r1'])
+    expect(recv.last.Table.checkedRows).toEqual([0]) // 桥已映射 rowKey→行序号（R9）
     expect(recv.last.Table.checkedRowsForceUpdate).toBe(true)
     fireEvent.click(screen.getByText('check-r1'))
     expect(onChange).toHaveBeenLastCalledWith(['r1'])
