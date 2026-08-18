@@ -174,8 +174,12 @@ export function Table(
       freezeCol: !!c.fixed,
       allowSort: !!c.sorter,
       // eview render(cellValue, rowData, options, row, isEdit) → antd render(value, record, index)；
-      // R9 实测：不设 renderType:'custom' 时 render 被忽略（列渲染原始值）。
-      renderType: c.render ? 'custom' : undefined,
+      // R9 实测：不设 renderType 时 render 被忽略。R10 实测 'custom' 字面量
+      // 也未生效——d.ts 字面量与运行时枚举实值可能不一致（Tag round 前科），
+      // 改取真组件静态枚举 ColumnRenderType.CUSTOM，兜底才用 'custom'。
+      renderType: c.render
+        ? ((EvTable as { ColumnRenderType?: { CUSTOM?: string } }).ColumnRenderType?.CUSTOM ?? 'custom')
+        : undefined,
       render: c.render
         ? (cv: unknown, _rowData: unknown, _options: unknown, row: Record<string, unknown>) =>
             c.render!(cv, row ?? {}, 0)
