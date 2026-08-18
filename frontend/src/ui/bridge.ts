@@ -76,6 +76,16 @@ export function useSemiControlledBridge(value: unknown): {
  * 场景（外网 skip 模式）安全返回 undefined，渲染前不崩（收集期防线）。
  */
 export function pickDefault(mod: unknown): never {
-  if (mod == null) return undefined as never
-  return ((mod as { default?: unknown }).default ?? mod) as never
+  // vite 浏览器优化器对 CJS 的 interop 可产生多层 default 嵌套（F3-R3 实录：
+  // happy-dom 单层剥即得组件，真浏览器下拿到 module 对象致「Element type is
+  // invalid: got object」）——循环剥到组件（函数/forwardRef 对象无 default
+  // 键自然停）为止。
+  let cur: unknown = mod
+  let guard = 0
+  while (cur != null && typeof cur === 'object' && 'default' in (cur as object) && guard++ < 5) {
+    const next = (cur as { default?: unknown }).default
+    if (next == null) break
+    cur = next
+  }
+  return (cur ?? undefined) as never
 }

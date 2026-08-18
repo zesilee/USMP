@@ -8,7 +8,14 @@ import { anchorId, pickDefault } from '../../bridge'
 
 const EvTab = pickDefault(TabNS)
 // TabItem 挂在模块具名导出（default 导入拿不到——须命名空间导入；实录坑）。
-const EvTabItem = pickDefault((TabNS as { TabItem?: unknown }).TabItem ?? (pickDefault(TabNS) as { TabItem?: unknown }).TabItem ?? TabNS)
+// F3-R4：真浏览器 interop 下具名可能藏在任意一层 default 内——候选链逐层找。
+const EvTabItem = pickDefault(
+  [
+    (TabNS as { TabItem?: unknown }).TabItem,
+    (TabNS as { default?: { TabItem?: unknown } }).default?.TabItem,
+    (EvTab as unknown as { TabItem?: unknown }).TabItem,
+  ].find((x) => x != null) ?? TabNS,
+)
 const EvTree = pickDefault(TreeMod)
 const EvTable = pickDefault(TableMod)
 

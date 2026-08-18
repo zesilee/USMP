@@ -130,15 +130,26 @@ d('F3 真浏览器 · Menu→Tree（happy-dom 移交项）', () => {
     console.log('F3-TREE: 展开点击已派发')
     await new Promise((r) => setTimeout(r, 300))
     console.log('F3-TREE: 展开后含叶子一=', container.textContent?.includes('叶子一'))
-    const leaf = Array.from(container.querySelectorAll('.ev_tree_text, [class*="tree"] span')).find(
-      (el) => el.textContent === '叶子一',
+    // R3 小尾巴：.ev_tree_text 点击无回调——监听点多目标逐试并报告命中
+    // （Switch 校准同款方法论）。
+    const leafText = Array.from(container.querySelectorAll('*')).find(
+      (el) => el.textContent === '叶子一' && el.children.length === 0,
     ) as HTMLElement | undefined
-    if (leaf) {
-      leaf.click()
-      await new Promise((r) => setTimeout(r, 200))
-      console.log('F3-TREE: 点叶子 onClick keys=', JSON.stringify(clicks), '（应含 leaf1）')
+    if (leafText) {
+      const targets: Array<[string, HTMLElement | null]> = [
+        ['text', leafText],
+        ['parent', leafText.parentElement],
+        ['grandparent', leafText.parentElement?.parentElement ?? null],
+      ]
+      for (const [name, el] of targets) {
+        if (!el || clicks.length) break
+        el.click()
+        await new Promise((r) => setTimeout(r, 150))
+        console.log(`F3-TREE: 点 ${name}(${el.className}) 后 keys=${JSON.stringify(clicks)}`)
+      }
+      console.log('F3-TREE: 叶子点击终态 keys=', JSON.stringify(clicks), '（应含 leaf1）')
     } else {
-      console.log('F3-TREE: 未找到叶子节点——展开渲染形态需按本轮 DOM 校准')
+      console.log('F3-TREE: 未找到叶子文本节点——展开渲染形态需按本轮 DOM 校准')
     }
     cleanup()
   })
