@@ -45,12 +45,13 @@ describe('SchemaForm · 运行时动态校验（R05 闸门）', () => {
     render(<Harness />)
     const name = screen.getAllByRole('textbox')[0]
     fireEvent.change(name, { target: { value: 'bad name!' } })
-    expect(await screen.findByText(/name/, { selector: '.ant-form-item-explain-error' })).toBeInTheDocument()
+    // 组 5 接线：错误提示外壳 = FormItemShell（.fis-error-msg[role=alert]）。
+    expect(await screen.findByText(/name/, { selector: '.fis-error-msg' })).toBeInTheDocument()
     fireEvent.change(name, { target: { value: 'ok_name' } })
     // 错误提示走 antd 离场动画，等待其真正卸载（非 -leave 态残影）。
     await waitFor(() =>
       expect(
-        document.querySelector('.ant-form-item-explain-error:not([class*="-leave"])'),
+        document.querySelector('.fis-error-msg'),
       ).toBeNull(),
     )
   })
@@ -69,9 +70,10 @@ describe('SchemaForm · 运行时动态校验（R05 闸门）', () => {
     render(<Harness seed={{ id: 1 }} />)
     expect(screen.getByTestId?.bind(screen) ? document.querySelector('[data-test="blocked"]')!.textContent : '').toBe('true')
     // desc 必填有标记；vid dynamicDefault 豁免无标记
-    const requiredLabels = Array.from(document.querySelectorAll('.ant-form-item-required')).map(
-      (el) => el.textContent,
-    )
+    // 组 5 接线：必填星 = FormItemShell 的 .fis-required（label 内）。
+    const requiredLabels = Array.from(document.querySelectorAll('.form-item-shell'))
+      .filter((el) => el.querySelector('.fis-required'))
+      .map((el) => el.querySelector('.fis-label')?.textContent ?? '')
     expect(requiredLabels.join()).toContain('desc')
     expect(requiredLabels.join()).not.toContain('vid')
   })

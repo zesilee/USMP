@@ -88,7 +88,7 @@ export default function ModuleListTab(props: ModuleListTabProps) {
   useEffect(() => setVisibleCols(defaultCols.map((c) => c.path)), [defaultCols])
   const shownColumns = useMemo(() => allCols.filter((c) => visibleCols.includes(c.path)), [allCols, visibleCols])
 
-  const [selectedKeys, setSelectedKeys] = useState<React.Key[]>([])
+  const [selectedKeys, setSelectedKeys] = useState<Array<string | number>>([])
 
   // 取数编排（FE-24/25）：requestRows 收口 + 双模式全部收敛在 useListQuery。
   const normalize = useCallback(

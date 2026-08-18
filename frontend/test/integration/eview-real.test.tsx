@@ -63,12 +63,12 @@ it(`eview-real 套件模式=${REAL ? 'REAL（内网真实校准）' : 'SKIP（�
   expect(true).toBe(true)
 })
 
-import { Tag, Badge, Breadcrumb, Empty, Drawer, Modal } from '../../src/ui/eview/components/display'
-import { Dropdown, Segmented, Radio, Checkbox, Switch } from '../../src/ui/eview/components/controls'
-import { Input, InputNumber, Select } from '../../src/ui/eview/components/inputs'
-import { Tabs, Menu, Table } from '../../src/ui/eview/components/structure'
-import { Button, Spin, Tooltip, Alert } from '../../src/ui/eview/components/rest'
-import FormItemShell from '../../src/ui/eview/FormItemShell'
+import { Tag, Badge, Breadcrumb, Empty, Drawer, Modal } from '@bridge/components/display'
+import { Dropdown, Segmented, Radio, Checkbox, Switch } from '@bridge/components/controls'
+import { Input, InputNumber, Select } from '@bridge/components/inputs'
+import { Tabs, Menu, Table } from '@bridge/components/structure'
+import { Button, Spin, Tooltip, Alert } from '@bridge/components/rest'
+import FormItemShell from '@bridge/FormItemShell'
 
 afterEach(() => {
   cleanup()

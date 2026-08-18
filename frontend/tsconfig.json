@@ -17,6 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
+      "@bridge/*": ["src/ui/eview/*"],
+      "@ui-backend/*": ["src/ui/eview/*"],
       "openinula": ["./node_modules/openinula/@types/index.d.ts"],
       "@nce/eview-react/*": ["./vendor/eview-types/@nce/eview-react/*"]
     },

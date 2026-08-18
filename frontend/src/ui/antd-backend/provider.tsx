@@ -6,9 +6,39 @@ import { useEffect, type ReactNode } from 'react'
 import { App as AntApp, ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import enUS from 'antd/locale/en_US'
-import { useLocale } from '../i18n'
-import { antdTheme } from './tokens'
+import { useLocale } from '../../i18n'
+import type { ThemeConfig } from 'antd'
+import {
+  colorPrimary,
+  colorSuccess,
+  colorWarning,
+  colorError,
+  textPrimary,
+  textSecondary,
+  textTertiary,
+  borderColor,
+  bgLayout,
+  borderRadius,
+  fontSize,
+} from '../tokens'
 import { __bindFeedback } from './feedback'
+
+// antd 主题装配（原 tokens.ts antdTheme，组 5 接线挪入测试后端）。
+const antdTheme: ThemeConfig = {
+  token: {
+    colorPrimary,
+    colorSuccess,
+    colorWarning,
+    colorError,
+    colorText: textPrimary,
+    colorTextSecondary: textSecondary,
+    colorTextTertiary: textTertiary,
+    colorBorder: borderColor,
+    colorBgLayout: bgLayout,
+    borderRadius,
+    fontSize,
+  },
+}
 
 // App.useApp() 只能在 <AntApp> 内调用——内层小组件负责把带上下文的
 // message/modal 实例绑给模块级 feedback API。绑定放 useEffect：render 期写

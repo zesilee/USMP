@@ -195,7 +195,7 @@ export default function Devices() {
             style={{ width: 120 }}
             placeholder={t('devices.filterStatus')}
             value={statusFilter || undefined}
-            onChange={(v) => setStatusFilter(v ?? '')}
+            onChange={(v) => setStatusFilter(v != null ? String(v) : '')}
             options={[
               { label: t('devices.online'), value: 'online' },
               { label: t('devices.offline'), value: 'offline' },
@@ -206,7 +206,7 @@ export default function Devices() {
             style={{ width: 140 }}
             placeholder={t('devices.filterVendor')}
             value={vendorFilter || undefined}
-            onChange={(v) => setVendorFilter(v ?? '')}
+            onChange={(v) => setVendorFilter(v != null ? String(v) : '')}
             options={vendors.map((v) => ({ label: v, value: v }))}
           />
           <Button icon={<icons.RefreshIcon />} onClick={() => void load()}>

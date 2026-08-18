@@ -31,7 +31,7 @@ vi.mock('@nce/eview-react/DivMessage', H.makeStub('DivMessage', (p, h) =>
 ))
 vi.mock('@nce/eview-react/PageMessage', H.makeStub('PageMessage'))
 
-import { Button, Spin, Tooltip, Popover, Alert } from '../../src/ui/eview/components/rest'
+import { Button, Spin, Tooltip, Popover, Alert } from '@bridge/components/rest'
 
 afterEach(() => {
   cleanup()

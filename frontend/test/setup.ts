@@ -27,3 +27,7 @@ afterEach(() => {
   // 不清理会让跨用例的按钮查询串台。
   document.body.innerHTML = ''
 })
+
+// 已知偶发（低频）：React 19 调度器残留 setImmediate 任务在文件 teardown 后
+// 执行会炸「window is not defined」Unhandled Error（三跑一现）。每用例 drain
+// 调度队列的修法实测反噬 70 红（时序敏感用例破坏）——不引入；命中时重跑即可。
