@@ -64,7 +64,7 @@
 ## 7. E2E 对等（PR-13）
 
 - [x] 7.1a staging-smoke 选择器迁移（外网部分）：25 处 ant-* 清零→SEL 常量收口（类名依据校准报告实证 DOM：ev_inputSelect/ev_Dialog_closeIcon/ev_table_content tr/ev_tab_title/ev_badge_content/form-item-shell/fis-label/ub-menu）；两处 TODO-E2E 待内网首跑实证（下拉弹层选项、Tab 溢出折叠形态）；**内网构建链解锁**=Dockerfile.prebuilt+docker-compose.prebuilt.yml（宿主 build dist 直装镜像，绕开容器内 @nce 安装死路）
-- [ ] 7.1b E2E 内网首跑：TODO-E2E 两处按真实 DOM 校准 + data-test 契约 80 条逐条核销
+- [ ] 7.1b E2E 内网首跑（进行中，多轮联调）：**已破七连环**（按序）①icon-plus 默认导入构建炸→命名空间导入②kind 部署链=Dockerfile.prebuilt+rollout（-n usmp-system）③icon-plus attachShadow 二次挂载崩→index.html 内联幂等守卫（closed 模式 WeakMap 记账）+install-guards 入口首行+图标级 IconBoundary（R08）④Google Fonts 外链离线必败→删外链走回退栈⑤React #520/#185 恢复循环压崩页面→**根因=eview TreeNode.cWRP 无条件 setState×60+ 节点超 React19 嵌套上限（编译产物实证）→Menu 桥自绘左树**（ev_* 类名承观感、id/data-test 锚保契约、label JSX 原样渲染）⑥onRecoverableError 钩子常驻（循环类问题自曝组件栈）⑦StrictMode 暂摘（恢复评估挂 8.1）。**下轮：内网同步 main 全量 E2E（预期进入真实选择器收敛）**
 - [ ] 7.2 三浏览器全绿；`make e2e-local` 全栈冒烟全绿；**豁免窗口停用**
 - [ ] 7.3 覆盖率棘轮重钉（staging-down 干净口径 + 分母重算注明，不低于既有阈值语义）
 
