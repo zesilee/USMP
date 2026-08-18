@@ -12,6 +12,9 @@ const SRC = resolve(process.cwd(), 'src')
 // 匹配模块说明符字符串本身：覆盖 import-from / 动态 import() / require /
 // import x = require / 副作用裸导入（'antd/dist/reset.css'）全部形态（评审 #2）。
 const LIB_IMPORT = /['"](antd|antd\/[^'"]*|@ant-design\/[^'"]*)['"]/
+// 组 5.3：换库后的新违规面——业务代码同样禁直连 EviewUI 包与适配层内部别名
+// （@bridge=桥测试专用直达、@ui-backend=适配层内部切换点，都不是业务入口）。
+const EVIEW_IMPORT = /['"](@nce\/[^'"]*|@bridge\/[^'"]*|@ui-backend\/[^'"]*)['"]/
 
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
@@ -29,7 +32,10 @@ describe('UI 适配层守护（FA-01/FA-02）', () => {
   const adapter = files.filter((f) => relative(SRC, f).startsWith('ui/'))
 
   it('业务代码零直接组件库 import（FA-01）', () => {
-    const violations = business.filter((f) => LIB_IMPORT.test(readFileSync(f, 'utf8')))
+    const violations = business.filter((f) => {
+      const src = readFileSync(f, 'utf8')
+      return LIB_IMPORT.test(src) || EVIEW_IMPORT.test(src)
+    })
     expect(violations.map((f) => relative(SRC, f))).toEqual([])
   })
 

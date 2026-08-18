@@ -23,8 +23,6 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@ant-design/icons": "^6.3.2",
-    "antd": "^6.6.0",
     "axios": "^1.16.0",
     "inula-intl": "^1.0.35",
     "inula-request": "^1.1.9",
@@ -36,6 +34,7 @@
     "zustand": "^5.0.15"
   },
   "devDependencies": {
+    "@ant-design/icons": "^6.3.2",
     "@playwright/test": "^1.59.1",
     "@storybook/react-vite": "^10.5.8",
     "@testing-library/jest-dom": "^7.0.1",
@@ -48,6 +47,7 @@
     "@vitest/browser": "^4.1.10",
     "@vitest/browser-playwright": "^4.1.10",
     "@vitest/coverage-v8": "^4.1.10",
+    "antd": "^6.6.0",
     "happy-dom": "^20.9.0",
     "openapi-typescript": "^7.13.0",
     "playwright": "^1.61.1",
