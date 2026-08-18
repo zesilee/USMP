@@ -180,9 +180,18 @@ export function Table(
       renderType: c.render
         ? ((EvTable as { ColumnRenderType?: { CUSTOM?: string } }).ColumnRenderType?.CUSTOM ?? 'custom')
         : undefined,
+      // R11 实测：render 已被调用但第 4 参非行对象（渲染出 R_x_undefined）；
+      // d.ts 第 2 参名 rowData 类型却标 Array——参数位不可信，自适应挑
+      // 「像行对象」的参（对象非数组优先 a2→a4；a2 为数组且 a4 为行号则取
+      // a2[a4]），行号取数字参。
       render: c.render
-        ? (cv: unknown, _rowData: unknown, _options: unknown, row: Record<string, unknown>) =>
-            c.render!(cv, row ?? {}, 0)
+        ? (cv: unknown, a2: unknown, _a3: unknown, a4: unknown) => {
+            const idx = typeof a4 === 'number' ? a4 : typeof a2 === 'number' ? a2 : 0
+            const isRec = (x: unknown): x is Record<string, unknown> =>
+              !!x && typeof x === 'object' && !Array.isArray(x)
+            const rec = isRec(a2) ? a2 : isRec(a4) ? a4 : Array.isArray(a2) && isRec(a2[idx]) ? a2[idx] : {}
+            return c.render!(cv, rec, idx)
+          }
         : undefined,
     })),
     dataset,

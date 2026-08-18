@@ -13,7 +13,7 @@ import { installFindDOMNodePolyfill } from '../../src/runtime/finddomnode-polyfi
 const REAL = process.env.EVIEW_REAL === '1'
 // 版本指纹：每轮修桥递增，报告第一行即可判内网跑的是否新代码（R8 教训：
 // 合入到报告间隔过短无法排除旧代码，指纹终结猜疑）。
-const CAL_VERSION = 'CAL-R11'
+const CAL_VERSION = 'CAL-R12'
 const d = REAL ? describe : describe.skip
 if (REAL) {
   vi.setConfig({ testTimeout: 10000, hookTimeout: 10000 })
