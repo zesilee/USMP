@@ -27,6 +27,34 @@ export function anchorId(dataTest?: string): string | undefined {
 export const ANCHOR_SELECTOR = (dataTest: string): string => `[data-test="${dataTest}"], #dt-${dataTest}`
 
 /**
+ * 锚点属性回填观察器（组 7 E2E 定案）：桥把 data-test 经 anchorId 转成
+ * id=dt-xxx 传给 eview 组件，但 eview 类组件不透传未知 props——DOM 上
+ * data-test 属性系统性丢失，E2E/F4 的 data-test 契约（80 条）全部落空。
+ * 单点修复：MutationObserver 监听新增节点，把 dt- 前缀 id 自动回填为
+ * data-test 属性——22 桥与未来新桥零改动，契约零妥协。UiProvider 装配。
+ */
+export function installAnchorAttrObserver(doc: Document = document): () => void {
+  const restore = (el: Element) => {
+    if (el.id && el.id.startsWith('dt-') && !el.hasAttribute('data-test')) {
+      el.setAttribute('data-test', el.id.slice(3))
+    }
+    el.querySelectorAll?.('[id^="dt-"]:not([data-test])').forEach((child) => {
+      child.setAttribute('data-test', child.id.slice(3))
+    })
+  }
+  restore(doc.body)
+  const mo = new MutationObserver((muts) => {
+    for (const m of muts) {
+      m.addedNodes.forEach((n) => {
+        if (n.nodeType === 1) restore(n as Element)
+      })
+    }
+  })
+  mo.observe(doc.body, { childList: true, subtree: true })
+  return () => mo.disconnect()
+}
+
+/**
  * 半受控输入桥（gate 定案组合：②受控回写为常规路径 + ③key 重挂兜底）。
  * 底层组件 value 经 cWRP 同步（②档，gate 双轮实证）；但「父级拒写/改写为
  * 第三值」时 props.value 未变化 → cWRP 不触发 → 内部停留用户输入。本 hook
