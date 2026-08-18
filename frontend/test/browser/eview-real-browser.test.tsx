@@ -95,7 +95,14 @@ d('F3 真浏览器 · Tabs（happy-dom 移交项）', () => {
     ) as HTMLElement | undefined
     expect(tabB).toBeTruthy()
     console.log('F3-TABS: 即将真实点击乙页')
-    tabB!.click()
+    // R4 疑点：点击后打点未现但用例结束（疑同步抛错）——捕获打印异常原文。
+    try {
+      tabB!.click()
+      console.log('F3-TABS: 点击已派发（未抛错）')
+    } catch (err) {
+      console.log('F3-TABS: 点击抛错=', String(err).slice(0, 300))
+      throw err
+    }
     await new Promise((r) => setTimeout(r, 300))
     console.log('F3-TABS: 点击后含 content-b=', container.textContent?.includes('content-b'))
     expect(container.textContent).toContain('content-b')
@@ -130,24 +137,20 @@ d('F3 真浏览器 · Menu→Tree（happy-dom 移交项）', () => {
     console.log('F3-TREE: 展开点击已派发')
     await new Promise((r) => setTimeout(r, 300))
     console.log('F3-TREE: 展开后含叶子一=', container.textContent?.includes('叶子一'))
-    // R3 小尾巴：.ev_tree_text 点击无回调——监听点多目标逐试并报告命中
-    // （Switch 校准同款方法论）。
+    // R4 定案：text/parent 不触发回调；grandparent（节点容器）触发 eview
+    // 内部状态更新踩 cWRP 同步死循环（key 重挂只护受控 props 路径护不住
+    // 内部自发更新）——停止乱点，本轮打印展开后叶子行完整 DOM（含事件特征
+    // tabindex/role/id），下一轮按真实监听点精准点击。
     const leafText = Array.from(container.querySelectorAll('*')).find(
       (el) => el.textContent === '叶子一' && el.children.length === 0,
     ) as HTMLElement | undefined
     if (leafText) {
-      const targets: Array<[string, HTMLElement | null]> = [
-        ['text', leafText],
-        ['parent', leafText.parentElement],
-        ['grandparent', leafText.parentElement?.parentElement ?? null],
-      ]
-      for (const [name, el] of targets) {
-        if (!el || clicks.length) break
-        el.click()
-        await new Promise((r) => setTimeout(r, 150))
-        console.log(`F3-TREE: 点 ${name}(${el.className}) 后 keys=${JSON.stringify(clicks)}`)
+      let row: HTMLElement | null = leafText
+      while (row && !/ev_tree_node|ev_tree_item|li/i.test(`${row.tagName} ${row.className}`) && row !== container) {
+        row = row.parentElement
       }
-      console.log('F3-TREE: 叶子点击终态 keys=', JSON.stringify(clicks), '（应含 leaf1）')
+      console.log('F3-TREE: 叶子行 DOM=', (row ?? leafText).outerHTML.slice(0, 900))
+      console.log('F3-TREE: 叶子安全目标（text）点击 keys=', JSON.stringify(clicks), '（text/parent 已证不触发；容器=内部更新雷区）')
     } else {
       console.log('F3-TREE: 未找到叶子文本节点——展开渲染形态需按本轮 DOM 校准')
     }
