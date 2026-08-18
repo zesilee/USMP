@@ -13,6 +13,7 @@ import { IntlProvider } from 'react-intl'
 import zhMessages from '@nce/eview-react/locales/zh'
 import { useLocale } from '../../i18n'
 import { injectTokenOverride } from './theme'
+import { installAnchorAttrObserver } from '../bridge'
 import { installFindDOMNodePolyfill } from '../../runtime/finddomnode-polyfill'
 
 installFindDOMNodePolyfill()
@@ -29,6 +30,8 @@ export function UiProvider({ children }: { children: ReactNode }) {
   const current = useLocale()
   useEffect(() => {
     injectTokenOverride()
+    // FA-05 锚点契约回填（data-test 属性，桥经 anchorId 只落 id——见 bridge.ts）。
+    return installAnchorAttrObserver()
   }, [])
   return (
     <IntlProvider

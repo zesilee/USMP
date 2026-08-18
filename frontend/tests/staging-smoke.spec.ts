@@ -3,6 +3,11 @@ import { test, expect } from '@playwright/test'
 // 组 7 选择器口径（EviewUI 桥接线后）：结构类选择器集中于此——类名依据
 // 内网校准报告实证 DOM（CAL-R16/F3-R10）。data-test 锚（FA-05）不受换库影响。
 // 待内网首跑收集：下拉弹层选项、Tab 溢出下拉的真实形态（标注 TODO-E2E）。
+// 种子设备地址按环境注入（组 7）：compose staging=192.168.1.1（默认）；
+// kind 环境模拟网元注册为 K8s 服务名——E2E_DEVICE_IP=netconf-sim.default；
+// 对接真机时传真机 IP。
+const DEVICE_IP = process.env.E2E_DEVICE_IP || '192.168.1.1'
+
 const SEL = {
   select: '.ev_inputSelect',
   // TODO-E2E(内网首跑): eview 下拉弹层选项类名未实证，先按 ev_ 前缀通配。
@@ -28,7 +33,7 @@ const SEL = {
 // 选设备（页头设备下拉 data-test）：模块控制台/业务切换用例共用。
 async function pickDevice(page: import('@playwright/test').Page) {
   await page.locator(SEL.select).first().click()
-  await page.locator(SEL.selectOption, { hasText: '192.168.1.1' }).first().click()
+  await page.locator(SEL.selectOption, { hasText: DEVICE_IP }).first().click()
 }
 
 test.describe('部署冒烟 - 前端 SPA', () => {
@@ -70,7 +75,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await page.goto('/devices', { waitUntil: 'networkidle' })
 
     // 设备表格里出现种子设备 IP（证明 store→/api/v1/devices→表格 整条链路打通）
-    await expect(page.getByText('192.168.1.1', { exact: false }).first()).toBeVisible({ timeout: 15000 })
+    await expect(page.getByText(DEVICE_IP, { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
 
   // ===== 通用模块控制台（generic-module-console，FE-10~13）=====
@@ -335,7 +340,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   // 先选设备、后做配置管理：设备管理「查看配置」写入全局上下文，跨模块切换保持。
   test('查看配置进入控制台后切换模块，设备选中保持不丢', async ({ page }) => {
     await page.goto('/devices', { waitUntil: 'networkidle' })
-    const row = page.locator(SEL.tableRow, { hasText: '192.168.1.1' }).first()
+    const row = page.locator(SEL.tableRow, { hasText: DEVICE_IP }).first()
     await row.getByRole('button', { name: '查看配置' }).click()
     await expect(page).toHaveURL(/module\/ifm/)
 
@@ -375,9 +380,12 @@ test.describe('部署冒烟 - 业务网络配置', () => {
     await page.locator('[data-test="business-item-business-vlan-service"]').click()
     await expect(page).toHaveURL(/business\/business-vlan-service/)
 
-    // 页面骨架 + 无集群降级告警（staging 无 apiserver）。
+    // 页面骨架 + 业务台状态（compose staging 无 apiserver→降级告警；kind
+    // 环境有真集群→业务表格——环境自适应断任一，组 7）。
     await expect(page.getByText('业务网络配置').first()).toBeVisible()
-    await expect(page.locator('[data-test="business-unavailable"]')).toBeVisible({ timeout: 15000 })
+    await expect(
+      page.locator('[data-test="business-table"], [data-test="business-unavailable"]').first(),
+    ).toBeVisible({ timeout: 15000 })
   })
 
   test('新建抽屉由意图 YANG schema 驱动渲染（devices 嵌套 list）', async ({ page }) => {
