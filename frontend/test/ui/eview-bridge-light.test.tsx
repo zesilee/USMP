@@ -49,8 +49,8 @@ vi.mock('@nce/eview-react/Switch', H.makeStub('Switch', (p, h) =>
   h('button', { onClick: () => p.onToggle?.(!p.toggled) }, 'toggle'),
 ))
 
-import { Tag, Badge, Breadcrumb, Empty, Drawer, Modal, toPx } from '../../src/ui/eview/components/display'
-import { Dropdown, Segmented, Radio, Checkbox, Switch } from '../../src/ui/eview/components/controls'
+import { Tag, Badge, Breadcrumb, Empty, Drawer, Modal, toPx } from '@bridge/components/display'
+import { Dropdown, Segmented, Radio, Checkbox, Switch } from '@bridge/components/controls'
 import { ANCHOR_SELECTOR } from '../../src/ui/bridge'
 
 afterEach(() => {

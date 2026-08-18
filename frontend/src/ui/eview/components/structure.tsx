@@ -1,6 +1,6 @@
 // EviewUI 桥 · 结构组（组 4.3）：Tabs/Menu(左树→Tree)/Table。
 // 对外 props = antd 形态；映射依据 = component-matrix + gate R1/R2（勿凭空改）。
-import { Children, createElement, isValidElement, type ReactNode, type CSSProperties } from 'react'
+import { Children, createElement, isValidElement, useState, type ReactNode, type CSSProperties } from 'react'
 import * as TabNS from '@nce/eview-react/Tab'
 import TreeMod from '@nce/eview-react/Tree'
 import TableMod from '@nce/eview-react/Table'
@@ -118,47 +118,82 @@ export function Menu(
 }
 
 // ===== Table（矩阵全项映射）=====
-interface AntdColumn {
+/** 对外列类型（antd TableColumnType 对等面，组 5 接线：业务泛型行类型经此收口）。 */
+export interface TableColumnType<T = Record<string, unknown>> {
   title?: ReactNode
   dataIndex?: string
   key?: string
   width?: number | string
   fixed?: string | boolean
-  sorter?: boolean | object
+  // 函数=本地比较排序（桥内执行，eview 本地排序已禁）；true=服务端下推。
+  sorter?: boolean | object | ((a: T, b: T) => number)
   ellipsis?: boolean
-  render?: (value: unknown, record: Record<string, unknown>, index: number) => ReactNode
+  // 列头筛选菜单（antd filters/onFilter）：eview 需 embeddedFilter 侦察后映射
+  // ——窗口期类型收下、行为暂缺（tasks 5.1 已登记，本地小表次要功能）。
+  filters?: Array<{ text: string; value: string | number | boolean }>
+  onFilter?: (value: string | number | boolean, record: T) => boolean
+  // value 保持 any 对齐 antd 形态（record 已强类型，单元格值类型由调用方 narrow）。
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render?: (value: any, record: T, index: number) => ReactNode
 }
-
-export function Table(
+export function Table<T extends object = Record<string, unknown>>(
   props: CommonProps & {
-    columns?: AntdColumn[]
-    dataSource?: Array<Record<string, unknown>>
-    rowKey?: string | ((r: Record<string, unknown>) => string | number)
+    columns?: Array<TableColumnType<T>>
+    dataSource?: T[]
+    rowKey?: string | ((r: T, index?: number) => string | number)
     rowSelection?: { selectedRowKeys?: Array<string | number>; onChange?: (keys: Array<string | number>) => void }
-    onRow?: (row: Record<string, unknown>) => { onClick?: () => void }
-    onChange?: (pagination: unknown, filters: unknown, sorter: { field?: string; order?: string } | undefined) => void
-    pagination?: { current?: number; pageSize?: number; total?: number; onChange?: (page: number, size: number) => void; pageSizeOptions?: Array<number | string> } | false
-    rowClassName?: (row: Record<string, unknown>, index: number) => string
+    onRow?: (row: T) => { onClick?: () => void }
+    onChange?: (
+      pagination: { current?: number; pageSize?: number },
+      filters: unknown,
+      sorter: { field?: string; order?: string } | undefined,
+    ) => void
+    pagination?: {
+      current?: number
+      pageSize?: number
+      total?: number
+      onChange?: (page: number, size: number) => void
+      pageSizeOptions?: Array<number | string>
+      // eview 分页自带尺寸切换与总数文案，两项类型收下不再单独映射。
+      showSizeChanger?: boolean
+      showTotal?: (total: number) => ReactNode
+    } | false
+    rowClassName?: (row: T, index: number) => string
     /** rowClassName 类名 → 行内样式映射（eview 无函数式类名，走 customStyleRows）。 */
     classStyleMap?: Record<string, CSSProperties>
     locale?: { emptyText?: ReactNode }
     loading?: boolean
     size?: string
+    // 展开行（antd expandable）：eview 展开形态待侦察——窗口期类型收下、
+    // 行为暂缺（tasks 5.1 已登记）。
+    expandable?: { defaultExpandAllRows?: boolean }
   },
 ) {
   const cols = props.columns ?? []
   const data = props.dataSource ?? []
   // rowKey 函数 → 预计算 __ubkey 字段（eview rowKey 仅收字段名）。
-  const keyOf = (r: Record<string, unknown>): string | number =>
-    typeof props.rowKey === 'function' ? props.rowKey(r) : ((r[props.rowKey ?? 'id'] as string | number) ?? '')
-  const dataset = data.map((r) => ({ ...r, __ubkey: keyOf(r) }))
+  // 本地函数排序（列 sorter 为函数时桥内执行——eview 本地排序已禁走受控流）。
+  const [localSort, setLocalSort] = useState<{ key?: string; desc?: boolean }>({})
+  const keyOf = (r: T, i: number): string | number =>
+    typeof props.rowKey === 'function'
+      ? props.rowKey(r, i)
+      : (((r as Record<string, unknown>)[props.rowKey ?? 'id'] as string | number) ?? '')
+  let sortedData = data
+  if (localSort.key) {
+    const col = cols.find((c) => (c.dataIndex ?? c.key) === localSort.key)
+    if (typeof col?.sorter === 'function') {
+      const cmp = col.sorter
+      sortedData = [...data].sort((a, b) => (localSort.desc ? -cmp(a, b) : cmp(a, b)))
+    }
+  }
+  const dataset = sortedData.map((r, i) => ({ ...(r as Record<string, unknown>), __ubkey: keyOf(r, i) }))
 
   // rowClassName → customStyleRows（行号→style）。
   let customStyleRows: Record<number, CSSProperties> | undefined
   if (props.rowClassName) {
     customStyleRows = {}
     dataset.forEach((r, i) => {
-      const cls = props.rowClassName!(r, i)
+      const cls = props.rowClassName!(r as T, i)
       const style = cls && props.classStyleMap?.[cls]
       if (style) customStyleRows![i] = style
     })
@@ -194,7 +229,7 @@ export function Table(
             const idx = dataset.findIndex(
               (r) => r === rec || (rec.__ubkey != null && r.__ubkey === rec.__ubkey),
             )
-            return c.render!(cv, rec, idx >= 0 ? idx : 0)
+            return c.render!(cv, rec as T, idx >= 0 ? idx : 0)
           }
         : undefined,
     })),
@@ -214,17 +249,26 @@ export function Table(
     onHeaderCheck: (checkedRows: Array<string | number>) =>
       props.rowSelection?.onChange?.((checkedRows ?? []).map((i) => dataset[Number(i)]?.__ubkey ?? i)),
     // 行点击（rowClickDelay:0 关单双击去抖，matrix）。
-    onRowClick: props.onRow ? (row: Record<string, unknown>) => props.onRow!(row).onClick?.() : undefined,
+    onRowClick: props.onRow ? (row: Record<string, unknown>) => props.onRow!(row as T).onClick?.() : undefined,
     rowClickDelay: 0,
     // 排序：服务端全权（disableEviewSort），合成 antd sorter 形态。
     disableEviewSort: true,
     delayOnColumnSort: true,
     onColumnSort: (sortColumn: { key?: string } | string, sortType: string) => {
       const field = typeof sortColumn === 'string' ? sortColumn : sortColumn?.key
-      props.onChange?.(undefined, undefined, {
-        field,
-        order: sortType === 'desc' ? 'descend' : sortType === 'asc' ? 'ascend' : undefined,
-      })
+      const col = cols.find((c) => (c.dataIndex ?? c.key) === field)
+      if (typeof col?.sorter === 'function') {
+        setLocalSort(sortType === 'origin' ? {} : { key: field, desc: sortType === 'desc' })
+      }
+      // antd 形态：onChange 第一参恒为分页快照（调用点直接读 current/pageSize）。
+      props.onChange?.(
+        { current: pag ? pag.current : undefined, pageSize: pag ? pag.pageSize : undefined },
+        undefined,
+        {
+          field,
+          order: sortType === 'desc' ? 'descend' : sortType === 'asc' ? 'ascend' : undefined,
+        },
+      )
     },
     // 分页：对象拆平；false → 关闭。
     enablePagination: !!pag,
@@ -234,8 +278,16 @@ export function Table(
           pageSize: pag.pageSize,
           recordCount: pag.total,
           pageSizeOptions: pag.pageSizeOptions?.map((n) => Number(n)),
-          onPageChange: (page: number) => pag.onChange?.(page, pag.pageSize ?? 10),
-          onPageSizeChange: (size: number) => pag.onChange?.(1, size),
+          // 分页动作双通道回写：antd 统一 onChange（第一参分页快照）+
+          // pagination.onChange（两者调用点各取所需）。
+          onPageChange: (page: number) => {
+            pag.onChange?.(page, pag.pageSize ?? 10)
+            props.onChange?.({ current: page, pageSize: pag.pageSize }, undefined, undefined)
+          },
+          onPageSizeChange: (size: number) => {
+            pag.onChange?.(1, size)
+            props.onChange?.({ current: 1, pageSize: size }, undefined, undefined)
+          },
         }
       : {}),
     customStyleRows,

@@ -46,7 +46,7 @@ vi.mock('@nce/eview-react/InputSelect', H.makeSemiStub('InputSelect', (p, h, set
   ),
 ))
 
-import { Input, InputNumber, Select } from '../../src/ui/eview/components/inputs'
+import { Input, InputNumber, Select } from '@bridge/components/inputs'
 import { useSemiControlledBridge } from '../../src/ui/bridge'
 
 afterEach(() => {

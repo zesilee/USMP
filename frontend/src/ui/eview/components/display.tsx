@@ -75,12 +75,17 @@ export function Breadcrumb(props: CommonProps & { items?: Array<{ title?: ReactN
 }
 
 // ===== Empty =====
-export function Empty(props: CommonProps & { description?: ReactNode }) {
-  return createElement(EvEmpty, {
+export function Empty(props: CommonProps & { description?: ReactNode; children?: ReactNode }) {
+  const empty = createElement(EvEmpty, {
     id: anchorId(props['data-test']),
     description: props.description,
     className: props.className,
   })
+  // antd Empty 支持 children（描述下操作位，如「去新建」按钮）——eview Empty
+  // 无槽位，桥在其后追加渲染。
+  if (props.children == null) return empty
+  return createElement('div', { className: 'ub-empty-wrap' }, empty,
+    createElement('div', { className: 'ub-empty-extra' }, props.children))
 }
 
 // ===== Drawer：open→visible；width 仅收 number（'50%' 折算视口）=====
@@ -129,6 +134,9 @@ export function Modal(
     footer?: ReactNode | null
     confirmLoading?: boolean
     closable?: boolean
+    // eview Dialog 无遮罩点击关闭配置（默认即不关，对齐 antd maskClosable:false
+    // 的效果）；类型收下保调用点兼容。
+    maskClosable?: boolean
     destroyOnHidden?: boolean
     width?: number | string
     children?: ReactNode
@@ -152,6 +160,11 @@ export function Modal(
       movable: false, // eview 默认可拖动，对齐 antd 不可拖
       className: props.className,
     },
-    props.children,
+    // 自定义 footer（JSX）：eview Dialog 无 footer 槽位，随 children 尾部渲染
+    // （视觉由 .ub-modal-footer 类衔接）。
+    props.footer != null && props.footer !== false
+      ? createElement('div', { key: 'ub-body' }, props.children,
+          createElement('div', { className: 'ub-modal-footer', key: 'ub-footer' }, props.footer))
+      : props.children,
   )
 }

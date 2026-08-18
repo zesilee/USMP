@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react'
-import FormItemShell from '../../src/ui/eview/FormItemShell'
+import FormItemShell from '@bridge/FormItemShell'
 
 // EviewUI 组件替身（混合模式：实现仅内网，F2 以 d.ts+gate 实测行为为规格）。
 // DivMessage：渲染 text；onClose 经关闭钮触发。MessageDialog：渲染 title/
@@ -26,7 +26,7 @@ vi.mock('@nce/eview-react/MessageDialog', () => ({
     ) : null,
 }))
 
-import { toast, confirm } from '../../src/ui/eview/feedback'
+import { toast, confirm } from '@bridge/feedback'
 
 afterEach(() => {
   cleanup()

@@ -1,8 +1,10 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { UiProvider } from '../../src/ui'
-import { toast, confirm } from '../../src/ui/feedback'
+// 组 5 接线：本套件锚定 antd 后端行为（外网测试镜像），直引 antd-backend
+// 版 UiProvider；生产 eview 版 provider 的联动由校准/E2E 兜底。
+import { UiProvider } from '../../src/ui/antd-backend/provider'
+import { toast, confirm } from '../../src/ui/antd-backend/feedback'
 
 // FA-03（design D7）：命令式反馈的 Promise 语义与非组件上下文可调用性。
 // 挂 UiProvider 后 toast/confirm 走带主题上下文的实例；确认/取消分别 resolve
@@ -19,7 +21,7 @@ describe('feedback 适配（FA-03）', () => {
   it('未挂 UiProvider 时降级静态 API 不崩（R08 负路径）', async () => {
     // 干净模块副本：绕开其它用例已完成的 __bindFeedback 绑定。
     vi.resetModules()
-    const fresh = await import('../../src/ui/feedback')
+    const fresh = await import('../../src/ui/antd-backend/feedback')
     expect(() => fresh.toast('降级提示', 'info')).not.toThrow()
     const p = fresh.confirm('降级确认？')
     const cancel = await screen.findByRole('button', { name: /Cancel|取\s*消/ })

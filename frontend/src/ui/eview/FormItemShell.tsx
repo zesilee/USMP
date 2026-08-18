@@ -15,13 +15,16 @@ export interface FormItemShellProps {
   labelExtra?: ReactNode
   /** 测试锚点（FA-05：wrapper 直接承载 data-test）。 */
   'data-test'?: string
+  /** 布局类透传（SchemaForm 的 fi-span-full 栅格控制）。 */
+  className?: string
   children?: ReactNode
 }
 
 export default function FormItemShell(props: FormItemShellProps) {
   const { label, required, error, labelExtra, children } = props
+  const cls = ['form-item-shell', error ? 'fis-error' : '', props.className ?? ''].filter(Boolean).join(' ')
   return (
-    <div className={`form-item-shell${error ? ' fis-error' : ''}`} data-test={props['data-test']}>
+    <div className={cls} data-test={props['data-test']}>
       {(label != null || labelExtra != null) && (
         <label className="fis-label">
           <span className="fis-label-text">

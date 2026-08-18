@@ -39,7 +39,7 @@ vi.mock('@nce/eview-react/Table', H.makeStub('Table', (p, h) =>
   ),
 ))
 
-import { Tabs, Menu, Table } from '../../src/ui/eview/components/structure'
+import { Tabs, Menu, Table } from '@bridge/components/structure'
 
 afterEach(() => {
   cleanup()
@@ -152,7 +152,8 @@ describe('Table 桥（矩阵全项）', () => {
     fireEvent.click(screen.getByText('row1'))
     expect(onRowClick).toHaveBeenCalledWith('r1')
     fireEvent.click(screen.getByText('sort-desc'))
-    expect(onChange).toHaveBeenCalledWith(undefined, undefined, { field: 'mtu', order: 'descend' })
+    // 组 5：排序回调第一参合成分页快照（antd 形态，调用点直接读 current/pageSize）。
+    expect(onChange).toHaveBeenCalledWith({ current: 1, pageSize: 10 }, undefined, { field: 'mtu', order: 'descend' })
     fireEvent.click(screen.getByText('page3'))
     expect(pageChange).toHaveBeenCalledWith(3, 10)
     expect(recv.last.Table.recordCount).toBe(42)

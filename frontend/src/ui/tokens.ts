@@ -3,8 +3,6 @@
 // 粒度）。业务组件 SHALL 从这里取令牌，SHALL NOT 硬编码色值；换库时本文件是
 // 唯一的主题对接点。改这里前先改 variables.scss，两处同源（评审防线：脚手架
 // 首版曾误用 Arco 默认色板致双色系，已按实值重钉）。
-import type { ThemeConfig } from 'antd'
-
 /** 品牌主色（= $color-primary #0C5EA6，深海蓝 ink 系）。 */
 export const colorPrimary = '#0C5EA6'
 
@@ -26,19 +24,5 @@ export const bgElevated = '#F4F6F9'
 export const borderRadius = 6
 export const fontSize = 14
 
-/** antd 主题配置：适配层内部消费（UiProvider），业务代码不直接引用。 */
-export const antdTheme: ThemeConfig = {
-  token: {
-    colorPrimary,
-    colorSuccess,
-    colorWarning,
-    colorError,
-    colorText: textPrimary,
-    colorTextSecondary: textSecondary,
-    colorTextTertiary: textTertiary,
-    colorBorder: borderColor,
-    colorBgLayout: bgLayout,
-    borderRadius,
-    fontSize,
-  },
-}
+// antd 主题装配已随组 5 接线挪至 antd-backend/provider（测试后端镜像）；
+// 生产主题注入 = eview/theme.ts 的 CSS 变量覆盖（UiProvider 装配）。

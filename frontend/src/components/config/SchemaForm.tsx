@@ -1,13 +1,14 @@
-import { Form, icons } from '../../ui'
+import { FormItemShell, icons } from '../../ui'
 import type { Field } from '../../utils/crdSchemaParser'
 import { fieldValidation } from '../../form/antdRules'
 import type { useConfigForm } from '../../hooks/useConfigForm'
 import FieldRenderer from './FieldRenderer'
 import './SchemaForm.scss'
 
-// SchemaForm（FE-02/FE-22 骨架）：字段面 → Form.Item（label + 受控校验展示）+
-// FieldRenderer 控件。单一数据源 = useConfigForm（Form.Item 不给 name、不接
-// antd Form store——双源同步是 bug 温床，见 form/antdRules 架构注）。
+// SchemaForm（FE-02/FE-22 骨架）：字段面 → FormItemShell（label + 受控校验
+// 展示，适配层自绘外壳，组 5 接线自 antd Form.Item 迁入）+ FieldRenderer 控件。
+// 单一数据源 = useConfigForm（外壳零校验行为、零表单 store——双源同步是 bug
+// 温床，见 form/antdRules 架构注）。
 // 可见性由 form.visibleFields（when 引擎）过滤——隐藏字段不渲染不校验不入
 // payload；choice 走 choiceScope/onChoiceUpdate（成员扁平同级契约）；key 叶带
 // 钥匙标识（FE-22，R12 真实图标）。提交门禁权威在 form.blocked（§9）。
@@ -28,7 +29,7 @@ export default function SchemaForm({ fields, form, keyField = '', fieldDisabled,
   const visible = new Set(form.visibleFields.map((f) => f.path))
   const shown = fields.filter((f) => visible.has(f.path))
   return (
-    <Form layout="vertical" className="schema-form" component="div">
+    <div className="schema-form">
       <div className="schema-form--grid">
         {shown.map((field) => {
           const v = fieldValidation(field, fields, form.formData)
@@ -37,18 +38,17 @@ export default function SchemaForm({ fields, form, keyField = '', fieldDisabled,
             (keyField && form.keyOf(field) === keyField)
           )
           return (
-            <Form.Item
+            <FormItemShell
               key={field.path}
               label={
                 <span className="fi-label">
                   {field.isKey && <icons.KeyIcon className="key-icon" data-test="key-icon" />}
                   <span>{field.label}</span>
-                  {labelExtra?.(field)}
                 </span>
               }
+              labelExtra={labelExtra?.(field)}
               required={requiredMark}
-              validateStatus={v.status}
-              help={v.help}
+              error={v.status === 'error' ? v.help : undefined}
               className={SCALAR.has(field.type) ? undefined : 'fi-span-full'}
             >
               {field.type === 'choice' ? (
@@ -65,10 +65,10 @@ export default function SchemaForm({ fields, form, keyField = '', fieldDisabled,
                   disabled={fieldDisabled?.(field)}
                 />
               )}
-            </Form.Item>
+            </FormItemShell>
           )
         })}
       </div>
-    </Form>
+    </div>
   )
 }

@@ -1,7 +1,9 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { render, screen, act } from '@testing-library/react'
 import { Pagination } from 'antd'
-import { UiProvider } from '../../src/ui'
+// 组 5 接线：本套件锚定 antd 后端行为（外网测试镜像），直引 antd-backend
+// 版 UiProvider；生产 eview 版 provider 的联动由校准/E2E 兜底。
+import { UiProvider } from '../../src/ui/antd-backend/provider'
 import { useLocaleStore } from '../../src/stores/locale'
 
 // UI-01 联动（F2）：locale store → i18n 薄层 → UiProvider（useSyncExternalStore）

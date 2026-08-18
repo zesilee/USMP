@@ -25,7 +25,8 @@ interface CommonProps {
 // ===== Dropdown：menu{items,onClick}→data/onItemClick（key↔value）=====
 export function Dropdown(
   props: CommonProps & {
-    menu?: { items?: Array<{ key: string; label?: ReactNode; disabled?: boolean }>; onClick?: (info: { key: string }) => void }
+    // selectedKeys：eview DropDown 无选中态高亮位，类型收下（视觉差异组 5 目视验收）。
+    menu?: { items?: Array<{ key: string; label?: ReactNode; disabled?: boolean }>; onClick?: (info: { key: string }) => void; selectedKeys?: string[] }
     trigger?: string[] | string
     children?: ReactNode
   },

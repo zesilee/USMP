@@ -212,7 +212,7 @@ export default function ModuleConsolePage() {
             style={{ width: 220 }}
             placeholder={t('console.selectDevicePlaceholder')}
             value={selectedDeviceIp || undefined}
-            onChange={(v) => selectDevice(v)}
+            onChange={(v) => { if (v != null) selectDevice(String(v)) }}
             options={devices.map((d) => ({ label: d.ip, value: d.ip }))}
             data-test="device-select"
           />
