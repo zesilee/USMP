@@ -90,8 +90,10 @@ d('F3 真浏览器 · Tabs（happy-dom 移交项）', () => {
       )
     }
     const { container } = renderReal(<Host />)
-    const tabB = Array.from(container.querySelectorAll('*')).find(
-      (el) => el.textContent === '乙页' && el.children.length === 0,
+    // R5 定案：eview 标签是 <div class=ev_tab_title>（内含装饰 span），无纯
+    // 文本叶子——按真实类名找。
+    const tabB = Array.from(container.querySelectorAll('.ev_tab_title, [id^="ev_tabItem"]')).find(
+      (el) => (el.textContent ?? '').includes('乙页'),
     ) as HTMLElement | undefined
     expect(tabB).toBeTruthy()
     console.log('F3-TABS: 即将真实点击乙页')
@@ -145,12 +147,15 @@ d('F3 真浏览器 · Menu→Tree（happy-dom 移交项）', () => {
       (el) => el.textContent === '叶子一' && el.children.length === 0,
     ) as HTMLElement | undefined
     if (leafText) {
-      let row: HTMLElement | null = leafText
-      while (row && !/ev_tree_node|ev_tree_item|li/i.test(`${row.tagName} ${row.className}`) && row !== container) {
-        row = row.parentElement
-      }
-      console.log('F3-TREE: 叶子行 DOM=', (row ?? leafText).outerHTML.slice(0, 900))
-      console.log('F3-TREE: 叶子安全目标（text）点击 keys=', JSON.stringify(clicks), '（text/parent 已证不触发；容器=内部更新雷区）')
+      // R6：桥已上节点区点击委托（capture 拦截+合成 onClick+阻断内部处理）
+      // ——点 text 应经委托命中回调且不再踩内部更新雷。
+      console.log('F3-TREE: 即将点 text（经桥委托）')
+      leafText.click()
+      await new Promise((r) => setTimeout(r, 200))
+      console.log('F3-TREE: 委托点击后 keys=', JSON.stringify(clicks), '（应含 leaf1）')
+      const treeRoot = container.querySelector('[id^="ev_tree_node_id"]')
+      console.log('F3-TREE: 节点 id 样例=', treeRoot?.id ?? '（无 ev_tree_node_id 前缀节点——委托锚点需校准）')
+      expect(JSON.stringify(clicks)).toContain('leaf1')
     } else {
       console.log('F3-TREE: 未找到叶子文本节点——展开渲染形态需按本轮 DOM 校准')
     }
