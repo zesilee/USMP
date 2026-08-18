@@ -13,7 +13,7 @@ import { installFindDOMNodePolyfill } from '../../src/runtime/finddomnode-polyfi
 const REAL = process.env.EVIEW_REAL === '1'
 // 版本指纹：每轮修桥递增，报告第一行即可判内网跑的是否新代码（R8 教训：
 // 合入到报告间隔过短无法排除旧代码，指纹终结猜疑）。
-const CAL_VERSION = 'CAL-R10'
+const CAL_VERSION = 'CAL-R11'
 const d = REAL ? describe : describe.skip
 if (REAL) {
   vi.setConfig({ testTimeout: 10000, hookTimeout: 10000 })
@@ -315,9 +315,14 @@ d('真实校准 · 结构组（Table→Tree→Tabs 静态；Tree 首渲有 R8 �
     )
     console.log('TABLE-DOM:', snap(container, 1500))
     expect(container.textContent).toContain('r1')
-    // R9 修桥后应为 true（renderType:'custom' 缺失曾致 render 被忽略）。
-    console.log('TABLE 自定义render R_x_r1 出现=', container.textContent?.includes('R_x_r1'))
-    expect(container.textContent).toContain('R_x_r1')
+    // R10 侦察：打印运行时枚举实值（d.ts 字面量 'custom' 未生效嫌疑）与
+    // val 列单元格实际 HTML——再失败也有硬数据。
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const rtEnum = (require('@nce/eview-react/Table') as { default?: { ColumnRenderType?: unknown } })
+    console.log('TABLE ColumnRenderType 运行时实值:', JSON.stringify((rtEnum.default ?? rtEnum as never)?.ColumnRenderType))
+    const cells = Array.from(container.querySelectorAll('.ev_table_content td')).map((td) => td.outerHTML.slice(0, 160))
+    console.log('TABLE 行单元格:', JSON.stringify(cells.slice(0, 4)))
+    // 勾选验证先行（R10 教训：render 断言失败会挡住勾选步骤）。
     // gate 教训：checkbox 监听在叶子 span；R9 教训：全表 querySelectorAll 会
     // 先命中表头全选框（点它回传全量行序号）——只选内容区行内 span。
     const box = container.querySelector('.ev_table_content [class*="checkbox_span"]')
@@ -328,6 +333,8 @@ d('真实校准 · 结构组（Table→Tree→Tabs 静态；Tree 首渲有 R8 �
       console.log('TABLE 行勾选回调 keys:', JSON.stringify(checks), '（应为 [["r1"]]——桥已做行序号→rowKey 映射）')
       expect(JSON.stringify(checks)).toContain('r1')
     }
+    console.log('TABLE 自定义render R_x_r1 出现=', container.textContent?.includes('R_x_r1'))
+    expect(container.textContent).toContain('R_x_r1')
   })
 
   // R9 定案：eview Tree 首次渲染即同步死循环（CAL-R9 ENTER 打出后
