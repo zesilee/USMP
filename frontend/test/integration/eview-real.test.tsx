@@ -13,7 +13,7 @@ import { installFindDOMNodePolyfill } from '../../src/runtime/finddomnode-polyfi
 const REAL = process.env.EVIEW_REAL === '1'
 // 版本指纹：每轮修桥递增，报告第一行即可判内网跑的是否新代码（R8 教训：
 // 合入到报告间隔过短无法排除旧代码，指纹终结猜疑）。
-const CAL_VERSION = 'CAL-R9'
+const CAL_VERSION = 'CAL-R10'
 const d = REAL ? describe : describe.skip
 if (REAL) {
   vi.setConfig({ testTimeout: 10000, hookTimeout: 10000 })
@@ -315,18 +315,26 @@ d('真实校准 · 结构组（Table→Tree→Tabs 静态；Tree 首渲有 R8 �
     )
     console.log('TABLE-DOM:', snap(container, 1500))
     expect(container.textContent).toContain('r1')
+    // R9 修桥后应为 true（renderType:'custom' 缺失曾致 render 被忽略）。
     console.log('TABLE 自定义render R_x_r1 出现=', container.textContent?.includes('R_x_r1'))
-    // gate 教训：checkbox 监听在叶子 span。
-    const box = container.querySelectorAll('[class*="checkbox_span"], [role="checkbox"]')[1]
+    expect(container.textContent).toContain('R_x_r1')
+    // gate 教训：checkbox 监听在叶子 span；R9 教训：全表 querySelectorAll 会
+    // 先命中表头全选框（点它回传全量行序号）——只选内容区行内 span。
+    const box = container.querySelector('.ev_table_content [class*="checkbox_span"]')
     if (box) {
-      console.log('TABLE: 即将派发勾选点击')
+      console.log('TABLE: 即将派发行勾选点击')
       fireEvent.click(box)
       await new Promise((r) => setTimeout(r, 60))
-      console.log('TABLE 勾选回调 keys:', JSON.stringify(checks), '（应含 ["r1"] 形态）')
+      console.log('TABLE 行勾选回调 keys:', JSON.stringify(checks), '（应为 [["r1"]]——桥已做行序号→rowKey 映射）')
+      expect(JSON.stringify(checks)).toContain('r1')
     }
   })
 
-  it('Menu→Tree：受控展开 + 节点选中回调', async () => {
+  // R9 定案：eview Tree 首次渲染即同步死循环（CAL-R9 ENTER 打出后
+  // TREE-DOM(收起) 都未打印，进程挂死）——与 Tab 同类的 happy-dom 无布局
+  // 死循环，模拟环境内零校准可能。Menu→Tree 桥的行为校准整体移交组 6 的
+  // F3 真浏览器套件（真 Chromium 真实布局下循环可收敛）。
+  it.skip('Menu→Tree：受控展开 + 节点选中回调（R9 定案：移交 F3）', async () => {
     const clicks: string[] = []
     function Host() {
       const [open, setOpen] = useState<string[]>([])

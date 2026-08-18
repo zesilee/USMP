@@ -173,7 +173,9 @@ export function Table(
       width: c.width,
       freezeCol: !!c.fixed,
       allowSort: !!c.sorter,
-      // eview render(cellValue, rowData, options, row, isEdit) → antd render(value, record, index)。
+      // eview render(cellValue, rowData, options, row, isEdit) → antd render(value, record, index)；
+      // R9 实测：不设 renderType:'custom' 时 render 被忽略（列渲染原始值）。
+      renderType: c.render ? 'custom' : undefined,
       render: c.render
         ? (cv: unknown, _rowData: unknown, _options: unknown, row: Record<string, unknown>) =>
             c.render!(cv, row ?? {}, 0)
@@ -181,13 +183,19 @@ export function Table(
     })),
     dataset,
     rowKey: '__ubkey',
-    // 勾选：受控 checkedRows + 强刷（matrix）；行/表头勾选回调统一回写 keys。
+    // 勾选：受控 checkedRows + 强刷（matrix）。R9 实测：不设 keyIndex 时
+    // checkedRows 双向都是「行序号」语义（keyIndex 又是数字列序号、对不上
+    // 对象行数据）——桥内做行序号↔rowKey 双向映射闭环，对外保持 antd
+    // selectedRowKeys 形态。
     enableCheckBox: !!props.rowSelection,
-    checkedRows: props.rowSelection?.selectedRowKeys ?? [],
+    checkedRows: (props.rowSelection?.selectedRowKeys ?? [])
+      .map((k) => dataset.findIndex((r) => r.__ubkey === k))
+      .filter((i) => i >= 0),
     checkedRowsForceUpdate: true,
     onRowCheck: (_row: unknown, checkedRows: Array<string | number>) =>
-      props.rowSelection?.onChange?.(checkedRows ?? []),
-    onHeaderCheck: (checkedRows: Array<string | number>) => props.rowSelection?.onChange?.(checkedRows ?? []),
+      props.rowSelection?.onChange?.((checkedRows ?? []).map((i) => dataset[Number(i)]?.__ubkey ?? i)),
+    onHeaderCheck: (checkedRows: Array<string | number>) =>
+      props.rowSelection?.onChange?.((checkedRows ?? []).map((i) => dataset[Number(i)]?.__ubkey ?? i)),
     // 行点击（rowClickDelay:0 关单双击去抖，matrix）。
     onRowClick: props.onRow ? (row: Record<string, unknown>) => props.onRow!(row).onClick?.() : undefined,
     rowClickDelay: 0,
