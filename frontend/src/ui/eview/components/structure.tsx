@@ -120,11 +120,14 @@ export function Menu(
   const onClickRef = useRef(props.onClick)
   onClickRef.current = props.onClick
   useEffect(() => {
-    const el = wrapRef.current
-    if (!el) return
+    // F3-R8 定案：容器级原生 capture 仍收不到（点 text 零回调+点 g1 挂死）
+    // ——eview 在 document 层 capture 吃事件（React 合成层与容器监听全部
+    // 收不到、而 eview 处理器确实执行，全部现象唯一统一解释）。监听提到
+    // window capture=事件下行绝对第一站，handler 内以 contains 圈定本树。
     const handler = (e: MouseEvent) => {
+      const root = wrapRef.current
       const t = e.target as HTMLElement | null
-      if (!t || typeof t.closest !== 'function') return
+      if (!root || !t || typeof t.closest !== 'function' || !root.contains(t)) return
       if (t.closest('[class*="switch" i], [class*="expand" i], [class*="arrow" i]')) return
       const node = t.closest('[id^="ev_tree_node_id"]') as HTMLElement | null
       if (!node) return
@@ -134,10 +137,9 @@ export function Menu(
         onClickRef.current?.({ key })
       }
     }
-    el.addEventListener('click', handler, true)
-    return () => el.removeEventListener('click', handler, true)
-    // inlineCollapsed 切换会卸载树体（下方早退）——effect 依赖它重挂监听。
-  }, [props.inlineCollapsed])
+    window.addEventListener('click', handler, true)
+    return () => window.removeEventListener('click', handler, true)
+  }, [])
   // inlineCollapsed（整面板收起）早退必须位于全部 hooks 之后（hooks 数量恒定）。
   if (props.inlineCollapsed) return createElement('div', { className: 'ub-menu-collapsed' })
   return createElement(
