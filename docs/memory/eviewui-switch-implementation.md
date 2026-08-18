@@ -25,6 +25,8 @@ metadata:
 - **Tabs/Tree 交互移交 F3**（tasks 6.1）：eview Tab 的 activeKey 更新路径与 Tree 的**首次渲染**均在 happy-dom 同步死循环（内部布局循环依赖真实元素宽度，happy-dom 恒 0 不收敛；同步循环连 vitest 单用例超时都中断不了——五轮挂死的总根因）。Tabs 静态渲染已实证正确；真 Chromium 真实布局下循环可收敛。
 - **修桥方法论**（14 轮提炼）：d.ts 是形态线索不是行为契约（renderType 缺失/参数位/枚举实值三连翻车）；猜两轮不中就**放探针拿实参真面目**（(...args)=>类型摘要，一轮换确定性）；交互点击类用例排文件最末+挂死嫌疑项拆独立用例（保证其余数据先落袋）；findDOMNode polyfill+raf 异步化+IntlProvider 包裹=REAL 前置三件套。
 
-**下一步**：**组 5 接线**（index.ts 切 eview 后端+调用点微调+antd 退场+覆盖率分母回收重钉+findDOMNode polyfill 生产安装）→组 6 F3（含 Tabs/Tree 校准移交项）/派生黄金→组 7 E2E→组 8 收尾→波 C 运行时翻转（openinula+intl 内核+router v5 化+inula-X，制品在 tasks.md 组 2 挂起项）。
+**组 5 已全量交付**（2026-08-18，PR#368-#370）：@ui-backend 裸别名单点切换（生产→eview 桥/外网测试与 storybook→src/ui/antd-backend antd 镜像/EVIEW_REAL=1→全链真身；Vite alias 不作用于相对导入是首版翻车根因）；SchemaForm 换 FormItemShell；antd 家族挪 devDeps；icons 切 icon-plus（**R16 实证：2608 图标、命名=IconPlus 前缀、22 语义名全命中**）；修真 flaky=eview provider 无 antd feedback 绑定时静态 message 3s 定时器 teardown 后炸（provider 对称入切换根治）；已知债=列头筛选菜单/展开行映射（tasks 5.1）。**校准终态 CAL-R16=17 passed/1 skip 全绿。**
+
+**原「下一步」记录（组 5 前）**：**组 5 接线**（index.ts 切 eview 后端+调用点微调+antd 退场+覆盖率分母回收重钉+findDOMNode polyfill 生产安装）→组 6 F3（含 Tabs/Tree 校准移交项）/派生黄金→组 7 E2E→组 8 收尾→波 C 运行时翻转（openinula+intl 内核+router v5 化+inula-X，制品在 tasks.md 组 2 挂起项）。
 
 相关：[[eviewui-inula-migration]]（调研与矩阵）、[[react-antd-rebuild]]（适配层军规与上次迁移方法论）。
