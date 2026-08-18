@@ -120,22 +120,27 @@ export function Menu(
   const onClickRef = useRef(props.onClick)
   onClickRef.current = props.onClick
   useEffect(() => {
-    // F3-R8 定案：容器级原生 capture 仍收不到（点 text 零回调+点 g1 挂死）
-    // ——eview 在 document 层 capture 吃事件（React 合成层与容器监听全部
-    // 收不到、而 eview 处理器确实执行，全部现象唯一统一解释）。监听提到
-    // window capture=事件下行绝对第一站，handler 内以 contains 圈定本树。
+    // F3-R10 终态（十轮收敛实录）：window capture=事件下行绝对第一站；
+    // 拦截边界=名称区锚 <a id=ev_tree_node_id…>（箭头天然在其外→点箭头
+    // closest 不达锚自然放行，走 eview 受控展开链 onExpand→回写→重挂）。
+    // 历史坑：旧「箭头放行」规则 [class*="expand"] 被祖先 ev_tree_expanded
+    // 状态类误伤——R6-R9 零回调+点节点挂死的真凶（React 合成层/document 层
+    // 假设皆误诊）。50ms 同锚去重：真浏览器实测同一次点击 handler 双触发。
+    let lastKey = ''
+    let lastTs = 0
     const handler = (e: MouseEvent) => {
       const root = wrapRef.current
       const t = e.target as HTMLElement | null
       if (!root || !t || typeof t.closest !== 'function' || !root.contains(t)) return
-      if (t.closest('[class*="switch" i], [class*="expand" i], [class*="arrow" i]')) return
       const node = t.closest('[id^="ev_tree_node_id"]') as HTMLElement | null
       if (!node) return
       const key = node.id.replace(/^ev_tree_node_id/, '')
-      if (key) {
-        e.stopPropagation()
-        onClickRef.current?.({ key })
-      }
+      if (!key) return
+      e.stopPropagation()
+      if (key === lastKey && e.timeStamp - lastTs < 50) return
+      lastKey = key
+      lastTs = e.timeStamp
+      onClickRef.current?.({ key })
     }
     window.addEventListener('click', handler, true)
     return () => window.removeEventListener('click', handler, true)

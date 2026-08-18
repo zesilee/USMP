@@ -158,15 +158,17 @@ d('F3 真浏览器 · Menu→Tree（happy-dom 移交项）', () => {
         a = a.parentElement
       }
       console.log('F3-TREE: 叶子祖先链=', JSON.stringify(chain))
+      // R10 收敛终态：委托边界=名称区锚（探针史见 git log）；硬断言恢复。
       leafText.click()
       await new Promise((r) => setTimeout(r, 200))
-      console.log('F3-TREE: 点 text 后 keys=', JSON.stringify(clicks), '（软断言收数据）')
+      console.log('F3-TREE: 点叶子后 keys=', JSON.stringify(clicks), '（应含 leaf1，桥 50ms 去重后单发）')
+      expect(clicks).toContain('leaf1')
       const g1Node = container.querySelector('[id="ev_tree_node_idg1"]') as HTMLElement | null
       if (g1Node) {
-        console.log('F3-TREE: 对照——即将点 g1 容器（委托生效=回调 g1；不生效=挂死重现）')
         g1Node.click()
         await new Promise((r) => setTimeout(r, 200))
-        console.log('F3-TREE: 点 g1 容器后 keys=', JSON.stringify(clicks))
+        console.log('F3-TREE: 点 g1 名称区后 keys=', JSON.stringify(clicks), '（应含 g1 且不挂死）')
+        expect(clicks).toContain('g1')
       }
     } else {
       console.log('F3-TREE: 未找到叶子文本节点——展开渲染形态需按本轮 DOM 校准')
