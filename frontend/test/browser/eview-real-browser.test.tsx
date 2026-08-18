@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { render, cleanup } from '@testing-library/react'
 import { useState, type ReactElement, createElement } from 'react'
 import { Tabs, Menu } from '@bridge/components/structure'
@@ -36,6 +36,12 @@ if (REAL) {
   }
   console.warn = throttle(console.warn.bind(console))
   console.error = throttle(console.error.bind(console))
+  // 入口打点（F3-R2 教训：报告只见 Tree 无 Tabs，执行序不明）——挂死轮次
+  // 可精确显示进入了哪个用例。
+  beforeEach(() => {
+    // eslint-disable-next-line no-console
+    console.log(`F3-ENTER: ${expect.getState().currentTestName ?? '?'}`)
+  })
 }
 
 // eview 组件 contextType 读 intl——真浏览器同样需要 IntlProvider 包根。
@@ -119,7 +125,9 @@ d('F3 真浏览器 · Menu→Tree（happy-dom 移交项）', () => {
     const { container, getByText } = renderReal(<Host />)
     console.log('F3-TREE: 首渲完成 DOM 长度=', container.innerHTML.length)
     expect(container.textContent).toContain('分组一')
+    console.log('F3-TREE: 即将派发展开点击（R2 卡死点——桥已上 key 重挂绕行）')
     getByText('expand-g1').click()
+    console.log('F3-TREE: 展开点击已派发')
     await new Promise((r) => setTimeout(r, 300))
     console.log('F3-TREE: 展开后含叶子一=', container.textContent?.includes('叶子一'))
     const leaf = Array.from(container.querySelectorAll('.ev_tree_text, [class*="tree"] span')).find(

@@ -45,9 +45,13 @@ export function Tabs(
     createElement(
       EvTab,
       {
+        // 更新路径绕行（CAL-R7/F3-R2 定案）：eview Tab/Tree 收新 props 的
+        // cWRP 更新路径同步死循环（happy-dom 与真浏览器均实证）——受控值
+        // 变化即整体重挂（key），组件恒走首渲路径；受控数据全由 props 喂回，
+        // 语义无损（代价=切换无过渡动画，窗口期可接受）。
+        key: `ub-tab-${idx}`,
         selectedIndex: idx,
-        // eview onClick(index, title, e)；半受控（内切先行）——业务恒回写
-        // activeKey（cWRP 同步），无拒写场景不上重挂（YAGNI，集成点复核）。
+        // eview onClick(index, title, e)。
         onClick: (index: number) => {
           const target = items[index]
           if (target && !target.disabled) props.onChange?.(target.key)
@@ -101,6 +105,9 @@ export function Menu(
   // 桥仅在收起时隐藏树体。
   if (props.inlineCollapsed) return createElement('div', { className: 'ub-menu-collapsed' })
   return createElement(EvTree, {
+    // 更新路径绕行（F3-R2 实证：真浏览器下受控展开更新同样挂死，同 Tab
+    // cWRP 循环类）——openKeys/selectedKeys 变化即重挂，恒走首渲路径。
+    key: `ub-tree-${(props.openKeys ?? []).join('|')}-${(props.selectedKeys ?? []).join('|')}`,
     id: anchorId(props['data-test']),
     data: toTreeData(props.items ?? []),
     nodeKey: 'id',
