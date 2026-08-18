@@ -285,23 +285,7 @@ d('真实校准 · 收尾组与外壳', () => {
   })
 })
 
-d('真实校准 · 结构组（交互点击隔离——R6 挂死于 Tab 点击，见下）', () => {
-  it('Tabs：标签栏渲染 + 受控切换（rerender 驱动，不点击）', () => {
-    const items = [
-      { key: 'a', label: '甲页', children: <p>content-a</p> },
-      { key: 'b', label: '乙页', children: <p>content-b</p> },
-    ]
-    const { container, rerender } = render(<Tabs items={items} activeKey="a" onChange={() => {}} />)
-    console.log('TABS-DOM:', snap(container, 1000))
-    expect(container.textContent).toContain('甲页')
-    expect(container.textContent).toContain('content-a')
-    // R6：点击派发挂死整轮（同步死循环嫌疑）——受控映射改用 rerender 验证，
-    // 点击行为隔离到全文件最后一个用例，真实点击交互留 F3 真浏览器兜底。
-    rerender(<Tabs items={items} activeKey="b" onChange={() => {}} />)
-    console.log('TABS rerender(activeKey=b) 后含 content-b=', container.textContent?.includes('content-b'))
-    expect(container.textContent).toContain('content-b')
-  })
-
+d('真实校准 · 结构组（Tree/Table 在前；Tabs 交互移交 F3——见末注）', () => {
   it('Menu→Tree：受控展开 + 节点选中回调', async () => {
     const clicks: string[] = []
     function Host() {
@@ -363,34 +347,25 @@ d('真实校准 · 结构组（交互点击隔离——R6 挂死于 Tab 点击�
     }
   })
 
-  // 刻意排在全文件最末：R5/R6 两轮整轮挂死均截断于此点击（超时中断不了，
-  // 同步死循环嫌疑——ink bar 布局循环 offsetWidth 恒 0 不收敛）。放最末保证
-  // 即使复现挂死，前面全部校准数据已落袋；「点击已派发」标记用于判定挂点
-  // 在 click 同步处理器内还是之后。
-  it('Tabs：点击切换（挂死嫌疑隔离位）', async () => {
-    function Host() {
-      const [k, setK] = useState('a')
-      return (
-        <Tabs
-          items={[
-            { key: 'a', label: '甲页', children: <p>content-a</p> },
-            { key: 'b', label: '乙页', children: <p>content-b</p> },
-          ]}
-          activeKey={k}
-          onChange={setK}
-        />
-      )
-    }
-    const { container } = render(<Host />)
-    const tabB = Array.from(container.querySelectorAll('*')).find(
-      (el) => el.textContent === '乙页' && el.children.length === 0,
+  // R7 定案：Tabs 挂死不在点击而在 props 更新路径——R7 报告中 rerender(activeKey)
+  // 且零点击的用例同样在 TABS-DOM 打印后挂死（标记日志未现），链条=任何 activeKey
+  // 变更 → Tab cWRP/更新逻辑同步死循环（happy-dom 无真实布局，宽度恒 0 不收敛）。
+  // 故 REAL 套件只校准 Tabs 静态渲染；受控切换与点击切换移交 F3 真浏览器
+  // （真 Chromium 有真实布局，循环可收敛），组 6 的 F3 套件覆盖。
+  it('Tabs：标签栏静态渲染（受控/点击切换=F3 项）', () => {
+    const { container } = render(
+      <Tabs
+        items={[
+          { key: 'a', label: '甲页', children: <p>content-a</p> },
+          { key: 'b', label: '乙页', children: <p>content-b</p> },
+        ]}
+        activeKey="a"
+        onChange={() => {}}
+      />
     )
-    if (tabB) {
-      console.log('TABS: 即将派发点击（若报告止于此行=同步死循环在 click 处理器内）')
-      fireEvent.click(tabB)
-      console.log('TABS: 点击已派发')
-      await waitFor(() => expect(container.textContent).toContain('content-b'), { timeout: 1500 }).catch(() => {})
-      console.log('TABS 点击切换后含 content-b=', container.textContent?.includes('content-b'))
-    }
+    console.log('TABS-DOM:', snap(container, 1000))
+    expect(container.textContent).toContain('甲页')
+    expect(container.textContent).toContain('乙页')
+    expect(container.textContent).toContain('content-a')
   })
 })
