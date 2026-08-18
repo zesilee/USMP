@@ -247,92 +247,6 @@ d('真实校准 · 表单输入组（半受控桥）', () => {
   })
 })
 
-d('真实校准 · 结构组', () => {
-  it('Tabs：标签栏渲染 + 点击切换 + 内容区自渲共存性', async () => {
-    function Host() {
-      const [k, setK] = useState('a')
-      return (
-        <Tabs
-          items={[
-            { key: 'a', label: '甲页', children: <p>content-a</p> },
-            { key: 'b', label: '乙页', children: <p>content-b</p> },
-          ]}
-          activeKey={k}
-          onChange={setK}
-        />
-      )
-    }
-    const { container } = render(<Host />)
-    console.log('TABS-DOM:', snap(container, 1000))
-    expect(container.textContent).toContain('甲页')
-    expect(container.textContent).toContain('content-a')
-    const tabB = Array.from(container.querySelectorAll('*')).find(
-      (el) => el.textContent === '乙页' && el.children.length === 0,
-    )
-    if (tabB) {
-      fireEvent.click(tabB)
-      await waitFor(() => expect(container.textContent).toContain('content-b'), { timeout: 1500 }).catch(() => {})
-      console.log('TABS 切换后含 content-b=', container.textContent?.includes('content-b'))
-    }
-  })
-
-  it('Menu→Tree：受控展开 + 节点选中回调', async () => {
-    const clicks: string[] = []
-    function Host() {
-      const [open, setOpen] = useState<string[]>([])
-      return (
-        <div>
-          <button data-probe="expand" onClick={() => setOpen(['g1'])}>expand-g1</button>
-          <Menu
-            items={[{ key: 'g1', label: '分组一', children: [{ key: 'leaf1', label: '叶子一' }] }]}
-            openKeys={open}
-            onOpenChange={setOpen}
-            selectedKeys={[]}
-            onClick={(i) => clicks.push(i.key)}
-          />
-        </div>
-      )
-    }
-    const { container } = render(<Host />)
-    console.log('TREE-DOM(收起):', snap(container, 800))
-    fireEvent.click(screen.getByText('expand-g1'))
-    await new Promise((r) => setTimeout(r, 80))
-    const expanded = container.querySelector('.ev_tree_expanded')
-    console.log('TREE expandedKeys 受控后 ev_tree_expanded 存在=', !!expanded)
-    const leaf = Array.from(container.querySelectorAll('.ev_tree_text')).find((el) => el.textContent === '叶子一')
-    if (leaf) {
-      fireEvent.click(leaf)
-      console.log('TREE 点叶子 onClick keys:', JSON.stringify(clicks), '（应含 leaf1）')
-    }
-  })
-
-  it('Table：动态列 render + 受控勾选回调', async () => {
-    const checks: unknown[] = []
-    const { container } = render(
-      <Table
-        data-test="cal-table"
-        columns={[
-          { title: '名称', dataIndex: 'name', width: 100 },
-          { title: '值', dataIndex: 'val', width: 100, render: (v, r) => `R_${v}_${r.name}` },
-        ]}
-        dataSource={[{ name: 'r1', val: 'x' }, { name: 'r2', val: 'y' }]}
-        rowKey="name"
-        rowSelection={{ selectedRowKeys: [], onChange: (keys) => checks.push(keys) }}
-        pagination={false}
-      />,
-    )
-    console.log('TABLE-DOM:', snap(container, 1500))
-    expect(container.textContent).toContain('r1')
-    console.log('TABLE 自定义render R_x_r1 出现=', container.textContent?.includes('R_x_r1'))
-    // gate 教训：checkbox 监听在叶子 span。
-    const box = container.querySelectorAll('[class*="checkbox_span"], [role="checkbox"]')[1]
-    if (box) {
-      fireEvent.click(box)
-      await new Promise((r) => setTimeout(r, 60))
-      console.log('TABLE 勾选回调 keys:', JSON.stringify(checks), '（应含 ["r1"] 形态）')
-    }
-  })
-})
 
 d('真实校准 · 收尾组与外壳', () => {
   it('Button 状态映射 + 点击；Spin/Tooltip/Alert 挂载', () => {
@@ -368,5 +282,115 @@ d('真实校准 · 收尾组与外壳', () => {
       </FormItemShell>,
     )
     expect(container.querySelector('.fis-error')).toBeNull()
+  })
+})
+
+d('真实校准 · 结构组（交互点击隔离——R6 挂死于 Tab 点击，见下）', () => {
+  it('Tabs：标签栏渲染 + 受控切换（rerender 驱动，不点击）', () => {
+    const items = [
+      { key: 'a', label: '甲页', children: <p>content-a</p> },
+      { key: 'b', label: '乙页', children: <p>content-b</p> },
+    ]
+    const { container, rerender } = render(<Tabs items={items} activeKey="a" onChange={() => {}} />)
+    console.log('TABS-DOM:', snap(container, 1000))
+    expect(container.textContent).toContain('甲页')
+    expect(container.textContent).toContain('content-a')
+    // R6：点击派发挂死整轮（同步死循环嫌疑）——受控映射改用 rerender 验证，
+    // 点击行为隔离到全文件最后一个用例，真实点击交互留 F3 真浏览器兜底。
+    rerender(<Tabs items={items} activeKey="b" onChange={() => {}} />)
+    console.log('TABS rerender(activeKey=b) 后含 content-b=', container.textContent?.includes('content-b'))
+    expect(container.textContent).toContain('content-b')
+  })
+
+  it('Menu→Tree：受控展开 + 节点选中回调', async () => {
+    const clicks: string[] = []
+    function Host() {
+      const [open, setOpen] = useState<string[]>([])
+      return (
+        <div>
+          <button data-probe="expand" onClick={() => setOpen(['g1'])}>expand-g1</button>
+          <Menu
+            items={[{ key: 'g1', label: '分组一', children: [{ key: 'leaf1', label: '叶子一' }] }]}
+            openKeys={open}
+            onOpenChange={setOpen}
+            selectedKeys={[]}
+            onClick={(i) => clicks.push(i.key)}
+          />
+        </div>
+      )
+    }
+    const { container } = render(<Host />)
+    console.log('TREE-DOM(收起):', snap(container, 800))
+    console.log('TREE: 即将派发展开点击')
+    fireEvent.click(screen.getByText('expand-g1'))
+    console.log('TREE: 展开点击已派发')
+    await new Promise((r) => setTimeout(r, 80))
+    const expanded = container.querySelector('.ev_tree_expanded')
+    console.log('TREE expandedKeys 受控后 ev_tree_expanded 存在=', !!expanded)
+    const leaf = Array.from(container.querySelectorAll('.ev_tree_text')).find((el) => el.textContent === '叶子一')
+    if (leaf) {
+      console.log('TREE: 即将派发叶子点击')
+      fireEvent.click(leaf)
+      console.log('TREE 点叶子 onClick keys:', JSON.stringify(clicks), '（应含 leaf1）')
+    }
+  })
+
+  it('Table：动态列 render + 受控勾选回调', async () => {
+    const checks: unknown[] = []
+    const { container } = render(
+      <Table
+        data-test="cal-table"
+        columns={[
+          { title: '名称', dataIndex: 'name', width: 100 },
+          { title: '值', dataIndex: 'val', width: 100, render: (v, r) => `R_${v}_${r.name}` },
+        ]}
+        dataSource={[{ name: 'r1', val: 'x' }, { name: 'r2', val: 'y' }]}
+        rowKey="name"
+        rowSelection={{ selectedRowKeys: [], onChange: (keys) => checks.push(keys) }}
+        pagination={false}
+      />,
+    )
+    console.log('TABLE-DOM:', snap(container, 1500))
+    expect(container.textContent).toContain('r1')
+    console.log('TABLE 自定义render R_x_r1 出现=', container.textContent?.includes('R_x_r1'))
+    // gate 教训：checkbox 监听在叶子 span。
+    const box = container.querySelectorAll('[class*="checkbox_span"], [role="checkbox"]')[1]
+    if (box) {
+      console.log('TABLE: 即将派发勾选点击')
+      fireEvent.click(box)
+      await new Promise((r) => setTimeout(r, 60))
+      console.log('TABLE 勾选回调 keys:', JSON.stringify(checks), '（应含 ["r1"] 形态）')
+    }
+  })
+
+  // 刻意排在全文件最末：R5/R6 两轮整轮挂死均截断于此点击（超时中断不了，
+  // 同步死循环嫌疑——ink bar 布局循环 offsetWidth 恒 0 不收敛）。放最末保证
+  // 即使复现挂死，前面全部校准数据已落袋；「点击已派发」标记用于判定挂点
+  // 在 click 同步处理器内还是之后。
+  it('Tabs：点击切换（挂死嫌疑隔离位）', async () => {
+    function Host() {
+      const [k, setK] = useState('a')
+      return (
+        <Tabs
+          items={[
+            { key: 'a', label: '甲页', children: <p>content-a</p> },
+            { key: 'b', label: '乙页', children: <p>content-b</p> },
+          ]}
+          activeKey={k}
+          onChange={setK}
+        />
+      )
+    }
+    const { container } = render(<Host />)
+    const tabB = Array.from(container.querySelectorAll('*')).find(
+      (el) => el.textContent === '乙页' && el.children.length === 0,
+    )
+    if (tabB) {
+      console.log('TABS: 即将派发点击（若报告止于此行=同步死循环在 click 处理器内）')
+      fireEvent.click(tabB)
+      console.log('TABS: 点击已派发')
+      await waitFor(() => expect(container.textContent).toContain('content-b'), { timeout: 1500 }).catch(() => {})
+      console.log('TABS 点击切换后含 content-b=', container.textContent?.includes('content-b'))
+    }
   })
 })
