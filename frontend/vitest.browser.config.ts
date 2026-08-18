@@ -8,10 +8,25 @@ import { fileURLToPath } from 'node:url'
 // 断言的是真实渲染结果而非 happy-dom 近似。运行：npm run test:browser
 export default defineConfig({
   plugins: [react()],
+  // 真浏览器无 node process——REAL 开关经构建期常量注入。
+  define: {
+    __EVIEW_REAL__: JSON.stringify(process.env.EVIEW_REAL === '1'),
+  },
   test: {
     globals: true,
     include: ['test/browser/**/*.{test,spec}.{ts,tsx}'],
     setupFiles: ['./test/setup.ts'],
+    // 外网（非 REAL）：eview-real-browser 套件顶层引真桥（@bridge）——@nce 系
+    // import 与 happy-dom 配置同款 stub 别名保收集期通过（用例本体 skip）。
+    alias: [
+      ...(process.env.EVIEW_REAL === '1'
+        ? []
+        : [
+            { find: /^@nce\/eview-react\/locales\/.+$/, replacement: fileURLToPath(new URL('./test/stubs/eview-locales.ts', import.meta.url)) },
+            { find: /^@nce\/eview-react\/([^/]+)$/, replacement: fileURLToPath(new URL('./test/stubs/eview/$1.ts', import.meta.url)) },
+            { find: /^@nce\/icon-plus(\/.*)?$/, replacement: fileURLToPath(new URL('./test/stubs/eview-empty.ts', import.meta.url)) },
+          ]),
+    ],
     browser: {
       enabled: true,
       provider: playwright(),
@@ -23,9 +38,12 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       // 组 5 接线：F3 真浏览器与 happy-dom 同口径走 antd 测试镜像
-      // （外网无 EviewUI 真包，antd-backend/README）；桥真浏览器校准
-      // 属组 6.1（内网跑时另行切换）。
-      '@ui-backend': fileURLToPath(new URL('./src/ui/antd-backend', import.meta.url)),
+      // （外网无 EviewUI 真包，antd-backend/README）。组 6.1：EVIEW_REAL=1
+      // （内网）切真桥全链——eview-real-browser 套件在真 Chromium 校准
+      // happy-dom 移交项（Tabs 受控/点击、Tree 全交互）。
+      '@ui-backend': fileURLToPath(
+        new URL(process.env.EVIEW_REAL === '1' ? './src/ui/eview' : './src/ui/antd-backend', import.meta.url),
+      ),
       '@bridge': fileURLToPath(new URL('./src/ui/eview', import.meta.url)),
     },
   },
