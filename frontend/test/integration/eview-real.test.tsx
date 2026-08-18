@@ -1,6 +1,8 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render as rtlRender, screen, fireEvent, waitFor, cleanup } from '@testing-library/react'
 import { createElement, useState, type ReactElement } from 'react'
+// 顶层静态 import（REAL 分支内 require 相对 TS 路径不经 vitest 转换——R4 实录坑）
+import { installFindDOMNodePolyfill } from '../../src/runtime/finddomnode-polyfill'
 
 // ============ 内网真实校准套件（集成点专用，混合协作模式） ============
 // 外网默认 skip（@nce 实现不存在）；内网运行：
@@ -18,10 +20,6 @@ if (REAL) vi.setConfig({ testTimeout: 10000, hookTimeout: 10000 })
 let wrapIntl = (el: ReactElement): ReactElement => el
 if (REAL) {
   // R3：EviewUI Dialog/Drawer 内部调用 React 19 已移除的 findDOMNode。
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { installFindDOMNodePolyfill } = require('../../src/runtime/finddomnode-polyfill') as {
-    installFindDOMNodePolyfill: () => void
-  }
   installFindDOMNodePolyfill()
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { IntlProvider } = require('react-intl') as { IntlProvider: never }
