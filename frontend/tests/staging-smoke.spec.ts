@@ -10,8 +10,9 @@ const DEVICE_IP = process.env.E2E_DEVICE_IP || '192.168.1.1'
 
 const SEL = {
   select: '.ev_inputSelect',
-  // TODO-E2E(内网首跑): eview 下拉弹层选项类名未实证，先按 ev_ 前缀通配。
-  selectOption: '[class*="ev_"][class*="item"]',
+  // 内网 diag4 实证：弹层=div.ev_popup（data-test 随 anchorId 回填为
+  // {select 锚}_pop），选项=span.ev_popup_option[role=option]。
+  selectOption: '.ev_popup_option',
   formItem: '.form-item-shell',
   formItemLabel: '.fis-label',
   badgeCount: '.ev_badge_content',
@@ -88,7 +89,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page).toHaveURL(/module\/vlan/)
 
     await pickDevice(page)
-    await page.getByRole('tab', { name: 'VLAN列表', exact: true }).click()
+    await page.locator(SEL.tab, { hasText: 'VLAN列表' }).first().click()
     await page.getByRole('button', { name: '创建' }).first().click()
 
     // 详情编辑区（FE-21 master-detail，抽屉退役）出现 schema 驱动的字段
@@ -102,7 +103,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   test('VLAN 表单缺主键(id)时下发应被校验拦截', async ({ page }) => {
     await page.goto('/module/vlan', { waitUntil: 'networkidle' })
     await pickDevice(page)
-    await page.getByRole('tab', { name: 'VLAN列表', exact: true }).click()
+    await page.locator(SEL.tab, { hasText: 'VLAN列表' }).first().click()
     await page.getByRole('button', { name: '创建' }).first().click()
     const pane = page.locator('[data-test="item-detail-pane"]')
     await expect(pane.getByText('VLAN管理状态', { exact: false }).first()).toBeVisible({ timeout: 15000 })
@@ -116,7 +117,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     const vlanId = String(3000 + (Date.now() % 900)) // 避开种子与历史运行残留
     await page.goto('/module/vlan', { waitUntil: 'networkidle' })
     await pickDevice(page)
-    await page.getByRole('tab', { name: 'VLAN列表', exact: true }).click()
+    await page.locator(SEL.tab, { hasText: 'VLAN列表' }).first().click()
     await page.getByRole('button', { name: '创建' }).first().click()
 
     const pane = page.locator('[data-test="item-detail-pane"]')
@@ -160,7 +161,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page).toHaveURL(/module\/ifm/)
 
     await pickDevice(page)
-    await page.getByRole('tab', { name: '接口列表', exact: true }).click()
+    await page.locator(SEL.tab, { hasText: '接口列表' }).first().click()
     await page.getByRole('button', { name: '创建' }).first().click()
 
     // mtu 为 IFM 叶子名，schema 动态渲染才会出现
@@ -175,8 +176,8 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await pickDevice(page)
 
     // Tab 栏无 rpc Tab（导航落点已迁移到左树）。
-    await expect(page.getByRole('tab', { name: '接口列表', exact: true })).toBeVisible({ timeout: 15000 })
-    await expect(page.getByRole('tab', { name: '按接口名清除统计', exact: true })).toHaveCount(0)
+    await expect(page.locator(SEL.tab, { hasText: '接口列表' }).first()).toBeVisible({ timeout: 15000 })
+    await expect(page.locator(SEL.tab, { hasText: '按接口名清除统计' }).first()).toHaveCount(0)
 
     // 左树：接口管理 → 接口基础 → huawei-ifm（可展开叶）→ rpc 节点。
     await page.locator('[data-test="lefttree-group-接口管理"]').first().click()
@@ -200,7 +201,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   test('接口列表应展示模拟网元种子行（3 main + 2 sub）', async ({ page }) => {
     await page.goto('/module/ifm', { waitUntil: 'networkidle' })
     await pickDevice(page)
-    await page.getByRole('tab', { name: '接口列表', exact: true }).click()
+    await page.locator(SEL.tab, { hasText: '接口列表' }).first().click()
 
     await expect(page.getByText('200GE0/1/0', { exact: true }).first()).toBeVisible({ timeout: 20000 })
     await expect(page.getByText('200GE0/1/1.1', { exact: false }).first()).toBeVisible()
@@ -211,7 +212,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   test('接口详情区回显 config=false 状态字段（dynamic/mac-address）', async ({ page }) => {
     await page.goto('/module/ifm', { waitUntil: 'networkidle' })
     await pickDevice(page)
-    await page.getByRole('tab', { name: '接口列表', exact: true }).click()
+    await page.locator(SEL.tab, { hasText: '接口列表' }).first().click()
     await expect(page.getByText('200GE0/1/0', { exact: true }).first()).toBeVisible({ timeout: 20000 })
 
     // 打开种子行 200GE0/1/0 的详情编辑区（master-detail，FE-21）
@@ -236,7 +237,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   test('高级搜索按 class 过滤（support-filter 驱动）', async ({ page }) => {
     await page.goto('/module/ifm', { waitUntil: 'networkidle' })
     await pickDevice(page)
-    await page.getByRole('tab', { name: '接口列表', exact: true }).click()
+    await page.locator(SEL.tab, { hasText: '接口列表' }).first().click()
     await expect(page.getByText('200GE0/1/0', { exact: true }).first()).toBeVisible({ timeout: 20000 })
 
     await page.getByRole('button', { name: /高级搜索/ }).click()
@@ -258,7 +259,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   test('接口 when 约束：class=sub-interface 才显现 parent-name（数据驱动显隐）', async ({ page }) => {
     await page.goto('/module/ifm', { waitUntil: 'networkidle' })
     await pickDevice(page)
-    await page.getByRole('tab', { name: '接口列表', exact: true }).click()
+    await page.locator(SEL.tab, { hasText: '接口列表' }).first().click()
     await page.getByRole('button', { name: '创建' }).first().click()
 
     const pane = page.locator('[data-test="item-detail-pane"]')
@@ -281,7 +282,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await page.goto('/module/vlan', { waitUntil: 'networkidle' })
     // 全局设备上下文（FE-10）：Tab 内容区以已选设备为前提
     await pickDevice(page)
-    await expect(page.getByRole('tab', { name: 'VLAN列表', exact: true })).toBeVisible({ timeout: 15000 })
+    await expect(page.locator(SEL.tab, { hasText: 'VLAN列表' }).first()).toBeVisible({ timeout: 15000 })
 
     // 侧栏 SND 左树（LT-03）：展开 接口管理→接口基础→huawei-ifm 叶，点 container 节点。
     await page.locator('[data-test="lefttree-group-接口管理"]').first().click()
@@ -291,7 +292,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page).toHaveURL(/module\/ifm/)
 
     // 设备上下文跨模块保持：无需重新选设备
-    await page.getByRole('tab', { name: '接口列表', exact: true }).click()
+    await page.locator(SEL.tab, { hasText: '接口列表' }).first().click()
     await page.getByRole('button', { name: '创建' }).first().click()
 
     // 接口独有字段 mtu 应出现（若仍沿用 VLAN schema 则不会有）
@@ -345,7 +346,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await expect(page).toHaveURL(/module\/ifm/)
 
     // 入口已写上下文：无需选设备，Tab 直接可用
-    await expect(page.getByRole('tab', { name: '接口列表', exact: true })).toBeVisible({ timeout: 15000 })
+    await expect(page.locator(SEL.tab, { hasText: '接口列表' }).first()).toBeVisible({ timeout: 15000 })
     await expect(page.locator('[data-test="select-device-empty"]')).toHaveCount(0)
 
     // 左树切到 VLAN 模块：设备上下文沿用，Tab 直接渲染（未选设备时只会显示引导空态）
@@ -354,7 +355,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await page.locator('[data-test="lefttree-leaf-huawei-vlan"]').first().click()
     await page.locator('[data-test="lefttree-node-vlan"]').click()
     await expect(page).toHaveURL(/module\/vlan/)
-    await expect(page.getByRole('tab', { name: 'VLAN列表', exact: true })).toBeVisible({ timeout: 15000 })
+    await expect(page.locator(SEL.tab, { hasText: 'VLAN列表' }).first()).toBeVisible({ timeout: 15000 })
     await expect(page.locator('[data-test="select-device-empty"]')).toHaveCount(0)
   })
 
@@ -362,7 +363,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
   test('直开控制台且无设备上下文时展示引导空态', async ({ page }) => {
     await page.goto('/module/vlan', { waitUntil: 'networkidle' })
     await expect(page.locator('[data-test="select-device-empty"]')).toBeVisible({ timeout: 15000 })
-    await expect(page.getByRole('tab', { name: 'VLAN列表', exact: true })).toHaveCount(0)
+    await expect(page.locator(SEL.tab, { hasText: 'VLAN列表' }).first()).toHaveCount(0)
   })
 })
 
@@ -416,7 +417,7 @@ test.describe('部署冒烟 - 业务网络配置', () => {
     await expect(page).toHaveURL(/module\/vlan/)
     // 全局设备上下文（FE-10）：业务侧进入无设备选中，先选设备再断言 Tab
     await pickDevice(page)
-    await expect(page.getByRole('tab', { name: 'VLAN列表', exact: true })).toBeVisible({ timeout: 15000 })
+    await expect(page.locator(SEL.tab, { hasText: 'VLAN列表' }).first()).toBeVisible({ timeout: 15000 })
   })
 })
 
@@ -426,7 +427,9 @@ test.describe('部署冒烟 - 语言切换（UI-01）', () => {
     await expect(page.locator('.ub-menu').getByText('设备管理')).toBeVisible({ timeout: 15000 })
 
     await page.locator('[data-test="locale-switch"]').click()
-    await page.locator('[data-test="locale-en"]').click()
+    // Dropdown 桥 label 文本化丢 data-test（锚点债，tasks 7.1b）——按弹层
+    // 选项文本选（语言名不随界面语言翻译，恒定安全）。
+    await page.locator(SEL.selectOption, { hasText: 'English' }).first().click()
     await expect(page.locator('.ub-menu').getByText('Devices', { exact: true })).toBeVisible({ timeout: 5000 })
     await expect(page.locator('.ub-menu').getByText('Native Configuration')).toBeVisible()
 
@@ -436,7 +439,7 @@ test.describe('部署冒烟 - 语言切换（UI-01）', () => {
 
     // 收尾切回 zh，避免影响后续用例顺序无关性
     await page.locator('[data-test="locale-switch"]').click()
-    await page.locator('[data-test="locale-zh"]').click()
+    await page.locator(SEL.selectOption, { hasText: '中文' }).first().click()
     await expect(page.locator('.ub-menu').getByText('设备管理')).toBeVisible({ timeout: 5000 })
   })
 })
