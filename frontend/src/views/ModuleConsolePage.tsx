@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useParams, useSearchParams, useBlocker } from 'react-router'
+import { useParams, useSearchParams, useBlocker } from '../router/compat'
 import { Alert, Breadcrumb, Empty, Select, Tabs, Tag, Tooltip, confirm } from '../ui'
 import { i18n, useLocale } from '../i18n'
 import { getYangSchema, getOwnership } from '../api'

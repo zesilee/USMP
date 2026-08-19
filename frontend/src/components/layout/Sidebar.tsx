@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router'
+import { useLocation, useNavigate } from '../../router/compat'
 import { Input, Menu, icons } from '../../ui'
 import { i18n, useLocale } from '../../i18n'
 import { useMenuStore, type LeftTreeNode } from '../../stores/menu'

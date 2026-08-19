@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router'
+import { createBrowserRouter } from './router/compat'
 import MainLayout from './components/layout/MainLayout'
 import ModuleConsolePage from './views/ModuleConsolePage'
 import Dashboard from './views/Dashboard'

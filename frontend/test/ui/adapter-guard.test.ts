@@ -15,6 +15,9 @@ const LIB_IMPORT = /['"](antd|antd\/[^'"]*|@ant-design\/[^'"]*)['"]/
 // 组 5.3：换库后的新违规面——业务代码同样禁直连 EviewUI 包与适配层内部别名
 // （@bridge=桥测试专用直达、@ui-backend=适配层内部切换点，都不是业务入口）。
 const EVIEW_IMPORT = /['"](@nce\/[^'"]*|@bridge\/[^'"]*|@ui-backend\/[^'"]*)['"]/
+// 波 C 2.4：路由 API 收口 src/router/compat——业务禁直接 import react-router
+// （翻转 inula-router 时改动收束单点）。
+const ROUTER_IMPORT = /from ['"]react-router['"]/
 
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
@@ -34,7 +37,8 @@ describe('UI 适配层守护（FA-01/FA-02）', () => {
   it('业务代码零直接组件库 import（FA-01）', () => {
     const violations = business.filter((f) => {
       const src = readFileSync(f, 'utf8')
-      return LIB_IMPORT.test(src) || EVIEW_IMPORT.test(src)
+      const isRouterCompat = relative(SRC, f) === 'router/compat.ts'
+      return LIB_IMPORT.test(src) || EVIEW_IMPORT.test(src) || (!isRouterCompat && ROUTER_IMPORT.test(src))
     })
     expect(violations.map((f) => relative(SRC, f))).toEqual([])
   })

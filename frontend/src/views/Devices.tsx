@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate } from '../router/compat'
 import { Button, Input, Modal, Select, Table, Tag, confirm, icons, toast, type TableColumnType } from '../ui'
 import { i18n } from '../i18n'
 import { useDeviceStore } from '../stores/device'
