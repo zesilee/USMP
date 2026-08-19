@@ -65,7 +65,10 @@ export default defineConfig({
       // 并行）：F2 替身测试在场但分支面随批次持续扩容，接线（组 5）时统一
       // 纳入分母并按干净口径重钉阈值——窗口期先排除，避免每批桥都重钉。
       // antd-backend = 测试后端镜像（测试基建非产品代码），不入分母。
-      exclude: ['src/**/*.d.ts', 'src/**/*.stories.tsx', 'src/ui/eview/**', 'src/ui/antd-backend/**', 'src/runtime/**'],
+      // src/ui/eview 组 7.3 收口回收入分母（组 5 窗口期承诺）：桥 F2 经
+      // @bridge 别名执行真桥代码，覆盖真实。src/runtime 维持排除（守卫/
+      // polyfill 仅真环境行为，外网测试多为兜底分支）。
+      exclude: ['src/**/*.d.ts', 'src/**/*.stories.tsx', 'src/ui/antd-backend/**', 'src/runtime/**'],
       // 覆盖率「不下降」棘轮（T08）：阈值 = 当前实测水平向下取整留余量。
       // 只准升不准降——低于阈值 CI 即 fail。补测后应把阈值同步上调，形成单向棘轮。
       // 历史轨迹（Vue 全量口径）：2026-07-06 66.55/66.57/56.67/66.88 →
@@ -86,11 +89,15 @@ export default defineConfig({
       // provider 换 eview 版、tokens 去 antd——分母微变致 functions 结构性
       // 回落（实测 94.37/83.47/94.37/96.07），按分母重算先例 functions
       // 94.5→94.3；组 7.3 覆盖率收口统一回填爬升。
+      // 组 7.3 收口重钉（2026-08-19）：src/ui/eview 桥 346 行回收入分母
+      // （组 5 窗口期承诺），四项结构性回落——icons F1 回填后实测
+      // 93.87/80.90/94.17/95.59，按现值下沿重钉；display/inputs 桥分支
+      // 补测挂组 8 回填爬升，回填后按 T08 上调。
       thresholds: {
-        statements: 94.3,
-        branches: 83.2,
-        functions: 94.3,
-        lines: 96.0
+        statements: 93.7,
+        branches: 80.7,
+        functions: 94.0,
+        lines: 95.4
       }
     }
   },
