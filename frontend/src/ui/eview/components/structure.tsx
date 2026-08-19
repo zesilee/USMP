@@ -1,20 +1,9 @@
 // EviewUI 桥 · 结构组（组 4.3）：Tabs/Menu(左树→Tree)/Table。
 // 对外 props = antd 形态；映射依据 = component-matrix + gate R1/R2（勿凭空改）。
 import { createElement, useState, type ReactNode, type CSSProperties } from 'react'
-import * as TabNS from '@nce/eview-react/Tab'
 import TableMod from '@nce/eview-react/Table'
 import { anchorId, pickDefault, textOf } from '../../bridge'
 
-const EvTab = pickDefault(TabNS)
-// TabItem 挂在模块具名导出（default 导入拿不到——须命名空间导入；实录坑）。
-// F3-R4：真浏览器 interop 下具名可能藏在任意一层 default 内——候选链逐层找。
-const EvTabItem = pickDefault(
-  [
-    (TabNS as { TabItem?: unknown }).TabItem,
-    (TabNS as { default?: { TabItem?: unknown } }).default?.TabItem,
-    (EvTab as unknown as { TabItem?: unknown }).TabItem,
-  ].find((x) => x != null) ?? TabNS,
-)
 const EvTable = pickDefault(TableMod)
 
 interface CommonProps {
@@ -23,7 +12,6 @@ interface CommonProps {
   style?: CSSProperties
 }
 
-// ===== Tabs → Tab（key↔index 桥；内容区桥自渲，绕开 TabContent 形态不确定性）=====
 export function Tabs(
   props: CommonProps & {
     items?: Array<{ key: string; label?: ReactNode; children?: ReactNode; disabled?: boolean }>
@@ -31,41 +19,40 @@ export function Tabs(
     onChange?: (key: string) => void
   },
 ) {
+  // ===== 标签栏自绘（组 7 E2E 终局定案，先例：Menu→Tree 自绘）=====
+  // eview Tab 三连问题实证：①cWRP 更新路径同步死循环（key 重挂绕行过）
+  // ②多标签溢出下 onClick index 错位（title 反查绕行过）③自带「可见窗口」
+  // 只给部分标签 display 类——详情区几十个标签时目标标签恒不可见（CSS 横滚
+  // 救不了）。自绘 div 横排：复用 ev_tab_title/active/ev_tab_bar 类承观感、
+  // 补回 role=tab/aria-selected 语义（eview 原生缺失）、标签栏横向滚动全部
+  // 可点。内容区自渲维持（key 按激活项防同类型组件复用残留）。
   const items = props.items ?? []
   const idx = Math.max(0, items.findIndex((i) => i.key === props.activeKey))
   return createElement(
     'div',
     { className: ['ub-tabs', props.className].filter(Boolean).join(' '), 'data-test': props['data-test'] },
     createElement(
-      EvTab,
-      {
-        // 更新路径绕行（CAL-R7/F3-R2 定案）：eview Tab/Tree 收新 props 的
-        // cWRP 更新路径同步死循环（happy-dom 与真浏览器均实证）——受控值
-        // 变化即整体重挂（key），组件恒走首渲路径；受控数据全由 props 喂回，
-        // 语义无损（代价=切换无过渡动画，窗口期可接受）。
-        key: `ub-tab-${idx}`,
-        selectedIndex: idx,
-        // eview onClick(index, title, e)。E2E 实录（ifm 7 tab）：溢出折叠场景
-        // index 与 items 原始序错位（点「接口列表」内容区仍是首 tab）——
-        // 以 title 反查为主、index 兜底。
-        onClick: (index: number, title?: string) => {
-          const target =
-            (title != null ? items.find((i) => textOf(i.label) === title) : undefined) ?? items[index]
-          if (target && !target.disabled) props.onChange?.(target.key)
-        },
-        // E2E 实录：溢出折叠把标签藏进不可达形态（详情 tabs「接口动态信息」
-        // element not visible）——关折叠改标签条横向滚动（.ub-tabs CSS），
-        // 全部标签恒可点（Playwright 自动滚动到位）。
-        observerWidthChange: false,
-      },
-      items.map((i) =>
-        createElement(EvTabItem, { key: i.key, title: textOf(i.label), disabled: i.disabled }),
+      'div',
+      { className: 'ub-tabs-nav', role: 'tablist' },
+      ...items.map((i, n) =>
+        createElement(
+          'div',
+          {
+            key: i.key,
+            role: 'tab',
+            'aria-selected': n === idx,
+            tabIndex: 0,
+            className: `ev_tab_title${n === idx ? ' active' : ''}${i.disabled ? ' is-disabled' : ''}`,
+            onClick: () => {
+              if (!i.disabled) props.onChange?.(i.key)
+            },
+          },
+          createElement('span', { className: 'ev_tab_bar' }),
+          i.label,
+        ),
       ),
     ),
-    // 内容区：仅渲染激活项（与 antd 默认 lazy 语义一致）。key 按激活项——
-    // 各 tab children 常为同一组件类型（如 ModuleListTab），无 key 时 React
-    // 就地复用旧实例致内部 state 残留（E2E 实录：切「接口列表」后取数已换
-    // 而列仍是旧 tab 的）；antd 每 pane 自带 key，对齐之。
+    // 内容区：仅渲染激活项（与 antd 默认 lazy 语义一致）。
     createElement('div', { className: 'ub-tabs-pane', key: `pane-${items[idx]?.key ?? idx}` }, items[idx]?.children),
   )
 }

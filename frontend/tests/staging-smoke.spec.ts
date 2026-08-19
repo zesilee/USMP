@@ -245,8 +245,8 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     const panel = page.locator('.search-panel')
     await panel.locator(SEL.select).first().click()
     await page.locator(`${SEL.selectOption}:visible`, { hasText: /sub-interface|子接口/ }).first().click()
-    // antd 两字按钮自动插空格（「查 询」），按正则匹配。
-    await panel.getByRole('button', { name: /查\s*询/ }).click()
+    // 按钮文本=common.apply（E2E 实录），本有锚——直接用锚。
+    await panel.locator('[data-test="adv-search-apply"]').click()
 
     // 主接口行被过滤掉，仅剩 2 条 sub-interface。断言限定在表格行内：rpc 的
     // if-name leafref 下拉（多个 rpc 面板常驻）也把接口名作为 teleport 选项渲染进
