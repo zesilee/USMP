@@ -46,24 +46,30 @@ afterEach(() => {
   recv.last = {}
 })
 
-describe('Tabs 桥（key↔index + 自渲内容区）', () => {
+// 组 7 终局：标签栏自绘（eview Tab 可见窗口/折叠 index 错位/cWRP 三连）——
+// 断言改真实 DOM（role=tab 语义为自绘补回）。
+describe('Tabs 桥（自绘标签栏 + 自渲内容区）', () => {
   const items = [
     { key: 'a', label: 'Tab 甲', children: <p>content-a</p> },
     { key: 'b', label: 'Tab 乙', children: <p>content-b</p>, disabled: false },
   ]
-  it('activeKey→selectedIndex、标签 title 文本化、仅渲染激活内容', () => {
-    render(<Tabs items={items} activeKey="b" onChange={() => {}} data-test="console-tabs" />)
-    expect(recv.last.Tab.selectedIndex).toBe(1)
-    expect(document.querySelector('[data-tabitem="Tab 甲"]')).toBeTruthy()
+  it('activeKey 激活态、role=tab 语义、仅渲染激活内容', () => {
+    const { container } = render(<Tabs items={items} activeKey="b" onChange={() => {}} data-test="console-tabs" />)
+    const tabs = container.querySelectorAll('[role="tab"]')
+    expect(tabs.length).toBe(2)
+    expect(tabs[1].className).toContain('active')
+    expect(tabs[1].getAttribute('aria-selected')).toBe('true')
     expect(screen.getByText('content-b')).toBeInTheDocument()
     expect(screen.queryByText('content-a')).toBeNull()
-    expect(document.querySelector('[data-test="console-tabs"]')).toBeTruthy()
+    expect(container.querySelector('[data-test="console-tabs"]')).toBeTruthy()
   })
-  it('点击 index→onChange(key)', () => {
+  it('点击标签→onChange(key)；切换重挂内容区（pane key）', () => {
     const onChange = vi.fn()
-    render(<Tabs items={items} activeKey="a" onChange={onChange} />)
-    fireEvent.click(screen.getByText('click-tab2'))
+    const { container, rerender } = render(<Tabs items={items} activeKey="a" onChange={onChange} />)
+    fireEvent.click(screen.getByText('Tab 乙'))
     expect(onChange).toHaveBeenCalledWith('b')
+    rerender(<Tabs items={items} activeKey="b" onChange={onChange} />)
+    expect(container.querySelector('.ub-tabs-pane')?.textContent).toBe('content-b')
   })
 })
 
