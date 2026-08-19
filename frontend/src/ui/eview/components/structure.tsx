@@ -206,7 +206,19 @@ export function Table<T extends object = Record<string, unknown>>(
   },
 ) {
   const cols = props.columns ?? []
-  const data = props.dataSource ?? []
+  // 展开行（antd expandable/children 树表格）：eview 无对应形态——
+  // defaultExpandAllRows 语义下拍平渲染（子行全部铺开，E2E 实证需求：
+  // 变更内容对话框树形三列）；children 字段从行对象剥除防 eview 误读。
+  const rawData = props.dataSource ?? []
+  const data: T[] = []
+  const flatten = (rows: T[]) => {
+    for (const r of rows) {
+      data.push(r)
+      const kids = (r as { children?: T[] }).children
+      if (props.expandable?.defaultExpandAllRows && kids?.length) flatten(kids)
+    }
+  }
+  flatten(rawData)
   // rowKey 函数 → 预计算 __ubkey 字段（eview rowKey 仅收字段名）。
   // 本地函数排序（列 sorter 为函数时桥内执行——eview 本地排序已禁走受控流）。
   const [localSort, setLocalSort] = useState<{ key?: string; desc?: boolean }>({})
@@ -222,7 +234,7 @@ export function Table<T extends object = Record<string, unknown>>(
       sortedData = [...data].sort((a, b) => (localSort.desc ? -cmp(a, b) : cmp(a, b)))
     }
   }
-  const dataset = sortedData.map((r, i) => ({ ...(r as Record<string, unknown>), __ubkey: keyOf(r, i) }))
+  const dataset = sortedData.map((r, i) => ({ ...(r as Record<string, unknown>), children: undefined, __ubkey: keyOf(r, i) }))
 
   // rowClassName → customStyleRows（行号→style）。
   let customStyleRows: Record<number, CSSProperties> | undefined
