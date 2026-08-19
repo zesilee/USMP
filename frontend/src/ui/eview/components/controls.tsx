@@ -8,7 +8,7 @@ import SegmentedMod from '@nce/eview-react/Segmented'
 import RadioGroupMod from '@nce/eview-react/RadioGroup'
 import CheckboxMod from '@nce/eview-react/Checkbox'
 import SwitchMod from '@nce/eview-react/Switch'
-import { anchorId, pickDefault } from '../../bridge'
+import { anchorId, pickDefault, textOf } from '../../bridge'
 
 const EvDropDown = pickDefault(DropDownMod)
 const EvSegmented = pickDefault(SegmentedMod)
@@ -37,7 +37,10 @@ export function Dropdown(
     EvDropDown,
     {
       id: anchorId(props['data-test']),
-      data: items.map((i) => ({ text: typeof i.label === 'string' ? i.label : String(i.label ?? ''), value: i.key, disabled: i.disabled })),
+      // E2E diag5 实录：JSX label 经 String() 显示 [object Object]（语言菜单
+      // 真 UI bug）——textOf 挖掘文本（label 内 data-test 锚随之丢失=已知
+      // 锚点债，E2E 按文本选）。
+      data: items.map((i) => ({ text: textOf(i.label), value: i.key, disabled: i.disabled })),
       onItemClick: (item: { value?: string }) => {
         if (item?.value != null) props.menu?.onClick?.({ key: item.value })
       },

@@ -1,5 +1,5 @@
 // 适配层桥接工具（FA-02 受控桥接层 / gate-conclusion 半受控档位，组 3.1）。
-import { useRef, useState } from 'react'
+import { Children, isValidElement, useRef, useState, type ReactNode } from 'react'
 
 /**
  * 半受控兜底③档：key 重挂。dep 变化时返回新 key，强制底层半受控组件重建
@@ -19,6 +19,18 @@ export function useRemountKey(dep: unknown): number {
  *   或外包 wrapper div 承载（弹层类组件 wrapper 定位不到浮层本体时用 id）。
  * 本工具生成 id 映射形态；wrapper 形态由各桥按组件结构选用。
  */
+/** JSX → 纯文本（label 文本化通道：Tab 标题/树节点 title/DropDown 项）。 */
+export const textOf = (n: ReactNode): string => {
+  if (typeof n === 'string' || typeof n === 'number') return String(n)
+  if (isValidElement(n)) {
+    const kids = (n.props as { children?: ReactNode }).children
+    return Children.toArray(kids ?? [])
+      .map((c) => textOf(c))
+      .join('')
+  }
+  return n == null ? '' : String(n)
+}
+
 export function anchorId(dataTest?: string): string | undefined {
   return dataTest ? `dt-${dataTest}` : undefined
 }
