@@ -34,6 +34,13 @@ metadata:
 - 真浏览器 interop：pickDefault 须**多层剥 default**（vite optimizer CJS 双层包装，happy-dom 单层即中）；具名导出（TabItem）用候选链逐层找。
 配套：Chromium 离线包摆渡（ms-playwright tgz→~/.cache）；F3 报告减脂=套件 console 节流+grep 过滤命令。
 
+**组 7 E2E 对等已收敛**（2026-08-19，十三轮 R1-R13 终局 **21/21 全绿**，PR#382-#396，kind 全栈+真浏览器）。核心定案（改桥/查「组件不响应」前必读）：
+- **eview 三大组件全自绘**：Tree（TreeNode.cWRP 无条件 setState×大树超 React19 嵌套上限 #185）、Tabs 标签栏（cWRP 死循环/溢出 index 错位/「可见窗口」只给部分标签 display 类三连）、Popover（TipBox display 受控被忽略）——桥自绘=ev_* 类名承观感+role 语义补回+ub- 自有类；自绘先例可复制（点外关闭 window capture+teleport 弹层排除）。
+- **FA-05 锚点回填观察器**（bridge.ts installAnchorAttrObserver）：桥 anchorId 只落 id=dt-*、eview 不透传 data-test——MutationObserver 全局回填，80 条契约零改造。
+- **confirm=Dialog 非 MessageDialog**（后者实为顶部消息横幅、无按钮——提交确认曾断死，截图实证）；Table expandable=树数据拍平；Tabs pane 按激活项 key（同类型 children 复用残留）；宽 Select 点容器空白不弹（eview 只认 input 本体——E2E 点 input）。
+- **环境口径**：kind 部署=Dockerfile.prebuilt（宿主 build dist 直装，容器 npm 装不到 @nce）+kind load+rollout（-n usmp-system）；E2E_DEVICE_IP=netconf-sim.default（K8s 服务名≠compose 的 192.168.1.1）；Google Fonts 外链已删（离线必败）。
+- **E2E 侦察方法论**：diag.spec 用例（DOM dump/boundingRect/response 抓包/列 col-id 清单/弹层计数）+失败截图人眼判读+精确 tab 正则（hasText 子串曾误中「动态VLAN列表」）——每轮一锤定音、十三轮无一轮空转。
+
 **原「下一步」记录（组 5 前）**：**组 5 接线**（index.ts 切 eview 后端+调用点微调+antd 退场+覆盖率分母回收重钉+findDOMNode polyfill 生产安装）→组 6 F3（含 Tabs/Tree 校准移交项）/派生黄金→组 7 E2E→组 8 收尾→波 C 运行时翻转（openinula+intl 内核+router v5 化+inula-X，制品在 tasks.md 组 2 挂起项）。
 
 相关：[[eviewui-inula-migration]]（调研与矩阵）、[[react-antd-rebuild]]（适配层军规与上次迁移方法论）。
