@@ -1,4 +1,4 @@
-import { create } from 'zustand'
+import { create } from './createStore'
 
 /** 后端 GET /config 响应中与缓存新鲜度相关的字段（PR-B2）。 */
 export interface CacheMeta {

@@ -1,4 +1,4 @@
-import { create } from 'zustand'
+import { create } from './createStore'
 import { setLocale as i18nSetLocale, getLocale } from '../i18n'
 
 // UI-01：语言偏好（zh-cn/en-us），localStorage 持久化；非法值回退 zh-cn（R08）。

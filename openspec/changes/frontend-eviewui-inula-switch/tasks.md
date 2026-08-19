@@ -25,7 +25,7 @@
 - [x] 2.1a （先行波）薄层 hook 化：新增 `useLocale()`（useState+useEffect 运行时无关实现），4 处 useSyncExternalStore 调用点清零；RT-02 守护测试落地（拦 React 18+ API 调用/导入）— **F1**
 - [ ] 2.1b （翻转波）i18n 内核换 inula-intl：薄层 API 面不变、内核换 VueI18n 适配器、`on('change')` 接订阅 — **F1**（词表键名快照回归）
 - [x] 2.2 （先行波）请求换 inula-request：ir.create 单实例（axios 同形零调用点改动）；filter 承载改直接拼 URL（inula-request params 不收 URLSearchParams），F1 请求形状测试跟随新契约更新（filter 不带[]/offset=0 省略/sort_dir 缺省/30s 超时验证点全保）；inula 四件套转正运行时依赖，axios 窗口期保留可回退 — 全量 577/577 绿
-- [ ] 2.3 store 换 inula-X：5 个 zustand store → `createStore({state,actions,computed})` 三段式；组件外订阅点接 `$subscribe`；**FE-27 回归**：changeset payload 经响应式 Proxy 后序列化/解构删键语义不变（红灯先行） — **F1**
+- [x] 2.3 状态层换**自研 React 17 级薄层**（2026-08-19 拍板变更，用户确认：inula-X 锁死 openinula 会使外网 React 测试体系失效——自研 createStore 双运行时可跑，zustand 同形 API 调用点仅换 import）：src/stores/createStore.ts（useState/useEffect/useRef 实现、selector Object.is bail、getState/setState/subscribe）+F1 五用例；5 store 换内核**全量 647 零回归**（FE-27 payload 语义在存量套件钉住）；zustand 依赖移除 — **F1 ✓**
 - [ ] 2.4 路由 v5 化：Switch/Route JSX 树 + MainLayout children 组合；`src/router/compat.ts`（useNavigate/useSearchParams 薄包装）；离开守卫 Prompt+getUserConfirmation 桥（FE-23 Scenario 回归钉住）；测试 MemoryRouter 迁移 — **F1/F2**
 
 > **路线乙重排（2026-08-17，route-decision.md）**：组 3~5 提前为主线（on React 19，
