@@ -71,7 +71,7 @@
 
 ## 8. 工具链与文档收尾（PR-14）
 
-- [ ] 8.1 CI 工作流/钩子/Dockerfile/build-release 验证（Vue→React 收尾清单同款流程）
-- [ ] 8.2 CLAUDE.md §3/§5.6/§7.2 栈口径更新；frontend/TESTING.md 更新
+- [x] 8.1 工具链收尾：kind-deploy.sh 支持 USMP_FRONTEND_DOCKERFILE=Dockerfile.prebuilt（离线内网）；build-release.sh 加 @nce 真包前置校验（交付构建=eview 真身，缺包快速失败）；StrictMode 恢复（守卫幂等后双挂载安全）+onRecoverableError 常驻；CI 六工作流全绿复核（frontend-ci/browser/storybook/contract/e2e-staging/pr-size）
+- [x] 8.2 CLAUDE.md §3 栈口径（EviewUI+@ui-backend 单点切换+三自绘）/§5.6/§7.2 antd 提法中性化；frontend/TESTING.md 新增「UI 双后端口径」章节（五场景表+FA-05 回填）
 - [ ] 8.3 /opsx:sync（frontend-runtime 新主 spec + frontend-ui-adapter MODIFIED/ADDED 合入；frontend/ui-i18n 仅 Purpose 栈名）
 - [ ] 8.4 /opsx:archive + 记忆归档（单独 commit）+ follow-up 债登记（Open Questions 1-3 + 目视验收妥协项）

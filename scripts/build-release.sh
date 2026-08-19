@@ -66,6 +66,9 @@ step "3/5 编译前端（vite build）"
 (
     cd "$ROOT/frontend"
     [ -d node_modules ] || npm ci --prefer-offline --no-audit --fund=false
+    # 组 8 口径：交付构建=EviewUI 真身，需 node_modules/@nce/* 在场（真包不出
+    # 内网、不在任何 npm 源——npm ci 装不到，须内网环境预置）。缺包快速失败。
+    [ -d node_modules/@nce/eview-react ] || fail "交付构建需 @nce/eview-react 真包（内网预置，npm 装不到）"
     npm run build
 )
 
