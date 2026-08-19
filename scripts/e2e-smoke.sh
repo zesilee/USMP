@@ -19,6 +19,10 @@ fi
 echo -e "${YELLOW}[e2e-smoke] 构建并起本地 staging...${NC}"
 # schema.ir.gz 为构建期产物不入库（R18）：backend 镜像构建 COPY 需其存在于工作区
 (cd backend/tools && go run ./schemagen -repo_root=../.. -output=../internal/yangschema/schema.ir.gz)
+# 组 7.2 口径：本地全栈冒烟以 antd 测试镜像构建前端（外网无 @nce 真包，
+# eview 构建必炸）——业务流程回归门禁；eview 真身验收=内网 kind E2E
+# （Dockerfile.prebuilt 链，21/21 已收敛）。
+USMP_UI_BACKEND=antd docker compose build --build-arg USMP_UI_BACKEND=antd frontend
 docker compose up -d --build --remove-orphans
 
 # 端口自动发现（尊重 override 的重映射；失败回退默认）
