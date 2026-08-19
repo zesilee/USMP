@@ -30,8 +30,7 @@
     "openinula": "^1.0.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-router": "^8.3.0",
-    "zustand": "^5.0.15"
+    "react-router": "^8.3.0"
   },
   "devDependencies": {
     "@ant-design/icons": "^6.3.2",

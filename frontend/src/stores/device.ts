@@ -1,4 +1,4 @@
-import { create } from 'zustand'
+import { create } from './createStore'
 import { listDevices, getDeviceStatus } from '../api'
 import { i18n } from '../i18n'
 

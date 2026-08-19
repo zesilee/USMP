@@ -1,4 +1,4 @@
-import { create } from 'zustand'
+import { create } from './createStore'
 import { listYangModules, getLeftTree } from '../api'
 import { i18n } from '../i18n'
 

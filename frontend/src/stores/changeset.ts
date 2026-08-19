@@ -1,4 +1,4 @@
-import { create } from 'zustand'
+import { create } from './createStore'
 
 /** 变更集条目操作类型（与后端 config-changeset 契约同名）。 */
 export type ChangesetOp = 'create' | 'update' | 'delete'
