@@ -115,6 +115,9 @@ export function Popover(
       if (!openRef.current) return
       const root = wrapRef.current
       const t = e.target as Node | null
+      // teleport 到 body 的下拉弹层（ev_popup）视为「内」——点面板里下拉的
+      // 选项曾被误判点外把面板关掉（E2E 238 实录）。
+      if (t && (t as Element).closest?.('.ev_popup')) return
       if (root && t && !root.contains(t)) setOpen(false)
     }
     window.addEventListener('click', handler, true)
