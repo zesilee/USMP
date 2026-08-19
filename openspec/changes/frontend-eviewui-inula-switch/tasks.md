@@ -23,10 +23,11 @@
 > 保留"以 git 可回退 + 窗口期双依赖体现）。
 
 - [x] 2.1a （先行波）薄层 hook 化：新增 `useLocale()`（useState+useEffect 运行时无关实现），4 处 useSyncExternalStore 调用点清零；RT-02 守护测试落地（拦 React 18+ API 调用/导入）— **F1**
-- [ ] 2.1b （翻转波）i18n 内核换 inula-intl：薄层 API 面不变、内核换 VueI18n 适配器、`on('change')` 接订阅 — **F1**（词表键名快照回归）
+- [x] 2.1b 定性核销（2026-08-19）：i18n 薄层在 React 重建期已**自研无内核**（纯词表查表+插值，src/i18n/index.ts——「换 inula-intl 内核」前提过时，17 级安全双运行时天然可跑）；inula-intl 仅在翻转日作为 eview 内部 require('react-intl') 的**构建别名承接**（归入 2.5 翻转日清单）
 - [x] 2.2 （先行波）请求换 inula-request：ir.create 单实例（axios 同形零调用点改动）；filter 承载改直接拼 URL（inula-request params 不收 URLSearchParams），F1 请求形状测试跟随新契约更新（filter 不带[]/offset=0 省略/sort_dir 缺省/30s 超时验证点全保）；inula 四件套转正运行时依赖，axios 窗口期保留可回退 — 全量 577/577 绿
 - [x] 2.3 状态层换**自研 React 17 级薄层**（2026-08-19 拍板变更，用户确认：inula-X 锁死 openinula 会使外网 React 测试体系失效——自研 createStore 双运行时可跑，zustand 同形 API 调用点仅换 import）：src/stores/createStore.ts（useState/useEffect/useRef 实现、selector Object.is bail、getState/setState/subscribe）+F1 五用例；5 store 换内核**全量 647 零回归**（FE-27 payload 语义在存量套件钉住）；zustand 依赖移除 — **F1 ✓**
 - [x] 2.4a 路由 compat 收口（波 C 前置，2026-08-19）：src/router/compat.ts 收束 8 个路由 API（现=react-router 直通），7 文件调用点全部改经 compat，adapter-guard 扩拦业务直 import react-router；**翻转时改动收束单点** — 全量 647 零回归
+- [x] 2.4a2 路由 compat 升级裸别名 @app-router（三配置接线：vite=生产/vitest+browser=测试恒 react 直通/tsconfig=类型面）——翻转后外网测试运行时不动，双实现分流与 @ui-backend 同款 — 647 零回归
 - [ ] 2.4b 翻转日：compat 内部换 inula-router（v5 形态：useNavigate/useSearchParams 薄包装、useBlocker→Prompt+getUserConfirmation 桥保 state/proceed/reset 契约（RT-03 Scenario）、createBrowserRouter/RouterProvider→BrowserRouter+Switch JSX）；测试 MemoryRouter 迁移 — **F1/F2**
 
 > **路线乙重排（2026-08-17，route-decision.md）**：组 3~5 提前为主线（on React 19，

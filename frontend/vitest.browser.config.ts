@@ -45,6 +45,7 @@ export default defineConfig({
         new URL(process.env.EVIEW_REAL === '1' ? './src/ui/eview' : './src/ui/antd-backend', import.meta.url),
       ),
       '@bridge': fileURLToPath(new URL('./src/ui/eview', import.meta.url)),
+      '@app-router': fileURLToPath(new URL('./src/router/compat.ts', import.meta.url)),
     },
   },
 })

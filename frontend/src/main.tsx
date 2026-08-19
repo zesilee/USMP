@@ -2,7 +2,7 @@
 import './runtime/install-guards'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { RouterProvider } from './router/compat'
+import { RouterProvider } from '@app-router'
 import { UiProvider } from './ui'
 import { router } from './router'
 import './styles/reset.scss'

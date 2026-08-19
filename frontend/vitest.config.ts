@@ -112,7 +112,10 @@ export default defineConfig({
       ),
       // 真桥直达别名：桥 F2 替身测试与内网校准套件专用（不随测试分流切换）；
       // 业务代码禁用（adapter-guard 拦）。
-      '@bridge': fileURLToPath(new URL('./src/ui/eview', import.meta.url))
+      '@bridge': fileURLToPath(new URL('./src/ui/eview', import.meta.url)),
+      // 路由 compat：外网测试恒 react 直通版（翻转后生产走 compat.inula，
+      // 测试运行时仍 React——双实现由本别名分流）。
+      '@app-router': fileURLToPath(new URL('./src/router/compat.ts', import.meta.url))
     }
   }
 })

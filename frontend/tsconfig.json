@@ -19,6 +19,7 @@
       "@/*": ["src/*"],
       "@bridge/*": ["src/ui/eview/*"],
       "@ui-backend/*": ["src/ui/eview/*"],
+      "@app-router": ["src/router/compat.ts"],
       "openinula": ["./node_modules/openinula/@types/index.d.ts"],
       "@nce/eview-react/*": ["./vendor/eview-types/@nce/eview-react/*"]
     },
