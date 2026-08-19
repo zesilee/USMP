@@ -711,3 +711,13 @@ html, body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* 组7 E2E（diag5 矩形实证）：eview TextField 默认固定宽 364px，左树搜索框
+   溢出 240px 侧栏、盖住内容区按钮（pointer 拦截）——侧栏内输入类一律限宽。 */
+.sidebar .ev_textField,
+.sidebar .ev_input,
+.sidebar [class*='ev_textField'] {
+  width: 100% !important;
+  max-width: 100%;
+  box-sizing: border-box;
+}

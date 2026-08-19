@@ -1,9 +1,9 @@
 // EviewUI 桥 · 结构组（组 4.3）：Tabs/Menu(左树→Tree)/Table。
 // 对外 props = antd 形态；映射依据 = component-matrix + gate R1/R2（勿凭空改）。
-import { Children, createElement, isValidElement, useState, type ReactNode, type CSSProperties } from 'react'
+import { createElement, useState, type ReactNode, type CSSProperties } from 'react'
 import * as TabNS from '@nce/eview-react/Tab'
 import TableMod from '@nce/eview-react/Table'
-import { anchorId, pickDefault } from '../../bridge'
+import { anchorId, pickDefault, textOf } from '../../bridge'
 
 const EvTab = pickDefault(TabNS)
 // TabItem 挂在模块具名导出（default 导入拿不到——须命名空间导入；实录坑）。
@@ -21,17 +21,6 @@ interface CommonProps {
   'data-test'?: string
   className?: string
   style?: CSSProperties
-}
-
-const textOf = (n: ReactNode): string => {
-  if (typeof n === 'string' || typeof n === 'number') return String(n)
-  if (isValidElement(n)) {
-    const kids = (n.props as { children?: ReactNode }).children
-    return Children.toArray(kids ?? [])
-      .map((c) => textOf(c))
-      .join('')
-  }
-  return n == null ? '' : String(n)
 }
 
 // ===== Tabs → Tab（key↔index 桥；内容区桥自渲，绕开 TabContent 形态不确定性）=====
