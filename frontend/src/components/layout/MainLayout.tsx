@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from '../../router/compat'
+import { Outlet, useLocation } from '@app-router'
 import Sidebar from './Sidebar'
 import Header from './Header'
 import './MainLayout.scss'

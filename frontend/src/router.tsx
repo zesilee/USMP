@@ -1,4 +1,4 @@
-import { createBrowserRouter } from './router/compat'
+import { createBrowserRouter } from '@app-router'
 import MainLayout from './components/layout/MainLayout'
 import ModuleConsolePage from './views/ModuleConsolePage'
 import Dashboard from './views/Dashboard'

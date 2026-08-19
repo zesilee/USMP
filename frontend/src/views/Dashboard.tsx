@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate } from '../router/compat'
+import { useNavigate } from '@app-router'
 import { Alert, Button } from '../ui'
 import { i18n } from '../i18n'
 import { useFleetOverview } from '../composables/useFleetOverview'
