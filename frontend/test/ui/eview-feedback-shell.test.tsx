@@ -13,14 +13,19 @@ vi.mock('@nce/eview-react/DivMessage', () => ({
     </div>
   ),
 }))
-vi.mock('@nce/eview-react/MessageDialog', () => ({
+// E2E 实录：MessageDialog 实为顶部消息横幅（无按钮）——confirm 改用 Dialog
+// （buttons 数组形态，Modal 桥同款）。stub 按 Dialog 契约。
+vi.mock('@nce/eview-react/Dialog', () => ({
   default: (p: any) =>
     p.isOpen ? (
-      <div data-stub="messagedialog" data-type={p.type}>
+      <div data-stub="dialog">
         <b>{p.title}</b>
-        {p.content && <p>{p.content}</p>}
-        <button onClick={p.buttons?.ok?.onClick}>{p.buttons?.ok?.text ?? 'OK'}</button>
-        <button onClick={p.buttons?.cancel?.onClick}>{p.buttons?.cancel?.text ?? 'CANCEL'}</button>
+        {p.children && <p>{p.children}</p>}
+        {(p.buttons ?? []).map((b: any, i: number) => (
+          <button key={i} onClick={b.onClick}>
+            {b.text}
+          </button>
+        ))}
         <button aria-label="close" onClick={p.onClose}>×</button>
       </div>
     ) : null,
@@ -56,22 +61,21 @@ describe('eview feedback · toast（自养挂载点）', () => {
 })
 
 describe('eview feedback · confirm（Promise 化）', () => {
-  it('确认 resolve(true) 并卸载', async () => {
+  it('确认 resolve(true) 并卸载；按钮文案缺省走 i18n', async () => {
     const p = confirm('删除该行？', { okText: '删除', danger: true })
-    const dlg = document.body.querySelector('[data-stub="messagedialog"]')!
-    expect(dlg.getAttribute('data-type')).toBe('risk')
+    const dlg = document.body.querySelector('[data-stub="dialog"]')!
     expect(dlg.textContent).toContain('删除该行？')
     fireEvent.click(screen.getByText('删除'))
     await expect(p).resolves.toBe(true)
     expect(document.body.querySelector('.usmp-feedback-host')).toBeNull()
   })
 
-  it('取消与右上关闭均 resolve(false)', async () => {
+  it('取消（i18n 缺省文案）与右上关闭均 resolve(false)', async () => {
     const p1 = confirm('确认？')
-    fireEvent.click(screen.getByText('CANCEL'))
+    fireEvent.click(screen.getByText('取消'))
     await expect(p1).resolves.toBe(false)
     const p2 = confirm('确认？', { title: '标题', okText: 'y', cancelText: 'n' })
-    const dlg = document.body.querySelector('[data-stub="messagedialog"]')!
+    const dlg = document.body.querySelector('[data-stub="dialog"]')!
     expect(dlg.querySelector('b')!.textContent).toBe('标题')
     expect(dlg.querySelector('p')!.textContent).toBe('确认？')
     fireEvent.click(screen.getByLabelText('close'))
