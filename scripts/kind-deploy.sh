@@ -98,7 +98,10 @@ log "构建镜像（simulator / controller / frontend）"
 (cd "$ROOT/backend/tools" && go run ./schemagen -repo_root=../.. -output=../internal/yangschema/schema.ir.gz)
 docker build "${build_args[@]}" -t usmp-simulator:latest  -f "$ROOT/backend/Dockerfile.simulator" "$ROOT/backend"
 docker build "${build_args[@]}" -t usmp-controller:latest -f "$ROOT/backend/Dockerfile"           "$ROOT/backend"
-docker build "${build_args[@]}" -t usmp-frontend:latest   -f "$ROOT/frontend/Dockerfile"          "$ROOT/frontend"
+# 组 8：前端 Dockerfile 可切换——离线内网（无 @nce npm 源）用 prebuilt：
+#   cd frontend && npm run build && cd .. && USMP_FRONTEND_DOCKERFILE=Dockerfile.prebuilt bash scripts/kind-deploy.sh
+FRONTEND_DOCKERFILE="${USMP_FRONTEND_DOCKERFILE:-Dockerfile}"
+docker build "${build_args[@]}" -t usmp-frontend:latest   -f "$ROOT/frontend/$FRONTEND_DOCKERFILE" "$ROOT/frontend"
 log "载入镜像到 kind 节点"
 kind load docker-image usmp-simulator:latest usmp-controller:latest usmp-frontend:latest --name "$CLUSTER"
 

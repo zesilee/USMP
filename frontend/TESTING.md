@@ -3,6 +3,24 @@
 > 本文件是前端测试的**唯一权威**分层规范，与 [CLAUDE.md §5.6](../CLAUDE.md)（测试军规）一致。
 > 军规：每个改动**必须**按「改动类型→必补层」补齐测试，缺层=未完成、禁止合并（T06）；测试设计先于编码（T05）。
 
+## UI 双后端口径（EviewUI 切换后，组 5-7 定型）
+
+生产 UI = **EviewUI 桥**（`src/ui/eview/*`，`@ui-backend` 别名单点切换）；但 EviewUI
+实现包（@nce/*）**不出内网**——外网测试环境没有真组件。因此：
+
+| 场景 | UI 后端 | 说明 |
+|------|---------|------|
+| 外网 F1/F2/F3/e2e-local | antd 测试镜像（`src/ui/antd-backend`） | 真实组件行为可断言；业务逻辑回归门禁 |
+| 桥自身 F2 替身测试 | 真桥（`@bridge` 别名 + @nce 子路径 stub + vi.mock 工厂） | 断言桥的 props 映射 |
+| 内网校准（happy-dom） | 真桥全链（`EVIEW_REAL=1`） | `test/integration/eview-real.test.tsx`，CAL-R16 全绿 |
+| 内网校准（真浏览器） | 真桥全链（`EVIEW_REAL=1` + browser config） | `test/browser/eview-real-browser.test.tsx`，F3-R10 全绿 |
+| 内网 E2E（kind 全栈） | eview 真身（Dockerfile.prebuilt 宿主构建） | `E2E_DEVICE_IP=netconf-sim.default`，21/21 全绿 |
+
+桥行为等价性由内网校准+E2E 兜底；外网测试断言 antd 行为是**窗口期口径**（波 C
+或外网可得真包时复评）。FA-05 锚点：桥经 anchorId 落 id=dt-*，运行时
+`installAnchorAttrObserver` 回填 data-test 属性（80 条契约零改造）。
+
+
 ## 四层 + 契约/类型门禁
 
 | 层 | 运行器 / 配置 | 位置 | 职责（测什么） | 跑法 |
