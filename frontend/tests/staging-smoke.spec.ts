@@ -139,7 +139,8 @@ test.describe('部署冒烟 - 前端 SPA', () => {
 
     // 变更内容弹窗核对后关闭
     await page.locator('[data-test="batch-changes"]').click()
-    const changesDialog = page.getByRole('dialog').filter({ hasText: '变更内容' })
+    // eview Dialog 无 role=dialog——类名+标题定位。
+    const changesDialog = page.locator('.ev_Dialog').filter({ hasText: '变更内容' }).first()
     await expect(changesDialog.getByText(vlanId, { exact: false }).first()).toBeVisible()
     await changesDialog.locator(SEL.modalClose).click()
 
@@ -243,7 +244,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     await page.getByRole('button', { name: /高级搜索/ }).click()
     const panel = page.locator('.search-panel')
     await panel.locator(SEL.select).first().click()
-    await page.locator(`${SEL.selectOption}:visible`, { hasText: 'sub-interface' }).first().click()
+    await page.locator(`${SEL.selectOption}:visible`, { hasText: /sub-interface|子接口/ }).first().click()
     // antd 两字按钮自动插空格（「查 询」），按正则匹配。
     await panel.getByRole('button', { name: /查\s*询/ }).click()
 
@@ -272,7 +273,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
       has: page.locator(SEL.formItemLabel, { hasText: /^接口类别$/ }),
     })
     await classItem.locator(SEL.select).click()
-    await page.locator(`${SEL.selectOption}:visible`, { hasText: 'sub-interface' }).first().click()
+    await page.locator(`${SEL.selectOption}:visible`, { hasText: /sub-interface|子接口/ }).first().click()
 
     await expect(pane.getByText('主接口名', { exact: false }).first()).toBeVisible({ timeout: 15000 })
   })
@@ -394,7 +395,8 @@ test.describe('部署冒烟 - 业务网络配置', () => {
     await page.locator('[data-test="business-create"]').click()
 
     // 页面含新建/详情两个抽屉容器，按 aria-label 精确定位（strict mode）。
-    const drawer = page.getByRole('dialog', { name: '新建业务实例' })
+    // eview Drawer 无 role=dialog（可达性差异，锚点债）——类名+标题文本定位。
+    const drawer = page.locator('[class*="ev_Drawer" i], [class*="ev_drawer" i]').filter({ hasText: '新建业务实例' }).first()
     await expect(drawer).toBeVisible({ timeout: 15000 })
     await expect(drawer.getByText('实例名').first()).toBeVisible()
     // schema 派生字段（意图 YANG 叶子）与嵌套 devices list 的添加入口。
