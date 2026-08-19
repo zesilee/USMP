@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from 'react-router'
+import { Outlet, useLocation } from '../../router/compat'
 import Sidebar from './Sidebar'
 import Header from './Header'
 import './MainLayout.scss'
