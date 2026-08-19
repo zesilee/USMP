@@ -1,6 +1,6 @@
 // EviewUI 桥 · 收尾组（组 4.4）：Button/Spin/Tooltip/Popover/Alert。
 // 对外 props = antd 形态；映射依据 = component-matrix + gate（勿凭空改）。
-import { createElement, type ReactNode, type CSSProperties } from 'react'
+import { createElement, useEffect, useRef, useState, type ReactNode, type CSSProperties } from 'react'
 import ButtonMod from '@nce/eview-react/Button'
 import LoadingMod from '@nce/eview-react/Loading'
 import TipBoxMod from '@nce/eview-react/TipBox'
@@ -96,17 +96,42 @@ export function Popover(
     children?: ReactNode
   },
 ) {
+  // 自绘气泡（组 7 E2E 定案）：TipBox 的 display 受控在真组件被忽略（matrix
+  // 早标记的已知限制，高级搜索面板 E2E 直击：受控 open=true 面板不弹）——
+  // 桥自绘：锚点 wrapper + 受控/非受控双态 + 点外关闭（window capture，
+  // Tree 委托同款先例）。hover 触发不在业务用（列设置/高级搜索均 click）。
+  const [innerOpen, setInnerOpen] = useState(false)
+  const isControlled = props.open !== undefined
+  const open = isControlled ? !!props.open : innerOpen
+  const setOpen = (v: boolean) => {
+    if (!isControlled) setInnerOpen(v)
+    props.onOpenChange?.(v)
+  }
+  const wrapRef = useRef<HTMLSpanElement | null>(null)
+  const openRef = useRef(open)
+  openRef.current = open
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (!openRef.current) return
+      const root = wrapRef.current
+      const t = e.target as Node | null
+      if (root && t && !root.contains(t)) setOpen(false)
+    }
+    window.addEventListener('click', handler, true)
+    return () => window.removeEventListener('click', handler, true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return createElement(
-    EvTipBox,
-    {
-      content: props.content,
-      trigger: props.trigger === 'hover' ? 'hover' : 'click',
-      display: props.open, // 已知限制：children 场景可能被忽略（d.ts 明示）
-      onClose: () => props.onOpenChange?.(false),
-      onDispose: () => props.onOpenChange?.(false),
-      className: props.className,
-    },
-    props.children,
+    'span',
+    { className: ['ub-popover-anchor', props.className].filter(Boolean).join(' '), ref: wrapRef },
+    createElement(
+      'span',
+      { className: 'ub-popover-trigger', onClick: () => setOpen(!open) },
+      props.children,
+    ),
+    open
+      ? createElement('div', { className: 'ub-popover', 'data-test': props['data-test'] }, props.content)
+      : null,
   )
 }
 

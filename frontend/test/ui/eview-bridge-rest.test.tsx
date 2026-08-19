@@ -70,13 +70,28 @@ describe('Spin/Tooltip/Popover 桥', () => {
     render(<Tooltip title="提示"><span>t</span></Tooltip>)
     expect(recv.last.TipBox).toMatchObject({ content: '提示', trigger: 'hover' })
   })
-  it('Popover：click 触发、open→display 尽力受控、关闭通知 onOpenChange(false)', () => {
+  // 组 7 定案：TipBox display 受控被真组件忽略（E2E 直击）——Popover 桥自绘，
+  // 断言改真实 DOM（受控开合/非受控点击切换/点外关闭）。
+  it('Popover 自绘：受控 open 渲染气泡、点外关闭通知 onOpenChange(false)', () => {
     const onOpenChange = vi.fn()
-    render(<Popover content={<b>面板</b>} trigger="click" open onOpenChange={onOpenChange}><span>t</span></Popover>)
-    expect(recv.last.TipBox.trigger).toBe('click')
-    expect(recv.last.TipBox.display).toBe(true)
-    fireEvent.click(screen.getByText('close-tip'))
+    const { container, rerender } = render(
+      <Popover content={<b>面板</b>} trigger="click" open onOpenChange={onOpenChange}><span>t</span></Popover>,
+    )
+    expect(container.querySelector('.ub-popover')?.textContent).toBe('面板')
+    fireEvent.click(document.body)
     expect(onOpenChange).toHaveBeenCalledWith(false)
+    rerender(
+      <Popover content={<b>面板</b>} trigger="click" open={false} onOpenChange={onOpenChange}><span>t</span></Popover>,
+    )
+    expect(container.querySelector('.ub-popover')).toBeNull()
+  })
+  it('Popover 自绘：非受控点击触发器切换开合', () => {
+    const { container } = render(<Popover content={<i>泡</i>}><button>b</button></Popover>)
+    expect(container.querySelector('.ub-popover')).toBeNull()
+    fireEvent.click(screen.getByText('b'))
+    expect(container.querySelector('.ub-popover')?.textContent).toBe('泡')
+    fireEvent.click(screen.getByText('b'))
+    expect(container.querySelector('.ub-popover')).toBeNull()
   })
 })
 

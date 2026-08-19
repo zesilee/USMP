@@ -53,7 +53,10 @@ export function Tabs(
             (title != null ? items.find((i) => textOf(i.label) === title) : undefined) ?? items[index]
           if (target && !target.disabled) props.onChange?.(target.key)
         },
-        observerWidthChange: true, // 溢出折叠随容器宽度自动重排（matrix）
+        // E2E 实录：溢出折叠把标签藏进不可达形态（详情 tabs「接口动态信息」
+        // element not visible）——关折叠改标签条横向滚动（.ub-tabs CSS），
+        // 全部标签恒可点（Playwright 自动滚动到位）。
+        observerWidthChange: false,
       },
       items.map((i) =>
         createElement(EvTabItem, { key: i.key, title: textOf(i.label), disabled: i.disabled }),

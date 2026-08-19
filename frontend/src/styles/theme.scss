@@ -721,3 +721,26 @@ html, body {
   max-width: 100%;
   box-sizing: border-box;
 }
+
+/* 组7：Popover 自绘气泡（TipBox display 受控被忽略——桥自绘）。 */
+.ub-popover-anchor {
+  position: relative;
+  display: inline-block;
+}
+.ub-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 1200;
+  min-width: 200px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  box-shadow: 0 6px 20px rgba(22, 34, 46, 0.12);
+}
+
+/* 组7：Tabs 关溢出折叠后标签条横向滚动。 */
+.ub-tabs {
+  overflow-x: auto;
+}
