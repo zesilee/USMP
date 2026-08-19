@@ -147,7 +147,7 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     // 提交配置：确认 → 进度弹窗 → 完成关闭
     await page.locator('[data-test="batch-commit"]').click()
     await page.getByRole('button', { name: /确\s*定/ }).last().click()
-    const commitDialog = page.getByRole('dialog').filter({ hasText: '提交配置' })
+    const commitDialog = page.locator('.ev_Dialog').filter({ hasText: '提交配置' }).first()
     await expect(commitDialog.locator('[data-test="commit-close"]')).toBeEnabled({ timeout: 30000 })
     await expect(commitDialog.locator('[data-test="commit-error"]')).toHaveCount(0)
     await commitDialog.locator('[data-test="commit-close"]').click()

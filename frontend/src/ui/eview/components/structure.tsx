@@ -45,9 +45,12 @@ export function Tabs(
         // 语义无损（代价=切换无过渡动画，窗口期可接受）。
         key: `ub-tab-${idx}`,
         selectedIndex: idx,
-        // eview onClick(index, title, e)。
-        onClick: (index: number) => {
-          const target = items[index]
+        // eview onClick(index, title, e)。E2E 实录（ifm 7 tab）：溢出折叠场景
+        // index 与 items 原始序错位（点「接口列表」内容区仍是首 tab）——
+        // 以 title 反查为主、index 兜底。
+        onClick: (index: number, title?: string) => {
+          const target =
+            (title != null ? items.find((i) => textOf(i.label) === title) : undefined) ?? items[index]
           if (target && !target.disabled) props.onChange?.(target.key)
         },
         observerWidthChange: true, // 溢出折叠随容器宽度自动重排（matrix）
