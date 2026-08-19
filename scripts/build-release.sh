@@ -69,6 +69,8 @@ step "3/5 编译前端（vite build）"
     # 组 8 口径：交付构建=EviewUI 真身，需 node_modules/@nce/* 在场（真包不出
     # 内网、不在任何 npm 源——npm ci 装不到，须内网环境预置）。缺包快速失败。
     [ -d node_modules/@nce/eview-react ] || fail "交付构建需 @nce/eview-react 真包（内网预置，npm 装不到）"
+    # 波 C：openinula 运行时产物加 USMP_RUNTIME=inula（内网 E2E 验收通过后
+    # 将翻为默认）；缺省仍 React 19。
     npm run build
 )
 

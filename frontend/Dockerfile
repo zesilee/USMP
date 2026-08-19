@@ -16,6 +16,9 @@ COPY . .
 # 全栈门禁用；缺省 eview 真身=内网/交付构建）
 ARG USMP_UI_BACKEND=
 ENV USMP_UI_BACKEND=${USMP_UI_BACKEND}
+# 波 C：USMP_RUNTIME=inula 时产物为 openinula 运行时（内网验收通过前默认 React）。
+ARG USMP_RUNTIME=
+ENV USMP_RUNTIME=${USMP_RUNTIME}
 RUN npm run build
 
 # 运行阶段
