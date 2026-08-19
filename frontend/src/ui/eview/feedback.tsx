@@ -10,10 +10,11 @@ import { pickDefault } from '../bridge'
 import { flushSync } from 'react-dom'
 import { createElement, type ReactElement } from 'react'
 import DivMessageMod from '@nce/eview-react/DivMessage'
-import MessageDialogMod from '@nce/eview-react/MessageDialog'
+import DialogMod from '@nce/eview-react/Dialog'
+import { i18n } from '../../i18n'
 
 const DivMessage = pickDefault(DivMessageMod)
-const MessageDialog = pickDefault(MessageDialogMod)
+const EvDialog = pickDefault(DialogMod)
 
 type ToastKind = 'success' | 'error' | 'warning' | 'info'
 const KIND_MAP: Record<ToastKind, string> = { success: 'success', error: 'error', warning: 'warn', info: 'default' }
@@ -84,18 +85,28 @@ export function confirm(content: string, opts: ConfirmOptions = {}): Promise<boo
       m.unmount()
       resolve(v)
     }
+    // E2E 实录（组 7）：MessageDialog 实际渲染为顶部消息横幅（无按钮，仅
+    // 关闭叉）——确认链路断死（人工操作同样卡）。改用 Dialog（Modal 桥同款，
+    // buttons 形态校准实证）；按钮文案缺省走 i18n（common.confirm/cancel）。
+    const tt = i18n.global.t
     m.render(
-      createElement(MessageDialog, {
-        isOpen: true,
-        type: opts.danger ? 'risk' : 'confirm',
-        title: opts.title ?? content,
-        content: opts.title ? content : undefined,
-        buttons: {
-          ok: { text: opts.okText, onClick: () => done(true) },
-          cancel: { text: opts.cancelText, onClick: () => done(false) },
+      createElement(
+        EvDialog,
+        {
+          isOpen: true,
+          title: opts.title ?? content,
+          onClose: () => done(false),
+          buttons: [
+            { text: opts.okText ?? tt('common.confirm'), onClick: () => done(true) },
+            { text: opts.cancelText ?? tt('common.cancel'), onClick: () => done(false) },
+          ],
+          closable: true,
+          movable: false,
+          destroyOnClose: true,
+          size: [420, null],
         },
-        onClose: () => done(false),
-      }),
+        opts.title ? content : undefined,
+      ),
     )
   })
 }
