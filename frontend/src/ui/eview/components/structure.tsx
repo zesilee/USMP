@@ -59,8 +59,11 @@ export function Tabs(
         createElement(EvTabItem, { key: i.key, title: textOf(i.label), disabled: i.disabled }),
       ),
     ),
-    // 内容区：仅渲染激活项（与 antd 默认 lazy 语义一致）。
-    createElement('div', { className: 'ub-tabs-pane' }, items[idx]?.children),
+    // 内容区：仅渲染激活项（与 antd 默认 lazy 语义一致）。key 按激活项——
+    // 各 tab children 常为同一组件类型（如 ModuleListTab），无 key 时 React
+    // 就地复用旧实例致内部 state 残留（E2E 实录：切「接口列表」后取数已换
+    // 而列仍是旧 tab 的）；antd 每 pane 自带 key，对齐之。
+    createElement('div', { className: 'ub-tabs-pane', key: `pane-${items[idx]?.key ?? idx}` }, items[idx]?.children),
   )
 }
 
