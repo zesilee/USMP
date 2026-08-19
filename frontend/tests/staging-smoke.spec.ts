@@ -272,7 +272,9 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     const classItem = pane.locator(SEL.formItem, {
       has: page.locator(SEL.formItemLabel, { hasText: /^接口类别$/ }),
     })
-    await classItem.locator(SEL.select).click()
+    // diag8 实证：宽表单里点容器空白区 eview 不弹（只认 input 本体，原生
+    // 交互习惯非桥回归）——点 input。
+    await classItem.locator(`${SEL.select} input`).click()
     await page.locator(`${SEL.selectOption}:visible`, { hasText: /sub-interface|子接口/ }).first().click()
 
     await expect(pane.getByText('主接口名', { exact: false }).first()).toBeVisible({ timeout: 15000 })
