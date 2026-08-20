@@ -229,6 +229,10 @@ describe('Table 桥（列头筛选自绘菜单）', () => {
     expect(recv.last.Table.columns[0].title).toBe('名称')
     expect(container.querySelector('[aria-label="filter-kind"]')).toBeTruthy()
     expect(container.querySelector('[aria-label="filter-name"]')).toBeNull()
+    // 内网 C1 探针定案：eview 按标题文本测宽分列宽，组件标题量不出→列宽 0
+    // （整列被挤没）——须随组件标题供 titleComponentToText 测宽文本。
+    expect(recv.last.Table.columns[1].titleComponentToText).toBe('类型')
+    expect(recv.last.Table.columns[0].titleComponentToText).toBeUndefined()
   })
 
   it('勾选选项+确定：dataset 过滤、onChange 合成 filters+分页快照、触发器激活态', () => {

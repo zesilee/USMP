@@ -377,6 +377,9 @@ export function Table<T extends object = Record<string, unknown>>(
       key: k,
       // filters 列：标题包自绘筛选触发器（确定/重置回写 → 过滤管线 + antd
       // onChange filters 快照合成；分页快照与排序通道同形）。
+      // C1 探针定案：eview 对无显式宽度的列按标题文本测宽——组件标题量不出
+      // 长度会分到 0 宽（列被挤没）；titleComponentToText 即为此供测宽文本。
+      titleComponentToText: c.filters?.length && c.onFilter ? textOf(c.title) : undefined,
       title:
         c.filters?.length && c.onFilter
           ? createElement(ColFilter, {
