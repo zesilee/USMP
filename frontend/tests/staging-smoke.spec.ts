@@ -8,18 +8,45 @@ import { test, expect } from '@playwright/test'
 // 对接真机时传真机 IP。
 const DEVICE_IP = process.env.E2E_DEVICE_IP || '192.168.1.1'
 
-const SEL = {
-  select: '.ev_inputSelect',
-  // 内网 diag4 实证：弹层=div.ev_popup（data-test 随 anchorId 回填为
-  // {select 锚}_pop），选项=span.ev_popup_option[role=option]。
-  selectOption: '.ev_popup_option',
-  formItem: '.form-item-shell',
-  formItemLabel: '.fis-label',
-  badgeCount: '.ev_badge_content',
-  modalClose: '.ev_Dialog_closeIcon',
-  tableRow: '.ev_table_content tr',
-  tab: '.ev_tab_title',
-} as const
+// 双口径选择器表：缺省 eview（内网 kind 真桥，CAL/diag 实证类名）；
+// E2E_UI_BACKEND=antd 切 antd 类名——外网 e2e-local 以 antd 测试镜像构建
+// （方案 B：@nce 不出内网），本地 pre-push 门禁得以真实执行（此前 eview
+// 类名对 antd DOM 恒不匹配，只能 USMP_SKIP_E2E 跳过=门禁空转）。
+const ANTD = process.env.E2E_UI_BACKEND === 'antd'
+const SEL = ANTD
+  ? {
+      select: '.ant-select',
+      selectOption: '.ant-select-item-option',
+      formItem: '.form-item-shell',
+      formItemLabel: '.fis-label',
+      badgeCount: '.ant-badge-count',
+      modalClose: '.ant-modal-close',
+      tableRow: '.ant-table-tbody tr.ant-table-row',
+      tab: '.ant-tabs-tab',
+      // D2 实证：antd6 role=dialog 元素类=.ant-modal（无 -content 层）。
+      dialog: '.ant-modal',
+      // D1 实证：antd6 抽屉内容层=.ant-drawer-section。
+      drawer: '.ant-drawer-section',
+      menu: '.ant-menu',
+      dropdownItem: '.ant-dropdown-menu-item',
+    }
+  : {
+      select: '.ev_inputSelect',
+      // 内网 diag4 实证：弹层=div.ev_popup（data-test 随 anchorId 回填为
+      // {select 锚}_pop），选项=span.ev_popup_option[role=option]。
+      selectOption: '.ev_popup_option',
+      formItem: '.form-item-shell',
+      formItemLabel: '.fis-label',
+      badgeCount: '.ev_badge_content',
+      modalClose: '.ev_Dialog_closeIcon',
+      tableRow: '.ev_table_content tr',
+      tab: '.ev_tab_title',
+      dialog: '.ev_Dialog',
+      drawer: '[class*="ev_Drawer" i], [class*="ev_drawer" i]',
+      menu: '.ub-menu',
+      // eview 口径 Dropdown 弹层与 Select 同为 ev_popup（diag 实证）。
+      dropdownItem: '.ev_popup_option',
+    }
 
 // 部署冒烟 —— e2e-staging 工作流的浏览器门禁（v1）。
 //
@@ -140,14 +167,14 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     // 变更内容弹窗核对后关闭
     await page.locator('[data-test="batch-changes"]').click()
     // eview Dialog 无 role=dialog——类名+标题定位。
-    const changesDialog = page.locator('.ev_Dialog').filter({ hasText: '变更内容' }).first()
+    const changesDialog = page.locator(SEL.dialog).filter({ hasText: '变更内容' }).first()
     await expect(changesDialog.getByText(vlanId, { exact: false }).first()).toBeVisible()
     await changesDialog.locator(SEL.modalClose).click()
 
     // 提交配置：确认 → 进度弹窗 → 完成关闭
     await page.locator('[data-test="batch-commit"]').click()
     await page.getByRole('button', { name: /确\s*定/ }).last().click()
-    const commitDialog = page.locator('.ev_Dialog').filter({ hasText: '提交配置' }).first()
+    const commitDialog = page.locator(SEL.dialog).filter({ hasText: '提交配置' }).first()
     await expect(commitDialog.locator('[data-test="commit-close"]')).toBeEnabled({ timeout: 30000 })
     await expect(commitDialog.locator('[data-test="commit-error"]')).toHaveCount(0)
     await commitDialog.locator('[data-test="commit-close"]').click()
@@ -225,10 +252,15 @@ test.describe('部署冒烟 - 前端 SPA', () => {
     // 接口详情 Tab 有 47 个，antd Tabs 溢出折叠：目标 Tab 收在「更多」下拉里
     //（直点 nav 里的 tab 节点落在视口外、不触发切换），走下拉切换。
     const pane = page.locator('[data-test="item-detail-pane"]')
-    // TODO-E2E(内网首跑): antd 的「更多」溢出下拉在 eview 为 observerWidthChange
-    // 折叠，形态未实证——先按标签直点（若溢出隐藏不可点，内网首跑按真实
-    // DOM 校准）。
-    await pane.locator(`.detail-tabs ${SEL.tab}`, { hasText: '接口动态信息' }).first().click()
+    // 双口径切 Tab（D3/D4 实证）：antd 47+ Tab 溢出折叠，目标收在「更多」
+    // 下拉（直点隐藏 tab 为 no-op）——走 .ant-tabs-nav-more → dropdown 菜单项；
+    // eview 桥标签栏自绘横向滚动全部可点，保持直点。
+    if (ANTD) {
+      await pane.locator('.ant-tabs-nav-more').first().click()
+      await page.locator('.ant-tabs-dropdown-menu-item', { hasText: '接口动态信息' }).first().click()
+    } else {
+      await pane.locator(`.detail-tabs ${SEL.tab}`, { hasText: '接口动态信息' }).first().click()
+    }
     const macRow = pane.locator('.sub-field').filter({ hasText: '生效MAC地址' }).first()
     await expect(macRow.locator('input').first()).toHaveValue('00:e0:fc:12:34:01', { timeout: 15000 })
     await expect(macRow.locator('input').first()).toBeDisabled()
@@ -398,7 +430,7 @@ test.describe('部署冒烟 - 业务网络配置', () => {
 
     // 页面含新建/详情两个抽屉容器，按 aria-label 精确定位（strict mode）。
     // eview Drawer 无 role=dialog（可达性差异，锚点债）——类名+标题文本定位。
-    const drawer = page.locator('[class*="ev_Drawer" i], [class*="ev_drawer" i]').filter({ hasText: '新建业务实例' }).first()
+    const drawer = page.locator(SEL.drawer).filter({ hasText: '新建业务实例' }).first()
     await expect(drawer).toBeVisible({ timeout: 15000 })
     await expect(drawer.getByText('实例名').first()).toBeVisible()
     // schema 派生字段（意图 YANG 叶子）与嵌套 devices list 的添加入口。
@@ -428,22 +460,22 @@ test.describe('部署冒烟 - 业务网络配置', () => {
 test.describe('部署冒烟 - 语言切换（UI-01）', () => {
   test('切换 en-us 导航变英文并持久化，切回 zh-cn 收尾', async ({ page }) => {
     await page.goto('/', { waitUntil: 'networkidle' })
-    await expect(page.locator('.ub-menu').getByText('设备管理')).toBeVisible({ timeout: 15000 })
+    await expect(page.locator(SEL.menu).getByText('设备管理')).toBeVisible({ timeout: 15000 })
 
     await page.locator('[data-test="locale-switch"]').click()
     // Dropdown 桥 label 文本化丢 data-test（锚点债，tasks 7.1b）——按弹层
     // 选项文本选（语言名不随界面语言翻译，恒定安全）。
-    await page.locator(SEL.selectOption, { hasText: 'English' }).first().click()
-    await expect(page.locator('.ub-menu').getByText('Devices', { exact: true })).toBeVisible({ timeout: 5000 })
-    await expect(page.locator('.ub-menu').getByText('Native Configuration')).toBeVisible()
+    await page.locator(SEL.dropdownItem, { hasText: 'English' }).first().click()
+    await expect(page.locator(SEL.menu).getByText('Devices', { exact: true })).toBeVisible({ timeout: 5000 })
+    await expect(page.locator(SEL.menu).getByText('Native Configuration')).toBeVisible()
 
     // 刷新持久化（localStorage）
     await page.reload({ waitUntil: 'networkidle' })
-    await expect(page.locator('.ub-menu').getByText('Devices', { exact: true })).toBeVisible({ timeout: 15000 })
+    await expect(page.locator(SEL.menu).getByText('Devices', { exact: true })).toBeVisible({ timeout: 15000 })
 
     // 收尾切回 zh，避免影响后续用例顺序无关性
     await page.locator('[data-test="locale-switch"]').click()
-    await page.locator(SEL.selectOption, { hasText: '中文' }).first().click()
-    await expect(page.locator('.ub-menu').getByText('设备管理')).toBeVisible({ timeout: 5000 })
+    await page.locator(SEL.dropdownItem, { hasText: '中文' }).first().click()
+    await expect(page.locator(SEL.menu).getByText('设备管理')).toBeVisible({ timeout: 5000 })
   })
 })

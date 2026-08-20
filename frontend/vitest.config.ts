@@ -93,11 +93,13 @@ export default defineConfig({
       // （组 5 窗口期承诺），四项结构性回落——icons F1 回填后实测
       // 93.87/80.90/94.17/95.59，按现值下沿重钉；display/inputs 桥分支
       // 补测挂组 8 回填爬升，回填后按 T08 上调。
+      // 列头筛选补桥重钉（2026-08-20，follow-up 债 5.1）：ColFilter 自绘 F2
+      // 全覆盖并入，实测 94.30/81.15/94.62/95.94，按现值下沿 T08 上调。
       thresholds: {
-        statements: 93.7,
-        branches: 80.7,
-        functions: 94.0,
-        lines: 95.4
+        statements: 94.2,
+        branches: 81.0,
+        functions: 94.5,
+        lines: 95.8
       }
     }
   },

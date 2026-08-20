@@ -29,6 +29,8 @@ vi.mock('@nce/eview-react/Tree', H.makeStub('Tree', (p, h) =>
 ))
 vi.mock('@nce/eview-react/Table', H.makeStub('Table', (p, h) =>
   h('div', null,
+    // 列头渲染（title 可为 ReactNode——列头筛选自绘触发器经此可测）
+    h('div', { className: 'stub-titles' }, p.columns?.map((c: any, i: number) => h('span', { key: i }, c.title))),
     h('button', { onClick: () => p.onRowCheck?.({ __ubkey: 'r1' }, [0]) }, 'check-r1'), // R9 实测：回传行序号
     h('button', { onClick: () => p.onHeaderCheck?.([0, 1], true, []) }, 'check-all'), // R9 实测：回传行序号
     h('button', { onClick: () => p.onRowClick?.(p.dataset?.[0]) }, 'row1'),
@@ -191,5 +193,106 @@ describe('Table 桥（矩阵全项）', () => {
     expect(p.customStyleRows).toEqual({ 0: { background: '#f0fff0' } })
     expect(p.emptyTableMsg).toBe('暂无数据')
     expect(p.enableLoading).toBe(true)
+  })
+})
+
+// Follow-up 债 5.1：列头筛选（antd filters/onFilter）。eview 列 filter/
+// embeddedFilter 形状未在 d.ts 暴露（仅 object、无文档）——桥自绘筛选菜单
+// （先例：Tabs/Menu/Popover 自绘），行为对齐 antd 语义：选项勾选+确定→
+// onFilter 谓词本地过滤 dataset、onChange 合成 filters 快照；点外关闭弃草稿。
+describe('Table 桥（列头筛选自绘菜单）', () => {
+  const columns = [
+    { title: '名称', dataIndex: 'name' },
+    {
+      title: '类型',
+      dataIndex: 'kind',
+      filters: [
+        { text: 'ACCESS', value: 'access' },
+        { text: 'TRUNK', value: 'trunk' },
+      ],
+      onFilter: (v: string | number | boolean, r: Record<string, unknown>) => String(r.kind) === String(v),
+    },
+  ]
+  const data = [
+    { name: 'r1', kind: 'access' },
+    { name: 'r2', kind: 'trunk' },
+    { name: 'r3', kind: 'access' },
+  ]
+  const base = { columns, dataSource: data, rowKey: 'name' as const }
+
+  it('filters 列渲染触发器按钮；无 filters 列保持纯文本标题', () => {
+    const { container } = render(<Table {...base} />)
+    expect(recv.last.Table.columns[0].title).toBe('名称')
+    expect(container.querySelector('[aria-label="filter-kind"]')).toBeTruthy()
+    expect(container.querySelector('[aria-label="filter-name"]')).toBeNull()
+  })
+
+  it('勾选选项+确定：dataset 过滤、onChange 合成 filters+分页快照、触发器激活态', () => {
+    const onChange = vi.fn()
+    const { container } = render(
+      <Table {...base} onChange={onChange} pagination={{ current: 2, pageSize: 10, total: 3 }} />,
+    )
+    fireEvent.click(container.querySelector('[aria-label="filter-kind"]')!)
+    fireEvent.click(screen.getByLabelText('ACCESS'))
+    fireEvent.click(document.querySelector('.ub-filter-ok')!)
+    expect(recv.last.Table.dataset.map((r: any) => r.name)).toEqual(['r1', 'r3'])
+    expect(onChange).toHaveBeenCalledWith({ current: 2, pageSize: 10 }, { kind: ['access'] }, undefined)
+    expect(container.querySelector('[aria-label="filter-kind"]')!.className).toContain('is-active')
+  })
+
+  it('重置：恢复全量 dataset、onChange filters 为 null', () => {
+    const onChange = vi.fn()
+    const { container } = render(<Table {...base} onChange={onChange} />)
+    const trigger = () => container.querySelector('[aria-label="filter-kind"]')!
+    fireEvent.click(trigger())
+    fireEvent.click(screen.getByLabelText('TRUNK'))
+    fireEvent.click(document.querySelector('.ub-filter-ok')!)
+    expect(recv.last.Table.dataset.length).toBe(1)
+    fireEvent.click(trigger())
+    fireEvent.click(document.querySelector('.ub-filter-reset')!)
+    expect(recv.last.Table.dataset.length).toBe(3)
+    expect(onChange).toHaveBeenLastCalledWith(
+      { current: undefined, pageSize: undefined },
+      { kind: null },
+      undefined,
+    )
+    expect(trigger().className).not.toContain('is-active')
+  })
+
+  it('点外关闭=放弃草稿：已生效筛选不变；重开面板回显已生效值', () => {
+    const { container } = render(<Table {...base} />)
+    const trigger = () => container.querySelector('[aria-label="filter-kind"]')!
+    fireEvent.click(trigger())
+    fireEvent.click(screen.getByLabelText('ACCESS'))
+    fireEvent.click(document.querySelector('.ub-filter-ok')!)
+    // 重开勾第二项后点外关闭——不生效
+    fireEvent.click(trigger())
+    fireEvent.click(screen.getByLabelText('TRUNK'))
+    fireEvent.click(document.body)
+    expect(recv.last.Table.dataset.map((r: any) => r.name)).toEqual(['r1', 'r3'])
+    expect(document.querySelector('.ub-filter-popup')).toBeNull()
+    // 重开回显已生效值（ACCESS 勾选、TRUNK 未勾）
+    fireEvent.click(trigger())
+    expect((screen.getByLabelText('ACCESS') as HTMLInputElement).checked).toBe(true)
+    expect((screen.getByLabelText('TRUNK') as HTMLInputElement).checked).toBe(false)
+  })
+
+  it('筛选与本地排序叠加：先过滤后排序', () => {
+    // stub 的 sort-desc 按钮固定回传 key:'mtu'——排序列用 mtu 命中本地排序分支
+    const sortCols = [
+      { title: 'MTU', dataIndex: 'mtu', sorter: (a: any, b: any) => Number(a.mtu) - Number(b.mtu) },
+      columns[1],
+    ]
+    const sortData = [
+      { mtu: 1500, kind: 'access' },
+      { mtu: 9000, kind: 'trunk' },
+      { mtu: 4000, kind: 'access' },
+    ]
+    const { container } = render(<Table columns={sortCols} dataSource={sortData} rowKey="mtu" />)
+    fireEvent.click(container.querySelector('[aria-label="filter-kind"]')!)
+    fireEvent.click(screen.getByLabelText('ACCESS'))
+    fireEvent.click(document.querySelector('.ub-filter-ok')!)
+    fireEvent.click(screen.getByText('sort-desc'))
+    expect(recv.last.Table.dataset.map((r: any) => r.mtu)).toEqual([4000, 1500])
   })
 })
