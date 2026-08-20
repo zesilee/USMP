@@ -2,7 +2,7 @@
 
 ## Purpose
 
-界面双语（zh-cn/en-us）：语言切换持久化并联动 UI 适配层导出的组件库 locale；chrome 文案经 i18n 词表全覆盖（词表键名跨框架稳定）；YANG 字段标签按语言经 snd res 副本查表（懒加载、缺档回退节点名）。翻译数据权威 = snd 包（左树双语字段 + i18n res）。
+界面双语（zh-cn/en-us）：语言切换持久化并联动 UI 适配层的 intl 上下文（EviewUI 经 IntlProvider）；chrome 文案经 i18n 词表全覆盖（词表键名跨框架稳定）；YANG 字段标签按语言经 snd res 副本查表（懒加载、缺档回退节点名）。翻译数据权威 = snd 包（左树双语字段 + i18n res）。
 ## Requirements
 ### Requirement: UI-01 语言切换与持久化
 
