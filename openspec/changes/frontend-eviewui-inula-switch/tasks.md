@@ -29,7 +29,7 @@
 - [x] 2.4a 路由 compat 收口（波 C 前置，2026-08-19）：src/router/compat.ts 收束 8 个路由 API（现=react-router 直通），7 文件调用点全部改经 compat，adapter-guard 扩拦业务直 import react-router；**翻转时改动收束单点** — 全量 647 零回归
 - [x] 2.4a2 路由 compat 升级裸别名 @app-router（三配置接线：vite=生产/vitest+browser=测试恒 react 直通/tsconfig=类型面）——翻转后外网测试运行时不动，双实现分流与 @ui-backend 同款 — 647 零回归
 - [x] 2.4b 翻转日实现（2026-08-19，开关制）：compat.inula.tsx 全量实现（createBrowserRouter/RouterProvider→BrowserRouter+递归 Switch/Route、Outlet=Context 注入、useNavigate/useSearchParams 薄包装、useBlocker=Prompt when+message 函数+getUserConfirmation 桥保 state/proceed/reset 契约、类型断言桥收 inula 类型面）；vite USMP_RUNTIME=inula 别名组（react/react-dom/jsx-runtime→openinula、react-intl→inula-intl、@app-router→compat.inula）；Dockerfile/build-release 透传。**外网测试运行时不翻转**（vitest 恒 React+compat.ts）——行为验收=内网 USMP_RUNTIME=inula 构建+E2E 21 用例全量
-- [ ] 2.5 内网翻转验收：USMP_RUNTIME=inula npm run build→prebuilt 发布→E2E 全量+离开守卫人工核验→通过后默认翻 inula、React 退出交付链、polyfill/守卫复评退役
+- [x] 2.5 内网翻转验收（2026-08-20）：openinula 运行时产物 E2E **21/21 全绿一次通过**（RT-01/RT-03 真实环境验收）；默认翻 inula（USMP_RUNTIME=react 显式回退、USMP_UI_BACKEND=antd 联动强制 react）；react 家族移 devDependencies（生产=openinula，外网测试保留）；polyfill/attachShadow 守卫复评=**保留**（polyfill 自适应跳过 inula 自带 findDOMNode、守卫幂等无害——防御纵深优于裸奔）
 
 > **路线乙重排（2026-08-17，route-decision.md）**：组 3~5 提前为主线（on React 19，
 > cWRP 已实证）；组 2 剩余 2.1b/2.3/2.4 连同运行时 alias 全部改挂**终局波 C**
