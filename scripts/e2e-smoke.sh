@@ -48,7 +48,7 @@ echo -e "${YELLOW}[e2e-smoke] 运行 Playwright staging smoke...${NC}"
 cd frontend
 npm ci --prefer-offline --no-audit --fund=false
 npx playwright install chromium
-PLAYWRIGHT_BASE_URL="http://localhost:$FE_PORT" \
+PLAYWRIGHT_BASE_URL="http://localhost:$FE_PORT" E2E_UI_BACKEND=antd \
   npx playwright test tests/staging-smoke.spec.ts --project=chromium --reporter=list
 
 echo -e "${GREEN}[e2e-smoke] ✅ 通过（staging 仍在运行，make staging-down 可停止）${NC}"
