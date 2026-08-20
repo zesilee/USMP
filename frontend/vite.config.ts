@@ -7,7 +7,10 @@ import { fileURLToPath } from 'node:url'
 // （eview 编译产物内部 require('react')/require('react-intl') 一并接管）、
 // @app-router→compat.inula（inula-router v5 实现）。缺省仍 React 19（外网
 // 开发/e2e-local antd 口径）；内网交付构建：USMP_RUNTIME=inula npm run build。
-const INULA = process.env.USMP_RUNTIME === 'inula'
+// 2026-08-20 默认翻转（内网 E2E 21/21 验收通过）：缺省即 openinula；
+// USMP_RUNTIME=react 显式回退；USMP_UI_BACKEND=antd（e2e-local 口径）强制
+// react——antd 需 React 18+，两开关联动防误配。
+const INULA = process.env.USMP_UI_BACKEND === 'antd' ? false : process.env.USMP_RUNTIME !== 'react'
 const inulaAliases = INULA
   ? {
       react: 'openinula',
