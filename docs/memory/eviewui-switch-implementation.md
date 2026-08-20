@@ -49,4 +49,10 @@ metadata:
 
 **原「下一步」记录（组 5 前）**：**组 5 接线**（index.ts 切 eview 后端+调用点微调+antd 退场+覆盖率分母回收重钉+findDOMNode polyfill 生产安装）→组 6 F3（含 Tabs/Tree 校准移交项）/派生黄金→组 7 E2E→组 8 收尾→波 C 运行时翻转（openinula+intl 内核+router v5 化+inula-X，制品在 tasks.md 组 2 挂起项）。
 
+**归档后收尾波（2026-08-20，PR#406）——两债销账**：
+- **列头筛选债（tasks 5.1）已清**：eview 列 filter/embeddedFilter 形状 d.ts 未暴露（仅 object）→ 不猜其 API，桥自绘 ColFilter（列 title 收 ReactNode 实证可用；漏斗触发器+portal 弹层+确定/重置），谓词过滤在排序前、onChange 合成 antd filters 快照、点外关闭弃草稿；F2 5 用例 TDD、内网 E2E 21/21 验证。棘轮上调 94.2/81.0/94.5/95.8。
+- **外网 e2e 门禁空转债已清**（此前只能 USMP_SKIP_E2E 跳过）：①e2e-smoke `up -d --build` 用缺省参二次重建前端（eview 口径外网必炸，靠切换前旧层缓存掩盖，builder prune 后现形）→构建/启动分离；②规格类名全 ev_* 对 antd DOM 恒不匹配→SEL 表双口径（E2E_UI_BACKEND=antd），antd6 类名探针实证：对话框=.ant-modal（无 -content 层）、抽屉=.ant-drawer-section、Tab 溢出走 .ant-tabs-nav-more→.ant-tabs-dropdown-menu-item、Dropdown 项=.ant-dropdown-menu-item。外网 pre-push 21/21 真实拦截恢复。
+- 剩余债（有触发再启）：展开行拍平缩进视觉、Dropdown label 锚点债、CI Install Chromium 缓存、axios 清退评估、firefox/webkit 按需补、三大自绘 inula 上复评回退真组件（纯观感）。
+- 环境坑追加：内网新终端丢 Node22 PATH→rolldown 炸 styleText（node:util，需≥20.12）；后台 push 会被杀（再证）；pre-commit 前端单测偶发假失败重试即过（并行前科同款）。
+
 相关：[[eviewui-inula-migration]]（调研与矩阵）、[[react-antd-rebuild]]（适配层军规与上次迁移方法论）。
