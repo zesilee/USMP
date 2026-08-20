@@ -1,6 +1,6 @@
 ---
 name: eviewui-switch-implementation
-description: EviewUI/openInula 切换实施台账(2026-08-18 校准收敛)：闸门通过、路线乙、组2先行波+组3+组4全24桥、14轮内网校准收敛(CAL-R14全绿)、Table三定案、Tabs/Tree移交F3、实录坑集；进组5接线前必读
+description: EviewUI/openInula 切换**全量交付归档(2026-08-20,PR#342-#404,archive/2026-08-20-frontend-eviewui-inula-switch)**：校准14轮+F3十轮+E2E十三轮方法论、三大自绘、双后端/双运行时开关体系、波C自研store拍板；碰前端运行时/桥/测试口径前必读
 metadata:
   type: project
 ---
@@ -40,6 +40,12 @@ metadata:
 - **confirm=Dialog 非 MessageDialog**（后者实为顶部消息横幅、无按钮——提交确认曾断死，截图实证）；Table expandable=树数据拍平；Tabs pane 按激活项 key（同类型 children 复用残留）；宽 Select 点容器空白不弹（eview 只认 input 本体——E2E 点 input）。
 - **环境口径**：kind 部署=Dockerfile.prebuilt（宿主 build dist 直装，容器 npm 装不到 @nce）+kind load+rollout（-n usmp-system）；E2E_DEVICE_IP=netconf-sim.default（K8s 服务名≠compose 的 192.168.1.1）；Google Fonts 外链已删（离线必败）。
 - **E2E 侦察方法论**：diag.spec 用例（DOM dump/boundingRect/response 抓包/列 col-id 清单/弹层计数）+失败截图人眼判读+精确 tab 正则（hasText 子串曾误中「动态VLAN列表」）——每轮一锤定音、十三轮无一轮空转。
+
+**波 C 已全量交付、change 已归档**（2026-08-20，PR#400-#404）：
+- 状态层=自研 React 17 级薄层 createStore（拍板变更弃 inula-X：锁死 openinula 会废外网测试体系；zustand 同形 API、647 零回归）；路由收口 @app-router 别名双实现（compat.ts=react 直通/compat.inula.tsx=inula-router v5：递归 Switch/Route+Outlet Context+useBlocker=Prompt+getUserConfirmation 桥）；i18n 薄层本就自研无内核（2.1b 定性核销）。
+- **翻转开关体系**（终态）：USMP_RUNTIME（缺省 inula、react 显式回退）×USMP_UI_BACKEND（antd=e2e-local 口径、联动强制 react）×EVIEW_REAL（内网真桥测试）——外网开发/测试运行时恒 React 19（react 家族=devDependencies），交付产物=openinula+EviewUI。内网验收：openinula 产物 E2E 21/21 一次通过。
+- polyfill/attachShadow 守卫保留（自适应/幂等，防御纵深）；三大自绘保留（inula 上纯组件安全）。
+- spec 已 sync（frontend-runtime 新建含 RT-01 按拍板修正、FA-02/05/06 合入、frontend/ui-i18n Purpose 栈名）；change 归档 archive/2026-08-20-frontend-eviewui-inula-switch。
 
 **原「下一步」记录（组 5 前）**：**组 5 接线**（index.ts 切 eview 后端+调用点微调+antd 退场+覆盖率分母回收重钉+findDOMNode polyfill 生产安装）→组 6 F3（含 Tabs/Tree 校准移交项）/派生黄金→组 7 E2E→组 8 收尾→波 C 运行时翻转（openinula+intl 内核+router v5 化+inula-X，制品在 tasks.md 组 2 挂起项）。
 

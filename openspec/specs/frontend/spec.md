@@ -2,7 +2,7 @@
 
 ## Purpose
 
-frontend 是 React + TypeScript 平台前端（控件经 `src/ui` UI 适配层收口，当前实现 Ant Design，见 frontend-ui-adapter spec）：由后端 YANG schema **自动渲染**表单/表格/分组（R05，禁止手写固定表单），编辑→校验→提交→联动后端下发，并展示设备/缓存/对账状态。下发链路唯一：**Stack B 直连**（`POST /api/v1/config/:ip/*path` + 轮询对账），动态表单由 `FieldRenderer` 直渲；legacy K8s CRD 链路（ConfigPage/useK8sCRD/DynamicForm）已随 native-config-reposition 退役删除。概念分层：**原生配置** = 直接基于 YANG 模型的设备配置管理（模块控制台 `/module/:name`，本 spec 的全部范围）；**业务网络配置**为未来扩展层（业务侧 YANG 模型定义网络自动化能力，USMP 编排为原生配置下发，方向见 openspec/tasks/business-network-config.md）。
+frontend 是 openinula（React 生态形态）+ TypeScript 平台前端（控件经 `src/ui` UI 适配层收口，当前实现 EviewUI，见 frontend-ui-adapter/frontend-runtime spec）：由后端 YANG schema **自动渲染**表单/表格/分组（R05，禁止手写固定表单），编辑→校验→提交→联动后端下发，并展示设备/缓存/对账状态。下发链路唯一：**Stack B 直连**（`POST /api/v1/config/:ip/*path` + 轮询对账），动态表单由 `FieldRenderer` 直渲；legacy K8s CRD 链路（ConfigPage/useK8sCRD/DynamicForm）已随 native-config-reposition 退役删除。概念分层：**原生配置** = 直接基于 YANG 模型的设备配置管理（模块控制台 `/module/:name`，本 spec 的全部范围）；**业务网络配置**为未来扩展层（业务侧 YANG 模型定义网络自动化能力，USMP 编排为原生配置下发，方向见 openspec/tasks/business-network-config.md）。
 ## Requirements
 ### Requirement: FE-01 schema 驱动渲染
 
