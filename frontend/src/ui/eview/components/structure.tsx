@@ -373,19 +373,20 @@ export function Table<T extends object = Record<string, unknown>>(
     id: anchorId(props['data-test']) ?? 'ub-table',
     columns: cols.map((c) => {
       const k = (c.dataIndex ?? c.key)!
+      const hasFilter = !!(c.filters?.length && c.onFilter)
       return {
       key: k,
       // filters 列：标题包自绘筛选触发器（确定/重置回写 → 过滤管线 + antd
       // onChange filters 快照合成；分页快照与排序通道同形）。
       // C1 探针定案：eview 对无显式宽度的列按标题文本测宽——组件标题量不出
       // 长度会分到 0 宽（列被挤没）；titleComponentToText 即为此供测宽文本。
-      titleComponentToText: c.filters?.length && c.onFilter ? textOf(c.title) : undefined,
+      titleComponentToText: hasFilter ? textOf(c.title) : undefined,
       title:
-        c.filters?.length && c.onFilter
+        hasFilter
           ? createElement(ColFilter, {
               colKey: k,
               title: textOf(c.title),
-              options: c.filters,
+              options: c.filters ?? [],
               values: colFilters[k] ?? [],
               onApply: (vals: FilterVal[]) => {
                 setColFilters((prev) => ({ ...prev, [k]: vals }))
@@ -403,7 +404,11 @@ export function Table<T extends object = Record<string, unknown>>(
               },
             })
           : textOf(c.title),
-      width: c.width,
+      // C1 探针二定案：eview 按标题文本给无显式宽度列测宽，组件标题量不出
+      // →0 宽挤没整列（titleComponentToText 复测无效）；显式 width 被尊重
+      // （操作列 200 实渲染 200）——组件标题列桥内算宽：CJK 14px/字 + 图标
+      // 与内边距 56（漏斗 16+排序 18+padding）。
+      width: c.width ?? (hasFilter ? textOf(c.title).length * 14 + 56 : undefined),
       // fixed 不映射冻结（内网实证三连）：eview 冻结=拆分子表渲染，行高不
       // 同步致单元格跨行互相覆盖；freezeColPosition 是表级单侧属性，
       // fixed:'right' 的操作列被冻到最左；拆表还破坏横向滚动。列保持自然

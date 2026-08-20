@@ -230,9 +230,17 @@ describe('Table 桥（列头筛选自绘菜单）', () => {
     expect(container.querySelector('[aria-label="filter-kind"]')).toBeTruthy()
     expect(container.querySelector('[aria-label="filter-name"]')).toBeNull()
     // 内网 C1 探针定案：eview 按标题文本测宽分列宽，组件标题量不出→列宽 0
-    // （整列被挤没）——须随组件标题供 titleComponentToText 测宽文本。
+    // （整列被挤没）；titleComponentToText 复测无效——桥为组件标题列显式
+    // 算宽（探针证明显式 width 被尊重：操作列 200 真渲染 200）。
     expect(recv.last.Table.columns[1].titleComponentToText).toBe('类型')
     expect(recv.last.Table.columns[0].titleComponentToText).toBeUndefined()
+    expect(recv.last.Table.columns[1].width).toBe('类型'.length * 14 + 56)
+    expect(recv.last.Table.columns[0].width).toBeUndefined()
+  })
+  it('filters 列显式 width 优先于桥算宽', () => {
+    const wide = [columns[0], { ...columns[1], width: 300 }]
+    render(<Table {...base} columns={wide} />)
+    expect(recv.last.Table.columns[1].width).toBe(300)
   })
 
   it('勾选选项+确定：dataset 过滤、onChange 合成 filters+分页快照、触发器激活态', () => {
