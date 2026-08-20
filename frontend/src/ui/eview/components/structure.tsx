@@ -1,8 +1,10 @@
 // EviewUI 桥 · 结构组（组 4.3）：Tabs/Menu(左树→Tree)/Table。
 // 对外 props = antd 形态；映射依据 = component-matrix + gate R1/R2（勿凭空改）。
-import { createElement, useState, type ReactNode, type CSSProperties } from 'react'
+import { createElement, useEffect, useRef, useState, type ReactNode, type CSSProperties } from 'react'
+import { createPortal } from 'react-dom'
 import TableMod from '@nce/eview-react/Table'
 import { anchorId, pickDefault, textOf } from '../../bridge'
+import { i18n } from '../../../i18n'
 
 const EvTable = pickDefault(TableMod)
 
@@ -160,14 +162,126 @@ export interface TableColumnType<T = Record<string, unknown>> {
   // 函数=本地比较排序（桥内执行，eview 本地排序已禁）；true=服务端下推。
   sorter?: boolean | object | ((a: T, b: T) => number)
   ellipsis?: boolean
-  // 列头筛选菜单（antd filters/onFilter）：eview 需 embeddedFilter 侦察后映射
-  // ——窗口期类型收下、行为暂缺（tasks 5.1 已登记，本地小表次要功能）。
+  // 列头筛选菜单（antd filters/onFilter）：eview filter/embeddedFilter 形状
+  // 未在 d.ts 暴露（仅 object）——桥自绘筛选菜单实现（ColFilter），行为对齐
+  // antd 语义（谓词本地过滤 + onChange 合成 filters 快照）。
   filters?: Array<{ text: string; value: string | number | boolean }>
   onFilter?: (value: string | number | boolean, record: T) => boolean
   // value 保持 any 对齐 antd 形态（record 已强类型，单元格值类型由调用方 narrow）。
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   render?: (value: any, record: T, index: number) => ReactNode
 }
+type FilterVal = string | number | boolean
+
+// ===== 列头筛选自绘（follow-up 债 5.1）=====
+// eview 列 filter/embeddedFilter 形状未暴露（d.ts 仅 object、无文档），不猜
+// 其 UI——桥自绘（先例：Tabs/Menu/Popover）。触发器塞进列 title（eview 列
+// title 收 ReactNode），弹层 portal 到 body（fixed 定位防表头 overflow 裁剪），
+// 点外关闭=放弃草稿（antd 同语义）；确定/重置回写 onApply 由 Table 桥过滤。
+function ColFilter(props: {
+  colKey: string
+  title: ReactNode
+  options: Array<{ text: string; value: FilterVal }>
+  values: FilterVal[]
+  onApply: (vals: FilterVal[]) => void
+}) {
+  const [open, setOpen] = useState(false)
+  const [draft, setDraft] = useState<FilterVal[]>([])
+  const wrapRef = useRef<HTMLSpanElement | null>(null)
+  const posRef = useRef({ top: 0, left: 0 })
+  const openRef = useRef(open)
+  openRef.current = open
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (!openRef.current) return
+      const t = e.target as Element | null
+      if (t && (t.closest?.('.ub-filter-popup') || wrapRef.current?.contains(t))) return
+      setOpen(false)
+    }
+    window.addEventListener('click', handler, true)
+    return () => window.removeEventListener('click', handler, true)
+  }, [])
+  const active = props.values.length > 0
+  return createElement(
+    'span',
+    { className: 'ub-col-filter-wrap', ref: wrapRef },
+    props.title,
+    createElement(
+      'button',
+      {
+        type: 'button',
+        className: 'ub-col-filter' + (active ? ' is-active' : ''),
+        'aria-label': `filter-${props.colKey}`,
+        onClick: (e: { stopPropagation: () => void }) => {
+          e.stopPropagation() // 防触发 eview 列头排序
+          if (open) {
+            setOpen(false)
+            return
+          }
+          const r = wrapRef.current?.getBoundingClientRect()
+          posRef.current = { top: (r?.bottom ?? 0) + 4, left: r?.left ?? 0 }
+          setDraft(props.values)
+          setOpen(true)
+        },
+      },
+      createElement(
+        'svg',
+        { width: 12, height: 12, viewBox: '0 0 16 16', fill: 'currentColor', 'aria-hidden': true },
+        createElement('path', { d: 'M1.5 2h13l-5 6v5.5l-3 1.5V8l-5-6z' }),
+      ),
+    ),
+    open &&
+      createPortal(
+        createElement(
+          'div',
+          { className: 'ub-filter-popup', style: { top: posRef.current.top, left: posRef.current.left } },
+          props.options.map((o) =>
+            createElement(
+              'label',
+              { key: String(o.value), className: 'ub-filter-option' },
+              createElement('input', {
+                type: 'checkbox',
+                checked: draft.includes(o.value),
+                onChange: () =>
+                  setDraft((d) => (d.includes(o.value) ? d.filter((v) => v !== o.value) : [...d, o.value])),
+              }),
+              o.text,
+            ),
+          ),
+          createElement(
+            'div',
+            { className: 'ub-filter-actions' },
+            createElement(
+              'button',
+              {
+                type: 'button',
+                className: 'ub-filter-reset',
+                onClick: () => {
+                  setOpen(false)
+                  props.onApply([])
+                },
+              },
+              i18n.global.t('common.reset'),
+            ),
+            createElement(
+              'button',
+              {
+                type: 'button',
+                className: 'ub-filter-ok',
+                onClick: () => {
+                  setOpen(false)
+                  props.onApply(draft)
+                },
+              },
+              i18n.global.t('common.confirm'),
+            ),
+          ),
+        ),
+        document.body,
+      ),
+  )
+}
+
 export function Table<T extends object = Record<string, unknown>>(
   props: CommonProps & {
     columns?: Array<TableColumnType<T>>
@@ -215,6 +329,17 @@ export function Table<T extends object = Record<string, unknown>>(
     }
   }
   flatten(rawData)
+  // 列头筛选（follow-up 债 5.1）：filters+onFilter 列的已生效值；谓词过滤在
+  // 排序之前作用于桥收到的 dataset（本地模式父组件已自行切页——与 antd 受控
+  // 分页语义一致：筛选只作用于传入数据，total 不动）。
+  const [colFilters, setColFilters] = useState<Record<string, FilterVal[]>>({})
+  const filterCols = cols.filter((c) => c.filters?.length && c.onFilter)
+  const activeFilterCols = filterCols.filter((c) => colFilters[(c.dataIndex ?? c.key)!]?.length)
+  const filteredData = activeFilterCols.length
+    ? data.filter((row) =>
+        activeFilterCols.every((c) => colFilters[(c.dataIndex ?? c.key)!].some((v) => c.onFilter!(v, row))),
+      )
+    : data
   // rowKey 函数 → 预计算 __ubkey 字段（eview rowKey 仅收字段名）。
   // 本地函数排序（列 sorter 为函数时桥内执行——eview 本地排序已禁走受控流）。
   const [localSort, setLocalSort] = useState<{ key?: string; desc?: boolean }>({})
@@ -222,12 +347,12 @@ export function Table<T extends object = Record<string, unknown>>(
     typeof props.rowKey === 'function'
       ? props.rowKey(r, i)
       : (((r as Record<string, unknown>)[props.rowKey ?? 'id'] as string | number) ?? '')
-  let sortedData = data
+  let sortedData = filteredData
   if (localSort.key) {
     const col = cols.find((c) => (c.dataIndex ?? c.key) === localSort.key)
     if (typeof col?.sorter === 'function') {
       const cmp = col.sorter
-      sortedData = [...data].sort((a, b) => (localSort.desc ? -cmp(a, b) : cmp(a, b)))
+      sortedData = [...filteredData].sort((a, b) => (localSort.desc ? -cmp(a, b) : cmp(a, b)))
     }
   }
   const dataset = sortedData.map((r, i) => ({ ...(r as Record<string, unknown>), children: undefined, __ubkey: keyOf(r, i) }))
@@ -246,9 +371,35 @@ export function Table<T extends object = Record<string, unknown>>(
   const pag = props.pagination
   return createElement(EvTable, {
     id: anchorId(props['data-test']) ?? 'ub-table',
-    columns: cols.map((c) => ({
-      key: c.dataIndex ?? c.key,
-      title: textOf(c.title),
+    columns: cols.map((c) => {
+      const k = (c.dataIndex ?? c.key)!
+      return {
+      key: k,
+      // filters 列：标题包自绘筛选触发器（确定/重置回写 → 过滤管线 + antd
+      // onChange filters 快照合成；分页快照与排序通道同形）。
+      title:
+        c.filters?.length && c.onFilter
+          ? createElement(ColFilter, {
+              colKey: k,
+              title: textOf(c.title),
+              options: c.filters,
+              values: colFilters[k] ?? [],
+              onApply: (vals: FilterVal[]) => {
+                setColFilters((prev) => ({ ...prev, [k]: vals }))
+                const snap: Record<string, FilterVal[] | null> = {}
+                for (const fc of filterCols) {
+                  const fk = (fc.dataIndex ?? fc.key)!
+                  const cur = fk === k ? vals : (colFilters[fk] ?? [])
+                  snap[fk] = cur.length ? cur : null
+                }
+                props.onChange?.(
+                  { current: pag ? pag.current : undefined, pageSize: pag ? pag.pageSize : undefined },
+                  snap,
+                  undefined,
+                )
+              },
+            })
+          : textOf(c.title),
       width: c.width,
       freezeCol: !!c.fixed,
       allowSort: !!c.sorter,
@@ -276,7 +427,8 @@ export function Table<T extends object = Record<string, unknown>>(
             return c.render!(cv, rec as T, idx >= 0 ? idx : 0)
           }
         : undefined,
-    })),
+      }
+    }),
     dataset,
     rowKey: '__ubkey',
     // 勾选：受控 checkedRows + 强刷（matrix）。R9 实测：不设 keyIndex 时
