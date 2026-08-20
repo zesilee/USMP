@@ -127,9 +127,13 @@ describe('Table 桥（矩阵全项）', () => {
   const base = { columns, dataSource: data, rowKey: 'name' as const }
 
   it('列映射（allowSort/width/render 参数序换位）与 rowKey 预计算', () => {
-    render(<Table {...base} data-test="module-table" />)
+    const withFixed = [...columns, { title: '操作', key: 'ops', fixed: 'right' as const }]
+    render(<Table {...base} columns={withFixed} data-test="module-table" />)
     const p = recv.last.Table
     expect(p.columns[0]).toMatchObject({ key: 'name', title: '名称', allowSort: true, width: 120 })
+    // fixed 不映射冻结（内网实证：eview 冻结拆分子表行高不同步互相覆盖、
+    // 方向表级仅单侧致 fixed:'right' 冻到最左、横向滚动结构破坏）。
+    expect(p.columns.every((c: any) => !c.freezeCol)).toBe(true)
     expect(p.dataset[0].__ubkey).toBe('r1')
     expect(p.rowKey).toBe('__ubkey')
     expect(p.disableEviewSort).toBe(true)

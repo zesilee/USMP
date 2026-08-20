@@ -401,7 +401,10 @@ export function Table<T extends object = Record<string, unknown>>(
             })
           : textOf(c.title),
       width: c.width,
-      freezeCol: !!c.fixed,
+      // fixed 不映射冻结（内网实证三连）：eview 冻结=拆分子表渲染，行高不
+      // 同步致单元格跨行互相覆盖；freezeColPosition 是表级单侧属性，
+      // fixed:'right' 的操作列被冻到最左；拆表还破坏横向滚动。列保持自然
+      // 顺序（操作列自然排最右，宽表随表体滚动——antd 时代观感）。
       allowSort: !!c.sorter,
       // eview render(cellValue, rowData, options, row, isEdit) → antd render(value, record, index)；
       // R9 实测：不设 renderType 时 render 被忽略。R10 实测 'custom' 字面量

@@ -834,3 +834,22 @@ html, body {
 .ub-filter-actions .ub-filter-ok {
   color: $color-primary;
 }
+
+/* 内网目视修复（组件覆盖截图定案）：
+   1) link+danger 按钮红字形态（eview risk=实心红块，antd 语义=红字链接）。 */
+.ub-btn-link-danger,
+.ub-btn-link-danger:hover {
+  color: $color-error !important;
+}
+/* 2) eview 全局样式表给 ev_tree_* 类自带节点图标装饰（按其自身 DOM 结构
+   定位背景图/伪元素）——自绘树结构不同，图标错位压在文字上（内网实证）。
+   自绘树观感全由本文件承接，eview 侧装饰一律清除（ub-tree-switcher 的
+   自绘箭头不在 ev_tree 前缀内、不受影响）。 */
+.ub-menu [class*='ev_tree']::before,
+.ub-menu [class*='ev_tree']::after {
+  content: none !important;
+  background: none !important;
+}
+.ub-menu [class*='ev_tree'] {
+  background-image: none !important;
+}

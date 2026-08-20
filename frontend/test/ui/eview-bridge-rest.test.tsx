@@ -47,6 +47,11 @@ describe('Button 桥', () => {
     render(<Button type="link">c</Button>)
     expect(recv.last.Button.status).toBe('text')
   })
+  it('link+danger→text+红字类（内网实证：risk=实心红块，antd 语义应为红字链接）', () => {
+    render(<Button type="link" danger>d</Button>)
+    expect(recv.last.Button.status).toBe('text')
+    expect(recv.last.Button.className).toContain('ub-btn-link-danger')
+  })
   it('loading：禁点+自绘 spinner；ghost→样式类；onClick 吞双参对齐单参', () => {
     const onClick = vi.fn()
     const { rerender } = render(<Button loading onClick={onClick} ghost>x</Button>)
