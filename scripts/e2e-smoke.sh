@@ -22,8 +22,11 @@ echo -e "${YELLOW}[e2e-smoke] 构建并起本地 staging...${NC}"
 # 组 7.2 口径：本地全栈冒烟以 antd 测试镜像构建前端（外网无 @nce 真包，
 # eview 构建必炸）——业务流程回归门禁；eview 真身验收=内网 kind E2E
 # （Dockerfile.prebuilt 链，21/21 已收敛）。
-USMP_UI_BACKEND=antd docker compose build --build-arg USMP_UI_BACKEND=antd frontend
-docker compose up -d --build --remove-orphans
+# 构建与启动分离：up --build 会用缺省参数重建 frontend（eview 口径外网必炸，
+# 此前靠 eview 切换前时代的旧层缓存掩盖，builder prune 后现形）——全部服务
+# 统一带参一次构建（未声明该 ARG 的服务仅告警），up 不再触发重建。
+USMP_UI_BACKEND=antd docker compose build --build-arg USMP_UI_BACKEND=antd
+docker compose up -d --remove-orphans
 
 # 端口自动发现（尊重 override 的重映射；失败回退默认）
 BE_PORT=$(docker compose port backend 8080 2>/dev/null | sed -E 's/.*:([0-9]+)$/\1/'); BE_PORT=${BE_PORT:-8080}
