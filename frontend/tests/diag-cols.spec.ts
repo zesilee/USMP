@@ -55,3 +55,36 @@ test('C1 VLAN列表列 DOM 定案', async ({ page }) => {
   })
   console.log('C1=' + JSON.stringify(info))
 })
+
+test('C3 编辑面控件宽度解剖', async ({ page }) => {
+  await page.goto('/module/vlan', { waitUntil: 'networkidle' })
+  await page.locator('.ev_inputSelect').first().click()
+  await page.locator('.ev_popup_option', { hasText: DEVICE_IP }).first().click()
+  await page.locator('.ev_tab_title', { hasText: /^VLAN列表$/ }).first().click()
+  await page.waitForTimeout(2500)
+  // 打开首行编辑面
+  await page.locator('.ev_table_content tr').first().click()
+  await page.waitForTimeout(1500)
+  const info = await page.evaluate(() => {
+    const cssHasRule = Array.from(document.styleSheets).some((sh) => {
+      try {
+        return Array.from(sh.cssRules).some((r) => r.cssText.includes('.fis-control >'))
+      } catch {
+        return false
+      }
+    })
+    const shells = Array.from(document.querySelectorAll('[data-test="item-detail-pane"] .fis-control')).slice(0, 8)
+    const rows = shells.map((c) => {
+      const kid = c.firstElementChild as HTMLElement | null
+      const inner = c.querySelector('input, textarea') as HTMLElement | null
+      const cellW = Math.round(c.getBoundingClientRect().width)
+      const kidW = kid ? Math.round(kid.getBoundingClientRect().width) : -1
+      const innerW = inner ? Math.round(inner.getBoundingClientRect().width) : -1
+      const kidStyle = kid?.getAttribute('style')?.slice(0, 60) ?? ''
+      const innerStyle = inner?.getAttribute('style')?.slice(0, 60) ?? ''
+      return `${kid?.className.toString().split(' ').slice(0, 2).join('.')}|cell=${cellW}|kid=${kidW}|in=${innerW}|ks=${kidStyle}|is=${innerStyle}`
+    })
+    return { cssHasRule, rows }
+  })
+  console.log('C3=' + JSON.stringify(info))
+})
