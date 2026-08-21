@@ -73,8 +73,11 @@ test('C3 编辑面控件宽度解剖', async ({ page }) => {
   console.log('C3SCENE=' + JSON.stringify({ gotRow, ...scene }))
   if (gotRow) {
     await dataRow.click()
-    await page.waitForTimeout(1500)
+  } else {
+    // 无数据也能解剖：创建表单与编辑面同套 SchemaForm/FormItemShell 控件
+    await page.getByRole('button', { name: '创建' }).first().click()
   }
+  await page.waitForTimeout(1500)
   const info = await page.evaluate(() => {
     const cssHasRule = Array.from(document.styleSheets).some((sh) => {
       try {
@@ -83,7 +86,7 @@ test('C3 编辑面控件宽度解剖', async ({ page }) => {
         return false
       }
     })
-    const shells = Array.from(document.querySelectorAll('[data-test="item-detail-pane"] .fis-control')).slice(0, 8)
+    const shells = Array.from(document.querySelectorAll('.fis-control')).slice(0, 8)
     const rows = shells.map((c) => {
       const kid = c.firstElementChild as HTMLElement | null
       const inner = c.querySelector('input, textarea') as HTMLElement | null
