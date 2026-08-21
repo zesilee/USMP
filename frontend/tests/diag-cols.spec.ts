@@ -61,11 +61,20 @@ test('C3 编辑面控件宽度解剖', async ({ page }) => {
   await page.locator('.ev_inputSelect').first().click()
   await page.locator('.ev_popup_option', { hasText: DEVICE_IP }).first().click()
   await page.locator('.ev_tab_title', { hasText: /^VLAN列表$/ }).first().click()
-  // 等数据行真实出现（首个 tr 可能是 ev_table_nodata 占位——C3 首跑实录）
+  // 等数据行（拿不到也继续——先拍页面现场再说，探针永远有产出）
   const dataRow = page.locator('.ev_table_content tr', { hasText: /\d/ }).first()
-  await dataRow.waitFor({ state: 'visible', timeout: 25000 })
-  await dataRow.click()
-  await page.waitForTimeout(1500)
+  const gotRow = await dataRow.waitFor({ state: 'visible', timeout: 15000 }).then(() => true, () => false)
+  const scene = await page.evaluate(() => ({
+    deviceSel: (document.querySelector('.ev_inputSelect input') as HTMLInputElement | null)?.value ?? '',
+    rowCount: document.querySelectorAll('.ev_table_content tr').length,
+    tableText: (document.querySelector('.ev_table_content') as HTMLElement | null)?.innerText.slice(0, 120) ?? '',
+    errBanner: (document.querySelector('[class*="alert"], [class*="error"]') as HTMLElement | null)?.innerText.slice(0, 120) ?? '',
+  }))
+  console.log('C3SCENE=' + JSON.stringify({ gotRow, ...scene }))
+  if (gotRow) {
+    await dataRow.click()
+    await page.waitForTimeout(1500)
+  }
   const info = await page.evaluate(() => {
     const cssHasRule = Array.from(document.styleSheets).some((sh) => {
       try {
