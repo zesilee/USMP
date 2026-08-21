@@ -862,8 +862,11 @@ html, body {
    底色不同步为已知观感边界，目视轮反馈再调。 */
 .ub-fixed-right-last th:last-child,
 .ub-fixed-right-last td:last-child {
-  position: sticky;
-  right: 0;
+  /* C2 探针定案：eview 给表头单元格强设 position:relative（计算样式实证，
+     普通特异性压不过）——!important 强制 sticky；表头表体同处单一滚动容器
+     ev_table_container_inner，一条规则两处生效。 */
+  position: sticky !important;
+  right: 0 !important;
   z-index: 2;
   background: $bg-card;
   box-shadow: -8px 0 8px -8px rgba(0, 0, 0, 0.15);
