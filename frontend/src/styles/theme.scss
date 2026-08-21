@@ -877,19 +877,19 @@ html, body {
   box-shadow: -8px 0 8px -8px rgba(0, 0, 0, 0.15);
 }
 
-/* NCE 编辑面对齐：eview 输入类控件固有宽（TextField 364px 等）在表单三列
-   栅格内不吃满格——表单外壳内输入类一律 100% 撑满（Switch/Checkbox 保持
-   固有宽不受影响）。 */
-.form-item-shell .ev_textField,
-.form-item-shell [class*='ev_textField'],
-.form-item-shell .ev_input,
-.form-item-shell .ev_inputSelect,
-.form-item-shell [class*='ev_inputSelect'],
-.form-item-shell .ev_select,
-.form-item-shell textarea {
+/* NCE 编辑面对齐：eview 输入类控件各有固有宽（TextField 364px、Spinner
+   数字框另有其宽——「VLAN标识」与「VLAN名称」不等宽的病灶）。逐类名追
+   不完，改 .fis-control（FormItemShell 控件容器）通用归一：直接子控件
+   一律 100% 撑满格子；开关/复选/单选保持固有宽豁免。 */
+.form-item-shell .fis-control > * {
   width: 100% !important;
   max-width: 100%;
   box-sizing: border-box;
+}
+.form-item-shell .fis-control > [class*='witch'],
+.form-item-shell .fis-control > [class*='heckbox'],
+.form-item-shell .fis-control > [class*='adio'] {
+  width: auto !important;
 }
 
 /* Tag 桥自绘柔和标签（内网目视定案：eview 直名色饱和实底、文字对比不足）：
