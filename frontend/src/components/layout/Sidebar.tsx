@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useLocation, useNavigate } from '@app-router'
 import { Input, Menu, icons } from '../../ui'
 import { i18n, useLocale } from '../../i18n'
@@ -146,8 +146,48 @@ export default function Sidebar() {
     setOpenKeys(keys)
   }, [ltQuery, filteredTree])
 
+  // 侧栏宽度拖拽（NCE 特性列表对齐）：手柄拖改宽 [180,480]、双击复位 240、
+  // localStorage 持久；收起态忽略。拖动中禁用宽度过渡（跟手）。
+  const [navWidth, setNavWidth] = useState<number>(() => {
+    const v = Number(localStorage.getItem('usmp.sidebar.w'))
+    return v >= 180 && v <= 480 ? v : 240
+  })
+  const [dragging, setDragging] = useState(false)
+  const navWidthRef = useRef(navWidth)
+  navWidthRef.current = navWidth
+  useEffect(() => {
+    localStorage.setItem('usmp.sidebar.w', String(navWidth))
+  }, [navWidth])
+  const onResizeStart = (e: { clientX: number; preventDefault: () => void }) => {
+    const startX = e.clientX
+    const startW = navWidthRef.current
+    setDragging(true)
+    const move = (ev: MouseEvent) => setNavWidth(Math.min(480, Math.max(180, startW + ev.clientX - startX)))
+    const up = () => {
+      setDragging(false)
+      window.removeEventListener('mousemove', move)
+      window.removeEventListener('mouseup', up)
+    }
+    window.addEventListener('mousemove', move)
+    window.addEventListener('mouseup', up)
+    e.preventDefault()
+  }
+
   return (
-    <div className={`sidebar${isCollapsed ? ' collapsed' : ''}`} data-test="sidebar">
+    <div
+      className={`sidebar${isCollapsed ? ' collapsed' : ''}${dragging ? ' dragging' : ''}`}
+      data-test="sidebar"
+      style={isCollapsed ? undefined : { width: navWidth }}
+    >
+      <div
+        className="sidebar-resizer"
+        data-test="sidebar-resizer"
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="resize-sidebar"
+        onMouseDown={onResizeStart}
+        onDoubleClick={() => setNavWidth(240)}
+      />
       <div className="brand">
         <div className="brand-mark" aria-hidden="true" />
         {!isCollapsed && (

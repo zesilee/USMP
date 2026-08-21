@@ -707,11 +707,16 @@ html, body {
   opacity: 0.45;
 }
 .ub-menu .ev_tree_text {
-  /* NCE 对齐：长名称不截断——树体撑开宽度、侧栏容器横向滚动（特性列表
-     左右拖动）。 */
-  white-space: nowrap;
+  /* NCE 对齐：长名称不截断——eview 全局 CSS 的截断声明用 !important 压制
+     （表头 relative 同款前科）。 */
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: nowrap !important;
+  max-width: none !important;
 }
-.ub-menu {
+/* 滚动容器（.nav=.ub-menu 根，overflow:auto）与被撑开内容必须是父子——
+   内层 ul 撑 max-content，根滚动其溢出（同元素自撑自永不出滚动条）。 */
+.ub-menu > ul {
   min-width: max-content;
 }
 
