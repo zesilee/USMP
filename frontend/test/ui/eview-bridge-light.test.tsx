@@ -59,14 +59,20 @@ afterEach(() => {
 })
 
 describe('展示组桥', () => {
-  it('Tag：error→danger、processing→primary、round 跟默认、锚点可命中', () => {
+  it('Tag：桥自绘柔和标签（浅底深字），语义/直名色统一映射色调类，锚点可命中', () => {
+    // 内网目视定案：eview Tag 直名色=饱和实底、文字看不清——纯展示元素改
+    // 桥自绘 span.ub-tag（不再经 EvTag，浅底+同色系深字，见 theme.scss）。
     render(<Tag color="error" data-test="row-mark">x</Tag>)
-    expect(recv.last.Tag.color).toBe('danger')
-    // R3 实测 round 语义与 d.ts 推断相反——桥跟默认走（不传），目视验收定。
-    expect(recv.last.Tag.round).toBeUndefined()
-    expect(document.querySelector(ANCHOR_SELECTOR('row-mark'))).toBeTruthy()
-    render(<Tag color="processing">y</Tag>)
-    expect(recv.last.Tag.color).toBe('primary')
+    expect(recv.last.Tag).toBeUndefined()
+    const el = document.querySelector(ANCHOR_SELECTOR('row-mark'))!
+    expect(el.className).toContain('ub-tag')
+    expect(el.className).toContain('ub-tag-red')
+    render(<Tag color="green">y</Tag>)
+    expect(document.querySelector('.ub-tag-green')?.textContent).toBe('y')
+    render(<Tag>z</Tag>)
+    expect(document.querySelector('.ub-tag-default')?.textContent).toBe('z')
+    render(<Tag color="processing">p</Tag>)
+    expect(document.querySelector('.ub-tag-blue')?.textContent).toBe('p')
   })
 
   it('Badge：count→content、small 固化样式', () => {

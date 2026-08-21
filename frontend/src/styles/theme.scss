@@ -891,3 +891,21 @@ html, body {
   max-width: 100%;
   box-sizing: border-box;
 }
+
+/* Tag 桥自绘柔和标签（内网目视定案：eview 直名色饱和实底、文字对比不足）：
+   浅底 + 同色系深字，六档色调。 */
+.ub-tag {
+  display: inline-block;
+  padding: 1px 8px;
+  font-size: 12px;
+  line-height: 18px;
+  border-radius: 3px;
+  background: $bg-elevated;
+  color: $text-secondary;
+  border: 1px solid transparent;
+}
+.ub-tag-green { background: $color-success-bg; color: $color-success; }
+.ub-tag-orange { background: $color-warning-bg; color: $color-warning; }
+.ub-tag-red { background: $color-error-bg; color: $color-error; }
+.ub-tag-blue { background: $color-primary-bg; color: $color-primary; }
+.ub-tag-cyan { background: $color-info-bg; color: $color-info; }
