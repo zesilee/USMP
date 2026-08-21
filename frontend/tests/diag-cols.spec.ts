@@ -33,7 +33,25 @@ test('C1 VLAN列表列 DOM 定案', async ({ page }) => {
       (t) => `${t.className.split(' ')[0] || 'noclass'} w=${Math.round(t.getBoundingClientRect().width)} cols=${t.querySelectorAll('col').length}`,
     )
     void root
-    return { thCount: ths.length, headCells, rowCellCount: rowCells.length, rowCells, scrollers, funnels, tables }
+    // C2：操作列表头 sticky 失效定案——最后一个 th 的计算样式 + 祖先链
+    // （overflow/transform/margin 同步机制判定）。
+    const lastTh = ths[ths.length - 1]
+    const cs = lastTh ? getComputedStyle(lastTh) : null
+    const anc: string[] = []
+    let n: Element | null = lastTh ?? null
+    for (let i = 0; n && i < 8; i++) {
+      const c = getComputedStyle(n)
+      anc.push(
+        `${n.tagName}.${n.className.toString().split(' ')[0]}|of=${c.overflow}/${c.overflowX}|tf=${c.transform !== 'none' ? 'Y' : 'n'}|pos=${c.position}|ml=${c.marginLeft}|left=${c.left}`,
+      )
+      n = n.parentElement
+    }
+    const rootHasClass = !!document.querySelector('.ub-fixed-right-last')
+    const thInMarked = !!lastTh?.closest('.ub-fixed-right-last')
+    return {
+      thCount: ths.length, headCells, rowCellCount: rowCells.length, rowCells, scrollers, funnels, tables,
+      c2: { thPos: cs?.position, thRight: cs?.right, rootHasClass, thInMarked, anc },
+    }
   })
   console.log('C1=' + JSON.stringify(info))
 })
