@@ -231,7 +231,7 @@ export default function ModuleListTab(props: ModuleListTabProps) {
     columns.push({
       title: t('common.actions'),
       key: '__actions__',
-      width: 200,
+      width: 240,
       fixed: 'right',
       render: (_: unknown, row: Record<string, any>) => (
         <span onClick={(e) => e.stopPropagation()}>
@@ -250,6 +250,10 @@ export default function ModuleListTab(props: ModuleListTabProps) {
                 {t('common.delete')}
               </Button>
             ))}
+          {/* NCE 对齐：行内获取数据源（无库架构下取数粒度=整表强取，与工具栏同源）。 */}
+          <Button type="link" size="small" data-test="row-fetch" onClick={() => void load(true)}>
+            {t('console.fetchSource')}
+          </Button>
         </span>
       ),
     })

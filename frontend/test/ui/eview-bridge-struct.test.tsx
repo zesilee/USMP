@@ -134,6 +134,8 @@ describe('Table 桥（矩阵全项）', () => {
     // fixed 不映射冻结（内网实证：eview 冻结拆分子表行高不同步互相覆盖、
     // 方向表级仅单侧致 fixed:'right' 冻到最左、横向滚动结构破坏）。
     expect(p.columns.every((c: any) => !c.freezeCol)).toBe(true)
+    // 操作列固定改 CSS sticky（NCE 对齐）：fixed:'right' 列存在 → 根类名标记。
+    expect(p.className).toContain('ub-fixed-right-last')
     expect(p.dataset[0].__ubkey).toBe('r1')
     expect(p.rowKey).toBe('__ubkey')
     expect(p.disableEviewSort).toBe(true)

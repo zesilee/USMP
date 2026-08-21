@@ -500,6 +500,15 @@ export function Table<T extends object = Record<string, unknown>>(
     customStyleRows,
     emptyTableMsg: typeof props.locale?.emptyText === 'string' ? props.locale.emptyText : undefined,
     enableLoading: props.loading,
-    className: [props.className, props.size === 'small' ? 'ub-size-small' : ''].filter(Boolean).join(' ') || undefined,
+    // 操作列固定（NCE 对齐）：eview 冻结拆表已弃用——根类名标记，CSS sticky
+    // 钉最后一列（theme.scss .ub-fixed-right-last）。
+    className:
+      [
+        props.className,
+        props.size === 'small' ? 'ub-size-small' : '',
+        cols.some((c) => c.fixed === 'right') ? 'ub-fixed-right-last' : '',
+      ]
+        .filter(Boolean)
+        .join(' ') || undefined,
   })
 }

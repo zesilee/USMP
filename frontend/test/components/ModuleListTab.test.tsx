@@ -136,6 +136,30 @@ describe('ModuleListTab · 运行时动态列（R05 闸门）', () => {
     )
   })
 
+  it('行内获取数据源触发 force_refresh（NCE 操作列对齐）', async () => {
+    mockConfig({ vlan: rows })
+    mountTab()
+    await screen.findByText('mgmt')
+    fireEvent.click(document.querySelectorAll('[data-test="row-fetch"]')[0]!)
+    await waitFor(() =>
+      expect(vi.mocked(apiModule.getConfig)).toHaveBeenLastCalledWith(
+        '10.0.0.1', expect.any(String), true, false, expect.anything(),
+      ),
+    )
+  })
+
+  it('数据列统一宽度（NCE 等宽对齐）', async () => {
+    const { buildDataColumns } = await import('../../src/components/config/listColumns')
+    const cols = buildDataColumns(
+      [
+        { path: 'a', label: 'A', type: 'string' },
+        { path: 'b', label: 'B', type: 'boolean' },
+      ] as never,
+      false,
+    )
+    expect(cols.every((c: { width?: number }) => c.width === 160)).toBe(true)
+  })
+
   it('取数失败：错误条展示、表格空态（R08 负路径）', async () => {
     vi.mocked(apiModule.getConfig).mockRejectedValue(new Error('device offline'))
     mountTab()

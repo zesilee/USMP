@@ -707,9 +707,12 @@ html, body {
   opacity: 0.45;
 }
 .ub-menu .ev_tree_text {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* NCE 对齐：长名称不截断——树体撑开宽度、侧栏容器横向滚动（特性列表
+     左右拖动）。 */
   white-space: nowrap;
+}
+.ub-menu {
+  min-width: max-content;
 }
 
 /* 组7 E2E（diag5 矩形实证）：eview TextField 默认固定宽 364px，左树搜索框
@@ -852,4 +855,16 @@ html, body {
 }
 .ub-menu [class*='ev_tree'] {
   background-image: none !important;
+}
+
+/* 操作列固定（NCE 对齐）：eview 冻结=拆分子表已实证不可用——CSS sticky 钉
+   最后一列（桥在存在 fixed:'right' 列时标记根类名）。悬停行背景与 sticky
+   底色不同步为已知观感边界，目视轮反馈再调。 */
+.ub-fixed-right-last th:last-child,
+.ub-fixed-right-last td:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 2;
+  background: $bg-card;
+  box-shadow: -8px 0 8px -8px rgba(0, 0, 0, 0.15);
 }
