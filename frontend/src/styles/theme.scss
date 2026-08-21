@@ -868,3 +868,18 @@ html, body {
   background: $bg-card;
   box-shadow: -8px 0 8px -8px rgba(0, 0, 0, 0.15);
 }
+
+/* NCE 编辑面对齐：eview 输入类控件固有宽（TextField 364px 等）在表单三列
+   栅格内不吃满格——表单外壳内输入类一律 100% 撑满（Switch/Checkbox 保持
+   固有宽不受影响）。 */
+.form-item-shell .ev_textField,
+.form-item-shell [class*='ev_textField'],
+.form-item-shell .ev_input,
+.form-item-shell .ev_inputSelect,
+.form-item-shell [class*='ev_inputSelect'],
+.form-item-shell .ev_select,
+.form-item-shell textarea {
+  width: 100% !important;
+  max-width: 100%;
+  box-sizing: border-box;
+}

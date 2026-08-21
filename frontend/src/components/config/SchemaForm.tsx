@@ -25,9 +25,23 @@ export interface SchemaFormProps {
 
 const SCALAR = new Set(['string', 'number', 'boolean', 'enum'])
 
+// NCE 编辑面对齐：呈现序=主键→*name→*description→其余保持 YANG 定义序
+// （仅呈现层重排，派生逻辑/黄金零改动；payload 键序不受呈现序影响）。
+function presentRank(f: Field): number {
+  if (f.isKey) return 0
+  const leaf = (f.path.split('/').pop() ?? f.path).toLowerCase()
+  if (leaf === 'name' || leaf.endsWith('-name')) return 1
+  if (leaf === 'description' || leaf === 'desc' || leaf.endsWith('-description')) return 2
+  return 3
+}
+
 export default function SchemaForm({ fields, form, keyField = '', fieldDisabled, labelExtra }: SchemaFormProps) {
   const visible = new Set(form.visibleFields.map((f) => f.path))
-  const shown = fields.filter((f) => visible.has(f.path))
+  const shown = fields
+    .filter((f) => visible.has(f.path))
+    .map((f, i) => [f, i] as const)
+    .sort((a, b) => presentRank(a[0]) - presentRank(b[0]) || a[1] - b[1])
+    .map(([f]) => f)
   return (
     <div className="schema-form">
       <div className="schema-form--grid">
