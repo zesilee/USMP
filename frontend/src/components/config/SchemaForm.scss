@@ -2,7 +2,7 @@
 .schema-form--grid {
   display: grid;
   /* NCE 形态：列宽有上限（控件不随宽屏无限拉长）+ 大列距留白，左对齐。 */
-  grid-template-columns: repeat(3, minmax(240px, 400px));
+  grid-template-columns: repeat(3, minmax(240px, 800px));
   column-gap: 48px;
   row-gap: 8px;
   justify-content: start;
@@ -25,6 +25,6 @@
 
 @media (max-width: 1280px) {
   .schema-form--grid {
-    grid-template-columns: repeat(2, minmax(240px, 400px));
+    grid-template-columns: repeat(2, minmax(240px, 800px));
   }
 }
