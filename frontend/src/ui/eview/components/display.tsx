@@ -3,7 +3,6 @@
 // （映射依据=component-matrix，勿凭空改）。FA-05 锚点：闭合 props 组件走
 // 组件 id prop（anchorId 映射）。
 import { createElement, type ReactNode, type CSSProperties } from 'react'
-import TagMod from '@nce/eview-react/Tag'
 import BadgeMod from '@nce/eview-react/Badge'
 import CrumbsMod from '@nce/eview-react/Crumbs'
 import EmptyMod from '@nce/eview-react/Empty'
@@ -11,7 +10,6 @@ import DrawerMod from '@nce/eview-react/Drawer'
 import DialogMod from '@nce/eview-react/Dialog'
 import { anchorId, pickDefault } from '../../bridge'
 
-const EvTag = pickDefault(TagMod)
 const EvBadge = pickDefault(BadgeMod)
 const EvCrumbs = pickDefault(CrumbsMod)
 const EvEmpty = pickDefault(EmptyMod)
@@ -24,28 +22,33 @@ interface CommonProps {
   style?: CSSProperties
 }
 
-// ===== Tag：antd 语义色 → eview 色名（error→danger、processing→primary）=====
-const TAG_COLOR: Record<string, string> = {
-  success: 'success',
-  warning: 'warning',
-  error: 'danger',
-  processing: 'primary',
-  default: 'default',
+// ===== Tag：桥自绘柔和标签（内网目视定案）=====
+// eview Tag 直名色（green/red/orange…）=饱和实底、块面突兀且文字对比不足
+// ——Tag 为纯展示元素，改自绘 span.ub-tag（浅底+同色系深字，theme.scss
+// 承样式），不再经 EvTag、零 eview CSS 对抗。antd 语义色与直名色统一归
+// 六档色调类。
+const TAG_TONE: Record<string, string> = {
+  success: 'green',
+  green: 'green',
+  warning: 'orange',
+  orange: 'orange',
+  error: 'red',
+  red: 'red',
+  processing: 'blue',
+  blue: 'blue',
+  cyan: 'cyan',
 }
 
 export function Tag(props: CommonProps & { color?: string; children?: ReactNode }) {
-  const { color, children } = props
+  const tone = TAG_TONE[props.color ?? ''] ?? 'default'
   return createElement(
-    EvTag,
+    'span',
     {
       id: anchorId(props['data-test']),
-      color: color ? (TAG_COLOR[color] ?? color) : 'default',
-      // round 语义与 d.ts 推断相反（R3 实测 round:false 仍出 ev_tag_round 类）
-      // ——跟组件默认走，圆角观感留组 5 目视验收定夺。
-      className: props.className,
+      className: ['ub-tag', `ub-tag-${tone}`, props.className].filter(Boolean).join(' '),
       style: props.style,
     },
-    children,
+    props.children,
   )
 }
 

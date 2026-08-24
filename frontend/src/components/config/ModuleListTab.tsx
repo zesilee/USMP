@@ -211,19 +211,26 @@ export default function ModuleListTab(props: ModuleListTabProps) {
   }
 
   // ===== 运行时动态列 =====
+  // __mark__ 变更标记列仅在本列表存在攒批标记行时出现（NCE 对齐：无变更时
+  // 不留无标题空列）。
+  const hasMarks = pagedRows.some((r) => rowMark(r) !== '')
   const columns: TableColumnType<Record<string, any>>[] = [
-    {
-      title: '',
-      key: '__mark__',
-      width: 72,
-      render: (_: unknown, row: Record<string, any>) => {
-        const m = rowMark(row)
-        if (m === 'create') return <Tag color="green" data-test="mark-create">{t('console.markCreate')}</Tag>
-        if (m === 'update') return <Tag color="orange" data-test="mark-update">{t('console.markUpdate')}</Tag>
-        if (m === 'delete') return <Tag color="red" data-test="mark-delete">{t('console.markDelete')}</Tag>
-        return null
-      },
-    },
+    ...(hasMarks
+      ? [
+          {
+            title: '',
+            key: '__mark__',
+            width: 72,
+            render: (_: unknown, row: Record<string, any>) => {
+              const m = rowMark(row)
+              if (m === 'create') return <Tag color="green" data-test="mark-create">{t('console.markCreate')}</Tag>
+              if (m === 'update') return <Tag color="orange" data-test="mark-update">{t('console.markUpdate')}</Tag>
+              if (m === 'delete') return <Tag color="red" data-test="mark-delete">{t('console.markDelete')}</Tag>
+              return null
+            },
+          } as TableColumnType<Record<string, any>>,
+        ]
+      : []),
     ...buildDataColumns(shownColumns, serverMode),
   ]
 
@@ -231,7 +238,7 @@ export default function ModuleListTab(props: ModuleListTabProps) {
     columns.push({
       title: t('common.actions'),
       key: '__actions__',
-      width: 200,
+      width: 240,
       fixed: 'right',
       render: (_: unknown, row: Record<string, any>) => (
         <span onClick={(e) => e.stopPropagation()}>
@@ -250,6 +257,10 @@ export default function ModuleListTab(props: ModuleListTabProps) {
                 {t('common.delete')}
               </Button>
             ))}
+          {/* NCE 对齐：行内获取数据源（无库架构下取数粒度=整表强取，与工具栏同源）。 */}
+          <Button type="link" size="small" data-test="row-fetch" onClick={() => void load(true)}>
+            {t('console.fetchSource')}
+          </Button>
         </span>
       ),
     })

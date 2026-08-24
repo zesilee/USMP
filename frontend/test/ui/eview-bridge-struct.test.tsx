@@ -127,9 +127,15 @@ describe('Table 桥（矩阵全项）', () => {
   const base = { columns, dataSource: data, rowKey: 'name' as const }
 
   it('列映射（allowSort/width/render 参数序换位）与 rowKey 预计算', () => {
-    render(<Table {...base} data-test="module-table" />)
+    const withFixed = [...columns, { title: '操作', key: 'ops', fixed: 'right' as const }]
+    render(<Table {...base} columns={withFixed} data-test="module-table" />)
     const p = recv.last.Table
     expect(p.columns[0]).toMatchObject({ key: 'name', title: '名称', allowSort: true, width: 120 })
+    // fixed 不映射冻结（内网实证：eview 冻结拆分子表行高不同步互相覆盖、
+    // 方向表级仅单侧致 fixed:'right' 冻到最左、横向滚动结构破坏）。
+    expect(p.columns.every((c: any) => !c.freezeCol)).toBe(true)
+    // 操作列固定改 CSS sticky（NCE 对齐）：fixed:'right' 列存在 → 根类名标记。
+    expect(p.className).toContain('ub-fixed-right-last')
     expect(p.dataset[0].__ubkey).toBe('r1')
     expect(p.rowKey).toBe('__ubkey')
     expect(p.disableEviewSort).toBe(true)
@@ -225,6 +231,18 @@ describe('Table 桥（列头筛选自绘菜单）', () => {
     expect(recv.last.Table.columns[0].title).toBe('名称')
     expect(container.querySelector('[aria-label="filter-kind"]')).toBeTruthy()
     expect(container.querySelector('[aria-label="filter-name"]')).toBeNull()
+    // 内网 C1 探针定案：eview 按标题文本测宽分列宽，组件标题量不出→列宽 0
+    // （整列被挤没）；titleComponentToText 复测无效——桥为组件标题列显式
+    // 算宽（探针证明显式 width 被尊重：操作列 200 真渲染 200）。
+    expect(recv.last.Table.columns[1].titleComponentToText).toBe('类型')
+    expect(recv.last.Table.columns[0].titleComponentToText).toBeUndefined()
+    expect(recv.last.Table.columns[1].width).toBe('类型'.length * 14 + 56)
+    expect(recv.last.Table.columns[0].width).toBeUndefined()
+  })
+  it('filters 列显式 width 优先于桥算宽', () => {
+    const wide = [columns[0], { ...columns[1], width: 300 }]
+    render(<Table {...base} columns={wide} />)
+    expect(recv.last.Table.columns[1].width).toBe(300)
   })
 
   it('勾选选项+确定：dataset 过滤、onChange 合成 filters+分页快照、触发器激活态', () => {

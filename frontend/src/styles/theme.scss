@@ -707,9 +707,17 @@ html, body {
   opacity: 0.45;
 }
 .ub-menu .ev_tree_text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  /* NCE 对齐：长名称不截断——eview 全局 CSS 的截断声明用 !important 压制
+     （表头 relative 同款前科）。 */
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: nowrap !important;
+  max-width: none !important;
+}
+/* 滚动容器（.nav=.ub-menu 根，overflow:auto）与被撑开内容必须是父子——
+   内层 ul 撑 max-content，根滚动其溢出（同元素自撑自永不出滚动条）。 */
+.ub-menu > ul {
+  min-width: max-content;
 }
 
 /* 组7 E2E（diag5 矩形实证）：eview TextField 默认固定宽 364px，左树搜索框
@@ -834,3 +842,95 @@ html, body {
 .ub-filter-actions .ub-filter-ok {
   color: $color-primary;
 }
+
+/* 内网目视修复（组件覆盖截图定案）：
+   1) link+danger 按钮红字形态（eview risk=实心红块，antd 语义=红字链接）。 */
+.ub-btn-link-danger,
+.ub-btn-link-danger:hover {
+  color: $color-error !important;
+}
+/* 2) eview 全局样式表给 ev_tree_* 类自带节点图标装饰（按其自身 DOM 结构
+   定位背景图/伪元素）——自绘树结构不同，图标错位压在文字上（内网实证）。
+   自绘树观感全由本文件承接，eview 侧装饰一律清除（ub-tree-switcher 的
+   自绘箭头不在 ev_tree 前缀内、不受影响）。 */
+.ub-menu [class*='ev_tree']::before,
+.ub-menu [class*='ev_tree']::after {
+  content: none !important;
+  background: none !important;
+}
+.ub-menu [class*='ev_tree'] {
+  background-image: none !important;
+}
+
+/* 操作列固定（NCE 对齐）：eview 冻结=拆分子表已实证不可用——CSS sticky 钉
+   最后一列（桥在存在 fixed:'right' 列时标记根类名）。悬停行背景与 sticky
+   底色不同步为已知观感边界，目视轮反馈再调。 */
+.ub-fixed-right-last th:last-child,
+.ub-fixed-right-last td:last-child {
+  /* C2 探针定案：eview 给表头单元格强设 position:relative（计算样式实证，
+     普通特异性压不过）——!important 强制 sticky；表头表体同处单一滚动容器
+     ev_table_container_inner，一条规则两处生效。 */
+  position: sticky !important;
+  right: 0 !important;
+  z-index: 2;
+  background: $bg-card;
+  box-shadow: -8px 0 8px -8px rgba(0, 0, 0, 0.15);
+}
+
+/* NCE 编辑面对齐：eview 输入类控件各有固有宽（C3 探针实证：Spinner 223/
+   TextField 364/InputSelect 133）。.fis-control 直下是自家 field-renderer
+   包装（其已满格）——归一须下探：控件根（field-renderer 直下）+ 内层
+   input 双层拉满；开关/复选/单选豁免。 */
+.form-item-shell .fis-control .field-renderer > *,
+.form-item-shell .fis-control > *:not(.field-renderer) {
+  width: 100% !important;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+/* C4 探针定案：约束在各控件第二层包装（ev_textField_wrapper 204/
+   ev_spinner_wrap 225 为 eview 固有宽，其下各层与 input 均为其 100%）。
+   注意必须按 C4 实拍类名点名（前缀通配曾把 spinner 加减按钮也拉成 100%
+   ——「+ 覆盖输入」事故），按钮/图标零波及。 */
+.form-item-shell .fis-control .ev_textField_wrapper,
+.form-item-shell .fis-control .ev_textField_container,
+.form-item-shell .fis-control .ev_textField_inner,
+.form-item-shell .fis-control .ev_textField_input,
+.form-item-shell .fis-control .ev_spinner_wrap,
+.form-item-shell .fis-control .ev_spinner_container,
+.form-item-shell .fis-control .ev_spinner_input {
+  width: 100% !important;
+  min-width: 0;
+  box-sizing: border-box;
+}
+/* 下拉内层前缀猜测未中（复测 133 仍固有宽）——改有界通用：下拉根内除
+   弹层/图标外的 div 与 input 全拉满（箭头/清除钮通常为 span 或绝对定位，
+   不受影响）。 */
+.form-item-shell .fis-control [class*='ev_inputSelect'] div:not([class*='ev_popup']):not([class*='icon']):not([class*='Icon']),
+.form-item-shell .fis-control [class*='ev_inputSelect'] input {
+  width: 100% !important;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.form-item-shell .fis-control [class*='witch'],
+.form-item-shell .fis-control [class*='heckbox'],
+.form-item-shell .fis-control [class*='adio'] {
+  width: auto !important;
+}
+
+/* Tag 桥自绘柔和标签（内网目视定案：eview 直名色饱和实底、文字对比不足）：
+   浅底 + 同色系深字，六档色调。 */
+.ub-tag {
+  display: inline-block;
+  padding: 1px 8px;
+  font-size: 12px;
+  line-height: 18px;
+  border-radius: 3px;
+  background: $bg-elevated;
+  color: $text-secondary;
+  border: 1px solid transparent;
+}
+.ub-tag-green { background: $color-success-bg; color: $color-success; }
+.ub-tag-orange { background: $color-warning-bg; color: $color-warning; }
+.ub-tag-red { background: $color-error-bg; color: $color-error; }
+.ub-tag-blue { background: $color-primary-bg; color: $color-primary; }
+.ub-tag-cyan { background: $color-info-bg; color: $color-info; }

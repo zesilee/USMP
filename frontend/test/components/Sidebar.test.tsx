@@ -87,6 +87,20 @@ describe('Sidebar · SND 左树导航（LT-03）', () => {
     expect(document.querySelector('[data-test="sidebar"]')!.textContent).toContain('业务')
   })
 
+  it('侧栏宽度拖拽（NCE 特性列表对齐）：拖改宽、双击复位、localStorage 持久', async () => {
+    mount()
+    const handle = document.querySelector('[data-test="sidebar-resizer"]')!
+    expect(handle).toBeTruthy()
+    fireEvent.mouseDown(handle, { clientX: 240 })
+    fireEvent.mouseMove(window, { clientX: 340 })
+    fireEvent.mouseUp(window)
+    const sidebar = document.querySelector('[data-test="sidebar"]') as HTMLElement
+    expect(sidebar.style.width).toBe('340px')
+    expect(localStorage.getItem('usmp.sidebar.w')).toBe('340')
+    fireEvent.doubleClick(handle)
+    expect(sidebar.style.width).toBe('240px')
+  })
+
   it('语言切换（UI-01）：Header 入口切 en-us，左树标签换英文', async () => {
     mount()
     fireEvent.click(document.querySelector('[data-test="locale-switch"]')!)

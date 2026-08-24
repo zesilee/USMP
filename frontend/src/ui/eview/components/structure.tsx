@@ -373,16 +373,20 @@ export function Table<T extends object = Record<string, unknown>>(
     id: anchorId(props['data-test']) ?? 'ub-table',
     columns: cols.map((c) => {
       const k = (c.dataIndex ?? c.key)!
+      const hasFilter = !!(c.filters?.length && c.onFilter)
       return {
       key: k,
       // filters 列：标题包自绘筛选触发器（确定/重置回写 → 过滤管线 + antd
       // onChange filters 快照合成；分页快照与排序通道同形）。
+      // C1 探针定案：eview 对无显式宽度的列按标题文本测宽——组件标题量不出
+      // 长度会分到 0 宽（列被挤没）；titleComponentToText 即为此供测宽文本。
+      titleComponentToText: hasFilter ? textOf(c.title) : undefined,
       title:
-        c.filters?.length && c.onFilter
+        hasFilter
           ? createElement(ColFilter, {
               colKey: k,
               title: textOf(c.title),
-              options: c.filters,
+              options: c.filters ?? [],
               values: colFilters[k] ?? [],
               onApply: (vals: FilterVal[]) => {
                 setColFilters((prev) => ({ ...prev, [k]: vals }))
@@ -400,8 +404,15 @@ export function Table<T extends object = Record<string, unknown>>(
               },
             })
           : textOf(c.title),
-      width: c.width,
-      freezeCol: !!c.fixed,
+      // C1 探针二定案：eview 按标题文本给无显式宽度列测宽，组件标题量不出
+      // →0 宽挤没整列（titleComponentToText 复测无效）；显式 width 被尊重
+      // （操作列 200 实渲染 200）——组件标题列桥内算宽：CJK 14px/字 + 图标
+      // 与内边距 56（漏斗 16+排序 18+padding）。
+      width: c.width ?? (hasFilter ? textOf(c.title).length * 14 + 56 : undefined),
+      // fixed 不映射冻结（内网实证三连）：eview 冻结=拆分子表渲染，行高不
+      // 同步致单元格跨行互相覆盖；freezeColPosition 是表级单侧属性，
+      // fixed:'right' 的操作列被冻到最左；拆表还破坏横向滚动。列保持自然
+      // 顺序（操作列自然排最右，宽表随表体滚动——antd 时代观感）。
       allowSort: !!c.sorter,
       // eview render(cellValue, rowData, options, row, isEdit) → antd render(value, record, index)；
       // R9 实测：不设 renderType 时 render 被忽略。R10 实测 'custom' 字面量
@@ -489,6 +500,15 @@ export function Table<T extends object = Record<string, unknown>>(
     customStyleRows,
     emptyTableMsg: typeof props.locale?.emptyText === 'string' ? props.locale.emptyText : undefined,
     enableLoading: props.loading,
-    className: [props.className, props.size === 'small' ? 'ub-size-small' : ''].filter(Boolean).join(' ') || undefined,
+    // 操作列固定（NCE 对齐）：eview 冻结拆表已弃用——根类名标记，CSS sticky
+    // 钉最后一列（theme.scss .ub-fixed-right-last）。
+    className:
+      [
+        props.className,
+        props.size === 'small' ? 'ub-size-small' : '',
+        cols.some((c) => c.fixed === 'right') ? 'ub-fixed-right-last' : '',
+      ]
+        .filter(Boolean)
+        .join(' ') || undefined,
   })
 }

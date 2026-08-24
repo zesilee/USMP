@@ -6,6 +6,28 @@
   background: var(--bg-card, #fff);
   border-right: 1px solid var(--border-color);
   transition: width 0.2s;
+  position: relative;
+}
+
+/* 侧栏宽度拖拽手柄（NCE 特性列表对齐）。 */
+.sidebar .sidebar-resizer {
+  position: absolute;
+  top: 0;
+  right: -3px;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 20;
+}
+.sidebar .sidebar-resizer:hover {
+  background: rgba(12, 94, 166, 0.18);
+}
+.sidebar.dragging {
+  transition: none;
+  user-select: none;
+}
+.sidebar.collapsed .sidebar-resizer {
+  display: none;
 }
 
 .sidebar.collapsed {

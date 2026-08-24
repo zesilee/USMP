@@ -29,6 +29,8 @@ export function buildDataColumns(
       title: col.label,
       dataIndex: key,
       key: col.path,
+      // NCE 对齐：数据列统一等宽（多列超宽走表格横向滚动 + 操作列 sticky）。
+      width: 160,
       sorter: serverMode
         ? true
         : (a, b) => {

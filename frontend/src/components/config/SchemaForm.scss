@@ -1,9 +1,11 @@
 /* SchemaForm 三列栅格（FE-22 NCE 形态）：标量流式补位，容器/choice/list 整行。 */
 .schema-form--grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(220px, 1fr));
-  column-gap: 24px;
-  row-gap: 4px;
+  /* NCE 形态：列宽有上限（控件不随宽屏无限拉长）+ 大列距留白，左对齐。 */
+  grid-template-columns: repeat(3, minmax(240px, 800px));
+  column-gap: 48px;
+  row-gap: 8px;
+  justify-content: start;
 }
 
 .schema-form .fi-span-full {
@@ -23,6 +25,6 @@
 
 @media (max-width: 1280px) {
   .schema-form--grid {
-    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    grid-template-columns: repeat(2, minmax(240px, 800px));
   }
 }

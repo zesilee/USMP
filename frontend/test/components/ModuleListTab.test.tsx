@@ -111,8 +111,9 @@ describe('ModuleListTab · 运行时动态列（R05 闸门）', () => {
     await screen.findByText('z3')
     fireEvent.click(screen.getByRole('columnheader', { name: /id/ }))
     await waitFor(() => {
-      // 列序：selection(1) 标记列(2) id(3)——FE-11 二期标记列插位后 id 在第 3 列。
-      const cells = screen.getAllByRole('row').slice(1).map((r) => r.querySelector('td:nth-child(3)')?.textContent)
+      // 列序：selection(1) id(2)——标记列改为仅攒批有标记时插位（NCE 空列对齐），
+      // 无变更场景 id 在第 2 列。
+      const cells = screen.getAllByRole('row').slice(1).map((r) => r.querySelector('td:nth-child(2)')?.textContent)
       expect(cells).toEqual(['3', '10', '20']) // 数值序：3<10<20（字典序会是 10,20,3）
     })
     // 字符串列排序路径
@@ -134,6 +135,40 @@ describe('ModuleListTab · 运行时动态列（R05 闸门）', () => {
         '10.0.0.1', expect.any(String), true, false, expect.anything(),
       ),
     )
+  })
+
+  it('无攒批变更时不渲染 __mark__ 标记列（NCE 对齐：无空列）', async () => {
+    mockConfig({ vlan: rows })
+    mountTab()
+    await screen.findByText('mgmt')
+    const headTexts = Array.from(document.querySelectorAll('th')).map((th) => th.textContent?.trim())
+    // 首个非勾选列应为数据列（VLAN 标识），不存在无标题空列
+    expect(headTexts.filter((t2) => t2 === '').length).toBeLessThanOrEqual(1) // 仅勾选列头
+    expect(document.querySelector('[data-test="mark-create"]')).toBeNull()
+  })
+
+  it('行内获取数据源触发 force_refresh（NCE 操作列对齐）', async () => {
+    mockConfig({ vlan: rows })
+    mountTab()
+    await screen.findByText('mgmt')
+    fireEvent.click(document.querySelectorAll('[data-test="row-fetch"]')[0]!)
+    await waitFor(() =>
+      expect(vi.mocked(apiModule.getConfig)).toHaveBeenLastCalledWith(
+        '10.0.0.1', expect.any(String), true, false, expect.anything(),
+      ),
+    )
+  })
+
+  it('数据列统一宽度（NCE 等宽对齐）', async () => {
+    const { buildDataColumns } = await import('../../src/components/config/listColumns')
+    const cols = buildDataColumns(
+      [
+        { path: 'a', label: 'A', type: 'string' },
+        { path: 'b', label: 'B', type: 'boolean' },
+      ] as never,
+      false,
+    )
+    expect(cols.every((c: { width?: number }) => c.width === 160)).toBe(true)
   })
 
   it('取数失败：错误条展示、表格空态（R08 负路径）', async () => {

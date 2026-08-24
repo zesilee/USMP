@@ -36,7 +36,16 @@ export function Button(
     children?: ReactNode
   },
 ) {
-  const status = props.danger ? 'risk' : props.type === 'primary' ? 'primary' : props.type === 'link' ? 'text' : 'default'
+  // link+danger 不走 risk（内网实证：risk=实心红块，antd 语义=红字链接）
+  // ——保持 text 形态 + ub-btn-link-danger 红字类。
+  const status =
+    props.danger && props.type !== 'link'
+      ? 'risk'
+      : props.type === 'primary'
+        ? 'primary'
+        : props.type === 'link'
+          ? 'text'
+          : 'default'
   return createElement(
     EvButton,
     {
@@ -52,7 +61,14 @@ export function Button(
       onClick: (e: unknown) => {
         if (!props.loading) props.onClick?.(e)
       },
-      className: [props.className, props.ghost ? 'ub-btn-ghost' : ''].filter(Boolean).join(' ') || undefined,
+      className:
+        [
+          props.className,
+          props.ghost ? 'ub-btn-ghost' : '',
+          props.danger && props.type === 'link' ? 'ub-btn-link-danger' : '',
+        ]
+          .filter(Boolean)
+          .join(' ') || undefined,
       style: props.style,
     },
     props.children,
