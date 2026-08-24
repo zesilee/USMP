@@ -86,6 +86,21 @@ test('C3 编辑面控件宽度解剖', async ({ page }) => {
         return false
       }
     })
+    // C4：前 3 个控件从 field-renderer 到 input 的整条链（类名|宽度|display）
+    const chains = Array.from(document.querySelectorAll('.fis-control .field-renderer')).slice(0, 3).map((fr) => {
+      const input = fr.querySelector('input, textarea')
+      if (!input) return 'no-input'
+      const path: string[] = []
+      let n: Element | null = input
+      while (n && n !== fr.parentElement) {
+        const cs = getComputedStyle(n)
+        path.unshift(
+          `${n.tagName}.${n.className.toString().split(' ').slice(0, 2).join('.')}|w=${Math.round(n.getBoundingClientRect().width)}|d=${cs.display}|cssw=${cs.width}`,
+        )
+        n = n.parentElement
+      }
+      return path.join(' > ')
+    })
     const shells = Array.from(document.querySelectorAll('.fis-control')).slice(0, 8)
     const rows = shells.map((c) => {
       const kid = c.firstElementChild as HTMLElement | null
@@ -97,7 +112,7 @@ test('C3 编辑面控件宽度解剖', async ({ page }) => {
       const innerStyle = inner?.getAttribute('style')?.slice(0, 60) ?? ''
       return `${kid?.className.toString().split(' ').slice(0, 2).join('.')}|cell=${cellW}|kid=${kidW}|in=${innerW}|ks=${kidStyle}|is=${innerStyle}`
     })
-    return { cssHasRule, rows }
+    return { cssHasRule, rows, chains }
   })
   console.log('C3=' + JSON.stringify(info))
 })
