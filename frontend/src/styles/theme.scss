@@ -887,8 +887,14 @@ html, body {
   max-width: 100%;
   box-sizing: border-box;
 }
-.form-item-shell .fis-control .field-renderer input[type='text'],
-.form-item-shell .fis-control .field-renderer input:not([type]) {
+/* C4 探针定案：约束在各控件第二层包装（ev_textField_wrapper 204/
+   ev_spinner_wrap 225 为 eview 固有宽，其下各层与 input 均为其 100%）
+   ——按组件前缀把全部中间层拉满，开关/复选前缀不同零波及。 */
+.form-item-shell .fis-control .ev_textField [class*='ev_textField_'],
+.form-item-shell .fis-control [class*='ev_textField'] [class*='ev_textField_'],
+.form-item-shell .fis-control .ev_spinner [class*='ev_spinner_'],
+.form-item-shell .fis-control .ev_inputSelect [class*='ev_inputSelect_'],
+.form-item-shell .fis-control [class*='ev_inputSelect'] [class*='ev_inputSelect_'] {
   width: 100% !important;
   min-width: 0;
   box-sizing: border-box;
