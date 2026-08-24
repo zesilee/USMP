@@ -87,7 +87,7 @@ test('C3 编辑面控件宽度解剖', async ({ page }) => {
       }
     })
     // C4：前 3 个控件从 field-renderer 到 input 的整条链（类名|宽度|display）
-    const chains = Array.from(document.querySelectorAll('.fis-control .field-renderer')).slice(0, 3).map((fr) => {
+    const chains = Array.from(document.querySelectorAll('.fis-control .field-renderer')).slice(0, 5).map((fr) => {
       const input = fr.querySelector('input, textarea')
       if (!input) return 'no-input'
       const path: string[] = []

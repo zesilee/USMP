@@ -899,6 +899,15 @@ html, body {
   min-width: 0;
   box-sizing: border-box;
 }
+/* 下拉内层前缀猜测未中（复测 133 仍固有宽）——改有界通用：下拉根内除
+   弹层/图标外的 div 与 input 全拉满（箭头/清除钮通常为 span 或绝对定位，
+   不受影响）。 */
+.form-item-shell .fis-control [class*='ev_inputSelect'] div:not([class*='ev_popup']):not([class*='icon']):not([class*='Icon']),
+.form-item-shell .fis-control [class*='ev_inputSelect'] input {
+  width: 100% !important;
+  min-width: 0;
+  box-sizing: border-box;
+}
 .form-item-shell .fis-control [class*='witch'],
 .form-item-shell .fis-control [class*='heckbox'],
 .form-item-shell .fis-control [class*='adio'] {
