@@ -76,20 +76,17 @@ test.describe('VLAN 管理页面', () => {
 })
 ```
 
-### 4. 测试目录结构
+### 4. 真实目录与运行方式
 ```
-web/
+frontend/
 ├── tests/
-│   ├── pages/              # Page Objects
-│   │   ├── VlanPage.ts
-│   │   ├── DeviceTreePage.ts
-│   │   └── FormPage.ts
-│   ├── vlan.spec.ts        # VLAN 功能测试
-│   ├── devices.spec.ts     # 设备管理测试
-│   └── navigation.spec.ts  # 导航测试
+│   └── staging-smoke.spec.ts   # F4 部署冒烟（路由·挂载·种子数据·YANG 表单渲染·校验拦截）
 ├── playwright.config.ts
-└── TESTING.md              # 已包含 E2E 章节
+└── TESTING.md                  # 前端测试分层权威规范（F1-F4）
 ```
+- E2E 属 **F4 层**，选层按 `frontend/TESTING.md`；仅 happy-dom 伪造不了的组件交互走 F3 真浏览器，别塞进 E2E。
+- 本地运行：`make e2e-local`（起 docker 全栈→浏览器冒烟）。**推送含 frontend/ 改动前必跑**，pre-push 钩子自动拦截（§6.2）。
+- 点左树叶子=先展开；断言选择器双口径等踩坑见 `docs/memory/eviewui-switch-implementation.md`。
 
 ## 四、与其他技能联动
 

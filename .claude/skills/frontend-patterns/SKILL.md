@@ -6,6 +6,9 @@ origin: ECC
 
 # 前端开发模式 (Frontend Development Patterns)
 
+> ⚠️ **仅作为通用参考建议，非本项目规范，可根据任务灵活取舍。**
+> 本项目实际栈：React 19 语法 + openinula 运行时（`@app-router` 双实现）、自研 store（`src/stores/createStore.ts`，非 Zustand/Pinia）、axios（非 SWR/React Query）、组件库一律经 `src/ui` 适配层（FA-01~04 禁直接 import antd/eview）。与本文冲突时，以 CLAUDE.md §3、`frontend/TESTING.md` 与适配层军规为准。
+
 适用于 React、Next.js 和高性能用户界面的现代前端模式。
 
 ## 何时激活

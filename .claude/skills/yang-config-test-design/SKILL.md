@@ -14,7 +14,7 @@ description: 新增/接入任何 YANG 模型到设备配置(Stack B)时强制触
 出现以下任一情形，**必须**先按本技能设计完整用例矩阵再实现（TDD）：
 - 新增/接入任何华为（或其它厂商）YANG 模型到设备配置管理（`convertMapToHuaweiXxx` / `mapEntryToXxx`）
 - `buildYangSchema*` 支持新模块、`GetSchema` 新增 module 分支
-- `DeviceConfigPage` 新增一条配置路由（新 module/configPath/listKey）
+- 模块控制台（`ModuleConsolePage`）新增一条配置路由（新 module/configPath/listKey）
 - 新增/修改 `/api/v1/config/*` 的类型编解码
 - 修改配置下发链路（convert→merge→store→reconcile→NETCONF）任一环
 
@@ -31,7 +31,7 @@ description: 新增/接入任何 YANG 模型到设备配置(Stack B)时强制触
 | **幂等** | 集成(sim) | 同 desired 二次对账 → 无 error、无 requeue、状态不变 | 防重复下发副作用 |
 | **读回一致** | 集成(sim) | 配置后读回设备运行配置，属性一致 | 前端 list/编辑依赖读回 |
 | **边界拒绝** | 单元+集成 | key/范围越界（如 VLAN ID 0/4095、名称超长）→ 后端 400 拒绝 | YANG 常未编码业务范围，非法值会静默下发 |
-| **前端表单校验** | e2e(真浏览器) | 缺主键/非法值点下发 → 被 `el-form` 拦截、行内提示、不提交 | §9：不提交、行内提示 YANG 约束 |
+| **前端表单校验** | e2e(真浏览器) | 缺主键/非法值点下发 → 被表单校验层拦截、行内提示、不提交 | §9：不提交、行内提示 YANG 约束 |
 | **并发存储无竞态** | 集成(-race) | 并发 `storeConfigMerged` 配不同实例 → 无 DATA RACE、无丢更新、全部保留 | VLAN 曾并发下发**竞态+丢更新(R09)** |
 | **畸形/负路径降级** | 单元+集成 | 畸形输入(坏 key 类型)不 panic、跳过坏条目；设备离线→503 保留原配置(R08) | 禁崩溃、异常必降级 |
 | **动态表单渲染** | e2e(真浏览器) | 进配置页→选设备→新增→schema 驱动字段渲染出来 | VLAN 曾表单恒空(裸相对 fetch/接错架构) |
@@ -53,7 +53,7 @@ testsupport.AssertHuaweiXxx...(t, sim, ...)     // 断言到设备运行配置
 - 枚举用 `enumInt(v, "E_HuaweiXxx_...")`（数字直通 + `huawei.ΛEnum` name→value 反查）。
 - **-race** 跑并发用例：`go test ./internal/api/ -run TestXxx.*Concurrent -race`。
 
-**前端**：`useDeviceConfig` 参数化 + `DeviceConfigPage` props 接入；测试进 staging-smoke（真浏览器）。
+**前端**：配置表单经 `hooks/useConfigForm` + 通用模块控制台 `views/ModuleConsolePage.tsx` 接入（零模块专属代码，R05）；测试进 staging-smoke（真浏览器）。
 
 ## 四、必查高危陷阱清单（VLAN 4 个 bug 的通用化）
 
@@ -80,5 +80,5 @@ testsupport.AssertHuaweiXxx...(t, sim, ...)     // 断言到设备运行配置
 - 设备断言：`backend/simulator/netconfsim/testsupport/asserts.go`
 - 设备运行配置解析：`backend/simulator/netconfsim/query.go`（`RunningHuaweiXxxFull`）
 - 配置链路：`backend/internal/api/config_handler.go`（convertConfig/mergeConfig/storeConfigMerged/validateConfig）、`pkg/yang-runtime/client/netconf.go`（marshalChange/buildHuaweiXxxXML）
-- 前端：`frontend/src/composables/useDeviceConfig.ts`、`views/DeviceConfigPage.vue`、`tests/staging-smoke.spec.ts`
+- 前端：`frontend/src/hooks/useConfigForm.ts`、`frontend/src/views/ModuleConsolePage.tsx`、`frontend/tests/staging-smoke.spec.ts`
 - 关联技能：`netconf-sim-integration-test`、`tdd-test-driven-dev`、`go-code-review-check`
