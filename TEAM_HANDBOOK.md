@@ -184,7 +184,7 @@ apply tasks.md ──→ 写测试(红) ──→ 写代码(绿) ──→ 重�
 ```
 CI 全绿 ──→ Owner 自审 ──→ 合入 main ──→ main 验证 ──→ 清理 worktree
     │            │              │              │
-    │            │              │              └─ 仅 Superpowers 创建的
+    │            │              │              └─ 仅 EnterWorktree 创建的
     │            │              └─ squash merge 或 merge commit
     │            └─ 对照自审清单
     └─ 所有 workflow 通过
@@ -208,7 +208,7 @@ CI 全绿 ──→ Owner 自审 ──→ 合入 main ──→ main 验证 ─
 | 3 | 执行 `go test ./...` 验证 main |
 | 4 | 执行 `/opsx:sync` 将 delta spec 合并到主 spec |
 | 5 | 执行 `/opsx:archive` 归档 change |
-| 6 | 清理 worktree（仅 Superpowers 创建的，参考 CLAUDE.md §6.4） |
+| 6 | 清理 worktree（仅 EnterWorktree 创建的，参考 CLAUDE.md §6.4） |
 
 ### 7.3 合入冲突处理
 
@@ -235,7 +235,7 @@ CI 全绿 ──→ Owner 自审 ──→ 合入 main ──→ main 验证 ─
 - [ ] main 全量测试通过
 - [ ] delta spec 已 sync，主 spec 已更新
 - [ ] change 已归档
-- [ ] worktree 已清理（Superpowers 创建的）
+- [ ] worktree 已清理（EnterWorktree 创建的）
 - [ ] 相关 issue 已关闭
 
 ## 附录 A：分支命名规范
