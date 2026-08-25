@@ -207,7 +207,7 @@ explore → propose → apply → sync → archive
 
 ### 6.3 完成分支
 
-> 开发完成、测试全绿后，**必须**执行完成分支流程（`superpowers:finishing-a-development-branch`），禁止直接 merge/push。
+> 开发完成、测试全绿后，**必须**执行以下完成分支流程，禁止直接 merge/push。
 
 | 步骤 | 操作 |
 |------|------|
@@ -228,7 +228,7 @@ explore → propose → apply → sync → archive
 
 | 条件 | 操作 |
 |------|------|
-| worktree 路径在 `.claude/worktrees/` 下 | Superpowers 创建 → 本工具负责清理 |
+| worktree 路径在 `.claude/worktrees/` 下 | EnterWorktree 创建 → 本会话负责清理 |
 | worktree 路径在其他位置 | 外部环境创建 → 禁止删除，使用 ExitWorktree |
 | 删除前 | 必须 `cd` 到主仓库根目录 |
 | 删除后 | 执行 `git worktree prune` 清理过期注册 |
@@ -254,7 +254,7 @@ explore → propose → apply → sync → archive
 | 触发场景 | 技能 | 说明 |
 |----------|------|------|
 | 新 YANG 控制器开发 | `yang-controller-runtime-dev` | 架构合规（§4） |
-| YANG→Go 结构体 | `yang-ygot-generate` | 自动生成（R04） |
+| YANG→Go 结构体 | `make gen-yang`（自研 yanggen 管线，regen-and-diff） | 自动生成（R04），禁止手改 `internal/generated/` |
 | 配置缓存开发 | `go-ttl-lru-memory-cache` | TTL+LRU 并发安全（R03） |
 | NETCONF 对接 | `netconf-switch-protocol` | SSH 830（R02） |
 | 集成测试 | `netconf-sim-integration-test` | 模拟网元端到端（T02） |
@@ -272,19 +272,18 @@ explore → propose → apply → sync → archive
 | 纯逻辑/工程化/纯功能 | **不触发设计技能** | 状态管理/API/构建/校验/路由/权限 |
 | 前端测试 | 按 §5.6 选层：util/hook/store→F1、组件/页面→F2、Select/嵌套 list 交互→F3 真浏览器、端到端流→F4 | 缺层禁止合并（T06）；详见 [frontend/TESTING.md](frontend/TESTING.md) |
 
-### 7.3 Superpowers 技能
+### 7.3 通用工作流实践
 
-| 触发场景 | 技能 | 说明 |
-|----------|------|------|
-| 任何创造性工作前 | `superpowers:brainstorming` | 探索意图→设计→审批 |
-| 功能开发开始 | `superpowers:using-git-worktrees` | §6 隔离环境 |
-| 实施计划执行 | `superpowers:executing-plans` | 按计划逐步执行 |
-| 多任务并行 | `superpowers:subagent-driven-development` | 独立子任务并行 |
-| 开发完成 | `superpowers:finishing-a-development-branch` | §6.3 完成分支 |
-| Bug/测试失败 | `superpowers:systematic-debugging` | 根因分析优先 |
-| TDD 实现 | `superpowers:test-driven-development` | 红绿循环 |
-| 声称完成前 | `superpowers:verification-before-completion` | 必须有新鲜验证证据 |
-| 编写实施计划 | `superpowers:writing-plans` | 从规格到可执行计划 |
+> 原 Superpowers 插件已卸载（2026-08-25 自审计确认引用断链），其职能由原生能力与 §5 工作流覆盖：
+
+| 触发场景 | 现行做法 |
+|----------|----------|
+| 任何创造性工作前 | §5.1 `/opsx:explore` 探索意图；重大变更先出计划经用户审批再动手 |
+| 功能开发开始 | `EnterWorktree` 创建隔离环境（§6） |
+| 多任务并行 | Agent 工具派独立子代理，互不改同一 package（TM03） |
+| 开发完成 | §6.3 完成分支流程 |
+| Bug/测试失败 | 根因分析优先，先写复现回归测试再修（T07），禁止盲改碰运气 |
+| 声称完成前 | 必须有**新鲜验证证据**（刚跑过的测试/命令输出），禁止凭记忆宣称通过 |
 
 ## §8 数据存储
 

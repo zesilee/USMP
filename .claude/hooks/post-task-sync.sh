@@ -13,6 +13,28 @@ log() {
     echo "[post-task-sync] $*" >> "$REPO_ROOT/.claude/hooks/post-task-sync.log" 2>/dev/null || true
 }
 
+# Claude Code 以 stdin JSON 传递钩子载荷（tool_name/tool_input/tool_response）。
+# 历史 bug：旧版只读 $TOOL_NAME 等环境变量（并不存在），日志里 31 条全是空值跳过、从未生效。
+# 保留环境变量作手动调试的兜底。
+if [[ -z "${TOOL_NAME:-}" && ! -t 0 ]]; then
+    _PAYLOAD="$(cat || true)"
+    if [[ -n "$_PAYLOAD" ]]; then
+        eval "$(printf '%s' "$_PAYLOAD" | python3 -c "
+import sys, json, shlex
+try:
+    d = json.load(sys.stdin)
+except Exception:
+    sys.exit(0)
+print('TOOL_NAME=%s' % shlex.quote(d.get('tool_name', '')))
+print('TOOL_INPUT=%s' % shlex.quote(json.dumps(d.get('tool_input', {}), ensure_ascii=False)))
+print('TOOL_RESULT=%s' % shlex.quote(json.dumps(d.get('tool_response', {}), ensure_ascii=False)))
+" 2>/dev/null)"
+    fi
+fi
+TOOL_NAME="${TOOL_NAME:-}"
+TOOL_INPUT="${TOOL_INPUT:-}"
+TOOL_RESULT="${TOOL_RESULT:-}"
+
 # Check if tool is one we care about
 if [[ "$TOOL_NAME" != "TaskCreate" && "$TOOL_NAME" != "TaskUpdate" && "$TOOL_NAME" != "TaskDelete" ]]; then
     log "Skipping: $TOOL_NAME"
