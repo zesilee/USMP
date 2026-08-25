@@ -32,7 +32,7 @@
 
 ## 4. test-server（前端 E2E 后端）
 
-`cmd/test-server`（Gin :8080，`gin.TestMode`）以进程内 `vlanStore`（`fixture.go`，并发安全内存 VLAN 存储）为后端，路由 `/api/v1/devices`、`/config/:ip/vlans[...]` CRUD，服务前端 Playwright 套件。**该服务不经 NETCONF，为诚实命名的 REST 桩**。
+`cmd/test-server`（Beego :8080；gin 已随 gin→beego 迁移退役，守护测试禁回流）以进程内 `vlanStore`（`fixture.go`，并发安全内存 VLAN 存储）为后端，路由 `/api/v1/devices`、`/config/:ip/vlans[...]` CRUD，服务前端 Playwright 套件。**该服务不经 NETCONF，为诚实命名的 REST 桩**。
 
 ## 5. 数据流（集成测试）
 

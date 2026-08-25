@@ -1,7 +1,7 @@
-# translation-engine — 翻译引擎架构设计（反向还原）
+# translation-engine — 翻译引擎架构设计（反向还原·LEGACY）
 
-> **权威性**：属 Stack A 配置链路的一环；**仅 Huawei 实现**，Cisco/H3C/Juniper 为枚举占位 stub。
-> **还原基准**：`main@b1cfbae`，代码根 `backend/pkg/translator/`。
+> **LEGACY / 能力已退役（与同目录 spec.md 同口径）**：`pkg/translator` 已于 2026-07-17 整包物理删除（PR#186），本文描述的组件均已不存在，仅作历史架构记录保留，禁止据此开发。厂商门禁职能现由 [[device-driver-registry]] DR-04 承担。
+> **还原基准**：`main@b1cfbae`（删除前），代码根曾为 `backend/pkg/translator/`。
 
 ## 1. 职责
 

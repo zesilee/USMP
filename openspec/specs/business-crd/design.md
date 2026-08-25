@@ -1,7 +1,7 @@
-# business-crd — 业务 CRD 层架构设计（反向还原）
+# business-crd — 业务 CRD 层架构设计（反向还原·LEGACY）
 
-> **权威性**：属 **Stack A（K8s CRD 栈）**。其中 `api/v1` 树标注为 **`legacy`**；`api/biz/v1`+`api/core/v1` 为较新一代（唯一有生成 CRD YAML）。整个 Stack A 与 R01/R03 张力，见 `system-architecture/design.md` §2/§6。
-> **还原基准**：`main@b1cfbae`。
+> **LEGACY / 已退出生产（与同目录 spec.md 同口径）**：Stack A 代码载体已于 2026-07-17 起物理删除（PR#186/#187/#195），本文全文描述的组件（api/v1、api/biz/v1、controllers/*、翻译引擎调用链）**均已不存在**，仅作历史架构记录保留，禁止据此开发（SC-01 禁重引）。现行 CRD 用法（仅当持久化载体）见 `system-architecture/design.md` §2。
+> **还原基准**：`main@b1cfbae`（删除前）。
 
 ## 1. 职责
 

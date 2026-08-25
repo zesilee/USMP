@@ -8,7 +8,7 @@
 
 ### Requirement: FA-01 适配层为组件库唯一入口
 
-前端业务代码（页面、业务组件、composable/hook）SHALL 只从 UI 适配层（`src/ui`）导入界面控件，SHALL NOT 直接 import 具体组件库包名。适配层 SHALL 是组件库的唯一引用点，使组件库成为单点可替换依赖（当前实现为 antd，后继可能为公司内部组件库）。违反 SHALL 由静态检查与守护测试拦截。
+前端业务代码（页面、业务组件、composable/hook）SHALL 只从 UI 适配层（`src/ui`）导入界面控件，SHALL NOT 直接 import 具体组件库包名。适配层 SHALL 是组件库的唯一引用点，使组件库成为单点可替换依赖（当前生产实现为 EviewUI 桥，antd 镜像仅作外网测试后端，经 `@ui-backend` 别名切换）。违反 SHALL 由静态检查与守护测试拦截。
 
 #### Scenario: 业务代码直接引用组件库被拦截
 - **WHEN** 业务代码中出现直接 import 具体组件库包名的语句（`src/ui` 目录自身除外）
