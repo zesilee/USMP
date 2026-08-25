@@ -1,5 +1,7 @@
 # 项目记忆索引
 
+- [注释类重构零改动校验](comment-only-refactor-harness.md) — 做注释/格式/纯重命名等「不该改行为」的重构前必读：零改动机器校验法(go/scanner token流指纹+esbuild剥注释指纹,别用go/printer会因行号误报)、伪注释清单实测基线(swag `// @`187/kubebuilder18/eslint-disable19,生成器模板字符串内注释最隐蔽)、commit-msg卡500行≠pr-size卡3000行、全仓体检(死代码注释0处/TODO仅2个/腐坏主形态=退役技术现在时)、多代理切分口径
+
 - [.claude配置自审计](claude-config-self-audit.md) — 碰.claude配置/钩子/CLAUDE.md §6-§7前必读：/self-audit命令已交付(PR#414/#415,技能21→14)、钩子协议两坑(stdin JSON+exit 2才阻断,曾静默失效两月)、L2行级正则误伤复合命令、superpowers已摘除勿再引用、W01拦checkout main与§6.3选项A冲突待拍板
 
 - [React+antd 重建](react-antd-rebuild.md) — **已全量交付归档(2026-08-14,PR#316-#337)**：现栈React19+antd6+自研i18n薄层、适配层军规FA-01~04禁直接import antd、FE-27删键必解构、antd E2E三根因(左树data-test冒泡/Tab溢出走更多下拉/两字按钮插空格)、F3 useId撞name坑、follow-up债五条；碰前端任何文件前必读
