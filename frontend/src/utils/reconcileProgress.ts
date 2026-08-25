@@ -70,14 +70,14 @@ export interface ReconcileStatusLike {
   last_run?: string
 }
 
-// 把 last_run 解析为毫秒时刻；空/Go 零值(0001-01-01)/非法 → 0（视为"从未对账"）。
+// 把 last_run 解析为毫秒时刻；空值、Go 零值（0001-01-01）、非法串一律 → 0（视为「从未对账」）。
 export function parseRun(lastRun?: string | null): number {
   if (!lastRun || lastRun.startsWith('0001-01-01')) return 0
   const t = Date.parse(lastRun)
   return Number.isNaN(t) ? 0 : t
 }
 
-// 从 statuses[] 选出与目标 path 对应的状态；无精确匹配则回退到 last_run 最新的一条。
+// 从 statuses[] 选出目标 path 的状态；无精确匹配则回退到 last_run 最新的一条。
 // path 归一去前导斜杠（后端 status.path = "/" + configPath）。用于按 last_run 推进判定终态。
 export function selectStatus(
   statuses: ReconcileStatusLike[] | undefined | null,

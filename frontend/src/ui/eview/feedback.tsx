@@ -1,10 +1,10 @@
 // EviewUI 后端 · 命令式反馈（FA-03 / 组 3.5，gate 定案：EviewUI 无命令式 API，
 // 自养挂载点）：body 下挂容器 + createRoot 渲染 DivMessage（toast）/
-// MessageDialog（confirm，Promise 化）。API 面与 antd 后端 feedback 同形，
-// 组 5 接线时由 index.ts 切换导出——业务调用点零改动。
-// 行为规格依据（勿凭空改）：component-matrix + gate R1/R2 实测——
-// DivMessage type 无 'info'（映 'default'）、其"消失"是 display:none 不卸载
-// （toast 由本模块自管卸载）；MessageDialog buttons 仅 ok/cancel、type 含 risk。
+// Dialog（confirm，Promise 化）。API 面与 antd 后端 feedback 同形，index.ts
+// 按 @ui-backend 别名切换导出——业务调用点零改动。
+// 行为规格依据（勿凭空改）：component-matrix + gate R1/R2 实测——DivMessage
+// type 无 'info'（映 'default'）、「消失」只是 display:none 不卸载（toast 由
+// 本模块自管卸载）。
 import { createRoot } from 'react-dom/client'
 import { pickDefault } from '../bridge'
 import { flushSync } from 'react-dom'

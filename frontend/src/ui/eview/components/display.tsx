@@ -67,7 +67,7 @@ export function Badge(props: CommonProps & { count?: ReactNode; size?: string; c
   )
 }
 
-// ===== Breadcrumb：items[{title}]→data[{title:string}]；separator→seprator（其拼写）=====
+// ===== Breadcrumb：items[{title}]→data[{title:string}]；separator→seprator（eview 原拼写）=====
 export function Breadcrumb(props: CommonProps & { items?: Array<{ title?: ReactNode }>; separator?: string }) {
   return createElement(EvCrumbs, {
     id: anchorId(props['data-test']),

@@ -14,7 +14,7 @@ interface FreshnessState {
   ageSeconds: number
   ttlSeconds: number
   source: string
-  recordedAt: number // Date.now() ms，记录时刻
+  recordedAt: number // Date.now() 毫秒值
   hasData: boolean
   record: (meta: CacheMeta) => void
   reset: () => void

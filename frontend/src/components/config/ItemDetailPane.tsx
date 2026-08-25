@@ -69,7 +69,7 @@ export default function ItemDetailPane(props: ItemDetailPaneProps) {
   const dirty = form.diff.length > 0
   useEffect(() => onDirtyChange?.(dirty), [dirty, onDirtyChange])
 
-  // mode/row 变化即重置表单（切行/切建）。变更集已有该条目 → 以其最新值回填
+  // mode/row 变化即重置表单（切行/切建）。变更集已有该条目 → 用最新值回填
   // 并保持首次 baseline（FE-21 合并语义）：payload 覆盖行数据、cleared 叶置空。
   useEffect(() => {
     const seed: Record<string, any> = row ? { ...row } : {}

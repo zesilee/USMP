@@ -19,8 +19,8 @@ import './ModuleConsolePage.scss'
 // ModuleConsolePage（FE-10/18/19/24 宿主）：通用模块控制台——schema 拉取（?device=
 // 附不支持预标记 CN-05）→ 标签本地化（UI-03 懒加载原位替换，rootName 守卫防
 // 竞态）→ deriveTabs 一级 Tab（rpc 不进 Tab 栏，导航落点=左树）→ 各 Tab 组件。
-// rpc 直达模式仅渲染该 rpc 面板（未知名明确报错 R08）。攒批工具栏与提交编排随
-// tasks 11 组在 header-actions 挂载（consoleEpoch 重挂机制已就位）。
+// rpc 直达模式仅渲染该 rpc 面板（未知名明确报错 R08）。攒批工具栏与提交编排挂
+// 在 header-actions（tasks 11 组交付，重置/提交成功经 consoleEpoch 重挂 Tab）。
 const t = (k: string, p?: Record<string, unknown>) => i18n.global.t(k, p)
 
 export default function ModuleConsolePage() {

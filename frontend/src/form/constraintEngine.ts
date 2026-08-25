@@ -48,8 +48,8 @@ export function computeVisibleMap(
 }
 
 /**
- * must 违例：仅对当前可见字段（when=false 的节点视为不存在，其 must 不适用）逐条求值。
- * RFC7950 §7.5.3：must 只约束存在的节点——叶子未赋值=节点不存在，其 must 不适用
+ * must 违例：只对当前可见字段逐条求值（when=false 的节点视为不存在，must 不适用）。
+ * RFC7950 §7.5.3：must 只约束存在的节点——叶子未赋值即节点不存在
  * （否则自引用 must 如 ifm statistic-mode 会强迫用户为设备按类型裁剪的叶选值，真机拒收）。
  */
 export function computeMustViolations(

@@ -12,7 +12,6 @@ import type {
   AuditListData,
 } from '../types/api'
 
-// API 基础配置
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1'
 
 const api = ir.create({
@@ -61,7 +60,7 @@ export const getLogs = (params: { device?: string; status?: string; limit?: numb
   return api.get<ApiEnvelope<AuditListData>>('/logs', { params })
 }
 
-// Config API - 通用 YANG 配置接口。
+// Config API：通用 YANG 配置接口。
 // includeState=true 走按需状态通道（<get>，绕缓存），两类场景：
 // ① config 列表附带状态：真机整列表极慢，只许单行谓词读（读通道拆分）；
 // ② 纯 config false 子树（只读 Tab）：running 配置 schema 无此类节点，
@@ -85,7 +84,6 @@ export const getConfig = (
   includeState = false,
   query?: ListQuery,
 ) => {
-  // 移除 path 开头的斜杠
   const cleanPath = path.startsWith('/') ? path.slice(1) : path
   if (!query) {
     return api.get<ApiResponse<any>>(`/config/${ip}/${cleanPath}`, {
@@ -186,7 +184,7 @@ export const commitChangeset = (req: ChangesetRequestDTO, force = false) => {
   })
 }
 
-// Schema API - 获取 YANG 模型定义
+// Schema API：获取 YANG 模型定义。
 export const getSchema = (path: string) => {
   return api.get<ApiResponse<any>>(`/schema/${path}`)
 }

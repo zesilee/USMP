@@ -13,7 +13,7 @@ import { i18n } from '../i18n'
 // - device_id 与 device.ip 同为设备 IP（reconcile.Request.DeviceID=ip），可直接 join。
 // - status 模型只有 path/outcome/diff_count/last_error，无 was→now 值级差异；台账因此
 //   展示「设备 + 结局 + 最近对账时刻」。
-// - summary 仅含「已对账」设备；从未对账(unknown) = 在线但无对账记录，据设备表派生。
+// - summary 仅含「已对账」设备；从未对账（unknown）= 在线但无对账记录，据设备表派生。
 
 /** 设备在线态（取自 /devices）。 */
 export interface DeviceInput {

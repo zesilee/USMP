@@ -100,9 +100,8 @@ export function Tooltip(props: CommonProps & { title?: ReactNode; children?: Rea
   )
 }
 
-// ===== Popover → TipBox(click)：matrix 已知限制——有 children 时 display 受控失效、
-// 无 onOpenChange 等价；桥退化为非受控 + onClose 尽力通知（集成点重点校准，
-// 业务侧（高级搜索面板）若受控确不可行则在组 5 接线时改非受控用法。=====
+// ===== Popover：不走 TipBox——display 受控在真组件被忽略（matrix 已知限制），
+// 改桥自绘（组 7 E2E 定案，详见函数内说明）。=====
 export function Popover(
   props: CommonProps & {
     content?: ReactNode
