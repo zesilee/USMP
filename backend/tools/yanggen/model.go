@@ -36,7 +36,7 @@ type Struct struct {
 	OrderedKey string
 }
 
-// FieldKind classifies a field for JSON method generation（阶段3，§8）。
+// FieldKind classifies a field for JSON method generation（阶段 3，§8）。
 type FieldKind int
 
 const (

@@ -11,7 +11,7 @@ import (
 
 // coreBackend 把自研 netconfcore 封进 ncDriver（Wave 3 双路径的新芯）。
 //
-// 语义对齐要点（以 scrapligo 行为为契约，双路径测试套锁定）：
+// 语义对齐要点（以 scrapligo 行为为历史契约，client 测试套锁定）：
 //   - 应答内 <rpc-error> 由 Session.Do 以 *RPCReplyError 返回，此处折算进
 //     ncResult.Failed（业务错误，error 返回 nil，会话继续可用）；
 //   - 无截止时间的 ctx 补默认操作超时（scrapligo 有 60s op-timeout，语义对齐，
@@ -31,8 +31,8 @@ const closeTimeout = 5 * time.Second
 func dialCore(info DeviceConnectionInfo) (ncDriver, error) {
 	conn, err := netconfcore.DialSSH(info.IP, info.Port, info.Username, info.Password, info.Timeout)
 	if err != nil {
-		// 错误文案对齐 scrapligo 路径（"NETCONF" 关键字是 AUTO 协议分派
-		// 测试锁定的行为契约），双路径调用方看到同形错误。
+		// 错误文案沿用 scrapligo 路径口径："NETCONF" 关键字是 AUTO 协议分派
+		// 测试锁定的行为契约。
 		return nil, fmt.Errorf("failed to open NETCONF connection: %w", err)
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), info.Timeout)
@@ -118,7 +118,7 @@ func (b *coreBackend) Capabilities() []string {
 	return b.sess.Capabilities()
 }
 
-// Close 有界优雅关闭：与 scrapligo backend 同款外形——在途操作可能长期持有
+// Close 有界优雅关闭，外形沿用原 scrapligo backend：在途操作可能长期持有
 // 会话锁，watchdog 超时即 Abort 强切（Session 内部保证无泄漏协程）。
 func (b *coreBackend) Close() error {
 	done := make(chan error, 1)

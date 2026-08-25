@@ -35,24 +35,15 @@ type Controller interface {
 
 // DefaultController is the default implementation of Controller
 type DefaultController struct {
-	// name is the controller name
-	name string
-	// source is the event source that generates reconciliation events
-	source Source
-	// reconciler is the reconciler to use
-	reconciler reconcile.Reconciler
-	// queue is the work queue
-	queue queue.RateLimitingInterface
-	// predicates are the predicates to filter events
-	predicates []predicate.Predicate
-	// workerCount is the number of worker goroutines
+	name        string
+	source      Source
+	reconciler  reconcile.Reconciler
+	queue       queue.RateLimitingInterface
+	predicates  []predicate.Predicate
 	workerCount int
-	// wg is the wait group for workers
-	wg sync.WaitGroup
-	// started indicates whether the controller has been started
-	started bool
-	// stopChan is used to signal workers to stop
-	stopChan chan struct{}
+	wg          sync.WaitGroup
+	started     bool
+	stopChan    chan struct{}
 	// recorder records the reconcile outcome per device+path after each run.
 	// Optional: nil means outcomes are not recorded (degradation, R08).
 	recorder status.Recorder
@@ -102,14 +93,12 @@ func (c *DefaultController) Start(ctx context.Context) error {
 
 	c.started = true
 
-	// Start the event source if present
 	if c.source != nil {
 		if err := c.source.Start(ctx, c); err != nil {
 			return err
 		}
 	}
 
-	// Start worker goroutines
 	for i := 0; i < c.workerCount; i++ {
 		c.wg.Add(1)
 		go c.worker(ctx)
@@ -134,7 +123,6 @@ func (c *DefaultController) Stop() error {
 
 // Enqueue implements Controller interface
 func (c *DefaultController) Enqueue(evt predicate.Event) {
-	// Apply all predicates
 	for _, p := range c.predicates {
 		var ok bool
 		switch evt.Type {
@@ -152,7 +140,6 @@ func (c *DefaultController) Enqueue(evt predicate.Event) {
 		}
 	}
 
-	// Convert event to request and add to queue
 	req := evt.ForRequest()
 	c.queue.Add(req)
 }
@@ -182,7 +169,6 @@ func (c *DefaultController) worker(ctx context.Context) {
 			if result.shutdown {
 				return
 			}
-			// Process the request
 			c.process(ctx, result.obj.(reconcile.Request))
 			c.queue.Done(result.obj)
 		}
@@ -194,7 +180,6 @@ func (c *DefaultController) process(ctx context.Context, req reconcile.Request) 
 
 	c.recordOutcome(req, result)
 
-	// Handle requeuing
 	switch {
 	case result.Requeue:
 		if result.RequeueAfter > 0 {
@@ -214,7 +199,7 @@ func (c *DefaultController) process(ctx context.Context, req reconcile.Request) 
 		// device; a converged re-verify hits the default branch and Forgets.
 		c.queue.AddRateLimited(req)
 	default:
-		// Success and converged - forget the entry for rate limiting
+		// Converged: forget the entry so its backoff resets.
 		c.queue.Forget(req)
 	}
 }

@@ -487,9 +487,8 @@ func (h *ConfigHandler) SetConfig(c *beecontext.Context) {
 		return
 	}
 
-	// Convert the raw data to the appropriate YANG model struct
-	// This ensures the ConfigStore stores properly typed data that the
-	// Reconciler can work with for diff calculation
+	// Convert to a typed YANG model struct so the ConfigStore holds data the
+	// Reconciler can diff against the device.
 	desiredConfig, anchor, err := convertConfigAnchored(path, data)
 	if err != nil {
 		Error(c, 400, "Failed to parse configuration: "+err.Error())
@@ -503,8 +502,6 @@ func (h *ConfigHandler) SetConfig(c *beecontext.Context) {
 		return
 	}
 
-	// Store the desired configuration in ConfigStore.
-	//
 	// 合并语义（防数据丢失）：UI 每次只提交单个 VLAN/接口，但对账把 desired 当「完整状态」。
 	// 若直接覆盖，第二次下发会让对账删除设备上已有但本次未提交的条目。故先并入已存 desired
 	// （按 key union），使 desired 累积为完整意图。删除走独立 DELETE 端点，不经此路径。
@@ -521,7 +518,6 @@ func (h *ConfigHandler) SetConfig(c *beecontext.Context) {
 	// store — a rejected push must not evict good cache.
 	h.manager.GetRunningCache().InvalidatePrefix(ip + "|")
 
-	// Trigger immediate reconciliation
 	// The controller will:
 	// 1. Get actual config from device
 	// 2. Calculate diff between desired and actual

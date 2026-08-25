@@ -12,8 +12,8 @@ import (
 // merge/delete (T3) and get-config subtree filtering (T4).
 //
 // It intentionally mirrors the legacy Datastore's method surface
-// (SetCandidate/GetRunning/GetCandidate/Commit/DiscardCandidate) so it can be
-// swapped into the server in a later step (T5) after dual-path validation.
+// (SetCandidate/GetRunning/GetCandidate/Commit/DiscardCandidate), which is how
+// it was swapped into the server (T5) after dual-path validation.
 type treeDatastore struct {
 	mu        sync.RWMutex
 	running   *dataNode
@@ -41,7 +41,7 @@ func newTreeDatastore() *treeDatastore {
 }
 
 // SetCandidate parses the given config XML and replaces the candidate tree.
-// (Whole-tree replace for T2; per-operation merge/delete arrives in T3.)
+// (Whole-tree replace, T2; per-operation merge/delete lives in EditConfig, T3.)
 func (d *treeDatastore) SetCandidate(xmlBytes []byte) error {
 	node, err := parseXML(xmlBytes)
 	if err != nil {

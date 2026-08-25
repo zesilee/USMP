@@ -57,8 +57,8 @@ export const useDeviceStore = create<DeviceState>((set, get) => ({
     set({ isLoading: true })
     try {
       const res = await listDevices()
-      // 真实契约信封(类型安全): { success, data: { devices: [...], stats } }
-      // 旧二进制信封(兼容降级): { success, data: [...] }
+      // 真实契约信封（类型安全）：{ success, data: { devices: [...], stats } }
+      // 旧二进制信封（兼容降级）：{ success, data: [...] }
       const env = res.data
       const raw = Array.isArray((env as any).data)
         ? (env as any).data // 旧后端扁平 data[]

@@ -1,4 +1,4 @@
-// yanggen — 自研 YANG→Go 生成器（retire-ygot-runtime 阶段2，CG-01 修订版）。
+// yanggen — 自研 YANG→Go 生成器（retire-ygot-runtime 阶段 2，CG-01 修订版）。
 // 结构约定冻结自 ygot 生成物（openspec/changes/retire-ygot-runtime/
 // codegen-conventions.md），生成物实现 pkg/yang-runtime/object 接口族、
 // 零 ygot/goyang import。CLI 形状对齐 ygot generator，便于 gen-yang.sh 切换。

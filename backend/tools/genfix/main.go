@@ -10,7 +10,7 @@
 //     本步解压 blob → 对无序集合数组与对象键做确定性重排（保持 schema 语义等价）
 //     → 以固定参数重压 → 回填，使 blob 字节在重复生成间稳定。
 //
-// 用法: go run ./tools/genfix <file> [<file>...]
+// 用法：go run ./tools/genfix <file> [<file>...]
 package main
 
 import (

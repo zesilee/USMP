@@ -82,8 +82,9 @@ func xmlEscapeString(s string) string {
 }
 
 // parseRPCReply classifies a NETCONF <rpc-reply> body into ok / data / rpc-error.
-// scrapligo returns the reply content in resp.Result; we match structurally on
-// the well-known reply elements (robust to whitespace and self-closing tags).
+// The backend delivers the reply content in ncResult.Result; classification
+// matches the well-known reply elements by substring rather than by parsing,
+// so it is robust to whitespace, prefixes and self-closing tags.
 func parseRPCReply(reply string) *RPCResult {
 	res := &RPCResult{Reply: []byte(reply)}
 	if strings.Contains(reply, "<rpc-error") {

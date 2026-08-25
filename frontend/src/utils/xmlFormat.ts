@@ -2,8 +2,8 @@
 // （xmlcodec.Encode 的真实下发形态），直接塞进 <pre> 会糊成一整行。此处仅做
 // **展示层**折行与缩进，绝不改动报文内容本身（报文保真是试运行的意义所在）。
 //
-// 输出为结构化 token 而非 HTML 字符串：渲染侧用 v-for + span 着色，天然免疫
-// XSS（报文里含设备返回的任意文本，绝不能走 v-html）。
+// 输出为结构化 token 而非 HTML 字符串：渲染侧逐 token 出 span 着色，天然免疫
+// XSS（报文里含设备返回的任意文本，绝不能走 innerHTML 类通道）。
 
 /** token 类别，驱动着色。 */
 export type XmlTokenKind = 'punct' | 'tag' | 'attr-name' | 'attr-value' | 'text' | 'comment'
@@ -42,7 +42,7 @@ function tokenizeNodes(raw: string): Node[] {
     }
     if (lt > i) pushText(nodes, raw.slice(i, lt))
 
-    // 找到与之匹配的 '>'（跳过引号内内容）
+    // 找匹配的 '>'（跳过引号内内容）
     let j = lt + 1
     let quote: string | null = null
     while (j < n) {

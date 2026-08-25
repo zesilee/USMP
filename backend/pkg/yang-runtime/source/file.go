@@ -9,8 +9,8 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
 )
 
-// FileSource is an event source that watches a file for changes
-// When the file changes, it triggers reconciliation
+// FileSource is an event source that triggers reconciliation whenever the
+// watched file changes.
 type FileSource struct {
 	BaseSource
 	filePath string
@@ -21,8 +21,8 @@ type FileSource struct {
 	wg       DoneWaitGroup
 }
 
-// NewFileSource creates a new file source that watches the given file
-// for changes and triggers reconciliation for the given device/path
+// NewFileSource creates a file source that watches filePath and triggers
+// reconciliation for the given device/path.
 func NewFileSource(filePath, deviceID, path string) *FileSource {
 	return &FileSource{
 		filePath: filePath,
@@ -83,7 +83,7 @@ func (s *FileSource) run(ctx context.Context) {
 			if !ok {
 				return
 			}
-			// Log error but continue
+			// Watcher errors are non-fatal: keep watching (R08).
 			_ = err
 		}
 	}

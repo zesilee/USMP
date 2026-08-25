@@ -33,7 +33,6 @@ func NewTTLLRUCache(capacity int, ttl time.Duration, cleanupInterval time.Durati
 		stopChan: make(chan struct{}),
 	}
 
-	// Start background cleanup
 	if cleanupInterval > 0 {
 		go c.cleanupLoop(cleanupInterval)
 	}
@@ -43,7 +42,8 @@ func NewTTLLRUCache(capacity int, ttl time.Duration, cleanupInterval time.Durati
 
 // InitGlobalCache initializes the global cache used by the whole application
 func InitGlobalCache() {
-	// Default: 10000 entries, 30s TTL, 1min cleanup interval
+	// capacity / TTL / cleanup interval：TTL 30s 对齐 CLAUDE.md §8 的配置缓存口径
+	// （下发后另由 Invalidate 主动失效，不等过期）。
 	globalCache = NewTTLLRUCache(10000, 30*time.Second, 1*time.Minute)
 }
 
@@ -59,7 +59,6 @@ func (c *TTLLRUCache) Set(key string, value interface{}) {
 
 	now := time.Now()
 
-	// If key exists, update it
 	if e, exists := c.entries[key]; exists {
 		e.value = value
 		e.createdAt = now
@@ -67,12 +66,10 @@ func (c *TTLLRUCache) Set(key string, value interface{}) {
 		return
 	}
 
-	// If at capacity, evict LRU entry
 	if len(c.entries) >= c.capacity {
 		c.evictLRU()
 	}
 
-	// Add new entry
 	c.entries[key] = &entry{
 		key:       key,
 		value:     value,
@@ -193,7 +190,6 @@ func (c *TTLLRUCache) evictLRU() {
 	var lruKey string
 	var oldestTime time.Time
 
-	// Find the entry with the oldest lastUsed
 	for _, e := range c.entries {
 		if lruKey == "" || e.lastUsed.Before(oldestTime) {
 			lruKey = e.key

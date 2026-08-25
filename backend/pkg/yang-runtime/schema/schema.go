@@ -44,7 +44,6 @@ func (s *DefaultSchema) AddModule(m Module) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	s.modules[m.Name()] = m
-	// Build path cache by traversing the tree
 	s.buildPathCacheLocked(m.Root())
 }
 
@@ -73,10 +72,10 @@ func (s *DefaultSchema) buildPathCacheLocked(node Node) {
 func (s *DefaultSchema) Path(path string) (Node, bool) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	// Normalize path
 	if path == "" {
 		return nil, false
 	}
+	// Cache keys are absolute; accept a caller-supplied relative path too.
 	if path[0] != '/' {
 		path = "/" + path
 	}
@@ -90,8 +89,11 @@ func (s *DefaultSchema) Validate(path string, config interface{}) error {
 	if !ok {
 		return fmt.Errorf("schema: path %q not found in schema", path)
 	}
-	// TODO: Implement validation against schema
-	// This will be implemented in a later iteration
+	// Path existence is the only check here — real YANG constraint validation
+	// (when/must/pattern/range) lives in pkg/yang-runtime/validate, so this
+	// interface channel has stayed a stub.
+	// TODO(openspec/tasks/code-todo-backlog.md#a2): wire in validate, or drop
+	// this method from the interface.
 	return nil
 }
 

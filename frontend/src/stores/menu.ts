@@ -47,8 +47,8 @@ interface MenuState {
   loadLeftTree: () => Promise<void>
   loadNativeModules: () => Promise<void>
   /** 业务菜单组（旧 Pinia computed → 方法形态）。
-   *  ⚠️ 每次调用返回新数组：勿直接放进 zustand selector（getSnapshot 不稳定会
-   *  无限重渲染）——组件里取 nativeModules 后自行 useMemo。 */
+   *  ⚠️ 每次调用返回新数组：勿直接放进 store selector（返回值恒不相等，
+   *  Object.is 比对每次都判变 → 无限重渲染）——组件里取 nativeModules 后自行 useMemo。 */
   businessModules: () => NativeModel[]
   /** 原生模块按任务域聚合（FE-13）：category 首现序，未标注归默认组('')排最后；
    *  全部未标注 → 单一默认组，菜单退化为平铺（R08 渲染不失败）。

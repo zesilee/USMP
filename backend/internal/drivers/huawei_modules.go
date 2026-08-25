@@ -20,7 +20,8 @@ type plainModule struct {
 	newFn  func() object.Object
 }
 
-// plainModules 是全量接入（full-yang-onboarding）的模块表：49 个新叶模块
+// plainModules 是全量接入（full-yang-onboarding）的模块表，共 57 行：
+//   - 49 个新叶模块
 //   - 4 个此前「已生成未注册」的漏网叶（bfd/l3vpn/routing/time-range）
 //   - 4 个自手写块迁入的 2b 波次模块（tunnel-management/xpl/routing-policy/acl，
 //     其中 tunnel-management/routing-policy 由 YANG prefix 锚迁为根名锚——断链修复）。

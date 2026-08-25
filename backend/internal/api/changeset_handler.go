@@ -557,7 +557,7 @@ func changesetFragments(device string, entries []previewEntry) ([]intent.Fragmen
 // --- 反射工具（container = 单 map 字段的 ygot 容器，与 xmlcodec 同约定）---
 
 // containerSubset 从 baseline 容器中筛出 target 容器所含键的条目子集，返回
-// (子集容器, 命中条目数)。baseline 为 nil / 非同型 / 无 map 字段（容器根模块）
+// （子集容器，命中条目数）。baseline 为 nil / 非同型 / 无 map 字段（容器根模块）
 // 时返回 (baseline, -1)（容器根直接以整棵基线为准）。
 func containerSubset(baseline, target interface{}) (interface{}, int) {
 	if baseline == nil || target == nil {

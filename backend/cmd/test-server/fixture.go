@@ -17,7 +17,7 @@ type VLAN struct {
 // vlanStore is a concurrency-safe in-memory VLAN store backing the E2E REST
 // fixture. The test server never spoke NETCONF — it only needs somewhere to keep
 // VLAN state for the frontend Playwright tests — so this honestly-named store
-// replaces the former netsim fake "simulator". The mutex guards concurrent Gin
+// replaces the former netsim fake "simulator". The mutex guards concurrent
 // request goroutines (R09).
 type vlanStore struct {
 	mu    sync.RWMutex

@@ -1,7 +1,7 @@
 // Package main E2E 测试服务器 — 为前端 Playwright 提供内存 REST 桩。
 //
-// 该服务只服务前端的 REST 接口，从不经 NETCONF。历史上它误用 netsim 假
-// “模拟器” 作后端；现改为诚实命名的内存 VLAN store（fixture.go）。
+// 只提供前端要的 REST 接口，从不走 NETCONF。历史上误用 netsim 假「模拟器」
+// 作后端，现改为名副其实的内存 VLAN store（fixture.go）。
 package main
 
 import (
@@ -32,7 +32,7 @@ const (
 	fixturePassword   = "admin"
 )
 
-// API 响应结构
+// ApiResponse 是 REST 响应的统一信封。
 type ApiResponse[T any] struct {
 	Success bool   `json:"success"`
 	Message string `json:"message,omitempty"`
@@ -52,7 +52,7 @@ type VLANInfo struct {
 func main() {
 	r := web.NewControllerRegister()
 
-	// CORS 配置 - 允许前端访问
+	// 放行前端开发服务器 origin 的跨域请求。
 	_ = r.InsertFilter("*", web.BeforeRouter, cors.Allow(&cors.Options{
 		AllowOrigins:     []string{"http://localhost:3000", "http://127.0.0.1:3000", "http://localhost:5173", "http://127.0.0.1:5173"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -62,27 +62,22 @@ func main() {
 		MaxAge:           12 * time.Hour,
 	}))
 
-	// 初始化内存 VLAN store
 	store = newVLANStore()
 
-	// API 路由
-	// 设备 API
 	r.Get("/api/v1/devices", listDevices)
 	r.Get("/api/v1/devices/:ip/status", getDeviceStatus)
 
-	// VLAN 配置 API
 	r.Get("/api/v1/config/:ip/vlans", getVLANConfig)
 	r.Post("/api/v1/config/:ip/vlans", createVLAN)
 	r.Put("/api/v1/config/:ip/vlans/:id", updateVLAN)
 	r.Delete("/api/v1/config/:ip/vlans/:id", deleteVLAN)
 
-	// 启动 HTTP 服务器
 	srv := &http.Server{
 		Addr:    ":8080",
 		Handler: r,
 	}
 
-	// 优雅关闭
+	// 优雅关闭：收到终止信号后停止收新请求，等在途请求收尾再退出。
 	go func() {
 		sigCh := make(chan os.Signal, 1)
 		signal.Notify(sigCh, syscall.SIGINT, syscall.SIGTERM)
@@ -116,7 +111,6 @@ func bindJSON(c *beecontext.Context, v interface{}) error {
 	return json.NewDecoder(c.Request.Body).Decode(v)
 }
 
-// listDevices 返回设备列表
 func listDevices(c *beecontext.Context) {
 	_ = c.Output.JSON(ApiResponse[[]map[string]interface{}]{
 		Success: true,
@@ -132,7 +126,6 @@ func listDevices(c *beecontext.Context) {
 	}, false, false)
 }
 
-// getDeviceStatus 获取设备状态
 func getDeviceStatus(c *beecontext.Context) {
 	_ = c.Output.JSON(ApiResponse[map[string]bool]{
 		Success: true,
@@ -143,7 +136,6 @@ func getDeviceStatus(c *beecontext.Context) {
 	}, false, false)
 }
 
-// getVLANConfig 获取 VLAN 配置
 func getVLANConfig(c *beecontext.Context) {
 	forceRefresh := c.Input.Query("force_refresh") == "true"
 
@@ -176,7 +168,6 @@ func getVLANConfig(c *beecontext.Context) {
 	}, false, false)
 }
 
-// createVLAN 创建 VLAN
 func createVLAN(c *beecontext.Context) {
 	var vlan VLANInfo
 	if err := bindJSON(c, &vlan); err != nil {
@@ -211,7 +202,6 @@ func createVLAN(c *beecontext.Context) {
 	}, false, false)
 }
 
-// updateVLAN 更新 VLAN
 func updateVLAN(c *beecontext.Context) {
 	idStr := c.Input.Param(":id")
 	var id int
@@ -257,7 +247,6 @@ func updateVLAN(c *beecontext.Context) {
 	}, false, false)
 }
 
-// deleteVLAN 删除 VLAN
 func deleteVLAN(c *beecontext.Context) {
 	idStr := c.Input.Param(":id")
 	var id int
@@ -278,7 +267,6 @@ func deleteVLAN(c *beecontext.Context) {
 	}, false, false)
 }
 
-// helper: JSON 响应
 func jsonResponse(w http.ResponseWriter, status int, data interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)

@@ -2,7 +2,7 @@
 // 适配层自有实现，SHALL NOT 使用组件库表单容器的内部 store 与校验器
 // （校验权威在自研约束引擎）；错误文案由外部受控传入（error prop），
 // 与 antd 后端时代的 validateStatus/help 受控语义对等。
-// 结构与类名对齐既有 SchemaForm 栅格样式，组 5 接线时替换 antd Form.Item。
+// 结构与类名对齐 SchemaForm 栅格样式（组 5 接线已顶替 antd Form.Item）。
 import type { ReactNode } from 'react'
 
 export interface FormItemShellProps {

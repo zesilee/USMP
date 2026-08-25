@@ -19,7 +19,7 @@ import './BusinessConsolePage.scss'
 const MODULE = 'business-vlan-service'
 const t = (k: string, p?: Record<string, unknown>) => i18n.global.t(k, p)
 
-// 收敛状态按语义分档（tag 色据档位而非文案判断，避免与 i18n 耦合）。
+// 收敛状态按语义分档：tag 颜色取自档位而非文案，避免与 i18n 耦合。
 type ConvergeKind = 'validationFailed' | 'pending' | 'converged' | 'partialFailed' | 'converging'
 
 function condition(row: BusinessVlanServiceItem, type: string): any {

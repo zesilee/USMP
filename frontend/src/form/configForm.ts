@@ -17,7 +17,7 @@ export function keyOf(f: Field): string {
   return f.path.split('/').filter(Boolean).pop() || f.path
 }
 
-// ===== choice 展开（成员扁平同级）=====
+// choice 展开：各 case 的成员字段扁平到同级。
 export function choiceMemberFields(field: Field): Field[] {
   return (field.cases || []).flatMap((c) => c.fields || [])
 }
@@ -54,7 +54,7 @@ export function editableFlat(fields: Field[], formData: Record<string, any>): Fi
 
 /**
  * must 违例（presence 语义修正，FE-12）：presence 容器未开启（键不存在=节点不存在）
- * 时其 must 不适用；readonly state 叶的 must 不入门禁（FE-14：设备值用户不可改，
+ * 时 must 不适用；readonly state 叶的 must 不入门禁（FE-14：设备值用户不可改，
  * 违例会永久卡死提交）。
  */
 export function mustViolations(fields: Field[], formData: Record<string, any>): MustViolation[] {

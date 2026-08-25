@@ -12,7 +12,7 @@ type Response struct {
 	Success bool        `json:"success"`
 }
 
-// Success responds with success
+// Success responds with the standard envelope: code 0, success true.
 func Success(c *beecontext.Context, data interface{}, message string) {
 	_ = c.Output.JSON(Response{
 		Code:    0,
@@ -22,7 +22,7 @@ func Success(c *beecontext.Context, data interface{}, message string) {
 	}, false, false)
 }
 
-// Error responds with error
+// Error responds with the standard envelope carrying a non-zero code and message.
 func Error(c *beecontext.Context, code int, message string) {
 	_ = c.Output.JSON(Response{
 		Code:    code,
@@ -42,7 +42,7 @@ func ErrorWithData(c *beecontext.Context, code int, message string, data interfa
 	}, false, false)
 }
 
-// DeviceOfflineError responds with specific device offline error
+// DeviceOfflineError responds with 503 naming the unreachable device.
 func DeviceOfflineError(c *beecontext.Context, ip string) {
 	Error(c, 503, "Device "+ip+" is offline, please check connection")
 }

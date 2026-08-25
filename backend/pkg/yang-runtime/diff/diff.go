@@ -72,18 +72,15 @@ type diffWalker struct {
 }
 
 func (de *DefaultDiffEngine) walk(parentPath, schemaPath string, desired, actual interface{}, w *diffWalker) error {
-	// Check for nil/nil-pointer cases
-	// Handle both nil interface and nil pointer inside interface
+	// Both a nil interface and a non-nil interface holding a nil pointer count as absent.
 	desiredNil := desired == nil || (reflect.ValueOf(desired).Kind() == reflect.Ptr && reflect.ValueOf(desired).IsNil())
 	actualNil := actual == nil || (reflect.ValueOf(actual).Kind() == reflect.Ptr && reflect.ValueOf(actual).IsNil())
 
 	switch {
 	case desiredNil && actualNil:
-		// No change
 		return nil
 	case desiredNil && !actualNil:
-		// Entire subtree deleted
-		// We only need to record the delete at this level
+		// Entire subtree deleted: recording the delete at this level is enough.
 		w.result.AddChange(Change{
 			Type:       DeleteChange,
 			Path:       parentPath,
@@ -104,7 +101,6 @@ func (de *DefaultDiffEngine) walk(parentPath, schemaPath string, desired, actual
 		return nil
 	}
 
-	// Check if they are the same type
 	dv := reflect.ValueOf(desired)
 	av := reflect.ValueOf(actual)
 
@@ -120,7 +116,6 @@ func (de *DefaultDiffEngine) walk(parentPath, schemaPath string, desired, actual
 		return nil
 	}
 
-	// Handle based on kind
 	switch dv.Kind() {
 	case reflect.Ptr, reflect.Interface:
 		// Both are non-nil, dereference and continue
@@ -155,19 +150,18 @@ func (de *DefaultDiffEngine) walkStruct(parentPath, schemaPath string, desired, 
 	av := reflect.ValueOf(actual)
 	dType := dv.Type()
 
-	// Iterate over all fields
 	for i := 0; i < dv.NumField(); i++ {
 		dField := dv.Field(i)
 		aField := av.Field(i)
 		structField := dType.Field(i)
 
 		if !structField.IsExported() {
-			continue // Skip unexported fields
+			continue
 		}
 
+		// The generated structs name fields after their YANG node, so the Go
+		// field name doubles as the path segment.
 		fieldName := structField.Name
-		// JSON/YANG field name is usually the same as the struct field name
-		// For ygot generated structs, this matches
 		childPath := parentPath
 		if childPath == "" {
 			childPath = fieldName
@@ -193,29 +187,24 @@ func (de *DefaultDiffEngine) walkStruct(parentPath, schemaPath string, desired, 
 }
 
 func (de *DefaultDiffEngine) walkSlice(parentPath, schemaPath string, desired, actual interface{}, w *diffWalker) error {
-	// For YANG lists, we expect this to be a slice of structs with key fields
-	// We compare by matching keys and then comparing the content of each entry
-
+	// A YANG list arrives as a slice of key-bearing structs: entries are paired
+	// up by key and only then compared field by field.
 	dSlice := reflect.ValueOf(desired)
 	aSlice := reflect.ValueOf(actual)
 
-	// Create map of existing entries by key
 	aMap := de.indexListEntries(aSlice)
 
-	// Process each desired entry
 	for i := 0; i < dSlice.Len(); i++ {
 		dEntry := dSlice.Index(i)
 		dKey := de.extractKey(dEntry)
 
 		if aEntry, exists := aMap[dKey]; exists {
-			// Entry exists in both, compare content
 			childPath := fmt.Sprintf("%s[%s]", parentPath, dKey)
 			if err := de.walk(childPath, schemaPath, dEntry.Interface(), aEntry.Interface(), w); err != nil {
 				return err
 			}
 			delete(aMap, dKey)
 		} else {
-			// Entry is new, add it
 			childPath := fmt.Sprintf("%s[%s]", parentPath, dKey)
 			w.result.AddChange(Change{
 				Type:       AddChange,
@@ -227,7 +216,7 @@ func (de *DefaultDiffEngine) walkSlice(parentPath, schemaPath string, desired, a
 		}
 	}
 
-	// Any remaining entries in actual that are not in desired get deleted
+	// Whatever is left in aMap was matched by no desired entry, so it is gone.
 	for key, aEntry := range aMap {
 		childPath := fmt.Sprintf("%s[%s]", parentPath, key)
 		w.result.AddChange(Change{
@@ -246,8 +235,8 @@ func (de *DefaultDiffEngine) walkSlice(parentPath, schemaPath string, desired, a
 // (map[key]*Entry) rather than slices — so without this branch a list field would
 // fall through to the leaf default and be compared with reflect.DeepEqual, which is
 // always false when desired is the UI's sparse intent and actual is the device's full
-// readback (extra keys + device defaults + read-only leaves). That永远 produces a
-// change → 对账永不收敛 → 前端「一直漂移」。
+// readback (extra keys + device defaults + read-only leaves). 那样每轮都产出 change →
+// 对账永不收敛 → 前端「一直漂移」。
 //
 // 采用「合并/子集」语义，与 config_handler.storeConfigMerged 把 desired 当累积意图一致：
 //   - desired 的每个 key 必须在 actual 出现，且其「已设字段」匹配，否则视为需下发的漂移；
@@ -365,16 +354,14 @@ func (de *DefaultDiffEngine) subsetMatches(d, a reflect.Value) bool {
 	}
 }
 
-// extractKey extracts a string key from a list entry
-// For simplicity, we concatenate all key fields with = separator
-// This matches YANG path syntax
+// extractKey builds a string key for a list entry by joining every key field as
+// "name=value", which matches YANG path predicate syntax.
+//
+// Generated lists carry their keys in fields suffixed with "Key"; when an entry
+// has none, the first exported field stands in as the key.
 func (de *DefaultDiffEngine) extractKey(entry reflect.Value) string {
-	// For ygot generated lists, key fields have the corresponding `...Key` field
-	// We look for fields ending with Key and extract them
-	// Fallback: use the first field that can be converted to string
 	var keyParts []string
 
-	// First pass: look for fields named *Key
 	t := entry.Type()
 	for i := 0; i < entry.NumField(); i++ {
 		f := entry.Field(i)
@@ -383,7 +370,6 @@ func (de *DefaultDiffEngine) extractKey(entry reflect.Value) string {
 		}
 		fieldName := t.Field(i).Name
 		if len(fieldName) > 3 && fieldName[len(fieldName)-3:] == "Key" {
-			// This is a key field per ygot convention
 			keyStr := fmt.Sprintf("%v", f.Interface())
 			keyParts = append(keyParts, fieldName[:len(fieldName)-3]+"="+keyStr)
 		}
@@ -401,7 +387,6 @@ func (de *DefaultDiffEngine) extractKey(entry reflect.Value) string {
 		}
 	}
 
-	// Join all key parts with commas
 	result := ""
 	for i, p := range keyParts {
 		if i > 0 {
@@ -423,14 +408,12 @@ func (de *DefaultDiffEngine) indexListEntries(slice reflect.Value) map[string]re
 	return result
 }
 
-// pruneChanges removes redundant changes when a parent is already changed
-// If a parent node is added or deleted, all child changes are redundant
-// This reduces the number of changes sent to the device
+// pruneChanges drops changes whose ancestor is already being added or deleted:
+// the ancestor change carries the whole subtree, so the descendants only inflate
+// the payload sent to the device.
 func (de *DefaultDiffEngine) pruneChanges(changes []Change) *DiffResult {
 	result := NewDiffResult()
 
-	// For each change, check if it has an ancestor that is already
-	// an add or delete - if so, this change is redundant
 	for _, c := range changes {
 		redundant := false
 		parentPath := c.Path
@@ -439,10 +422,8 @@ func (de *DefaultDiffEngine) pruneChanges(changes []Change) *DiffResult {
 			if parentPath == "" {
 				break
 			}
-			// Check if any ancestor is add/delete
 			for _, ancestor := range changes {
 				if ancestor.Path == parentPath && (ancestor.Type == AddChange || ancestor.Type == DeleteChange) {
-					// Ancestor is already being added/deleted, this change is redundant
 					redundant = true
 					break
 				}

@@ -6,7 +6,7 @@ export interface DeviceInfo {
   password: string
 }
 
-// YangModuleInfo YANG模块信息
+// YangModuleInfo YANG 模块信息
 export interface YangModuleInfo {
   name: string
   path: string
@@ -14,7 +14,7 @@ export interface YangModuleInfo {
   type: string
 }
 
-// ApiResponse 通用API响应
+// ApiResponse 通用 API 响应
 export interface ApiResponse<T> {
   code: number
   message: string

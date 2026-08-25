@@ -59,7 +59,7 @@ export function Tabs(
   )
 }
 
-// ===== Menu（左树）→ Tree：items 嵌套 → data；openKeys/selectedKeys 受控桥 =====
+// ===== Menu（左树）：items 嵌套递归自绘；openKeys/selectedKeys 受控 =====
 export interface MenuLikeItem {
   key: string
   label?: ReactNode
@@ -310,8 +310,8 @@ export function Table<T extends object = Record<string, unknown>>(
     locale?: { emptyText?: ReactNode }
     loading?: boolean
     size?: string
-    // 展开行（antd expandable）：eview 展开形态待侦察——窗口期类型收下、
-    // 行为暂缺（tasks 5.1 已登记）。
+    // 展开行（antd expandable）：eview 无对应形态——只有 defaultExpandAllRows
+    // 语义生效，走桥内拍平渲染（见下方 flatten）。
     expandable?: { defaultExpandAllRows?: boolean }
   },
 ) {

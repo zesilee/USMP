@@ -37,17 +37,14 @@ func generateSigner() (ssh.Signer, error) {
 func (s *sshServer) handleConnection(conn net.Conn) {
 	defer conn.Close()
 
-	// Perform SSH handshake
 	sshConn, chans, reqs, err := ssh.NewServerConn(conn, s.config)
 	if err != nil {
 		return
 	}
 	defer sshConn.Close()
 
-	// Discard out-of-band requests
 	go ssh.DiscardRequests(reqs)
 
-	// Handle channels (only accept session channels)
 	for newChan := range chans {
 		if newChan.ChannelType() != "session" {
 			newChan.Reject(ssh.UnknownChannelType, "unknown channel type")
@@ -59,12 +56,11 @@ func (s *sshServer) handleConnection(conn net.Conn) {
 			return
 		}
 
-		// Handle requests - accept subsystem netconf request
-		// subsystem request payload is 4-byte big-endian length followed by name
+		// A subsystem request payload is a 4-byte big-endian length followed by
+		// the name, so the name starts at offset 4.
 		go func() {
 			for req := range reqs {
 				if req.Type == "subsystem" && len(req.Payload) >= 4 {
-					// extract length, check if it's "netconf"
 					name := string(req.Payload[4:])
 					if name == "netconf" {
 						_ = req.Reply(true, nil)
@@ -85,7 +81,6 @@ func (s *sshServer) handleSession(ch ssh.Channel) {
 
 	reader := bufio.NewReader(ch)
 
-	// Send server hello
 	hello := buildHello(1, s.extraCaps, !s.scenario.DisableConfirmedCommit)
 
 	var buf bytes.Buffer
@@ -96,12 +91,11 @@ func (s *sshServer) handleSession(ch ssh.Channel) {
 		log.Printf("encode hello failed: %v", err)
 		return
 	}
-	// Flush the encoder to make sure all data is written to buffer
 	if err := encoder.Flush(); err != nil {
 		log.Printf("flush hello failed: %v", err)
 		return
 	}
-	// Add EOM marker
+	// ]]>]]> is the base:1.0 end-of-message marker.
 	buf.WriteString("]]>]]>")
 
 	if _, err := ch.Write(buf.Bytes()); err != nil {
@@ -110,7 +104,6 @@ func (s *sshServer) handleSession(ch ssh.Channel) {
 	}
 	log.Printf("Sent server hello, %d bytes", buf.Len())
 
-	// Read client hello
 	clientHello, err := readMessage(reader)
 	if err != nil {
 		log.Printf("read client hello failed: %v", err)
@@ -118,7 +111,6 @@ func (s *sshServer) handleSession(ch ssh.Channel) {
 	}
 	log.Printf("Received client hello, %d bytes: %.100s", len(clientHello), clientHello)
 
-	// Handle requests until connection close
 	for {
 		select {
 		case <-s.done:
@@ -280,7 +272,6 @@ func readMessage(r *bufio.Reader) (string, error) {
 			found = true
 			break
 		}
-		// Check if EOM is at the end after adding newline
 		current := builder.String()
 		if len(current) >= 5 && strings.HasSuffix(current, eom) {
 			found = true
@@ -364,7 +355,6 @@ func extractFilter(msg string) (inner string, present bool) {
 
 func (s *sshServer) handleGetConfig(msg, msgID string) string {
 	log.Printf("handleGetConfig: msg: %.200s", msg)
-	// Extract source (running/candidate)
 	source := "running"
 	if strings.Contains(msg, `<source><candidate/>`) {
 		source = "candidate"
@@ -399,30 +389,22 @@ func (s *sshServer) handleGetConfig(msg, msgID string) string {
 
 func (s *sshServer) handleEditConfig(msg, msgID string) string {
 	log.Printf("handleEditConfig: received request msg: %.200s", msg)
-	// Check for scenario error
 	if err, ok := s.scenario.ErrorOnRPC["edit-config"]; ok {
 		return errorReply(msgID, err.Error())
 	}
 
-	// Extract target - for most cases it's candidate
-	// Handle both <candidate/> and <candidate></candidate> formats
+	// Match on the opening tag alone so both <candidate/> and
+	// <candidate></candidate> are recognized.
 	hasCandidateTarget := strings.Contains(msg, "<candidate")
 	targetIsRunning := strings.Contains(msg, "<running")
 	targetIsCandidate := hasCandidateTarget && !targetIsRunning
 
-	// Extract the config content
-	// Logic:
-	// 1. Get everything after closing </target> in <edit-config>
-	// 2. Trim whitespace, if it starts with <config, extract the content inside <config>...</config>
-	// 3. Otherwise, the entire content after </target> is the config content
-	// Handles both wrapped and unwrapped content correctly
 	editConfigStart := strings.Index(msg, "<edit-config")
 	if editConfigStart == -1 {
 		log.Printf("handleEditConfig: no <edit-config> found: %.200s", msg)
 		return errorReply(msgID, "invalid edit-config")
 	}
 
-	// Find closing </target> after edit-config starts
 	endTargetRelative := strings.Index(msg[editConfigStart:], "</target>")
 	if endTargetRelative == -1 {
 		log.Printf("handleEditConfig: missing </target> in edit-config: %.200s", msg)
@@ -430,17 +412,15 @@ func (s *sshServer) handleEditConfig(msg, msgID string) string {
 	}
 	contentStart := editConfigStart + endTargetRelative + len("</target>")
 
-	// Extract the entire content after target, trim whitespace
 	content := strings.TrimSpace(msg[contentStart:])
-	// Remove closing </edit-config> if it's at the end
 	if idx := strings.Index(content, "</edit-config>"); idx != -1 {
 		content = strings.TrimSpace(content[:idx])
 	}
 
 	var configContent string
 	if strings.HasPrefix(content, "<config") {
-		// Has wrapping <config> tag - extract content inside it
-		// Find the closing </config> at the end (simplified - works for our use case)
+		// Take the last </config>: nested <config> elements would break this, but
+		// no such payload reaches the simulator.
 		start := strings.Index(content, ">") + 1
 		end := strings.LastIndex(content, "</config>")
 		if end == -1 {
@@ -449,7 +429,6 @@ func (s *sshServer) handleEditConfig(msg, msgID string) string {
 		}
 		configContent = content[start:end]
 	} else {
-		// No wrapping config tag - entire content is config content
 		configContent = content
 	}
 	configContent = strings.TrimSpace(configContent)
@@ -468,7 +447,7 @@ func (s *sshServer) handleEditConfig(msg, msgID string) string {
 			return errorReply(msgID, err.Error())
 		}
 	} else {
-		// If directly editing running, update immediately
+		// Editing running directly: apply and commit in one step.
 		if err := s.store.EditConfig([]byte(configContent)); err != nil {
 			return errorReply(msgID, err.Error())
 		}
@@ -479,7 +458,6 @@ func (s *sshServer) handleEditConfig(msg, msgID string) string {
 }
 
 func (s *sshServer) handleCommit(msg, msgID string) string {
-	// Check for scenario error
 	if err, ok := s.scenario.ErrorOnRPC["commit"]; ok {
 		return errorReply(msgID, err.Error())
 	}
@@ -529,7 +507,6 @@ func parseConfirmedCommit(msg string) (bool, time.Duration) {
 }
 
 func (s *sshServer) handleDiscardChanges(msg, msgID string) string {
-	// Check for scenario error
 	if err, ok := s.scenario.ErrorOnRPC["discard-changes"]; ok {
 		return errorReply(msgID, err.Error())
 	}

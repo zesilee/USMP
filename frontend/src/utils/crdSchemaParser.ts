@@ -83,7 +83,6 @@ export function parseCRDSchemaToFields(schema: any): Field[] {
   const fields: Field[] = []
 
   for (const [path, prop] of Object.entries(specProps)) {
-    // Skip hidden fields
     if (prop['x-custom-hidden']) continue
 
     const field: Field = {
@@ -103,7 +102,6 @@ export function parseCRDSchemaToFields(schema: any): Field[] {
       default: prop.default,
     }
 
-    // Handle nested object properties
     if (prop.type === 'object' && prop.properties) {
       field.fields = parseNestedProperties(prop.properties, [])
     }

@@ -16,8 +16,8 @@ type DeviceLister interface {
 	List() []string
 }
 
-// PeriodicSource is an event source that triggers reconciliation at fixed intervals
-// It can be used for periodic polling of device configuration to detect drift
+// PeriodicSource is an event source that triggers reconciliation at fixed
+// intervals, polling device configuration to detect drift.
 type PeriodicSource struct {
 	BaseSource
 	interval  time.Duration
@@ -29,19 +29,20 @@ type PeriodicSource struct {
 	wg        DoneWaitGroup
 }
 
-// DoneWaitGroup is a wait group for done channels
+// DoneWaitGroup is a wait group whose completion is signalled by closing a
+// done channel.
 type DoneWaitGroup struct {
 	done chan struct{}
 	wg   int
 }
 
-// Add increments the wait group counter
+// Add increments the wait group counter.
 func (wg *DoneWaitGroup) Add() {
 	wg.done = make(chan struct{})
 	wg.wg++
 }
 
-// Done decrements the wait group counter
+// Done decrements the wait group counter, closing done when it reaches zero.
 func (wg *DoneWaitGroup) Done() {
 	wg.wg--
 	if wg.wg <= 0 {
@@ -49,7 +50,7 @@ func (wg *DoneWaitGroup) Done() {
 	}
 }
 
-// Wait waits for all goroutines to finish
+// Wait blocks until all goroutines have finished.
 func (wg *DoneWaitGroup) Wait() {
 	if wg.done != nil {
 		<-wg.done
@@ -111,7 +112,6 @@ func (s *PeriodicSource) run(ctx context.Context) {
 			s.ticker.Stop()
 			return
 		case <-s.ticker.C:
-			// Enqueue all currently-registered devices for reconciliation
 			for _, deviceID := range s.deviceList() {
 				evt := predicate.Event{
 					DeviceID: deviceID,

@@ -44,7 +44,7 @@ export function deriveDeviceRows(devices: Device[], fleet: FleetInput): DeviceRo
       online,
       session: online ? 'connected' : 'disconnected',
       reconcileState,
-      // 归一 Go 零值(0001-01-01)为空，与概览台账口径一致（避免设备表字面显示零值时刻）
+      // 归一 Go 零值（0001-01-01）为空，与概览台账口径一致（避免设备表字面显示零值时刻）
       lastSync: normalizeLastRun(d.lastSync) ?? '',
       load: null,
     }

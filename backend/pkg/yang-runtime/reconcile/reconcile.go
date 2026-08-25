@@ -75,7 +75,6 @@ func NewGenericReconciler(
 
 // Reconcile implements the Reconciler interface
 func (g *GenericReconciler) Reconcile(ctx context.Context, req Request) Result {
-	// Get desired configuration from config store
 	desired, err := g.configStore.Get(req.DeviceID, req.Path)
 	if err != nil {
 		return Result{
@@ -88,16 +87,14 @@ func (g *GenericReconciler) Reconcile(ctx context.Context, req Request) Result {
 		}
 	}
 
-	// If desired is nil, it means the configuration should be deleted
+	// Nothing is declared for this path, so there is nothing to align.
 	if desired == nil {
-		// No changes needed if it's already gone
 		return Result{
 			Requeue: false,
 			Error:   nil,
 		}
 	}
 
-	// Get actual configuration from device
 	actual, err := g.deviceClient.Get(ctx, req.DeviceID)
 	if err != nil {
 		return Result{
@@ -110,7 +107,6 @@ func (g *GenericReconciler) Reconcile(ctx context.Context, req Request) Result {
 		}
 	}
 
-	// Compute diff
 	changes, err := g.diffEngine.Diff(desired, actual, req.Path)
 	if err != nil {
 		return Result{
@@ -123,7 +119,6 @@ func (g *GenericReconciler) Reconcile(ctx context.Context, req Request) Result {
 		}
 	}
 
-	// If no changes, we're done
 	if len(changes) == 0 {
 		return Result{
 			Requeue: false,
@@ -131,7 +126,6 @@ func (g *GenericReconciler) Reconcile(ctx context.Context, req Request) Result {
 		}
 	}
 
-	// Apply changes to device
 	if err := g.deviceClient.Set(ctx, req.DeviceID, changes); err != nil {
 		return Result{
 			Requeue: true,
