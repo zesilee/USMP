@@ -187,5 +187,5 @@ frontend/                        # 【Vue3 动态表单】→ frontend/design.md
 ## 9. 关联文档
 
 - 权威框架设计：根 `yang-controller-runtime.md`、`spec/openconfig-vlan-controller.md`（Stack B 忠实基线）
-- legacy 参考（Stack A，已被红线取代）：`backend/docs/architecture/overview.md`、`refactor-by-crd.md`、`docs/superpowers/specs/2026-05-03-k8s-native-crd-architecture.md`
+- legacy 参考（Stack A，已被红线取代）：`backend/docs/architecture/overview.md`（其余 Stack A 方案文档已随 2026-08 清理删除，历史见 git）
 - 北向 API：`openspec/specs/{devices,config,yang}-api/`、`backend/docs/api/rest-api.md`
