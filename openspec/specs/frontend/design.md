@@ -80,4 +80,4 @@ K8s CRD OpenAPIV3Schema
 - **R11/R12 反 AI 陈词滥调/emoji 图标**：暗色网管风，未见紫粉蓝渐变；图标用法建议后续按 `web-design-engineer` 复核。
 
 ## 10. 关联
-- `frontend-yang-dynamic-form` 技能；`business-crd/design.md`（CRD schema 来源）；`yang-api`/`devices-api`/`config-api`（后端接口）；`spec/vlan-frontend-design.md`、`docs/superpowers/specs/2026-05-03-frontend-design.md`（UX 设计参考）。
+- `frontend-yang-dynamic-form` 技能；`business-crd/design.md`（CRD schema 来源）；`yang-api`/`devices-api`/`config-api`（后端接口）。
