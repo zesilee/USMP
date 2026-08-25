@@ -18,9 +18,8 @@ description: 基于 yang-controller-runtime 框架开发 YANG 模块控制器，
 Manager (全局生命周期)
   ├─ Schema (加载的YANG模型)
   ├─ ClientPool (设备连接池)
-  ├─ PluginManager (插件扩展点)
   └─ Controllers (每个YANG模块一个Controller)
-        ├─ EventSource (事件源: 周期轮询/gNMI订阅/文件变更)
+        ├─ EventSource (事件源: 周期轮询/K8s CRD watch/文件变更)
         ├─ WorkQueue (带指数退避的工作队列)
         ├─ Predicate (事件过滤)
         └─ Reconciler (差异比对+配置对齐 - 用户实现)
@@ -34,10 +33,9 @@ Manager (全局生命周期)
 | **Schema** | YANG模型元数据缓存 | 框架从文件加载，用户不需要改 |
 | **ClientPool** | 设备连接池，自动重连 | 框架已实现，通过 `manager.GetClientPool()` 获取 |
 | **Controller** | 事件出队 → 过滤 → 调用 Reconciler | 框架已实现，通过 Builder 配置 |
-| **EventSource** | 产生 reconcile 事件 | 使用内置: `source.NewPeriodicSource`, `source.NewGNMISubSource` |
+| **EventSource** | 产生 reconcile 事件 | 使用内置源（周期轮询/CRD watch，见 `backend/pkg/yang-runtime/source`） |
 | **Predicate** | 过滤不需要 reconcile 的事件 | 使用内置: `predicate.PathPrefix`, `predicate.Always` 等 |
 | **Reconciler** | 比对 desired ↔ actual，推送变更 | **用户需要实现** |
-| **Plugin** | 验证/变更/通知钩子 | 可选，用户可实现扩展 |
 
 ## 开发流程（严格遵循）
 
@@ -45,11 +43,11 @@ Manager (全局生命周期)
 
 ```go
 import (
-  "github.com/leezesi/usmp/pkg/yang-runtime/controller"
-  "github.com/leezesi/usmp/pkg/yang-runtime/source"
-  "github.com/leezesi/usmp/pkg/yang-runtime/predicate"
-  "github.com/leezesi/usmp/pkg/yang-runtime/reconcile"
-  "github.com/leezesi/usmp/pkg/yang-runtime/manager"
+  "github.com/leezesi/usmp/backend/pkg/yang-runtime/controller"
+  "github.com/leezesi/usmp/backend/pkg/yang-runtime/source"
+  "github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
+  "github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
+  "github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 )
 
 // 1. 在 main.go 或入口处创建 Controller 并添加到 Manager
@@ -178,7 +176,7 @@ pred := predicate.And(
 - 覆盖正常路径、错误路径、边界情况
 
 ### 集成测试（**强制要求**）
-- 必须添加基于 `test/netconf-simulator` NETCONF 模拟网元的端到端集成测试
+- 必须添加基于 `backend/simulator/netconfsim` NETCONF 模拟网元的端到端集成测试
 - 使用 `netconf-sim-integration-test` 技能自动生成测试用例
 - 必须覆盖：至少一个正常全流程 + 至少一个异常场景
 - 所有集成测试必须执行成功才能提交代码
@@ -189,7 +187,7 @@ pred := predicate.And(
 
 ### 常见问题
 1. **Reconcile 不触发** → 检查 Predicate 是否过滤掉了事件，检查 EventSource 是否正确启动
-2. **连接不上设备** → 检查 ClientPool 中设备信息是否正确，检查协议端口（NETCONF 830, gNMI 9339）
+2. **连接不上设备** → 检查 ClientPool 中设备信息是否正确，检查协议端口（NETCONF 830；gNMI 为规划能力未实现）
 3. **diff 出了错误的变更** → 检查列表键提取是否正确，检查节点类型是否匹配
 4. **队列卡住** → 检查 Reconciler 是否panic，检查是否有死锁，查看日志
 
@@ -197,15 +195,6 @@ pred := predicate.And(
 - 使用 `manager.WithDebug()` 开启调试日志
 - 检查 controller 工作队列长度：`controller.Queue().Len()`
 - 检查 client 连接状态：`client.IsConnected()`
-
-## 与原有架构对比（迁移参考）
-
-| 原有 Actor 架构 | 新 controller-runtime 架构 |
-|----------------|---------------------------|
-| 每个设备一个 DeviceActor | 连接池复用设备连接，无 Actor |
-| 每个 YANG 对象一个 Actor | 一个 Controller 处理所有设备的同类型对象 |
-| 异步消息通信 | 同步 reconcile 循环，框架处理排队 |
-| 用户处理所有连接/重连 | 框架连接池自动处理 |
 
 ## 记住一句话
 **框架处理所有 boilerplate，你只需要写 Reconcile 逻辑**
