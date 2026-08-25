@@ -4,86 +4,73 @@
 
 ## 项目结构适配
 
-本项目已实现前后端分离，验证时必须先定位 Git 仓库根目录，再进入对应目录，避免当前工作目录已在子目录时路径错误：
-- **后端**：`$(git rev-parse --show-toplevel)/backend` - Go 代码
-- **前端**：`$(git rev-parse --show-toplevel)/frontend` - Vue3 + TypeScript
+本项目前后端分离，验证时先定位 Git 仓库根目录，再进入对应目录：
+- **后端**：`$(git rev-parse --show-toplevel)/backend` — Go 1.22
+- **前端**：`$(git rev-parse --show-toplevel)/frontend` — React 19 + TypeScript（openinula 运行时 + EviewUI/antd 适配层）
 
 ---
 
 ## 指令（Instructions）
 
-请按以下确切顺序执行验证：
+按以下顺序执行：
 
-### 1. **后端构建检查（Backend Build Check）**
+### 1. 后端构建检查
 ```bash
-REPO_ROOT=$(git rev-parse --show-toplevel)
-cd "$REPO_ROOT/backend"
-go build ./...
+cd "$(git rev-parse --show-toplevel)/backend" && go build ./...
 ```
-- 如果构建失败，报告错误并停止（STOP）
+失败则报告错误并停止。
 
-### 2. **前端构建检查（Frontend Build Check）**
+### 2. 前端构建检查
 ```bash
-REPO_ROOT=$(git rev-parse --show-toplevel)
-cd "$REPO_ROOT/frontend"
-npm run build
+cd "$(git rev-parse --show-toplevel)/frontend" && npm run typecheck && npm run build
 ```
-- 如果构建失败，报告错误并停止（STOP）
+失败则报告错误并停止。
 
-### 3. **后端测试套件（Backend Test Suite）**
+### 3. 后端测试套件
 ```bash
-REPO_ROOT=$(git rev-parse --show-toplevel)
-cd "$REPO_ROOT/backend"
-go test ./... -short -v  # 快速测试（跳过集成测试）
-go test ./... -v          # 完整测试（含集成测试）
+cd "$(git rev-parse --show-toplevel)/backend"
+go test ./... -short   # 快速（跳过集成测试）
+go test ./... -race    # 完整（含集成测试与竞态检测）
 ```
-- 报告通过/失败的数量
+报告通过/失败数量。
 
-### 4. **前端测试套件（Frontend Test Suite）**
+### 4. 前端测试套件
 ```bash
-REPO_ROOT=$(git rev-parse --show-toplevel)
-cd "$REPO_ROOT/frontend"
-npm run test
+cd "$(git rev-parse --show-toplevel)/frontend"
+npm run test           # F1/F2 happy-dom 单测（含覆盖率棘轮阈值）
 ```
-- 报告通过/失败的数量
-- 报告覆盖率百分比
+报告通过/失败数量与覆盖率；涉及 F3 场景另跑 `npm run test:browser`。
 
-### 5. **Console.log 审计**
+### 5. E2E 冒烟（pre-pr 档，或含 frontend/ 改动时）
 ```bash
-REPO_ROOT=$(git rev-parse --show-toplevel)
-grep -RIn --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.git "console\.log" "$REPO_ROOT/backend" "$REPO_ROOT/frontend/src" || true
+make e2e-local    # 起 docker 全栈 → Playwright staging smoke（§6.2 门禁，pre-push 亦调用）
 ```
-- 如果没有匹配结果，报告 `OK`
-- 如果有匹配结果，报告其所在位置
 
-### 6. **Git 状态（Git Status）**
-- 显示未提交的更改
-- 显示自上次提交以来修改的文件
+### 6. Git 状态
+显示未提交变更与自上次提交以来修改的文件。
 
 ---
 
 ## 输出（Output）
 
-生成一份简洁的验证报告：
-
 ```
 VERIFICATION: [PASS/FAIL]
 
 Backend Build:  [OK/FAIL]
-Frontend Build: [OK/FAIL]
-Backend Tests:  [X passed, 0 failed]
+Frontend Build: [OK/FAIL]  (typecheck + vite build)
+Backend Tests:  [X passed, 0 failed] (-race)
 Frontend Tests: [X/Y passed, Z% coverage]
-Logs:           [OK/X console.logs]
+E2E Smoke:      [OK/FAIL/SKIPPED]
 
 Ready for PR: [YES/NO]
 ```
 
-如果存在任何关键问题，请列出这些问题并给出修复建议。
+存在关键问题时列出并给修复建议。
 
 ## 参数（Arguments）
 
 `$ARGUMENTS` 可以是：
-- `quick` - 仅执行后端 + 前端构建
-- `full` - 执行所有检查（默认）
-- `pre-commit` - 执行构建 + 单元测试
-- `pre-pr` - 执行完整检查 + E2E 测试
+- `quick` — 仅执行后端 + 前端构建
+- `full` — 执行 1-4 与 6（默认）
+- `pre-commit` — 构建 + 快速单测（对应 pre-commit 钩子口径）
+- `pre-pr` — 全部检查 + `make e2e-local`

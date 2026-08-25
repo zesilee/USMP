@@ -1,64 +1,44 @@
-# Hook 配置说明
+# Claude Code Hook 配置说明
+
+> 本文档只描述 `.claude/settings.json` 中**实际注册**的钩子。git 层门禁（pre-commit/commit-msg/pre-push/post-checkout）在 `.githooks/`，与本文档无关。
+> Claude Code 钩子协议：载荷以 **stdin JSON** 传入（`tool_name`/`tool_input`/`tool_response`）；PreToolUse **exit 2 才阻断**（exit 1 只是非阻断报错）。
 
 ## 目录结构
 ```
 .claude/
-├── settings.json          # 主配置文件（简洁版）
-├── HOOKS.md               # 本文档（详细说明）
-├── hooks/
-│   ├── pre-commit-review.md    # 提交前代码检视流程
-│   └── post-test-review.md     # 测试后代码检视流程
-└── ...
+├── settings.json          # 钩子注册（权限、attribution 也在这）
+├── HOOKS.md               # 本文档
+└── hooks/
+    ├── pre-tool-use.sh    # L2 命令拦截
+    ├── post-task-sync.sh  # 任务持久化同步
+    └── post-task-sync.log # 同步日志（gitignore）
 ```
 
 ## Hook 列表
 
-### 1. Stop Hook - 提交前强制代码检视
-**触发时机**：会话停止时
+### 1. PreToolUse (Bash) — L2 命令拦截 `pre-tool-use.sh`
+在 AI 执行 Bash 命令前拦截违规操作，命中即 exit 2 阻断：
 
-**执行流程**：
-1. 检查 Git 状态，确认是否有未提交的 Go 代码变更
-2. 如有变更，使用 `go-code-review-check` 技能进行全面检视
-3. 生成检视报告（问题清单、严重程度、修改建议）
-4. 检视不通过 → 自动修复 → 重新检视（循环直到通过）
-5. 检视通过 → 使用 `git-what-why-how-commit` 规范自动提交
+| 拦截项 | 红线 |
+|--------|------|
+| `git push ... main`（非 hotfix） | R13 |
+| `git push --force` | W07 |
+| 手动编辑 `internal/generated/` | R04（走 `make gen-yang` regen-and-diff） |
+| `git checkout main` | W01（用 EnterWorktree） |
+| `rm -rf /` | 破坏性命令 |
+| 重定向写 `.env` | R16 |
 
-**检视项**：
-- 并发安全（goroutine 泄漏、锁使用正确性）
-- ygot 类型安全（类型转换、空指针）
-- 内存缓存安全（TTL、LRU、并发访问）
-- NETCONF 异常处理（重连、超时、错误恢复）
-- 架构合规性（符合 yang-controller-runtime 规范）
-- 代码规范（命名、注释、错误处理）
+改动脚本后必跑文件末尾注释里的自测命令（历史教训：曾因读不到输入而静默放行数月）。
 
----
-
-### 2. PostToolUse Hook - 测试后代码检视
-**触发时机**：执行 `go test` 命令后
-
-**执行流程**：
-1. 列出所有变更的 `.go` 文件
-2. 使用 `go-code-review-check` 技能进行检视
-3. 输出检视报告
-4. 存在严重问题 → 标记并列出需修复项
-5. 检视通过 → 标记可安全提交
-
----
+### 2. PostToolUse (TaskCreate|TaskUpdate|TaskDelete) — 任务同步 `post-task-sync.sh`
+把会话内任务变更同步到 `openspec/tasks/*.md`（§12 会话恢复体系）：
+- TaskCreate → 生成带 frontmatter 的任务文件（id/title/status/priority/branch/worktree）
+- TaskUpdate → 更新对应文件 frontmatter
+- TaskDelete → 标记 `status: deleted`
+- 失败不阻塞主流程（`set +e`），日志见 `post-task-sync.log`
 
 ## 权限配置
-允许的命令：
-- `Bash(git status *)`
-- `Bash(git diff *)`
-- `Bash(git log *)`
-- `Bash(go fmt *)`
-- `Bash(go vet *)`
-
----
+见 `settings.json` 的 `permissions.allow`（git status/diff/log、go fmt/vet/test、make 等只读与构建类命令免提示）。
 
 ## 提交规范
-使用 `git-what-why-how-commit` 三段式：
-- **What**：做了什么
-- **Why**：为什么做
-- **Impact**：影响范围
-
-自动添加 Claude Code 作为 Co-Author。
+用 `git-what-why-how-commit` 技能：`<type>: <subject>` + What/Why/How 三段式，自动附 Claude Code Co-Author（settings.json `attribution`）。

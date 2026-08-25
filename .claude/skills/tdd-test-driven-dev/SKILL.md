@@ -1,111 +1,34 @@
 ---
 name: tdd-test-driven-dev
-description: 所有功能优先编写单元测试用例，再实现业务代码，覆盖正常、异常、边界、并发场景
+description: 所有改动测试先行（T01-T09 军规载体）：先产出测试设计再写实现，按 CLAUDE.md §5.6 选层补齐，覆盖正常、异常、边界、并发场景
 ---
 
-# 技能详情
-## 一、激活时机（何时自动触发）
-1.  当用户需求包含「测试用例」「TDD」「单元测试」「异常测试」等关键词时，自动激活。
-2.  开发流程中，任何新功能、BUG修复，在编写业务代码前，自动触发本技能，生成测试用例。
-3.  与其他所有技能联动，每个技能的实现代码，均需先通过本技能生成测试用例，再编写代码。
+# USMP TDD 军规执行技能
 
-## 二、核心原则（底层设计逻辑）
-1.  测试先行原则：测试用例定义功能需求和边界，引导业务代码开发，避免偏离需求。
-2.  全面覆盖原则：测试用例需覆盖正常流程、异常流程、边界场景、并发场景，确保代码健壮性。
-3.  闭环原则：每个原子功能对应一套完整测试用例，测试通过后，再提交业务代码，形成闭环。
-4.  可维护原则：测试用例与业务代码同步更新，确保代码迭代后，测试仍能有效验证功能。
+## 一、激活时机
+1. 任何新功能、Bug 修复、重构，在编写业务代码**之前**激活（T01/T05）。
+2. 用户需求包含「测试用例」「TDD」「单元测试」「异常测试」等关键词时激活。
 
-## 三、使用样例（实操指令+输出效果）
-### 样例1：触发技能指令
-为 TTL+LRU 缓存的 Set、Get、Invalidate 方法，编写 TDD 测试用例
-plaintext
+## 二、权威来源（本技能只做执行指针，不复制正文）
+- 测试军规 T01-T09 与测试分层职责：**CLAUDE.md §5.5-§5.6**（含「改动类型→必补层」映射表）
+- 前端分层权威：**frontend/TESTING.md**（F1 happy-dom / F2 组件 / F3 真浏览器 / F4 E2E）
+- 新增 YANG 模型接入设备配置：**必触发 `yang-config-test-design` 技能**（T02b，完备测试矩阵）
+- 集成测试模板：`netconf-sim-integration-test` 技能
+- 覆盖率棘轮：`backend/.coverage-baseline` 与前端 vitest thresholds 为下限，补测后同步上调（T08）
 
-### 样例2：技能输出效果（先写测试，后写代码）
-```go
-package cache_test
+## 三、执行流程（红绿循环）
+1. **测试设计先行（T05）**：列出本改动的用例清单（正常/异常/边界/并发/负路径），对照 §5.6 选层，缺层=未完成（T06）。
+2. **红灯**：先写测试，运行确认其因正确原因失败。**Bug 修复必须先写复现该 Bug 的回归测试**（T07）。
+3. **绿灯**：写最小实现使测试通过。
+4. **重构**：保持全绿。
+5. **验证**：后端 `go test ./... -race`；前端 `npm run test`（happy-dom）、涉及 Select 弹层/嵌套 list 交互时 `npm run test:browser`（F3）。
 
-import (
-	"testing"
-	"time"
-	"你的项目路径/cache"
-)
+## 四、Go 测试写法要点（真实仓库口径）
+- 表格驱动 + `t.Run` 子测试；并发用例必须在 `-race` 下通过（R09）。
+- 并发测试用 `sync.WaitGroup` 收拢协程；**禁止用 `time.Sleep` 凑同步（Magic Sleep 反模式）、禁止在子协程里调用 `t.Fatalf`**（`t.Errorf` 可以，但失败信号建议经 channel 回主协程断言）。
+- 集成测试命名 `*_integration_test.go`，开头 `if testing.Short() { t.Skip(...) }`（T03）。
+- 现成范例：`backend/internal/cache/`、`backend/internal/api/` 下的 `*_test.go` 与 `*_integration_test.go`。
 
-// 测试正常Set+Get缓存
-func TestTTLLRUCache_SetAndGet(t *testing.T) {
-	// 初始化缓存（最大容量10，TTL30秒）
-	c := cache.NewTTLLRUCache(10, 30*time.Second)
-	key := "192.168.1.1/interfaces"
-	value := "test config"
-
-	// 执行Set操作
-	c.Set(key, value)
-
-	// 执行Get操作，验证结果
-	val, ok := c.Get(key)
-	if !ok {
-		t.Errorf("Get缓存失败，期望存在key: %s", key)
-	}
-	if val != value {
-		t.Errorf("缓存值不匹配，期望: %s，实际: %v", value, val)
-	}
-}
-
-// 测试缓存过期
-func TestTTLLRUCache_Expire(t *testing.T) {
-	// 初始化缓存（TTL1秒）
-	c := cache.NewTTLLRUCache(10, 1*time.Second)
-	key := "192.168.1.1/interfaces"
-	value := "test config"
-
-	c.Set(key, value)
-	// 等待2秒，确保缓存过期
-	time.Sleep(2 * time.Second)
-
-	// 验证缓存已过期
-	val, ok := c.Get(key)
-	if ok {
-		t.Errorf("缓存未过期，期望过期key: %s，实际值: %v", key, val)
-	}
-}
-
-// 测试主动失效缓存
-func TestTTLLRUCache_Invalidate(t *testing.T) {
-	c := cache.NewTTLLRUCache(10, 30*time.Second)
-	key := "192.168.1.1/interfaces"
-	value := "test config"
-
-	c.Set(key, value)
-	// 主动失效
-	c.Invalidate(key)
-
-	// 验证缓存已失效
-	val, ok := c.Get(key)
-	if ok {
-		t.Errorf("缓存未失效，期望失效key: %s，实际值: %v", key, val)
-	}
-}
-
-// 测试并发Set+Get（协程安全）
-func TestTTLLRUCache_Concurrent(t *testing.T) {
-	c := cache.NewTTLLRUCache(100, 30*time.Second)
-	key := "192.168.1.1/interfaces"
-	value := "test config"
-
-	// 并发执行1000次Set+Get
-	for i := 0; i < 1000; i++ {
-		go func() {
-			c.Set(key, value)
-			val, ok := c.Get(key)
-			if !ok || val != value {
-				t.Errorf("并发缓存操作失败，val: %v, ok: %v", val, ok)
-			}
-		}()
-	}
-
-	// 等待所有协程执行完成
-	time.Sleep(1 * time.Second)
-}
-```
-
-### 样例 3：联动其他技能
-为Controller的Reconcile功能，编写TDD测试用例，覆盖正常配置对齐、配置下发失败重试异常场景
+## 五、门禁
+- 测试未过禁止 commit：pre-commit 本地拦截（后端变更包测试 + 前端 happy-dom 单测）+ CI 兜底（R15/T09）。
+- 代码评审不通过禁止提交（T04，`go-code-review-check` 技能）。
