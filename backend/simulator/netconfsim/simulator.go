@@ -40,8 +40,8 @@ type Simulator struct {
 	wg      sync.WaitGroup
 
 	// conns tracks live client connections so Stop can force-close them.
-	// handleSession 阻塞在 readMessage（bufio 读）时感知不到 done channel，
-	// 不主动断开连接 Stop 会在 wg.Wait 上永久挂起。
+	// handleSession 阻塞在 readMessage（bufio 读）时感知不到 done channel；
+	// 不主动断开连接，Stop 会在 wg.Wait 上永久挂起。
 	connMu sync.Mutex
 	conns  map[net.Conn]struct{}
 }
@@ -85,13 +85,11 @@ func (s *Simulator) Start() error {
 		return fmt.Errorf("simulator already running")
 	}
 
-	// Generate temporary SSH host key
 	signer, err := generateSigner()
 	if err != nil {
 		return fmt.Errorf("generate SSH signer: %w", err)
 	}
 
-	// Configure SSH server
 	s.config = &ssh.ServerConfig{
 		PasswordCallback: func(conn ssh.ConnMetadata, password []byte) (*ssh.Permissions, error) {
 			if s.scenario.RejectAuth {
@@ -105,7 +103,6 @@ func (s *Simulator) Start() error {
 	}
 	s.config.AddHostKey(signer)
 
-	// Start listening
 	listener, err := net.Listen("tcp", net.JoinHostPort(s.addr, strconv.Itoa(s.listenPort)))
 	if err != nil {
 		return fmt.Errorf("start listener: %w", err)

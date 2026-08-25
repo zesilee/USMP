@@ -222,7 +222,6 @@ func SplitPath(path string) []string {
 	if path == "" || path == "/" {
 		return []string{}
 	}
-	// Strip leading and trailing slashes
 	for len(path) > 0 && path[0] == '/' {
 		path = path[1:]
 	}
@@ -232,7 +231,6 @@ func SplitPath(path string) []string {
 	if path == "" {
 		return []string{}
 	}
-	// Split on forward slashes
 	var components []string
 	start := 0
 	for i := 0; i < len(path); i++ {

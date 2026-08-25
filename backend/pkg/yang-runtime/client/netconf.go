@@ -51,7 +51,6 @@ func NewNETCONFClient(info DeviceConnectionInfo) (*NETCONFClient, error) {
 		info: info,
 	}
 
-	// Connect immediately
 	if err := c.connect(); err != nil {
 		// Return the client with the error so caller can handle it
 		return c, err
@@ -109,7 +108,8 @@ func (c *NETCONFClient) markDisconnected() {
 
 // isTransportError reports whether err means the NETCONF session itself is
 // unusable (vs. an RPC-level <rpc-error>), so the connection must be redialed.
-// 同时覆盖 scrapligo 错误族与自研 core 的 ErrSessionDead（双路径共用）。
+// 除 netconfcore 的 ErrSessionDead 外，还按错误文案兜底匹配断链错误族——
+// 文案口径是历史 scrapligo 路径遗留，对任意传输实现同样适用。
 func isTransportError(err error) bool {
 	if err == nil {
 		return false
@@ -132,7 +132,6 @@ func (c *NETCONFClient) Get(ctx context.Context, path string, opts ...GetOption)
 	c.opMu.Lock()
 	defer c.opMu.Unlock()
 
-	// Apply options
 	getOpts := &GetOptions{
 		Datastore: "running",
 	}
@@ -140,7 +139,6 @@ func (c *NETCONFClient) Get(ctx context.Context, path string, opts ...GetOption)
 		opt.Apply(getOpts)
 	}
 
-	// Construct filter
 	filter := c.constructFilter(path)
 
 	backend, err := c.ensureConnected()
@@ -218,7 +216,6 @@ func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOp
 		return nil, err
 	}
 
-	// Apply options
 	setOpts := &SetOptions{
 		Datastore: "candidate",
 		Commit:    true,
@@ -233,9 +230,7 @@ func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOp
 		Changes:   make([]ChangeResult, len(changes)),
 	}
 
-	// Apply each change
 	for i, change := range changes {
-		// For NETCONF, we need to convert the change to XML
 		xmlConfig, err := c.marshalChange(change)
 		if err != nil {
 			result.Changes[i] = ChangeResult{
@@ -266,7 +261,6 @@ func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOp
 			result.Success = false
 			continue
 		}
-		// Check for NETCONF level errors (<rpc-error> in response)
 		if resp.Failed != nil {
 			result.Changes[i] = ChangeResult{
 				Change:  change,
@@ -284,7 +278,6 @@ func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOp
 		}
 	}
 
-	// Commit if requested and all changes succeeded
 	if setOpts.Commit && result.Success {
 		resp, err := backend.Commit(ctx)
 		if err != nil {
@@ -295,7 +288,6 @@ func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOp
 			result.Message = fmt.Sprintf("partial success: failed to commit: %v", err)
 			return result, err
 		}
-		// If response contains <rpc-error>, resp.Failed will be non-nil
 		if resp.Failed != nil {
 			result.Success = false
 			result.Message = fmt.Sprintf("partial success: commit failed: %v", resp.Failed)
@@ -304,13 +296,11 @@ func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOp
 	}
 
 	if !result.Success {
-		// Print any errors for debugging
 		for _, ch := range result.Changes {
 			if !ch.Success && ch.Error != nil {
 				fmt.Printf("Change failed: %v\n", ch.Error)
 			}
 		}
-		// If any change failed, return an error to caller
 		return result, fmt.Errorf("one or more changes failed to apply")
 	}
 
@@ -319,8 +309,9 @@ func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOp
 
 // Subscribe implements Client interface
 func (c *NETCONFClient) Subscribe(ctx context.Context, path string, handler func(Notification)) error {
-	// NETCONF doesn't have built-in subscription like gNMI
-	// TODO: Implement NETCONF notification subscription
+	// NETCONF has no built-in subscription channel like gNMI; pushing device
+	// state changes would mean implementing RFC5277 <create-subscription>.
+	// TODO(openspec/tasks/code-todo-backlog.md#a1): implement notification subscription.
 	return fmt.Errorf("subscription not implemented for NETCONF")
 }
 
@@ -583,10 +574,8 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		return out, encErr
 	}
 
-	// Try xml.Marshal for other types
 	output, err := xml.Marshal(change.NewValue)
 	if err == nil {
-		// Success, fix naming and return
 		outputStr := string(output)
 		repl := strings.NewReplacer(
 			"<VlanId>", "<vlan-id>",
@@ -606,7 +595,8 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		return outputStr, nil
 	}
 
-	// If xml.Marshal failed and it's a map, handle manually
+	// encoding/xml cannot marshal a map at all, so the typed-map change values
+	// the diff engine emits reach this point and are assembled entry by entry.
 	v := reflect.ValueOf(change.NewValue)
 	if v.Kind() == reflect.Ptr && !v.IsNil() {
 		v = v.Elem()
@@ -614,7 +604,6 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 	if v.Kind() == reflect.Map {
 		var builder strings.Builder
 
-		// Determine container tag based on the path
 		containerTag := "vlans"
 		if strings.HasSuffix(change.Path, "vlans") {
 			containerTag = "vlans"
@@ -625,11 +614,10 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		}
 		builder.WriteString(fmt.Sprintf("<%s>", containerTag))
 
-		// Iterate through all map entries and marshal each value individually
 		for _, key := range v.MapKeys() {
 			entryVal := v.MapIndex(key)
 			if entryVal.IsValid() && !entryVal.IsNil() {
-				// Each entry is a pointer to a struct that can be marshaled
+				// Each entry is a struct pointer, which xml.Marshal handles fine.
 				entryXML, err2 := xml.Marshal(entryVal.Interface())
 				if err2 != nil {
 					return "", fmt.Errorf("failed to marshal map entry: %w", err2)
@@ -658,7 +646,6 @@ func (c *NETCONFClient) marshalChange(change Change) (string, error) {
 		return outputStr, nil
 	}
 
-	// Still failed - return original error
 	return "", fmt.Errorf("failed to marshal config to XML: %w", err)
 }
 

@@ -13,8 +13,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// Huawei model assertion methods for VLAN testing
-
 // AssertHuaweiVlanExists asserts that a VLAN with the given ID exists using Huawei model parsing.
 func AssertHuaweiVlanExists(t *testing.T, sim *netconfsim.Simulator, vlanID uint16) {
 	t.Helper()
@@ -37,10 +35,6 @@ func AssertHuaweiVlanCount(t *testing.T, sim *netconfsim.Simulator, expected int
 	vlans := sim.RunningHuaweiVLANs()
 	assert.Len(t, vlans, expected)
 }
-
-// ============================================
-// Full VLAN attribute assertion methods
-// ============================================
 
 // AssertHuaweiVlanDescription asserts the description of a VLAN.
 func AssertHuaweiVlanDescription(t *testing.T, sim *netconfsim.Simulator, vlanID uint16, expected string) {
@@ -171,10 +165,6 @@ func AssertHuaweiVlanSuppression(t *testing.T, sim *netconfsim.Simulator, vlanID
 	assert.Equal(t, outbound, vlan.Suppression.Outbound, "VLAN %d outbound suppression mismatch", vlanID)
 }
 
-// ============================================
-// IFM Interface assertion methods
-// ============================================
-
 // AssertHuaweiInterfaceExists asserts that an interface with the given name exists.
 func AssertHuaweiInterfaceExists(t *testing.T, sim *netconfsim.Simulator, ifaceName string) {
 	t.Helper()
@@ -299,10 +289,6 @@ func AssertHuaweiSystemName(t *testing.T, sim *netconfsim.Simulator, expected st
 	sys := sim.RunningHuaweiSystem()
 	assert.Equal(t, expected, sys.SysName, "System name mismatch")
 }
-
-// ============================================
-// OpenConfig interface assertion methods
-// ============================================
 
 // AssertInterfaceExists verifies that the interface with the given name exists in the running config.
 func AssertInterfaceExists(t *testing.T, sim *netconfsim.Simulator, name string) {

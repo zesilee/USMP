@@ -22,14 +22,12 @@ type diffEngineAdapter struct {
 	de *diff.DefaultDiffEngine
 }
 
-// Diff implements the reconcile.DiffEngine interface
 func (a *diffEngineAdapter) Diff(desired, actual interface{}, path string) ([]reconcile.Change, error) {
 	var s schema.Schema = nil // not used since we have it from the manager schema loading
 	result, err := a.de.Diff(desired, actual, s)
 	if err != nil {
 		return nil, err
 	}
-	// Convert diff.Change to reconcile.Change
 	changes := make([]reconcile.Change, len(result.Changes))
 	for i, c := range result.Changes {
 		changes[i] = reconcile.Change{
@@ -93,10 +91,9 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 
 	deviceRoot := &huawei.Device{}
 
-	// Check data type and parse accordingly
 	switch data := result.Data.(type) {
 	case []byte:
-		// Try JSON first (gNMI case), then XML (NETCONF case)
+		// 首字节 '<' 判定编码：XML 来自 NETCONF，其余按 gNMI JSON 处理。
 		if len(data) > 0 && data[0] == '<' {
 			// XML format from NETCONF get-config：经驱动描述符注册表解码
 			// （DR-03/XC-02，通用引擎全字段填充；直接 xml.Unmarshal 进 ygot
@@ -117,7 +114,7 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 		return deviceRoot.Ifm.Interfaces, nil
 	}
 
-	// If it's already unmarshaled into a struct, check directly
+	// Already unmarshaled (sim / test injection).
 	if ifm, ok := result.Data.(*huawei.HuaweiIfm_Ifm_Interfaces); ok {
 		return ifm, nil
 	}
@@ -125,7 +122,6 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 		return deviceRoot.Ifm.Interfaces, nil
 	}
 
-	// Unknown data format
 	return nil, fmt.Errorf("unknown data format for ifm config: %T", result.Data)
 }
 
@@ -136,7 +132,6 @@ func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []recon
 		return err
 	}
 
-	// Convert reconcile.Change to client.Change
 	clientChanges := make([]client.Change, len(changes))
 	for i, rc := range changes {
 		var changeType client.ChangeType
@@ -159,7 +154,6 @@ func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []recon
 		}
 	}
 
-	// Apply changes with commit
 	_, err = c.Set(ctx, clientChanges, client.WithCommit(true))
 	return err
 }

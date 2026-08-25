@@ -5,8 +5,8 @@ import (
 	"time"
 )
 
-// Request contains the information needed for a reconciliation
-// It carries the device ID and the path that triggered the reconciliation
+// Request carries what a single reconciliation needs: which device, and which
+// path triggered it.
 type Request struct {
 	// DeviceID is the unique identifier of the device (typically IP address)
 	DeviceID string

@@ -1,5 +1,5 @@
 // Package ygotbridge 把 ygot 生成包的 schema（goyang yang.Entry 树）转换为框架
-// Schema IR（retire-ygot-runtime 阶段1.5，原 pkg/yang-runtime/schema/entry.go 迁出）。
+// Schema IR（retire-ygot-runtime 阶段 1.5，原 pkg/yang-runtime/schema/entry.go 迁出）。
 //
 // 本包是**构建期/测试专用**：允许 import ygot/goyang（YN-05 守护豁免面）；发布
 // 二进制的运行时闭包不得引用本包。转换语义与原 entry.go 逐字段等价，由
@@ -293,7 +293,7 @@ func listMinElements(e *yang.Entry) uint64 {
 }
 
 // LoadModuleEntries 构建期从 YANG 源目录装载模块闭包（AddPath 递归 + Read +
-// Process + ToEntry；与 tools/yanggen 装载语义一致）。schemagen 直读源用
+// Process + ToEntry；与 tools/yanggen 装载语义一致），供 schemagen 直读源使用
 // （S4：不再经 generated 包 gzip schema）。
 func LoadModuleEntries(paths, modules []string) (map[string]*yang.Entry, error) {
 	ms := yang.NewModules()

@@ -89,7 +89,6 @@ func (dq *delayingQueue) ShutDownWithDrain() {
 	dq.shutdown = true
 	dq.mu.Unlock()
 	close(dq.stop)
-	// Wait for all delayed items to be processed and drained
 	dq.base.ShutDownWithDrain()
 	dq.wg.Wait()
 }

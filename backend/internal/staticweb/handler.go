@@ -1,7 +1,7 @@
 // Package staticweb 提供发布包内前端静态站的极简 HTTP 处理器。
 //
 // 行为对齐 frontend/nginx.conf 的 try_files $uri /index.html：
-// 命中真实文件直接返回，其余一律回 index.html（Vue history 路由 SPA fallback），
+// 命中真实文件直接返回，其余一律回 index.html（history 路由 SPA fallback），
 // /healthz 返回 200 供容器健康检查。零第三方依赖（R10），发布包解压即用，
 // 目标镜像无需预装 nginx。
 package staticweb

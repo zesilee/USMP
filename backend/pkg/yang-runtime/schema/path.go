@@ -21,7 +21,7 @@ func NewPathResolver(schema Schema) *PathResolver {
 // Supports paths like: "/interfaces/interface[name='eth0']/config/description"
 // Returns the node and whether it was found
 func (r *PathResolver) Resolve(path string) (Node, bool) {
-	// Fast path: check cache in schema first
+	// Fast path: the schema keeps a prebuilt path cache.
 	if node, ok := r.schema.Path(path); ok {
 		return node, ok
 	}
@@ -31,15 +31,13 @@ func (r *PathResolver) Resolve(path string) (Node, bool) {
 		return nil, false
 	}
 
-	// Start from root of first module
 	var current Node
 	modules := r.schema.Modules()
 	if len(modules) == 0 {
 		return nil, false
 	}
 
-	// First component is module namespace/name
-	// Find module with matching name
+	// The first component is the module namespace/name.
 	for _, m := range modules {
 		if m.Name() == components[0] {
 			current = m.Root()
@@ -48,7 +46,7 @@ func (r *PathResolver) Resolve(path string) (Node, bool) {
 	}
 
 	if current == nil {
-		// Try first module root
+		// No module matched: fall back to the first module's root.
 		current = modules[0].Root()
 	}
 
@@ -56,7 +54,6 @@ func (r *PathResolver) Resolve(path string) (Node, bool) {
 		return current, true
 	}
 
-	// Resolve remaining components
 	for _, comp := range components[1:] {
 		// Strip list key predicate if present: "name='eth0'" → "name"
 		name := comp
@@ -126,7 +123,6 @@ func ParseListKey(predicate string) (string, string, error) {
 	}
 	key := strings.TrimSpace(parts[0])
 	value := strings.TrimSpace(parts[1])
-	// Strip quotes
 	value = strings.Trim(value, "'\"")
 	return key, value, nil
 }
@@ -157,7 +153,7 @@ func PathWithoutKeys(path string) string {
 			result.WriteRune(c)
 		}
 	}
-	// Clean up double slashes
+	// Removing a predicate can leave "//" behind.
 	cleanPath := strings.ReplaceAll(result.String(), "//", "/")
 	return cleanPath
 }

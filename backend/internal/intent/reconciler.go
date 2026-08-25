@@ -19,7 +19,7 @@ import (
 // Reconciler is the C3 reconciler for BusinessVlanService intents (BIO-01):
 // fetch CR → decode+validate (admission-by-watch backstop, BIC-03) → expand
 // (BIO-02) → status writeback (BIC-04). The cross-device 2PC push (BIO-03)
-// plugs in behind the expansion (tasks 波次 7).
+// runs behind the expansion once a Pusher is wired (WithPush).
 type Reconciler struct {
 	client client.Client
 	now    func() time.Time

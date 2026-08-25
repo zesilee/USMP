@@ -46,7 +46,6 @@ func (s *Server) setupCORS() {
 }
 
 func (s *Server) setupRoutes() {
-	// Device endpoints
 	reconcileHandler := NewReconcileHandler(s.manager)
 	deviceHandler := NewDeviceHandler(s.manager)
 	s.router.Get("/api/v1/devices", deviceHandler.ListDevices)
@@ -64,7 +63,6 @@ func (s *Server) setupRoutes() {
 	// Operation audit log (config-delivery records + live reconcile outcome)
 	s.router.Get("/api/v1/logs", NewAuditHandler(s.manager).ListLogs)
 
-	// Configuration endpoints
 	configHandler := NewConfigHandler(s.manager)
 	// 攒批变更集（config-changeset）：静态段 "changeset" 与 ":ip" 参数段
 	// 在 beego 路由树共存（静态优先，行为由 beego_router_equiv_test 锁死），
@@ -89,7 +87,6 @@ func (s *Server) setupRoutes() {
 	s.router.Post("/api/v1/business/vlan-services", bizHandler.Apply)
 	s.router.Delete("/api/v1/business/vlan-services/:name", bizHandler.Delete)
 
-	// YANG model endpoints
 	yangHandler := NewYangHandler(s.manager)
 	s.router.Get("/api/v1/yang/modules", yangHandler.ListModules)
 	s.router.Get("/api/v1/yang/left-tree", yangHandler.LeftTree)

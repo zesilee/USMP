@@ -1,6 +1,6 @@
-// json_emit.go — 生成式 RFC7951 JSON 方法（阶段3 任务3.1，codegen-conventions §8）。
+// json_emit.go — 生成式 RFC7951 JSON 方法（阶段 3 任务 3.1，codegen-conventions §8）。
 // 每 struct 生成 MarshalJSON/UnmarshalJSON，每 union 生成 marshal/unmarshal 包级
-// helper；规则（模块限定键/64位字符串化/枚举值域名/[null]/list数组化）全部烘焙进
+// helper；规则（模块限定键/64 位字符串化/枚举值域名/[null]/list 数组化）全部烘焙进
 // 生成代码，运行期零 schema、零反射引擎（D2）。
 package main
 
@@ -17,7 +17,7 @@ func jsonKey(s *Struct, f *Field) string {
 	return f.YangName
 }
 
-// is64 reports 64 位整型（RFC7951 §6.1 字符串化）。
+// is64 reports whether elem is a 64-bit integer type（RFC7951 §6.1 字符串化）。
 func is64(elem string) bool { return elem == "int64" || elem == "uint64" }
 
 // emitJSONMethods renders MarshalJSON + UnmarshalJSON for one struct.

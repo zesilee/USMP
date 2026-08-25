@@ -176,14 +176,14 @@ type AddDeviceRequest struct {
 	Role string `json:"role,omitempty"`
 }
 
-// DeviceStatus is a device plus its live online status (Stack B REST替代
+// DeviceStatus is a device plus its live online status (Stack B REST 替代
 // BusinessSwitch 控制器的 CR-status 探活).
 type DeviceStatus struct {
 	DeviceInfo
 	Online bool `json:"online"`
 }
 
-// probeOnline reports whether a device is reachable, via the ClientPool直连
+// probeOnline reports whether a device is reachable, via the ClientPool 直连
 // (Get + IsConnected). A connection error is treated as offline (R08).
 func probeOnline(pool client.ClientPool, d DeviceInfo) bool {
 	info := toConnInfo(d)
@@ -301,7 +301,6 @@ func (h *DeviceHandler) AddDevice(c *beecontext.Context) {
 		return
 	}
 
-	// Try to create client and connect immediately
 	pool := h.manager.GetClientPool()
 	_, err := pool.Get(toConnInfo(added))
 	if err != nil {
@@ -332,7 +331,6 @@ func (h *DeviceHandler) RemoveDevice(c *beecontext.Context) {
 		}
 	}
 
-	// Close the connection
 	pool := h.manager.GetClientPool()
 	pool.Release(ip)
 
@@ -388,7 +386,6 @@ func (h *DeviceHandler) GetStatus(c *beecontext.Context) {
 		return
 	}
 
-	// Get client from pool and check connection status
 	pool := h.manager.GetClientPool()
 
 	cli, err := pool.Get(client.DeviceConnectionInfo{

@@ -481,7 +481,6 @@ func encodeLeaf(b *strings.Builder, tag string, v reflect.Value, ns string) erro
 			b.WriteString(openEl + escape(name) + closeEl)
 			return nil
 		}
-		// 退回整数（合成值/未映射值）
 		fmt.Fprintf(b, "%s%d%s", openEl, v.Int(), closeEl)
 		return nil
 	}

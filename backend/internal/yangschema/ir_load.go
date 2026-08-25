@@ -19,8 +19,8 @@ import (
 //go:embed schema.ir.gz
 var schemaIRBlob []byte
 
-// loadFromIR decodes the checked-in IR blob into the framework schema tree.
-// 阶段1.4 切换 Load() 数据源到本函数；切换后旧链路仅存活于对拍测试。
+// loadFromIR decodes the embedded IR blob into the framework schema tree.
+// 阶段 1.4 起 Load() 的数据源即本函数，旧链路只剩对拍测试在用。
 func loadFromIR() (schema.Schema, error) {
 	return schema.DecodeIR(schemaIRBlob)
 }

@@ -19,7 +19,6 @@ type diffEngineAdapter struct {
 	de *diff.DefaultDiffEngine
 }
 
-// Diff implements the reconcile.DiffEngine interface
 func (a *diffEngineAdapter) Diff(desired, actual interface{}, path string) ([]reconcile.Change, error) {
 	var s schema.Schema = nil
 	result, err := a.de.Diff(desired, actual, s)
@@ -88,7 +87,8 @@ func (d *deviceClient) Get(ctx context.Context, deviceID string) (interface{}, e
 	switch data := result.Data.(type) {
 	case []byte:
 		if len(data) > 0 && data[0] == '<' {
-			// XML format from NETCONF
+			// XML from NETCONF：直接解不动时补一层 <data> 再试，两次都
+			// 失败才报错。
 			if err := xml.Unmarshal(data, deviceRoot); err != nil {
 				wrapped := []byte(fmt.Sprintf("<data>%s</data>", string(data)))
 				if err2 := xml.Unmarshal(wrapped, deviceRoot); err2 != nil {
@@ -142,7 +142,6 @@ func (d *deviceClient) Set(ctx context.Context, deviceID string, changes []recon
 		}
 	}
 
-	// Apply changes with commit
 	_, err = c.Set(ctx, clientChanges, client.WithCommit(true))
 	return err
 }

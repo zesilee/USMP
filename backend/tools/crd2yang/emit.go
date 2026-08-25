@@ -378,7 +378,7 @@ func guard(s *apiextv1.JSONSchemaProps, path string) error {
 		}
 	}
 
-	// 跨类型约束白名单：约束只允许挂在"对口类型"上，挂错类型即 fail-fast——
+	// 跨类型约束白名单：约束只允许挂在「对口类型」上，挂错类型即 fail-fast——
 	// 否则会在各 emit 分支被静默丢弃（C2Y-03「SHALL NOT 静默丢弃」）。
 	typed := []struct {
 		bad  bool

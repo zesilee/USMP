@@ -141,7 +141,6 @@ func DefaultClientFactory(defaultTimeout time.Duration) ClientFactory {
 			// （retire-idle-scaffolds），显式错误优于伪装成功（R08）。
 			return nil, fmt.Errorf("gNMI 尚未实现（规划能力），设备 %s 请使用 NETCONF", info.IP)
 		case ProtocolAUTO:
-			// Auto-detect based on port
 			if info.Port == 0 {
 				info.Port = 830
 				info.Protocol = ProtocolNETCONF
@@ -157,7 +156,7 @@ func DefaultClientFactory(defaultTimeout time.Duration) ClientFactory {
 				// gNMI 端口显式未实现（规划能力，见 ProtocolGNMI 分支）。
 				return nil, fmt.Errorf("gNMI 尚未实现（规划能力），设备 %s:9339 请使用 NETCONF(830)", info.IP)
 			default:
-				// Default to NETCONF
+				// Unknown port: NETCONF is the only implemented protocol (R08 降级).
 				info.Protocol = ProtocolNETCONF
 				c, err := NewNETCONFClient(info)
 				return c, err

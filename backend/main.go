@@ -32,9 +32,8 @@ import (
 // @description     响应统一信封 {code,message,data,success}；此规格是前端 TS 类型的唯一真源（勿手改生成物）。
 // @BasePath        /api/v1
 func main() {
-	// Build the YANG schema tree from generated ygot models (huawei + usmp business)
-	// so the manager's schema tree is populated (fixes the empty-schema gap).
-	// Device NETCONF capabilities narrow the usable module set at runtime.
+	// The manager needs a populated schema tree; device NETCONF capabilities only
+	// narrow the usable module set at runtime, they never supply attribute schema.
 	yangSchema, err := yangschema.Load()
 	if err != nil {
 		log.Fatalf("failed to load YANG schema: %v", err)
@@ -44,7 +43,6 @@ func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	// Create and start the yang-controller-runtime Manager
 	mgr := manager.New(
 		manager.WithDefaultTimeout(10*time.Second),
 		manager.WithSchema(yangSchema),
@@ -56,8 +54,6 @@ func main() {
 		manager.WithDeviceStore(buildDeviceStore(ctx)),
 	)
 
-	// Create and register the Huawei VLAN controller
-	// The VLAN controller reconciles VLAN configuration every 5 minutes
 	cs := mgr.GetConfigStore()
 	clientPool := mgr.GetClientPool()
 
@@ -65,8 +61,7 @@ func main() {
 	// USMP_NATIVE_LEADER_ELECTION=1 且集群可达时生效；否则透传零行为变化）。
 	nativeGate := buildNativeGate()
 
-	// Periodic source polls all configured devices for reconciliation
-	// Pass nil for deviceIDs to indicate all devices that have desired config
+	// Periodic sources tick every device the device store lists, scoped to one path.
 	vlanCtrl := controller.ControllerManagedBy("huawei-vlan").
 		WithReconciler(vlan.New(cs, clientPool, mgr.GetDeviceStore())).
 		WithSource(nativeGate.Wrap(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), "/vlan:vlan/vlan:vlans"))).
@@ -77,8 +72,6 @@ func main() {
 	mgr.AddController(vlanCtrl)
 	log.Printf("Huawei VLAN controller registered successfully")
 
-	// Create and register the Huawei IFM controller
-	// The IFM controller reconciles interface configuration every 5 minutes
 	ifmCtrl := controller.ControllerManagedBy("huawei-ifm").
 		WithReconciler(ifm.New(cs, clientPool, mgr.GetDeviceStore())).
 		WithSource(nativeGate.Wrap(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), "/ifm:ifm/ifm:interfaces"))).
@@ -89,8 +82,6 @@ func main() {
 	mgr.AddController(ifmCtrl)
 	log.Printf("Huawei IFM controller registered successfully")
 
-	// Create and register the Huawei System controller
-	// The System controller reconciles system configuration every 5 minutes
 	systemCtrl := controller.ControllerManagedBy("huawei-system").
 		WithReconciler(system.New(cs, clientPool, mgr.GetDeviceStore())).
 		WithSource(nativeGate.Wrap(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), "/system:system"))).
@@ -101,8 +92,8 @@ func main() {
 	mgr.AddController(systemCtrl)
 	log.Printf("Huawei System controller registered successfully")
 
-	// Create and register the Huawei 公网 BGP controller（容器根模块，/bgp:bgp）。
-	// Name 含 "bgp" → manager.TriggerReconcile 按 ControllerToken="bgp" 路由命中。
+	// 公网 BGP：容器根模块（/bgp:bgp）。Name 含 "bgp" → manager.TriggerReconcile
+	// 按 ControllerToken="bgp" 路由命中。
 	bgpCtrl := controller.ControllerManagedBy("huawei-bgp").
 		WithReconciler(bgp.New(cs, clientPool, mgr.GetDeviceStore())).
 		WithSource(nativeGate.Wrap(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), bgp.BgpPath))).
@@ -113,9 +104,9 @@ func main() {
 	mgr.AddController(bgpCtrl)
 	log.Printf("Huawei BGP controller registered successfully")
 
-	// Create and register the Huawei network-instance controller（容器根 + 嵌套 list，
-	// /ni:network-instance）——BGP 二期 peering 唯一硬前置。Name 含 "network-instance"
-	// → manager.TriggerReconcile 按 ControllerToken="network-instance" 路由命中。
+	// network-instance：容器根 + 嵌套 list（/ni:network-instance），BGP 二期 peering
+	// 唯一硬前置。Name 含 "network-instance" → manager.TriggerReconcile 按
+	// ControllerToken="network-instance" 路由命中。
 	niCtrl := controller.ControllerManagedBy("huawei-network-instance").
 		WithReconciler(networkinstance.New(cs, clientPool, mgr.GetDeviceStore())).
 		WithSource(nativeGate.Wrap(source.NewPeriodicSourceWithLister(5*time.Minute, mgr.GetDeviceStore(), networkinstance.NetworkInstancePath))).
@@ -155,7 +146,6 @@ func main() {
 		log.Printf("Failed to register business intent controller: %v", err)
 	}
 
-	// Start the manager - loads schema, starts all controllers
 	go intent.StartCache(ctx, intentCache)
 
 	if err := mgr.Start(ctx); err != nil {
@@ -163,14 +153,12 @@ func main() {
 	}
 	log.Printf("YANG Controller Runtime started successfully")
 
-	// 启动Gin API服务器
 	server := api.NewServer(mgr)
 	log.Printf("Starting server on :8080")
 	if err := server.Run(":8080"); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}
 
-	// Stop manager on exit
 	mgr.Stop()
 }
 

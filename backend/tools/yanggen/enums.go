@@ -9,8 +9,8 @@ import (
 )
 
 // registerEnum registers an enumeration type and returns its E_ type name.
-// typedef enum → E_<CamelCase(使用方叶所属模块)>_<CamelCase(typedef名)>（union
-// 内追加 _Enum）；内联 enumeration → E_<宿主struct>_<CamelCase(叶名)>。
+// typedef enum → E_<CamelCase(使用方叶所属模块)>_<CamelCase(typedef 名)>（union
+// 内追加 _Enum）；内联 enumeration → E_<宿主 struct>_<CamelCase(叶名)>。
 func (b *builder) registerEnum(hostStruct string, e *yang.Entry, t *yang.YangType, inUnion bool) string {
 	var name string
 	if t.Name != "" && t.Name != "enumeration" {
@@ -62,8 +62,8 @@ func (b *builder) registerEnum(hostStruct string, e *yang.Entry, t *yang.YangTyp
 	return name
 }
 
-// registerIdentity registers an identityref enum: E_<CamelCase(基identity定义
-// 模块)>_<基identity名（不做 CamelCase）>；值 = 全部派生 identity，字典序编号
+// registerIdentity registers an identityref enum: E_<CamelCase(基 identity 定义
+// 模块)>_<基 identity 名（不做 CamelCase）>；值 = 全部派生 identity，字典序编号
 // 自 1（UNSET=0），每值携带其定义模块（RFC7951 §6.8 DefiningModule）。
 func (b *builder) registerIdentity(t *yang.YangType) string {
 	base := t.IdentityBase
@@ -104,7 +104,7 @@ func identityModule(id *yang.Identity) string {
 // 在 mapType 先行解析到目标）。**同型折叠**（冻结自 ygot 行为）：全部成员映射
 // 到同一 Go 类型时不生成接口，直接用该类型（string|string 的 ip 地址类 typedef
 // 全走此路径——huawei 闭包 265 处 union 叶折叠后仅剩 6 个真接口）；异型才生成
-// 接口 <宿主struct>_<CamelCase(叶名)>_Union + 包装类型。
+// 接口 <宿主 struct>_<CamelCase(叶名)>_Union + 包装类型。
 // 返回 (Go 类型, 是否指针标量, JSON 分类)。
 func (b *builder) registerUnion(hostStruct string, e *yang.Entry, t *yang.YangType) (string, bool, FieldKind) {
 	var members []string

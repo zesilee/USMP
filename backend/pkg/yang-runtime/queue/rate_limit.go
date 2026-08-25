@@ -43,13 +43,12 @@ func (rl *ItemExponentialFailureRateLimiter) When(item interface{}) time.Duratio
 	failures := rl.failures[item]
 	rl.failures[item] = failures + 1
 
-	// Calculate delay: base * 2^failures clamped at maxDelay
 	delay := time.Duration(float64(rl.baseDelay) * math.Pow(2, float64(failures)))
 	if delay > rl.maxDelay {
 		delay = rl.maxDelay
 	}
 
-	// Add jitter
+	// Jitter spreads the retries of items that failed at the same instant.
 	if rl.jitterFactor > 0 {
 		jitter := 1.0 + rl.rng.Float64()*rl.jitterFactor
 		delay = time.Duration(float64(delay) * jitter)
@@ -142,7 +141,7 @@ func (rl *BucketRateLimiter) When(item interface{}) time.Duration {
 	elapsed := now.Sub(rl.last)
 	rl.last = now
 
-	// Add tokens based on elapsed time
+	// Refill for the time that passed since the previous call.
 	rl.tokens += elapsed.Seconds() * rl.limit
 	if rl.tokens > rl.capacity {
 		rl.tokens = rl.capacity
@@ -153,7 +152,7 @@ func (rl *BucketRateLimiter) When(item interface{}) time.Duration {
 		return 0
 	}
 
-	// Need to wait for a token
+	// Bucket is short of a full token: wait until it refills to one.
 	waitSeconds := (1.0 - rl.tokens) / rl.limit
 	return time.Duration(waitSeconds * float64(time.Second))
 }

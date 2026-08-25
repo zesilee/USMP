@@ -92,7 +92,6 @@ func (s *InMemoryConfigStore) ListDevices() ([]string, error) {
 // - Schema loading and caching
 // - Client connection pool
 // - Controller registration and starting
-// - Plugin management
 type Manager interface {
 	// Start starts the manager and all registered controllers
 	Start(ctx context.Context) error
@@ -152,14 +151,14 @@ func New(opts ...Option) *DefaultManager {
 
 	var s schema.Schema
 	if options.Schema != nil {
-		// Pre-built schema (e.g. from generated ygot models) takes precedence.
+		// An injected schema (build-time IR blob) takes precedence.
 		s = options.Schema
 	} else {
-		// Empty; may be loaded from SchemeDir in Start.
+		// Nothing injected: start from an empty tree.
 		s = schema.NewSchema()
 	}
 
-	// Desired-config store: TTL+LRU cache, ttl=1min, cleanup every 5min.
+	// Desired-config store: TTL+LRU cache (R03, no database).
 	desiredCache := cache.NewTTLLRUCache(1000, 1*time.Minute, 5*time.Minute)
 	cs := NewInMemoryConfigStore(desiredCache)
 
@@ -194,7 +193,6 @@ func (m *DefaultManager) Start(ctx context.Context) error {
 
 	m.ctx, m.cancel = context.WithCancel(ctx)
 
-	// Start all controllers
 	for _, ctrl := range m.controllers {
 		if err := ctrl.Start(m.ctx); err != nil {
 			return err
@@ -211,21 +209,19 @@ func (m *DefaultManager) Stop() error {
 		return nil
 	}
 
-	// Stop all controllers
 	for _, ctrl := range m.controllers {
 		ctrl.Stop()
 	}
 
-	// Close all client connections
 	if err := m.clientPool.CloseAll(); err != nil {
-		// Log but continue shutdown
+		// Shutdown proceeds regardless of close failures (R08).
 	}
 
 	// Stop both cache cleanup goroutines (no leak).
 	m.desiredCache.Stop()
 	m.runningCache.Stop()
 
-	// Final flush of the audit log to disk (best-effort; already persisted per-record).
+	// Best-effort flush; the current backends persist per record and no-op here.
 	_ = m.auditStore.Flush()
 
 	m.cancel()

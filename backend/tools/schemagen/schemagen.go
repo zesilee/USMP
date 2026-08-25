@@ -3,8 +3,8 @@
 //
 // S4 起**直读 YANG 源**（gen.conf 驱动，经 ygotbridge 装载+转换），不再依赖
 // generated 包 gzip schema。与旧链路的等价性已实测冻结：叶级全字段零差异；
-// 仅两处刻意口径——①description 剥离（gzip 往返历史行为不含描述，冻结字节
-// 稳定；描述增益另行拍板）②模块 namespace 补全（gzip 往返实测恒空的 D3b
+// 仅两处刻意口径——① description 剥离（gzip 往返历史行为不含描述，冻结字节
+// 稳定；描述增益另行拍板）② 模块 namespace 补全（gzip 往返实测恒空的 D3b
 // 缺口修复，68 模块获得真实 namespace，采纳为正确性修复）。
 package main
 
