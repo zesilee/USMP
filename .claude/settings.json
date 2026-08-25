@@ -1,10 +1,4 @@
 {
-  "plugins": ["superpowers"],
-  "superpowers": {
-    "autoPlan": true,
-    "autoTest": true,
-    "autoReview": true
-  },
   "permissions": {
     "allow": [
       "Bash(git status *)",
@@ -24,7 +18,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": ".claude/hooks/pre-tool-use.sh \"$TOOL_INPUT\""
+            "command": ".claude/hooks/pre-tool-use.sh"
           }
         ]
       }
