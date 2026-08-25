@@ -1,7 +1,8 @@
 # schema-fixture-pipeline Specification
 
 ## Purpose
-TBD - created by archiving change schema-driven-test-harness. Update Purpose after archive.
+
+提供一条把后端**实际加载**的全部 YANG 模块嵌套呈现 schema 导出为版本化 JSON fixture 并入库的生成管线，使前端派生黄金（[[console-derivation-golden]]）与 schema 契约测试建立在与运行期一致的真实数据上，而非手造样例；模块集合动态发现，新接入模块自动获得 fixture，schema 形状变更经 fixture diff 显式暴露（忠实性锚点：改动生成逻辑导致 fixture 变红是预期行为，重跑 `make gen-schema-fixtures` 并核对）。
 ## Requirements
 ### Requirement: SF-01 全模块 fixture 导出
 
