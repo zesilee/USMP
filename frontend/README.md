@@ -1,6 +1,6 @@
 # USMP 前端
 
-Vue3 + Element Plus + Pinia。YANG 模型驱动动态渲染（R05）。
+React 19 + TypeScript + EviewUI（经 `src/ui` 适配层，`@ui-backend` 单点切换；外网测试走 antd 测试镜像）+ zustand。YANG 模型驱动动态渲染（R05）。测试分层权威规范见 [TESTING.md](TESTING.md)。
 
 ## 环境要求
 
@@ -17,7 +17,7 @@ npm ci           # 严格按 lockfile 安装，可复现
 
 | 命令 | 用途 | 速度 |
 |------|------|------|
-| `npm test` | 全量单测（vitest run，20 文件 93 测试） | ~9s |
+| `npm test` | 全量单测（vitest run，F1/F2 全量，约 70 文件 650+ 测试） | ~2min |
 | `npm run test:watch` | 改哪测哪，热重跑 | 即时 |
 | `npm run test:ui` | vitest 图形界面 | — |
 | `npm run test:coverage` | 覆盖率报告 | — |
@@ -42,7 +42,7 @@ make dev     # 仓库根目录：go build 后端(:8080) + vite dev 前端(:3000,
 ## 组件隔离开发 / 真浏览器测试
 
 ```bash
-npm run storybook       # YANG 动态渲染组件（DynamicForm/DynamicTable/StatusBadge）隔离展示
+npm run storybook       # YANG 动态渲染组件（FieldRenderer 等）隔离展示
 npm run test:browser    # 真 Chromium 组件测试（Vitest Browser Mode）
 ```
 
