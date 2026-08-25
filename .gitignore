@@ -65,3 +65,6 @@ backend/yanggen
 
 # 构建期生成的 schema IR blob（make gen-schema-ir；二进制不入库 R18）
 backend/internal/yangschema/schema.ir.gz
+
+# 构建期工具产物（R18，backend/tools/blacklistgen 编译物）
+backend/blacklistgen
