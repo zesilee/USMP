@@ -1,7 +1,8 @@
 # console-derivation-golden Specification
 
 ## Purpose
-TBD - created by archiving change schema-driven-test-harness. Update Purpose after archive.
+
+把前端控制台的全部派生纯函数（Tab、列、list 主键、可过滤字段、详情二级 Tab、架构树与字段级控件/必填/只读/约束/单位派生）对全模块 schema fixture 的派生结果钉为**黄金快照**，作为修改派生逻辑时的强制回归防线：黄金漂移即门禁拦截，刷新黄金必须逐模块人工核对（GD-01/SF-04）。fixture 数据地基由 [[schema-fixture-pipeline]] 提供。
 ## Requirements
 ### Requirement: GD-01 全模块控制台派生黄金覆盖
 

@@ -51,7 +51,7 @@ GenericReconciler.Reconcile ── ConfigStore.Get(desired) ◀────┘
 
 ## 6. 红线对照
 
-- **R03 无数据库**：✅ 仅内存 map + 元信息 JSON，无 MySQL/Redis/SQLite。（注意 Stack A 的 etcd 依赖是另一条与 R03 张力的路径，见 `system-architecture/design.md` §6。）
+- **R03 无数据库**：✅ 仅内存 map，无 MySQL/Redis/SQLite；持久元信息走 K8s CRD 载体（§8 口径）。历史上 Stack A 的 etcd 张力已随其 2026-07-17 物理删除而消解。
 
 ## 7. 关联
 - `go-ttl-lru-memory-cache` 技能；`yang-controller-runtime/design.md`（ConfigStore 消费方）；`config-api`（REST 读写接口，确认未接读缓存）。

@@ -42,13 +42,12 @@
 - `queue`：K8s 式工作队列——阻塞基队列 + 延迟重投（min-heap）+ 每项指数退避 + 令牌桶。`DefaultRateLimiter` = Max(exp 1s–30s, bucket 10qps/100)（`queue/rate_limit.go:175`）。
 - `predicate`：Create/Update/Delete/Generic 过滤 + And/Or/Not 组合 + Prefix/Exact/Contains 路径谓词。
 - `diff`：**基于反射**的 ygot 结构树 diff，list 按 `*Key` 字段匹配，`pruneChanges` 剔除已增删父节点的后代（`diff/diff.go`）。注意 `Diff(...schema.Schema)` 的 schema 参数实际未用。
-- `schema`：YANG schema 树 + 路径缓存 + Loader。
-- `plugin`：Validation/Mutation/Notification/ReconciliationHook 四类注册表。
+- `schema`：YANG schema 树 + 路径缓存 + Loader。（plugin 四类注册表已随 retire-idle-scaffolds 物理删除——扩展点由真实需求驱动再设计。）
 
 ## 3. 装配与数据流（Stack B，`backend/main.go`）
 
 ```
-manager.New → InMemoryConfigStore(TTL-LRU) + DefaultClientPool + plugin.Manager
+manager.New → InMemoryConfigStore(TTL-LRU) + DefaultClientPool
   → ControllerManagedBy("vlan").WithReconciler(vlan.New(cs,pool))
        .WithSource(PeriodicSource(5m, nil, "/vlan:vlan/vlan:vlans"))
        .WithPredicate(predicate.Prefix(...)).WithWorkerCount(2).Build()
@@ -67,25 +66,18 @@ Ticker → Source.EnqueueEvent → Controller.Enqueue(predicates)
 - 每 controller `workerCount` 个 worker goroutine（默认 1；main 用 2）+ 每次 `Get()` 一个临时 goroutine。
 - 队列：`sync.Mutex` + `atomic.Bool` shutdown；延迟层 min-heap 后台轮询 ≤100ms。
 - 限频器：`map` + `sync.Mutex`，指数退避带 20% 抖动。
-- schema/plugin 注册表：`sync.RWMutex`。
+- schema 注册表：`sync.RWMutex`。
 
-## 5. as-built 缺口 / 空转件（诚实标注）
+## 5. as-built 缺口 / 空转件台账（2026-08-25 审计刷新）
 
-| 缺口 | 位置 | 说明 |
-|------|------|------|
-| **plugin 从不被调用** | `plugin/*` | 四类插件可注册，但 `process`/`GenericReconciler.Reconcile`/Actor 均不调用 Validate/Mutate/Pre/PostReconcile。扩展点空转。 |
-| **schema 层运行时为空** | `main.go:22`（`SchemeDir` 未设） | diff 纯靠反射；diff 适配器传 `schema.Schema = nil`（`vlan/reconciler.go:27`）。 |
-| **ConfigStore.List/ListDevices = stub** | `manager.go:55,61` 返回 `nil,nil` | `PeriodicSource(deviceIDs=nil)` 无法枚举设备。 |
-| **Source 接口不统一** | `gnmi_sub.go`/`file.go` 的 `Stop()` 不返回 error | 不满足 `controller.Source`，无法直接传给 Builder。 |
-| **`DoneWaitGroup` 非线程安全** | `source/periodic.go:24` | 无锁 int 计数，潜在竞态（R09 风险）。 |
-| **worker 的 Get() goroutine 可能泄漏** | `controller.go:149` | stop 竞态下阻塞在 `Get()` 的 goroutine 可能存活。 |
-| **两套 Reconciler 形态并存** | `GenericReconciler` vs `actor.ActorReconciler` | 见 `actor-transaction/design.md`；后者属 legacy 栈。 |
-| **`New` 死分支** | `manager.go:116` | if/else 两支都调 `NewSchema()`。 |
+初版所列缺口多数已闭环：**plugin 空转** → 整包物理删除（retire-idle-scaffolds）；**schema 层运行时为空** → `internal/yangschema.Load` 构建 schema 树 + manager `WithSchema` 挂载（device-native-lowcode-config）；**ConfigStore.List/ListDevices stub** → 基于 `cache.Keys()` 枚举（同前）；**两套 Reconciler 并存** → Actor 栈 2026-07-17 物理删除，`GenericReconciler` 为唯一形态。
+
+初版遗留、未单独验证闭环状态的观察项（复核时以当前代码为准）：Source 接口 `Stop()` 签名不统一、`DoneWaitGroup` 无锁计数（R09 风险）、worker `Get()` goroutine 停机竞态、`manager.New` 死分支。
 
 ## 6. 扩展点
 
-用户**应当**只实现 C3 `Reconciler`（`reconcile.go:10`）。现实中 `internal/controller/*` 的「用户 reconciler」只是内嵌 `GenericReconciler` 并提供 `DeviceClient` 适配器——框架做了 diff/push 主体，故 CLAUDE.md「用户只需实现 C3」在当前代码里**被高估**：schema/plugin 基本休眠，而最庞大的 Actor/2PC 子系统根本不在 C1–C5 叙事内（见 `actor-transaction/design.md`）。
+用户只实现 C3 `Reconciler`：`internal/controller/*` 的「用户 reconciler」内嵌 `GenericReconciler` 并提供 `DeviceClient` 适配器，框架承担 diff/push 主体——与 CLAUDE.md §4 叙事一致（Actor/plugin 等叙事外子系统均已物理删除）。
 
 ## 7. 关联
 - 根 `yang-controller-runtime.md`（设计宣言，忠实基线）、`spec/openconfig-vlan-controller.md`（VLAN 控制器范例）。
-- `device-protocol/design.md`（C5）、`config-cache/design.md`（ConfigStore 后端）、`actor-transaction/design.md`（legacy 并行栈）。
+- `device-protocol/design.md`（C5）、`config-cache/design.md`（ConfigStore 后端）、`actor-transaction/design.md`（LEGACY 历史契约，载体已删）。

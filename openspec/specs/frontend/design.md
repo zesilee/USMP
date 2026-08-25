@@ -1,83 +1,42 @@
-# frontend — 前端架构设计（反向还原）
+# frontend — 前端架构设计（as-built）
 
-> **权威性**：CRD/OpenAPI-schema 驱动的动态表单为**活跃路径**；旧 `components/yang/*` 静态 YANG-schema 路径**未接路由**（死代码，迁移债 D9）。
-> **还原基准**：`main@b1cfbae`，代码根 `frontend/src/`。
+> **还原基准**：2026-08-25 配置自审计随笔刷新（原 `main@b1cfbae` Vue3 版全文已过期重写）。行为契约以同目录 `spec.md` 为权威，本文只做架构导航。
+> 历史沿革：Vue3+Element-Plus 初代 → React19+antd 重建（PR#316-#337）→ EviewUI 切换 + openinula 运行时（PR#342-#404）。详见 `docs/memory/{react-antd-rebuild,eviewui-switch-implementation}.md`。
 
 ## 1. 职责
 
-由 YANG/CRD 模型**自动渲染**设备管理界面（R05：禁止手写固定表单）：schema → 表单/表格/分组面板；编辑 → 提交 → 联动后端下发；展示设备/缓存/下发/异常状态。
+由 YANG 模型**自动渲染**设备管理界面（R05：禁止手写固定表单）：`/yang/schema` → 派生 → 表单/表格/Tab；编辑 → 变更集 preview/commit 两阶段提交联动后端下发；展示设备/缓存/下发/异常状态。
 
-## 2. 技术栈（`package.json` / `vite.config.ts`）
+## 2. 技术栈
 
-Vue 3 `^3.4` + Element Plus `^2.5` + Pinia `^3` + Axios `^1.16` + vue-router `^5` + echarts `^6`；构建 Vite `^5`（dev :3000，代理 `/api`→`:8080`）；测试 Vitest + `@vue/test-utils` + happy-dom，E2E Playwright。`main.ts` 全局注册 Pinia/router/ElementPlus。
+React 19 语法 + **openinula 运行时**（`USMP_RUNTIME` 缺省 inula，react 可切换；路由经 `@app-router` 双实现）；组件库 **EviewUI**（`@nce/eview-react`）经 `src/ui` 适配层 + `@ui-backend` 别名单点切换——生产=eview 桥、外网测试/e2e-local=antd 镜像 `src/ui/antd-backend`（EviewUI 实现包不出内网）；Tree/Tabs/Popover 为桥内自绘。状态=自研 store 薄层（`src/stores/createStore.ts`，非 Pinia/Zustand）；HTTP=axios；i18n=自研薄层（见 `ui-i18n` spec）。构建 Vite；测试 Vitest（happy-dom + Browser Mode）+ Playwright。
 
-## 3. ⚠️ 两代动态表单并存
+## 3. 核心渲染管线（模块控制台）
 
-### 3.1 活跃路径：CRD/OpenAPI 驱动
 ```
-K8s CRD OpenAPIV3Schema
-  → parseCRDSchemaToFields(schema)         utils/crdSchemaParser.ts:38
-       读 schema.properties.spec.properties，逐属性映射为 Field
-       类型映射 mapK8sTypeToFieldType:112 (enum/boolean/number/object→group/string)
-       厂商扩展 x-custom-label/group/placeholder/readonly/hidden
-  → Field[] → DynamicForm.vue                components/config/DynamicForm.vue
-       >1 分组时 el-collapse；由 pattern/min/max/required 生成校验 rules
-  → FieldRenderer.vue（按 type→el-input/-number/switch/select，group 递归自身）
-  → DynamicTable.vue（列表视图）
+GET /yang/schema（模块嵌套呈现 schema + rpc 清单）
+  → 派生纯函数（src/utils）：deriveTabs / deriveColumns（默认显示集+可用列全集）/
+      deriveKeyField / filterableFields / deriveSchemaTree / deriveDetailTabs
+  → src/form 表单核心（schema→控件树、when/must/pattern/range 数据驱动校验、list 增删改）
+  → src/ui 适配层控件（FA-01~04：业务代码禁直接 import 组件库，守护测试拦截）
+  → views/ModuleConsolePage.tsx（通用模块控制台：列表/详情/编辑/列设置/获取数据源）
 ```
-这是 router → `ConfigPage.vue` 实际走的链路。
 
-### 3.2 legacy 路径：静态 YANG-schema（未接路由）
-`components/yang/YangRenderer.vue` 由静态注册表 `types/yang-schema.ts`（`getSchemaByPath`/`getDefaultValue`/`convertKeysToKebab`）驱动，经 `YangPanel`/`YangTable`/`YangField` 渲染，直读写设备 `getConfig`/`setConfig`。**不被活跃路由引用**——待清理。
+- 派生结果由**全模块黄金快照**钉住（GD-01，`console-derivation-golden` spec；fixture 来自 `schema-fixture-pipeline`）。
+- 左树深到模块级（container+rpc 平铺入树，构建期烘焙双语 children），rpc 入口唯一在左树（`left-tree-navigation` spec）。
+- rpc 执行走 RpcExecuteTab（执行前确认+高危升级，不入缓存，`yang-rpc` spec）。
 
-## 4. 组合式函数（composables）
+## 4. 数据面
 
-- `useConfigPage.ts` — 配置页统一大脑。`useConfigPage(module)` 按硬编码 `BUSINESS_CRDS` map（`:7`，vlan/interface/route/switch→`biz.usmp.io/v1`）分支：
-  - 业务模块 → 委托 `useK8sCRD`，`getSchema()` 拉 CRD schema 再 `parseCRDSchemaToFields`（`:27`）；`listByDevice` 按 `spec.deviceID` 过滤（`:43`）。
-  - 原生模块 → `useK8sCRD('core.usmp.io','v1','nativedeviceconfigs')`，但 schema 来自后端 YANG API `GET /api/v1/yang/schema/${module}`（预建 fields，`:65`）。
-  - `useNativeModules()`（`:105`）拉 `GET /api/v1/yang/modules` 按 vendor 分组。
-- `useK8sCRD.ts` — 基于 fetch 的 `K8sClient`：list/get/create/replace/delete custom objects、`getCRD`(OpenAPI schema)、K8s watch NDJSON 流 + 3s 自动重连（`:201`）、Vue 生命周期自动 list/watch。
-- `useDeviceConfig.ts` — 旧组合式（基于 `api/crd.ts`），服务于 legacy yang/ 路径。
+- **读**：`GET /config`（后端 TTL 缓存 30s）；大 list 走服务端分页（阈值 200 双模式）；状态（config=false）只读 Tab 整树走 `<get>` 通道。
+- **写**：变更集链路 `hooks/useChangesetSubmit.ts`（preview → commit 2PC，即时下发已退役）；表单态 `hooks/useConfigForm.ts`。
+- API 客户端 `src/api`（契约由 `make gen-contract` 从 swag 生成，漂移有门禁）。
+- 历史注记：K8s CRD 前端消费链（useK8sCRD/ConfigPage/BUSINESS_CRDS）已于 2026-07（#143 及 native-config-reposition）整链退役删除，链路唯一 = Stack B 直连。
 
-## 5. API 层
+## 5. 测试
 
-- `api/index.ts` — Axios 实例，`baseURL = VITE_API_URL || http://localhost:8080/api/v1`；`listDevices` `GET /devices`、`getDeviceStatus /devices/{ip}/status`、`getConfig/setConfig GET|POST /config/{ip}/{path}`、`getSchema /schema/{path}`。对齐后端北向 `devices/config/yang` API。
-- `api/crd.ts` — 独立 Axios `baseURL=/api/crd`，含 SSE `watchConfigs`(EventSource)（legacy 路径用）。
-- `api/logs.ts` — `/api/logs`。
-- 直接 `fetch`：YANG schema/modules（`useConfigPage.ts:69,113`）、K8s API（`useK8sCRD.ts`）、`stores/menu.ts:21`。
+分层权威 `frontend/TESTING.md`：F1 纯逻辑（happy-dom）/ F2 组件 / F3 真浏览器（Select 弹层、嵌套 list、自绘 Tree/Tabs 交互；EVIEW_REAL=1 内网打真桥）/ F4 Playwright staging-smoke（`make e2e-local`，pre-push 拦截）。覆盖率棘轮 vitest thresholds。
 
-> **k8s client-node 历史**：曾集成 `@kubernetes/client-node`（commit 45ad884），后 commit 620f70c 因浏览器兼容**移除**该依赖，改写 `useK8sCRD.ts` 为浏览器原生 fetch 的 `K8sClient`，靠 kubectl proxy(dev)/后端 `/api/k8s` proxy(prod)（`getDefaultBaseUrl:140`）。**当前构建无 `@kubernetes/client-node`**。
+## 6. 关联
 
-## 6. 页面 / 路由（`router/index.ts`）
-
-| 路由 | 视图 | 说明 |
-|------|------|------|
-| `/` | Dashboard.vue | StatCard + echarts StatusChart + 日志表 |
-| `/devices` | Devices.vue | 设备列表 el-table，搜索/测连 |
-| `/config/interface\|vlan\|route` | ConfigPage.vue | props.module=`openconfig-*`，配置编辑器 |
-| `/native/:module` | ConfigPage.vue | 动态原生模块 |
-| `/logs` `/settings` | Logs/Settings.vue | |
-
-`ConfigPage.vue` = 配置编辑器：设备选择器 + `StatusBadge`(phase) + `DynamicTable`(列表) + `DetailDrawer`+`DynamicForm`(增改)；增改删经 `useConfigPage`，名字 `${device}-${module}-${Date.now()}`（`:171`）。布局 `MainLayout.vue`(Header+Sidebar+router-view)，`Sidebar.vue` 动态原生子菜单按 vendor 分组。
-
-## 7. 状态管理（仅两个 Pinia store）
-
-- `stores/device.ts` `useDeviceStore`：`devices/selectedDevice/isLoading`；getter `onlineCount/offlineCount`；action `fetchDevices`(`GET /api/devices`)/`testConnection`/`selectDevice`。
-- `stores/menu.ts` `useMenuStore`：`nativeModels/nativeMenuLoaded/isCollapsed`；`loadNativeModels`(`GET /api/v1/yang/modules`，去重+huawei 回退)；getter `groupedByVendor`。
-- 架构注记：设备/菜单态在 Pinia，但**每页 CRD 配置态在 `useConfigPage`/`useK8sCRD` 的局部 ref**，不入 store。
-
-## 8. as-built 缺口
-
-| 缺口 | 位置 |
-|------|------|
-| 两代动态表单并存，旧 yang/ 路径未接路由 | `components/yang/*`、`components/DynamicForm.vue`、`useDeviceConfig` |
-| `BUSINESS_CRDS` 模块→group 硬编码 | `useConfigPage.ts:7` |
-| K8sClient 依赖外部 proxy（dev kubectl / prod `/api/k8s`） | `useK8sCRD.ts:140` |
-
-## 9. 红线对照
-
-- **R05 YANG 自动渲染**：✅ 活跃路径 schema→表单全自动，零硬编码表单。
-- **R11/R12 反 AI 陈词滥调/emoji 图标**：暗色网管风，未见紫粉蓝渐变；图标用法建议后续按 `web-design-engineer` 复核。
-
-## 10. 关联
-- `frontend-yang-dynamic-form` 技能；`business-crd/design.md`（CRD schema 来源）；`yang-api`/`devices-api`/`config-api`（后端接口）。
+`frontend-runtime`（运行时/双后端开关）、`frontend-ui-adapter`（FA 军规）、`ui-i18n`、`left-tree-navigation`、`console-derivation-golden`、`schema-fixture-pipeline`、`yang-rpc`；后端接口 `yang-api`/`devices-api`/`config-api`/`config-changeset`。技能：`frontend-yang-dynamic-form`。

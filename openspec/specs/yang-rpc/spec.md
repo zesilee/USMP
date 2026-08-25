@@ -1,7 +1,8 @@
 # yang-rpc Specification
 
 ## Purpose
-TBD - created by archiving change yang-rpc-execution. Update Purpose after archive.
+
+为已接入模块的 YANG rpc（清计数、重启接口等运维操作）提供完整执行链路：构建期 rpcgen 从 YANG 源提取 rpc 定义与 input 叶树 → `/yang/schema` 随模块下发 → 后端 ExecuteRPC 执行（有副作用：不重试、结果不入缓存）→ 前端 rpc 执行入口（左树直达，执行前确认、高危操作升级确认）。leafref input 提供关联下拉，标签本地化只改展示不改键。
 ## Requirements
 ### Requirement: RPC-01 构建期 rpc 提取
 

@@ -1,5 +1,7 @@
 # 项目记忆索引
 
+- [.claude配置自审计](claude-config-self-audit.md) — 碰.claude配置/钩子/CLAUDE.md §6-§7前必读：/self-audit命令已交付(PR#414/#415,技能21→14)、钩子协议两坑(stdin JSON+exit 2才阻断,曾静默失效两月)、L2行级正则误伤复合命令、superpowers已摘除勿再引用、W01拦checkout main与§6.3选项A冲突待拍板
+
 - [React+antd 重建](react-antd-rebuild.md) — **已全量交付归档(2026-08-14,PR#316-#337)**：现栈React19+antd6+自研i18n薄层、适配层军规FA-01~04禁直接import antd、FE-27删键必解构、antd E2E三根因(左树data-test冒泡/Tab溢出走更多下拉/两字按钮插空格)、F3 useId撞name坑、follow-up债五条；碰前端任何文件前必读
 - [EviewUI切换实施台账](eviewui-switch-implementation.md) — **校准收敛(2026-08-18,PR#342-#367)**：闸门通过、路线乙(组件库先换on React19,运行时+全家桶推波C)、组4全24桥+14轮内网校准全绿(CAL-R14)、Table三定案(renderType枚举/行序号↔rowKey/render行数据在第4参rawData)、Tabs/Tree交互移交F3(happy-dom同步死循环)、探针方法论；**组5已交付(PR#368-#370,@ui-backend单点切换+antd镜像分流+icons全命中,终态CAL-R16全绿)**；**组6.1 F3已收敛(十轮R1-R10终态4/4全绿:cWRP死循环=key重挂/Tree选中=window委托+名称锚/expand状态类误伤=四轮真凶)**；**已全量交付归档(2026-08-20,PR#342-#404)**：波C=自研store拍板+@app-router双实现+USMP_RUNTIME缺省inula(21/21验收)、组7 E2E十三轮方法论、三大自绘、双后端双运行时开关体系；**收尾波(2026-08-20,PR#406)：列头筛选债清(桥自绘ColFilter)+外网e2e门禁空转债清(SEL双口径E2E_UI_BACKEND=antd+smoke脚本双bug)**；**NCE目视对齐首轮(2026-08-24,PR#408)：冻结列退役→sticky !important、列0宽=标题测宽、控件等宽三层病灶+前缀通配误伤「+」事故、探针先行方法论(C1-C4)、内网一键重部署脚本；未完项=openspec/tasks/frontend-nce-parity-r2.md**；碰前端运行时/桥/测试口径前必读
 - [EviewUI/openInula迁移调研](eviewui-inula-migration.md) — **已定案且缺料全闭环(2026-08-17,含全量24组件矩阵)**：全家桶拍板、alias实测=require("react")构建期别名即可、inula-X三段式同构zustand、EviewUI peer是horizon非react、inula-intl两头通吃t()零改动、inula-router是v5 API、**半受控是全库地基风险**(真受控仅Radio/Switch)、左树=Tree(NCE截图实证翻案)、data-test全库不透传、令牌注入已通(CSS变量覆盖--brand-*零编译,勿用过滤脚本采非类型包)、适配层重估1300~2200行；做EviewUI/换库/运行时工作前必读，全文 docs/research/{eviewui-inula-migration,eviewui-component-matrix}.md
@@ -16,6 +18,7 @@
 - [schema驱动测试地基](schema-driven-test-harness.md) — 改前端派生逻辑/加YANG模块/碰schema契约前必读：fixture导出+68模块派生黄金已交付(PR#223)、SF-03忠实性锚点(改field_gen会红是对的,重跑gen-schema-fixtures)、黄金只记派生结论不含i18n、cap=9截断follow-up、后续三步(设备一致性矩阵/E2E瘦身/真机门)
 
 - [换机器环境清单](server-migration-env-checklist.md) — 迁服务器/新环境首跑必读：迁移会丢 gh 二进制(→push 直接炸)、node_modules 半旧(→前端测试全灭)、Playwright 要装两套浏览器(1217+1228)、hooksPath 绝对路径误报；含全绿基线与容器 unhealthy 误报解释
+- [分支同步与大删除门禁坑](branch-sync-and-bulk-delete-gotchas.md) — 做大清理/PR分支同步/写合入自动化前必读：PR同步main必走服务端update-branch(本地merge commit过不了commit-msg钩子)、大删除拆多个基于main的并行PR(纯删除档也只有6000)、大pull后必npm ci+gen-schema-ir、`gh pr merge \| tail`吞退出码假成功
 
 - [状态读<get>通道](state-read-get-channel.md) — 做状态相关功能/真机接入前必读：config=false 显示链路已交付(PR#219/#220)、四坑(config壳归一化/payload深层剥除/scrapligo filter双包/vlan无status叶)、只读Tab整树走<get>是单行读约定的合法例外(真机get-config拒state节点,PR#282)、coverage误提交存量债
 - [节点级设备能力协商](device-node-capability.md) — 接真机/新设备型号/能力协商二期前必读：运行时被动学习+快速失败+FE-24占位态已交付(PR#284-286)、Get吞业务rpc-error病灶已修、swag注释隔断坑、能力查询必须Peek不拨号、后台push会被杀、deviations二期捷径待真机capabilities回传
