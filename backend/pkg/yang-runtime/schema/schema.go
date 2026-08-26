@@ -83,18 +83,18 @@ func (s *DefaultSchema) Path(path string) (Node, bool) {
 	return node, ok
 }
 
-// Validate implements Schema interface
+// Validate implements Schema interface: it resolves the path to a schema node
+// and runs the IR-driven constraint checks (pattern/range/length/min-elements)
+// against the config subtree. An unknown path fails fast rather than passing
+// unvalidated config through.
+//
+// 语义子集与冻结项见本包 validate.go 的包注释（YN-04）。
 func (s *DefaultSchema) Validate(path string, config interface{}) error {
-	_, ok := s.Path(path)
+	node, ok := s.Path(path)
 	if !ok {
 		return fmt.Errorf("schema: path %q not found in schema", path)
 	}
-	// Path existence is the only check here — real YANG constraint validation
-	// (when/must/pattern/range) lives in pkg/yang-runtime/validate, so this
-	// interface channel has stayed a stub.
-	// TODO(openspec/tasks/code-todo-backlog.md#a2): wire in validate, or drop
-	// this method from the interface.
-	return nil
+	return ValidateObject(node, config)
 }
 
 // defaultNode is the base implementation of Node
