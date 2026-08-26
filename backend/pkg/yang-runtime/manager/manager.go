@@ -3,6 +3,7 @@ package manager
 import (
 	"context"
 	"fmt"
+	"log"
 	"strings"
 	"time"
 
@@ -214,7 +215,10 @@ func (m *DefaultManager) Stop() error {
 	}
 
 	if err := m.clientPool.CloseAll(); err != nil {
-		// Shutdown proceeds regardless of close failures (R08).
+		// Shutdown proceeds regardless of close failures (R08), but the failure
+		// still has to surface: a pool that cannot close leaks sessions on the
+		// device side, and silence here leaves that undiagnosable.
+		log.Printf("manager: client pool close during shutdown failed (continuing): %v", err)
 	}
 
 	// Stop both cache cleanup goroutines (no leak).

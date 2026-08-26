@@ -2,6 +2,7 @@ package source
 
 import (
 	"context"
+	"log"
 	"time"
 
 	"github.com/fsnotify/fsnotify"
@@ -83,8 +84,11 @@ func (s *FileSource) run(ctx context.Context) {
 			if !ok {
 				return
 			}
-			// Watcher errors are non-fatal: keep watching (R08).
-			_ = err
+			// Watcher errors are non-fatal: keep watching (R08). They must be
+			// logged though — a degraded watch (inotify limit, vanished mount)
+			// otherwise shows up only as "edited the file, nothing happened",
+			// with no trace of why the source went deaf.
+			log.Printf("file-source: watcher error on %s (still watching): %v", s.filePath, err)
 		}
 	}
 }
