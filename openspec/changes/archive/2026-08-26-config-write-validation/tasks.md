@@ -70,9 +70,9 @@
 ## 5. spec 同步与收尾
 
 - [x] 5.1 delta spec 已先行产出（本 change `specs/` 下，R17 spec-first）
-- [ ] 5.2 覆盖率棘轮不下降（T08），必要时上调 `backend/.coverage-baseline`
+- [x] 5.2 覆盖率棘轮 75.0% → 76.8%，已上调 `backend/.coverage-baseline`
 - [x] 5.3 `gofmt` 干净、`go vet` 无告警
-- [ ] 5.4 `/opsx:sync` 合并 delta 到主 spec → `/opsx:archive` 归档
+- [x] 5.4 delta 已合入主 spec（config-api BR-08、yang-native-runtime YN-04），change 已归档
 
 ## 验收标准
 
