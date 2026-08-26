@@ -3,11 +3,13 @@ id: code-todo-backlog
 title: 代码内 TODO 台账（注释清理重构收割）
 status: pending
 priority: low
-branch: (未开工——各项开工时另立 worktree/change)
+branch: (A 段未开工；B 段已于 worktree-fix-observability-gaps 收口)
 worktree: (无活跃)
 change: (按项另立)
-updated: 2026-08-25
+updated: 2026-08-26
 source: comment-cleanup 全仓注释清理重构（8 批子代理，256 个非测试源文件）
+b_done: 2026-08-26 —— B1/B2/B4 三处静默吞错误已补日志（各带回归用例），
+  B3 经 spec BIO-05 定性为契约、加锁定用例防误改，B5 生成器笔误已修并重生成
 ---
 
 ## 目标
@@ -54,47 +56,61 @@ source: comment-cleanup 全仓注释清理重构（8 批子代理，256 个非�
 `frontend/src/ui/eview/components/structure.tsx:313`（`expandable` 行为原称「tasks 5.1
 已登记、行为暂缺」，实际 `flatten` 已实现 `defaultExpandAllRows`）。
 
-## B. 注释清理途中发现的存量代码问题（本次刻意未改）
+## B. 注释清理途中发现的存量代码问题 —— ✅ 全部收口（2026-08-26）
 
-> 本次重构铁律是「只动注释」，以下问题只记录、不修。每条都需要单独判断是缺陷还是有意为之。
+> 原记录是「只记不修」，因为注释清理那一轮的铁律是不动代码。本段已单独立项修完，
+> 每条按 T07 先写复现回归用例（红）再修（绿）。
 
-### B1. Manager.Stop 静默吞掉 CloseAll 错误
+### B1. Manager.Stop 静默吞掉 CloseAll 错误 —— ✅ 已修
 
-- 位置：`backend/pkg/yang-runtime/manager/manager.go:216`
-- 形态：`if err := m.clientPool.CloseAll(); err != nil { }` —— 空块，原注释写的是
-  「Log but continue shutdown」，但块内没有任何 log 调用。
-- 判断：R08 要求异常必须降级处理，「继续关停」本身没问题，但错误完全不落地
-  会让关停期的连接池故障不可观测。建议补 log。
+- 位置：`backend/pkg/yang-runtime/manager/manager.go`
+- 病灶：`if err := m.clientPool.CloseAll(); err != nil { }` 是空块，注释写着
+  「Log but continue shutdown」却一行 log 都没有。连接池关不干净会在设备侧留下
+  悬挂会话，而这个失败完全不可观测。
+- 处置：补 `log.Printf("manager: client pool close during shutdown failed …")`。
+  「继续关停」的降级语义（R08）保持不变，只是错误不再蒸发。
+- 回归：`manager_stop_logging_test.go` —— 失败必落日志 + 成功不刷噪声（双向锁定）。
 
-### B2. file source 的 watcher 错误同样只 `_ = err`
+### B2. file source 的 watcher 错误同样只 `_ = err` —— ✅ 已修
 
-- 位置：`backend/pkg/yang-runtime/source/file.go:86`
-- 形态：原注释「Log error but continue」，代码只有 `_ = err`。
-- 判断：同 B1，属可观测性缺口。
+- 位置：`backend/pkg/yang-runtime/source/file.go`
+- 病灶：同 B1。监听退化（inotify 上限、挂载点消失）后事件源静默失聪，
+  现象是「改了文件没反应」且无任何线索。
+- 处置：补 `log.Printf("file-source: watcher error on %s (still watching) …")`。
+- 回归：`file_watcher_error_test.go` —— 错误落日志 + 报错后监听协程仍存活。
+  日志写在独立协程，用例用带锁缓冲接收，`-race` 下干净（R09）。
 
-### B3. desired 为 nil 时不触发删除
+### B3. desired 为 nil 时不触发删除 —— ✅ 定性为契约，非缺陷
 
-- 位置：`backend/pkg/yang-runtime/reconcile/reconcile.go:91`
-- 形态：`desired == nil` 直接返回成功，不做任何对齐动作。
-- 判断：**需要确认设计意图**。若「desired 为 nil 应触发删除」才是本意，这就是逻辑
-  缺口而非注释缺口。注意声明式通道刻意删不了、删除走独立 DELETE 命令通道
-  （见 [[config-delete-semantics]]），所以现状很可能是有意为之——但原注释自相
-  矛盾（一句说「应被删除」，下一句说「已经没了就不用动」），值得确认后把结论
-  写死进注释。
+- 位置：`backend/pkg/yang-runtime/reconcile/reconcile.go`
+- 结论：**有意为之**。`openspec/specs/business-intent-orchestration/spec.md` BIO-05
+  写死「删除请求 SHALL 触发展开为 DELETE 命令通道调用（声明式通道不承载删除）」。
+  同见 [[config-delete-semantics]]。
+- 为什么容易误判：diff 引擎里确实有 `desiredNil && !actualNil → DeleteChange`
+  分支（`diff/diff.go`），单看那段很容易得出「对账应该能删」，进而把这里的提前
+  返回当逻辑缺口"修"掉。真那么改，**任何一次 desired 过期或读取落空都会被翻译
+  成删真机配置**。
+- 处置：把结论连同 BIO-05 锚点写死进注释；补锁定用例
+  `reconcile_desired_absent_test.go`（断言不回读设备、不进 diff，另设对照组
+  确认 desired 存在时正常走完整链路）。
 
-### B4. 库代码里的裸 fmt.Printf 调试残留
+### B4. 库代码里的裸 fmt.Printf 调试残留 —— ✅ 已修
 
-- 位置：`backend/pkg/yang-runtime/client/netconf.go:298`（`Set` 失败路径）
-- 形态：`fmt.Printf("Change failed: %v\n", ch.Error)` 直打 stdout。
-- 判断：库代码不该直接写 stdout，建议改走 logger 或删除。
+- 位置：`backend/pkg/yang-runtime/client/netconf.go`（`Set` 失败路径）
+- 病灶：`fmt.Printf("Change failed: %v\n", ch.Error)` 直占 stdout——绕过进程日志
+  配置（无时间戳、不可重定向分级），且与全仓一律 `log.Printf` 的约定不一致。
+- 处置：改为 `log.Printf("netconf: %s change %s failed: …")`，并补上设备 IP 与
+  变更路径——聚合错误只说「有变更失败」，哪条路径因何而废原先只能靠猜。
+- 回归：`netconf_set_failure_logging_test.go` —— 失败明细带路径落日志 +
+  全成功时不刷噪声。
 
-### B5. 生成器输出的注释里变量名笔误
+### B5. 生成器输出的注释里变量名笔误 —— ✅ 已修
 
-- 位置：`backend/tools/yanggen/emit.go:330`（`emitEnumMaps` 的模板字符串内）
-- 形态：模板输出 `// enumMaps 是全包枚举定义表…`，而它紧接着生成的变量名是
-  `EnumMaps`（首字母大写）。
-- 判断：改它会让 `internal/generated/*` 全量重生成、触发 regen-and-diff 门禁，
-  必须作为生成器改动单独走 `make gen-yang` 流程（R04）。
+- 位置：`backend/tools/yanggen/emit.go`（`emitEnumMaps` 的模板字符串内）
+- 病灶：模板输出 `// enumMaps 是全包枚举定义表…`，实际生成的变量名是 `EnumMaps`。
+- 处置：改模板首字母大写，`make gen-yang` 重生成。漂移精确命中 2 个生成文件各 1 行
+  （`native/business/all.gen.go`、`native/huawei/enum_map.go`），无无关漂移。
+  `yanggen` 的 golden 用例如期拦截，已 `UPDATE_GENTEST=1` 刷新并核对 diff。
 
 ## C. 注释里记录的措辞漂移（已就地改注释对齐现状，备案供复核）
 
