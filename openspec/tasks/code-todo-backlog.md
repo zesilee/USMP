@@ -30,15 +30,21 @@ b_done: 2026-08-26 —— B1/B2/B4 三处静默吞错误已补日志（各带回
 - 影响面：无调用方依赖，属能力缺口而非缺陷；gNMI 本身也是规划能力（§1 R02）。
 - 层次：B1 + B2（模拟网元需补 notification 流才能端到端验）。
 
-### A2. Schema.Validate 只查路径存在性
+### A2. Schema.Validate 只查路径存在性 —— ✅ 已填实（2026-08-26）
 
-- 位置：`backend/pkg/yang-runtime/schema/schema.go:87` `DefaultSchema.Validate`
-- 现状：路径不存在则报错，存在就直接 `return nil`，不做任何约束校验。
-- 背景：真正的 YANG 约束校验（when/must/pattern/range/leaf-list）落在
-  `pkg/yang-runtime/validate` 包（见 [[yang-constraint-engine]]），`Schema` 接口
-  这条通道一直是空壳。
-- 待定：是把 `validate` 接进来，还是把这个方法从接口上摘掉——先定语义再动手。
-- 层次：B1（表格驱动 + 负路径）。
+- 原病灶：`DefaultSchema.Validate` 路径不存在则报错、存在就 `return nil`，
+  不做任何约束校验；全仓零调用方，长得像防线实际什么都不做。
+- **空壳的真正成因是包依赖方向**：校验实现原先独立成 `pkg/yang-runtime/validate` 包
+  并 import `schema`，`schema` 反过来委托即构成循环依赖，Go 直接编译不过——
+  不是没人想实现，是实现不了。
+- 处置（change `config-write-validation`）：校验实现整体迁入 `schema` 包
+  （`schema.ValidateObject`），环从根上消失；`Validate` 委托到它；`validate` 包删除，
+  三处调用点改指新位置。语义冻结契约随代码原样迁移，意图层结论由快照/双跑用例
+  证明未漂。
+- **顺带闭掉一个更大的缺口**：原生配置写路径此前只有一个硬编码的 VLAN ID 范围校验，
+  其余模块一律放行。现已接入通用约束校验，违反 YANG 约束的提交在后端即被 400 拒绝
+  且零副作用（不写 desired / 不触发对账 / 不触达设备）。契约见 config-api BR-08。
+- 层次：B1（表格驱动 + 负路径）+ B3（API 拒绝路径 + 零副作用）。
 
 ### A3. 前端未打标记的遗留债（注释里写着「待收」，但没有 TODO 标记）
 
