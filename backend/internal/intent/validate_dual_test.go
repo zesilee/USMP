@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/leezesi/usmp/backend/internal/yangschema"
-	"github.com/leezesi/usmp/backend/pkg/yang-runtime/validate"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 // 任务5.2 双跑一致门：IR 校验器对全部快照用例与 ygot Validate 结论一致
@@ -25,7 +25,7 @@ func TestValidateSnapshotIRDual(t *testing.T) {
 			if root == nil {
 				err = errRejectedAtDecode
 			} else {
-				err = validate.Object(node, root.BusinessVlanService)
+				err = schema.ValidateObject(node, root.BusinessVlanService)
 			}
 			if (err == nil) != tc.ok {
 				t.Fatalf("IR 校验器与快照失配: want ok=%v, got err=%v", tc.ok, err)

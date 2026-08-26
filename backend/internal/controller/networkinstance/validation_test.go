@@ -8,7 +8,7 @@ import (
 	"github.com/leezesi/usmp/backend/internal/generated/native/huawei"
 	"github.com/leezesi/usmp/backend/internal/yangschema"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
-	"github.com/leezesi/usmp/backend/pkg/yang-runtime/validate"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 // 边界/负路径（NI-05）：ygot ΛValidate 按 schema 强制 name/description 的 length 与
@@ -79,5 +79,5 @@ func irValidateNI(ni *huawei.HuaweiNetworkInstance_NetworkInstance) error {
 	if !ok {
 		return fmt.Errorf("network-instance schema node missing")
 	}
-	return validate.Object(n, ni)
+	return schema.ValidateObject(n, ni)
 }
