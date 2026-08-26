@@ -327,7 +327,7 @@ func emitEnums(m *Model) string {
 
 func emitEnumMaps(m *Model) string {
 	var b strings.Builder
-	b.WriteString("// enumMaps 是全包枚举定义表（外层 key 带 E_ 前缀——消费方按\n")
+	b.WriteString("// EnumMaps 是全包枚举定义表（外层 key 带 E_ 前缀——消费方按\n")
 	b.WriteString("// reflect Type().Name() 查表，失配即静默解码错，勿改口径）。\n")
 	b.WriteString("var EnumMaps = map[string]map[int64]object.EnumDefinition{\n")
 	for _, e := range m.Enums {
