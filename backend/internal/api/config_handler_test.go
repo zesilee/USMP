@@ -20,6 +20,9 @@ func decodeJSON(t *testing.T, jsonStr string) map[string]interface{} {
 	return data
 }
 
+// mac-address 取华为 pub-type:mac-address 的合法形态（pattern
+// `[0-9a-f]{4}(-[0-9a-f]{4}){2}`）。此处原为冒号形态 00:11:22:33:44:55，真机会拒——
+// 写路径接入约束校验（change config-write-validation）后被守护用例抓出，一并订正。
 func TestConvertConfig_HuaweiIfm_FullAttributes(t *testing.T) {
 	data := decodeJSON(t, `{
 		"interface": [
@@ -36,7 +39,7 @@ func TestConvertConfig_HuaweiIfm_FullAttributes(t *testing.T) {
 				"router-type": "broadcast",
 				"service-type": "none",
 				"mtu": 1500,
-				"mac-address": "00:11:22:33:44:55",
+				"mac-address": "0011-2233-4455",
 				"bandwidth": 1000,
 				"bandwidth-kbps": 1000000,
 				"vrf-name": "public",
@@ -68,7 +71,7 @@ func TestConvertConfig_HuaweiIfm_FullAttributes(t *testing.T) {
 	assert.Equal(t, "broadcast", iface.RouterType.String())
 	assert.Equal(t, "none", iface.ServiceType.String())
 	assert.Equal(t, uint32(1500), *iface.Mtu)
-	assert.Equal(t, "00:11:22:33:44:55", *iface.MacAddress)
+	assert.Equal(t, "0011-2233-4455", *iface.MacAddress)
 	assert.Equal(t, uint32(1000), *iface.Bandwidth)
 	assert.Equal(t, uint32(1000000), *iface.BandwidthKbps)
 	assert.Equal(t, "public", *iface.VrfName)

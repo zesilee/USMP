@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 	"os"
 	"sort"
 	"strconv"
@@ -20,6 +21,7 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/device"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/schema"
 )
 
 // errDeviceNotConnected marks a fetch failure due to the device being offline,
@@ -502,6 +504,17 @@ func (h *ConfigHandler) SetConfig(c *beecontext.Context) {
 		return
 	}
 
+	// Schema IR 约束校验（BR-08 / YN-04）：pattern/range/length/min-elements。
+	// 位置有讲究——必须在 convertConfigAnchored 之后（校验器走生成结构体的 path
+	// tag 反射，输入得是类型化对象），且必须在 storeConfigMerged 之前（拒绝要零
+	// 副作用：不写 desired、不失效缓存、不触发对账、不触达设备）。
+	// 校验对象是本次提交的增量而非合并后的全量 desired：否则一条存量历史非法值
+	// 会让此后所有提交全被拒，且错误指向用户没碰过的字段（design D4）。
+	if verr := validateAgainstSchema(h.manager.GetSchema(), anchor, desiredConfig); verr != nil {
+		Error(c, 400, "配置校验失败: "+verr.Error())
+		return
+	}
+
 	// 合并语义（防数据丢失）：UI 每次只提交单个 VLAN/接口，但对账把 desired 当「完整状态」。
 	// 若直接覆盖，第二次下发会让对账删除设备上已有但本次未提交的条目。故先并入已存 desired
 	// （按 key union），使 desired 累积为完整意图。删除走独立 DELETE 端点，不经此路径。
@@ -560,6 +573,40 @@ func validateConfig(cfg interface{}) error {
 		}
 	}
 	return nil
+}
+
+// schemaLookupPath 把运行时路径按段剥模块前缀，映射为 schema 树路径
+// （/vlan:vlan/vlan:vlans → /vlan/vlans，与前端 configPathFor 互逆）。
+// 写路径校验与删除门禁共用，避免两处各写一份剥前缀逻辑而漂移。
+func schemaLookupPath(runtimePath string) string {
+	segs := strings.Split(strings.Trim(runtimePath, "/"), "/")
+	for i, seg := range segs {
+		if j := strings.Index(seg, ":"); j >= 0 {
+			segs[i] = seg[j+1:]
+		}
+	}
+	return "/" + strings.Join(segs, "/")
+}
+
+// validateAgainstSchema 用 Schema IR 的约束元数据校验本次提交（pattern/range/
+// length/min-elements，YN-04 语义子集，与前端表单校验同源）。
+//
+// 两处刻意放行，都不是「装作没看见」：
+//   - schema 未装载：单测的 manager.New() 与降级启动都是空 schema，此时没有任何
+//     约束可校验。因这条路径正常且高频，不打日志。
+//   - schema 已装载但锚点缺失：注册表与 schema 不一致，是**我们自己**的问题。
+//     拿用户的合法配置为我们的不一致陪葬是错的（design D6），故放行——但必须
+//     留痕，否则这条降级会变成一道看不见的静默失效。
+func validateAgainstSchema(s schema.Schema, anchor string, cfg interface{}) error {
+	if s == nil || len(s.Modules()) == 0 {
+		return nil
+	}
+	node, ok := s.Path(schemaLookupPath(anchor))
+	if !ok {
+		log.Printf("api: schema 无锚点 %s，本次提交跳过约束校验（注册表与 schema 不一致，需排查）", anchor)
+		return nil
+	}
+	return schema.ValidateObject(node, cfg)
 }
 
 // configMergeMu 串行化 Get→merge→Set 临界区，避免并发下发时的丢更新与竞态（R09）。
