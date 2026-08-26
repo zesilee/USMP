@@ -54,13 +54,7 @@ func deleteGate(s schema.Schema, runtimePath string) error {
 	if s == nil {
 		return nil
 	}
-	segs := strings.Split(strings.Trim(runtimePath, "/"), "/")
-	for i, seg := range segs {
-		if j := strings.Index(seg, ":"); j >= 0 {
-			segs[i] = seg[j+1:]
-		}
-	}
-	node, ok := s.Path("/" + strings.Join(segs, "/"))
+	node, ok := s.Path(schemaLookupPath(runtimePath))
 	if !ok {
 		return nil // schema 未覆盖：放行
 	}
