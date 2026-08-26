@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"reflect"
 	"strings"
 	"sync"
@@ -296,9 +297,12 @@ func (c *NETCONFClient) Set(ctx context.Context, changes []Change, opts ...SetOp
 	}
 
 	if !result.Success {
+		// 逐条留痕：返回的聚合错误只说「有变更失败」，具体哪条路径因何而废
+		// 只在这里可见。走 log 而非 stdout——库代码占用 stdout 会绕过进程日志
+		// 配置，也会污染以 stdout 为数据通道的调用场景。
 		for _, ch := range result.Changes {
 			if !ch.Success && ch.Error != nil {
-				fmt.Printf("Change failed: %v\n", ch.Error)
+				log.Printf("netconf: %s change %s failed: %v", c.info.IP, ch.Change.Path, ch.Error)
 			}
 		}
 		return result, fmt.Errorf("one or more changes failed to apply")

@@ -69,7 +69,7 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/object"
 )
 
-// enumMaps 是全包枚举定义表（外层 key 带 E_ 前缀——消费方按
+// EnumMaps 是全包枚举定义表（外层 key 带 E_ 前缀——消费方按
 // reflect Type().Name() 查表，失配即静默解码错，勿改口径）。
 var EnumMaps = map[string]map[int64]object.EnumDefinition{
 	"E_HuaweiAcl_EncapType": {

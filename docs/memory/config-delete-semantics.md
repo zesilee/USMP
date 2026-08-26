@@ -11,6 +11,8 @@ Change `config-delete-semantics`（P4 **已闭环**：#128 实现 + #130 sync/�
 
 **核心架构决策（改写链路前必读）：**
 - **声明式通道删不了东西是刻意的**：`diff.walkMap`（ygot list=Go map 的真实分支）merge/subset 语义——desired ⊆ actual 即收敛、actual 独有键**绝不**产 DeleteChange（防误删设备存量）。删除走**显式命令通道** `DELETE /config/:ip/*path?key=`（handler 同步下发，非 ACCEPTED 异步），SetConfig 注释早有预留。别试图用 tombstone/全量覆盖改造声明式通道。
+- **不删除契约有两道闸，别只认得 walkMap 那道**（2026-08-26 PR#418 补锁）：第二道在 `reconcile.GenericReconciler.Reconcile`——`desired == nil` 直接空返回，压根不回读设备、不进 diff。6 个真实 reconciler（vlan/ifm/system/bgp/networkinstance/plainmodule）全部内嵌它且**都不覆盖 Reconcile**，所以这是生产活代码。spec 锚点 = business-intent-orchestration **BIO-05**「删除请求 SHALL 触发展开为 DELETE 命令通道调用（声明式通道不承载删除）」。
+- **⚠️ 陷阱**：`diff.walk` 里**确实有** `desiredNil && !actualNil → DeleteChange` 分支（区别于 walkMap 的 subset 语义，那条走的是容器/子树层）。单看那段极容易得出「对账应该能删」，进而把上面的提前返回当逻辑缺口"修"掉。**真那么改，任何一次 desired 过期或读取落空都会被翻译成删真机配置。**那条分支服务的是 DELETE 命令通道，不是对账。已加锁定用例 `reconcile/reconcile_desired_absent_test.go`（断言不回读设备、不进 diff + 对照组确认 desired 存在时链路正常），注释里也写死了结论与反向指路——**动这块前先跑那个用例**。
 - 顺序军规：**先移 desired 再下发**（对账不复活刚删条目）；成功才缓存失效+审计；失败零副作用。
 - per-model 分支又添三处（parseDeleteTarget/storeConfigDeleted/marshalDeleteChange），与 convertConfig/mergeConfig 同模式——根治属 P5 SND 声明式化。
 

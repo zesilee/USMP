@@ -87,7 +87,14 @@ func (g *GenericReconciler) Reconcile(ctx context.Context, req Request) Result {
 		}
 	}
 
-	// Nothing is declared for this path, so there is nothing to align.
+	// Nothing declared for this path → no-op. This is deliberately NOT turned
+	// into a deletion: BIO-05 puts deletes on the DELETE command channel, and
+	// 「声明式通道不承载删除」is the contract, not an oversight.
+	//
+	// The diff engine does have a desiredNil → DeleteChange branch, which serves
+	// that command channel. Do not "fix" this early return to reach it: every
+	// expired or failed desired read would then be translated into wiping live
+	// device config. Locked by reconcile_desired_absent_test.go.
 	if desired == nil {
 		return Result{
 			Requeue: false,
