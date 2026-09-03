@@ -166,12 +166,18 @@ d('F3 真浏览器 · Menu→Tree（happy-dom 移交项）', () => {
       await new Promise((r) => setTimeout(r, 200))
       console.log('F3-TREE: 点叶子后 keys=', JSON.stringify(clicks), '（应含 leaf1，桥 50ms 去重后单发）')
       expect(clicks).toContain('leaf1')
+      // 组 7 起 Menu 为桥自绘（structure.tsx，eview Tree 因 cWRP 无条件 setState
+      // 循环退役）：点分组名称区=切换展开（onOpenChange），不再上抛 onClick——
+      // antd 同语义。2026-09-03 内网复跑暴露旧断言（曾期待回调 g1）过时，改为
+      // 断言收起且 onClick 未收到分组 key。
       const g1Node = container.querySelector('[id="ev_tree_node_idg1"]') as HTMLElement | null
       if (g1Node) {
         g1Node.click()
         await new Promise((r) => setTimeout(r, 200))
-        console.log('F3-TREE: 点 g1 名称区后 keys=', JSON.stringify(clicks), '（应含 g1 且不挂死）')
-        expect(clicks).toContain('g1')
+        const collapsed = !container.textContent?.includes('叶子一')
+        console.log('F3-TREE: 点 g1 名称区后 keys=', JSON.stringify(clicks), '已收起=', collapsed, '（应不含 g1、已收起且不挂死）')
+        expect(clicks).not.toContain('g1')
+        expect(collapsed).toBe(true)
       }
     } else {
       console.log('F3-TREE: 未找到叶子文本节点——展开渲染形态需按本轮 DOM 校准')
