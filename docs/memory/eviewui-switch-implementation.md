@@ -57,4 +57,6 @@ metadata:
 
 **NCE 目视对齐首轮（2026-08-24，PR#408）**：冻结列退役（eview 冻结=拆分子表行高不同步互相覆盖+方向表级单侧，fixed:'right' 被冻最左）→CSS sticky !important 钉末列（eview 对表头强设 relative）；列 0 宽根因=eview 按标题文本测宽、组件标题量不出（titleComponentToText 无效，显式算宽终修）；控件等宽三层病灶链=自家 field-renderer→eview 根→第二层包装固有宽（ev_textField_wrapper 204/ev_spinner_wrap 225，百分比对它解析）——点名类拉伸终修，**前缀通配把 spinner 加减按钮拉满=「+」覆盖输入事故**；Tag/左树装饰=纯展示直接桥自绘收编。**方法论：探针先行**（diag spec dump DOM 链类名|实宽|display，C1-C4 四轮定案，盲改一轮=一次内网摆渡）；探针要「永有产出」（页面状态快照先行）+与环境数据解耦（创建表单替代编辑面）。内网一键重部署=scripts/inner-frontend-redeploy.sh；未完项台账=openspec/tasks/frontend-nce-parity-r2.md。
 
+**左树搜索框事故（2026-09-03，fix-lefttree-search-affix）**：症状=输入后框变长溢出侧栏+输入区看不见字。根因=侧栏 `[class*='ev_textField']` 通配拉宽规则把桥挂在 eview `suffix` 槽的清除钮（有值才出现）一并拉满 100%——**前缀通配误伤第二起**（同「+」覆盖输入）。定案：Input 装饰（prefix/clear）**桥自持**——`.ub-input-affix` 容器 relative、装饰绝对定位叠输入两端、eview 根用结构锚 `> :not(装饰)` + C4 点名类拉满，外部定宽 style 落容器；`[class*='ev_textField']` 从 theme.scss 清除并加守护测试（test/ui/eview-affix-css-guard）。三个自绘类曾零样式裸奔。内网校准入口=eview-real-browser「侧栏搜索框 affix 几何校准」用例（EVIEW_REAL=1，F3-AFFIX 打点）。教训：**eview 槽位内容也吃我们的通配规则——凡 `[class*=ev_]` 拉宽一律禁**。
+
 相关：[[eviewui-inula-migration]]（调研与矩阵）、[[react-antd-rebuild]]（适配层军规与上次迁移方法论）。
