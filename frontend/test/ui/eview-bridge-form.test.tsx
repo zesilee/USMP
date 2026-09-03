@@ -113,6 +113,42 @@ describe('Input 桥', () => {
     expect(onChange).toHaveBeenCalledWith({ target: { value: '' } })
   })
 
+  // 左树搜索框事故（2026-09-03）：清除钮曾挂 eview `suffix` 槽，被侧栏
+  // `[class*='ev_textField']` 通配宽度规则拉满 100%——输入后框变长溢出侧栏、
+  // 输入区被挤没。定案：prefix/clear 装饰一律桥自持（affix 容器内绝对定位），
+  // 不再交给 eview 槽位；style（外部定宽）落在 affix 容器上。
+  it('装饰桥自持：prefix/clear 不走 eview suffix 槽，宽度 style 落 affix 容器', () => {
+    const onChange = vi.fn()
+    const { container } = render(
+      <Input value="vlan" onChange={onChange} allowClear prefix={<i data-test="pfx" />} style={{ width: 200 }} />,
+    )
+    expect(recv.last.TextField.suffix).toBeUndefined()
+    expect(recv.last.TextField.style).toBeUndefined()
+    const affix = container.querySelector('.ub-input-affix') as HTMLElement
+    expect(affix).toBeTruthy()
+    expect(affix.style.width).toBe('200px')
+    expect(affix.classList.contains('has-prefix')).toBe(true)
+    expect(affix.classList.contains('has-clear')).toBe(true)
+    expect(affix.querySelector('.ub-input-prefix [data-test="pfx"]')).toBeTruthy()
+    const clear = screen.getByLabelText('clear')
+    // 清除钮是 affix 容器的直系子节点，不在 eview 组件子树内。
+    expect(clear.parentElement).toBe(affix)
+    expect(clear.closest('[data-stub="TextField"]')).toBeNull()
+    fireEvent.click(clear)
+    expect(onChange).toHaveBeenCalledWith({ target: { value: '' } })
+  })
+
+  it('无值/禁用不出清除钮但保留 affix 容器；无装饰零包装', () => {
+    const { container, rerender } = render(<Input value="" onChange={() => {}} allowClear />)
+    expect(container.querySelector('.ub-input-affix')).toBeTruthy()
+    expect(container.querySelector('.ub-input-affix.has-clear')).toBeNull()
+    rerender(<Input value="x" onChange={() => {}} allowClear disabled />)
+    expect(container.querySelector('.ub-input-affix.has-clear')).toBeNull()
+    rerender(<Input value="x" onChange={() => {}} style={{ width: 120 }} />)
+    expect(container.querySelector('.ub-input-affix')).toBeNull()
+    expect(recv.last.TextField.style).toEqual({ width: 120 })
+  })
+
   it('validator 体系绝不下传（FA-06 守护）', () => {
     render(<Input value="x" onChange={() => {}} />)
     expect(recv.last.TextField.validator).toBeUndefined()

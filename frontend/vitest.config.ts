@@ -95,11 +95,13 @@ export default defineConfig({
       // 补测挂组 8 回填爬升，回填后按 T08 上调。
       // 列头筛选补桥重钉（2026-08-20，follow-up 债 5.1）：ColFilter 自绘 F2
       // 全覆盖并入，实测 94.30/81.15/94.62/95.94，按现值下沿 T08 上调。
+      // 左树搜索框 affix 修复（2026-09-03）：桥 Input 装饰自持单测并入，实测
+      // 94.45/81.59/94.73/96.07，按下沿留 ~0.1 余量 T08 上调。
       thresholds: {
-        statements: 94.2,
-        branches: 81.0,
-        functions: 94.5,
-        lines: 95.8
+        statements: 94.3,
+        branches: 81.3,
+        functions: 94.6,
+        lines: 95.9
       }
     }
   },

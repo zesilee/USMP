@@ -2,6 +2,9 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { render, cleanup } from '@testing-library/react'
 import { useState, type ReactElement, createElement } from 'react'
 import { Tabs, Menu } from '@bridge/components/structure'
+import { Input } from '@bridge/components/inputs'
+// 侧栏搜索框几何校准依赖 theme 规则（affix 满宽/装饰绝对定位）——显式加载。
+import '../../src/styles/theme.scss'
 import { installFindDOMNodePolyfill } from '../../src/runtime/finddomnode-polyfill'
 import { IntlProvider } from 'react-intl'
 import zhMessages from '@nce/eview-react/locales/zh'
@@ -173,6 +176,31 @@ d('F3 真浏览器 · Menu→Tree（happy-dom 移交项）', () => {
     } else {
       console.log('F3-TREE: 未找到叶子文本节点——展开渲染形态需按本轮 DOM 校准')
     }
+    cleanup()
+  })
+})
+
+// 左树搜索框校准（2026-09-03 事故：输入后框变长溢出侧栏、输入区被挤没）。
+// 在 240px 容器内模拟侧栏（.sidebar 类触发 theme 满宽规则），有值+prefix+
+// allowClear 三要素齐全时：整框不得超出容器、输入本体可见且回显值。
+d('F3 真浏览器 · 侧栏搜索框 affix 几何校准', () => {
+  it('有值时 affix 整框 ≤ 容器宽、输入本体可见且回显', async () => {
+    const { container } = renderReal(
+      <div className="sidebar" style={{ width: 240, padding: '0 12px', boxSizing: 'border-box' }}>
+        <Input value="vlan" onChange={() => {}} allowClear prefix={<i>S</i>} data-test="cal-search" />
+      </div>,
+    )
+    const box = container.firstElementChild as HTMLElement
+    const affix = container.querySelector('.ub-input-affix') as HTMLElement
+    const input = container.querySelector('input') as HTMLInputElement
+    const clear = container.querySelector('.ub-input-clear') as HTMLElement
+    const r = (el: Element) => el.getBoundingClientRect()
+    console.log('F3-AFFIX:', JSON.stringify({ box: r(box).width, affix: r(affix).width, input: r(input).width, clear: r(clear).width, value: input.value }))
+    expect(r(affix).width).toBeLessThanOrEqual(r(box).width)
+    expect(r(affix).right).toBeLessThanOrEqual(r(box).right + 0.5)
+    expect(r(input).width).toBeGreaterThan(100)
+    expect(r(clear).width).toBeLessThan(40)
+    expect(input.value).toBe('vlan')
     cleanup()
   })
 })
