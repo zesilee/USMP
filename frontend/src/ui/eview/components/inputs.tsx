@@ -18,7 +18,11 @@ interface CommonProps {
 }
 
 // ===== Input → TextField =====
-// 缺口补齐：allowClear 自绘清除钮挂 suffix；prefix 叠放容器；size 走 className。
+// 缺口补齐：allowClear/prefix 装饰**桥自持**——affix 容器（position:relative）
+// 内绝对定位叠于输入两端，不走 eview suffix 槽；size 走 className。
+// 事故（2026-09-03 左树搜索框）：清除钮曾挂 eview suffix，被侧栏 ev_textField
+// 通配拉宽规则连坐拉满 100%，输入后框变长溢出侧栏、输入区被挤没。
+// 有装饰时外部 style（定宽）落在 affix 容器，eview 根在容器内满宽。
 export function Input(
   props: CommonProps & {
     value?: string
@@ -36,6 +40,9 @@ export function Input(
     onEmit(nv)
     props.onChange?.({ target: { value: nv } })
   }
+  const hasPrefix = props.prefix != null && props.prefix !== false && props.prefix !== ''
+  const affix = hasPrefix || !!props.allowClear
+  const showClear = !!props.allowClear && (props.value ?? '') !== '' && !props.disabled
   const field = createElement(EvTextField, {
     key,
     id: anchorId(props['data-test']),
@@ -46,28 +53,30 @@ export function Input(
     disabled: props.disabled,
     type: props.type === 'password' ? 'password' : 'text',
     // 自带 validator 体系一律不传（FA-06：校验权威在自研引擎）。
-    suffix:
-      props.allowClear && (props.value ?? '') !== '' && !props.disabled
-        ? createElement(
-            'span',
-            {
-              className: 'ub-input-clear',
-              role: 'button',
-              'aria-label': 'clear',
-              onClick: () => emit(''),
-            },
-            '×',
-          )
-        : undefined,
     className: [props.className, props.size === 'small' ? 'ub-size-small' : ''].filter(Boolean).join(' ') || undefined,
-    style: props.style,
+    style: affix ? undefined : props.style,
   })
-  if (props.prefix == null) return field
+  if (!affix) return field
   return createElement(
     'span',
-    { className: 'ub-input-affix' },
-    createElement('span', { className: 'ub-input-prefix' }, props.prefix),
+    {
+      className: ['ub-input-affix', hasPrefix ? 'has-prefix' : '', showClear ? 'has-clear' : ''].filter(Boolean).join(' '),
+      style: props.style,
+    },
+    hasPrefix ? createElement('span', { className: 'ub-input-prefix' }, props.prefix) : null,
     field,
+    showClear
+      ? createElement(
+          'span',
+          {
+            className: 'ub-input-clear',
+            role: 'button',
+            'aria-label': 'clear',
+            onClick: () => emit(''),
+          },
+          '×',
+        )
+      : null,
   )
 }
 

@@ -77,6 +77,8 @@ describe('Sidebar · SND 左树导航（LT-03）', () => {
     mount()
     const input = document.querySelector('[data-test="lefttree-search"] input, input[data-test="lefttree-search"]') as HTMLInputElement
     fireEvent.change(input, { target: { value: 'VLAN' } })
+    // 输入内容必须回显在框内（左树搜索框事故：输入区被挤没）。
+    expect(input.value).toBe('VLAN')
     expect(screen.queryByText(/no-match/)).toBeNull()
     fireEvent.change(input, { target: { value: 'zzz-none' } })
     await waitFor(() => expect(document.querySelector('[data-test="lefttree-no-match"]')).toBeTruthy())

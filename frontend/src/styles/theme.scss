@@ -721,13 +721,88 @@ html, body {
 }
 
 /* 组7 E2E（diag5 矩形实证）：eview TextField 默认固定宽 364px，左树搜索框
-   溢出 240px 侧栏、盖住内容区按钮（pointer 拦截）——侧栏内输入类一律限宽。 */
+   溢出 240px 侧栏、盖住内容区按钮（pointer 拦截）——侧栏内输入类一律限宽。
+   2026-09-03 事故：原 `[class*='ev_textField']` 通配把输入后才出现的清除钮
+   一并拉满 100%（前缀通配误伤第二起，同「+」覆盖输入事故）——改为
+   结构锚（affix 容器直系子=eview 根）+ C4 实拍点名类，装饰元素零波及。 */
+.sidebar .ub-input-affix {
+  display: flex;
+  width: 100%;
+}
 .sidebar .ev_textField,
 .sidebar .ev_input,
-.sidebar [class*='ev_textField'] {
+.sidebar .ev_textField_wrapper,
+.sidebar .ev_textField_container,
+.sidebar .ev_textField_inner,
+.sidebar .ev_textField_input {
   width: 100% !important;
   max-width: 100%;
+  min-width: 0;
   box-sizing: border-box;
+}
+
+/* 桥自持输入装饰（Input allowClear/prefix）：affix 容器定位基准，装饰绝对
+   定位叠于输入两端、不占流；输入本体按装饰留内边距。任何上下文（侧栏/
+   工具栏定宽/编辑面）eview 根在容器内满宽，外部定宽 style 落在容器上。 */
+.ub-input-affix {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  max-width: 100%;
+  min-width: 0;
+}
+/* 容器直系子=eview 根（结构锚，不依赖其类名）：任何上下文都在容器内满宽。 */
+.ub-input-affix > :not(.ub-input-prefix):not(.ub-input-clear) {
+  flex: 1 1 auto;
+  width: 100% !important;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.ub-input-affix .ev_textField_wrapper,
+.ub-input-affix .ev_textField_container,
+.ub-input-affix .ev_textField_inner,
+.ub-input-affix .ev_textField_input {
+  width: 100% !important;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.ub-input-affix.has-prefix input {
+  padding-left: 28px !important;
+}
+.ub-input-affix.has-clear input {
+  padding-right: 24px !important;
+}
+.ub-input-prefix,
+.ub-input-clear {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  line-height: 1;
+  color: $text-tertiary;
+}
+.ub-input-prefix {
+  left: 9px;
+  pointer-events: none;
+  font-size: 13px;
+}
+.ub-input-clear {
+  right: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+  background: $bg-elevated;
+}
+.ub-input-clear:hover {
+  color: $text-secondary;
 }
 
 /* 组7：Popover 自绘气泡（TipBox display 受控被忽略——桥自绘）。 */
