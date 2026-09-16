@@ -53,11 +53,12 @@ func TestPending_TrackReportsPendingAndGen(t *testing.T) {
 }
 
 func TestPending_MarkExpiringStartsTTLFromNow(t *testing.T) {
-	c := NewTTLLRUCache(100, 40*time.Millisecond, 0)
+	// TTL 取 200ms：标记 → 「TTL 内命中」这段要给 -race 弱机 ×5 的调度余量
+	c := NewTTLLRUCache(100, 200*time.Millisecond, 0)
 	defer c.Stop()
 
 	c.SetPending("k", "v")
-	time.Sleep(80 * time.Millisecond) // 2×TTL，仍应命中
+	time.Sleep(400 * time.Millisecond) // 2×TTL，仍应命中
 	gen, _, _, _ := c.Track("k")
 	assert.True(t, c.MarkExpiring("k", gen))
 
@@ -67,7 +68,7 @@ func TestPending_MarkExpiringStartsTTLFromNow(t *testing.T) {
 
 	_, ok = c.Get("k")
 	assert.True(t, ok, "标记后 TTL 内应命中")
-	time.Sleep(60 * time.Millisecond)
+	time.Sleep(300 * time.Millisecond)
 	_, ok = c.Get("k")
 	assert.False(t, ok, "标记后超过 TTL 应未命中")
 }

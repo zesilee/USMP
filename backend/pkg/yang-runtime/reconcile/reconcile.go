@@ -141,6 +141,13 @@ func NewGenericReconciler(
 
 // Reconcile implements the Reconciler interface
 func (g *GenericReconciler) Reconcile(ctx context.Context, req Request) Result {
+	// Lifecycle snapshot (YR-09) is taken *before* the value is read: if a user
+	// write lands between the two, the generation held here is older than the
+	// value we act on, so MarkSynced/Abandon both fail closed and the newer
+	// value keeps its own pending clock. The opposite order would let a newer
+	// value be marked synced on the strength of an older one (TOCTOU).
+	lc := g.trackLifecycle(req)
+
 	desired, err := g.configStore.Get(req.DeviceID, req.Path)
 	if err != nil {
 		return Result{
@@ -164,11 +171,6 @@ func (g *GenericReconciler) Reconcile(ctx context.Context, req Request) Result {
 	if desired == nil {
 		return Result{NoDesired: true}
 	}
-
-	// Lifecycle snapshot (YR-09): the generation read here is what MarkSynced /
-	// Abandon are guarded with, so a user write landing mid-reconcile can never
-	// be marked synced (and expire) on the strength of this run.
-	lc := g.trackLifecycle(req)
 
 	actual, err := g.deviceClient.Get(ctx, req.DeviceID)
 	if err != nil {
@@ -194,9 +196,15 @@ func (g *GenericReconciler) Reconcile(ctx context.Context, req Request) Result {
 		return g.fail(req, lc, err)
 	}
 
-	// All changes applied successfully; report the drift that was corrected.
-	// Not marked synced yet: YR-05 requeues a re-verify, whose zero-change run
-	// is the confirmation.
+	// Delivered but not yet confirmed: YR-05 requeues a re-verify whose
+	// zero-change run is the confirmation. A device that accepts every push
+	// yet never reads back equal (lossy readback, device-side normalisation)
+	// would otherwise loop push→re-verify forever, so the abandon limit applies
+	// here too — a pending entry is bounded by time, not by how it fails.
+	if res, abandoned := g.abandonIfOverdue(req, lc,
+		fmt.Errorf("每轮仍有 %d 项差异，设备接受下发但回读不收敛", len(changes))); abandoned {
+		return res
+	}
 	return Result{Changes: len(changes)}
 }
 
@@ -226,19 +234,8 @@ func (g *GenericReconciler) trackLifecycle(req Request) lifecycle {
 // retrying — never silently "converged" (YR-09). Abandon is generation-guarded:
 // if the user rewrote the entry mid-run the newer value keeps its own clock.
 func (g *GenericReconciler) fail(req Request, lc lifecycle, cause error) Result {
-	if lc.tracker != nil && lc.pending {
-		if waited := time.Since(lc.since); waited > AbandonAfter() {
-			if lc.tracker.Abandon(req.DeviceID, req.Path, lc.gen) {
-				return Result{
-					Terminal: true,
-					Error: &ReconcileError{
-						DeviceID: req.DeviceID,
-						Path:     req.Path,
-						Err:      fmt.Errorf("%w：等待 %s，最后错误: %v", ErrDesiredAbandoned, waited.Round(time.Second), cause),
-					},
-				}
-			}
-		}
+	if res, abandoned := g.abandonIfOverdue(req, lc, cause); abandoned {
+		return res
 	}
 	return Result{
 		Requeue: true,
@@ -248,4 +245,28 @@ func (g *GenericReconciler) fail(req Request, lc lifecycle, cause error) Result 
 			Err:      cause,
 		},
 	}
+}
+
+// abandonIfOverdue applies the abandon limit to a pending entry: if it has been
+// pending longer than AbandonAfter and is still at the generation this run
+// read, it is dropped and a terminal error is returned. A zero pendingSince
+// (a third-party tracker not filling it in) is treated as "unknown", never as
+// "since forever" — R08. Both the sentinel and the cause are wrapped so
+// errors.Is works for either.
+func (g *GenericReconciler) abandonIfOverdue(req Request, lc lifecycle, cause error) (Result, bool) {
+	if lc.tracker == nil || !lc.pending || lc.since.IsZero() {
+		return Result{}, false
+	}
+	waited := time.Since(lc.since)
+	if waited <= AbandonAfter() || !lc.tracker.Abandon(req.DeviceID, req.Path, lc.gen) {
+		return Result{}, false
+	}
+	return Result{
+		Terminal: true,
+		Error: &ReconcileError{
+			DeviceID: req.DeviceID,
+			Path:     req.Path,
+			Err:      fmt.Errorf("%w：等待 %s，最后错误: %w", ErrDesiredAbandoned, waited.Round(time.Second), cause),
+		},
+	}, true
 }

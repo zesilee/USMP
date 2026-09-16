@@ -261,6 +261,11 @@ func (c *TTLLRUCache) Keys() []string {
 	return keys
 }
 
+// evictLRU drops the least recently used entry when the cache is at capacity.
+// Pending entries are not exempt: capacity is the second bound on the desired
+// store after the abandon limit (design D6). An evicted pending entry reads
+// back as absent, which the reconciler reports as NoDesired (never as
+// converged, never as a device-side delete).
 func (c *TTLLRUCache) evictLRU() {
 	var lruKey string
 	var oldestTime time.Time

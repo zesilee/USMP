@@ -79,7 +79,8 @@ func TestRegression_RetryAcrossTTLStillDelivers(t *testing.T) {
 }
 
 func TestRegression_AbandonAfterLimitWithRealStore(t *testing.T) {
-	reconcile.SetAbandonAfter(30 * time.Millisecond)
+	// 200ms：Set → 首轮失败必须落在上限内，给 -race 弱机 ×5 余量
+	reconcile.SetAbandonAfter(200 * time.Millisecond)
 	defer reconcile.SetAbandonAfter(0)
 
 	c := cache.NewTTLLRUCache(100, time.Second, 0)
@@ -94,7 +95,7 @@ func TestRegression_AbandonAfterLimitWithRealStore(t *testing.T) {
 	assert.True(t, res.Requeue)
 	assert.False(t, res.Terminal, "未超限照常重投")
 
-	time.Sleep(50 * time.Millisecond)
+	time.Sleep(250 * time.Millisecond)
 	res = r.Reconcile(context.Background(), req)
 	assert.True(t, res.Terminal, "超限放弃")
 	assert.True(t, errors.Is(res.Error, reconcile.ErrDesiredAbandoned))

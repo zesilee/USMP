@@ -22,9 +22,16 @@ type trackingStore struct {
 	abandonedGen []uint64
 	// mutateOnTrack 模拟「对账读入后用户又写了一版」：Track 之后写代跳变。
 	mutateOnTrack bool
+	// mutateOnGet 模拟写入落在 Track 与 Get 之间：Get 返回新值且写代跳变。
+	mutateOnGet bool
 }
 
-func (s *trackingStore) Get(string, string) (interface{}, error) { return s.val, nil }
+func (s *trackingStore) Get(string, string) (interface{}, error) {
+	if s.mutateOnGet && s.val != nil {
+		s.val, s.gen, s.pendingSince = "desired-v2", s.gen+1, time.Now()
+	}
+	return s.val, nil
+}
 func (s *trackingStore) Set(_, _ string, v interface{}) error {
 	s.val, s.gen, s.pending, s.pendingSince = v, s.gen+1, true, time.Now()
 	return nil
@@ -107,6 +114,81 @@ func TestPending_RewrittenDuringReconcileNotMarked(t *testing.T) {
 
 	assert.Equal(t, []uint64{1}, cs.markedGen)
 	assert.True(t, cs.pending, "写代不匹配：新值仍待同步")
+}
+
+// 评审 🟡-1：写入落在 Track 与 Get 之间（Get 读到 v2/gen=2，快照 gen=1）——
+// 零变更时 MarkSynced(1) 必须失败，v2 保持待同步；反向错位只能保守，不能误标。
+func TestPending_WriteBetweenTrackAndGetNotMarked(t *testing.T) {
+	cs := pendingStore("desired", time.Now())
+	cs.mutateOnGet = true
+	dc := &MockDeviceClient{}
+	de := &MockDiffEngine{}
+	dc.On("Get", mock.Anything, req.DeviceID).Return("actual", nil)
+	de.On("Diff", "desired-v2", "actual", req.Path).Return([]Change{}, nil)
+
+	NewGenericReconciler(cs, dc, de).Reconcile(context.Background(), req)
+
+	assert.Equal(t, []uint64{1}, cs.markedGen, "以快照 gen=1 标记")
+	assert.True(t, cs.pending, "gen 不匹配：v2 仍待同步")
+	assert.Equal(t, uint64(2), cs.gen)
+}
+
+// 评审 🟡-2：设备接受下发但回读永不相等（每轮 Changes>0）——超限同样放弃，
+// 否则 push→复验 无限循环、每 30s 打一次设备。
+func TestPending_DeliveredButNeverConvergesAbandons(t *testing.T) {
+	SetAbandonAfter(50 * time.Millisecond)
+	defer SetAbandonAfter(0)
+	dc := &MockDeviceClient{}
+	de := &MockDiffEngine{}
+	dc.On("Get", mock.Anything, req.DeviceID).Return("actual", nil)
+	de.On("Diff", "desired", "actual", req.Path).Return([]Change{{Path: "/x"}}, nil)
+	dc.On("Set", mock.Anything, req.DeviceID, mock.Anything).Return(nil)
+
+	fresh := pendingStore("desired", time.Now())
+	res := NewGenericReconciler(fresh, dc, de).Reconcile(context.Background(), req)
+	assert.Equal(t, 1, res.Changes, "未超限：正常上报 Changes 等复验")
+	assert.False(t, res.Terminal)
+	assert.Equal(t, "desired", fresh.val)
+
+	overdue := pendingStore("desired", time.Now().Add(-time.Second))
+	res = NewGenericReconciler(overdue, dc, de).Reconcile(context.Background(), req)
+	assert.True(t, res.Terminal, "下发成功但超限仍不收敛：放弃")
+	assert.Equal(t, 0, res.Changes)
+	if assert.NotNil(t, res.Error) {
+		assert.True(t, errors.Is(res.Error, ErrDesiredAbandoned))
+		assert.Contains(t, res.Error.Error(), "不收敛")
+	}
+	assert.Nil(t, overdue.val)
+}
+
+// 评审 🟢-3：第三方 tracker 未填 pendingSince（零值）→ 视为未知，不得首轮即放弃。
+func TestPending_ZeroPendingSinceNeverAbandons(t *testing.T) {
+	SetAbandonAfter(time.Millisecond)
+	defer SetAbandonAfter(0)
+	cs := pendingStore("desired", time.Time{})
+	dc := &MockDeviceClient{}
+	dc.On("Get", mock.Anything, req.DeviceID).Return(nil, errors.New("unreachable"))
+
+	res := NewGenericReconciler(cs, dc, &MockDiffEngine{}).Reconcile(context.Background(), req)
+
+	assert.False(t, res.Terminal)
+	assert.True(t, res.Requeue)
+	assert.Empty(t, cs.abandonedGen)
+}
+
+// 评审 🟢-6：原因错误也以 %w 包装，errors.Is 对底层错误同样成立。
+func TestPending_AbandonWrapsCause(t *testing.T) {
+	SetAbandonAfter(time.Millisecond)
+	defer SetAbandonAfter(0)
+	cause := errors.New("transport down")
+	cs := pendingStore("desired", time.Now().Add(-time.Second))
+	dc := &MockDeviceClient{}
+	dc.On("Get", mock.Anything, req.DeviceID).Return(nil, cause)
+
+	res := NewGenericReconciler(cs, dc, &MockDiffEngine{}).Reconcile(context.Background(), req)
+
+	assert.True(t, errors.Is(res.Error, cause))
+	assert.True(t, errors.Is(res.Error, ErrDesiredAbandoned))
 }
 
 func TestPending_FailureWithinLimitRequeuesKeepsDesired(t *testing.T) {
