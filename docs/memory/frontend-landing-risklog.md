@@ -10,7 +10,7 @@ metadata:
 前端设计落地迭代（[[frontend-redesign]]）中发现的关键风险/决策。用户次日据此规划。
 
 ## PR-B1 对账状态（已开发，待检视+合并）
-- **desired 态仅存内存、5min TTL 会过期**（ConfigStore=TTL+LRU）。→ desired↔actual 比对只在 desired 未过期时有效；reconcile-status 反映的是"最近一次对账"，非实时权威。
+- ~~**desired 态仅存内存、5min TTL 会过期**（ConfigStore=TTL+LRU）。→ desired↔actual 比对只在 desired 未过期时有效~~ **已收口（2026-09-16，change desired-pending-until-synced）**：desired 改为「送达确认前不过期、复验收敛后才起算 1min 释放」+ 放弃上限 30min（`USMP_DESIRED_ABANDON_AFTER`）+ 读空不记录结局；根因是重试跨 TTL 读空被记 Converged（假成功），详见 [[desired-pending-lifecycle]]。reconcile-status 仍是"最近一次**真实**对账"，非实时权威。
 - **reconcile 同步自动纠偏** → `drifted` 语义 = "上次对账检测到差异并已纠正"，不是持久漂移态。真正持久的"配置不一致"只在 `error`（下发失败/设备离线）时体现。**前端台账文案/图例需与此对齐**，别把 drifted 当成"当前仍不一致"。
 - **status.Store 无 TTL/清理** → 设备移除后残留旧结局；建议后续加清理或 TTL（须 ≥ desired 的 5min，否则语义错位）。
 - **GetFleetReconcile 只覆盖"已对账过"的设备** → `unknown`（从未对账）设备不在聚合里，前端需用 `/devices` 总数减去已覆盖数派生 unknown。

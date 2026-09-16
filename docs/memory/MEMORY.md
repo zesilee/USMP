@@ -64,6 +64,7 @@
 - [前端契约生成](frontend-contract-gen.md) — 前端测试能力改造**全交付**：0层锁Node22 / 1a契约生成+漂移门禁 / 1b全API面 / 1c typecheck门禁+清34错 / 层2 Vitest Browser Mode / 层4 Storybook；配套体积门禁排除生成物(#60,加重依赖前必做)。踩坑：swag2.0、git--exit-status、ref-UnwrapRef、playwright双版本歧义
 - [前端重设计](frontend-redesign.md) — 商用级高保真原型**已批准并合入main**(#78+#79)；浅色iMaster NCE气质+收敛台账+新鲜度环+模型驱动YANG树；落地计划见 docs/superpowers/plans/2026-07-05-frontend-design-landing.md + openspec/tasks/同名
 - [落地迭代工作方式](frontend-landing-workflow.md) — 每PR用独立agent检视设计/测试/开发；CI过后自助merge；关键风险记risklog供次日规划；认真测试设计；长迭代注意上下文压缩保留关键信息
+- [desired 生命周期](desired-pending-lifecycle.md) — 改对账/ConfigStore/TTL/状态结局前必读：desired 送达确认前不过期、复验收敛后 1min 释放（口径 A）、30min 放弃（USMP_DESIRED_ABANDON_AFTER）、读空不记录结局；根因=重试跨 TTL 读空被记 Converged 假成功；SyncTracker 可选接口+写代守卫；时序用例用 ms 级 TTL
 - [落地风险台账](frontend-landing-risklog.md) — PR-B1对账态(drifted=已纠正非持久/status无TTL/desired 5min过期/fleet不含unknown)；PR-B2(config GET不缓存、force_refresh是TODO、与§8矛盾)
 - [攒批提交二期](nce-batch-commit.md) — 做配置台提交链路/变更集/试运行相关前必读：二期全交付(变更集/preview/commit 2PC/即时下发退役)、desired后写时序、pr-size不豁免openspec文档、worktree真目录node_modules勿再symlink、vitest4 unhandled rejection红整套件、阈值86/79/80/87+后端72.3
 - [发布打包](release-packaging.md) — 做交付/部署/改打包链路前必读：scripts/build-release.sh 一键出 zip(bin+web+start.sh)、静态站=自研Go二进制免nginx、start.sh=POSIX sh可当ENTRYPOINT、python zipfile兜底保留+x、冒烟用干净alpine容器别抢本机8080
