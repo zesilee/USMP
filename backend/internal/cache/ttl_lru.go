@@ -199,6 +199,20 @@ func (c *TTLLRUCache) InvalidatePrefix(prefix string) {
 	}
 }
 
+// DeleteIfGen removes the entry only if it is still at generation gen, so a
+// caller deciding on a value it read earlier cannot delete a newer write.
+// Returns whether an entry was removed.
+func (c *TTLLRUCache) DeleteIfGen(key string, gen uint64) bool {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	e, exists := c.entries[key]
+	if !exists || e.gen != gen {
+		return false
+	}
+	delete(c.entries, key)
+	return true
+}
+
 // Delete removes an entry from the cache
 func (c *TTLLRUCache) Delete(key string) {
 	c.mu.Lock()

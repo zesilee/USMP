@@ -41,11 +41,29 @@ func (s *InMemoryConfigStore) Get(deviceID, path string) (interface{}, error) {
 	return val, nil
 }
 
-// Set stores the desired configuration at the given path for a device
+// Set stores the desired configuration at the given path for a device. The
+// entry is written *pending* (YR-09): it does not expire until a reconcile
+// confirms the device matches it (MarkSynced), however slow delivery is.
 func (s *InMemoryConfigStore) Set(deviceID, path string, value interface{}) error {
 	key := fmt.Sprintf("%s:%s", deviceID, path)
-	s.cache.Set(key, value)
+	s.cache.SetPending(key, value)
 	return nil
+}
+
+// Track implements reconcile.SyncTracker.
+func (s *InMemoryConfigStore) Track(deviceID, path string) (gen uint64, pendingSince time.Time, pending, ok bool) {
+	return s.cache.Track(fmt.Sprintf("%s:%s", deviceID, path))
+}
+
+// MarkSynced implements reconcile.SyncTracker: starts the entry's TTL if it is
+// still at gen (口径 A: after delivery the device is the source of truth).
+func (s *InMemoryConfigStore) MarkSynced(deviceID, path string, gen uint64) bool {
+	return s.cache.MarkExpiring(fmt.Sprintf("%s:%s", deviceID, path), gen)
+}
+
+// Abandon implements reconcile.SyncTracker: drops the entry if still at gen.
+func (s *InMemoryConfigStore) Abandon(deviceID, path string, gen uint64) bool {
+	return s.cache.DeleteIfGen(fmt.Sprintf("%s:%s", deviceID, path), gen)
 }
 
 // Delete removes the desired configuration at the given path for a device

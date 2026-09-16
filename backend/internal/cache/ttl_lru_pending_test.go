@@ -132,6 +132,21 @@ func TestPending_PlainSetUnchanged(t *testing.T) {
 	assert.False(t, pending)
 }
 
+func TestPending_DeleteIfGen(t *testing.T) {
+	c := NewTTLLRUCache(100, time.Second, 0)
+	defer c.Stop()
+
+	c.SetPending("k", "v1")
+	old, _, _, _ := c.Track("k")
+	c.SetPending("k", "v2")
+	assert.False(t, c.DeleteIfGen("k", old), "旧 gen 不得删新值")
+	assert.False(t, c.DeleteIfGen("missing", 1))
+	cur, _, _, _ := c.Track("k")
+	assert.True(t, c.DeleteIfGen("k", cur))
+	_, ok := c.Get("k")
+	assert.False(t, ok)
+}
+
 func TestPending_Concurrent(t *testing.T) {
 	c := NewTTLLRUCache(1000, 5*time.Millisecond, time.Millisecond)
 	defer c.Stop()
