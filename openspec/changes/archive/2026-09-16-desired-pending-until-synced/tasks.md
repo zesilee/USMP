@@ -38,7 +38,7 @@
 - [x] 6.2 全量 `go test -race ./...` 全绿（最终树 31 个测试包，分 6 块 `-p 1` 串行跑——本机整包 race+覆盖率插桩编译会触发低内存被杀，见备注）；CI 口径覆盖率 77.0% ≥ 基线 76.8，棘轮上调至 77.0
 - [x] 6.3 `go-code-review-check`（独立代理只读评审）：🔴 0 / 🟡 2 / 🟢 5，两中危均采纳整改（快照先于读值堵 TOCTOU；下发成功但不收敛也套放弃上限）+ 四低危修复（零值 pendingSince 守卫、双 %w、时序用例余量 200ms、evictLRU 注释），整改为第 5 个 commit；`git-what-why-how-commit` 三段式，5 个 commit 均 ≤500 行
 - [x] 6.4 记忆更新：`docs/memory/frontend-landing-risklog.md` desired 过期条目收口 + 新增 `docs/memory/desired-pending-lifecycle.md` + 索引（待单独 `docs:` commit，MEM04）
-- [ ] 6.5 PR + CI 全绿后 `/opsx:sync` 合入主 spec、`/opsx:archive`
+- [x] 6.5 PR #425 CI 十项全绿已合入（merge 3dc0a65）；`/opsx:sync` 已把 CC-02/CC-08、YR-02/YR-04/YR-09 并入主 spec（两份主 spec `openspec validate` 通过）；`/opsx:archive` 归档为 `archive/2026-09-16-desired-pending-until-synced`
 
 ## 实施备注
 
