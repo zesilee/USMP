@@ -22,6 +22,7 @@ import (
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/leader"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/manager"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/predicate"
+	"github.com/leezesi/usmp/backend/pkg/yang-runtime/reconcile"
 	"github.com/leezesi/usmp/backend/pkg/yang-runtime/source"
 	ctrlcfg "sigs.k8s.io/controller-runtime/pkg/client/config"
 )
@@ -56,6 +57,10 @@ func main() {
 
 	cs := mgr.GetConfigStore()
 	clientPool := mgr.GetClientPool()
+
+	// YR-09: desired 送达确认前不过期，持续送不到超过此上限即放弃（记 error 不重投）。
+	// 启动时打印生效值，环境变量非法已在解析处回退默认并 warning。
+	log.Printf("desired 放弃上限: %s（USMP_DESIRED_ABANDON_AFTER，默认 %s）", reconcile.AbandonAfter(), reconcile.DefaultAbandonAfter)
 
 	// YR-08: 原生周期控制器统一选主门（单全局 Lease usmp-native-controllers，
 	// USMP_NATIVE_LEADER_ELECTION=1 且集群可达时生效；否则透传零行为变化）。
