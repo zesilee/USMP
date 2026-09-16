@@ -27,6 +27,14 @@ type Result struct {
 	// and corrected (drifted). Lets the controller distinguish converged from
 	// drifted when recording reconcile status.
 	Changes int
+	// Terminal marks an Error as final: the controller records it and Forgets
+	// the request instead of requeuing (YR-04). Set when a pending desired is
+	// abandoned after AbandonAfter (YR-09).
+	Terminal bool
+	// NoDesired reports that the store held no desired for this request. The
+	// controller records nothing for it (YR-02: an absent intent is not
+	// "converged" and must not overwrite the last real outcome) and Forgets.
+	NoDesired bool
 }
 
 // ConfigResult contains the result of comparing desired and actual configuration

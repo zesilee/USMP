@@ -178,9 +178,22 @@ func (c *DefaultController) worker(ctx context.Context) {
 func (c *DefaultController) process(ctx context.Context, req reconcile.Request) {
 	result := c.reconciler.Reconcile(ctx, req)
 
+	// No desired held for this request (expired after sync, abandoned, evicted
+	// or never written): nothing to reconcile and nothing to say about it. Not
+	// recorded — an absent intent is not "converged" and must not overwrite the
+	// last real outcome (YR-02). Just reset the backoff.
+	if result.NoDesired {
+		c.queue.Forget(req)
+		return
+	}
+
 	c.recordOutcome(req, result)
 
 	switch {
+	case result.Terminal && result.Error != nil:
+		// Final failure (e.g. desired abandoned, YR-09): recorded above as
+		// error; retrying cannot help, so stop here instead of backing off.
+		c.queue.Forget(req)
 	case result.Requeue:
 		if result.RequeueAfter > 0 {
 			c.queue.AddAfter(req, result.RequeueAfter)
